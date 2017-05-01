@@ -1,6 +1,6 @@
-[submodule "ogre"]
-	path = ogre
+[submodule "libs/ogre"]
+	path = libs/ogre
 	url = https://github.com/OGRECave/ogre.git
-[submodule "OIS"]
-	path = OIS
+[submodule "libs/OIS"]
+	path = libs/OIS
 	url = https://github.com/wgois/OIS.git
