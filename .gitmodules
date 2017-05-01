@@ -4,3 +4,9 @@
 [submodule "libs/OIS"]
 	path = libs/OIS
 	url = https://github.com/wgois/OIS.git
+[submodule "libs/ogrebullet"]
+	path = libs/ogrebullet
+	url = https://bitbucket.org/alexeyknyshev/ogrebullet.git
+[submodule "libs/bullet3"]
+	path = libs/bullet3
+	url = https://github.com/bulletphysics/bullet3.git
