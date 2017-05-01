@@ -1,3 +1,6 @@
 [submodule "ogre"]
 	path = ogre
 	url = https://github.com/OGRECave/ogre.git
+[submodule "OIS"]
+	path = OIS
+	url = https://github.com/wgois/OIS.git
