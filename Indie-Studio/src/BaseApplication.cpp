@@ -44,11 +44,11 @@ bool BaseApplication::configure()
     // Show the configuration dialog and initialise the system
     // You can skip this and use root.restoreConfig() to load configuration
     // settings if you were sure there are valid ones saved in ogre.cfg
-    if(mRoot->showConfigDialog())
+    if(mRoot->showConfigDialog(mDialog))
     {
         // If returned true, user clicked OK so initialise
         // Here we choose to let the system create a default rendering window by passing 'true'
-        mWindow = mRoot->initialise(true, "Ogre-Sample Application Render Window");
+        mWindow = mRoot->initialise(true, "Indie Studio");
 
         return true;
     }
@@ -123,27 +123,26 @@ void BaseApplication::createViewports()
 //-------------------------------------------------------------------------------------
 void BaseApplication::setupResources()
 {
-    // Load resource paths from config file
-    Ogre::ConfigFile cf;
-    cf.load(mResourcesCfg);
+  // Load resource paths from config file
+  Ogre::ConfigFile cf;
+  cf.load(mResourcesCfg);
 
     // Go through all sections & settings in the file
-    Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();
-
-    Ogre::String secName, typeName, archName;
-    while (seci.hasMoreElements())
-    {
-        secName = seci.peekNextKey();
-        Ogre::ConfigFile::SettingsMultiMap *settings = seci.getNext();
-        Ogre::ConfigFile::SettingsMultiMap::iterator i;
-        for (i = settings->begin(); i != settings->end(); ++i)
-        {
-            typeName = i->first;
-            archName = i->second;
-            Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
-                archName, typeName, secName);
-        }
-    }
+  Ogre::String sec, type, arch;
+  Ogre::ConfigFile::SettingsBySection_::const_iterator seci;
+  for(seci = cf.getSettingsBySection().begin(); seci != cf.getSettingsBySection().end(); ++seci)
+  {
+   sec = seci->first;
+   const Ogre::ConfigFile::SettingsMultiMap& settings = seci->second;
+   Ogre::ConfigFile::SettingsMultiMap::const_iterator i;
+   // go through all resource paths
+   for (i = settings.begin(); i != settings.end(); ++i)
+   {
+     type = i->first;
+     arch = Ogre::FileSystemLayer::resolveBundlePath(i->second);
+     Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch, type, sec);
+   }
+ }
 }
 //-------------------------------------------------------------------------------------
 void BaseApplication::createResourceListener()

@@ -27,3 +27,10 @@
 *.exe
 *.out
 *.app
+
+# Ctags
+*.tags
+.tags1
+
+# Dist
+dist/
