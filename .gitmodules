@@ -12,5 +12,4 @@
 	url = https://github.com/bulletphysics/bullet3.git
 [submodule "libs/CEGUI"]
 	path = libs/CEGUI
-	url = https://github.com/OpenTechEngine/CEGUI.git
-	branch = v0-8
+	url = https://github.com/mooncilla/CEGUI.git
