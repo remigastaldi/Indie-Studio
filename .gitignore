@@ -32,5 +32,10 @@
 *.tags
 .tags1
 
-# Dist
-dist/
+# cmake
+*.cmake
+*.log
+*.bin
+*.cache
+*.make
+*.txt
