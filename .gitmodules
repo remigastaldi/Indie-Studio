@@ -10,6 +10,6 @@
 [submodule "libs/bullet3"]
 	path = libs/bullet3
 	url = https://github.com/bulletphysics/bullet3.git
-[submodule "libs/CEGUI"]
-	path = libs/CEGUI
+[submodule "CEGUI"]
+	path = CEGUI
 	url = https://github.com/mooncilla/CEGUI.git
