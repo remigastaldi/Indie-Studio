@@ -14,6 +14,3 @@
 	path = libs/CEGUI
 	url = https://github.com/OpenTechEngine/CEGUI.git
 	branch = v0-8
-[submodule "CEGUI"]
-	path = CEGUI
-	url = https://github.com/mooncilla/CEGUI.git
