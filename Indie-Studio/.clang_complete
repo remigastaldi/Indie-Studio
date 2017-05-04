@@ -1,4 +1,4 @@
--Iincludes
+-Iinclude
 -I/usr/local/include/OGRE/
 -I/usr/local/include/OGRE/Bites
 -I/usr/local/include/OIS

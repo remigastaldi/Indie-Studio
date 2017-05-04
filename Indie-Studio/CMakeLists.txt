@@ -90,6 +90,7 @@ include_directories( ${OGRE_INCLUDE_DIRS}
     /usr/local/include/OGRE/Volume
     /usr/local/include/OGRE/MeshLodgenerator
     /usr/include/SDL2
+		/usr/local/include/cegui-0
 )
 
 link_directories(${OGRE_LIBRARY_DIRS})
