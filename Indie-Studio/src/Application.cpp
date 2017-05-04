@@ -14,7 +14,7 @@ Application::Application() :
 mDistance(0),
 mWalkSpd(70.0),
 mDirection(Ogre::Vector3::ZERO),
-mDestination(Ogre::Vector3::ZERO),
+mDestination(Ogre::Vector3(300, 0, 300)),
 mAnimationState(0),
 mEntity(0),
 mNode(0)
@@ -92,10 +92,6 @@ void Application::createScene()
 		  Ogre::Vector3(0, 0, 25.0));
 		mNode->attachObject(mEntity);
 
-		mWalkList.push_back(Ogre::Vector3(550.0, 0, 50.0));
-		mWalkList.push_back(Ogre::Vector3(-100.0, 0, -200.0));
-		mWalkList.push_back(Ogre::Vector3(0, 0, 25.0));
-
 		Ogre::Entity* ent;
 		Ogre::SceneNode* node;
 
@@ -124,6 +120,44 @@ void Application::createScene()
 		mAnimationState = mEntity->getAnimationState("Idle");
 mAnimationState->setLoop(true);
 mAnimationState->setEnabled(true);
+}
+
+bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
+{
+	if (mWindow->isClosed()) {
+		return false;
+	}
+
+	if (mShutDown) {
+		return false;
+	}
+
+    //Need to capture/update each device
+    mKeyboard->capture();
+    mMouse->capture();
+
+				Ogre::Real move = mWalkSpd * evt.timeSinceLastFrame;
+				mDistance -= move;
+				mNode->translate(move * mDirection);
+				mDirection = mDestination - mNode->getPosition();
+				mDistance = mDirection.normalise();
+
+				Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_X;
+
+		if ((1.0 + src.dotProduct(mDirection)) < 0.0001)
+		{
+		  mNode->yaw(Ogre::Degree(180));
+		}
+		else
+		{
+		  Ogre::Quaternion quat = src.getRotationTo(mDirection);
+		  mNode->rotate(quat);
+		}
+		 //Need to inject timestamps to CEGUI System.
+    CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+
+    mCameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
+    return true;
 }
 
 bool Application::keyPressed( const OIS::KeyEvent &arg )

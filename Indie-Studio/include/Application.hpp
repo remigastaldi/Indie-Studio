@@ -11,6 +11,8 @@ public:
 
 		bool keyPressed( const OIS::KeyEvent &arg );
 
+		bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+
 protected:
     void createScene();
 		std::deque<Ogre::Vector3> mWalkList;
