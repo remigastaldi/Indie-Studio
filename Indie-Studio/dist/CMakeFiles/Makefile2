@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gastal_r/rendu/Indie-Studio/Indie-Studio
+CMAKE_SOURCE_DIR = /home/august_t/Indie-Studio/Indie-Studio
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gastal_r/rendu/Indie-Studio/Indie-Studio/dist
+CMAKE_BINARY_DIR = /home/august_t/Indie-Studio/Indie-Studio/dist
 
 #=============================================================================
 # Target rules for target CMakeFiles/IndieStudio.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /home/gastal_r/rendu/Indie-Studio/Indie-Studio/dist
 CMakeFiles/IndieStudio.dir/all:
 	$(MAKE) -f CMakeFiles/IndieStudio.dir/build.make CMakeFiles/IndieStudio.dir/depend
 	$(MAKE) -f CMakeFiles/IndieStudio.dir/build.make CMakeFiles/IndieStudio.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/gastal_r/rendu/Indie-Studio/Indie-Studio/dist/CMakeFiles --progress-num=1,2,3,4,5 "Built target IndieStudio"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/august_t/Indie-Studio/Indie-Studio/dist/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target IndieStudio"
 .PHONY : CMakeFiles/IndieStudio.dir/all
 
 # Include target in all.
@@ -76,15 +76,25 @@ all: CMakeFiles/IndieStudio.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/IndieStudio.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gastal_r/rendu/Indie-Studio/Indie-Studio/dist/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/august_t/Indie-Studio/Indie-Studio/dist/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/IndieStudio.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gastal_r/rendu/Indie-Studio/Indie-Studio/dist/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/august_t/Indie-Studio/Indie-Studio/dist/CMakeFiles 0
 .PHONY : CMakeFiles/IndieStudio.dir/rule
 
 # Convenience name for target.
 IndieStudio: CMakeFiles/IndieStudio.dir/rule
 
 .PHONY : IndieStudio
+
+# Pre-install relink rule for target.
+CMakeFiles/IndieStudio.dir/preinstall:
+	$(MAKE) -f CMakeFiles/IndieStudio.dir/build.make CMakeFiles/IndieStudio.dir/preinstall
+.PHONY : CMakeFiles/IndieStudio.dir/preinstall
+
+# Prepare target for install.
+preinstall: CMakeFiles/IndieStudio.dir/preinstall
+
+.PHONY : preinstall
 
 # clean rule for target.
 CMakeFiles/IndieStudio.dir/clean:

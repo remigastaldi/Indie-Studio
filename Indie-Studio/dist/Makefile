@@ -48,24 +48,13 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gastal_r/rendu/Indie-Studio/Indie-Studio
+CMAKE_SOURCE_DIR = /home/august_t/Indie-Studio/Indie-Studio
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gastal_r/rendu/Indie-Studio/Indie-Studio/dist
+CMAKE_BINARY_DIR = /home/august_t/Indie-Studio/Indie-Studio/dist
 
 #=============================================================================
 # Targets provided globally by CMake.
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
 
 # Special rule for the target install/local
 install/local: preinstall
@@ -124,9 +113,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gastal_r/rendu/Indie-Studio/Indie-Studio/dist/CMakeFiles /home/gastal_r/rendu/Indie-Studio/Indie-Studio/dist/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/august_t/Indie-Studio/Indie-Studio/dist/CMakeFiles /home/august_t/Indie-Studio/Indie-Studio/dist/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gastal_r/rendu/Indie-Studio/Indie-Studio/dist/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/august_t/Indie-Studio/Indie-Studio/dist/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -166,6 +155,11 @@ IndieStudio: cmake_check_build_system
 IndieStudio/fast:
 	$(MAKE) -f CMakeFiles/IndieStudio.dir/build.make CMakeFiles/IndieStudio.dir/build
 .PHONY : IndieStudio/fast
+
+# Manual pre-install relink rule for target.
+IndieStudio/preinstall:
+	$(MAKE) -f CMakeFiles/IndieStudio.dir/build.make CMakeFiles/IndieStudio.dir/preinstall
+.PHONY : IndieStudio/preinstall
 
 src/Application.o: src/Application.cpp.o
 
@@ -281,7 +275,6 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install/strip"
 	@echo "... install/local"
 	@echo "... IndieStudio"
 	@echo "... install"

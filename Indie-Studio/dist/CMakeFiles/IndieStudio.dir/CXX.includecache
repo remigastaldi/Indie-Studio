@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/Application.cpp
+/home/august_t/Indie-Studio/Indie-Studio/src/Application.cpp
 Application.hpp
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/Application.hpp
+/home/august_t/Indie-Studio/Indie-Studio/src/Application.hpp
 OgreSceneManager.h
 -
 OgreViewport.h
@@ -26,15 +26,15 @@ OgreException.h
 OIS/OISException.h
 -
 
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/Application.hpp
+/home/august_t/Indie-Studio/Indie-Studio/src/Application.hpp
 BaseApplication.hpp
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/BaseApplication.hpp
+/home/august_t/Indie-Studio/Indie-Studio/src/BaseApplication.hpp
 
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/BaseApplication.cpp
+/home/august_t/Indie-Studio/Indie-Studio/src/BaseApplication.cpp
 BaseApplication.hpp
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/BaseApplication.hpp
+/home/august_t/Indie-Studio/Indie-Studio/src/BaseApplication.hpp
 
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/BaseApplication.hpp
+/home/august_t/Indie-Studio/Indie-Studio/src/BaseApplication.hpp
 OgreWindowEventUtilities.h
 -
 OgreFrameListener.h
@@ -66,15 +66,15 @@ OIS/OISKeyboard.h
 OIS/OISMouse.h
 -
 CameraMan.hpp
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/CameraMan.hpp
+/home/august_t/Indie-Studio/Indie-Studio/src/CameraMan.hpp
 
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/CameraMan.cpp
+/home/august_t/Indie-Studio/Indie-Studio/src/CameraMan.cpp
 CameraMan.hpp
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/CameraMan.hpp
+/home/august_t/Indie-Studio/Indie-Studio/src/CameraMan.hpp
 
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/CameraMan.hpp
+/home/august_t/Indie-Studio/Indie-Studio/src/CameraMan.hpp
 Ogre.h
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/Ogre.h
+/home/august_t/Indie-Studio/Indie-Studio/src/Ogre.h
 OIS/OISEvents.h
 -
 OIS/OISInputManager.h
@@ -86,13 +86,13 @@ OIS/OISMouse.h
 limits
 -
 
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/main.cpp
+/home/august_t/Indie-Studio/Indie-Studio/src/main.cpp
 Application.hpp
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/Application.hpp
+/home/august_t/Indie-Studio/Indie-Studio/src/Application.hpp
 OIS/OISException.h
 -
 windows.h
-/home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/windows.h
+/home/august_t/Indie-Studio/Indie-Studio/src/windows.h
 
 /usr/local/include/OGRE/Ogre.h
 OgrePrerequisites.h
