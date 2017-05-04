@@ -1,3 +1,3 @@
-[submodule "libs/socket.io-cpp"]
-	path = libs/socket.io-cpp
+[submodule "libs/socket.io-client-cpp"]
+	path = libs/socket.io-client-cpp
 	url = https://github.com/socketio/socket.io-client-cpp.git
