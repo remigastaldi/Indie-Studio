@@ -3,10 +3,10 @@
 
 #include "Ogre.h"
 
-#include <OIS/OISEvents.h>
-#include <OIS/OISInputManager.h>
-#include <OIS/OISKeyboard.h>
-#include <OIS/OISMouse.h>
+#include <OISEvents.h>
+#include <OISInputManager.h>
+#include <OISKeyboard.h>
+#include <OISMouse.h>
 
 #include <limits>
 
@@ -25,7 +25,7 @@ namespace OgreCookies
     class CameraMan
     {
     public:
-        explicit CameraMan(Ogre::Camera* cam);
+        CameraMan(Ogre::Camera* cam);
         virtual ~CameraMan();
 
         /*-----------------------------------------------------------------------------

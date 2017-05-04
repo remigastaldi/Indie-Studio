@@ -61,9 +61,9 @@ if(NOT OIS_FOUND)
 endif()
 
 set(HDRS
-	${CMAKE_CURRENT_SOURCE_DIR}/src/BaseApplication.hpp
-	${CMAKE_CURRENT_SOURCE_DIR}/src/Application.hpp
-	${CMAKE_CURRENT_SOURCE_DIR}/src/CameraMan.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/BaseApplication.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/Application.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/CameraMan.hpp
 )
 
 set(SRCS
@@ -76,7 +76,23 @@ set(SRCS
 include_directories( ${OGRE_INCLUDE_DIRS}
     ${OIS_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    /usr/local/include/OIS
+    /usr/local/include/OGRE/Bites
+    /usr/local/include/OGRE/Overlay
+    /usr/local/include/OGRE/HLMS
+    /usr/local/include/OGRE/MesgLodGenerator
+    /usr/local/include/OGRE/Paging
+    /usr/local/include/OGRE/RenderSystems
+    /usr/local/include/OGRE/RTShaderSystem
+    /usr/local/include/OGRE/Terrain
+    /usr/local/include/OGRE/Threading
+    /usr/local/include/OGRE/Volume
+    /usr/local/include/OGRE/MeshLodgenerator
+    /usr/include/SDL2
 )
+
+link_directories(${OGRE_LIBRARY_DIRS})
 
 # Specify build paths
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")

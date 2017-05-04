@@ -13,14 +13,13 @@
 #include <OgreFileSystemLayer.h>
 #include <OgreConfigFile.h>
 
+#include <OgreApplicationContext.h>
 #include <OIS/OISEvents.h>
 #include <OIS/OISInputManager.h>
 #include <OIS/OISKeyboard.h>
 #include <OIS/OISMouse.h>
 #include "CameraMan.hpp"
 
-//#include <Bites/OgreTrays.h>
-//#  include <Bites/OgreCameraMan.h>
 class BaseApplication : public Ogre::WindowEventListener, public Ogre::FrameListener, public OIS::KeyListener, public OIS::MouseListener
 {
 public:
