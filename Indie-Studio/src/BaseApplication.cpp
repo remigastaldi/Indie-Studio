@@ -220,6 +220,8 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
     mCameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
 
+     //Need to inject timestamps to CEGUI System.
+    CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
     return true;
 }
 //-------------------------------------------------------------------------------------

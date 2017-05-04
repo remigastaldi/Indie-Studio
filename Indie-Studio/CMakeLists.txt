@@ -1,11 +1,9 @@
 cmake_minimum_required(VERSION 2.8.12)
 
-# Change this to your project's name
 set(PROJECT_NAME "IndieStudio")
 
 project(${PROJECT_NAME} CXX C)
 
-# This template purpose is for experimenting, so start from v0.0.1
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
 set(VERSION_RELEASE 1)
@@ -55,6 +53,11 @@ if (${OGRE_VERSION} VERSION_LESS "1.9" OR ${OGRE_VERSION} VERSION_GREATER "2.0")
     message(FATAL_ERROR "${PROJECT_NAME} requires Ogre 1.9 or later, please install the latest stable version from http://ogre3d.org")
 endif()
 
+find_package(CEGUI REQUIRED)
+if(NOT CEGUI_FOUND)
+	message(SEND_ERROR "Failed to find CEGUI.")
+endif()
+
 find_package(OIS REQUIRED)
 if(NOT OIS_FOUND)
 	message(SEND_ERROR "Failed to find OIS.")
@@ -90,7 +93,7 @@ include_directories( ${OGRE_INCLUDE_DIRS}
     /usr/local/include/OGRE/Volume
     /usr/local/include/OGRE/MeshLodgenerator
     /usr/include/SDL2
-		/usr/local/include/cegui-0
+    /usr/local/include/cegui-0
 )
 
 link_directories(${OGRE_LIBRARY_DIRS})
@@ -112,7 +115,7 @@ add_executable(${PROJECT_NAME} WIN32 ${HDRS} ${SRCS})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
-target_link_libraries(${PROJECT_NAME} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${Boost_LIBRARIES} ${CEGUI_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES})
 
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/bin)
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/media)

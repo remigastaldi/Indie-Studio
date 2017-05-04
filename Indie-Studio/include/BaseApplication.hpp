@@ -12,12 +12,16 @@
 #include <OgreRenderWindow.h>
 #include <OgreFileSystemLayer.h>
 #include <OgreConfigFile.h>
-
 #include <OgreApplicationContext.h>
+
 #include <OIS/OISEvents.h>
 #include <OIS/OISInputManager.h>
 #include <OIS/OISKeyboard.h>
 #include <OIS/OISMouse.h>
+
+#include <CEGUI/CEGUI.h>
+#include <CEGUI/RendererModules/Ogre/Renderer.h>
+
 #include "CameraMan.hpp"
 
 class BaseApplication : public Ogre::WindowEventListener, public Ogre::FrameListener, public OIS::KeyListener, public OIS::MouseListener

@@ -33,7 +33,7 @@
 .tags1
 
 # cmake
-Indie-Studio/dist/CMakeFiles
+CMakeFiles
 *.cmake
 *.log
 *.bin

@@ -2,7 +2,6 @@
 #define __Application_hpp_
 
 #include "BaseApplication.hpp"
-#include <CEGUI/CEGUI.h>
 
 class Application : public BaseApplication
 {
