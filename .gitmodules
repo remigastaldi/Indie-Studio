@@ -1,15 +1,3 @@
-[submodule "libs/ogre"]
-	path = libs/ogre
-	url = https://github.com/OGRECave/ogre.git
-[submodule "libs/OIS"]
-	path = libs/OIS
-	url = https://github.com/wgois/OIS.git
-[submodule "libs/ogrebullet"]
-	path = libs/ogrebullet
-	url = https://bitbucket.org/alexeyknyshev/ogrebullet.git
-[submodule "libs/bullet3"]
-	path = libs/bullet3
-	url = https://github.com/bulletphysics/bullet3.git
-[submodule "libs/cegui"]
-	path = libs/cegui
-	url = https://github.com/mooncilla/CEGUI.git
+[submodule "libs/socket.io-cpp"]
+	path = libs/socket.io-cpp
+	url = https://github.com/socketio/socket.io-client-cpp.git
