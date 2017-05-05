@@ -5,8 +5,9 @@ io.on('connection', function (socket) {
   console.log("User connected");
 
   socket.on('test', function (data) {
-    io.emit("test", data + " bite");
-    console.log(data);
+    data = JSON.parse(data);
+    io.emit("test", data);
+    console.log(data["message"]);
   });
 
 	socket.on('disconnect', function () {

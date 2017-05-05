@@ -12,6 +12,7 @@
 #include <mutex>
 #include <condition_variable>
 #include <string>
+
 #ifdef WIN32
 #define HIGHLIGHT(__O__) std::cout<<__O__<<std::endl
 #define EM(__O__) std::cout<<__O__<<std::endl
@@ -31,6 +32,7 @@ using namespace std;
 std::mutex _lock;
 
 std::condition_variable_any _cond;
+int my_id;
 bool connect_finish = false;
 
 class connection_listener
@@ -74,7 +76,8 @@ void bind_events(socket::ptr &socket)
 	current_socket->on("test", sio::socket::event_listener_aux([&](string const& name, message::ptr const& data, bool isAck,message::list &ack_resp)
                        {
                            _lock.lock();
-                           std::cout << data->get_string() << '\n';
+                           if (data->get_map()["send_by"]->get_int() != my_id)
+                              std::cout <<  data->get_map()["message"]->get_string() << '\n';
                            _lock.unlock();
                        }));
 }
@@ -84,6 +87,8 @@ int main(int ac, char **av)
 
     sio::client h;
     connection_listener l(h);
+    std::srand(std::time(0));
+    my_id = std::rand();
 
     h.set_open_listener(std::bind(&connection_listener::on_connected, &l));
     h.set_close_listener(std::bind(&connection_listener::on_close, &l,std::placeholders::_1));
@@ -103,7 +108,8 @@ int main(int ac, char **av)
 
         while (getline(cin, line))
         {
-          current_socket->emit("test", line);
+          std::string st("{\"message\": \"" + line  +"\", \"send_by\": " + std::to_string(my_id) + "}");
+          current_socket->emit("test", st);
         }
 
     _lock.lock();
