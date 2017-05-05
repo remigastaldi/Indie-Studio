@@ -5,12 +5,12 @@
 ## Login   <leo.hubert@epitech.eu>
 ##
 ## Started on  Thu May  4 18:11:07 2017 Leo HUBERT
-## Last update Fri May  5 14:37:44 2017 Matthias Prost
+## Last update Fri May  5 14:41:30 2017 LEO Leo HUBERT
 ##
 
 ## CFLAGS	+=	-W -Wall -Werror -Iinc
-CFLAGS	+= 	-lboost_date_time -lboost_random -lboost_system -lsioclient -lpthread -Iinc
-CFLAGS 	+= -I./inc
+CFLAGS	+= 	-lboost_date_time -lboost_random -lboost_system -lpthread -Iinc
+CFLAGS 	+=	-I./inc -Llib -lsioclient
 
 CC	=	g++
 
