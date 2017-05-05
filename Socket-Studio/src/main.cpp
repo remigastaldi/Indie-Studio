@@ -174,15 +174,11 @@ Login:
                 }
                 goto Login;
             }
-
-            while (1)
-            {
                 std::cout << line << "\n";
-                current_socket->emit("new message", "hey");
+                current_socket->emit("new message", line);
                 _lock.lock();
                 EM("\t\t\t"<<line<<":"<<"You");
                 _lock.unlock();
-            }
         }
     }
     HIGHLIGHT("Closing...");

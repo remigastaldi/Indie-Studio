@@ -5,17 +5,18 @@
 ## Login   <leo.hubert@epitech.eu>
 ##
 ## Started on  Thu May  4 18:11:07 2017 Leo HUBERT
-## Last update Fri May  5 12:01:56 2017 Leo HUBERT
+## Last update Fri May  5 14:37:44 2017 Matthias Prost
 ##
 
-CFLAGS	+=	-W -Wall -Werror -Iinc
-CFLAGS	+= 	-lboost_date_time -lboost_random -lboost_system -lsioclient -lpthread
+## CFLAGS	+=	-W -Wall -Werror -Iinc
+CFLAGS	+= 	-lboost_date_time -lboost_random -lboost_system -lsioclient -lpthread -Iinc
+CFLAGS 	+= -I./inc
 
 CC	=	g++
 
 NAME    =	test
 
-SRC	=	src/main.cpp
+SRC	=	src/main.cpp \
 
 ECHO	=	/bin/echo -e
 DEFAULT	=	"\033[00m"
