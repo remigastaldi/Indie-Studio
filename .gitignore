@@ -41,4 +41,4 @@ Indie-Studio/dist/CMakeFiles
 *.make
 *.txt
 
-Socket-Studio/server/node-module
+Socket-Studio/server/node_modules
