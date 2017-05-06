@@ -19,7 +19,6 @@
 
 #include <stdio.h>
 #include <tchar.h>
-#define MAIN_FUNC int _tmain(int argc, _TCHAR* argv[])
 #else
 #define HIGHLIGHT(__O__) std::cout<<"\e[1;31m"<<__O__<<"\e[0m"<<std::endl
 #define EM(__O__) std::cout<<"\e[1;30;1m"<<__O__<<"\e[0m"<<std::endl
@@ -56,13 +55,13 @@ public:
     }
     void on_close(client::close_reason const& reason)
     {
-        std::cout<<"sio closed "<<std::endl;
+        std::cout << "sio closed: " << reason << std::endl;
         exit(0);
     }
 
     void on_fail()
     {
-        std::cout<<"sio failed "<<std::endl;
+        std::cout << "sio failed: " <<std::endl;
         exit(0);
     }
 };
@@ -73,8 +72,14 @@ socket::ptr current_socket;
 
 void bind_events(socket::ptr &socket)
 {
-	current_socket->on("test", sio::socket::event_listener_aux([&](string const& name, message::ptr const& data, bool isAck,message::list &ack_resp)
+  (void)socket;
+	current_socket->on("test", sio::socket::event_listener_aux([&](string const& name,
+                                                            message::ptr const& data,
+                                                            bool isAck,message::list &ack_resp)
                        {
+                         (void)name;
+                         (void)isAck;
+                         (void)ack_resp;
                            _lock.lock();
                            if (data->get_map()["send_by"]->get_int() != my_id)
                               std::cout <<  data->get_map()["message"]->get_string() << '\n';
@@ -82,7 +87,7 @@ void bind_events(socket::ptr &socket)
                        }));
 }
 
-int main(int ac, char **av)
+int main()
 {
 
     sio::client h;

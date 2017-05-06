@@ -5,10 +5,10 @@
 ## Login   <leo.hubert@epitech.eu>
 ##
 ## Started on  Thu May  4 18:11:07 2017 Leo HUBERT
-## Last update Fri May  5 14:41:30 2017 LEO Leo HUBERT
+## Last update Sat May  6 12:35:12 2017 Matthias Prost
 ##
 
-## CFLAGS	+=	-W -Wall -Werror -Iinc
+CFLAGS	+=	-W -Wall -Werror
 CFLAGS	+= 	-lboost_date_time -lboost_random -lboost_system -lpthread -Iinc
 CFLAGS 	+=	-I./inc -Llib -lsioclient
 
