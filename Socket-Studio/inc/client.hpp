@@ -5,41 +5,51 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Sat May  6 13:59:56 2017 Matthias Prost
+// Last update Sat May  6 15:39:18 2017 Matthias Prost
 //
 
 #ifndef _CLIENT_HPP_
 #define _CLIENT_HPP_
 
-#include <sio_client.h>
 
-#include <functional>
-#include <iostream>
-#include <thread>
 #include <mutex>
-#include <condition_variable>
+#include <thread>
 #include <string>
+#include <iostream>
+#include <functional>
+#include <sio_client.h>
+#include <condition_variable>
 
 #ifdef WIN32
-#define HIGHLIGHT(__O__) std::cout<<__O__<<std::endl
 #define EM(__O__) std::cout<<__O__<<std::endl
+#define HIGHLIGHT(__O__) std::cout<<__O__<<std::endl
 
-#include <stdio.h>
 #include <tchar.h>
+#include <stdio.h>
+
 #else
-#define HIGHLIGHT(__O__) std::cout<<"\e[1;31m"<<__O__<<"\e[0m"<<std::endl
 #define EM(__O__) std::cout<<"\e[1;30;1m"<<__O__<<"\e[0m"<<std::endl
+#define HIGHLIGHT(__O__) std::cout<<"\e[1;31m"<<__O__<<"\e[0m"<<std::endl
 
 class Client
 {
     sio::client &handler;
 
-public:
-    Client(sio::client& h) : handler(h) {}
+  private:
+    int                         _id;
+    std::mutex                  _lock;
+    std::condition_variable_any _cond;
+    bool                        connect_finish;
+    int                         participants;
+
+  public:
+    Client(sio::client&);
     ~Client() {}
     void  on_connected();
     void  on_close(sio::client::close_reason const& reason);
     void  on_fail();
+    void  events(sio::socket::ptr &socket);
+    void  create(sio::client &);
 };
 
 #endif

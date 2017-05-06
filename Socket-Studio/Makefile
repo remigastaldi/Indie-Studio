@@ -5,7 +5,7 @@
 ## Login   <leo.hubert@epitech.eu>
 ##
 ## Started on  Thu May  4 18:11:07 2017 Leo HUBERT
-## Last update Sat May  6 13:13:14 2017 Matthias Prost
+## Last update Sat May  6 15:32:45 2017 Matthias Prost
 ##
 
 CFLAGS	+=	-W -Wall -Werror
@@ -17,6 +17,7 @@ CC	=	g++
 NAME    =	client
 
 SRC	=	src/main.cpp \
+			src/client.cpp \
 
 ECHO	=	/bin/echo -e
 DEFAULT	=	"\033[00m"
