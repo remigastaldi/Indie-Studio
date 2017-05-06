@@ -1,6 +1,18 @@
 var io = require('socket.io')(3000);
 //var router = require('socket.io-events')();
 
+var readline = require('readline');
+var rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  terminal: false
+});
+
+rl.on('line', function(line){
+    if (line == "exit" || line == "Exit")
+        process.exit();
+})
+
 io.on('connection', function (socket) {
   console.log("User connected");
 

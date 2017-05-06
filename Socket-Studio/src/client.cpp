@@ -1,11 +1,11 @@
 /*
-** client.cpp for Indie-Studio-socket
+** client.cpp for Indie-Studio
 **
 ** Made by	Full Name
 ** Login	Full Name
 **
 ** Started on	Sat May 06 15:32:16 2017 Full Name
-** Last update	Sat May 06 15:39:21 2017 Full Name
+** Last update	Sat May 06 15:41:08 2017 Full Name
 */
 
 #include "client.hpp"
