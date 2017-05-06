@@ -8,20 +8,28 @@ var rl = readline.createInterface({
   terminal: false
 });
 
+
+function exit()
+{
+    io.emit("exit", null);
+    process.exit();
+}
+
 rl.on('line', function(line){
     if (line == "exit" || line == "Exit")
     {
-      io.emit("exit", null);
-      process.exit();
+      exit();
     }
 })
 
 io.on('connection', function (socket) {
   console.log("User connected");
 
-  socket.on('test', function (data) {
+  socket.on('message', function (data) {
     data = JSON.parse(data);
-    io.emit("test", data);
+    if (data["message"] == "$exit")
+      exit();
+    io.emit("message", data);
     console.log(data["message"]);
   });
 

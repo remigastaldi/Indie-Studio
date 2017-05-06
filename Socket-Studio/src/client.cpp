@@ -5,7 +5,7 @@
 ** Login	Full Name
 **
 ** Started on	Sat May 06 15:32:16 2017 Full Name
-** Last update	Sat May 06 17:01:47 2017 Full Name
+** Last update Sat May 06 20:13:31 2017 Leo Hubert Froideval
 */
 
 #include "client.hpp"
@@ -41,7 +41,7 @@ void Client::on_fail()
 void Client::events(sio::socket::ptr &socket)
 {
   (void)socket;
-	current_socket->on("test", sio::socket::event_listener_aux([&](std::string const& name,
+	current_socket->on("message", sio::socket::event_listener_aux([&](std::string const& name,
                                                             sio::message::ptr const& data,
                                                             bool isAck, sio::message::list &ack_resp)
                        {
@@ -86,7 +86,7 @@ void Client::create(sio::client &h)
     while (getline(std::cin, line))
     {
       std::string st("{\"message\": \"" + line  +"\", \"send_by\": " + std::to_string(_id) + "}");
-      current_socket->emit("test", st);
+      current_socket->emit("message", st);
     }
 
     _lock.lock();
