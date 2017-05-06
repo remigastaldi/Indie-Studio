@@ -42,8 +42,9 @@ class Client
     int                         _id;
     std::mutex                  _lock;
     std::condition_variable_any _cond;
-    bool                        connect_finish;
-    int                         participants;
+    bool                        _connect_finish;
+    int                         _participants;
+    sio::socket::ptr            _current_socket;
 
   public:
     Client(sio::client&);
@@ -51,7 +52,7 @@ class Client
     void  on_connected();
     void  on_close(sio::client::close_reason const& reason);
     void  on_fail();
-    void  events(sio::socket::ptr &socket);
+    void  events();
     void  create(sio::client &);
 };
 
