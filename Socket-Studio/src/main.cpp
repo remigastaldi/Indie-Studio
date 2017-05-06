@@ -1,81 +1,48 @@
 //
-//  sio_test_sample.cpp
+// main.cpp for Indie-Sutdio in /home/prost_m/Rendu/Semestre_4/Indie-Studio-socket/Socket-Studio/src/
 //
-//  Created by Melo Yao on 3/24/15.
+// Made by Matthias Prost
+// Login   <matthias.prost@epitech.eu@epitech.eu>
+//
+// Started on  Sat May  6 13:12:48 2017 Matthias Prost
+// Last update Sat May  6 14:00:57 2017 Matthias Prost
 //
 
-#include <sio_client.h>
+#include "client.hpp"
 
-#include <functional>
-#include <iostream>
-#include <thread>
-#include <mutex>
-#include <condition_variable>
-#include <string>
-
-#ifdef WIN32
-#define HIGHLIGHT(__O__) std::cout<<__O__<<std::endl
-#define EM(__O__) std::cout<<__O__<<std::endl
-
-#include <stdio.h>
-#include <tchar.h>
-#else
-#define HIGHLIGHT(__O__) std::cout<<"\e[1;31m"<<__O__<<"\e[0m"<<std::endl
-#define EM(__O__) std::cout<<"\e[1;30;1m"<<__O__<<"\e[0m"<<std::endl
-
-#define MAIN_FUNC int main(int argc ,const char* args[])
-#endif
-
-using namespace sio;
-using namespace std;
 std::mutex _lock;
-
 std::condition_variable_any _cond;
 int my_id;
 bool connect_finish = false;
-
-class connection_listener
-{
-    sio::client &handler;
-
-public:
-
-    connection_listener(sio::client& h):
-    handler(h)
-    {
-    }
-
-
-    void on_connected()
-    {
-        _lock.lock();
-        _cond.notify_all();
-        connect_finish = true;
-        _lock.unlock();
-    }
-    void on_close(client::close_reason const& reason)
-    {
-        std::cout << "sio closed: " << reason << std::endl;
-        exit(0);
-    }
-
-    void on_fail()
-    {
-        std::cout << "sio failed: " <<std::endl;
-        exit(0);
-    }
-};
-
 int participants = -1;
+sio::socket::ptr current_socket;
 
-socket::ptr current_socket;
+void Client::on_connected()
+{
+    _lock.lock();
+    _cond.notify_all();
+    connect_finish = true;
+    _lock.unlock();
+}
 
-void bind_events(socket::ptr &socket)
+void Client::on_close(sio::client::close_reason const& reason)
+{
+    std::cout << "sio closed: " << reason << std::endl;
+    exit(0);
+}
+
+void Client::on_fail()
+{
+    std::cout << "sio failed: " <<std::endl;
+    exit(0);
+}
+
+void bind_events(sio::socket::ptr &socket)
 {
   (void)socket;
-	current_socket->on("test", sio::socket::event_listener_aux([&](string const& name,
-                                                            message::ptr const& data,
-                                                            bool isAck,message::list &ack_resp)
+	current_socket->on("test", sio::socket::event_listener_aux([&](std::string const& name,
+                                                            sio::message::ptr const& data,
+                                                            bool isAck, sio::message::list &ack_resp)
                        {
                          (void)name;
                          (void)isAck;
@@ -89,15 +56,14 @@ void bind_events(socket::ptr &socket)
 
 int main()
 {
-
     sio::client h;
-    connection_listener l(h);
+    Client l(h);
     std::srand(std::time(0));
     my_id = std::rand();
 
-    h.set_open_listener(std::bind(&connection_listener::on_connected, &l));
-    h.set_close_listener(std::bind(&connection_listener::on_close, &l,std::placeholders::_1));
-    h.set_fail_listener(std::bind(&connection_listener::on_fail, &l));
+    h.set_open_listener(std::bind(&Client::on_connected, &l));
+    h.set_close_listener(std::bind(&Client::on_close, &l,std::placeholders::_1));
+    h.set_fail_listener(std::bind(&Client::on_fail, &l));
     h.connect("http://127.0.0.1:3000");
     _lock.lock();
     if(!connect_finish)
@@ -108,21 +74,17 @@ int main()
 		current_socket = h.socket();
     bind_events(current_socket);
 
+    std::string line;
 
-        std::string line;
-
-        while (getline(cin, line))
-        {
-          std::string st("{\"message\": \"" + line  +"\", \"send_by\": " + std::to_string(my_id) + "}");
-          current_socket->emit("test", st);
-        }
+    while (getline(std::cin, line))
+    {
+      std::string st("{\"message\": \"" + line  +"\", \"send_by\": " + std::to_string(my_id) + "}");
+      current_socket->emit("test", st);
+    }
 
     _lock.lock();
     _cond.wait(_lock);
     _lock.unlock();
-
-
-
 
     HIGHLIGHT("Closing...");
     h.sync_close();

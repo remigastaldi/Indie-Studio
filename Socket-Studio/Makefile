@@ -5,7 +5,7 @@
 ## Login   <leo.hubert@epitech.eu>
 ##
 ## Started on  Thu May  4 18:11:07 2017 Leo HUBERT
-## Last update Sat May  6 12:35:12 2017 Matthias Prost
+## Last update Sat May  6 13:13:14 2017 Matthias Prost
 ##
 
 CFLAGS	+=	-W -Wall -Werror
@@ -14,7 +14,7 @@ CFLAGS 	+=	-I./inc -Llib -lsioclient
 
 CC	=	g++
 
-NAME    =	test
+NAME    =	client
 
 SRC	=	src/main.cpp \
 
