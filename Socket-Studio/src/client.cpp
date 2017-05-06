@@ -5,7 +5,7 @@
 ** Login	Full Name
 **
 ** Started on	Sat May 06 15:32:16 2017 Full Name
-** Last update	Sat May 06 15:41:08 2017 Full Name
+** Last update	Sat May 06 17:01:47 2017 Full Name
 */
 
 #include "client.hpp"
@@ -53,6 +53,14 @@ void Client::events(sio::socket::ptr &socket)
                               std::cout <<  data->get_map()["message"]->get_string() << '\n';
                            _lock.unlock();
                        }));
+  current_socket->on("exit", [&](sio::event& ev)
+                         {
+                           (void)ev;
+                           _lock.lock();
+                           HIGHLIGHT_N("SYSTEM:");
+                           std::cout << " The server is gonna to shutdown in 5 seconds" << '\n';
+                           _lock.unlock();
+                         });
 }
 
 void Client::create(sio::client &h)

@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Sat May  6 15:39:18 2017 Matthias Prost
+// Last update Sat May  6 17:02:42 2017 Matthias Prost
 //
 
 #ifndef _CLIENT_HPP_
@@ -23,11 +23,14 @@
 #ifdef WIN32
 #define EM(__O__) std::cout<<__O__<<std::endl
 #define HIGHLIGHT(__O__) std::cout<<__O__<<std::endl
+#define HIGHLIGHT_N(__O__) std::cout<<__O__
+
 
 #include <tchar.h>
 #include <stdio.h>
 
 #else
+#define HIGHLIGHT_N(__O__) std::cout<<"\e[1;31m"<<__O__<<"\e[0m"
 #define EM(__O__) std::cout<<"\e[1;30;1m"<<__O__<<"\e[0m"<<std::endl
 #define HIGHLIGHT(__O__) std::cout<<"\e[1;31m"<<__O__<<"\e[0m"<<std::endl
 

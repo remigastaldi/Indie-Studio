@@ -10,7 +10,10 @@ var rl = readline.createInterface({
 
 rl.on('line', function(line){
     if (line == "exit" || line == "Exit")
-        process.exit();
+    {
+      io.emit("exit", null);
+      process.exit();
+    }
 })
 
 io.on('connection', function (socket) {
