@@ -1,3 +1,13 @@
+//
+// Application.cpp for Indie-Studio in /home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/
+//
+// Made by gastal_r
+// Login   <remi.gastaldi@epitech.eu>
+//
+// Started on  Fri May  5 09:53:57 2017 gastal_r
+// Last update Sun May  7 22:47:45 2017 gastal_r
+//
+
 #include "Application.hpp"
 
 #include <OgreSceneManager.h>
@@ -12,9 +22,9 @@
 //-------------------------------------------------------------------------------------
 Application::Application() :
 mDistance(0),
-mWalkSpd(70.0),
+mWalkSpd(170.0),
 mDirection(Ogre::Vector3::ZERO),
-mDestination(Ogre::Vector3(300, 0, 300)),
+mDestination(Ogre::Vector3(500, 0, 0)),
 mAnimationState(0),
 mEntity(0),
 mNode(0)
@@ -29,97 +39,65 @@ Application::~Application()
 //-------------------------------------------------------------------------------------
 void Application::createScene()
 {
+	//Load the scheme
+	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
+	// Set the defaults
+	//CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("DejaVuSans-10");
+	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
+	// Create window
+	CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
+	// Setting root window
+	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( myRoot );
+	// Creating a new window to incorporate an image
+	CEGUI::Window *myImageWindow = CEGUI::WindowManager::getSingleton().createWindow("TaharezLook/StaticImage","PrettyWindow" );
+	// Setting image location : CEGUI::UVector2(CEGUI::UDim x, CEGUI::UDim y);
+	myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5,0),CEGUI::UDim(0.5,0)));
+	// Setting Window size
+	myImageWindow->setSize(CEGUI::USize(CEGUI::UDim(0,150),CEGUI::UDim(0,100)));
+	// Setting the image used in the window
+	myImageWindow->setProperty("Image","TaharezLook/full_image");
+	//Attaching the image window to the root window
+	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);
+
+
 	// Set the scene's ambient light
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
-
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-/*
-		 Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
+	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
+	mNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
+	mNode->attachObject(ogreHead);
+	mNode->setPosition(Ogre::Vector3(0, 0, 0));
 
-    // Create a SceneNode and attach the Entity to it
+	// Create a Light and set its position
+	Ogre::Light* light = mSceneMgr->createLight("MainLight");
+	mNode->attachObject(light);
+	light->setPosition(mNode->getPosition() + Ogre::Vector3(-84, 0, 30));
+	light->setDirection(mNode->getPosition());
 
-		//Ogre::SceneNode *camera = mSceneMgr->getRootSceneNode()->createChildSceneNode("Camera");
-		//mCameraMan->setTarget(camera);
+	Ogre::Entity* ogreEntity2 = mSceneMgr->createEntity("Second", "ogrehead.mesh");
 
-    Ogre::SceneNode *headNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
-    headNode->attachObject(ogreHead);
-		headNode->setPosition(Ogre::Vector3(0, 0, 0));
+	Ogre::SceneNode* ogreNode2 = mNode->createChildSceneNode("SecondNode", Ogre::Vector3(84, 0, 0));
+	ogreNode2->attachObject(ogreEntity2);
+	//mNode->attachObject(ogreNode2);
 
-    // Create a Light and set its position
-    Ogre::Light* light = mSceneMgr->createLight("MainLight");
-		headNode->attachObject(light);
-		light->setPosition(headNode->getPosition() + Ogre::Vector3(-84, 0, 30));
-		light->setDirection(headNode->getPosition());
+	//mCameraMan->setTarget(mNode);
+	mCamera->setPosition(mNode->getPosition() + Ogre::Vector3(150, 0, 300));
 
-		Ogre::Entity* ogreEntity2 = mSceneMgr->createEntity("ogrehead.mesh");
+	earNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("EarNode", Ogre::Vector3(0,0,0), Ogre::Quaternion::IDENTITY);
+	earNode->setPosition(mCamera->getPosition());
+	earNode->setOrientation(mCamera->getOrientation());
+	earNode->attachObject(mSoundManager->getListener());
 
-		Ogre::SceneNode* ogreNode2 = mSceneMgr->getRootSceneNode()->createChildSceneNode(Ogre::Vector3(84, 0, 0));
-		ogreNode2->attachObject(ogreEntity2); */
-		CEGUI::OgreRenderer* myRenderer = &CEGUI::OgreRenderer::bootstrapSystem();
+	mSoundManager->setDistanceModel(AL_LINEAR_DISTANCE);
 
-		//Load the scheme
-		CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
-
-		// Set the defaults
-		//CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("DejaVuSans-10");
-		CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
-
-		// Create window
-		CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
-
-		// Setting root window
-		CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( myRoot );
-
-		// Creating a new window to incorporate an image
-		CEGUI::Window *myImageWindow = CEGUI::WindowManager::getSingleton().createWindow("TaharezLook/StaticImage","PrettyWindow" );
-
-		// Setting image location : CEGUI::UVector2(CEGUI::UDim x, CEGUI::UDim y);
-		myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5,0),CEGUI::UDim(0.5,0)));
-
-		// Setting Window size
-		myImageWindow->setSize(CEGUI::USize(CEGUI::UDim(0,150),CEGUI::UDim(0,100)));
-
-		// Setting the image used in the window
-		myImageWindow->setProperty("Image","TaharezLook/full_image");
-
-		//Attaching the image window to the root window
-		CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);
-
-		mEntity = mSceneMgr->createEntity("robot.mesh");
-
-		mNode = mSceneMgr->getRootSceneNode()->createChildSceneNode(
-		  Ogre::Vector3(0, 0, 25.0));
-		mNode->attachObject(mEntity);
-
-		Ogre::Entity* ent;
-		Ogre::SceneNode* node;
-
-		ent = mSceneMgr->createEntity("knot.mesh");
-		node = mSceneMgr->getRootSceneNode()->createChildSceneNode(
-		  Ogre::Vector3(0, -10.0, 25.0));
-		node->attachObject(ent);
-		node->setScale(0.1, 0.1, 0.1);
-
-		ent = mSceneMgr->createEntity("knot.mesh");
-		node = mSceneMgr->getRootSceneNode()->createChildSceneNode(
-		  Ogre::Vector3(550.0, -10.0, 50.0));
-		node->attachObject(ent);
-		node->setScale(0.1, 0.1, 0.1);
-
-		ent = mSceneMgr->createEntity("knot.mesh");
-		node = mSceneMgr->getRootSceneNode()->createChildSceneNode(
-		  Ogre::Vector3(-100.0, -10.0,-200.0));
-		node->attachObject(ent);
-		node->setScale(0.1, 0.1, 0.1);
-
-		mCamera->setPosition(90.0, 280.0, 535.0);
-		mCamera->pitch(Ogre::Degree(-30.0));
-		mCamera->yaw(Ogre::Degree(-15.0));
-		mNode->showBoundingBox(true);
-		mAnimationState = mEntity->getAnimationState("Idle");
-mAnimationState->setLoop(true);
-mAnimationState->setEnabled(true);
+	OgreOggSound::OgreOggISound *jinx = mSoundManager->createSound("Jinx", "jinxMono.wav", false, true, true, 0, true);
+	//jinx->setVolume(100);
+	jinx->setRolloffFactor(2.f);
+	jinx->setReferenceDistance(10.f);
+	mNode->attachObject(jinx);
+	//std::cout << "x: " << jinx->getPosition().x << std::endl;
+	//jinx->play(true);
 }
 
 bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
@@ -131,102 +109,117 @@ bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	if (mShutDown) {
 		return false;
 	}
+  //Need to capture/update each device
+  mKeyboard->capture();
+  mMouse->capture();
 
-    //Need to capture/update each device
-    mKeyboard->capture();
-    mMouse->capture();
+		static bool checkJinx = true;
+		if (checkJinx)
+		{
+			//std::cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" << std::endl;
+			mSoundManager->getSound("Jinx")->play(true);
+			checkJinx = false;
+		 }
+		 earNode->setPosition(mCamera->getPosition());
+      earNode->setOrientation(mCamera->getOrientation());
 
-				Ogre::Real move = mWalkSpd * evt.timeSinceLastFrame;
+			//std::cout << "x: " << mSceneMgr->getSceneNode("HeadNode")->getPosition().x << std::endl;
+			//std::cout << "ear x: " << mSceneMgr->getSceneNode("EarNode")->getPosition().x << std::endl;
+		if (mNode->getPosition().x < 500)
+		{
+			Ogre::Real move = mWalkSpd * evt.timeSinceLastFrame;
 				mDistance -= move;
 				mNode->translate(move * mDirection);
 				mDirection = mDestination - mNode->getPosition();
 				mDistance = mDirection.normalise();
 
 				Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_X;
-
-		if ((1.0 + src.dotProduct(mDirection)) < 0.0001)
-		{
-		  mNode->yaw(Ogre::Degree(180));
+			// Orientation
+/*			if ((1.0 + src.dotProduct(mDirection)) < 0.0001)
+			  mNode->yaw(Ogre::Degree(180));
+			else
+			{
+			  Ogre::Quaternion quat = src.getRotationTo(mDirection);
+			  mNode->rotate(quat);
+			} */
 		}
-		else
-		{
-		  Ogre::Quaternion quat = src.getRotationTo(mDirection);
-		  mNode->rotate(quat);
-		}
-		 //Need to inject timestamps to CEGUI System.
-    CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
-    mCameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
-    return true;
+	//Need to inject timestamps to CEGUI System.
+  CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+
+	mSoundManager->update(evt.timeSinceLastFrame);
+
+  mCameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
+  return true;
 }
 
 bool Application::keyPressed( const OIS::KeyEvent &arg )
 {
 	if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
 	{
-			Ogre::TextureFilterOptions tfo;
-			unsigned int aniso;
+		Ogre::TextureFilterOptions tfo;
+		unsigned int aniso;
 
-			switch (mPolygonRenderingMode)
-			{
-			case 'B':
-		mPolygonRenderingMode = 'T';
-					tfo = Ogre::TFO_TRILINEAR;
-					aniso = 1;
-					break;
-			case 'T':
-		mPolygonRenderingMode = 'A';
-					tfo = Ogre::TFO_ANISOTROPIC;
-					aniso = 8;
-					break;
-			case 'A':
-		mPolygonRenderingMode = 'N';
-					tfo = Ogre::TFO_NONE;
-					aniso = 1;
-					break;
-			default:
-		mPolygonRenderingMode = 'B';
-					tfo = Ogre::TFO_BILINEAR;
-					aniso = 1;
-			}
+		switch (mPolygonRenderingMode)
+		{
+		case 'B':
+			mPolygonRenderingMode = 'T';
+			tfo = Ogre::TFO_TRILINEAR;
+			aniso = 1;
+			break;
+		case 'T':
+			mPolygonRenderingMode = 'A';
+			tfo = Ogre::TFO_ANISOTROPIC;
+			aniso = 8;
+			break;
+		case 'A':
+			mPolygonRenderingMode = 'N';
+			tfo = Ogre::TFO_NONE;
+			aniso = 1;
+			break;
+		default:
+			mPolygonRenderingMode = 'B';
+			tfo = Ogre::TFO_BILINEAR;
+			aniso = 1;
+		}
 
-			Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
-			Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
+		Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
+		Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
 	}
 	else if (arg.key == OIS::KC_R)   // cycle polygon rendering mode
 	{
-			Ogre::PolygonMode pm;
+		Ogre::PolygonMode pm;
 
-			switch (mCamera->getPolygonMode())
-			{
-			case Ogre::PM_SOLID:
-					pm = Ogre::PM_WIREFRAME;
-					break;
-			case Ogre::PM_WIREFRAME:
-					pm = Ogre::PM_POINTS;
-					break;
-			default:
-					pm = Ogre::PM_SOLID;
-			}
+		switch (mCamera->getPolygonMode())
+		{
+		case Ogre::PM_SOLID:
+			pm = Ogre::PM_WIREFRAME;
+			break;
+		case Ogre::PM_WIREFRAME:
+			pm = Ogre::PM_POINTS;
+			break;
+		default:
+			pm = Ogre::PM_SOLID;
+		}
 
-			mCamera->setPolygonMode(pm);
+		mCamera->setPolygonMode(pm);
 	}
 	else if(arg.key == OIS::KC_F5)   // refresh all textures
 	{
-			Ogre::TextureManager::getSingleton().reloadAll();
+		Ogre::TextureManager::getSingleton().reloadAll();
 	}
 	else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
 	{
-			mWindow->writeContentsToTimestampedFile("screenshot", ".jpg");
+		mWindow->writeContentsToTimestampedFile("screenshot", ".jpg");
 	}
 	else if (arg.key == OIS::KC_ESCAPE)
 	{
-			mShutDown = true;
+		mShutDown = true;
 	}
 	else
 	{
-			mCameraMan->injectKeyDown(arg);
+		mCameraMan->injectKeyDown(arg);
 	}
 
-	return true;
+	return (true);
 }

@@ -1,6 +1,7 @@
 #ifndef __BaseApplication_hpp_
 #define __BaseApplication_hpp_
 
+#undef __DEPRECATED
 #include <OgreWindowEventUtilities.h>
 #include <OgreFrameListener.h>
 #include <OgreCamera.h>
@@ -13,6 +14,10 @@
 #include <OgreFileSystemLayer.h>
 #include <OgreConfigFile.h>
 #include <OgreApplicationContext.h>
+
+#include <OgreOggSound/OgreOggSound.h>
+#include <OgreOggSound/OgreOggSoundManager.h>
+#define __DEPRECATED
 
 #include <OIS/OISEvents.h>
 #include <OIS/OISInputManager.h>
@@ -47,6 +52,7 @@ protected:
 
     // Ogre::FrameListener
     virtual bool frameRenderingQueued(const Ogre::FrameEvent &);
+    virtual bool frameStarted (const Ogre::FrameEvent &evt);
 
     // OIS::KeyListener
     virtual bool keyPressed(const OIS::KeyEvent &);
@@ -79,6 +85,12 @@ protected:
 
     // OgreCookies
     OgreCookies::CameraMan* mCameraMan;       // basic camera controller
+
+    // CEGUI
+    CEGUI::OgreRenderer* mRenderer;
+
+    // OgreOggSound
+    OgreOggSound::OgreOggSoundManager *mSoundManager;
 };
 
 #endif // #ifndef __BaseApplication_h_

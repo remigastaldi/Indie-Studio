@@ -81,6 +81,7 @@ include_directories( ${OGRE_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     /usr/local/include/OIS
+    /usr/local/include/OGRE/
     /usr/local/include/OGRE/Bites
     /usr/local/include/OGRE/Overlay
     /usr/local/include/OGRE/HLMS
@@ -115,7 +116,7 @@ add_executable(${PROJECT_NAME} WIN32 ${HDRS} ${SRCS})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
-target_link_libraries(${PROJECT_NAME} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${Boost_LIBRARIES} ${CEGUI_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${Boost_LIBRARIES} ${CEGUI_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES} OgreOggSound PocoFoundation)
 
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/bin)
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/media)

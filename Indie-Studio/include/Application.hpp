@@ -24,6 +24,7 @@ protected:
 		Ogre::AnimationState* mAnimationState;
 		Ogre::Entity* mEntity;
 		Ogre::SceneNode* mNode;
+Ogre::SceneNode *earNode;
 };
 
 #endif // #ifndef __Application_h_

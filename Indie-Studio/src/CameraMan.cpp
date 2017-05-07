@@ -5,6 +5,7 @@ using namespace OgreCookies;
 //-------------------------------------------------------------------------------------
 CameraMan::CameraMan(Ogre::Camera* cam)
     : mCamera(0)
+    , mStyle(UNDIFINED)
     , mTarget(0)
     , mOrbiting(false)
     , mZooming(false)

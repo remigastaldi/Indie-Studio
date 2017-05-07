@@ -1,3 +1,13 @@
+//
+// BaseApplication.cpp for Indie-Studio in /home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/
+//
+// Made by gastal_r
+// Login   <remi.gastaldi@epitech.eu>
+//
+// Started on  Fri May  5 09:54:11 2017 gastal_r
+// Last update Sun May  7 19:06:15 2017 gastal_r
+//
+
 #include "BaseApplication.hpp"
 
 //#include <OgreRoot.h>
@@ -18,6 +28,8 @@ BaseApplication::BaseApplication()
     mInputManager(0),
     mMouse(0),
     mKeyboard(0),
+    mRenderer(0),
+    mSoundManager(0),
     mCameraMan(0)
 {
     mFSLayer = OGRE_NEW_T(Ogre::FileSystemLayer, Ogre::MEMCATEGORY_GENERAL)(OGRE_VERSION_NAME);
@@ -181,6 +193,8 @@ bool BaseApplication::setup()
 
     setupResources();
 
+    mRoot->loadPlugin("libOgreOggSound.so");
+
     bool carryOn = configure();
     if (!carryOn) return false;
 
@@ -190,11 +204,15 @@ bool BaseApplication::setup()
 
     // Set default mipmap level (NB some APIs ignore this)
     Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
-
     // Create any resource listeners (for loading screens)
     createResourceListener();
     // Load resources
     loadResources();
+
+    mRenderer = &CEGUI::OgreRenderer::bootstrapSystem();
+
+    mSoundManager = OgreOggSound::OgreOggSoundManager::getSingletonPtr();
+  	mSoundManager->init();
 
     // Create the scene
     createScene();
@@ -203,6 +221,12 @@ bool BaseApplication::setup()
 
     return true;
 };
+
+bool 	BaseApplication::frameStarted(const Ogre::FrameEvent &evt)
+{
+  return true;
+}
+
 //-------------------------------------------------------------------------------------
 bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
@@ -218,10 +242,12 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
     mKeyboard->capture();
     mMouse->capture();
 
-    mCameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
-
      //Need to inject timestamps to CEGUI System.
     CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+
+    mCameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
+
+    mSoundManager->update(evt.timeSinceLastFrame);
     return true;
 }
 //-------------------------------------------------------------------------------------

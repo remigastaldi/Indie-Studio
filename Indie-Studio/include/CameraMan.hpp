@@ -16,7 +16,8 @@ namespace OgreCookies
     {
         CS_FREELOOK,
         CS_ORBIT,
-        CS_MANUAL
+        CS_MANUAL,
+        UNDIFINED
     };
 
     /*=============================================================================
@@ -25,7 +26,7 @@ namespace OgreCookies
     class CameraMan
     {
     public:
-        CameraMan(Ogre::Camera* cam);
+        explicit CameraMan(Ogre::Camera* cam);
         virtual ~CameraMan();
 
         /*-----------------------------------------------------------------------------

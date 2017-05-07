@@ -1,3 +1,13 @@
+//
+// main.cpp for Indie-Studio in /home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/
+//
+// Made by gastal_r
+// Login   <remi.gastaldi@epitech.eu>
+//
+// Started on  Fri May  5 09:54:05 2017 gastal_r
+// Last update Fri May  5 09:54:09 2017 gastal_r
+//
+
 #include "Application.hpp"
 #include <OIS/OISException.h>
 

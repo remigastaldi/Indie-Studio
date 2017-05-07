@@ -33,7 +33,7 @@
 .tags1
 
 # cmake
-CMakeFiles
+CMakeFiles/
 *.cmake
 *.log
 *.bin
