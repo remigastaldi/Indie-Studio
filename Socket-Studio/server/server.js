@@ -28,6 +28,9 @@ function exec_command(command, from)
         process.exit();
       }, 5000);
       break;
+    case "test":
+      io.emit("message", {message: "private test message ", send_by: 0, send_to: from});      
+      break;
     default:
       io.emit("message", { message: command + ": command not found", send_by: 42, send_to: from});
       break;

@@ -5,7 +5,7 @@
 ** Login	Full Name
 **
 ** Started on	Sat May 06 15:32:16 2017 Full Name
-** Last update Sat May 06 20:57:38 2017 Leo Hubert Froideval
+** Last update Sun May 07 22:59:32 2017 Leo Hubert Froideval
 */
 
 #include "client.hpp"
@@ -64,7 +64,7 @@ void Client::create(sio::client &h)
         h.set_open_listener(std::bind(&Client::on_connected, this));
         h.set_close_listener(std::bind(&Client::on_close, this,std::placeholders::_1));
         h.set_fail_listener(std::bind(&Client::on_fail, this));
-        h.connect("http://127.0.0.1:3000");
+        h.connect("https://ezgames.eu:3000");
         _lock.lock();
         if(!_connect_finish)
         {
