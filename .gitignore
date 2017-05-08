@@ -41,4 +41,7 @@ cmake_install.cmake
 *.bin
 *.cache
 *.make
-*.txt
+CMakeCache.txt
+ChangeLog.txt
+ReleaseNotes.txt
+libs/ogg/OgreOggSound-v1.26/build/Makefile
