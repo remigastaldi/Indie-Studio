@@ -27,7 +27,9 @@
 .tags1
 
 # cmake
-Indie-Studio/dist/CMakeFiles
+CMakeFiles/
+Indie-Studio/dist/Makefile
+Indie-Studio/dist/bin/IndieStudio
 *.cmake
 *.log
 *.bin
