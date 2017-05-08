@@ -36,7 +36,7 @@
 CMakeFiles/
 Indie-Studio/dist/Makefile
 Indie-Studio/dist/bin/IndieStudio
-*.cmake
+cmake_install.cmake
 *.log
 *.bin
 *.cache
