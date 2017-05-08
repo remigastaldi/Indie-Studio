@@ -674,7 +674,7 @@ namespace OgreOggSound
 		class Updater : public Poco::Runnable
 		{
 		public:
-			virtual void run() {};
+			virtual void run();
 		};
 		friend class Updater;
 		static Updater* mUpdater;

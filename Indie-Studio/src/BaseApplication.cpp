@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:54:11 2017 gastal_r
-// Last update Sun May  7 19:06:15 2017 gastal_r
+// Last update Mon May  8 11:58:42 2017 gastal_r
 //
 
 #include "BaseApplication.hpp"
@@ -213,7 +213,7 @@ bool BaseApplication::setup()
 
     mSoundManager = OgreOggSound::OgreOggSoundManager::getSingletonPtr();
   	mSoundManager->init();
-
+    mSoundManager->setDistanceModel(AL_LINEAR_DISTANCE);
     // Create the scene
     createScene();
 

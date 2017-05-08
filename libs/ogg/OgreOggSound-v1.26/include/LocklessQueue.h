@@ -67,7 +67,7 @@ namespace OgreOggSound
 		//! destructor.
 		inline ~LocklessQueue()
 		{
-			m_buffer ? delete [] m_buffer : (void)0;
+			delete [] m_buffer;
 		}
 
 		//! push object into the queue.

@@ -39,6 +39,7 @@
 #	ifdef POCO_THREAD
 		Poco::Thread *OgreOggSound::OgreOggSoundManager::mUpdateThread = 0;
 		OgreOggSound::OgreOggSoundManager::Updater* OgreOggSound::OgreOggSoundManager::mUpdater = 0;
+        void OgreOggSound::OgreOggSoundManager::Updater::run() { OgreOggSound::OgreOggSoundManager::threadUpdate(); }
 		Poco::Mutex OgreOggSound::OgreOggSoundManager::mMutex;
 		Poco::Mutex OgreOggSound::OgreOggSoundManager::mSoundMutex;
 		Poco::Mutex OgreOggSound::OgreOggSoundManager::mResourceGroupNameMutex;
@@ -70,7 +71,6 @@ namespace OgreOggSound
 		,mDevice(0)
 		,mContext(0)
 		,mListener(0)
-		,mSoundsToDestroy(0)
 #if HAVE_EFX
 		,mEAXSupport(false)
 		,mEFXSupport(false)
@@ -88,6 +88,7 @@ namespace OgreOggSound
 		,mMaxSources(100)
 		,mResourceGroupName("")
 		,mGlobalPitch(1.f)
+		,mSoundsToDestroy(0)
 		,mFadeVolume(false)
 		,mFadeIn(false)
 		,mFadeTime(0.f)
@@ -172,19 +173,19 @@ namespace OgreOggSound
 						{			
 						case LQ_LOAD:
 							{
-								if ( obj.mParams ) OGRE_DELETE_T(static_cast<cSound*>(obj.mParams), cSound, Ogre::MEMCATEGORY_GENERAL);
+								OGRE_DELETE_T(static_cast<cSound*>(obj.mParams), cSound, Ogre::MEMCATEGORY_GENERAL);
 							}
 							break;	   
 						case LQ_ATTACH_EFX:
 						case LQ_DETACH_EFX:
 						case LQ_SET_EFX_PROPERTY:
 							{
-								if ( obj.mParams ) OGRE_DELETE_T(static_cast<efxProperty*>(obj.mParams), efxProperty, Ogre::MEMCATEGORY_GENERAL);
+								OGRE_DELETE_T(static_cast<efxProperty*>(obj.mParams), efxProperty, Ogre::MEMCATEGORY_GENERAL);
 							}
 							break;	 
 						default:
 							{
-								if ( obj.mParams ) OGRE_FREE(obj.mParams, Ogre::MEMCATEGORY_GENERAL);
+								OGRE_FREE(obj.mParams, Ogre::MEMCATEGORY_GENERAL);
 							}
 							break;
 						}
@@ -2210,8 +2211,8 @@ namespace OgreOggSound
 		if (!buffer)
 		{
 			// Load audio file
-			Ogre::DataStreamPtr streamedFilePtr = _openStream(file);
-            sound->_openImpl(streamedFilePtr);
+            Ogre::DataStreamPtr streamedFilePtr = _openStream(file);
+			sound->_openImpl(streamedFilePtr);
 		}
 		else
 		{
@@ -2320,8 +2321,6 @@ namespace OgreOggSound
 		#	endif
 		#endif
 
-        if ( !sound )
-            return;
 		SoundMap::iterator i = mSoundMap.find(sound->getName());
 		mSoundMap.erase(i);
 
@@ -2807,7 +2806,7 @@ namespace OgreOggSound
 				}
 
 				// Delete
-				if ( c ) OGRE_DELETE_T(c, cSound, Ogre::MEMCATEGORY_GENERAL);
+				OGRE_DELETE_T(c, cSound, Ogre::MEMCATEGORY_GENERAL);
 			}
 			break;
 #if HAVE_EFX
@@ -2823,7 +2822,7 @@ namespace OgreOggSound
 						_attachFilterToSoundImpl(s, e->mFilterName);
 				}
 				// Delete
-				if ( e ) OGRE_DELETE_T(e, efxProperty, Ogre::MEMCATEGORY_GENERAL);
+				OGRE_DELETE_T(e, efxProperty, Ogre::MEMCATEGORY_GENERAL);
 			}
 			break;
 		case LQ_DETACH_EFX:
@@ -2838,7 +2837,7 @@ namespace OgreOggSound
 						_detachFilterFromSoundImpl(s);
 				}
 				// Delete
-				if ( e ) OGRE_DELETE_T(e, efxProperty, Ogre::MEMCATEGORY_GENERAL);
+				OGRE_DELETE_T(e, efxProperty, Ogre::MEMCATEGORY_GENERAL);
 			}
 			break;
 		case LQ_SET_EFX_PROPERTY:
@@ -2850,7 +2849,7 @@ namespace OgreOggSound
 					_setEFXSoundPropertiesImpl(s, e->mAirAbsorption, e->mRolloff, e->mConeHF);
 				}
 				// Delete
-				if ( e ) OGRE_DELETE_T(e, efxProperty, Ogre::MEMCATEGORY_GENERAL);
+				OGRE_DELETE_T(e, efxProperty, Ogre::MEMCATEGORY_GENERAL);
 			}
 			break;
 #endif

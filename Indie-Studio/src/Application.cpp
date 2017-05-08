@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:53:57 2017 gastal_r
-// Last update Sun May  7 22:47:45 2017 gastal_r
+// Last update Mon May  8 12:44:41 2017 gastal_r
 //
 
 #include "Application.hpp"
@@ -89,15 +89,11 @@ void Application::createScene()
 	earNode->setOrientation(mCamera->getOrientation());
 	earNode->attachObject(mSoundManager->getListener());
 
-	mSoundManager->setDistanceModel(AL_LINEAR_DISTANCE);
-
-	OgreOggSound::OgreOggISound *jinx = mSoundManager->createSound("Jinx", "jinxMono.wav", false, true, true, 0, true);
-	//jinx->setVolume(100);
-	jinx->setRolloffFactor(2.f);
+	OgreOggSound::OgreOggISound *jinx = mSoundManager->createSound("Jinx", "jinxMono.wav", false, true, false);
+	jinx->setRolloffFactor(4.f);
 	jinx->setReferenceDistance(10.f);
+	//jinx->setMaxDistance(800.f);
 	mNode->attachObject(jinx);
-	//std::cout << "x: " << jinx->getPosition().x << std::endl;
-	//jinx->play(true);
 }
 
 bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
@@ -116,15 +112,12 @@ bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		static bool checkJinx = true;
 		if (checkJinx)
 		{
-			//std::cout << "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$" << std::endl;
-			mSoundManager->getSound("Jinx")->play(true);
+			mSoundManager->getSound("Jinx")->play();
 			checkJinx = false;
 		 }
 		 earNode->setPosition(mCamera->getPosition());
       earNode->setOrientation(mCamera->getOrientation());
 
-			//std::cout << "x: " << mSceneMgr->getSceneNode("HeadNode")->getPosition().x << std::endl;
-			//std::cout << "ear x: " << mSceneMgr->getSceneNode("EarNode")->getPosition().x << std::endl;
 		if (mNode->getPosition().x < 500)
 		{
 			Ogre::Real move = mWalkSpd * evt.timeSinceLastFrame;
@@ -133,7 +126,7 @@ bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
 				mDirection = mDestination - mNode->getPosition();
 				mDistance = mDirection.normalise();
 
-				Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_X;
+				//Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_X;
 			// Orientation
 /*			if ((1.0 + src.dotProduct(mDirection)) < 0.0001)
 			  mNode->yaw(Ogre::Degree(180));

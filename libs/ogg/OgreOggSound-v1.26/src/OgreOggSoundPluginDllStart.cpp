@@ -38,7 +38,7 @@
 using namespace Ogre;
 using namespace OgreOggSound;
 
-OgreOggSoundPlugin* mOgreOggSoundPlugin = 0;
+OgreOggSoundPlugin* mOgreOggSoundPlugin;
 
 //----------------------------------------------------------------------------------
 // register SecureArchive with Archive Manager
@@ -56,6 +56,6 @@ extern "C" void _OGGSOUND_EXPORT dllStopPlugin( void )
 {
 	Root::getSingleton().uninstallPlugin(mOgreOggSoundPlugin);
 
-	if ( mOgreOggSoundPlugin ) OGRE_DELETE_T(mOgreOggSoundPlugin, OgreOggSoundPlugin, Ogre::MEMCATEGORY_GENERAL);
+	OGRE_DELETE_T(mOgreOggSoundPlugin, OgreOggSoundPlugin, Ogre::MEMCATEGORY_GENERAL);
 	mOgreOggSoundPlugin = 0;
 }
