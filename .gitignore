@@ -29,7 +29,7 @@
 *.app
 
 # Ctags
-*.tags
+.tags
 .tags1
 
 # cmake

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:53:57 2017 gastal_r
-// Last update Mon May  8 12:44:41 2017 gastal_r
+// Last update Mon May  8 15:20:57 2017 gastal_r
 //
 
 #include "Application.hpp"
@@ -92,7 +92,7 @@ void Application::createScene()
 	OgreOggSound::OgreOggISound *jinx = mSoundManager->createSound("Jinx", "jinxMono.wav", false, true, false);
 	jinx->setRolloffFactor(4.f);
 	jinx->setReferenceDistance(10.f);
-	//jinx->setMaxDistance(800.f);
+	jinx->setMaxDistance(800.f);
 	mNode->attachObject(jinx);
 }
 
