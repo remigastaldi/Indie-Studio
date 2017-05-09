@@ -23,13 +23,13 @@ function exec_command(command, from)
       }, 5000);
       break;
     case "reboot":
-      io.emit("message", {message: "Server will be reboot in 5 seconds...", send_by: 42, send_to: 0});
+      io.emit("message", {message: "Server will reboot in 5 seconds...", send_by: 42, send_to: 0});
       setTimeout(function(){
         process.exit();
       }, 5000);
       break;
-    case "test":
-      io.emit("message", {message: "private test message ", send_by: 0, send_to: from});      
+    case "whoami":
+      io.emit("message", {message: "First, you are a bitch and your id is: " + from, send_by: 0, send_to: from});
       break;
     default:
       io.emit("message", { message: command + ": command not found", send_by: 42, send_to: from});
