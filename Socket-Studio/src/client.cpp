@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Tue May 09 17:50:34 2017 Leo Hubert Froideval
+** Last update Tue May 09 18:51:29 2017 Leo Hubert Froideval
 */
 
 #include "client.hpp"
@@ -33,6 +33,7 @@ void Client::on_connected()
         _cond.notify_all();
         _connect_finish = true;
         _lock.unlock();
+        emit("login", "{\"user_id\": " + std::to_string(_id) + "}");
 }
 
 void Client::on_close(sio::client::close_reason const& reason)
@@ -67,8 +68,8 @@ void Client::events()
         }));
 
         _current_socket->on("move", sio::socket::event_listener_aux([&](std::string const& name,
-                                                                           sio::message::ptr const& data,
-                                                                           bool isAck, sio::message::list &ack_resp)
+                                                                        sio::message::ptr const& data,
+                                                                        bool isAck, sio::message::list &ack_resp)
         {
                 (void)name;
                 (void)isAck;
@@ -78,8 +79,39 @@ void Client::events()
                 std::cout << "ttea" << "\n";
                 if (data->get_map()["send_by"]->get_int() != _id)
                 {
-                    test = data->get_map()["fw"]->get_double();
-                    std::cout <<  test  << '\n';
+                        test = data->get_map()["fw"]->get_double();
+                        std::cout <<  test  << '\n';
+                }
+                _lock.unlock();
+        }));
+
+        _current_socket->on("login", sio::socket::event_listener_aux([&](std::string const& name,
+                                                                        sio::message::ptr const& data,
+                                                                        bool isAck, sio::message::list &ack_resp)
+        {
+                (void)name;
+                (void)isAck;
+                (void)ack_resp;
+                _lock.lock();
+                if (data->get_map()["user_id"]->get_int() != _id)
+                {
+                    std::cout <<  "User connected! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
+                }
+                _lock.unlock();
+        }));
+
+        _current_socket->on("logout", sio::socket::event_listener_aux([&](std::string const& name,
+                                                                        sio::message::ptr const& data,
+                                                                        bool isAck, sio::message::list &ack_resp)
+        {
+                (void)name;
+                (void)isAck;
+                (void)ack_resp;
+                (void)data;
+                _lock.lock();
+                if (data->get_map()["user_id"]->get_int() != _id)
+                {
+                    std::cout <<  "User disconnected ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
                 }
                 _lock.unlock();
         }));
@@ -88,13 +120,13 @@ void Client::events()
 void Client::connect()
 {
         _client.connect(_addr);
+        _current_socket = _client.socket();
         _lock.lock();
         if(!_connect_finish)
         {
                 _cond.wait(_lock);
         }
         _lock.unlock();
-        _current_socket = _client.socket();
         events();
 }
 
@@ -107,13 +139,13 @@ void Client::wait()
 
 void Client::emit(std::string const event, std::string const request)
 {
-    _current_socket->emit(event, request);
+        _current_socket->emit(event, request);
 }
 
 void Client::move(float fw, float x, float y, float z)
 {
-    std::string request("{\"fw\": " + std::to_string(fw)  +", \"x\": " + std::to_string(x)  +", \"y\": " + std::to_string(y)  +", \"z\": " + std::to_string(z)  +", \"send_by\": " + std::to_string(_id) + ", \"send_to\": 0}");
-    emit("move", request);
+        std::string request("{\"fw\": " + std::to_string(fw)  +", \"x\": " + std::to_string(x)  +", \"y\": " + std::to_string(y)  +", \"z\": " + std::to_string(z)  +", \"send_by\": " + std::to_string(_id) + ", \"send_to\": 0}");
+        emit("move", request);
 }
 
 void Client::consoleChat()
@@ -122,13 +154,13 @@ void Client::consoleChat()
 
         while (getline(std::cin, line))
         {
-            if (line == "test")
-            {
-                move(123.123, 12344.123,123.123,123.123);
-                continue;
-            }
+                if (line == "test")
+                {
+                        move(123.123, 12344.123,123.123,123.123);
+                        continue;
+                }
 
-            std::string st("{\"message\": \"" + line  +"\", \"send_by\": " + std::to_string(_id) + ", \"send_to\": 0}");
-            emit("message", st);
+                std::string st("{\"message\": \"" + line  +"\", \"send_by\": " + std::to_string(_id) + ", \"send_to\": 0}");
+                emit("message", st);
         }
 }

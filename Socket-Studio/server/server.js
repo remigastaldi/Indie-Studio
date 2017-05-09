@@ -31,6 +31,7 @@ function exec_command(command, from)
       break;
     case "ping":
       io.emit("message", {message: "pong", send_by: 42, send_to: from});
+      console.log(socket.id);
       break;
     default:
       io.emit("message", { message: command + ": command not found", send_by: 42, send_to: from});
@@ -44,7 +45,6 @@ rl.on('line', function(line){
 });
 
 io.on('connection', function (socket) {
-  console.log("User connected");
 
   socket.on('message', function (data) {
     data = JSON.parse(data);
@@ -59,9 +59,18 @@ io.on('connection', function (socket) {
     io.emit("move", data);
   });
 
+  socket.on('login', function (data) {
+    data = JSON.parse(data);
+    io.emit("login", data);
+    console.log("Connected! ID: " + data["user_id"]);
+    socket.user_id = data["user_id"];
+  });
+
+
 
 	socket.on('disconnect', function () {
-		console.log("User disconnected");
+		console.log("Disconnected ! ID: " + socket.user_id);
+    io.emit("logout", {user_id: socket.user_id});
 	});
 
 });
