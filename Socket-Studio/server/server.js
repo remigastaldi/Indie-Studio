@@ -54,6 +54,12 @@ io.on('connection', function (socket) {
     console.log(data["message"]);
   });
 
+  socket.on('move', function (data) {
+    data = JSON.parse(data);
+    io.emit("move", data);
+  });
+
+
 	socket.on('disconnect', function () {
 		console.log("User disconnected");
 	});

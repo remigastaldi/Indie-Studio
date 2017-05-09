@@ -1,19 +1,30 @@
 /*
-** client.cpp for Indie-Studio
+** client.cpp for Socket-Studio in /Users/leohubertfroideval/Documents/Shared/C++_2016/Socket-Studio/Socket-Studio/src
 **
-** Made by	Full Name
-** Login	Full Name
+** Made by Leo Hubert Froideval
+** Login   <leohubertfroideval@epitech.net>
 **
-** Started on	Sat May 06 15:32:16 2017 Full Name
-** Last update Sun May 07 22:59:32 2017 Leo Hubert Froideval
+** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
+** Last update Tue May 09 17:50:34 2017 Leo Hubert Froideval
 */
 
 #include "client.hpp"
 
-Client::Client(sio::client& h) : handler(h)
+Client::Client(std::string const &addr, int const port, int const id) : _id(id)
 {
         _connect_finish = false;
-        _participants = -1;
+        _addr = addr + ":" + std::to_string(port);
+
+        _client.set_open_listener(std::bind(&Client::on_connected, this));
+        _client.set_close_listener(std::bind(&Client::on_close, this,std::placeholders::_1));
+        _client.set_fail_listener(std::bind(&Client::on_fail, this));
+}
+
+Client::~Client()
+{
+        HIGHLIGHT("Closing...");
+        _client.sync_close();
+        _client.clear_con_listeners();
 }
 
 void Client::on_connected()
@@ -48,47 +59,76 @@ void Client::events()
                 _lock.lock();
                 if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
                 {
-                    if (data->get_map()["send_by"]->get_int() == 42)
-                        HIGHLIGHT_N("SYSTEM: ");
-                    std::cout <<  data->get_map()["message"]->get_string() << '\n';
+                        if (data->get_map()["send_by"]->get_int() == 42)
+                                HIGHLIGHT_N("SYSTEM: ");
+                        std::cout <<  data->get_map()["message"]->get_string() << '\n';
+                }
+                _lock.unlock();
+        }));
+
+        _current_socket->on("move", sio::socket::event_listener_aux([&](std::string const& name,
+                                                                           sio::message::ptr const& data,
+                                                                           bool isAck, sio::message::list &ack_resp)
+        {
+                (void)name;
+                (void)isAck;
+                (void)ack_resp;
+                float test;
+                _lock.lock();
+                std::cout << "ttea" << "\n";
+                if (data->get_map()["send_by"]->get_int() != _id)
+                {
+                    test = data->get_map()["fw"]->get_double();
+                    std::cout <<  test  << '\n';
                 }
                 _lock.unlock();
         }));
 }
 
-void Client::create(sio::client &h)
+void Client::connect()
 {
-        std::srand(std::time(0));
-        _id = std::rand();
-
-        h.set_open_listener(std::bind(&Client::on_connected, this));
-        h.set_close_listener(std::bind(&Client::on_close, this,std::placeholders::_1));
-        h.set_fail_listener(std::bind(&Client::on_fail, this));
-        h.connect("https://ezgames.eu:3000");
+        _client.connect(_addr);
         _lock.lock();
         if(!_connect_finish)
         {
                 _cond.wait(_lock);
         }
         _lock.unlock();
-        _current_socket = h.socket();
+        _current_socket = _client.socket();
         events();
+}
 
+void Client::wait()
+{
+        _lock.lock();
+        _cond.wait(_lock);
+        _lock.unlock();
+}
 
+void Client::emit(std::string const event, std::string const request)
+{
+    _current_socket->emit(event, request);
+}
 
+void Client::move(float fw, float x, float y, float z)
+{
+    std::string request("{\"fw\": " + std::to_string(fw)  +", \"x\": " + std::to_string(x)  +", \"y\": " + std::to_string(y)  +", \"z\": " + std::to_string(z)  +", \"send_by\": " + std::to_string(_id) + ", \"send_to\": 0}");
+    emit("move", request);
+}
+
+void Client::consoleChat()
+{
         std::string line;
 
         while (getline(std::cin, line))
         {
-                std::string st("{\"message\": \"" + line  +"\", \"send_by\": " + std::to_string(_id) + ", \"send_to\": 0}");
-                _current_socket->emit("message", st);
+            if (line == "test")
+            {
+                move(123.123, 12344.123,123.123,123.123);
+                continue;
+            }
+
+            std::string st("{\"message\": \"" + line  +"\", \"send_by\": " + std::to_string(_id) + ", \"send_to\": 0}");
+            emit("message", st);
         }
-
-        _lock.lock();
-        _cond.wait(_lock);
-        _lock.unlock();
-
-        HIGHLIGHT("Closing...");
-        h.sync_close();
-        h.clear_con_listeners();
 }

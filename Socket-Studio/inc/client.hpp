@@ -36,24 +36,29 @@
 
 class Client
 {
-    sio::client &handler;
-
   private:
     int                         _id;
     std::mutex                  _lock;
     std::condition_variable_any _cond;
     bool                        _connect_finish;
-    int                         _participants;
     sio::socket::ptr            _current_socket;
+    sio::client                 _client;
+    std::string                 _addr;
 
   public:
-    Client(sio::client&);
-    ~Client() {}
+    Client(std::string const &addr, int const port, int const id);
+    ~Client();
     void  on_connected();
     void  on_close(sio::client::close_reason const& reason);
     void  on_fail();
     void  events();
-    void  create(sio::client &);
+    void  connect();
+    void  wait();
+    void  consoleChat();
+
+    void  emit(std::string const event, std::string const request);
+    void  move(float fw, float x, float y, float z);
+
 };
 
 #endif

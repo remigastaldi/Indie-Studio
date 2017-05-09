@@ -12,9 +12,13 @@
 
 int   main()
 {
-  sio::client h;
+    std::srand(std::time(0));
+    int id;
 
-  Client client(h);
-  client.create(h);
+    id = std::rand();
+
+  Client client("http://localhost", 3000, id);
+  client.connect();
+  client.consoleChat();
   return (0);
 }
