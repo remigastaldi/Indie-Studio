@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Tue May 09 18:51:29 2017 Leo Hubert Froideval
+** Last update Tue May 09 19:18:53 2017 Leo Hubert Froideval
 */
 
 #include "client.hpp"
@@ -76,7 +76,6 @@ void Client::events()
                 (void)ack_resp;
                 float test;
                 _lock.lock();
-                std::cout << "ttea" << "\n";
                 if (data->get_map()["send_by"]->get_int() != _id)
                 {
                         test = data->get_map()["fw"]->get_double();
