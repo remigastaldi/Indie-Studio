@@ -1,8 +1,6 @@
 var io = require('socket.io')(3000);
 var exec = require('child_process').exec;
 
-//var router = require('socket.io-events')();
-
 var readline = require('readline');
 var rl = readline.createInterface({
   input: process.stdin,
@@ -30,6 +28,9 @@ function exec_command(command, from)
       break;
     case "whoami":
       io.emit("message", {message: "First, you are a bitch and your id is: " + from, send_by: 0, send_to: from});
+      break;
+    case "ping":
+      io.emit("message", {message: "pong", send_by: 42, send_to: from});
       break;
     default:
       io.emit("message", { message: command + ": command not found", send_by: 42, send_to: from});
