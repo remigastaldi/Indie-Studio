@@ -19,7 +19,8 @@ NAME    =	client
 SRC	=	src/main.cpp \
 			src/client.cpp \
 
-ECHO	=	/bin/echo -e
+
+ECHO	=	echo -e
 DEFAULT	=	"\033[00m"
 GREEN	=	"\033[0;32m"
 TEAL	=	"\033[1;36m"
@@ -40,6 +41,10 @@ fclean:		clean
 		@rm -f $(NAME) && \
 		$(ECHO) $(GREEN) "[OK] rm" $(TEAL) $(NAME) $(DEFAULT) || \
 		$(ECHO) $(RED) "[ERROR] rm" $(TEAL) $(NAME) $(DEFAULT)
+
+install:
+		@$(ECHO) $(YELLOW) "Starting socket.io install" $(DEFAULT)
+		@cd ../libs/socket.io-client-cpp/; rm -rf build; mkdir build; cd build; cmake ..; make; sudo make install; cp libsioclient.a ../../../Socket-Studio/lib
 
 re:	 fclean all
 
