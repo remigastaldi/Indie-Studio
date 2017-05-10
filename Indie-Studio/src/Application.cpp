@@ -94,6 +94,8 @@ void Application::createScene()
 	jinx->setReferenceDistance(10.f);
 	jinx->setMaxDistance(800.f);
 	mNode->attachObject(jinx);
+
+	
 }
 
 bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)

@@ -63,6 +63,16 @@ if(NOT OIS_FOUND)
 	message(SEND_ERROR "Failed to find OIS.")
 endif()
 
+find_package(BULLET REQUIRED)
+if(NOT BULLET_FOUND)
+	message(SEND_ERROR "Failed to find BULLET.")
+endif()
+
+find_package(OGREBULLET REQUIRED)
+if(NOT BULLET_FOUND)
+	message(SEND_ERROR "Failed to find OGREBULLET.")
+endif()
+
 set(HDRS
 	${CMAKE_CURRENT_SOURCE_DIR}/include/BaseApplication.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/Application.hpp
@@ -95,6 +105,9 @@ include_directories( ${OGRE_INCLUDE_DIRS}
     /usr/local/include/OGRE/MeshLodgenerator
     /usr/include/SDL2
     /usr/local/include/cegui-0
+		/usr/local/include/OgreBullet/Collisions
+		/usr/local/include/OgreBullet/Dynamics
+		/usr/local/include/bullet
 )
 
 link_directories(${OGRE_LIBRARY_DIRS})
@@ -116,7 +129,7 @@ add_executable(${PROJECT_NAME} WIN32 ${HDRS} ${SRCS})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
-target_link_libraries(${PROJECT_NAME} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${Boost_LIBRARIES} ${CEGUI_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES} OgreOggSound PocoFoundation)
+target_link_libraries(${PROJECT_NAME} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${Boost_LIBRARIES} ${CEGUI_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES} ${BULLET_LIBRARIES} ${OGREBULLET_LIBRARIES} OgreOggSound PocoFoundation)
 
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/bin)
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/media)
