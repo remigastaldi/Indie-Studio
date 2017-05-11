@@ -38,3 +38,5 @@ Indie-Studio/dist/bin/IndieStudio
 *.txt
 
 Socket-Studio/server/node_modules
+Socket-Studio/lib
+Socket-Studio/include
