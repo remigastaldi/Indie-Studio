@@ -73,7 +73,7 @@ io.on('connection', function (socket) {
     console.log("Connected! ID: " + data["user_id"]);
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[totalConnected] = {id: data["user_id"], username: "User " + totalConnected, ip: 123, port: 1234};
+    users[totalConnected] = {id: data["user_id"], username: "User " + totalConnected, ip: socket.handshake.address.address, port: socket.handshake.address.port};
     totalConnected++;
   });
 
