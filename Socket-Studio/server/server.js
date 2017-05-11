@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
@@ -9,6 +10,12 @@ var exec = require('child_process').exec;
 /* LOCAL VAR */
 var totalConnected = 0;
 var users = [];
+=======
+var io = require('socket.io')(3000);
+var exec = require('child_process').exec;
+
+//var router = require('socket.io-events')();
+>>>>>>> 2501e63f6131a751f2cc9315572e1f12bcb83e93
 
 var readline = require('readline');
 var rl = readline.createInterface({
@@ -30,17 +37,26 @@ function exec_command(command, from)
       }, 5000);
       break;
     case "reboot":
+<<<<<<< HEAD
       io.emit("message", {message: "Server will reboot in 5 seconds...", send_by: 42, send_to: 0});
+=======
+      io.emit("message", {message: "Server will be reboot in 5 seconds...", send_by: 42, send_to: 0});
+>>>>>>> 2501e63f6131a751f2cc9315572e1f12bcb83e93
       setTimeout(function(){
         process.exit();
       }, 5000);
       break;
+<<<<<<< HEAD
     case "whoami":
       io.emit("message", {message: "First, you are a bitch and your id is: " + from, send_by: 0, send_to: from});
       break;
     case "ping":
       io.emit("message", {message: "pong", send_by: 42, send_to: from});
       console.log(socket.id);
+=======
+    case "test":
+      io.emit("message", {message: "private test message ", send_by: 0, send_to: from});      
+>>>>>>> 2501e63f6131a751f2cc9315572e1f12bcb83e93
       break;
     default:
       io.emit("message", { message: command + ": command not found", send_by: 42, send_to: from});
@@ -54,6 +70,11 @@ rl.on('line', function(line){
 });
 
 io.on('connection', function (socket) {
+<<<<<<< HEAD
+=======
+  console.log("User connected");
+
+>>>>>>> 2501e63f6131a751f2cc9315572e1f12bcb83e93
   socket.on('message', function (data) {
     data = JSON.parse(data);
     if (exec_command(data["message"], data["send_by"]) == 1)
@@ -62,6 +83,7 @@ io.on('connection', function (socket) {
     console.log(data["message"]);
   });
 
+<<<<<<< HEAD
   socket.on('move', function (data) {
     data = JSON.parse(data);
     io.emit("move", data);
@@ -94,3 +116,10 @@ app.get('/', function (req, res) {
 })
 
 server.listen(3000);
+=======
+	socket.on('disconnect', function () {
+		console.log("User disconnected");
+	});
+
+});
+>>>>>>> 2501e63f6131a751f2cc9315572e1f12bcb83e93

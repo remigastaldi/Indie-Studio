@@ -5,12 +5,12 @@
 ## Login   <leo.hubert@epitech.eu>
 ##
 ## Started on  Thu May  4 18:11:07 2017 Leo HUBERT
-## Last update Sat May  6 19:59:13 2017 Leo HUBERT
+## Last update Fri May 12 01:29:50 2017 John Doe
 ##
 
 CFLAGS	+=	-W -Wall -Werror
-CFLAGS	+= 	-lboost_date_time -lboost_random -lboost_system -lpthread -Iinc
-CFLAGS 	+=	-I./inc -Llib -lsioclient -std=c++11
+CFLAGS	+= 	-L./lib -lboost_date_time -lboost_random -lboost_system -lpthread -lsioclient -Iinc
+CFLAGS 	+=	-I./inc -I./include -std=c++11
 
 CC	=	g++
 
@@ -19,8 +19,7 @@ NAME    =	client
 SRC	=	src/main.cpp \
 			src/Client.cpp \
 
-
-ECHO	=	echo -e
+ECHO	=	/bin/echo -e
 DEFAULT	=	"\033[00m"
 GREEN	=	"\033[0;32m"
 TEAL	=	"\033[1;36m"
@@ -41,14 +40,6 @@ fclean:		clean
 		@rm -f $(NAME) && \
 		$(ECHO) $(GREEN) "[OK] rm" $(TEAL) $(NAME) $(DEFAULT) || \
 		$(ECHO) $(RED) "[ERROR] rm" $(TEAL) $(NAME) $(DEFAULT)
-
-install:
-		@$(ECHO) $(YELLOW) "Starting socket.io install" $(DEFAULT)
-		@sudo rm -rf ../libs/websocketpp/ ../libs/rapidjson/ ../libs/socket.io-client-cpp/
-		@git submodule update --init
-	 	@cd ../libs/websocketpp/; rm -rf build; mkdir build; cd build; cmake ..; make; sudo make install
-	 	@cd ../libs/rapidjson/; rm -rf build; mkdir build; cd build; cmake ..; make; sudo make install
-		@cd ../libs/socket.io-client-cpp/; rm -rf build; mkdir build; cd build; cmake ..; make; sudo make install; cp libsioclient.a ../../../Socket-Studio/lib
 
 re:	 fclean all
 

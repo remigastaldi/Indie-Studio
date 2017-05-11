@@ -23,18 +23,8 @@
 *.app
 
 # Ctags
-*.tags
+.tags
 .tags1
-
-# cmake
-CMakeFiles/
-Indie-Studio/dist/Makefile
-Indie-Studio/dist/bin/IndieStudio
-*.cmake
-*.log
-*.bin
-*.cache
-*.make
 *.txt
 
 Socket-Studio/server/node_modules
