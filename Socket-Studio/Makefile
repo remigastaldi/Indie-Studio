@@ -17,7 +17,7 @@ CC	=	g++
 NAME    =	client
 
 SRC	=	src/main.cpp \
-			src/client.cpp \
+			src/Client.cpp \
 
 
 ECHO	=	echo -e

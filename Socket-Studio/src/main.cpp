@@ -8,7 +8,7 @@
 // Last update Sat May  6 15:32:25 2017 Matthias Prost
 //
 
-#include "client.hpp"
+#include "Client.hpp"
 
 int   main()
 {
@@ -17,7 +17,7 @@ int   main()
 
     id = std::rand();
 
-  Client client("http://ezgames.eu/", 3000, id);
+  Client client("http://ezgames.eu", 3000, id);
   client.connect();
   client.consoleChat();
   return (0);

@@ -5,10 +5,10 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Tue May 09 19:18:53 2017 Leo Hubert Froideval
+** Last update Thu May 11 21:48:20 2017 Leo Hubert Froideval
 */
 
-#include "client.hpp"
+#include "Client.hpp"
 
 Client::Client(std::string const &addr, int const port, int const id) : _id(id)
 {
