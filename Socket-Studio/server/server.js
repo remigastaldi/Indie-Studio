@@ -1,5 +1,14 @@
-var io = require('socket.io')(3000);
+var app = require('express')();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+
+//var io = require('socket.io')(3000);
 var exec = require('child_process').exec;
+
+
+/* LOCAL VAR */
+var totalConnected = 0;
+var users = [];
 
 var readline = require('readline');
 var rl = readline.createInterface({
@@ -45,7 +54,6 @@ rl.on('line', function(line){
 });
 
 io.on('connection', function (socket) {
-
   socket.on('message', function (data) {
     data = JSON.parse(data);
     if (exec_command(data["message"], data["send_by"]) == 1)
@@ -64,13 +72,25 @@ io.on('connection', function (socket) {
     io.emit("login", data);
     console.log("Connected! ID: " + data["user_id"]);
     socket.user_id = data["user_id"];
+    socket.user_server_id = totalConnected;
+    users[totalConnected] = {id: data["user_id"], username: "User " + totalConnected};
+    totalConnected++;
   });
 
 
 
 	socket.on('disconnect', function () {
+    users.splice(socket.user_server_id, 1);
+    totalConnected--;
 		console.log("Disconnected ! ID: " + socket.user_id);
     io.emit("logout", {user_id: socket.user_id});
 	});
 
 });
+
+app.get('/', function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({ connected: totalConnected, users: users}));
+})
+
+server.listen(3000);

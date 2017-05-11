@@ -17,7 +17,7 @@ int   main()
 
     id = std::rand();
 
-  Client client("http://ezgames.eu", 3000, id);
+  Client client("http://ezgames.eu/", 3000, id);
   client.connect();
   client.consoleChat();
   return (0);
