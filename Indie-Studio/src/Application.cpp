@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:53:57 2017 gastal_r
-// Last update Mon May  8 15:20:57 2017 gastal_r
+// Last update Thu May 11 05:58:57 2017 gastal_r
 //
 
 #include "Application.hpp"
@@ -23,7 +23,7 @@
 Application::Application() :
 mDistance(0),
 mWalkSpd(170.0),
-mDirection(Ogre::Vector3::ZERO),
+mDirection(Ogre::Vector3(0, 800, 0)),
 mDestination(Ogre::Vector3(500, 0, 0)),
 mAnimationState(0),
 mEntity(0),
@@ -34,13 +34,17 @@ mNode(0)
 //-------------------------------------------------------------------------------------
 Application::~Application()
 {
+	if (mLoader)
+	{
+		OGRE_DELETE mLoader;
+	}
 }
 
 //-------------------------------------------------------------------------------------
 void Application::createScene()
 {
 	//Load the scheme
-	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
+	/*CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
 	// Set the defaults
 	//CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("DejaVuSans-10");
 	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
@@ -57,7 +61,7 @@ void Application::createScene()
 	// Setting the image used in the window
 	myImageWindow->setProperty("Image","TaharezLook/full_image");
 	//Attaching the image window to the root window
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);
+	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow); */
 
 
 	// Set the scene's ambient light
@@ -65,9 +69,8 @@ void Application::createScene()
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
-	mNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
+	mNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode", Ogre::Vector3(0, 800, 0));
 	mNode->attachObject(ogreHead);
-	mNode->setPosition(Ogre::Vector3(0, 0, 0));
 
 	// Create a Light and set its position
 	Ogre::Light* light = mSceneMgr->createLight("MainLight");
@@ -82,7 +85,7 @@ void Application::createScene()
 	//mNode->attachObject(ogreNode2);
 
 	//mCameraMan->setTarget(mNode);
-	mCamera->setPosition(mNode->getPosition() + Ogre::Vector3(150, 0, 300));
+	mCamera->setPosition(mNode->getPosition() + Ogre::Vector3(0, 300, 0));
 
 	earNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("EarNode", Ogre::Vector3(0,0,0), Ogre::Quaternion::IDENTITY);
 	earNode->setPosition(mCamera->getPosition());
@@ -94,6 +97,31 @@ void Application::createScene()
 	jinx->setReferenceDistance(10.f);
 	jinx->setMaxDistance(800.f);
 	mNode->attachObject(jinx);
+
+   //loader.parseDotScene("test.scene","General", mSceneMgr);
+	 mLoader = new DotSceneLoader();
+	 Ogre::SceneNode *map = mSceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
+	 mLoader->parseDotScene("test.scene","General", mSceneMgr, map);
+	 //map->scale(Ogre::Vector3(100.f, 100.f, 100.f));
+	 mTerrain = mLoader->getTerrainGroup();
+	 Ogre::TerrainGlobalOptions *mTerrainGlobals = mLoader->mTerrainGlobalOptions;
+	 //mCameraMan->setTarget(mTerrain);
+
+
+
+	 mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
+
+Ogre::Light* testLight = mSceneMgr->createLight("TestLight");
+testLight->setType(Ogre::Light::LT_DIRECTIONAL);
+testLight->setDirection(Ogre::Vector3(0.55, -0.3, 0.75));
+testLight->setDiffuseColour(Ogre::ColourValue::White);
+testLight->setSpecularColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+
+mTerrainGlobals->setLightMapDirection(light->getDerivedDirection());
+mTerrainGlobals->setCompositeMapAmbient(mSceneMgr->getAmbientLight());
+mTerrainGlobals->setCompositeMapDiffuse(light->getDiffuseColour());
+
+mTerrain->setOrigin(Ogre::Vector3::ZERO);
 }
 
 bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
@@ -118,7 +146,7 @@ bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		 earNode->setPosition(mCamera->getPosition());
       earNode->setOrientation(mCamera->getOrientation());
 
-		if (mNode->getPosition().x < 500)
+		if (mNode->getPosition().y < 800)
 		{
 			Ogre::Real move = mWalkSpd * evt.timeSinceLastFrame;
 				mDistance -= move;

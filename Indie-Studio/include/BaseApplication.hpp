@@ -14,6 +14,9 @@
 #include <OgreFileSystemLayer.h>
 #include <OgreConfigFile.h>
 #include <OgreApplicationContext.h>
+#include <OgreApplicationContext.h>
+#include <Terrain/OgreTerrain.h>
+#include <Terrain/OgreTerrainGroup.h>
 
 #include <OgreOggSound/OgreOggSound.h>
 #include <OgreOggSound/OgreOggSoundManager.h>
@@ -28,6 +31,8 @@
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 
 #include "CameraMan.hpp"
+
+#include "DotSceneLoader.h"
 
 class BaseApplication : public Ogre::WindowEventListener, public Ogre::FrameListener, public OIS::KeyListener, public OIS::MouseListener
 {
@@ -91,6 +96,10 @@ protected:
 
     // OgreOggSound
     OgreOggSound::OgreOggSoundManager *mSoundManager;
+
+    // Terrain
+    DotSceneLoader     *mLoader;
+    Ogre::TerrainGroup *mTerrain;
 };
 
 #endif // #ifndef __BaseApplication_h_

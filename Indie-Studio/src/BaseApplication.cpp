@@ -5,14 +5,11 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:54:11 2017 gastal_r
-// Last update Mon May  8 15:17:01 2017 gastal_r
+// Last update Thu May 11 04:41:04 2017 gastal_r
 //
 
 #include "BaseApplication.hpp"
 
-//#include <OgreRoot.h>
-//#include <OgreRenderWindow.h>
-//#include <OIS/OIS.h>
 
 //-------------------------------------------------------------------------------------
 BaseApplication::BaseApplication()
@@ -30,7 +27,9 @@ BaseApplication::BaseApplication()
     mKeyboard(0),
     mRenderer(0),
     mSoundManager(0),
-    mCameraMan(0)
+    mCameraMan(0),
+    mTerrain(0),
+    mLoader(0)
 {
     mFSLayer = OGRE_NEW_T(Ogre::FileSystemLayer, Ogre::MEMCATEGORY_GENERAL)(OGRE_VERSION_NAME);
 }
@@ -73,7 +72,7 @@ bool BaseApplication::configure()
 void BaseApplication::chooseSceneManager()
 {
     // Get the SceneManager, in this case a generic one
-    mSceneMgr = mRoot->createSceneManager(Ogre::ST_GENERIC);
+    mSceneMgr = mRoot->createSceneManager("OctreeSceneManager");
 }
 //-------------------------------------------------------------------------------------
 void BaseApplication::createCamera()

@@ -67,12 +67,17 @@ set(HDRS
 	${CMAKE_CURRENT_SOURCE_DIR}/include/BaseApplication.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/Application.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/CameraMan.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/rapidxml_iterators.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/rapidxml_print.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/rapidxml_utils.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/rapidxml.hpp
 )
 
 set(SRCS
 	${CMAKE_CURRENT_SOURCE_DIR}/src/BaseApplication.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Application.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/CameraMan.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/src/DotSceneLoader.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
 )
 
@@ -116,7 +121,7 @@ add_executable(${PROJECT_NAME} WIN32 ${HDRS} ${SRCS})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
-target_link_libraries(${PROJECT_NAME} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${Boost_LIBRARIES} ${CEGUI_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES} OgreOggSound PocoFoundation)
+target_link_libraries(${PROJECT_NAME} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${Boost_LIBRARIES} ${CEGUI_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES} OgreOggSound PocoFoundation OgreTerrain)
 
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/bin)
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/media)
