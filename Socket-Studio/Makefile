@@ -44,6 +44,10 @@ fclean:		clean
 
 install:
 		@$(ECHO) $(YELLOW) "Starting socket.io install" $(DEFAULT)
+		@sudo rm -rf ../libs/websocketpp/ ../libs/rapidjson/ ../libs/socket.io-client-cpp/
+		@git submodule update --init
+	 	@cd ../libs/websocketpp/; rm -rf build; mkdir build; cd build; cmake ..; make; sudo make install
+	 	@cd ../libs/rapidjson/; rm -rf build; mkdir build; cd build; cmake ..; make; sudo make install
 		@cd ../libs/socket.io-client-cpp/; rm -rf build; mkdir build; cd build; cmake ..; make; sudo make install; cp libsioclient.a ../../../Socket-Studio/lib
 
 re:	 fclean all
