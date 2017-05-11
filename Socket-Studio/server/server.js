@@ -73,7 +73,7 @@ io.on('connection', function (socket) {
     console.log("Connected! ID: " + data["user_id"]);
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[totalConnected] = {id: data["user_id"], username: "User " + totalConnected, ip: socket.request.connection.remoteAddress};
+    users[totalConnected] = {id: data["user_id"], username: "User " + totalConnected};
     totalConnected++;
   });
 
