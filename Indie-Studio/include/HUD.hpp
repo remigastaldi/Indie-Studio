@@ -11,7 +11,7 @@
 #ifndef HUD_HPP
 # define HUD_HPP
 
-#include <CEGUI.h>
+#include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 
 #endif // HUD_HPP

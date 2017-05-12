@@ -5,11 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:54:11 2017 gastal_r
-// Last update Thu May 11 04:41:04 2017 gastal_r
+// Last update Mon May  8 15:17:01 2017 gastal_r
 //
 
 #include "BaseApplication.hpp"
 
+//#include <OgreRoot.h>
+//#include <OgreRenderWindow.h>
+//#include <OIS/OIS.h>
 
 //-------------------------------------------------------------------------------------
 BaseApplication::BaseApplication()
@@ -27,9 +30,7 @@ BaseApplication::BaseApplication()
     mKeyboard(0),
     mRenderer(0),
     mSoundManager(0),
-    mCameraMan(0),
-    mTerrain(0),
-    mLoader(0)
+    mCameraMan(0)
 {
     mFSLayer = OGRE_NEW_T(Ogre::FileSystemLayer, Ogre::MEMCATEGORY_GENERAL)(OGRE_VERSION_NAME);
 }
@@ -55,7 +56,7 @@ bool BaseApplication::configure()
     // Show the configuration dialog and initialise the system
     // You can skip this and use root.restoreConfig() to load configuration
     // settings if you were sure there are valid ones saved in ogre.cfg
-    if(mRoot->showConfigDialog(mDialog))
+    if(mRoot->showConfigDialog())
     {
         // If returned true, user clicked OK so initialise
         // Here we choose to let the system create a default rendering window by passing 'true'
@@ -72,7 +73,7 @@ bool BaseApplication::configure()
 void BaseApplication::chooseSceneManager()
 {
     // Get the SceneManager, in this case a generic one
-    mSceneMgr = mRoot->createSceneManager("OctreeSceneManager");
+    mSceneMgr = mRoot->createSceneManager(Ogre::ST_GENERIC);
 }
 //-------------------------------------------------------------------------------------
 void BaseApplication::createCamera()
@@ -192,8 +193,14 @@ bool BaseApplication::setup()
 
     setupResources();
 
-    mRoot->loadPlugin("libOgreOggSound.so");
-
+    mRoot->loadPlugin("OgreOggSound.dll");
+	mRoot->loadPlugin("Plugin_OctreeZone.dll");
+	mRoot->loadPlugin("Plugin_PCZSceneManager.dll");
+	//mRoot->loadPlugin("Plugin_CgProgramManager.dll");
+	mRoot->loadPlugin("Plugin_OctreeSceneManager.dll");
+	//mRoot->loadPlugin("RenderSystem_GL3Plus.dll");
+	mRoot->loadPlugin("RenderSystem_GL.dll");
+	
     bool carryOn = configure();
     if (!carryOn) return false;
 
@@ -208,8 +215,8 @@ bool BaseApplication::setup()
     // Load resources
     loadResources();
 
-    mRenderer = &CEGUI::OgreRenderer::bootstrapSystem();
-
+	Ogre::RenderTarget* renderTarget = mRoot->getRenderTarget("Indie Studio");
+	CEGUI::OgreRenderer& myRenderer = CEGUI::OgreRenderer::bootstrapSystem(*renderTarget);
     mSoundManager = OgreOggSound::OgreOggSoundManager::getSingletonPtr();
   	mSoundManager->init();
     mSoundManager->setDistanceModel(AL_LINEAR_DISTANCE);
@@ -241,7 +248,7 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
     mMouse->capture();
 
      //Need to inject timestamps to CEGUI System.
-    CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+    //CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
     mCameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
 

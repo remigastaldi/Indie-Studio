@@ -15,7 +15,7 @@ void    Start_CEGUI_Rendering()
 // Bootstrap CEGUI::System with an OgreRenderer object that uses the
 // default Ogre rendering window as the default output surface, an Ogre based
 // ResourceProvider, and an Ogre based ImageCodec.
-CEGUI::OgreRenderer* myRenderer = &CEGUI::OgreRenderer::bootstrapSystem();
+/*CEGUI::OgreRenderer* myRenderer = &CEGUI::OgreRenderer::bootstrapSystem();
 
 //Load the scheme
 CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
@@ -37,17 +37,17 @@ CEGUI::Window *myImageWindow = CEGUI::WindowManager::getSingleton().createWindow
 myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5,0),CEGUI::UDim(0.5,0)));
 
 // Setting Window size
-myImageWindow->setSize(USize(UDim(0,150),UDim(0,100)));
+myImageWindow->setSize(CEGUI::USize(CEGUI::UDim(0,150),CEGUI::UDim(0,100)));
 
 // Setting the image used in the window
 myImageWindow->setProperty("Image","TaharezLook/full_image");
 
 //Attaching the image window to the root window
-CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);
+CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);*/
 }
 
 void    Deinitialisation()
 {
     CEGUI::System::destroy();
-    CEGUI::OpenGL3Renderer::destroy(static_cast<CEGUI::OpenGL3Renderer&>(*d_renderer));
+    //CEGUI::OpenGL3Renderer::destroy(static_cast<CEGUI::OpenGL3Renderer&>(*d_renderer));
 }
