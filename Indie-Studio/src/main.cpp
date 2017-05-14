@@ -5,10 +5,10 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:54:05 2017 gastal_r
-// Last update Fri May  5 09:54:09 2017 gastal_r
+// Last update Sun May 14 19:16:51 2017 John Doe
 //
 
-#include "Application.hpp"
+#include "Core.hpp"
 #include <OISException.h>
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -27,7 +27,9 @@ extern "C" {
 #endif
     {
         // Create application object
-        Application app;
+        Core app("http://ezgames.eu", 3000, 12);
+
+        app.connect();
 
         try {
             app.run();
