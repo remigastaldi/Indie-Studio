@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:54:11 2017 gastal_r
-// Last update Mon May  8 15:17:01 2017 gastal_r
+// Last update Sat May 13 17:48:35 2017 John Doe
 //
 
 #include "BaseApplication.hpp"
@@ -193,14 +193,15 @@ bool BaseApplication::setup()
 
     setupResources();
 
-    mRoot->loadPlugin("OgreOggSound.dll");
+    mRoot->loadPlugin("libOgreOggSound.so");
+/*    mRoot->loadPlugin("OgreOggSound.dll");
 	mRoot->loadPlugin("Plugin_OctreeZone.dll");
 	mRoot->loadPlugin("Plugin_PCZSceneManager.dll");
 	//mRoot->loadPlugin("Plugin_CgProgramManager.dll");
 	mRoot->loadPlugin("Plugin_OctreeSceneManager.dll");
 	//mRoot->loadPlugin("RenderSystem_GL3Plus.dll");
-	mRoot->loadPlugin("RenderSystem_GL.dll");
-	
+	mRoot->loadPlugin("RenderSystem_GL.dll"); */
+
     bool carryOn = configure();
     if (!carryOn) return false;
 

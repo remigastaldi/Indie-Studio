@@ -15,8 +15,8 @@
 #include <OgreConfigFile.h>
 //#include <OgreApplicationContext.h>
 
-#include <OgreOggSound.h>
-#include <OgreOggSoundManager.h>
+#include <OgreOggSound/OgreOggSound.h>
+#include <OgreOggSound/OgreOggSoundManager.h>
 #define __DEPRECATED
 
 #include <OISEvents.h>
