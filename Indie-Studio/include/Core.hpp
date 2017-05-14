@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Sun May 14 16:31:07 2017 John Doe
+// Last update Sun May 14 18:17:24 2017 John Doe
 //
 
 #ifndef _CORE_HPP_
@@ -17,8 +17,10 @@
 #include <string>
 #include <iostream>
 #include <functional>
-#include "sio_client.h"
 #include <condition_variable>
+
+#include "sio_client.h"
+#include "BaseApplication.hpp"
 
 #ifdef WIN32
 #define EM(__O__) std::cout<<__O__<<std::endl
@@ -34,7 +36,7 @@
 #define EM(__O__) std::cout<<"\e[1;30;1m"<<__O__<<"\e[0m"<<std::endl
 #define HIGHLIGHT(__O__) std::cout<<"\e[1;31m"<<__O__<<"\e[0m"<<std::endl
 
-class Core
+class Core : BaseApplication
 {
   private:
     int                         _id;
