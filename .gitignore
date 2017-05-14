@@ -49,3 +49,4 @@ libs/ogg/OgreOggSound-v1.26/build/Makefile
 # Windows
 Indie-Studio.VC.db
 *.db
+install_manifest\.txt
