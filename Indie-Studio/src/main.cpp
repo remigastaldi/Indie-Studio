@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:54:05 2017 gastal_r
-// Last update Sun May 14 19:16:51 2017 John Doe
+// Last update Tue May 16 11:56:35 2017 gastal_r
 //
 
 #include "Core.hpp"
@@ -27,10 +27,10 @@ extern "C" {
 #endif
     {
         // Create application object
-        Core app("http://ezgames.eu", 3000, 12);
+        //Core app("http://ezgames.eu", 3000, 12);
 
-        app.connect();
-
+        //app.connect();
+Application app;
         try {
             app.run();
         } catch( Ogre::Exception& e ) {

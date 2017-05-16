@@ -72,11 +72,9 @@ set(HDRS
 	${CMAKE_CURRENT_SOURCE_DIR}/include/rapidxml_print.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/rapidxml_utils.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/rapidxml.hpp
-	${CMAKE_CURRENT_SOURCE_DIR}/include/Core.hpp
 )
 
 set(SRCS
-	${CMAKE_CURRENT_SOURCE_DIR}/src/Core.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/BaseApplication.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Application.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/CameraMan.cpp
@@ -123,8 +121,8 @@ endif(WIN32 OR APPLE)
 
 add_executable(${PROJECT_NAME} WIN32 ${HDRS} ${SRCS})
 
-target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/lib/libsioclient.a)
-add_library(sioclient STATIC IMPORTED)
+#target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/lib/libsioclient.a)
+#add_library(sioclient STATIC IMPORTED)
 
 set(CMAKE_CXX_FLAGS "-lpthread")
 

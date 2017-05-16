@@ -29,6 +29,8 @@
 
 #include "CameraMan.hpp"
 
+#include "DotSceneLoader.h"
+
 class BaseApplication : public Ogre::WindowEventListener, public Ogre::FrameListener, public OIS::KeyListener, public OIS::MouseListener
 {
 public:

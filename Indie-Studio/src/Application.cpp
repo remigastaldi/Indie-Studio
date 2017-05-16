@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:53:57 2017 gastal_r
-// Last update Sat May 13 17:59:46 2017 John Doe
+// Last update Tue May 16 12:07:06 2017 gastal_r
 //
 
 #include "Application.hpp"
@@ -40,7 +40,7 @@ Application::~Application()
 void Application::createScene()
 {
 	//Load the scheme
-	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
+	/*CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
 	// Set the defaults
 	//CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("DejaVuSans-10");
 	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
@@ -57,7 +57,7 @@ void Application::createScene()
 	// Setting the image used in the window
 	myImageWindow->setProperty("Image","TaharezLook/full_image");
 	//Attaching the image window to the root window
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);
+	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);*/
 
 
 	// Set the scene's ambient light
@@ -94,6 +94,11 @@ void Application::createScene()
 	jinx->setReferenceDistance(10.f);
 	jinx->setMaxDistance(800.f);
 	mNode->attachObject(jinx);
+
+	Ogre::SceneNode *map = mSceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
+
+	DotSceneLoader loader;
+   loader.parseDotScene("map.scene","General", mSceneMgr, map);
 }
 
 bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
