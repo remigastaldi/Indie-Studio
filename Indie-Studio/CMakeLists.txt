@@ -129,7 +129,7 @@ add_executable(${PROJECT_NAME} WIN32 ${HDRS} ${SRCS})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
-target_link_libraries(${PROJECT_NAME} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${Boost_LIBRARIES} ${CEGUI_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES} ${BULLET_LIBRARIES} ${OGREBULLET_LIBRARIES} OgreOggSound PocoFoundation)
+target_link_libraries(${PROJECT_NAME} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${Boost_LIBRARIES} ${CEGUI_LIBRARIES} ${CEGUI_OgreRenderer_LIBRARIES} ${BULLET_LIBRARIES} ${OGREBULLET_LIBRARIES} OgreOggSound PocoFoundation OgreBulletCollisions OgreBulletDynamics OgreOverlay OgrePaging OgreProperty OgreVolume)
 
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/bin)
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/media)

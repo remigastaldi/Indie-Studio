@@ -1,0 +1,15 @@
+material Examples/Rockwall
+{
+   technique
+   {
+      pass
+      {
+         texture_unit
+         {
+            max_anisotropy 16
+            filtering anisotropic
+            texture plant.jpg
+         }
+      }
+   }
+}

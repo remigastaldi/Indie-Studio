@@ -30,6 +30,12 @@
 #include "CameraMan.hpp"
 
 #include "OgreBulletDynamicsRigidBody.h"
+#include "OgreBulletCollisions.h"
+#include "Shapes/OgreBulletCollisionsStaticPlaneShape.h"
+#include "Shapes/OgreBulletCollisionsBoxShape.h"
+#include "Shapes/OgreBulletCollisionsTrimeshShape.h"
+#include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
+#include "OgreBulletCollisionsPreRequisites.h"
 
 class BaseApplication : public Ogre::WindowEventListener, public Ogre::FrameListener, public OIS::KeyListener, public OIS::MouseListener
 {
@@ -55,6 +61,7 @@ protected:
     // Ogre::FrameListener
     virtual bool frameRenderingQueued(const Ogre::FrameEvent &);
     virtual bool frameStarted (const Ogre::FrameEvent &evt);
+    //virtual bool frameEnded(const Ogre::FrameEvent& evt);
 
     // OIS::KeyListener
     virtual bool keyPressed(const OIS::KeyEvent &);
@@ -93,6 +100,14 @@ protected:
 
     // OgreOggSound
     OgreOggSound::OgreOggSoundManager *mSoundManager;
+
+    //OgreBullet
+    OgreBulletDynamics::DynamicsWorld *mWorld;	// OgreBullet World
+    OgreBulletCollisions::DebugDrawer *debugDrawer;
+    int mNumEntitiesInstanced;
+
+    std::deque<OgreBulletDynamics::RigidBody *>         mBodies;
+    std::deque<OgreBulletCollisions::CollisionShape *>  mShapes;
 };
 
 #endif // #ifndef __BaseApplication_h_
