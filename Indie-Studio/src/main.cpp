@@ -5,11 +5,11 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:54:05 2017 gastal_r
-// Last update Fri May  5 09:54:09 2017 gastal_r
+// Last update Tue May 16 11:56:35 2017 gastal_r
 //
 
-#include "Application.hpp"
-#include <OIS/OISException.h>
+#include "Core.hpp"
+#include <OISException.h>
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
@@ -27,8 +27,10 @@ extern "C" {
 #endif
     {
         // Create application object
-        Application app;
+        //Core app("http://ezgames.eu", 3000, 12);
 
+        //app.connect();
+Application app;
         try {
             app.run();
         } catch( Ogre::Exception& e ) {

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ResourceCompile Include="Indie-Studio.rc" />
+    <Image Include="Indie-Studio.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\BaseApplication.cpp" />
+    <ClCompile Include="src\CameraMan.cpp" />
+    <ClCompile Include="src\HUD.cpp" />
+    <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Application.hpp" />
+    <ClInclude Include="include\BaseApplication.hpp" />
+    <ClInclude Include="include\CameraMan.hpp" />
+    <ClInclude Include="include\HUD.hpp" />
+  </ItemGroup>
+</Project>

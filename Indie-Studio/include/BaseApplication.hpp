@@ -13,21 +13,23 @@
 #include <OgreRenderWindow.h>
 #include <OgreFileSystemLayer.h>
 #include <OgreConfigFile.h>
-#include <OgreApplicationContext.h>
+//#include <OgreApplicationContext.h>
 
 #include <OgreOggSound/OgreOggSound.h>
 #include <OgreOggSound/OgreOggSoundManager.h>
 #define __DEPRECATED
 
-#include <OIS/OISEvents.h>
-#include <OIS/OISInputManager.h>
-#include <OIS/OISKeyboard.h>
-#include <OIS/OISMouse.h>
+#include <OISEvents.h>
+#include <OISInputManager.h>
+#include <OISKeyboard.h>
+#include <OISMouse.h>
 
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 
 #include "CameraMan.hpp"
+
+#include "DotSceneLoader.h"
 
 #include "OgreBulletDynamicsRigidBody.h"
 #include "OgreBulletCollisions.h"
@@ -96,7 +98,7 @@ protected:
     OgreCookies::CameraMan* mCameraMan;       // basic camera controller
 
     // CEGUI
-    CEGUI::OgreRenderer* mRenderer;
+    CEGUI::OgreRenderer *mRenderer;
 
     // OgreOggSound
     OgreOggSound::OgreOggSoundManager *mSoundManager;

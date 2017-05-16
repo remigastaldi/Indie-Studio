@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D0326E34-CB57-48A0-871B-CDFADEBC5FAC}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TutorialFramework</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Configuration.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Configuration.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Configuration.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Configuration.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(PlatformShortName)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(PlatformShortName)-$(Configuration)-$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(PlatformShortName)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(PlatformShortName)-$(Configuration)-$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)_d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(PlatformShortName)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(PlatformShortName)-$(Configuration)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(PlatformShortName)-$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(PlatformShortName)-$(Configuration)-$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\HLMS;$(OGRE_HOME)\include\OGRE\MeshLodGenerator;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(BOOST_HOME)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain_d.lib;OgreHLMS_d.lib;OgreMeshLodGenerator_d.lib;OgrePaging_d.lib;OgreProperty_d.lib;OgreRTShaderSystem_d.lib;OgreTerrain_d.lib;OgreVolume_d.lib;OIS_d.lib;OgreOverlay_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copy runtime files</Message>
+      <Command>copy $(OGRE_HOME)\bin\$(Configuration)\OgreMain*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreHLMS*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreMeshLodGenerator*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgrePaging*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreProperty*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreRTShaderSystem*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreTerrain*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreVolume*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OIS*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_BSPSceneManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_CgProgramManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\cg.dll $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\RenderSystem_GL*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\glut32.dll $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreOverlay*.* $(TargetDir) /y
+set pluginpostfix=
+if "$(Configuration)"=="Debug" set pluginpostfix=_d
+set plugincfg=$(TargetDir)\plugins%pluginpostfix%.cfg
+echo # Defines plugins to load&gt;%plugincfg%
+echo.&gt;&gt;%plugincfg%
+echo # Define plugin folder&gt;&gt;%plugincfg%
+echo PluginFolder=.&gt;&gt;%plugincfg%
+echo.&gt;&gt;%plugincfg%
+echo # Define plugins&gt;&gt;%plugincfg%
+echo Plugin=RenderSystem_GL%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_ParticleFX%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_BSPSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_CgProgramManager%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_PCZSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_OctreeZone%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_OctreeSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
+set resourcescfg=$(TargetDir)\resources%pluginpostfix%.cfg
+echo [General]&gt;%resourcescfg%
+echo FileSystem=$(OGRE_HOME)\Media&gt;&gt;%resourcescfg%
+echo.&gt;&gt;%resourcescfg%
+echo [Essential]&gt;&gt;%resourcescfg%
+echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\HLMS;$(OGRE_HOME)\include\OGRE\MeshLodGenerator;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(BOOST_HOME)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain_d.lib;OgreHLMS_d.lib;OgreMeshLodGenerator_d.lib;OgrePaging_d.lib;OgreProperty_d.lib;OgreRTShaderSystem_d.lib;OgreTerrain_d.lib;OgreVolume_d.lib;OIS_d.lib;OgreOverlay_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copy runtime files</Message>
+      <Command>copy $(OGRE_HOME)\bin\$(Configuration)\OgreMain*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreHLMS*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreMeshLodGenerator*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgrePaging*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreProperty*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreRTShaderSystem*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreTerrain*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreVolume*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OIS*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_BSPSceneManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_CgProgramManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\cg.dll $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\RenderSystem_GL*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\glut32.dll $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreOverlay*.* $(TargetDir) /y
+set pluginpostfix=
+if "$(Configuration)"=="Debug" set pluginpostfix=_d
+set plugincfg=$(TargetDir)\plugins%pluginpostfix%.cfg
+echo # Defines plugins to load&gt;%plugincfg%
+echo.&gt;&gt;%plugincfg%
+echo # Define plugin folder&gt;&gt;%plugincfg%
+echo PluginFolder=.&gt;&gt;%plugincfg%
+echo.&gt;&gt;%plugincfg%
+echo # Define plugins&gt;&gt;%plugincfg%
+echo Plugin=RenderSystem_GL%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_ParticleFX%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_BSPSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_CgProgramManager%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_PCZSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_OctreeZone%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_OctreeSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
+set resourcescfg=$(TargetDir)\resources%pluginpostfix%.cfg
+echo [General]&gt;%resourcescfg%
+echo FileSystem=$(OGRE_HOME)\Media&gt;&gt;%resourcescfg%
+echo.&gt;&gt;%resourcescfg%
+echo [Essential]&gt;&gt;%resourcescfg%
+echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\HLMS;$(OGRE_HOME)\include\OGRE\MeshLodGenerator;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(OGRE_HOME)\lib\$(Configuration);$(BOOST_HOME)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OIS.lib;OgreOverlay.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copy runtime files</Message>
+      <Command>copy $(OGRE_HOME)\bin\$(Configuration)\OgreMain*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreHLMS*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreMeshLodGenerator*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgrePaging*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreProperty*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreRTShaderSystem*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreTerrain*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreVolume*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OIS*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_BSPSceneManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_CgProgramManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\cg.dll $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\RenderSystem_GL*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\glut32.dll $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreOverlay*.* $(TargetDir) /y
+set pluginpostfix=
+if "$(Configuration)"=="Debug" set pluginpostfix=_d
+set plugincfg=$(TargetDir)\plugins%pluginpostfix%.cfg
+echo # Defines plugins to load&gt;%plugincfg%
+echo.&gt;&gt;%plugincfg%
+echo # Define plugin folder&gt;&gt;%plugincfg%
+echo PluginFolder=.&gt;&gt;%plugincfg%
+echo.&gt;&gt;%plugincfg%
+echo # Define plugins&gt;&gt;%plugincfg%
+echo Plugin=RenderSystem_GL%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_ParticleFX%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_BSPSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_CgProgramManager%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_PCZSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_OctreeZone%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_OctreeSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
+set resourcescfg=$(TargetDir)\resources%pluginpostfix%.cfg
+echo [General]&gt;%resourcescfg%
+echo FileSystem=$(OGRE_HOME)\Media&gt;&gt;%resourcescfg%
+echo.&gt;&gt;%resourcescfg%
+echo [Essential]&gt;&gt;%resourcescfg%
+echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\HLMS;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\MeshLodGenerator;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\Pagin;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\Property;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\RTShaderSystem;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\Terrain;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\Volume;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OIS;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\Overlay;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\BOOST;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\Indie-Studio\include;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\CEGUI;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\AL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\BOOST\lib;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\CEGUI\lib;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OIS.lib;OgreOverlay.lib;OgreOggSound.lib;CEGUIBase-0.lib;CEGUICommonDialogs-0.lib;CEGUICoreWindowRendererSet.lib;CEGUIExpatParser.lib;CEGUIFreeImageImageCodec.lib;CEGUIMinesweeper.lib;CEGUIOgreRenderer-0.lib;CEGUIOpenGLRenderer-0.lib;CEGUISILLYImageCodec.lib;CEGUITinyXMLParser.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Message>Copy runtime files</Message>
+      <Command>copy $(OGRE_HOME)\bin\$(Configuration)\OgreMain*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreHLMS*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreMeshLodGenerator*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgrePaging*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreProperty*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreRTShaderSystem*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreTerrain*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreVolume*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OIS*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_BSPSceneManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_CgProgramManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\cg.dll $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\RenderSystem_GL*.* $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\glut32.dll $(TargetDir) /y
+copy $(OGRE_HOME)\bin\$(Configuration)\OgreOverlay*.* $(TargetDir) /y
+set pluginpostfix=
+if "$(Configuration)"=="Debug" set pluginpostfix=_d
+set plugincfg=$(TargetDir)\plugins%pluginpostfix%.cfg
+echo # Defines plugins to load&gt;%plugincfg%
+echo.&gt;&gt;%plugincfg%
+echo # Define plugin folder&gt;&gt;%plugincfg%
+echo PluginFolder=.&gt;&gt;%plugincfg%
+echo.&gt;&gt;%plugincfg%
+echo # Define plugins&gt;&gt;%plugincfg%
+echo Plugin=RenderSystem_GL%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_ParticleFX%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_BSPSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_CgProgramManager%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_PCZSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_OctreeZone%pluginpostfix%&gt;&gt;%plugincfg%
+echo Plugin=Plugin_OctreeSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
+set resourcescfg=$(TargetDir)\resources%pluginpostfix%.cfg
+echo [General]&gt;%resourcescfg%
+echo FileSystem=$(OGRE_HOME)\Media&gt;&gt;%resourcescfg%
+echo.&gt;&gt;%resourcescfg%
+echo [Essential]&gt;&gt;%resourcescfg%
+echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Indie-Studio.rc" />
+    <Image Include="Indie-Studio.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\BaseApplication.cpp" />
+    <ClCompile Include="src\CameraMan.cpp" />
+    <ClCompile Include="src\HUD.cpp" />
+    <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Application.hpp" />
+    <ClInclude Include="include\BaseApplication.hpp" />
+    <ClInclude Include="include\CameraMan.hpp" />
+    <ClInclude Include="include\HUD.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

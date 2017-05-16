@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:53:57 2017 gastal_r
-// Last update Mon May  8 15:20:57 2017 gastal_r
+// Last update Tue May 16 12:07:06 2017 gastal_r
 //
 
 #include "Application.hpp"
@@ -17,7 +17,7 @@
 #include <OgreRenderWindow.h>
 #include <OgreColourValue.h>
 #include <OgreException.h>
-#include <OIS/OISException.h>
+#include <OISException.h>
 
 //-------------------------------------------------------------------------------------
 Application::Application() :
@@ -59,15 +59,14 @@ void Application::createScene()
 	// Setting the image used in the window
 	myImageWindow->setProperty("Image","TaharezLook/full_image");
 	//Attaching the image window to the root window
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);
-*/
+	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);*/
 
 	// Set the scene's ambient light
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
-	mNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNod");
+	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "Ogre.mesh");
+	mNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
 	mNode->attachObject(ogreHead);
 	mNode->setPosition(Ogre::Vector3(0, 500, 0));
 
@@ -77,7 +76,7 @@ void Application::createScene()
 	light->setPosition(mNode->getPosition() + Ogre::Vector3(-84, 0, 30));
 	light->setDirection(mNode->getPosition());
 
-	Ogre::Entity* ogreEntity2 = mSceneMgr->createEntity("Second", "ogrehead.mesh");
+	Ogre::Entity* ogreEntity2 = mSceneMgr->createEntity("Second", "Ogre.mesh");
 
 	Ogre::SceneNode* ogreNode2 = mNode->createChildSceneNode("SecondNode", Ogre::Vector3(84, 0, 0));
 	ogreNode2->attachObject(ogreEntity2);
@@ -96,6 +95,11 @@ void Application::createScene()
 	jinx->setReferenceDistance(10.f);
 	jinx->setMaxDistance(800.f);
 	mNode->attachObject(jinx);
+
+	Ogre::SceneNode *map = mSceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
+
+	DotSceneLoader loader;
+   loader.parseDotScene("map.scene","General", mSceneMgr, map);
 
 	//for OgreBullet
 	mWorld = new OgreBulletDynamics::DynamicsWorld(mSceneMgr, mBounds, mGravityVector);
@@ -303,7 +307,7 @@ bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
 // 		}
 
 	//Need to inject timestamps to CEGUI System.
-  CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+ // CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
 	mSoundManager->update(evt.timeSinceLastFrame);
 

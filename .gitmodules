@@ -1,0 +1,12 @@
+[submodule "Indie-Studio-Dependencies"]
+	path = Indie-Studio-Dependencies
+	url = git@github.com:mooncilla/Indie-Studio-Dependencies.git
+[submodule "libs/websocketpp"]
+	path = libs/websocketpp
+	url = https://github.com/MrDarkSkil/websocketpp.git
+[submodule "libs/rapidjson"]
+	path = libs/rapidjson
+	url = https://github.com/miloyip/rapidjson.git
+[submodule "libs/socket.io-client-cpp"]
+	path = libs/socket.io-client-cpp
+	url = https://github.com/MrDarkSkil/socket.io-client-cpp.git
