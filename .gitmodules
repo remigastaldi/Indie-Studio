@@ -1,12 +1,3 @@
-[submodule "libs/ogre"]
-	path = libs/ogre
-	url = https://github.com/OGRECave/ogre.git
-[submodule "libs/ogrebullet"]
-	path = libs/ogrebullet
-	url = https://bitbucket.org/alexeyknyshev/ogrebullet.git
-[submodule "libs/cegui"]
-	path = libs/cegui
-	url = https://github.com/mooncilla/CEGUI.git
 [submodule "Indie-Studio-Dependencies"]
 	path = Indie-Studio-Dependencies
 	url = git@github.com:mooncilla/Indie-Studio-Dependencies.git
