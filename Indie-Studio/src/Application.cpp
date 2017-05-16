@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:53:57 2017 gastal_r
-// Last update Mon May  8 15:20:57 2017 gastal_r
+// Last update Sat May 13 17:59:46 2017 John Doe
 //
 
 #include "Application.hpp"
@@ -64,7 +64,7 @@ void Application::createScene()
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
+	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "Ogre.mesh");
 	mNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
 	mNode->attachObject(ogreHead);
 	mNode->setPosition(Ogre::Vector3(0, 0, 0));
@@ -75,7 +75,7 @@ void Application::createScene()
 	light->setPosition(mNode->getPosition() + Ogre::Vector3(-84, 0, 30));
 	light->setDirection(mNode->getPosition());
 
-	Ogre::Entity* ogreEntity2 = mSceneMgr->createEntity("Second", "ogrehead.mesh");
+	Ogre::Entity* ogreEntity2 = mSceneMgr->createEntity("Second", "Ogre.mesh");
 
 	Ogre::SceneNode* ogreNode2 = mNode->createChildSceneNode("SecondNode", Ogre::Vector3(84, 0, 0));
 	ogreNode2->attachObject(ogreEntity2);

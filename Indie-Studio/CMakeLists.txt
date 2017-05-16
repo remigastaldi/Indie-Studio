@@ -8,6 +8,7 @@ set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
 set(VERSION_RELEASE 1)
 set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_RELEASE}")
+set(CMAKE_CXX_FLAGS "-L./libc")
 
 # Avoid source tree pollution
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_BINARY_DIR)
@@ -71,9 +72,11 @@ set(HDRS
 	${CMAKE_CURRENT_SOURCE_DIR}/include/rapidxml_print.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/rapidxml_utils.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/rapidxml.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/Core.hpp
 )
 
 set(SRCS
+	${CMAKE_CURRENT_SOURCE_DIR}/src/Core.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/BaseApplication.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/Application.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/src/CameraMan.cpp
@@ -85,24 +88,25 @@ include_directories( ${OGRE_INCLUDE_DIRS}
     ${OIS_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    /usr/local/include/OIS
-    /usr/local/include/OGRE/
-    /usr/local/include/OGRE/Bites
-    /usr/local/include/OGRE/Overlay
-    /usr/local/include/OGRE/HLMS
-    /usr/local/include/OGRE/MesgLodGenerator
-    /usr/local/include/OGRE/Paging
-    /usr/local/include/OGRE/RenderSystems
-    /usr/local/include/OGRE/RTShaderSystem
-    /usr/local/include/OGRE/Terrain
-    /usr/local/include/OGRE/Threading
-    /usr/local/include/OGRE/Volume
-    /usr/local/include/OGRE/MeshLodgenerator
+    /usr/include/OIS
+    /usr/include/OGRE/
+    /usr/include/OGRE/Bites
+    /usr/include/OGRE/Overlay
+    /usr/include/OGRE/HLMS
+    /usr/include/OGRE/MesgLodGenerator
+    /usr/include/OGRE/Paging
+    /usr/include/OGRE/RenderSystems
+    /usr/include/OGRE/RTShaderSystem
+    /usr/include/OGRE/Terrain
+    /usr/include/OGRE/Threading
+    /usr/include/OGRE/Volume
+    /usr/include/OGRE/MeshLodgenerator
     /usr/include/SDL2
-    /usr/local/include/cegui-0
+    /usr/include/cegui-0
 )
 
 link_directories(${OGRE_LIBRARY_DIRS})
+link_directories(/usr/lib/)
 
 # Specify build paths
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
@@ -118,6 +122,11 @@ if (WIN32 OR APPLE)
 endif(WIN32 OR APPLE)
 
 add_executable(${PROJECT_NAME} WIN32 ${HDRS} ${SRCS})
+
+target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/lib/libsioclient.a)
+add_library(sioclient STATIC IMPORTED)
+
+set(CMAKE_CXX_FLAGS "-lpthread")
 
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 

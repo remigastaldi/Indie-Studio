@@ -5,11 +5,11 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Sat May  6 17:02:42 2017 Matthias Prost
+// Last update Sun May 14 19:08:50 2017 John Doe
 //
 
-#ifndef _CLIENT_HPP_
-#define _CLIENT_HPP_
+#ifndef _CORE_HPP_
+#define _CORE_HPP_
 
 
 #include <mutex>
@@ -17,8 +17,10 @@
 #include <string>
 #include <iostream>
 #include <functional>
-#include <sio_client.h>
 #include <condition_variable>
+
+#include "sio_client.h"
+#include "Application.hpp"
 
 #ifdef WIN32
 #define EM(__O__) std::cout<<__O__<<std::endl
@@ -34,28 +36,33 @@
 #define EM(__O__) std::cout<<"\e[1;30;1m"<<__O__<<"\e[0m"<<std::endl
 #define HIGHLIGHT(__O__) std::cout<<"\e[1;31m"<<__O__<<"\e[0m"<<std::endl
 
-class Client
+class Core : public Application
 {
-    sio::client &handler;
-
   private:
     int                         _id;
     std::mutex                  _lock;
     std::condition_variable_any _cond;
     bool                        _connect_finish;
-    int                         _participants;
     sio::socket::ptr            _current_socket;
+    sio::client                 _client;
+    std::string                 _addr;
 
   public:
-    Client(sio::client&);
-    ~Client() {}
+    Core(std::string const &addr, int const port, int const id);
     void  on_connected();
+    ~Core();
     void  on_close(sio::client::close_reason const& reason);
     void  on_fail();
     void  events();
-    void  create(sio::client &);
+    void  connect();
+    void  wait();
+    void  consoleChat();
+
+    void  emit(std::string const event, std::string const request);
+    void  move(float fw, float x, float y, float z);
+
 };
 
 #endif
 
-#endif /* _CLIENT_HPP_ */
+#endif /* _CORE_HPP_ */
