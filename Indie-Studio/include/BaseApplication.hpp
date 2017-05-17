@@ -32,12 +32,12 @@
 #include "DotSceneLoader.h"
 
 #include "OgreBulletDynamicsRigidBody.h"
+#include "OgreBulletCollisionsPreRequisites.h"
 #include "OgreBulletCollisions.h"
 #include "Shapes/OgreBulletCollisionsStaticPlaneShape.h"
 #include "Shapes/OgreBulletCollisionsBoxShape.h"
 #include "Shapes/OgreBulletCollisionsTrimeshShape.h"
 #include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
-#include "OgreBulletCollisionsPreRequisites.h"
 
 class BaseApplication : public Ogre::WindowEventListener, public Ogre::FrameListener, public OIS::KeyListener, public OIS::MouseListener
 {

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:53:57 2017 gastal_r
-// Last update Tue May 16 12:07:06 2017 gastal_r
+// Last update Wed May 17 11:32:35 2017 gastal_r
 //
 
 #include "Application.hpp"
@@ -42,7 +42,7 @@ Application::~Application()
 void Application::createScene()
 {
 	//Load the scheme
-	/*CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
+	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
 	// Set the defaults
 	//CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("DejaVuSans-10");
 	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
@@ -59,7 +59,7 @@ void Application::createScene()
 	// Setting the image used in the window
 	myImageWindow->setProperty("Image","TaharezLook/full_image");
 	//Attaching the image window to the root window
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);*/
+	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);
 
 	// Set the scene's ambient light
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
