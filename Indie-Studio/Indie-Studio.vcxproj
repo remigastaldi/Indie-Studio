@@ -284,15 +284,13 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\HLMS;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\MeshLodGenerator;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\Pagin;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\Property;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\RTShaderSystem;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\Terrain;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\Volume;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OIS;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\OGRE\Overlay;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\BOOST;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\Indie-Studio\include;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\CEGUI;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\include\AL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\MeshLodGenerator;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\RTShaderSystem;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Property;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Terrain;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Volume;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Overlay;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\HLMS;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Pagin;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OIS;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\AL;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\BOOST;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\CEGUI;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -300,8 +298,8 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\BOOST\lib;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\CEGUI\lib;C:\Users\FLAVIEN SELLET\Documents\Visual Studio 2015\Projects\Indie-Studio\libs\windows\OGRE_SDK\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OIS.lib;OgreOverlay.lib;OgreOggSound.lib;CEGUIBase-0.lib;CEGUICommonDialogs-0.lib;CEGUICoreWindowRendererSet.lib;CEGUIExpatParser.lib;CEGUIFreeImageImageCodec.lib;CEGUIMinesweeper.lib;CEGUIOgreRenderer-0.lib;CEGUIOpenGLRenderer-0.lib;CEGUISILLYImageCodec.lib;CEGUITinyXMLParser.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\BOOST\lib;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\CEGUI\lib;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\lib\Release;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OIS.lib;OgreOverlay.lib;OgreOggSound.lib;CEGUIBase-0.lib;CEGUICommonDialogs-0.lib;CEGUICoreWindowRendererSet.lib;CEGUIExpatParser.lib;CEGUIFreeImageImageCodec.lib;CEGUIMinesweeper.lib;CEGUIOgreRenderer-0.lib;CEGUIOpenGLRenderer-0.lib;CEGUISILLYImageCodec.lib;CEGUITinyXMLParser.lib;sioclient.lib;boost_random-vc140-mt-1_61.lib;boost_random-vc140-mt-gd-1_61.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Message>Copy runtime files</Message>
@@ -350,13 +348,25 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Image Include="media\characters\materials\textures\GreenSkin.jpg" />
+    <Image Include="media\characters\materials\textures\spheremap.png" />
+    <Image Include="media\characters\materials\textures\tusk.jpg" />
+    <Image Include="media\map\CastleAtlas_lit.jpg" />
+    <Image Include="media\map\GardenAtlas.jpg" />
+    <Image Include="media\map\SKYBOX_sphere.jpg" />
+    <Image Include="media\map\TreeAtlas.jpg" />
+    <Image Include="media\map\Windows.png" />
     <ResourceCompile Include="Indie-Studio.rc" />
     <Image Include="Indie-Studio.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CMakeFiles\feature_tests.c" />
+    <ClCompile Include="CMakeFiles\feature_tests.cxx" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\BaseApplication.cpp" />
     <ClCompile Include="src\CameraMan.cpp" />
+    <ClCompile Include="src\Core.cpp" />
+    <ClCompile Include="src\DotSceneLoader.cpp" />
     <ClCompile Include="src\HUD.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
@@ -364,7 +374,93 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <ClInclude Include="include\Application.hpp" />
     <ClInclude Include="include\BaseApplication.hpp" />
     <ClInclude Include="include\CameraMan.hpp" />
+    <ClInclude Include="include\Core.hpp" />
+    <ClInclude Include="include\DotSceneLoader.h" />
     <ClInclude Include="include\HUD.hpp" />
+    <ClInclude Include="include\rapidxml.hpp" />
+    <ClInclude Include="include\rapidxml_iterators.hpp" />
+    <ClInclude Include="include\rapidxml_print.hpp" />
+    <ClInclude Include="include\rapidxml_utils.hpp" />
+    <ClInclude Include="include\sio_client.h" />
+    <ClInclude Include="include\sio_message.h" />
+    <ClInclude Include="include\sio_socket.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".clang_complete" />
+    <None Include=".tags" />
+    <None Include=".tags1" />
+    <None Include="CMakeFiles\3.7.2\CMakeCXXCompiler.cmake" />
+    <None Include="CMakeFiles\3.7.2\CMakeDetermineCompilerABI_CXX.bin" />
+    <None Include="CMakeFiles\3.7.2\CMakeSystem.cmake" />
+    <None Include="CMakeFiles\cmake.check_cache" />
+    <None Include="CMakeFiles\feature_tests.bin" />
+    <None Include="Configuration.props" />
+    <None Include="dist\bin\plugins.cfg" />
+    <None Include="dist\bin\plugins_d.cfg" />
+    <None Include="dist\bin\resources.cfg" />
+    <None Include="dist\bin\resources_d.cfg" />
+    <None Include="lib\sioclient.dll" />
+    <None Include="media\characters\materials\scripts\Ogre.material" />
+    <None Include="media\characters\models\Barrel.mesh" />
+    <None Include="media\characters\models\dwarf.mesh" />
+    <None Include="media\characters\models\Dwarf.skeleton" />
+    <None Include="media\characters\models\fence4.mesh" />
+    <None Include="media\characters\models\hang.bridge.01.mesh" />
+    <None Include="media\characters\models\highlanderhouse.01.mesh" />
+    <None Include="media\characters\models\Ogre.mesh" />
+    <None Include="media\characters\models\Ogre.skeleton" />
+    <None Include="media\characters\models\rock.05.mesh" />
+    <None Include="media\characters\models\rock.07.mesh" />
+    <None Include="media\characters\models\skeltorch.mesh" />
+    <None Include="media\characters\models\tree.05.mesh" />
+    <None Include="media\characters\models\tree.07.mesh" />
+    <None Include="media\characters\models\tree.09.mesh" />
+    <None Include="media\map\Castle.001.material" />
+    <None Include="media\map\Cube.002.mesh" />
+    <None Include="media\map\Garden.material" />
+    <None Include="media\map\map.scene" />
+    <None Include="media\map\Material.material" />
+    <None Include="media\map\Plane.004.mesh" />
+    <None Include="media\map\Plane.312.mesh" />
+    <None Include="media\map\Plane.313.mesh" />
+    <None Include="media\map\Tree.001.material" />
+    <None Include="media\map\Tree.001.mesh" />
+    <None Include="media\map\Tree.002.mesh" />
+    <None Include="media\map\Tree.003.mesh" />
+    <None Include="media\map\Tree.004.mesh" />
+    <None Include="media\map\Tree.005.mesh" />
+    <None Include="media\map\Tree.006.mesh" />
+    <None Include="media\map\Tree.007.mesh" />
+    <None Include="media\map\Tree.008.mesh" />
+    <None Include="media\map\Tree.009.mesh" />
+    <None Include="media\map\Tree.010.mesh" />
+    <None Include="media\map\Tree.011.mesh" />
+    <None Include="media\map\Tree.012.mesh" />
+    <None Include="media\map\Tree.013.mesh" />
+    <None Include="media\map\Tree.014.mesh" />
+    <None Include="media\map\Tree.015.mesh" />
+    <None Include="media\map\Tree.016.mesh" />
+    <None Include="media\map\Tree.017.mesh" />
+    <None Include="media\map\Tree.018.mesh" />
+    <None Include="media\map\Tree.019.mesh" />
+    <None Include="media\map\Tree.020.mesh" />
+    <None Include="media\map\Tree.021.mesh" />
+    <None Include="media\map\Tree.022.mesh" />
+    <None Include="media\map\Tree.023.mesh" />
+    <None Include="media\map\Tree.024.mesh" />
+    <None Include="media\map\Tree.025.mesh" />
+    <None Include="media\map\Tree.mesh" />
+    <None Include="media\map\Windows.001.material" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="media\map\jinxMono.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeFiles\CMakeOutput.log" />
+    <Text Include="CMakeLists.txt" />
+    <Text Include="media\characters\models\model_license.txt" />
+    <Text Include="media\characters\models\ogre.info.txt" />
+    <Text Include="media\characters\models\ogre_model_license.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
