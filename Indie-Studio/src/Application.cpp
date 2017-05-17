@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:53:57 2017 gastal_r
-// Last update Tue May 16 12:07:06 2017 gastal_r
+// Last update Wed May 17 11:32:35 2017 gastal_r
 //
 
 #include "Application.hpp"
@@ -27,7 +27,9 @@ mDirection(Ogre::Vector3::ZERO),
 mDestination(Ogre::Vector3(500, 0, 0)),
 mAnimationState(0),
 mEntity(0),
-mNode(0)
+mNode(0),
+mGravityVector(Ogre::Vector3(0,-9.81,0)),
+mBounds(Ogre::AxisAlignedBox(Ogre::Vector3 (-10000, -10000, -10000), Ogre::Vector3 (10000,  10000,  10000)))
 {
 }
 
@@ -40,7 +42,7 @@ Application::~Application()
 void Application::createScene()
 {
 	//Load the scheme
-	/*CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
+	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
 	// Set the defaults
 	//CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("DejaVuSans-10");
 	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
@@ -57,8 +59,7 @@ void Application::createScene()
 	// Setting the image used in the window
 	myImageWindow->setProperty("Image","TaharezLook/full_image");
 	//Attaching the image window to the root window
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);*/
-
+	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);
 
 	// Set the scene's ambient light
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
@@ -67,7 +68,7 @@ void Application::createScene()
 	Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "Ogre.mesh");
 	mNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
 	mNode->attachObject(ogreHead);
-	mNode->setPosition(Ogre::Vector3(0, 0, 0));
+	mNode->setPosition(Ogre::Vector3(0, 500, 0));
 
 	// Create a Light and set its position
 	Ogre::Light* light = mSceneMgr->createLight("MainLight");
@@ -99,7 +100,169 @@ void Application::createScene()
 
 	DotSceneLoader loader;
    loader.parseDotScene("map.scene","General", mSceneMgr, map);
+
+	//for OgreBullet
+	mWorld = new OgreBulletDynamics::DynamicsWorld(mSceneMgr, mBounds, mGravityVector);
+	debugDrawer = new OgreBulletCollisions::DebugDrawer();
+	debugDrawer->setDrawWireframe(true);
+
+	mWorld->setDebugDrawer(debugDrawer);
+	mWorld->setShowDebugShapes(true);
+	mNode->attachObject(static_cast <Ogre::SimpleRenderable *> (debugDrawer));
+
+
+	Ogre::Entity *ent;
+	Ogre::Plane p;
+	p.normal = Ogre::Vector3(0,1,0);
+	p.d = 0;
+		Ogre::MeshManager::getSingleton().createPlane("FloorPlane",
+	  Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	  p, 200000, 200000, 20, 20, true, 1, 9000, 9000,
+	  Ogre::Vector3::UNIT_Z);
+		ent = mSceneMgr->createEntity("floor", "FloorPlane");
+		ent->setMaterialName("Examples/Rockwall");
+    mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(ent);
+
+	OgreBulletCollisions::CollisionShape *Shape;
+
+	Shape = new OgreBulletCollisions::StaticPlaneCollisionShape(Ogre::Vector3(0,1,0), 0);
+
+	OgreBulletDynamics::RigidBody *defaultPlaneBody = new OgreBulletDynamics::RigidBody("BasePlane",
+	  												    mWorld);
+	defaultPlaneBody->setStaticShape(Shape, 0.1, 0.8);// (shape, restitution, friction)
+	 		// push the created objects to the deques
+	mShapes.push_back(Shape);
+	mBodies.push_back(defaultPlaneBody);
+
+// 	OgreBulletDynamics::RigidBody *defaultHead = new OgreBulletDynamics::RigidBody("Head",
+// 																mWorld);
+// //	defaultHead->setStaticShape(Shape, 0.1, 0.8);// (shape, restitution, friction)
+// 	defaultHead->setShape(mNode,
+//  						Shape,
+//  						0.6f,			// dynamic body restitution
+//  						0.6f,			// dynamic body friction
+//  						1.0f, 			// dynamic bodymass
+//  						Ogre::Vector3(0, 0, 0),		// starting position of the box
+//  						Ogre::Quaternion(90,0,90,1));// orientation of the box
+// 	defaultHead->setLinearVelocity(mCamera->getDerivedDirection().normalisedCopy() * 7.0f ); // shooting speed
+// 	mShapes.push_back(Shape);
+// 	mBodies.push_back(defaultHead);
 }
+
+bool 	Application::frameStarted(const Ogre::FrameEvent &evt)
+{
+	mWorld->stepSimulation(evt.timeSinceLastFrame);	// update Bullet Physics animation
+  return true;
+}
+
+bool Application::frameEnded(const Ogre::FrameEvent& evt)
+{
+ 		mWorld->stepSimulation(evt.timeSinceLastFrame);	// update Bullet Physics animation
+ 		return true;
+}
+
+bool Application::processUnbufferedKeyInput(const Ogre::FrameEvent& evt)
+ 	{
+ 		// create and throw a box if 'B' is pressed
+ 		if(mKeyboard->isKeyDown(OIS::KC_B))
+ 		{
+ 			Ogre::Vector3 size = Ogre::Vector3::ZERO;	// size of the box
+ 			// starting position of the box
+ 			Ogre::Vector3 position = (mCamera->getDerivedPosition() + mCamera->getDerivedDirection().normalisedCopy() * 10);
+
+ 			// create an ordinary, Ogre mesh with texture
+ 		  Ogre::Entity *entity = mSceneMgr->createEntity(
+ 					"Barrel" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
+ 					"Barrel.mesh");
+ 			entity->setCastShadows(true);
+ 			// we need the bounding box of the box to be able to set the size of the Bullet-box
+
+ 			Ogre::SceneNode *node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+ 			node->attachObject(entity);
+
+ 			// after that create the Bullet shape with the calculated size
+			OgreBulletCollisions::StaticMeshToShapeConverter *trimeshConverter = new
+      	OgreBulletCollisions::StaticMeshToShapeConverter(entity);
+
+				OgreBulletCollisions::TriangleMeshCollisionShape *sceneTriMeshShape = NULL;
+				sceneTriMeshShape = trimeshConverter->createTrimesh();
+				delete trimeshConverter;
+
+ 			// and the Bullet rigid body
+			OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
+ 					"defaultBoxRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
+ 					mWorld);
+
+ 			defaultBody->setShape(node,
+ 						sceneTriMeshShape,
+ 						0.6f,			// dynamic body restitution
+ 						0.6f,			// dynamic body friction
+ 						1.0f, 			// dynamic bodymass
+ 						position,		// starting position of the box
+ 						Ogre::Quaternion(180,0,0,1));// orientation of the box
+        mNumEntitiesInstanced++;
+
+				defaultBody->enableActiveState();
+				mWorld->addRigidBody(defaultBody,0,0);
+ 				defaultBody->setLinearVelocity(
+				mCamera->getDerivedDirection().normalisedCopy() * 7.0f ); // shooting speed
+ 			// push the created objects to the dequese
+ 			mShapes.push_back(sceneTriMeshShape);
+ 			mBodies.push_back(defaultBody);
+ 			//mTimeUntilNextToggle = 0.5;
+ 		}
+		if(mKeyboard->isKeyDown(OIS::KC_V))
+ 		{
+			Ogre::Vector3 size = Ogre::Vector3::ZERO;
+ 			Ogre::Vector3 position = (mCamera->getDerivedPosition() + mCamera->getDerivedDirection().normalisedCopy() * 10);
+
+ 		  Ogre::Entity *entity = mSceneMgr->createEntity(
+ 					"Barrel" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
+ 					"Barrel.mesh");
+ 			entity->setCastShadows(true);
+ 			// we need the bounding box of the box to be able to set the size of the Bullet-box
+ 			Ogre::AxisAlignedBox boundingB = entity->getBoundingBox();
+ 			size = boundingB.getSize();
+			size /= 2.0f; // only the half needed
+ 			size *= 0.95f;	// Bullet margin is a bit bigger so we need a smaller size
+// 									(Bullet 2.76 Physics SDK Manual page 18)
+		 size = boundingB.getSize()*0.95f;
+ 			//entity->setMaterialName("barrel");
+ 			Ogre::SceneNode *node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+ 			node->attachObject(entity);
+ 		 	//node->scale(20f, 20f, 20f);	// the cube is too big for us
+ 		// 	size *= 0.05f;						// don't forget to scale down the Bullet-box too
+
+ 			// after that create the Bullet shape with the calculated size
+			OgreBulletCollisions::BoxCollisionShape *sceneBoxShape =
+			new OgreBulletCollisions::BoxCollisionShape(size);
+
+ 			// and the Bullet rigid body
+			OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
+ 					"defaultBoxRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
+ 					mWorld);
+
+			// OgreBulletCollisions::CollisionShape *collisionShape =
+ 			defaultBody->setShape(node,
+						sceneBoxShape,
+ 						0.6f,			// dynamic body restitution
+ 						100.f,			// dynamic body friction
+ 						1000.0f, 			// dynamic bodymass
+ 						position,		// starting position of the box
+ 						Ogre::Quaternion(180,0,0,1));// orientation of the box
+        mNumEntitiesInstanced++;
+
+				defaultBody->enableActiveState();
+				mWorld->addRigidBody(defaultBody,0,0);
+ 				defaultBody->setLinearVelocity(
+				mCamera->getDerivedDirection().normalisedCopy() * 7.0f ); // shooting speed
+ 			// push the created objects to the dequese
+ 			mShapes.push_back(sceneBoxShape);
+ 			mBodies.push_back(defaultBody);
+ 			//mTimeUntilNextToggle = 0.5;
+		}
+ 		return true;
+ 	}
 
 bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
@@ -114,6 +277,7 @@ bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
   mKeyboard->capture();
   mMouse->capture();
 
+		processUnbufferedKeyInput(evt);
 		static bool checkJinx = true;
 		if (checkJinx)
 		{
@@ -123,24 +287,24 @@ bool Application::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		 earNode->setPosition(mCamera->getPosition());
       earNode->setOrientation(mCamera->getOrientation());
 
-		if (mNode->getPosition().x < 500)
-		{
-			Ogre::Real move = mWalkSpd * evt.timeSinceLastFrame;
-				mDistance -= move;
-				mNode->translate(move * mDirection);
-				mDirection = mDestination - mNode->getPosition();
-				mDistance = mDirection.normalise();
-
-				//Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_X;
-			// Orientation
-/*			if ((1.0 + src.dotProduct(mDirection)) < 0.0001)
-			  mNode->yaw(Ogre::Degree(180));
-			else
-			{
-			  Ogre::Quaternion quat = src.getRotationTo(mDirection);
-			  mNode->rotate(quat);
-			} */
-		}
+// 		if (mNode->getPosition().x < 500)
+// 		{
+// 			Ogre::Real move = mWalkSpd * evt.timeSinceLastFrame;
+// 				mDistance -= move;
+// 				mNode->translate(move * mDirection);
+// 				mDirection = mDestination - mNode->getPosition();
+// 				mDistance = mDirection.normalise();
+//
+// 				//Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_X;
+// 			// Orientation
+// /*			if ((1.0 + src.dotProduct(mDirection)) < 0.0001)
+// 			  mNode->yaw(Ogre::Degree(180));
+// 			else
+// 			{
+// 			  Ogre::Quaternion quat = src.getRotationTo(mDirection);
+// 			  mNode->rotate(quat);
+// 			} */
+// 		}
 
 	//Need to inject timestamps to CEGUI System.
  // CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);

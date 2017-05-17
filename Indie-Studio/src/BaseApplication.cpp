@@ -115,6 +115,9 @@ void BaseApplication::createFrameListener()
     //Register as a Window listener
     Ogre::WindowEventUtilities::addWindowEventListener(mWindow, this);
 
+    //for Bullet
+
+    mNumEntitiesInstanced = 0;
     mRoot->addFrameListener(this);
 }
 //-------------------------------------------------------------------------------------
@@ -232,6 +235,16 @@ bool 	BaseApplication::frameStarted(const Ogre::FrameEvent &evt)
 {
   return true;
 }
+
+
+// bool BaseApplication::frameEnded(const Ogre::FrameEvent& evt)
+// {
+//  		bool ret = BaseApplication::frameEnded(evt);
+//
+//  		mWorld->stepSimulation(evt.timeSinceLastFrame);	// update Bullet Physics animation
+//
+//  		return ret;
+// }
 
 //-------------------------------------------------------------------------------------
 bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
