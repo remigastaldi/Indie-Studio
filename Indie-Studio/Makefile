@@ -51,6 +51,7 @@ CXXFLAGS				+=			-lPocoFoundation
 CXXFLAGS        +=      -lBulletCollision -lBulletDynamics -lBulletSoftBody -lLinearMath
 CXXFLAGS				+=			-lOgreBulletCollisions -lOgreBulletDynamics
 CXXFLAGS				+=			-lOgreOggSound
+CXXFLAGS				+=			-lCgGL -lCg
 CXXFLAGS        += 			-Wno-deprecated-declarations
 
 SRC             =      	src/BaseApplication.cpp				\
