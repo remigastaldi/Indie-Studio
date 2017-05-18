@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Sat May  6 17:02:41 2017 Matthias Prost
+// Last update Thu May 18 17:19:33 2017 John Doe
 //
 
 #ifndef _CLIENT_HPP_
@@ -44,9 +44,10 @@ class Client
     sio::socket::ptr            _current_socket;
     sio::client                 _client;
     std::string                 _addr;
+    std::string                 _room;
 
   public:
-    Client(std::string const &addr, int const port, int const id);
+    Client(std::string const &addr, int const port, int const id, std::string const &room);
     ~Client();
     void  on_connected();
     void  on_close(sio::client::close_reason const& reason);
@@ -56,7 +57,7 @@ class Client
     void  wait();
     void  consoleChat();
 
-    void  emit(std::string const event, std::string const request);
+    void  emit(std::string const event, std::shared_ptr<sio::message> const &request);
     void  move(float fw, float x, float y, float z);
 
 };

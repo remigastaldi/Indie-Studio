@@ -2,7 +2,6 @@ var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
-//var io = require('socket.io')(3000);
 var exec = require('child_process').exec;
 
 
@@ -54,38 +53,50 @@ rl.on('line', function(line){
 });
 
 io.on('connection', function (socket) {
+
   socket.on('message', function (data) {
-    data = JSON.parse(data);
     if (exec_command(data["message"], data["send_by"]) == 1)
         return;
-    io.emit("message", data);
+    io.to(socket.room).emit("message", data);
     console.log(data["message"]);
   });
 
-  socket.on('move', function (data) {
-    data = JSON.parse(data);
-    io.emit("move", data);
+  socket.on('move', function (data) {     
+    io.to(socket.room).emit("move", data);
+  });
+
+
+  socket.on('test', function (data) {
+    console.log(data);
   });
 
   socket.on('login', function (data) {
-    data = JSON.parse(data);
-    io.emit("login", data);
+    socket.join(data["room"]);
+    socket.room = data["room"];
+    io.to(socket.room).emit("login", data);
+
+    for (user in users)
+    {
+      if (users[user]["room"] == socket.room)
+          io.to(socket.room).emit("login", { user_id: users[user]["id"], send_to: data["user_id"] });
+    }
+
+
+
     console.log("Connected! ID: " + data["user_id"]);
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[totalConnected] = {id: data["user_id"], username: "User " + totalConnected, ip: socket.handshake.address.address, port: socket.handshake.address.port};
+    users[totalConnected] = {id: data["user_id"], username: "User " + totalConnected, room: socket.room};
     totalConnected++;
   });
-
-
 
 	socket.on('disconnect', function () {
     users.splice(socket.user_server_id, 1);
     totalConnected--;
     if (totalConnected < 0)
-      totalConnected = 0; 
+      totalConnected = 0;
 		console.log("Disconnected ! ID: " + socket.user_id);
-    io.emit("logout", {user_id: socket.user_id});
+    io.to(socket.room).emit("logout", {user_id: socket.user_id});
 	});
 
 });

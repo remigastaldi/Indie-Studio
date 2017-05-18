@@ -5,12 +5,12 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Thu May 11 21:48:20 2017 Leo Hubert Froideval
+** Last update Thu May 18 17:36:27 2017 John Doe
 */
 
 #include "Client.hpp"
 
-Client::Client(std::string const &addr, int const port, int const id) : _id(id)
+Client::Client(std::string const &addr, int const port, int const id, std::string const &room) : _id(id), _room(room)
 {
         _connect_finish = false;
         _addr = addr + ":" + std::to_string(port);
@@ -33,7 +33,12 @@ void Client::on_connected()
         _cond.notify_all();
         _connect_finish = true;
         _lock.unlock();
-        emit("login", "{\"user_id\": " + std::to_string(_id) + "}");
+
+        auto obj = sio::object_message::create();
+        obj.get()->get_map()["user_id"] =  sio::int_message::create(_id);
+        obj.get()->get_map()["room"] =  sio::string_message::create(_room);
+        obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
+        emit("login", obj);
 }
 
 void Client::on_close(sio::client::close_reason const& reason)
@@ -92,7 +97,7 @@ void Client::events()
                 (void)isAck;
                 (void)ack_resp;
                 _lock.lock();
-                if (data->get_map()["user_id"]->get_int() != _id)
+                if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["user_id"]->get_int() != _id)
                 {
                     std::cout <<  "User connected! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
                 }
@@ -105,8 +110,7 @@ void Client::events()
         {
                 (void)name;
                 (void)isAck;
-                (void)ack_resp;
-                (void)data;
+                (void)ack_resp;                
                 _lock.lock();
                 if (data->get_map()["user_id"]->get_int() != _id)
                 {
@@ -136,15 +140,21 @@ void Client::wait()
         _lock.unlock();
 }
 
-void Client::emit(std::string const event, std::string const request)
+void Client::emit(std::string const event, std::shared_ptr<sio::message> const &request)
 {
         _current_socket->emit(event, request);
 }
 
 void Client::move(float fw, float x, float y, float z)
 {
-        std::string request("{\"fw\": " + std::to_string(fw)  +", \"x\": " + std::to_string(x)  +", \"y\": " + std::to_string(y)  +", \"z\": " + std::to_string(z)  +", \"send_by\": " + std::to_string(_id) + ", \"send_to\": 0}");
-        emit("move", request);
+        auto obj = sio::object_message::create();
+        obj.get()->get_map()["fw"] =  sio::double_message::create(fw);
+        obj.get()->get_map()["x"] =  sio::double_message::create(x);
+        obj.get()->get_map()["y"] =  sio::double_message::create(y);
+        obj.get()->get_map()["z"] =  sio::double_message::create(z);
+        obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
+        obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
+        emit("move", obj);
 }
 
 void Client::consoleChat()
@@ -159,7 +169,10 @@ void Client::consoleChat()
                         continue;
                 }
 
-                std::string st("{\"message\": \"" + line  +"\", \"send_by\": " + std::to_string(_id) + ", \"send_to\": 0}");
-                emit("message", st);
+                auto obj = sio::object_message::create();
+                obj.get()->get_map()["message"] =  sio::string_message::create(line);
+                obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
+                obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
+                emit("message", obj);
         }
 }
