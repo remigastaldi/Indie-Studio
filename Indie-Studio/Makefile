@@ -71,7 +71,7 @@ title		:
 			@$(ECHO) $(YELLOW) [ $(TEAL)INDIE-STUDIO$(YELLOW) ] $(DEFAULT)
 
 $(NAME)         :	$(OBJ)
-			@$(CC) -o $(NAME) $(OBJ) $(CXXFLAGS) && \
+			@$(CXX) -o $(NAME) $(OBJ) $(CXXFLAGS) && \
 			 $(ECHO) $(YELLOW)[$(GREEN)OK$(YELLOW)]$(BLUE) $(NAME) $(DEFAULT)  || \
 			 $(ECHO) $(RED) "[XX]" $(TEAL) $(NAME) $(DEFAULT)
 
@@ -86,6 +86,6 @@ re              :       fclean all
 .PHONNY         :       all clean fclean re
 
 .cpp.o		:
-			@$(CC) $(CXXFLAGS) -c $< -o $@  && \
+			@$(CXX) $(CXXFLAGS) -c $< -o $@  && \
 			 $(ECHO) $(YELLOW)[$(GREEN)OK$(YELLOW)] $(BLUE)$< $(DEFAULT) || \
 			 $(ECHO) $(RED) "[XX]" $(TEAL) $< $(DEFAULT)
