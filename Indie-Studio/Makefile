@@ -59,7 +59,7 @@ SRC             =      	src/BaseApplication.cpp				\
 												src/Application.cpp						\
 												src/CameraMan.cpp							\
 												src/DotSceneLoader.cpp				\
-												src/Core.cpp				\
+												src/Socket.cpp								\
 												src/main.cpp
 
 
