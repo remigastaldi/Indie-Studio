@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:54:11 2017 gastal_r
-// Last update Sat May 13 17:48:35 2017 John Doe
+// Last update Thu May 18 21:31:00 2017 gastal_r
 //
 
 #include "BaseApplication.hpp"
@@ -38,7 +38,7 @@ BaseApplication::BaseApplication()
 //-------------------------------------------------------------------------------------
 BaseApplication::~BaseApplication()
 {
-    if (mCameraMan) { delete mCameraMan; }
+  if (mCameraMan) { delete mCameraMan; }
 	if (mRoot) { mRoot->removeFrameListener(this); }
 
     //Remove ourself as a Window listener
@@ -73,7 +73,7 @@ bool BaseApplication::configure()
 void BaseApplication::chooseSceneManager()
 {
     // Get the SceneManager, in this case a generic one
-    mSceneMgr = mRoot->createSceneManager(Ogre::ST_GENERIC);
+    mSceneMgr = mRoot->createSceneManager("OctreeSceneManager");
 }
 //-------------------------------------------------------------------------------------
 void BaseApplication::createCamera()

@@ -2,6 +2,7 @@
 #define __Application_hpp_
 
 #include "BaseApplication.hpp"
+#include "Player.hpp"
 
 class Application : public BaseApplication
 {
@@ -15,6 +16,7 @@ public:
 		bool processUnbufferedKeyInput(const Ogre::FrameEvent& evt);
 		bool frameStarted (const Ogre::FrameEvent &evt);
 		bool frameEnded (const Ogre::FrameEvent& evt);
+
 protected:
     void createScene();
 		std::deque<Ogre::Vector3> mWalkList;
@@ -23,12 +25,13 @@ protected:
 		Ogre::Real mWalkSpd;
 		Ogre::Vector3 mDirection;
 		Ogre::Vector3 mDestination;
-		Ogre::Vector3 mGravityVector;
-		Ogre::AxisAlignedBox mBounds;
-		Ogre::AnimationState* mAnimationState;
-		Ogre::Entity* mEntity;
-		Ogre::SceneNode* mNode;
-Ogre::SceneNode *earNode;
+		Ogre::Vector3 			mGravityVector;
+		Ogre::AxisAlignedBox 	mBounds;
+		Ogre::AnimationState	*mAnimationState;
+		Ogre::Entity			*mEntity;
+		Ogre::SceneNode		*mNode;
+		Ogre::SceneNode 	*earNode;
+	//	Map 								_currentMap;
 };
 
 #endif // #ifndef __Application_h_

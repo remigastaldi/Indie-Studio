@@ -53,13 +53,18 @@ CXXFLAGS				+=			-lOgreBulletCollisions -lOgreBulletDynamics
 CXXFLAGS				+=			-lOgreOggSound
 CXXFLAGS				+=			-lCgGL -lCg
 CXXFLAGS				+=			-lsioclient -lpthread
-CXXFLAGS        += 			-Wno-deprecated-declarations
+CXXFLAGS        += 			-Wno-deprecated-declarations -g -g3
 
 SRC             =      	src/BaseApplication.cpp				\
 												src/Application.cpp						\
 												src/CameraMan.cpp							\
 												src/DotSceneLoader.cpp				\
 												src/Socket.cpp								\
+												src/Entity.cpp								\
+												src/Player.cpp								\
+												src/GameStateManager.cpp			\
+												src/Menu.cpp									\
+												src/Indie.cpp									\
 												src/main.cpp
 
 

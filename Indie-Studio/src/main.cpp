@@ -5,11 +5,12 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:54:05 2017 gastal_r
-// Last update Tue May 16 11:56:35 2017 gastal_r
+// Last update Thu May 18 21:34:16 2017 gastal_r
 //
 
-#include "Core.hpp"
+#include "Socket.hpp"
 #include <OISException.h>
+#include "Indie.hpp"
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
@@ -30,9 +31,11 @@ extern "C" {
         //Core app("http://ezgames.eu", 3000, 12);
 
         //app.connect();
-Application app;
+        Indie indie;
+
         try {
-            app.run();
+            indie.init();
+            indie.start();
         } catch( Ogre::Exception& e ) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
             MessageBox( NULL, e.getFullDescription().c_str(), "An OGRE exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
