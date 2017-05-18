@@ -21,7 +21,7 @@ esac
 git submodule update --init Indie-Studio-Dependencies
 
 cd Indie-Studio-Dependencies/linux/
-tar -xvf bin_include_share.tar.bz2 && tar -xvf lib.tar.bz2
+tar -xvf bin_include_share.tar.bz2 && tar -xvf lib.tar.bz2 && tar -xvf ogre_plugins.tar.bz2
 cd -
 
 cd Indie-Studio

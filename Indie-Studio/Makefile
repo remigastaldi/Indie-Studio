@@ -52,12 +52,14 @@ CXXFLAGS        +=      -lBulletCollision -lBulletDynamics -lBulletSoftBody -lLi
 CXXFLAGS				+=			-lOgreBulletCollisions -lOgreBulletDynamics
 CXXFLAGS				+=			-lOgreOggSound
 CXXFLAGS				+=			-lCgGL -lCg
+CXXFLAGS				+=			-lsioclient -lpthread
 CXXFLAGS        += 			-Wno-deprecated-declarations
 
 SRC             =      	src/BaseApplication.cpp				\
 												src/Application.cpp						\
 												src/CameraMan.cpp							\
 												src/DotSceneLoader.cpp				\
+												src/Core.cpp				\
 												src/main.cpp
 
 
