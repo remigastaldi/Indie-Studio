@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:28:18 2017 gastal_r
-// Last update Thu May 18 19:31:25 2017 gastal_r
+// Last update Fri May 19 20:30:53 2017 gastal_r
 //
 
 #include "GameStateManager.hpp"
@@ -13,7 +13,7 @@
 /**    Constructs the GameStateManager.  Must have all
     input, output, gui functions in order to manage
     states. */
-GameStateManager::GameStateManager(device_info *devices)
+GameStateManager::GameStateManager(device_info *devices) : mShutdown(false)
 {
     mDevice=devices;
 }
@@ -53,9 +53,9 @@ GameState *GameStateManager::findByName(Ogre::String state_name)
 {
     std::vector<state_info>::iterator itr;
 
-    for(itr=mStates.begin();itr!=mStates.end();++itr)
+    for(itr = mStates.begin(); itr != mStates.end(); ++itr)
     {
-        if(itr->name==state_name)
+        if(itr->name == state_name)
             return itr->state;
     }
 

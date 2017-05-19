@@ -5,12 +5,13 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Thu May 18 22:10:57 2017 gastal_r
+// Last update Fri May 19 20:30:56 2017 gastal_r
 //
 
 #include        "Menu.hpp"
 
-Menu::Menu()
+Menu::Menu() :
+  mPolygonRenderingMode('B')
 {}
 
 Menu::~Menu()
@@ -18,6 +19,15 @@ Menu::~Menu()
 
 void Menu::enter(void)
 {
+
+mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
+  mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+
+Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
+
+  DotSceneLoader loader;
+   loader.parseDotScene("map.scene","General", mDevice->sceneMgr, map);
+
 }
 
 void Menu::exit(void)
@@ -36,18 +46,13 @@ bool Menu::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		return false;
 	}
 
-	if (mShutDown) {
-		return false;
-	}
-
     //Need to capture/update each device
-    mDevice->keyboard->capture();
-    mDevice->mouse->capture();
-
+  //  mDevice->keyboard->capture();
+    //mDevice->mouse->capture();
      //Need to inject timestamps to CEGUI System.
-    //CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+    CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
-    //mCameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
+    mDevice->cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
     mDevice->soundManager->update(evt.timeSinceLastFrame);
     return true;
 }
@@ -118,7 +123,7 @@ bool Menu::keyPressed( const OIS::KeyEvent &arg )
     }
     else
     {
-        //mCameraMan->injectKeyDown(arg);
+        mDevice->cameraMan->injectKeyDown(arg);
     }
 
     return true;
@@ -126,24 +131,24 @@ bool Menu::keyPressed( const OIS::KeyEvent &arg )
 
 bool Menu::keyReleased( const OIS::KeyEvent &arg )
 {
-    //mCameraMan->injectKeyUp(arg);
+    mDevice->cameraMan->injectKeyUp(arg);
     return true;
 }
 
 bool Menu::mouseMoved( const OIS::MouseEvent &arg )
 {
-    //mCameraMan->injectMouseMove(arg);
+    mDevice->cameraMan->injectMouseMove(arg);
     return true;
 }
 
 bool Menu::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
-    //mCameraMan->injectMouseDown(arg, id);
+    mDevice->cameraMan->injectMouseDown(arg, id);
     return true;
 }
 
 bool Menu::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
-    //mCameraMan->injectMouseUp(arg, id);
+    mDevice->cameraMan->injectMouseUp(arg, id);
     return true;
 }

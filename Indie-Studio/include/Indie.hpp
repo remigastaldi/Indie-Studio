@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:34:15 2017 gastal_r
-// Last update Thu May 18 21:37:57 2017 gastal_r
+// Last update Fri May 19 16:09:12 2017 gastal_r
 //
 
 #ifndef _INDIE_HPP_
@@ -31,6 +31,7 @@ public:
   void  windowResized(Ogre::RenderWindow *rw);
   void  windowClosed(Ogre::RenderWindow *rw);
   void  createViewports();
+  void  createOISListener();
   void  createCamera();
   bool  init();
 
@@ -38,7 +39,6 @@ private:
   Ogre::FileSystemLayer* mFSLayer; // File system abstraction layer
   Ogre::String  mResourcesCfg;
   Ogre::String  mPluginsCfg;
-
   device_info   _device;
 };
 

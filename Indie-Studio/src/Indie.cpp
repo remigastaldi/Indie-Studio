@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Thu May 18 21:40:05 2017 gastal_r
+// Last update Fri May 19 19:40:52 2017 gastal_r
 //
 
 #include        "Indie.hpp"
@@ -43,7 +43,9 @@ void            Indie::start()
 {
   GameStateManager gameStateMgr(&_device);
   Menu::Create(&gameStateMgr, "Menu");
-  gameStateMgr.start(gameStateMgr.findByName("Menu"));
+  GameState *menu = gameStateMgr.findByName("Menu");
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** Start Menu ***");
+  gameStateMgr.start(menu);
 }
 
 void            Indie::setupResources()
@@ -127,18 +129,42 @@ void            Indie::createCamera()
     _device.camera->lookAt(Ogre::Vector3(0,0,-300));
     _device.camera->setNearClipDistance(5);
 
-    //mCameraMan = new OgreCookies::CameraMan(mCamera);   // create a default camera controller
+    _device.cameraMan = new OgreCookies::CameraMan(_device.camera);   // create a default camera controller
 }
 
 void            Indie::createViewports()
 {
     // Create one viewport, entire window
-    Ogre::Viewport* vp = _device.window->addViewport(_device.camera);
+      Ogre::Viewport* vp = _device.window->addViewport(_device.camera);
     vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
 
     // Alter the camera aspect ratio to match the viewport
     _device.camera->setAspectRatio(
         Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
+}
+
+void             Indie::createOISListener()
+{
+
+    Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
+    OIS::ParamList pl;
+    size_t windowHnd = 0;
+    std::ostringstream windowHndStr;
+
+    _device.window->getCustomAttribute("WINDOW", &windowHnd);
+    windowHndStr << windowHnd;
+    pl.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
+
+    _device.inputMgr = OIS::InputManager::createInputSystem( pl );
+
+    _device.keyboard = static_cast<OIS::Keyboard*>(_device.inputMgr->createInputObject( OIS::OISKeyboard, true ));
+    _device.mouse = static_cast<OIS::Mouse*>(_device.inputMgr->createInputObject( OIS::OISMouse, true ));
+
+    //_device.keyboard->setEventCallback(this);
+    //_device.mouse->setEventCallback(this);
+    windowResized(_device.window);
+    //Register as a Window listener
+    //Ogre::WindowEventUtilities::addWindowEventListener(_device.window, this);
 }
 
 bool            Indie::init()
@@ -181,24 +207,7 @@ CEGUI::OgreRenderer& myRenderer = CEGUI::OgreRenderer::bootstrapSystem(*renderTa
   //createScene();
   //createFrameListener();
 
-  Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
-  OIS::ParamList pl;
-  size_t windowHnd = 0;
-  std::ostringstream windowHndStr;
+  createOISListener();
 
-  _device.window->getCustomAttribute("WINDOW", &windowHnd);
-  windowHndStr << windowHnd;
-  pl.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
-
-  _device.inputMgr = OIS::InputManager::createInputSystem( pl );
-
-  _device.keyboard = static_cast<OIS::Keyboard*>(_device.inputMgr->createInputObject( OIS::OISKeyboard, true ));
-  _device.mouse = static_cast<OIS::Mouse*>(_device.inputMgr->createInputObject( OIS::OISMouse, true ));
-
-  //_device.keyboard->setEventCallback(this);
-  //_device.mouse->setEventCallback(this);
-  windowResized(_device.window);
-  //Register as a Window listener
-  //Ogre::WindowEventUtilities::addWindowEventListener(_device.window, this);
   return true;
 }

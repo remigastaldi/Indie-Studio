@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:59:44 2017 gastal_r
-// Last update Thu May 18 21:45:02 2017 gastal_r
+// Last update Fri May 19 19:47:55 2017 gastal_r
 //
 
 #ifndef _MENU_HPP_
@@ -44,13 +44,12 @@ public:
 
 protected:
   char mPolygonRenderingMode;
-  bool mShutDown;
   Ogre::SceneNode		*mNode;
 
   //OIS Input devices
 
   // OgreCookies
-  OgreCookies::CameraMan* mCameraMan;       // basic camera controller
+//  OgreCookies::CameraMan* mCameraMan;       // basic camera controller
 
   // OgreOggSound
 };

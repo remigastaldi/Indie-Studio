@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:20:33 2017 gastal_r
-// Last update Thu May 18 21:09:48 2017 gastal_r
+// Last update Fri May 19 19:40:10 2017 gastal_r
 //
 
 #ifndef         __GAMESTATE_HPP__
@@ -60,6 +60,7 @@ typedef struct
     OgreOggSound::OgreOggSoundManager *soundManager;
     Ogre::SceneManager *sceneMgr;
     Ogre::Camera *camera;
+    OgreCookies::CameraMan* cameraMan;
 } device_info;
 
 class GameState;

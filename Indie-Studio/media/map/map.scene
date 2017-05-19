@@ -12,7 +12,6 @@
       </game>
       <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Plane.004.mesh" name="Plane.004" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
         <user_data name="cycles" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEPlane.004", name="cycles", address=0x7fcce1e92c68&gt;' />
-        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEPlane.004", name="ogre_mesh_exporter", address=0x7fccdb9ab608&gt;' />
       </entity>
     </node>
     <node name="Castle" >
@@ -26,7 +25,6 @@
       </game>
       <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Plane.312.mesh" name="Plane.312" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
         <user_data name="cycles" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEPlane.312", name="cycles", address=0x7fcce1e92da8&gt;' />
-        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEPlane.312", name="ogre_mesh_exporter", address=0x7fccdb9ab6a8&gt;' />
       </entity>
     </node>
     <node name="Windows.001" >
