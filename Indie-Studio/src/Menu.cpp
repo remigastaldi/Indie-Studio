@@ -5,13 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Fri May 19 20:30:56 2017 gastal_r
+// Last update Fri May 19 22:36:43 2017 gastal_r
 //
 
 #include        "Menu.hpp"
 
 Menu::Menu() :
-  mPolygonRenderingMode('B')
+  mPolygonRenderingMode('B'),
+  mShutDown(false)
 {}
 
 Menu::~Menu()
@@ -46,9 +47,13 @@ bool Menu::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		return false;
 	}
 
+  	if (mShutDown) {
+  		return false;
+  	}
+
     //Need to capture/update each device
-  //  mDevice->keyboard->capture();
-    //mDevice->mouse->capture();
+    mDevice->keyboard->capture();
+    mDevice->mouse->capture();
      //Need to inject timestamps to CEGUI System.
     CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
@@ -119,6 +124,7 @@ bool Menu::keyPressed( const OIS::KeyEvent &arg )
     }
     else if (arg.key == OIS::KC_ESCAPE)
     {
+        mShutDown = true;
         Shutdown();
     }
     else

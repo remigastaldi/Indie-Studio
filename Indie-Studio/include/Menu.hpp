@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:59:44 2017 gastal_r
-// Last update Fri May 19 19:47:55 2017 gastal_r
+// Last update Fri May 19 22:32:32 2017 gastal_r
 //
 
 #ifndef _MENU_HPP_
@@ -42,10 +42,11 @@ public:
   virtual bool mousePressed(const OIS::MouseEvent &, OIS::MouseButtonID);
   virtual bool mouseReleased(const OIS::MouseEvent &, OIS::MouseButtonID);
 
-protected:
+private:
   char mPolygonRenderingMode;
   Ogre::SceneNode		*mNode;
 
+  bool mShutDown;
   //OIS Input devices
 
   // OgreCookies

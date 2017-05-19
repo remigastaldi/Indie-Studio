@@ -5,14 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Fri May 19 19:40:52 2017 gastal_r
+// Last update Fri May 19 21:58:18 2017 gastal_r
 //
 
 #include        "Indie.hpp"
 
 Indie::Indie() :
-  mResourcesCfg(Ogre::BLANKSTRING),
-  mPluginsCfg(Ogre::BLANKSTRING)
+  mResourcesCfg("resources.cfg"),
+  mPluginsCfg("plugins.cfg")
 {
   _device.ogre = nullptr;
   _device.rwindow = nullptr;
@@ -25,8 +25,6 @@ Indie::Indie() :
   _device.soundManager = nullptr;
   _device.sceneMgr = nullptr;
   _device.camera = nullptr;
-  mResourcesCfg = "resources.cfg";
-  mPluginsCfg = "plugins.cfg";
   mFSLayer = OGRE_NEW_T(Ogre::FileSystemLayer, Ogre::MEMCATEGORY_GENERAL)(OGRE_VERSION_NAME);
 }
 
@@ -184,7 +182,8 @@ _device.ogre->loadPlugin("Plugin_OctreeSceneManager.dll");
 _device.ogre->loadPlugin("RenderSystem_GL.dll"); */
 
   bool carryOn = configure();
-  if (!carryOn) return false;
+  if (!carryOn)
+    return false;
 
   _device.sceneMgr = _device.ogre->createSceneManager("OctreeSceneManager");
   createCamera();
@@ -203,9 +202,6 @@ CEGUI::OgreRenderer& myRenderer = CEGUI::OgreRenderer::bootstrapSystem(*renderTa
   _device.soundManager = OgreOggSound::OgreOggSoundManager::getSingletonPtr();
   _device.soundManager->init();
   _device.soundManager->setDistanceModel(AL_LINEAR_DISTANCE);
-  // Create the scene
-  //createScene();
-  //createFrameListener();
 
   createOISListener();
 

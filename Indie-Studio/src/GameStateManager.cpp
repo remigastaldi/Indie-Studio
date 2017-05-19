@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:28:18 2017 gastal_r
-// Last update Fri May 19 20:30:53 2017 gastal_r
+// Last update Fri May 19 22:44:16 2017 gastal_r
 //
 
 #include "GameStateManager.hpp"
@@ -68,9 +68,11 @@ GameState *GameStateManager::findByName(Ogre::String state_name)
      takes care of the Windows message pump.*/
 void GameStateManager::start(GameState *state)
 {
+  std::cout << "=============START=========================" << std::endl;
     changeGameState(state);
 
-    while (!mShutdown)
+    mDevice->ogre->startRendering();
+/*  while (!mShutdown)
     {
 
         mDevice->keyboard->capture();
@@ -93,7 +95,8 @@ void GameStateManager::start(GameState *state)
         }
 #endif
         mDevice->ogre->renderOneFrame();
-    }
+    } */
+    std::cout << "=============END=========================" << std::endl;
 }
 
 /** Change to a game state.  This replaces the current game state

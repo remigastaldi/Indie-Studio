@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri May  5 09:54:05 2017 gastal_r
-// Last update Fri May 19 17:18:50 2017 gastal_r
+// Last update Fri May 19 21:36:24 2017 gastal_r
 //
 
 #include "Socket.hpp"
@@ -36,7 +36,8 @@ extern "C" {
 
         try {
           //app.run();
-            indie.init();
+            if (!indie.init())
+              return (0);
             indie.start();
         } catch( Ogre::Exception& e ) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
