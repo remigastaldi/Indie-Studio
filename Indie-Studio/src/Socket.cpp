@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Fri May 19 12:48:30 2017 John Doe
+** Last update Mon May 22 11:23:55 2017 John Doe
 */
 
 #include "Socket.hpp"
@@ -143,6 +143,15 @@ void Socket::wait()
 void Socket::emit(std::string const event, std::shared_ptr<sio::message> const &request)
 {
         _current_socket->emit(event, request);
+}
+
+void Socket::sendMessage(std::string const &message)
+{
+        auto obj = sio::object_message::create();
+        obj.get()->get_map()["message"] =  sio::string_message::create(message);
+        obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
+        obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
+        emit("message", obj);
 }
 
 void Socket::move(float fw, float x, float y, float z)
