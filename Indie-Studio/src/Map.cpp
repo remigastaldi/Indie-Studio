@@ -15,8 +15,11 @@ Map::Map() :
   mPolygonRenderingMode('B'),
   mShutDown(false),
   _camera(nullptr),
-  _cameraMan(nullptr)
-{}
+  _cameraMan(nullptr),
+  Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room")
+{
+
+}
 
 Map::~Map()
 {}
@@ -24,6 +27,8 @@ Map::~Map()
 void Map::enter(void)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Enter Map =====");
+
+  connect();
 
   _camera = mDevice->sceneMgr->createCamera("PlayerCamMap");
   _camera->setPosition(Ogre::Vector3(0,0,80));
@@ -58,6 +63,8 @@ void Map::exit(void)
   mDevice->sceneMgr->clearScene();
  mDevice->sceneMgr->destroyAllCameras();
  mDevice->window->removeAllViewports();
+
+ disconnect();
 
  Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Map =====");
 }

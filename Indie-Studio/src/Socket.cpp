@@ -22,7 +22,7 @@ Socket::Socket(std::string const &addr, int const port, int const id, std::strin
 
 Socket::~Socket()
 {
-        HIGHLIGHT("Closing...");
+        HIGHLIGHT("Socket.IO: Closing...");
         _client.sync_close();
         _client.clear_con_listeners();
 }
@@ -39,12 +39,13 @@ void Socket::on_connected()
         obj.get()->get_map()["room"] =  sio::string_message::create(_room);
         obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
         emit("login", obj);
+
+        HIGHLIGHT_N("Socket.IO: Connected");
 }
 
 void Socket::on_close(sio::client::close_reason const& reason)
 {
-        std::cout << "sio closed: " << reason << std::endl;
-        exit(0);
+        HIGHLIGHT("Socket.IO: Disconnected");
 }
 
 void Socket::on_fail()
@@ -131,6 +132,11 @@ void Socket::connect()
         }
         _lock.unlock();
         events();
+}
+
+void Socket::disconnect()
+{
+        _client.close();
 }
 
 void Socket::wait()

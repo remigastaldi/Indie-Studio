@@ -28,11 +28,8 @@ extern "C" {
     int main(int argc, char *argv[])
 #endif
     {
-        // Create application object
-        //Core app("http://ezgames.eu", 3000, 12);
-        //Application app;
-        //app.connect();
         Indie indie;
+        std::srand(std::time(0));
 
         try {
           //app.run();
