@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:28:18 2017 gastal_r
-// Last update Fri May 19 22:44:16 2017 gastal_r
+// Last update Mon May 22 17:58:01 2017 gastal_r
 //
 
 #include "GameStateManager.hpp"
@@ -68,10 +68,9 @@ GameState *GameStateManager::findByName(Ogre::String state_name)
      takes care of the Windows message pump.*/
 void GameStateManager::start(GameState *state)
 {
-  std::cout << "=============START=========================" << std::endl;
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Start Gameloop =====");
     changeGameState(state);
 
-    //mDevice->ogre->startRendering();
   while (!mShutdown)
     {
 
@@ -79,7 +78,7 @@ void GameStateManager::start(GameState *state)
         mDevice->mouse->capture();
 
         // run the message pump
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+        #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
         {
             MSG msg;
             while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -93,10 +92,10 @@ void GameStateManager::start(GameState *state)
                  }
             }
         }
-#endif
+        #endif
         mDevice->ogre->renderOneFrame();
     }
-    std::cout << "=============END=========================" << std::endl;
+    Ogre::LogManager::getSingletonPtr()->logMessage("===== End Gameloop =====");
 }
 
 /** Change to a game state.  This replaces the current game state
@@ -134,6 +133,7 @@ bool GameStateManager::pushGameState(GameState* state)
     // store and init the new state
     mStateStack.push_back(state);
     init(state);
+    std::cout << "=== BEFORE ENTER " << mStates.back().name << std::endl;
     mStateStack.back()->enter();
 
     return true;

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:20:33 2017 gastal_r
-// Last update Fri May 19 19:40:10 2017 gastal_r
+// Last update Mon May 22 18:39:33 2017 gastal_r
 //
 
 #ifndef         __GAMESTATE_HPP__
@@ -59,8 +59,6 @@ typedef struct
     Ogre::RenderWindow *window;
     OgreOggSound::OgreOggSoundManager *soundManager;
     Ogre::SceneManager *sceneMgr;
-    Ogre::Camera *camera;
-    OgreCookies::CameraMan* cameraMan;
 } device_info;
 
 class GameState;
@@ -132,7 +130,7 @@ public:
 
 protected:
     /** Constructor: This should be a private member of an inherited class. */
-    GameState(void) {};
+    GameState(void) : parent(nullptr), mDevice(nullptr) {};
     /** Destructor: This should be a private member of an inherited class. */
     virtual ~GameState(void) {};
 
@@ -161,19 +159,6 @@ protected:
     /** Keeps a method of device interaction. */
     device_info *mDevice;
 };
-
-/** Create the game state. Inherit, Create your class, and have it managed.
-    Example:
-    \code
-    static void MyGameStateClass::Create(GameStateListener *parent,
-            const Ogre::String name)
-    {
-        myGameStateClass myGameState=new myGameStateClass();
-        myGameState->parent=parent;
-        parent->ManageGameState(name,myGameState);
-    }
-    \endcode
-*/
 
 #define DECLARE_GAMESTATE_CLASS(T)                                      \
 static void Create(GameStateListener *parent,const Ogre::String name)   \

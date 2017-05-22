@@ -55,9 +55,7 @@ CXXFLAGS				+=			-lCgGL -lCg
 CXXFLAGS				+=			-lsioclient -lpthread
 CXXFLAGS        += 			-Wno-deprecated-declarations -g -g3
 
-SRC             =      	src/BaseApplication.cpp				\
-												src/Application.cpp						\
-												src/CameraMan.cpp							\
+SRC             =				src/CameraMan.cpp							\
 												src/DotSceneLoader.cpp				\
 												src/Socket.cpp								\
 												src/Entity.cpp								\

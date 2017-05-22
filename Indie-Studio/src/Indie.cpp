@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Sun May 21 20:44:30 2017 gastal_r
+// Last update Mon May 22 17:57:08 2017 gastal_r
 //
 
 #include        "Indie.hpp"
@@ -24,7 +24,6 @@ Indie::Indie() :
   _device.window = nullptr;
   _device.soundManager = nullptr;
   _device.sceneMgr = nullptr;
-  _device.camera = nullptr;
   mFSLayer = OGRE_NEW_T(Ogre::FileSystemLayer, Ogre::MEMCATEGORY_GENERAL)(OGRE_VERSION_NAME);
 }
 
@@ -43,7 +42,6 @@ void            Indie::start()
   Menu::Create(&gameStateMgr, "Menu");
   Map::Create(&gameStateMgr, "Map");
   GameState *menu = gameStateMgr.findByName("Menu");
-  Ogre::LogManager::getSingletonPtr()->logMessage("*** Start Menu ***");
   gameStateMgr.start(menu);
 }
 
@@ -119,27 +117,27 @@ void            Indie::windowClosed(Ogre::RenderWindow *rw)
 
 void            Indie::createCamera()
 {
-    // Create the camera
-    _device.camera = _device.sceneMgr->createCamera("PlayerCam");
-
-    // Position it at 500 in Z direction
-    _device.camera->setPosition(Ogre::Vector3(0,0,80));
-    // Look back along -Z
-    _device.camera->lookAt(Ogre::Vector3(0,0,-300));
-    _device.camera->setNearClipDistance(5);
-
-    _device.cameraMan = new OgreCookies::CameraMan(_device.camera);   // create a default camera controller
+    // // Create the camera
+    // _device.camera = _device.sceneMgr->createCamera("PlayerCam");
+    //
+    // // Position it at 500 in Z direction
+    // _device.camera->setPosition(Ogre::Vector3(0,0,80));
+    // // Look back along -Z
+    // _device.camera->lookAt(Ogre::Vector3(0,0,-300));
+    // _device.camera->setNearClipDistance(5);
+    //
+    // _device.cameraMan = new OgreCookies::CameraMan(_device.camera);   // create a default camera controller
 }
 
 void            Indie::createViewports()
 {
-    // Create one viewport, entire window
-      Ogre::Viewport* vp = _device.window->addViewport(_device.camera);
-    vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
-
-    // Alter the camera aspect ratio to match the viewport
-    _device.camera->setAspectRatio(
-        Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
+    // // Create one viewport, entire window
+    //   Ogre::Viewport* vp = _device.window->addViewport(_device.camera);
+    // vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
+    //
+    // // Alter the camera aspect ratio to match the viewport
+    // _device.camera->setAspectRatio(
+    //     Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
 }
 
 void             Indie::createOISListener()

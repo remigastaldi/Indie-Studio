@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Mon May 22 10:21:02 2017 gastal_r
+// Last update Mon May 22 18:30:54 2017 gastal_r
 //
 
 
@@ -13,7 +13,9 @@
 
 Map::Map() :
   mPolygonRenderingMode('B'),
-  mShutDown(false)
+  mShutDown(false),
+  _camera(nullptr),
+  _cameraMan(nullptr)
 {}
 
 Map::~Map()
@@ -21,21 +23,43 @@ Map::~Map()
 
 void Map::enter(void)
 {
-mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Enter Map =====");
+
+  _camera = mDevice->sceneMgr->createCamera("PlayerCamMap");
+  _camera->setPosition(Ogre::Vector3(0,0,80));
+  _camera->lookAt(Ogre::Vector3(0,0,-300));
+  _camera->setNearClipDistance(5);
+
+
+  _cameraMan = new OgreCookies::CameraMan(_camera);
+  Ogre::Viewport* vp = mDevice->window->addViewport(_camera);
+  vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
+  vp->update();
+
+  _camera->setAspectRatio(
+      Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
+
+   createScene();
+}
+
+void Map::createScene(void)
+{
+  mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
   mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
+  Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
 
-   Ogre::Entity* ogreHead = mDevice->sceneMgr->createEntity("Head", "Ogre.mesh");
- 	Ogre::SceneNode *mNode = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
- 	mNode->attachObject(ogreHead);
- 	mNode->setPosition(mDevice->camera->getPosition());
-  mDevice->camera->setPosition(Ogre::Vector3(0.f, 0.f, 0.f));
+  DotSceneLoader loader;
+  loader.parseDotScene("map.scene","General", mDevice->sceneMgr, map);
 }
 
 void Map::exit(void)
 {
   mDevice->sceneMgr->clearScene();
+ mDevice->sceneMgr->destroyAllCameras();
+ mDevice->window->removeAllViewports();
+
+ Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Map =====");
 }
 
 bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
@@ -54,13 +78,10 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
   		return false;
   	}
 
-    //Need to capture/update each device
-    //mDevice->keyboard->capture();
-    //mDevice->mouse->capture();
      //Need to inject timestamps to CEGUI System.
     CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
-    mDevice->cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
+    _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
     mDevice->soundManager->update(evt.timeSinceLastFrame);
     return true;
 }
@@ -106,9 +127,9 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
     }
     else if (arg.key == OIS::KC_R)   // cycle polygon rendering mode
     {
-/*        Ogre::PolygonMode pm;
+        Ogre::PolygonMode pm;
 
-        switch (mDevice->camera->getPolygonMode())
+        switch (_camera->getPolygonMode())
         {
         case Ogre::PM_SOLID:
             pm = Ogre::PM_WIREFRAME;
@@ -120,14 +141,16 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
             pm = Ogre::PM_SOLID;
         }
 
-        mDevice->camera->setPolygonMode(pm); */
-        popGameState();
+        _camera->setPolygonMode(pm);
     }
     else if(arg.key == OIS::KC_F5)   // refresh all textures
     {
-        GameState *menu2 = findByName("Menu");
-        Ogre::LogManager::getSingletonPtr()->logMessage("*** Start Menu ***");
-        pushGameState(menu2);
+      Ogre::TextureManager::getSingleton().reloadAll();
+    }
+    else if(arg.key == OIS::KC_S)
+    {
+      GameState *menu = findByName("Menu");
+      changeGameState(menu);
     }
     else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
     {
@@ -140,7 +163,7 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
     }
     else
     {
-        mDevice->cameraMan->injectKeyDown(arg);
+        _cameraMan->injectKeyDown(arg);
     }
 
     return true;
@@ -148,24 +171,24 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
 
 bool Map::keyReleased( const OIS::KeyEvent &arg )
 {
-    mDevice->cameraMan->injectKeyUp(arg);
+    _cameraMan->injectKeyUp(arg);
     return true;
 }
 
 bool Map::mouseMoved( const OIS::MouseEvent &arg )
 {
-    mDevice->cameraMan->injectMouseMove(arg);
+    _cameraMan->injectMouseMove(arg);
     return true;
 }
 
 bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
-    mDevice->cameraMan->injectMouseDown(arg, id);
+    _cameraMan->injectMouseDown(arg, id);
     return true;
 }
 
 bool Map::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
-    mDevice->cameraMan->injectMouseUp(arg, id);
+    _cameraMan->injectMouseUp(arg, id);
     return true;
 }
