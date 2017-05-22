@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:20:33 2017 gastal_r
-// Last update Mon May 22 18:39:33 2017 gastal_r
+// Last update Mon May 22 23:09:15 2017 gastal_r
 //
 
 #ifndef         __GAMESTATE_HPP__
@@ -31,6 +31,7 @@
 #include <OISInputManager.h>
 #include <OISKeyboard.h>
 #include <OISMouse.h>
+#include <OISException.h>
 
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>

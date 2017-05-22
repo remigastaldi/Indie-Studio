@@ -61,9 +61,10 @@ SRC             =				src/CameraMan.cpp							\
 												src/Entity.cpp								\
 												src/Player.cpp								\
 												src/GameStateManager.cpp			\
-												src/Map.cpp									\
+												src/Map.cpp										\
 												src/Menu.cpp									\
 												src/Indie.cpp									\
+												src/SplashScreen.cpp  				\
 												src/main.cpp
 
 

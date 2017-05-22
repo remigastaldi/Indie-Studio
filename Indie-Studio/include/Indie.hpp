@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:34:15 2017 gastal_r
-// Last update Sun May 21 20:46:04 2017 gastal_r
+// Last update Mon May 22 23:25:56 2017 gastal_r
 //
 
 #ifndef _INDIE_HPP_
@@ -31,9 +31,7 @@ public:
   bool  configure();
   void  windowResized(Ogre::RenderWindow *rw);
   void  windowClosed(Ogre::RenderWindow *rw);
-  void  createViewports();
   void  createOISListener();
-  void  createCamera();
   bool  init();
 
 private:

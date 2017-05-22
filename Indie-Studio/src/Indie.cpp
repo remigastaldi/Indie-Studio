@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Mon May 22 17:57:08 2017 gastal_r
+// Last update Mon May 22 23:27:25 2017 gastal_r
 //
 
 #include        "Indie.hpp"
@@ -115,53 +115,23 @@ void            Indie::windowClosed(Ogre::RenderWindow *rw)
     }
 }
 
-void            Indie::createCamera()
-{
-    // // Create the camera
-    // _device.camera = _device.sceneMgr->createCamera("PlayerCam");
-    //
-    // // Position it at 500 in Z direction
-    // _device.camera->setPosition(Ogre::Vector3(0,0,80));
-    // // Look back along -Z
-    // _device.camera->lookAt(Ogre::Vector3(0,0,-300));
-    // _device.camera->setNearClipDistance(5);
-    //
-    // _device.cameraMan = new OgreCookies::CameraMan(_device.camera);   // create a default camera controller
-}
-
-void            Indie::createViewports()
-{
-    // // Create one viewport, entire window
-    //   Ogre::Viewport* vp = _device.window->addViewport(_device.camera);
-    // vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
-    //
-    // // Alter the camera aspect ratio to match the viewport
-    // _device.camera->setAspectRatio(
-    //     Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
-}
-
 void             Indie::createOISListener()
 {
+  Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
+  OIS::ParamList pl;
+  size_t windowHnd = 0;
+  std::ostringstream windowHndStr;
 
-    Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
-    OIS::ParamList pl;
-    size_t windowHnd = 0;
-    std::ostringstream windowHndStr;
+  _device.window->getCustomAttribute("WINDOW", &windowHnd);
+  windowHndStr << windowHnd;
+  pl.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
 
-    _device.window->getCustomAttribute("WINDOW", &windowHnd);
-    windowHndStr << windowHnd;
-    pl.insert(std::make_pair(std::string("WINDOW"), windowHndStr.str()));
+  _device.inputMgr = OIS::InputManager::createInputSystem( pl );
 
-    _device.inputMgr = OIS::InputManager::createInputSystem( pl );
+  _device.keyboard = static_cast<OIS::Keyboard*>(_device.inputMgr->createInputObject( OIS::OISKeyboard, true ));
+  _device.mouse = static_cast<OIS::Mouse*>(_device.inputMgr->createInputObject( OIS::OISMouse, true ));
 
-    _device.keyboard = static_cast<OIS::Keyboard*>(_device.inputMgr->createInputObject( OIS::OISKeyboard, true ));
-    _device.mouse = static_cast<OIS::Mouse*>(_device.inputMgr->createInputObject( OIS::OISMouse, true ));
-
-    //_device.keyboard->setEventCallback(this);
-    //_device.mouse->setEventCallback(this);
-    windowResized(_device.window);
-    //Register as a Window listener
-    //Ogre::WindowEventUtilities::addWindowEventListener(_device.window, this);
+  windowResized(_device.window);
 }
 
 bool            Indie::init()
@@ -170,37 +140,36 @@ bool            Indie::init()
   mFSLayer->getWritablePath("ogre.log"));
 
   setupResources();
-  
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	_device.ogre->loadPlugin("OgreOggSound.dll");
-	_device.ogre->loadPlugin("Plugin_OctreeZone.dll");
-	_device.ogre->loadPlugin("Plugin_PCZSceneManager.dll");
-	//_device.ogre->loadPlugin("Plugin_CgProgramManager.dll");
-	_device.ogre->loadPlugin("Plugin_OctreeSceneManager.dll");
-	//_device.ogre->loadPlugin("RenderSystem_GL3Plus.dll");
-	_device.ogre->loadPlugin("RenderSystem_GL.dll");
-#else
-	_device.ogre->loadPlugin("libOgreOggSound.so");
-#endif
+
+  #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+  	_device.ogre->loadPlugin("OgreOggSound.dll");
+  	_device.ogre->loadPlugin("Plugin_OctreeZone.dll");
+  	_device.ogre->loadPlugin("Plugin_PCZSceneManager.dll");
+  	//_device.ogre->loadPlugin("Plugin_CgProgramManager.dll");
+  	_device.ogre->loadPlugin("Plugin_OctreeSceneManager.dll");
+  	//_device.ogre->loadPlugin("RenderSystem_GL3Plus.dll");
+  	_device.ogre->loadPlugin("RenderSystem_GL.dll");
+  #else
+	  _device.ogre->loadPlugin("libOgreOggSound.so");
+  #endif
 
   bool carryOn = configure();
   if (!carryOn)
     return false;
 
   _device.sceneMgr = _device.ogre->createSceneManager("OctreeSceneManager");
-  createCamera();
-  createViewports();
 
   // Set default mipmap level (NB some APIs ignore this)
   Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
-  // Create any resource listeners (for loading screens)
 
+  //TODO Create any resource listeners (for loading screens)
   //createResourceListener();
   // Load resources
   Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 
-Ogre::RenderTarget* renderTarget = _device.ogre->getRenderTarget("Indie Studio");
-CEGUI::OgreRenderer& myRenderer = CEGUI::OgreRenderer::bootstrapSystem(*renderTarget);
+  Ogre::RenderTarget* renderTarget = _device.ogre->getRenderTarget("Indie Studio");
+  CEGUI::OgreRenderer& myRenderer = CEGUI::OgreRenderer::bootstrapSystem(*renderTarget);
+
   _device.soundManager = OgreOggSound::OgreOggSoundManager::getSingletonPtr();
   _device.soundManager->init();
   _device.soundManager->setDistanceModel(AL_LINEAR_DISTANCE);
