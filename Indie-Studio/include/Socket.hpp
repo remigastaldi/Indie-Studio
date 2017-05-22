@@ -37,6 +37,8 @@
 #define EM(__O__) std::cout<<"\e[1;30;1m"<<__O__<<"\e[0m"<<std::endl
 #define HIGHLIGHT(__O__) std::cout<<"\e[1;31m"<<__O__<<"\e[0m"<<std::endl
 
+#endif
+
 class Socket
 {
   private:
@@ -65,7 +67,5 @@ class Socket
     void sendMessage(std::string const &);
 
 };
-
-#endif
 
 #endif /* _CLIENT_HPP_ */

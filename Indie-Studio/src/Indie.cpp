@@ -170,15 +170,18 @@ bool            Indie::init()
   mFSLayer->getWritablePath("ogre.log"));
 
   setupResources();
-
-  _device.ogre->loadPlugin("libOgreOggSound.so");
-/*    _device.ogre->loadPlugin("OgreOggSound.dll");
-_device.ogre->loadPlugin("Plugin_OctreeZone.dll");
-_device.ogre->loadPlugin("Plugin_PCZSceneManager.dll");
-//_device.ogre->loadPlugin("Plugin_CgProgramManager.dll");
-_device.ogre->loadPlugin("Plugin_OctreeSceneManager.dll");
-//_device.ogre->loadPlugin("RenderSystem_GL3Plus.dll");
-_device.ogre->loadPlugin("RenderSystem_GL.dll"); */
+  
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	_device.ogre->loadPlugin("OgreOggSound.dll");
+	_device.ogre->loadPlugin("Plugin_OctreeZone.dll");
+	_device.ogre->loadPlugin("Plugin_PCZSceneManager.dll");
+	//_device.ogre->loadPlugin("Plugin_CgProgramManager.dll");
+	_device.ogre->loadPlugin("Plugin_OctreeSceneManager.dll");
+	//_device.ogre->loadPlugin("RenderSystem_GL3Plus.dll");
+	_device.ogre->loadPlugin("RenderSystem_GL.dll");
+#else
+	_device.ogre->loadPlugin("libOgreOggSound.so");
+#endif
 
   bool carryOn = configure();
   if (!carryOn)

@@ -10,11 +10,120 @@
     <ClCompile Include="src\CameraMan.cpp" />
     <ClCompile Include="src\HUD.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\DotSceneLoader.cpp" />
+    <ClCompile Include="src\Socket.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\Map.cpp" />
+    <ClCompile Include="src\Indie.cpp" />
+    <ClCompile Include="src\GameStateManager.cpp" />
+    <ClCompile Include="src\Entity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Application.hpp" />
     <ClInclude Include="include\BaseApplication.hpp" />
     <ClInclude Include="include\CameraMan.hpp" />
     <ClInclude Include="include\HUD.hpp" />
+    <ClInclude Include="include\DotSceneLoader.h" />
+    <ClInclude Include="include\rapidxml.hpp" />
+    <ClInclude Include="include\rapidxml_iterators.hpp" />
+    <ClInclude Include="include\rapidxml_print.hpp" />
+    <ClInclude Include="include\rapidxml_utils.hpp" />
+    <ClInclude Include="include\sio_client.h" />
+    <ClInclude Include="include\sio_message.h" />
+    <ClInclude Include="include\sio_socket.h" />
+    <ClInclude Include="include\Entity.hpp" />
+    <ClInclude Include="include\GameState.hpp" />
+    <ClInclude Include="include\GameStateManager.hpp" />
+    <ClInclude Include="include\Indie.hpp" />
+    <ClInclude Include="include\Map.hpp" />
+    <ClInclude Include="include\Menu.hpp" />
+    <ClInclude Include="include\Player.hpp" />
+    <ClInclude Include="include\Socket.hpp" />
+    <ClInclude Include="include\Core.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="media\map\jinxMono.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="media\characters\materials\textures\GreenSkin.jpg" />
+    <Image Include="media\characters\materials\textures\spheremap.png" />
+    <Image Include="media\characters\materials\textures\tusk.jpg" />
+    <Image Include="media\map\CastleAtlas_lit.jpg" />
+    <Image Include="media\map\GardenAtlas.jpg" />
+    <Image Include="media\map\SKYBOX_sphere.jpg" />
+    <Image Include="media\map\TreeAtlas.jpg" />
+    <Image Include="media\map\Windows.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".clang_complete" />
+    <None Include="CMakeFiles\3.7.2\CMakeCXXCompiler.cmake" />
+    <None Include="CMakeFiles\3.7.2\CMakeDetermineCompilerABI_CXX.bin" />
+    <None Include="CMakeFiles\3.7.2\CMakeSystem.cmake" />
+    <None Include="CMakeFiles\cmake.check_cache" />
+    <None Include="CMakeFiles\feature_tests.bin" />
+    <None Include="Configuration.props" />
+    <None Include="dist\bin\plugins.cfg" />
+    <None Include="dist\bin\plugins_d.cfg" />
+    <None Include="dist\bin\resources.cfg" />
+    <None Include="dist\bin\resources_d.cfg" />
+    <None Include="lib\sioclient.dll" />
+    <None Include="media\characters\materials\scripts\Ogre.material" />
+    <None Include="media\characters\models\Barrel.mesh" />
+    <None Include="media\characters\models\dwarf.mesh" />
+    <None Include="media\characters\models\Dwarf.skeleton" />
+    <None Include="media\characters\models\fence4.mesh" />
+    <None Include="media\characters\models\hang.bridge.01.mesh" />
+    <None Include="media\characters\models\highlanderhouse.01.mesh" />
+    <None Include="media\characters\models\Ogre.mesh" />
+    <None Include="media\characters\models\Ogre.skeleton" />
+    <None Include="media\characters\models\rock.05.mesh" />
+    <None Include="media\characters\models\rock.07.mesh" />
+    <None Include="media\characters\models\skeltorch.mesh" />
+    <None Include="media\characters\models\tree.05.mesh" />
+    <None Include="media\characters\models\tree.07.mesh" />
+    <None Include="media\characters\models\tree.09.mesh" />
+    <None Include="media\map\Castle.001.material" />
+    <None Include="media\map\Cube.002.mesh" />
+    <None Include="media\map\Garden.material" />
+    <None Include="media\map\map.scene" />
+    <None Include="media\map\Material.material" />
+    <None Include="media\map\Plane.004.mesh" />
+    <None Include="media\map\Plane.312.mesh" />
+    <None Include="media\map\Plane.313.mesh" />
+    <None Include="media\map\Tree.001.material" />
+    <None Include="media\map\Tree.001.mesh" />
+    <None Include="media\map\Tree.002.mesh" />
+    <None Include="media\map\Tree.003.mesh" />
+    <None Include="media\map\Tree.004.mesh" />
+    <None Include="media\map\Tree.005.mesh" />
+    <None Include="media\map\Tree.006.mesh" />
+    <None Include="media\map\Tree.007.mesh" />
+    <None Include="media\map\Tree.008.mesh" />
+    <None Include="media\map\Tree.009.mesh" />
+    <None Include="media\map\Tree.010.mesh" />
+    <None Include="media\map\Tree.011.mesh" />
+    <None Include="media\map\Tree.012.mesh" />
+    <None Include="media\map\Tree.013.mesh" />
+    <None Include="media\map\Tree.014.mesh" />
+    <None Include="media\map\Tree.015.mesh" />
+    <None Include="media\map\Tree.016.mesh" />
+    <None Include="media\map\Tree.017.mesh" />
+    <None Include="media\map\Tree.018.mesh" />
+    <None Include="media\map\Tree.019.mesh" />
+    <None Include="media\map\Tree.020.mesh" />
+    <None Include="media\map\Tree.021.mesh" />
+    <None Include="media\map\Tree.022.mesh" />
+    <None Include="media\map\Tree.023.mesh" />
+    <None Include="media\map\Tree.024.mesh" />
+    <None Include="media\map\Tree.025.mesh" />
+    <None Include="media\map\Tree.mesh" />
+    <None Include="media\map\Windows.001.material" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeFiles\CMakeOutput.log" />
+    <Text Include="media\characters\models\model_license.txt" />
+    <Text Include="media\characters\models\ogre.info.txt" />
+    <Text Include="media\characters\models\ogre_model_license.txt" />
   </ItemGroup>
 </Project>

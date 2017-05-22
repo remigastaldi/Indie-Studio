@@ -195,15 +195,17 @@ bool BaseApplication::setup()
 				mFSLayer->getWritablePath("ogre.log"));
 
     setupResources();
-
-    mRoot->loadPlugin("libOgreOggSound.so");
-/*    mRoot->loadPlugin("OgreOggSound.dll");
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	mRoot->loadPlugin("OgreOggSound.dll");
 	mRoot->loadPlugin("Plugin_OctreeZone.dll");
 	mRoot->loadPlugin("Plugin_PCZSceneManager.dll");
 	//mRoot->loadPlugin("Plugin_CgProgramManager.dll");
 	mRoot->loadPlugin("Plugin_OctreeSceneManager.dll");
 	//mRoot->loadPlugin("RenderSystem_GL3Plus.dll");
-	mRoot->loadPlugin("RenderSystem_GL.dll"); */
+	mRoot->loadPlugin("RenderSystem_GL.dll");
+#else
+	mRoot->loadPlugin("libOgreOggSound.so");
+#endif
 
     bool carryOn = configure();
     if (!carryOn) return false;

@@ -290,7 +290,7 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\MeshLodGenerator;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\RTShaderSystem;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Property;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Terrain;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Volume;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Overlay;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\HLMS;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Pagin;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OIS;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\AL;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\BOOST;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\CEGUI;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\MeshLodGenerator;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\RTShaderSystem;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Property;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Terrain;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Volume;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Overlay;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\HLMS;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE\Pagin;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OGRE;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\OIS;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include\AL;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\include;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\BOOST;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\CEGUI;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio\include;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\BULLET\include;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGREBULLET\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -298,8 +298,8 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\BOOST\lib;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\CEGUI\lib;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\lib\Release;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OIS.lib;OgreOverlay.lib;OgreOggSound.lib;CEGUIBase-0.lib;CEGUICommonDialogs-0.lib;CEGUICoreWindowRendererSet.lib;CEGUIExpatParser.lib;CEGUIFreeImageImageCodec.lib;CEGUIMinesweeper.lib;CEGUIOgreRenderer-0.lib;CEGUIOpenGLRenderer-0.lib;CEGUISILLYImageCodec.lib;CEGUITinyXMLParser.lib;sioclient.lib;boost_random-vc140-mt-1_61.lib;boost_random-vc140-mt-gd-1_61.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\BOOST\lib;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\CEGUI\lib;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGRE_SDK\lib\Release;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio\lib;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio\include;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\OGREBULLET\lib;C:\Users\FLAVIEN SELLET\Documents\Indie-Studio\Indie-Studio-Dependencies\windows\BULLET\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain.lib;OgreHLMS.lib;OgreMeshLodGenerator.lib;OgrePaging.lib;OgreProperty.lib;OgreRTShaderSystem.lib;OgreTerrain.lib;OgreVolume.lib;OIS.lib;OgreOverlay.lib;OgreOggSound.lib;CEGUIBase-0.lib;CEGUICommonDialogs-0.lib;CEGUICoreWindowRendererSet.lib;CEGUIExpatParser.lib;CEGUIFreeImageImageCodec.lib;CEGUIMinesweeper.lib;CEGUIOgreRenderer-0.lib;CEGUIOpenGLRenderer-0.lib;CEGUISILLYImageCodec.lib;CEGUITinyXMLParser.lib;sioclient.lib;boost_random-vc140-mt-1_61.lib;boost_random-vc140-mt-gd-1_61.lib;OgreBulletCollisions.lib;OgreBulletDynamics.lib;Bullet2FileLoader.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;Bullet3OpenCL_clew.lib;BulletCollision.lib;BulletDynamics.lib;BulletExampleBrowserLib.lib;BulletFileLoader.lib;BulletInverseDynamics.lib;BulletInverseDynamicsUtils.lib;BulletSoftBody.lib;BulletWorldImporter.lib;BulletXmlWorldImporter.lib;BussIK.lib;clsocket.lib;ConvexDecomposition.lib;GIMPACTUtils.lib;gtest.lib;HACD.lib;LinearMath.lib;OpenGLWindow.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Message>Copy runtime files</Message>
@@ -360,15 +360,19 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <Image Include="Indie-Studio.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CMakeFiles\feature_tests.c" />
-    <ClCompile Include="CMakeFiles\feature_tests.cxx" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\BaseApplication.cpp" />
     <ClCompile Include="src\CameraMan.cpp" />
-    <ClCompile Include="src\Core.cpp" />
     <ClCompile Include="src\DotSceneLoader.cpp" />
+    <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\GameStateManager.cpp" />
     <ClCompile Include="src\HUD.cpp" />
+    <ClCompile Include="src\Indie.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Map.cpp" />
+    <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Socket.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Application.hpp" />
@@ -376,7 +380,14 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <ClInclude Include="include\CameraMan.hpp" />
     <ClInclude Include="include\Core.hpp" />
     <ClInclude Include="include\DotSceneLoader.h" />
+    <ClInclude Include="include\Entity.hpp" />
+    <ClInclude Include="include\GameState.hpp" />
+    <ClInclude Include="include\GameStateManager.hpp" />
     <ClInclude Include="include\HUD.hpp" />
+    <ClInclude Include="include\Indie.hpp" />
+    <ClInclude Include="include\Map.hpp" />
+    <ClInclude Include="include\Menu.hpp" />
+    <ClInclude Include="include\Player.hpp" />
     <ClInclude Include="include\rapidxml.hpp" />
     <ClInclude Include="include\rapidxml_iterators.hpp" />
     <ClInclude Include="include\rapidxml_print.hpp" />
@@ -384,11 +395,10 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <ClInclude Include="include\sio_client.h" />
     <ClInclude Include="include\sio_message.h" />
     <ClInclude Include="include\sio_socket.h" />
+    <ClInclude Include="include\Socket.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang_complete" />
-    <None Include=".tags" />
-    <None Include=".tags1" />
     <None Include="CMakeFiles\3.7.2\CMakeCXXCompiler.cmake" />
     <None Include="CMakeFiles\3.7.2\CMakeDetermineCompilerABI_CXX.bin" />
     <None Include="CMakeFiles\3.7.2\CMakeSystem.cmake" />
@@ -457,7 +467,6 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeFiles\CMakeOutput.log" />
-    <Text Include="CMakeLists.txt" />
     <Text Include="media\characters\models\model_license.txt" />
     <Text Include="media\characters\models\ogre.info.txt" />
     <Text Include="media\characters\models\ogre_model_license.txt" />
