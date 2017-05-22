@@ -5,15 +5,16 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Mon May 22 18:28:46 2017 gastal_r
+// Last update Mon May 22 19:17:17 2017 John Doe
 //
 
 #ifndef       _MAP_HPP_
 #define       _MAP_HPP_
 
 #include      "GameState.hpp"
+#include      "Socket.hpp"
 
-class Map : public GameState
+class Map : public GameState, public Socket
 {
 public:
   Map();
