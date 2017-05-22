@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Fri May 19 21:58:18 2017 gastal_r
+// Last update Sun May 21 20:44:30 2017 gastal_r
 //
 
 #include        "Indie.hpp"
@@ -41,6 +41,7 @@ void            Indie::start()
 {
   GameStateManager gameStateMgr(&_device);
   Menu::Create(&gameStateMgr, "Menu");
+  Map::Create(&gameStateMgr, "Map");
   GameState *menu = gameStateMgr.findByName("Menu");
   Ogre::LogManager::getSingletonPtr()->logMessage("*** Start Menu ***");
   gameStateMgr.start(menu);

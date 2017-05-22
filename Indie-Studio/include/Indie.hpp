@@ -5,13 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:34:15 2017 gastal_r
-// Last update Fri May 19 16:09:12 2017 gastal_r
+// Last update Sun May 21 20:46:04 2017 gastal_r
 //
 
 #ifndef _INDIE_HPP_
 #define _INDIE_HPP_
 
 #include "GameStateManager.hpp"
+#include "Map.hpp"
 #include "Menu.hpp"
 
 class Indie

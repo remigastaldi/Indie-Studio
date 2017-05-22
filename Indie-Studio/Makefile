@@ -63,6 +63,7 @@ SRC             =      	src/BaseApplication.cpp				\
 												src/Entity.cpp								\
 												src/Player.cpp								\
 												src/GameStateManager.cpp			\
+												src/Map.cpp									\
 												src/Menu.cpp									\
 												src/Indie.cpp									\
 												src/main.cpp

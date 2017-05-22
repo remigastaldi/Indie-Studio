@@ -1,47 +1,50 @@
 //
-// Menu.cpp for Indie-Studio in /home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/
+// Map.cpp for Indie-Studio in /home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/
 //
 // Made by gastal_r
 // Login   <remi.gastaldi@epitech.eu>
 //
-// Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Mon May 22 10:20:54 2017 gastal_r
+// Started on  Sun May 21 20:34:06 2017 gastal_r
+// Last update Mon May 22 10:21:02 2017 gastal_r
 //
 
-#include        "Menu.hpp"
 
-Menu::Menu() :
+#include        "Map.hpp"
+
+Map::Map() :
   mPolygonRenderingMode('B'),
   mShutDown(false)
 {}
 
-Menu::~Menu()
+Map::~Map()
 {}
 
-void Menu::enter(void)
+void Map::enter(void)
 {
-mDevice->camera->setPosition(Ogre::Vector3(0.f, 0.f, 0.f));
 mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
   mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
 
-  DotSceneLoader loader;
-   loader.parseDotScene("map.scene","General", mDevice->sceneMgr, map);
+   Ogre::Entity* ogreHead = mDevice->sceneMgr->createEntity("Head", "Ogre.mesh");
+ 	Ogre::SceneNode *mNode = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
+ 	mNode->attachObject(ogreHead);
+ 	mNode->setPosition(mDevice->camera->getPosition());
+  mDevice->camera->setPosition(Ogre::Vector3(0.f, 0.f, 0.f));
 }
 
-void Menu::exit(void)
+void Map::exit(void)
 {
   mDevice->sceneMgr->clearScene();
 }
 
-bool 	Menu::frameStarted(const Ogre::FrameEvent &evt)
+bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
 {
   return true;
 }
 
 //-------------------------------------------------------------------------------------
-bool Menu::frameRenderingQueued(const Ogre::FrameEvent& evt)
+bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	if (mDevice->window->isClosed()) {
 		return false;
@@ -52,8 +55,8 @@ bool Menu::frameRenderingQueued(const Ogre::FrameEvent& evt)
   	}
 
     //Need to capture/update each device
-  //  mDevice->keyboard->capture();
-//    mDevice->mouse->capture();
+    //mDevice->keyboard->capture();
+    //mDevice->mouse->capture();
      //Need to inject timestamps to CEGUI System.
     CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
@@ -62,13 +65,13 @@ bool Menu::frameRenderingQueued(const Ogre::FrameEvent& evt)
     return true;
 }
 
-bool Menu::frameEnded(const Ogre::FrameEvent& evt)
+bool Map::frameEnded(const Ogre::FrameEvent& evt)
 {
   return (true);
 }
 
 //-------------------------------------------------------------------------------------
-bool Menu::keyPressed( const OIS::KeyEvent &arg )
+bool Map::keyPressed( const OIS::KeyEvent &arg )
 {
     if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
     {
@@ -122,8 +125,8 @@ bool Menu::keyPressed( const OIS::KeyEvent &arg )
     }
     else if(arg.key == OIS::KC_F5)   // refresh all textures
     {
-        GameState *menu2 = findByName("Map");
-        Ogre::LogManager::getSingletonPtr()->logMessage("*** Start Map ***");
+        GameState *menu2 = findByName("Menu");
+        Ogre::LogManager::getSingletonPtr()->logMessage("*** Start Menu ***");
         pushGameState(menu2);
     }
     else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
@@ -143,25 +146,25 @@ bool Menu::keyPressed( const OIS::KeyEvent &arg )
     return true;
 }
 
-bool Menu::keyReleased( const OIS::KeyEvent &arg )
+bool Map::keyReleased( const OIS::KeyEvent &arg )
 {
     mDevice->cameraMan->injectKeyUp(arg);
     return true;
 }
 
-bool Menu::mouseMoved( const OIS::MouseEvent &arg )
+bool Map::mouseMoved( const OIS::MouseEvent &arg )
 {
     mDevice->cameraMan->injectMouseMove(arg);
     return true;
 }
 
-bool Menu::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
+bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
     mDevice->cameraMan->injectMouseDown(arg, id);
     return true;
 }
 
-bool Menu::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
+bool Map::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
     mDevice->cameraMan->injectMouseUp(arg, id);
     return true;
