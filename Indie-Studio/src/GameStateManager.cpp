@@ -71,8 +71,8 @@ void GameStateManager::start(GameState *state)
   std::cout << "=============START=========================" << std::endl;
     changeGameState(state);
 
-    mDevice->ogre->startRendering();
-/*  while (!mShutdown)
+    //mDevice->ogre->startRendering();
+  while (!mShutdown)
     {
 
         mDevice->keyboard->capture();
@@ -95,7 +95,7 @@ void GameStateManager::start(GameState *state)
         }
 #endif
         mDevice->ogre->renderOneFrame();
-    } */
+    }
     std::cout << "=============END=========================" << std::endl;
 }
 
