@@ -42,64 +42,6 @@ void Menu::enter(void)
 
 void Menu::createScene(void)
 {
-
-  CEGUI::System &sys = CEGUI::System::getSingleton();
-	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-
-	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
-
-	rgm.createResourceGroup("imagesets");
-	rgm.createResourceGroup("fonts");
-	rgm.createResourceGroup("layouts");
-	rgm.createResourceGroup("schemes");
-	rgm.createResourceGroup("looknfeels");
-	rgm.createResourceGroup("schemas");
-
-	rgm.addResourceLocation("../media/interface/schemes/", "FileSystem", "schemes");
-	rgm.addResourceLocation("../media/interface/imagesets/", "FileSystem", "imagesets");
-	rgm.addResourceLocation("../media/interface/fonts/", "FileSystem", "fonts");
-	rgm.addResourceLocation("../media/interface/layouts/", "FileSystem", "layouts");
-	rgm.addResourceLocation("../media/interface/looknfeels/", "FileSystem", "looknfeels");
-
-	CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
-	CEGUI::Font::setDefaultResourceGroup("fonts");
-	CEGUI::Scheme::setDefaultResourceGroup("schemes");
-	CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
-	CEGUI::WindowManager::setDefaultResourceGroup("layouts");
-
-	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
-
-	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
-
-	CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
-	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( myRoot );
-
-	CEGUI::Window *myImageWindow = CEGUI::WindowManager::getSingleton().createWindow("TaharezLook/StaticImage","PrettyWindow" );
-	// myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5,0),CEGUI::UDim(0.5,0)));
-	// myImageWindow->setSize(CEGUI::USize(CEGUI::UDim(0,550),CEGUI::UDim(0,200)));
-	myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5,0),CEGUI::UDim(0.5,0)));
-	myImageWindow->setSize(CEGUI::USize(CEGUI::UDim(0,150), CEGUI::UDim(0,100)));
-	myImageWindow->setProperty("Image","TaharezLook/full_image");
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);
-
-//	CEGUI::SchemeManager::getSingleton().createFromFile( "OgreTray.scheme" );
-
-	CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
-
-	CEGUI::Window *newWindow = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("ChatBox.layout");
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(newWindow);
-
-	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
-
-	CEGUI::Window *gJumpBtnWindow = NULL;
-
-	gJumpBtnWindow = CEGUI::WindowManager::getSingleton().createWindow("TaharezLook/Button","JumpPushButton");
-	gJumpBtnWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.75,0),CEGUI::UDim(0.50,0)));
-	gJumpBtnWindow->setSize(CEGUI::USize(CEGUI::UDim(0,100),CEGUI::UDim(0,100)));
-	gJumpBtnWindow->setText("I'M A BEE AMA BEE AMAMAMA BEE");
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(gJumpBtnWindow);
-
   mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
   mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
