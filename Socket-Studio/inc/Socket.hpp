@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Thu May 18 17:19:33 2017 John Doe
+// Last update Mon May 22 19:48:15 2017 John Doe
 //
 
 #ifndef _CLIENT_HPP_
@@ -19,6 +19,9 @@
 #include <functional>
 #include <sio_client.h>
 #include <condition_variable>
+
+#define SOCKET_SERVER "http://ezgames.eu"
+#define SOCKET_PORT 3000
 
 #ifdef WIN32
 #define EM(__O__) std::cout<<__O__<<std::endl
@@ -34,7 +37,9 @@
 #define EM(__O__) std::cout<<"\e[1;30;1m"<<__O__<<"\e[0m"<<std::endl
 #define HIGHLIGHT(__O__) std::cout<<"\e[1;31m"<<__O__<<"\e[0m"<<std::endl
 
-class Client
+#endif
+
+class Socket
 {
   private:
     int                         _id;
@@ -47,21 +52,21 @@ class Client
     std::string                 _room;
 
   public:
-    Client(std::string const &addr, int const port, int const id, std::string const &room);
-    ~Client();
+    Socket(std::string const &addr, int const port, int const id, std::string const &room);
+    ~Socket();
     void  on_connected();
     void  on_close(sio::client::close_reason const& reason);
     void  on_fail();
     void  events();
     void  connect();
+    void  disconnect();
     void  wait();
     void  consoleChat();
-
     void  emit(std::string const event, std::shared_ptr<sio::message> const &request);
     void  move(float fw, float x, float y, float z);
 
-};
+    void sendMessage(std::string const &);
 
-#endif
+};
 
 #endif /* _CLIENT_HPP_ */

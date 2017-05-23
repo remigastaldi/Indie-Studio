@@ -5,29 +5,29 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Thu May 18 17:36:27 2017 John Doe
+** Last update Tue May 23 10:23:04 2017 John Doe
 */
 
-#include "Client.hpp"
+#include "Socket.hpp"
 
-Client::Client(std::string const &addr, int const port, int const id, std::string const &room) : _id(id), _room(room)
+Socket::Socket(std::string const &addr, int const port, int const id, std::string const &room) : _id(id), _room(room)
 {
         _connect_finish = false;
         _addr = addr + ":" + std::to_string(port);
 
-        _client.set_open_listener(std::bind(&Client::on_connected, this));
-        _client.set_close_listener(std::bind(&Client::on_close, this,std::placeholders::_1));
-        _client.set_fail_listener(std::bind(&Client::on_fail, this));
+        _client.set_open_listener(std::bind(&Socket::on_connected, this));
+        _client.set_close_listener(std::bind(&Socket::on_close, this,std::placeholders::_1));
+        _client.set_fail_listener(std::bind(&Socket::on_fail, this));
 }
 
-Client::~Client()
+Socket::~Socket()
 {
-        HIGHLIGHT("Closing...");
+        HIGHLIGHT("Socket.IO: Closing...");
         _client.sync_close();
         _client.clear_con_listeners();
 }
 
-void Client::on_connected()
+void Socket::on_connected()
 {
         _lock.lock();
         _cond.notify_all();
@@ -39,21 +39,24 @@ void Client::on_connected()
         obj.get()->get_map()["room"] =  sio::string_message::create(_room);
         obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
         emit("login", obj);
+
+        HIGHLIGHT_N("Socket.IO: Connected");
 }
 
-void Client::on_close(sio::client::close_reason const& reason)
+void Socket::on_close(sio::client::close_reason const& reason)
 {
-        std::cout << "sio closed: " << reason << std::endl;
-        exit(0);
+  (void)reason;
+  HIGHLIGHT("Socket.IO: Disconnected");
+
 }
 
-void Client::on_fail()
+void Socket::on_fail()
 {
         std::cout << "sio failed: " <<std::endl;
         exit(0);
 }
 
-void Client::events()
+void Socket::events()
 {
         _current_socket->on("message", sio::socket::event_listener_aux([&](std::string const& name,
                                                                            sio::message::ptr const& data,
@@ -110,7 +113,7 @@ void Client::events()
         {
                 (void)name;
                 (void)isAck;
-                (void)ack_resp;                
+                (void)ack_resp;
                 _lock.lock();
                 if (data->get_map()["user_id"]->get_int() != _id)
                 {
@@ -120,7 +123,7 @@ void Client::events()
         }));
 }
 
-void Client::connect()
+void Socket::connect()
 {
         _client.connect(_addr);
         _current_socket = _client.socket();
@@ -133,19 +136,33 @@ void Client::connect()
         events();
 }
 
-void Client::wait()
+void Socket::disconnect()
+{
+        _client.close();
+}
+
+void Socket::wait()
 {
         _lock.lock();
         _cond.wait(_lock);
         _lock.unlock();
 }
 
-void Client::emit(std::string const event, std::shared_ptr<sio::message> const &request)
+void Socket::emit(std::string const event, std::shared_ptr<sio::message> const &request)
 {
         _current_socket->emit(event, request);
 }
 
-void Client::move(float fw, float x, float y, float z)
+void Socket::sendMessage(std::string const &message)
+{
+        auto obj = sio::object_message::create();
+        obj.get()->get_map()["message"] =  sio::string_message::create(message);
+        obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
+        obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
+        emit("message", obj);
+}
+
+void Socket::move(float fw, float x, float y, float z)
 {
         auto obj = sio::object_message::create();
         obj.get()->get_map()["fw"] =  sio::double_message::create(fw);
@@ -157,7 +174,7 @@ void Client::move(float fw, float x, float y, float z)
         emit("move", obj);
 }
 
-void Client::consoleChat()
+void Socket::consoleChat()
 {
         std::string line;
 

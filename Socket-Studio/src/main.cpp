@@ -5,10 +5,10 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:12:48 2017 Matthias Prost
-// Last update Thu May 18 17:38:05 2017 John Doe
+// Last update Tue May 23 10:22:11 2017 John Doe
 //
 
-#include "Client.hpp"
+#include "Socket.hpp"
 
 int   main(int ac, char **av)
 {
@@ -22,7 +22,7 @@ int   main(int ac, char **av)
         std::cout << "Plus d'argummenntnennentnnn " << "\n";
         return (9);
     }
-    Client client("http://ezgames.eu", 3000, id, av[1]);
+    Socket client("http://ezgames.eu", 3000, id, av[1]);
     client.connect();
     client.consoleChat();
     return (0);

@@ -61,7 +61,7 @@ io.on('connection', function (socket) {
     console.log(data["message"]);
   });
 
-  socket.on('move', function (data) {     
+  socket.on('move', function (data) {
     io.to(socket.room).emit("move", data);
   });
 

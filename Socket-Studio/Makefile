@@ -5,10 +5,10 @@
 ## Login   <leo.hubert@epitech.eu>
 ##
 ## Started on  Thu May  4 18:11:07 2017 Leo HUBERT
-## Last update Fri May 12 01:43:33 2017 John Doe
+## Last update Thu May 18 17:59:40 2017 John Doe
 ##
 
-CFLAGS	+=	-W -Wall -Werror
+CFLAGS	+=	-W -Wall -Werror -Wextra
 CFLAGS	+= 	-L./lib -lboost_date_time -lboost_random -lboost_system -lpthread -lsioclient -Iinc
 CFLAGS 	+=	-I./inc -I./include -std=c++11
 
@@ -17,7 +17,7 @@ CC	=	g++
 NAME    =	client
 
 SRC	=	src/main.cpp \
-			src/Client.cpp \
+			src/Socket.cpp \
 
 ECHO	=	/bin/echo -e
 DEFAULT	=	"\033[00m"
