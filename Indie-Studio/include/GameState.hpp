@@ -22,6 +22,8 @@
 #include <OgreRenderWindow.h>
 #include <OgreFileSystemLayer.h>
 #include <OgreConfigFile.h>
+#include <OgreColourValue.h>
+#include <OgreException.h>
 //#include <OgreApplicationContext.h>
 
 #include <OgreOggSound/OgreOggSound.h>
@@ -32,6 +34,7 @@
 #include <OISKeyboard.h>
 #include <OISMouse.h>
 #include <OISException.h>
+#include <OIS/OISException.h>
 
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
