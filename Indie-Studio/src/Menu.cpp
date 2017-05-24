@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Mon May 22 18:41:54 2017 gastal_r
+// Last update Wed May 24 12:20:01 2017 Matthias Prost
 //
 
 #include        "Menu.hpp"
@@ -87,8 +87,8 @@ void Menu::createScene(void)
 
 	CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
 
-	CEGUI::Window *newWindow = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("ChatBox.layout");
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(newWindow);
+	// CEGUI::Window *newWindow = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("ChatBox.layout");
+	// CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(newWindow);
 
 	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
 
@@ -140,6 +140,8 @@ bool Menu::frameRenderingQueued(const Ogre::FrameEvent& evt)
   	if (mShutDown) {
   		return false;
   	}
+          mDevice->keyboard->capture();
+          mDevice->mouse->capture();
 
      //Need to inject timestamps to CEGUI System.
     CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
