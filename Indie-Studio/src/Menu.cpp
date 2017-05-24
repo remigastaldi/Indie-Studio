@@ -49,9 +49,11 @@ void Menu::createScene(void)
   CEGUI::System &sys = CEGUI::System::getSingleton();
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
 	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-
+	static 	int i = 0;
 	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
 
+	if (i = 0)
+	{
 	rgm.createResourceGroup("imagesets");
 	rgm.createResourceGroup("fonts");
 	rgm.createResourceGroup("layouts");
@@ -70,6 +72,8 @@ void Menu::createScene(void)
 	CEGUI::Scheme::setDefaultResourceGroup("schemes");
 	CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
 	CEGUI::WindowManager::setDefaultResourceGroup("layouts");
+	i++;
+}
 
 	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
 
