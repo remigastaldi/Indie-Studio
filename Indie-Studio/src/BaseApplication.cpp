@@ -30,7 +30,11 @@ BaseApplication::BaseApplication()
     mKeyboard(0),
     mRenderer(0),
     mSoundManager(0),
-    mCameraMan(0)
+    mCameraMan(0),
+    mRotSpd(0.1),
+    mLMouseDown(false),
+    mRMouseDown(false),
+    mCurObject(0)
 {
     mFSLayer = OGRE_NEW_T(Ogre::FileSystemLayer, Ogre::MEMCATEGORY_GENERAL)(OGRE_VERSION_NAME);
 }
@@ -351,19 +355,67 @@ bool BaseApplication::keyReleased( const OIS::KeyEvent &arg )
 
 bool BaseApplication::mouseMoved( const OIS::MouseEvent &arg )
 {
-    mCameraMan->injectMouseMove(arg);
-    return true;
+//    mCameraMan->injectMouseMove(arg);
+  CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+  context.injectMouseMove(arg.state.X.rel, arg.state.Y.rel);
+  if (mLMouseDown)
+  {
+  }
+  else if (mRMouseDown)
+  {
+    mCamera->yaw(Ogre::Degree(-arg.state.X.rel * mRotSpd));
+    mCamera->pitch(Ogre::Degree(-arg.state.Y.rel * mRotSpd));
+  }
+return true;
+}
+
+// Helper function for mouse events
+CEGUI::MouseButton convertButton(OIS::MouseButtonID id)
+{
+  switch (id)
+  {
+  case OIS::MB_Left:
+    return CEGUI::LeftButton;
+  case OIS::MB_Right:
+    return CEGUI::RightButton;
+  case OIS::MB_Middle:
+    return CEGUI::MiddleButton;
+  default:
+    return CEGUI::LeftButton;
+  }
 }
 
 bool BaseApplication::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
-    mCameraMan->injectMouseDown(arg, id);
-    return true;
+//    mCameraMan->injectMouseDown(arg, id);
+CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+context.injectMouseButtonDown(convertButton(id));
+  if (id == OIS::MB_Left)
+  {
+    mLMouseDown = true;
+  }
+  else if (id == OIS::MB_Right)
+  {
+    mRMouseDown = true;
+    context.getMouseCursor().hide();
+  }
+  return true;
 }
 
 bool BaseApplication::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
-    mCameraMan->injectMouseUp(arg, id);
+//    mCameraMan->injectMouseUp(arg, id);
+CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+context.injectMouseButtonUp(convertButton(id));
+if (id == OIS::MB_Left)
+{
+mLMouseDown = false;
+}
+else if (id == OIS::MB_Right)
+{
+mRMouseDown = false;
+context.getMouseCursor().show();
+}
     return true;
 }
 

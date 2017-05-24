@@ -16,7 +16,11 @@ Map::Map() :
   mShutDown(false),
   _camera(nullptr),
   _cameraMan(nullptr),
-  Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room")
+  Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room"),
+  mRotSpd(0.1),
+  mLMouseDown(false),
+  mRMouseDown(false),
+  mCurObject(0)
 {
 
 }
@@ -49,6 +53,7 @@ void Map::enter(void)
 
 void Map::createScene(void)
 {
+  CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
   mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
   mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
@@ -184,18 +189,67 @@ bool Map::keyReleased( const OIS::KeyEvent &arg )
 
 bool Map::mouseMoved( const OIS::MouseEvent &arg )
 {
-    _cameraMan->injectMouseMove(arg);
-    return true;
+  // _cameraMan->injectMouseMove(arg);
+  CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+  context.injectMouseMove(arg.state.X.rel, arg.state.Y.rel);
+  if (mLMouseDown)
+  {
+  }
+  else if (mRMouseDown)
+  {
+    mCamera->yaw(Ogre::Degree(-arg.state.X.rel * mRotSpd));
+    mCamera->pitch(Ogre::Degree(-arg.state.Y.rel * mRotSpd));
+  }
+  return true;
+}
+
+// Helper function for mouse events
+CEGUI::MouseButton convertButon(OIS::MouseButtonID id)
+{
+  switch (id)
+  {
+  case OIS::MB_Left:
+    return CEGUI::LeftButton;
+  case OIS::MB_Right:
+    return CEGUI::RightButton;
+  case OIS::MB_Middle:
+    return CEGUI::MiddleButton;
+  default:
+    return CEGUI::LeftButton;
+  }
 }
 
 bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
-    _cameraMan->injectMouseDown(arg, id);
-    return true;
+//    _cameraMan->injectMouseDown(arg, id);
+CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+context.injectMouseButtonDown(convertButon(id));
+if (id == OIS::MB_Left)
+{
+mLMouseDown = true;
+}
+else if (id == OIS::MB_Right)
+{
+mRMouseDown = true;
+context.getMouseCursor().hide();
+}
+return true;
 }
 
 bool Map::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
-    _cameraMan->injectMouseUp(arg, id);
+//    _cameraMan->injectMouseUp(arg, id);
+CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+context.injectMouseButtonUp(convertButon(id));
+if (id == OIS::MB_Left)
+{
+mLMouseDown = false;
+}
+else if (id == OIS::MB_Right)
+{
+mRMouseDown = false;
+context.getMouseCursor().show();
+}
+//mCameraMan->injectMouseUp(arg, id);
     return true;
 }

@@ -41,6 +41,8 @@ Application::~Application()
 //-------------------------------------------------------------------------------------
 void Application::createScene()
 {
+	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+
 	//Load the scheme
 	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
 	// Set the defaults
