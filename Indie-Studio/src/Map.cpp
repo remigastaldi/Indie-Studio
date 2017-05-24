@@ -197,8 +197,8 @@ bool Map::mouseMoved( const OIS::MouseEvent &arg )
   }
   else if (mRMouseDown)
   {
-    mCamera->yaw(Ogre::Degree(-arg.state.X.rel * mRotSpd));
-    mCamera->pitch(Ogre::Degree(-arg.state.Y.rel * mRotSpd));
+    // mCamera->yaw(Ogre::Degree(-arg.state.X.rel * mRotSpd));
+    // mCamera->pitch(Ogre::Degree(-arg.state.Y.rel * mRotSpd));
   }
   return true;
 }
