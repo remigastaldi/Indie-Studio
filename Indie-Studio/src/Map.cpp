@@ -5,9 +5,8 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Mon May 22 18:30:54 2017 gastal_r
+// Last update Tue May 23 15:23:08 2017 gastal_r
 //
-
 
 #include        "Map.hpp"
 
@@ -17,9 +16,7 @@ Map::Map() :
   _camera(nullptr),
   _cameraMan(nullptr),
   Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room")
-{
-
-}
+{}
 
 Map::~Map()
 {}
@@ -31,8 +28,8 @@ void Map::enter(void)
   connect();
 
   _camera = mDevice->sceneMgr->createCamera("PlayerCamMap");
-  _camera->setPosition(Ogre::Vector3(0,0,80));
-  _camera->lookAt(Ogre::Vector3(0,0,-300));
+  _camera->setPosition(Ogre::Vector3(0, 0, 80));
+  _camera->lookAt(Ogre::Vector3(0, 0, -300));
   _camera->setNearClipDistance(5);
 
 
@@ -44,7 +41,7 @@ void Map::enter(void)
   _camera->setAspectRatio(
       Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
 
-   createScene();
+  createScene();
 }
 
 void Map::createScene(void)

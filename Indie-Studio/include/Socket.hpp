@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Mon May 22 19:48:15 2017 John Doe
+// Last update Wed May 24 15:41:01 2017 gastal_r
 //
 
 #ifndef _CLIENT_HPP_
@@ -19,6 +19,9 @@
 #include <functional>
 #include <sio_client.h>
 #include <condition_variable>
+#include <unordered_map>
+#include "Entity.hpp"
+#include "GameState.hpp"
 
 #define SOCKET_SERVER "http://ezgames.eu"
 #define SOCKET_PORT 3000
@@ -39,34 +42,34 @@
 
 #endif
 
-class Socket
+class Socket : public GameState
 {
-  private:
-    int                         _id;
-    std::mutex                  _lock;
-    std::condition_variable_any _cond;
-    bool                        _connect_finish;
-    sio::socket::ptr            _current_socket;
-    sio::client                 _client;
-    std::string                 _addr;
-    std::string                 _room;
+public:
+  Socket(std::string const &addr, int const port, int const id, std::string const &room);
+  ~Socket();
+  void  on_connected();
+  void  on_close(sio::client::close_reason const& reason);
+  void  on_fail();
+  void  events();
+  void  connect();
+  void  disconnect();
+  void  wait();
+  void  consoleChat();
+  void  emit(std::string const event, std::shared_ptr<sio::message> const &request);
+  void  move(float fw, float x, float y, float z);
 
-  public:
-    Socket(std::string const &addr, int const port, int const id, std::string const &room);
-    ~Socket();
-    void  on_connected();
-    void  on_close(sio::client::close_reason const& reason);
-    void  on_fail();
-    void  events();
-    void  connect();
-    void  disconnect();
-    void  wait();
-    void  consoleChat();
-    void  emit(std::string const event, std::shared_ptr<sio::message> const &request);
-    void  move(float fw, float x, float y, float z);
+  void sendMessage(std::string const &);
 
-    void sendMessage(std::string const &);
-
+private:
+  int                         _id;
+  std::mutex                  _lock;
+  std::condition_variable_any _cond;
+  bool                        _connect_finish;
+  sio::socket::ptr            _current_socket;
+  sio::client                 _client;
+  std::string                 _addr;
+  std::string                 _room;
+  std::unordered_map<size_t, Entity *>  _entity;
 };
 
 #endif /* _CLIENT_HPP_ */

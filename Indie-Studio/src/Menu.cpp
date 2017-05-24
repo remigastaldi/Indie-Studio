@@ -5,10 +5,11 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Mon May 22 18:41:54 2017 gastal_r
+// Last update Wed May 24 19:16:42 2017 gastal_r
 //
 
 #include        "Menu.hpp"
+#include    "Entity.hpp"
 
 Menu::Menu() :
   mPolygonRenderingMode('B'),
@@ -37,7 +38,7 @@ void Menu::enter(void)
   _camera->setAspectRatio(
       Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
 
-   createScene();
+  createScene();
 }
 
 void Menu::createScene(void)
@@ -56,6 +57,9 @@ void Menu::createScene(void)
   light->setDirection(mNode->getPosition());
 
   _cameraMan->setTarget(mNode);
+
+  Entity *player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 2,
+  Entity::Status::IMMOBILE, {0.f, 0.f, 0.f}, {0.f, 0.f, 0.f, 0.f});
 }
 
 void Menu::exit(void)

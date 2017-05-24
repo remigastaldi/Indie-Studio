@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Mon May 22 11:23:55 2017 John Doe
+** Last update Tue May 23 21:02:14 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -51,7 +51,7 @@ void Socket::on_close(sio::client::close_reason const& reason)
 void Socket::on_fail()
 {
         std::cout << "sio failed: " <<std::endl;
-        exit(0);
+        exit();
 }
 
 void Socket::events()
