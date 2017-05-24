@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:28:18 2017 gastal_r
-// Last update Mon May 22 17:58:01 2017 gastal_r
+// Last update Wed May 24 13:02:02 2017 gastal_r
 //
 
 #include "GameStateManager.hpp"
@@ -77,7 +77,6 @@ void GameStateManager::start(GameState *state)
         mDevice->keyboard->capture();
         mDevice->mouse->capture();
 
-        // run the message pump
         #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
         {
             MSG msg;
@@ -93,6 +92,7 @@ void GameStateManager::start(GameState *state)
             }
         }
         #endif
+        Ogre::WindowEventUtilities::messagePump();
         mDevice->ogre->renderOneFrame();
     }
     Ogre::LogManager::getSingletonPtr()->logMessage("===== End Gameloop =====");
