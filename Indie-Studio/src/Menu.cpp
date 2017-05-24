@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Wed May 24 12:20:01 2017 Matthias Prost
+// Last update Wed May 24 18:21:11 2017 Matthias Prost
 //
 
 #include        "Menu.hpp"
@@ -44,6 +44,25 @@ void Menu::enter(void)
    createScene();
 }
 
+#include <stdlib.h>
+
+bool Menu::buttonPlay(const CEGUI::EventArgs &e)
+{
+  _playButton->destroy();
+  _quitButton->destroy();
+  GameState *menu = findByName("Map");
+  changeGameState(menu);
+  return (true);
+}
+
+bool Menu::buttonQuit(const CEGUI::EventArgs &e)
+{
+  _playButton->destroy();
+  _quitButton->destroy();
+  exit();
+  return (true);
+}
+
 void Menu::createScene(void)
 {
   CEGUI::System &sys = CEGUI::System::getSingleton();
@@ -76,19 +95,12 @@ void Menu::createScene(void)
 }
 
 	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "OgreTray.scheme" );
 
-	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
+	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
 
 	CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
 	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( myRoot );
-
-	CEGUI::Window *myImageWindow = CEGUI::WindowManager::getSingleton().createWindow("TaharezLook/StaticImage","PrettyWindow" );
-	// myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5,0),CEGUI::UDim(0.5,0)));
-	// myImageWindow->setSize(CEGUI::USize(CEGUI::UDim(0,550),CEGUI::UDim(0,200)));
-	myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5,0),CEGUI::UDim(0.5,0)));
-	myImageWindow->setSize(CEGUI::USize(CEGUI::UDim(0,150), CEGUI::UDim(0,100)));
-	myImageWindow->setProperty("Image","TaharezLook/full_image");
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);
 
 //	CEGUI::SchemeManager::getSingleton().createFromFile( "OgreTray.scheme" );
 
@@ -97,30 +109,19 @@ void Menu::createScene(void)
 	// CEGUI::Window *newWindow = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("ChatBox.layout");
 	// CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(newWindow);
 
-	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
+  _playButton = CEGUI::WindowManager::getSingleton().createWindow("Vanilla/Button","JumpPushButton");
+	_playButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.49,0),CEGUI::UDim(0.37,0)));
+	_playButton->setSize(CEGUI::USize(CEGUI::UDim(0,100),CEGUI::UDim(0,60)));
+	_playButton->setText("PLAY");
+  _playButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Menu::buttonPlay, this));
+	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_playButton);
 
-	CEGUI::Window *gJumpBtnWindow = NULL;
-
-	gJumpBtnWindow = CEGUI::WindowManager::getSingleton().createWindow("TaharezLook/Button","JumpPushButton");
-	gJumpBtnWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.75,0),CEGUI::UDim(0.50,0)));
-	gJumpBtnWindow->setSize(CEGUI::USize(CEGUI::UDim(0,100),CEGUI::UDim(0,100)));
-	gJumpBtnWindow->setText("I'M A BEE AMA BEE AMAMAMA BEE");
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(gJumpBtnWindow);
-
-  mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
-  mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-
-  Ogre::Entity* ogreHead = mDevice->sceneMgr->createEntity("Head", "Ogre.mesh");
-  Ogre::SceneNode *mNode = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("HeadNode");
-  mNode->attachObject(ogreHead);
-  mNode->setPosition(_camera->getPosition());
-
-  Ogre::Light* light = mDevice->sceneMgr->createLight("MainLight");
-  mNode->attachObject(light);
-  light->setPosition(mNode->getPosition() + Ogre::Vector3(-84, 0, 30));
-  light->setDirection(mNode->getPosition());
-
-  _cameraMan->setTarget(mNode);
+  _quitButton = CEGUI::WindowManager::getSingleton().createWindow("Vanilla/Button","Exit");
+	_quitButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.49,0),CEGUI::UDim(0.43,0)));
+	_quitButton->setSize(CEGUI::USize(CEGUI::UDim(0,100),CEGUI::UDim(0,60)));
+	_quitButton->setText("QUIT");
+  _quitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
+	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_quitButton);
 }
 
 void Menu::exit(void)
@@ -218,11 +219,6 @@ bool Menu::keyPressed( const OIS::KeyEvent &arg )
     else if(arg.key == OIS::KC_F5)   // refresh all textures
     {
        Ogre::TextureManager::getSingleton().reloadAll();
-    }
-    else if(arg.key == OIS::KC_S)
-    {
-      GameState *menu = findByName("Map");
-      changeGameState(menu);
     }
     else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
     {

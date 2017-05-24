@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Tue May 23 00:09:06 2017 gastal_r
+// Last update Wed May 24 17:08:04 2017 Matthias Prost
 //
 
 #ifndef       _MAP_HPP_
