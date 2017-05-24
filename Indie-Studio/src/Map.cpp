@@ -203,7 +203,7 @@ bool Map::mouseMoved( const OIS::MouseEvent &arg )
   return true;
 }
 
-// Helper function for mouse events
+//Helper function for mouse events
 CEGUI::MouseButton convertButon(OIS::MouseButtonID id)
 {
   switch (id)
@@ -221,7 +221,7 @@ CEGUI::MouseButton convertButon(OIS::MouseButtonID id)
 
 bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
-//    _cameraMan->injectMouseDown(arg, id);
+  // _cameraMan->injectMouseDown(arg, id);
 CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
 context.injectMouseButtonDown(convertButon(id));
 if (id == OIS::MB_Left)
@@ -238,7 +238,7 @@ return true;
 
 bool Map::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
-//    _cameraMan->injectMouseUp(arg, id);
+  //  _cameraMan->injectMouseUp(arg, id);
 CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
 context.injectMouseButtonUp(convertButon(id));
 if (id == OIS::MB_Left)
@@ -250,6 +250,5 @@ else if (id == OIS::MB_Right)
 mRMouseDown = false;
 context.getMouseCursor().show();
 }
-//mCameraMan->injectMouseUp(arg, id);
     return true;
 }
