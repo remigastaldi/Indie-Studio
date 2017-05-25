@@ -93,12 +93,17 @@ protected:
     OIS::InputManager* mInputManager;
     OIS::Mouse*    mMouse;
     OIS::Keyboard* mKeyboard;
+    bool    mLMouseDown;
+    bool    mRMouseDown;
+    float   mRotSpd;
+    Ogre::SceneNode* mCurObject;
 
     // OgreCookies
     OgreCookies::CameraMan* mCameraMan;       // basic camera controller
 
     // CEGUI
     CEGUI::OgreRenderer *mRenderer;
+    CEGUI::MouseCursor  *mCursor;
 
     // OgreOggSound
     OgreOggSound::OgreOggSoundManager *mSoundManager;

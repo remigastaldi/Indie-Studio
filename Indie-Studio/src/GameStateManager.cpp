@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:28:18 2017 gastal_r
-// Last update Wed May 24 13:02:02 2017 gastal_r
+// Last update Wed May 24 13:59:19 2017 Matthias Prost
 //
 
 #include "GameStateManager.hpp"

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:59:44 2017 gastal_r
-// Last update Tue May 23 00:10:32 2017 gastal_r
+// Last update Wed May 24 18:08:13 2017 Matthias Prost
 //
 
 #ifndef _MENU_HPP_
@@ -45,8 +45,27 @@ public:
   virtual bool mousePressed(const OIS::MouseEvent &, OIS::MouseButtonID);
   virtual bool mouseReleased(const OIS::MouseEvent &, OIS::MouseButtonID);
 
+  bool         buttonPlay(const CEGUI::EventArgs &e);
+  bool         buttonQuit(const CEGUI::EventArgs &e);
+
 private:
   char mPolygonRenderingMode;
+
+  Ogre::Camera *mCamera;
+
+  // OgreCookies
+  OgreCookies::CameraMan* mCameraMan;       // basic camera controller
+
+  //OIS Input devices
+  bool    mLMouseDown;
+  bool    mRMouseDown;
+  float   mRotSpd;
+  Ogre::SceneNode* mCurObject;
+
+//CEGUI
+CEGUI::MouseCursor  *mCursor;
+CEGUI::Window *_playButton;
+CEGUI::Window *_quitButton;
 
   bool mShutDown;
   Ogre::Camera *_camera;
