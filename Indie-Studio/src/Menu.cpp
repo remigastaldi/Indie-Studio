@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Wed May 24 18:21:11 2017 Matthias Prost
+// Last update Thu May 25 10:59:11 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -45,8 +45,6 @@ void Menu::enter(void)
   createScene();
 }
 
-#include <stdlib.h>
-
 bool Menu::buttonPlay(const CEGUI::EventArgs &e)
 {
   _playButton->destroy();
@@ -69,35 +67,9 @@ void Menu::createScene(void)
   CEGUI::System &sys = CEGUI::System::getSingleton();
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
 	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-	static 	int i = 0;
-	Ogre::ResourceGroupManager& rgm = Ogre::ResourceGroupManager::getSingleton();
-
-	if (i = 0)
-	{
-	rgm.createResourceGroup("imagesets");
-	rgm.createResourceGroup("fonts");
-	rgm.createResourceGroup("layouts");
-	rgm.createResourceGroup("schemes");
-	rgm.createResourceGroup("looknfeels");
-	rgm.createResourceGroup("schemas");
-
-	rgm.addResourceLocation("../media/interface/schemes/", "FileSystem", "schemes");
-	rgm.addResourceLocation("../media/interface/imagesets/", "FileSystem", "imagesets");
-	rgm.addResourceLocation("../media/interface/fonts/", "FileSystem", "fonts");
-	rgm.addResourceLocation("../media/interface/layouts/", "FileSystem", "layouts");
-	rgm.addResourceLocation("../media/interface/looknfeels/", "FileSystem", "looknfeels");
-
-	CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
-	CEGUI::Font::setDefaultResourceGroup("fonts");
-	CEGUI::Scheme::setDefaultResourceGroup("schemes");
-	CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
-	CEGUI::WindowManager::setDefaultResourceGroup("layouts");
-	i++;
-  _cameraMan->setTarget(mNode);
 
   Entity *player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 2,
-  Entity::Status::IMMOBILE, {0.f, 0.f, 0.f}, {0.f, 0.f, 0.f, 0.f});
-}
+    Entity::Status::IMMOBILE, {0.f, 0.f, 0.f}, {0.f, 0.f, 0.f, 0.f});
 
 	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
   CEGUI::SchemeManager::getSingleton().createFromFile( "OgreTray.scheme" );
