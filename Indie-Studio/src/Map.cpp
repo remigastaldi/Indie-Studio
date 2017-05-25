@@ -15,6 +15,7 @@ Map::Map() :
   mShutDown(false),
   _camera(nullptr),
   _cameraMan(nullptr),
+  mTerrainGroup(0),
   Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room"),
   mRotSpd(0.1),
   mLMouseDown(false),
@@ -189,8 +190,8 @@ bool Map::mouseMoved( const OIS::MouseEvent &arg )
   }
   else if (mRMouseDown)
   {
-    // mCamera->yaw(Ogre::Degree(-arg.state.X.rel * mRotSpd));
-    // mCamera->pitch(Ogre::Degree(-arg.state.Y.rel * mRotSpd));
+    _camera->yaw(Ogre::Degree(-arg.state.X.rel * mRotSpd));
+    _camera->pitch(Ogre::Degree(-arg.state.Y.rel * mRotSpd));
   }
   return true;
 }
@@ -218,12 +219,37 @@ CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext(
 context.injectMouseButtonDown(convertButon(id));
 if (id == OIS::MB_Left)
 {
-mLMouseDown = true;
+  mLMouseDown = true;
+  //
+  CEGUI::Vector2f mousePos = context.getMouseCursor().getPosition();
+  std::cout << "mouse x = " << mousePos.d_x << std::endl;
+  std::cout << "mouse y = " << mousePos.d_y << std::endl;
+    Ogre::Ray mouseRay =
+      _camera->getCameraToViewportRay(
+	mousePos.d_x / float(arg.state.width),
+	mousePos.d_y / float(arg.state.height));
+
+    // Ogre::TerrainGroup::RayResult result = mTerrainGroup->rayIntersects(mouseRay);
+  
+      Entity *player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 2,
+        Entity::Status::IMMOBILE, {0.f, 0.f, 0.f}, {0.f, 0.f, 0.f, 0.f});
+    // if (result.terrain)
+    // {
+    //   Ogre::Entity* ent = mDevice->sceneMgr->createEntity("robot.mesh");
+    //
+    //   mCurObject = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode();
+    //   mCurObject->setPosition(result.position);
+    //   mCurObject->setScale(0.1, 0.1, 0.1);
+    //   mCurObject->attachObject(ent);
+    //
+    //   // Entity *player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 2,
+    //   //   Entity::Status::IMMOBILE, {0.f, 0.f, 0.f}, {0.f, 0.f, 0.f, 0.f});
+    // }
 }
 else if (id == OIS::MB_Right)
 {
-mRMouseDown = true;
-context.getMouseCursor().hide();
+  mRMouseDown = true;
+  context.getMouseCursor().hide();
 }
 return true;
 }

@@ -24,6 +24,8 @@
 #include <OgreConfigFile.h>
 #include <OgreColourValue.h>
 #include <OgreException.h>
+#include <OgreTerrain.h>
+#include <OgreTerrainGroup.h>
 //#include <OgreApplicationContext.h>
 
 #include <OgreOggSound/OgreOggSound.h>

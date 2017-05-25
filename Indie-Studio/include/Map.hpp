@@ -49,11 +49,6 @@ public:
 private:
   char mPolygonRenderingMode;
 
-  Ogre::Camera *mCamera;
-
-  // OgreCookies
-  OgreCookies::CameraMan* mCameraMan;       // basic camera controller
-
   //OIS Input devices
   bool    mLMouseDown;
   bool    mRMouseDown;
@@ -62,6 +57,9 @@ private:
 
 //CEGUI
 CEGUI::MouseCursor  *mCursor;
+
+//Terrain
+Ogre::TerrainGroup* mTerrainGroup;
 
   Ogre::Camera *_camera;
   OgreCookies::CameraMan* _cameraMan;
