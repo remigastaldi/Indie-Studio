@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Tue May 23 21:02:14 2017 gastal_r
+** Last update Thu May 25 11:37:49 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -58,7 +58,7 @@ void Socket::events()
 {
         _current_socket->on("message", sio::socket::event_listener_aux([&](std::string const& name,
                                                                            sio::message::ptr const& data,
-                                                                           bool isAck, sio::message::list &ack_resp)
+                                                                           bool isAck, const sio::message::list &ack_resp)
         {
                 (void)name;
                 (void)isAck;
@@ -75,7 +75,7 @@ void Socket::events()
 
         _current_socket->on("move", sio::socket::event_listener_aux([&](std::string const& name,
                                                                         sio::message::ptr const& data,
-                                                                        bool isAck, sio::message::list &ack_resp)
+                                                                        bool isAck, const sio::message::list &ack_resp)
         {
                 (void)name;
                 (void)isAck;
@@ -92,7 +92,7 @@ void Socket::events()
 
         _current_socket->on("login", sio::socket::event_listener_aux([&](std::string const& name,
                                                                         sio::message::ptr const& data,
-                                                                        bool isAck, sio::message::list &ack_resp)
+                                                                        bool isAck, const sio::message::list &ack_resp)
         {
                 (void)name;
                 (void)isAck;
@@ -107,7 +107,7 @@ void Socket::events()
 
         _current_socket->on("logout", sio::socket::event_listener_aux([&](std::string const& name,
                                                                         sio::message::ptr const& data,
-                                                                        bool isAck, sio::message::list &ack_resp)
+                                                                        bool isAck, const sio::message::list &ack_resp)
         {
                 (void)name;
                 (void)isAck;
@@ -146,7 +146,7 @@ void Socket::wait()
         _lock.unlock();
 }
 
-void Socket::emit(std::string const event, std::shared_ptr<sio::message> const &request)
+void Socket::emit(const std::string &event, std::shared_ptr<sio::message> const &request)
 {
         _current_socket->emit(event, request);
 }
