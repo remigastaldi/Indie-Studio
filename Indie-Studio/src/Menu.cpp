@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Thu May 25 11:04:05 2017 gastal_r
+// Last update Thu May 25 20:46:09 2017 Matthias Prost
 //
 
 #include        "Menu.hpp"
@@ -85,6 +85,10 @@ void Menu::createScene(void)
 
 	// CEGUI::Window *newWindow = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("ChatBox.layout");
 	// CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(newWindow);
+
+  CEGUI::Window *newWindow = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("SampleBrowser.layout");
+
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(newWindow);
 
   _playButton = CEGUI::WindowManager::getSingleton().createWindow("Vanilla/Button","JumpPushButton");
 	_playButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.49,0),CEGUI::UDim(0.37,0)));
