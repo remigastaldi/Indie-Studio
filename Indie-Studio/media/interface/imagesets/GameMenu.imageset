@@ -1,4 +1,4 @@
-<Imageset autoScaled="vertical" imagefile="GameMenu.png" name="GameMenuImages" nativeHorzRes="1024" nativeVertRes="720" version="2">
+<Imageset autoScaled="vertical" imagefile="GameMenu.png" name="GameMenuImages" nativeHorzRes="1920" nativeVertRes="1080" version="2">
     <Image height="220" name="CenterImageInside" width="220" xPos="55" yPos="1256" />
     <Image height="356" name="CenterImageOutside1" width="353" xPos="747" yPos="242" />
     <Image height="332" name="CenterImageOutside2" width="328" xPos="340" yPos="254" />
@@ -8,7 +8,7 @@
     <Image height="99" name="CenterImageButtonBOTH" width="99" xPos="1887" yPos="454" />
     <Image height="40" name="CenterImageButtonStartButt" width="100" xPos="1742" yPos="526" />
     <Image height="37" name="MouseCursor" width="36" xPos="1983" yPos="202" />
-    <Image height="1" name="Background" width="1" xPos="220" yPos="1400" />
+    <Image height="1080" name="Background" width="1920" xPos="2110" yPos="1421" />
     <Image height="140" name="TopBar" width="1920" xPos="0" yPos="0" />
     <Image height="140" name="BotBar" width="1844" xPos="0" yPos="1908" />
     <Image height="56" name="ButtonOptionsIcon" width="56" xPos="1972" yPos="277" />

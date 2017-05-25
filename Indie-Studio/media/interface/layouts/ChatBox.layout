@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="Vanilla/FrameWindow" name="Console" >
+        <Property name="Area" value="{{0.5,2},{0.5,45},{1,2},{0.95,56}}" />
+        <Property name="Font" value="DejaVuSans-14-NoScale" />
+        <Property name="Text" value="Chat" />
+        <Property name="Alpha" value="0.5" />
+        <Property name="MaxSize" value="{{0.8,0},{0.8,0}}" />
+        <Property name="MinSize" value="{{0.2,0},{0.2,0}}" />
+        <Property name="TitlebarFont" value="Jura-18" />
+        <AutoWindow namePath="__auto_titlebar__" >
+            <Property name="Font" value="Jura-18" />
+        </AutoWindow>
+        <Window type="Vanilla/Button" name="Submit" >
+            <Property name="ID" value="1" />
+            <Property name="Area" value="{{0,-7},{0,-7},{0.25,-7},{0,23}}" />
+            <Property name="Text" value="Envoyer" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="VerticalAlignment" value="Bottom" />
+            <Property name="HorizontalAlignment" value="Right" />
+        </Window>
+        <Window type="Vanilla/MultiLineEditbox" name="History" >
+            <Property name="ID" value="3" />
+            <Property name="Area" value="{{0,7},{0,7},{1,-6},{1,-40}}" />
+            <Property name="Font" value="Jura-18" />
+            <Property name="Text" >Bienvenue !
+
+Nos serveurs sont en ligne, vous pouvez désormais discuter avec d&apos;autres joueurs et vous organiser pour casser des bouches.
+
+N&apos;oubliez pas de vous healer régulièrement pour ne pas mourrir.
+
+Faites attentions aux mobs qui sont cachés dans des buissons il peuvent vous attaquer par surprise.
+
+Bonne partie !
+</Property>
+            <Property name="Alpha" value="0.7" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="ReadOnly" value="true" />
+            <Property name="InheritsAlpha" value="false" />
+            <Property name="WantsMultiClickEvents" value="false" />
+        </Window>
+        <Window type="Vanilla/Editbox" name="Editbox" >
+            <Property name="ID" value="2" />
+            <Property name="Area" value="{{0,7},{0,-7},{0.75,-14},{0,23}}" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="UpdateMode" value="Always" />
+            <Property name="AlwaysOnTop" value="true" />
+            <Property name="VerticalAlignment" value="Bottom" />
+        </Window>
+    </Window>
+</GUILayout>

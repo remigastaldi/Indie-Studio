@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="Generic/Image" name="Image" >
+        <Property name="Area" value="{{-0.000520833,0},{0.00277778,0},{0.999479,0},{1.00278,0}}" />
+        <Property name="Image" value="WindowsLook/WindowFrameTopRight" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+    </Window>
+</GUILayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project CEGUIDefaultResolution="1920x1080" CEGUIVersion="0.8" baseDirectory="." fontsPath="fonts" imagesetsPath="imagesets" layoutsPath="layouts" looknfeelsPath="looknfeel" schemesPath="schemes" version="CEED Project 1" xmlSchemasPath="xml_schemas">
+    <Items>
+        <Item name="images" type="folder">
+            <Item path="imagesets/AlfiskoSkin.imageset" type="file" />
+            <Item path="imagesets/AlfiskoSkin.png" type="file" />
+            <Item path="imagesets/Aliasing.jpg" type="file" />
+            <Item path="imagesets/BackgroundSampleBrowser.jpg" type="file" />
+            <Item path="imagesets/DriveIcons.imageset" type="file" />
+            <Item path="imagesets/DriveIcons.png" type="file" />
+            <Item path="imagesets/FairChar.imageset" type="file" />
+            <Item path="imagesets/FairChar.png" type="file" />
+            <Item path="imagesets/GameMenu.imageset" type="file" />
+            <Item path="imagesets/GameMenu.png" type="file" />
+            <Item path="imagesets/HUDDemo.imageset" type="file" />
+            <Item path="imagesets/HUDDemo.png" type="file" />
+            <Item path="imagesets/HUDDemoGameOver.png" type="file" />
+            <Item path="imagesets/OgreTray.imageset" type="file" />
+            <Item path="imagesets/OgreTrayImages.png" type="file" />
+            <Item path="imagesets/ReadMe.txt" type="file" />
+            <Item path="imagesets/SampleBrowser.imageset" type="file" />
+            <Item path="imagesets/SampleBrowser.png" type="file" />
+            <Item path="imagesets/SpaceBackground.jpg" type="file" />
+            <Item path="imagesets/TaharezLook.imageset" type="file" />
+            <Item path="imagesets/TaharezLook.png" type="file" />
+            <Item path="imagesets/Vanilla.imageset" type="file" />
+            <Item path="imagesets/WindowsLook.imageset" type="file" />
+            <Item path="imagesets/WindowsLook.png" type="file" />
+            <Item path="imagesets/logo.png" type="file" />
+            <Item path="imagesets/mainMenu.imageset" type="file" />
+            <Item path="imagesets/vanilla.png" type="file" />
+        </Item>
+        <Item name="layout" type="folder">
+            <Item path="layouts/ChatBox.layout" type="file" />
+            <Item path="layouts/Console.wnd" type="file" />
+            <Item path="layouts/Demo8.layout" type="file" />
+            <Item path="layouts/DragDropDemo.layout" type="file" />
+            <Item path="layouts/EffectsDemo.layout" type="file" />
+            <Item path="layouts/FontDemo.layout" type="file" />
+            <Item path="layouts/GameMenu.layout" type="file" />
+            <Item path="layouts/HUDDemoGameOver.layout" type="file" />
+            <Item path="layouts/HUDDemoIngame.layout" type="file" />
+            <Item path="layouts/SampleBrowser.layout" type="file" />
+            <Item path="layouts/SampleBrowserLoadScreen.layout" type="file" />
+            <Item path="layouts/TabControlDemo.layout" type="file" />
+            <Item path="layouts/TabPage.layout" type="file" />
+            <Item path="layouts/TabPage1.layout" type="file" />
+            <Item path="layouts/TabPage2.layout" type="file" />
+            <Item path="layouts/TaharezLookOverview.layout" type="file" />
+            <Item path="layouts/TextDemo.layout" type="file" />
+            <Item path="layouts/TreeDemoTaharez.layout" type="file" />
+            <Item path="layouts/VanillaConsole.layout" type="file" />
+            <Item path="layouts/VanillaLookOverview.layout" type="file" />
+            <Item path="layouts/VanillaWindows.layout" type="file" />
+            <Item path="layouts/application_templates.layout" type="file" />
+            <Item path="layouts/mainMenu.layout" type="file" />
+        </Item>
+        <Item name="looknfeel" type="folder">
+            <Item path="looknfeel/AlfiskoSkin.looknfeel" type="file" />
+            <Item path="looknfeel/GameMenu.looknfeel" type="file" />
+            <Item path="looknfeel/Generic.looknfeel" type="file" />
+            <Item path="looknfeel/HUDDemo.looknfeel" type="file" />
+            <Item path="looknfeel/InventoryComponents.looknfeel" type="file" />
+            <Item path="looknfeel/OgreTray.looknfeel" type="file" />
+            <Item path="looknfeel/SampleBrowser.looknfeel" type="file" />
+            <Item path="looknfeel/TaharezLook.looknfeel" type="file" />
+            <Item path="looknfeel/Vanilla.looknfeel" type="file" />
+            <Item path="looknfeel/VanillaCommonDialogs.looknfeel" type="file" />
+            <Item path="looknfeel/WindowsLook.looknfeel" type="file" />
+        </Item>
+        <Item name="schemes" type="folder">
+            <Item path="schemes/AlfiskoSkin.scheme" type="file" />
+            <Item path="schemes/GameMenu.scheme" type="file" />
+            <Item path="schemes/Generic.scheme" type="file" />
+            <Item path="schemes/HUDDemo.scheme" type="file" />
+            <Item path="schemes/OgreTray.scheme" type="file" />
+            <Item path="schemes/SampleBrowser.scheme" type="file" />
+            <Item path="schemes/TaharezLook.scheme" type="file" />
+            <Item path="schemes/VanillaCommonDialogs.scheme" type="file" />
+            <Item path="schemes/VanillaSkin.scheme" type="file" />
+            <Item path="schemes/WindowsLook.scheme" type="file" />
+            <Item path="schemes/mainMenu.scheme" type="file" />
+        </Item>
+    </Items>
+</Project>
