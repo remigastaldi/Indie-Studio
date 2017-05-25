@@ -64,12 +64,20 @@ private:
 
 //CEGUI
 CEGUI::MouseCursor  *mCursor;
+CEGUI::Window* myRoot;
+CEGUI::Window *newWindow;
 CEGUI::Window *_playButton;
 CEGUI::Window *_quitButton;
 
   bool mShutDown;
   Ogre::Camera *_camera;
   OgreCookies::CameraMan* _cameraMan;
+
+  //Menu button
+  CEGUI::Window* d_loginContainer;
+  CEGUI::Window* d_loginAcceptButton;
+  CEGUI::String d_userName;
+
 };
 
 #endif /* end of include guard: _MENU_HPP_ */
