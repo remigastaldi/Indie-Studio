@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Thu May 25 20:46:09 2017 Matthias Prost
+// Last update Fri May 26 00:43:58 2017 Matthias Prost
 //
 
 #include        "Menu.hpp"
@@ -102,15 +102,16 @@ void Menu::createScene(void)
 
   CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
 
-  newWindow = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Menu.layout");
+  newWindow = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("GameMenu.layout");
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(newWindow);
 
   CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
 
-  d_loginContainer = newWindow->getChild("LoginContainer");
-
-  d_loginAcceptButton = d_loginContainer->getChild("AcceptButton");
+  d_loginAcceptButton = newWindow->getChild("Button");
   d_loginAcceptButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonPlay, this));
+
+  d_loginAcceptButton = newWindow->getChild("Button2");
+  d_loginAcceptButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
 
 }
 
