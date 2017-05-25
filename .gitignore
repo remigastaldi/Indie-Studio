@@ -50,5 +50,5 @@ libs/ogg/OgreOggSound-v1.26/build/Makefile
 Indie-Studio.VC.db
 *.db
 install_manifest\.txt
-
+.suo
 Indie-Studio/dist/IndieStudio
