@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Thu May 25 10:59:11 2017 gastal_r
+// Last update Thu May 25 11:04:05 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -58,7 +58,7 @@ bool Menu::buttonQuit(const CEGUI::EventArgs &e)
 {
   _playButton->destroy();
   _quitButton->destroy();
-  exit();
+  Shutdown();
   return (true);
 }
 
