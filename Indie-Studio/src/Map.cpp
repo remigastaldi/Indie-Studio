@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Tue May 23 15:23:08 2017 gastal_r
+// Last update Thu May 25 15:56:57 2017 Matthias Prost
 //
 
 #include        "Map.hpp"
@@ -155,11 +155,6 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
     else if(arg.key == OIS::KC_F5)   // refresh all textures
     {
       Ogre::TextureManager::getSingleton().reloadAll();
-    }
-    else if(arg.key == OIS::KC_S)
-    {
-      GameState *menu = findByName("Menu");
-      changeGameState(menu);
     }
     else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
     {
