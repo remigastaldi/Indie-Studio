@@ -9,6 +9,12 @@ function Entity(id, username, type) {
     return (this.pos);
   }
 
+  this.setPosition = function (x, y, z) {
+    this.pos.x = x;
+    this.pos.y = y;
+    this.pos.z = z;
+  }
+
   return (this);
 }
 
