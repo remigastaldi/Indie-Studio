@@ -37,6 +37,10 @@
 #include "Shapes/OgreBulletCollisionsStaticPlaneShape.h"
 #include "Shapes/OgreBulletCollisionsBoxShape.h"
 #include "Shapes/OgreBulletCollisionsTrimeshShape.h"
+#include "Shapes/OgreBulletCollisionsMultiSphereShape.h"
+#include "Shapes/OgreBulletCollisionsSphereShape.h"
+#include "Shapes/OgreBulletCollisionsCompoundShape.h"
+#include "Shapes/OgreBulletCollisionsCapsuleShape.h"
 #include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
 
 class BaseApplication : public Ogre::WindowEventListener, public Ogre::FrameListener, public OIS::KeyListener, public OIS::MouseListener
