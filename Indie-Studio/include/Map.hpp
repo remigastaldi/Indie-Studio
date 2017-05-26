@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Fri May 26 18:15:52 2017 Matthias Prost
+// Last update Fri May 26 19:35:04 2017 Matthias Prost
 //
 
 #ifndef       _MAP_HPP_
@@ -57,7 +57,8 @@ private:
 
 //CEGUI
 CEGUI::MouseCursor  *mCursor;
-CEGUI::Window *test;
+CEGUI::Window* _myRoot;
+CEGUI::Window *_ui;
 
 //Terrain
 Ogre::TerrainGroup* mTerrainGroup;

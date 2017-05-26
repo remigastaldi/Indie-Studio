@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Fri May 26 18:41:57 2017 Matthias Prost
+// Last update Fri May 26 19:39:15 2017 Matthias Prost
 //
 
 #include        "Menu.hpp"
@@ -92,6 +92,7 @@ void Menu::createScene(void)
   CEGUI::SchemeManager::getSingleton().createFromFile( "Generic.scheme" );
   CEGUI::SchemeManager::getSingleton().createFromFile( "GameMenu.scheme" );
   CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "SampleBrowser.scheme" );
 
   CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
 

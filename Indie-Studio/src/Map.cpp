@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Fri May 26 18:30:17 2017 Matthias Prost
+// Last update Fri May 26 19:40:15 2017 Matthias Prost
 //
 
 #include        "Map.hpp"
@@ -51,31 +51,11 @@ void Map::enter(void)
 
 void Map::createScene(void)
 {
-  // CEGUI::System &sys = CEGUI::System::getSingleton();
-  // CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-  // CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-  // // Ogre::ResourceGroupManager& files = Ogre::ResourceGroupManager::getSingleton();
-  //
-  // // files.createResourceGroup("imagesets");
-  // // files.createResourceGroup("fonts");
-  // // files.createResourceGroup("layouts");
-  // // files.createResourceGroup("schemes");
-  // // files.createResourceGroup("looknfeels");
-  // // files.createResourceGroup("schemas");
-  //
-  // CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
-  // CEGUI::Font::setDefaultResourceGroup("fonts");
-  // CEGUI::Scheme::setDefaultResourceGroup("schemes");
-  // CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
-  // CEGUI::WindowManager::setDefaultResourceGroup("layouts");
-  //
-  // CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
-  // CEGUI::SchemeManager::getSingleton().createFromFile( "OgreTray.scheme" );
-  // CEGUI::SchemeManager::getSingleton().createFromFile( "Generic.scheme" );
-  // CEGUI::SchemeManager::getSingleton().createFromFile( "GameMenu.scheme" );
-  //
-  // test = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("GameMenu.layout");
-  // CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(test);
+  _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
+  CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
+
+  _ui = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("UI_IG.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
 
   mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
   mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
