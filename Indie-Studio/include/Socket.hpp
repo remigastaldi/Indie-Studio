@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Thu May 25 11:36:37 2017 gastal_r
+// Last update Fri May 26 13:54:22 2017 Leo HUBERT
 //
 
 #ifndef _CLIENT_HPP_
@@ -59,6 +59,7 @@ public:
   void  move(float fw, float x, float y, float z);
 
   void sendMessage(std::string const &);
+  void sendEntity(Entity const &);
 
 private:
   int                         _id;

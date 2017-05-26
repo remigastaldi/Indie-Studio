@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Thu May 25 11:37:49 2017 gastal_r
+** Last update Fri May 26 13:58:03 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -90,6 +90,24 @@ void Socket::events()
                 _lock.unlock();
         }));
 
+        _current_socket->on("create_entity", sio::socket::event_listener_aux([&](std::string const& name,
+                                                                        sio::message::ptr const& data,
+                                                                        bool isAck, const sio::message::list &ack_resp)
+        {
+                (void)name;
+                (void)isAck;
+                (void)ack_resp;
+                _lock.lock();
+
+                std::cout << data->get_map()["send_to"]->get_string() << '\n';
+
+                if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
+                {
+                  //CODE OF create_entity
+                }
+                _lock.unlock();
+        }));
+
         _current_socket->on("login", sio::socket::event_listener_aux([&](std::string const& name,
                                                                         sio::message::ptr const& data,
                                                                         bool isAck, const sio::message::list &ack_resp)
@@ -149,6 +167,15 @@ void Socket::wait()
 void Socket::emit(const std::string &event, std::shared_ptr<sio::message> const &request)
 {
         _current_socket->emit(event, request);
+}
+
+void Socket::sendEntity(Entity const &entity)
+{
+        auto obj = sio::object_message::create();
+        obj.get()->get_map()["message"] =  sio::string_message::create("TEST");
+        obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
+        obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
+        emit("create_entity", obj);
 }
 
 void Socket::sendMessage(std::string const &message)
