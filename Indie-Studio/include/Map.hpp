@@ -51,6 +51,17 @@ public:
 private:
   char mPolygonRenderingMode;
 
+  //OgreBullet
+  int mNumEntitiesInstanced;
+  OgreBulletDynamics::DynamicsWorld *mWorld;
+  std::deque<OgreBulletCollisions::CollisionShape *>  mShapes;
+  std::deque<OgreBulletDynamics::RigidBody *>         mBodies;
+  Ogre::AxisAlignedBox                                mBounds;
+  Ogre::Vector3                                       mGravityVector;
+  OgreBulletCollisions::DebugDrawer                   *debugDrawer;
+
+  Ogre::Camera *mCamera;
+
   // OgreCookies
   OgreCookies::CameraMan* mCameraMan;       // basic camera controller
 

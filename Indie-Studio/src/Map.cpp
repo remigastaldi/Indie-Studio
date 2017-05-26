@@ -20,6 +20,9 @@ Map::Map() :
   mLMouseDown(false),
   mRMouseDown(false),
   mCurObject(0),
+  mGravityVector(Ogre::Vector3(0,-9.81,0)),
+  mBounds(Ogre::AxisAlignedBox(Ogre::Vector3 (-10000, -10000, -10000),
+  Ogre::Vector3 (10000,  10000,  10000))),
   _rayCast(nullptr)
 {}
 
@@ -69,6 +72,38 @@ void Map::createScene(void)
   spotLight1->setType(Ogre::Light::LT_POINT);
   spotLight1->setDirection(0, 0, 0);
   spotLight1->setPosition(Ogre::Vector3(0, 40, 0));
+
+  mWorld = new OgreBulletDynamics::DynamicsWorld(mDevice->sceneMgr, mBounds, mGravityVector);
+	debugDrawer = new OgreBulletCollisions::DebugDrawer();
+	debugDrawer->setDrawWireframe(true);
+
+
+	mWorld->setDebugDrawer(debugDrawer);
+	mWorld->setShowDebugShapes(true);
+	// mNode->attachObject(static_cast <Ogre::SimpleRenderable *> (debugDrawer));
+
+  Ogre::Entity *ent;
+	Ogre::Plane p;
+	p.normal = Ogre::Vector3(0,1,0);
+	p.d = 0;
+	Ogre::MeshManager::getSingleton().createPlane("FloorPlane",
+  Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+  p, 200000, 200000, 20, 20, true, 1, 9000, 9000,
+  Ogre::Vector3::UNIT_Z);
+	ent = mDevice->sceneMgr->createEntity("floor", "FloorPlane");
+	ent->setMaterialName("Examples/Rockwall");
+  mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(ent);
+
+  OgreBulletCollisions::CollisionShape *Shape;
+
+  Shape = new OgreBulletCollisions::StaticPlaneCollisionShape(Ogre::Vector3(0,1,0), 0);
+
+  OgreBulletDynamics::RigidBody *defaultPlaneBody = new OgreBulletDynamics::RigidBody("BasePlane",
+                                mWorld);
+  defaultPlaneBody->setStaticShape(Shape, 0.1, 0.8);// (shape, restitution, friction)
+      // push the created objects to the deques
+  mShapes.push_back(Shape);
+  mBodies.push_back(defaultPlaneBody);
 }
 
 void Map::exit(void)
@@ -86,6 +121,7 @@ void Map::exit(void)
 
 bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
 {
+  mWorld->stepSimulation(evt.timeSinceLastFrame);
   return true;
 }
 
@@ -109,12 +145,123 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 bool Map::frameEnded(const Ogre::FrameEvent& evt)
 {
+  mWorld->stepSimulation(evt.timeSinceLastFrame);
   return (true);
 }
 
 //-------------------------------------------------------------------------------------
 bool Map::keyPressed( const OIS::KeyEvent &arg )
 {
+  if(arg.key == OIS::KC_B)
+  {
+    Ogre::Vector3 size = Ogre::Vector3::ZERO;	// size of the box
+    // starting position of the box
+    Ogre::Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 10);
+
+    // create an ordinary, Ogre mesh with texture
+    Ogre::Entity *entity = mDevice->sceneMgr->createEntity(
+        "Barrel" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
+        "Barrel.mesh");
+    entity->setCastShadows(true);
+    // we need the bounding box of the box to be able to set the size of the Bullet-box
+
+    Ogre::SceneNode *node = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode();
+    node->attachObject(entity);
+
+    // const Ogre::Real       gSphereBodyBounds    = 1.0f;
+    //
+    // OgreBulletCollisions::SphereCollisionShape *sceneCubeShape =
+    // new OgreBulletCollisions::SphereCollisionShape(gSphereBodyBounds);
+
+
+    // after that create the Bullet shape with the calculated size
+    OgreBulletCollisions::StaticMeshToShapeConverter *trimeshConverter = new
+      OgreBulletCollisions::StaticMeshToShapeConverter(entity);
+
+      OgreBulletCollisions::TriangleMeshCollisionShape *sceneTriMeshShape = NULL;
+      sceneTriMeshShape = trimeshConverter->createTrimesh();
+      delete trimeshConverter;
+
+    // and the Bullet rigid body
+    OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
+        "defaulRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
+        mWorld);
+
+        // BtOgre::StaticMeshToShapeConverter convProva(entity);
+        btCollisionShape* shProva;
+        // shProva->setLocalScaling(BtOgre::Convert::toBullet(nProva->getScale()));
+        // btRigidBody* rbProva=this->createRigidBody(0.1,nProva,tr,shProva);
+
+    defaultBody->setShape(node,
+          sceneTriMeshShape,
+          0.6f,			// dynamic body restitution
+          0.6f,			// dynamic body friction
+          1.0f, 			// dynamic bodymass
+          position,		// starting position of the box
+          Ogre::Quaternion(180,0,0,1));// orientation of the box
+      mNumEntitiesInstanced++;
+
+      defaultBody->enableActiveState();
+      mWorld->addRigidBody(defaultBody,0,0);
+      defaultBody->setLinearVelocity(
+      _camera->getDerivedDirection().normalisedCopy() * 7.0f ); // shooting speed
+    // push the created objects to the dequese
+    mShapes.push_back(sceneTriMeshShape);
+    mBodies.push_back(defaultBody);
+    //mTimeUntilNextToggle = 0.5;
+  }
+
+  if(arg.key == OIS::KC_V)
+  {
+    Ogre::Vector3 size = Ogre::Vector3::ZERO;
+    Ogre::Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 10);
+
+    Ogre::Entity *entity = mDevice->sceneMgr->createEntity(
+        "Barrel" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
+        "Barrel.mesh");
+    entity->setCastShadows(true);
+    // we need the bounding box of the box to be able to set the size of the Bullet-box
+    Ogre::AxisAlignedBox boundingB = entity->getBoundingBox();
+    size = boundingB.getSize();
+    size /= 2.0f; // only the half needed
+    size *= 0.95f;	// Bullet margin is a bit bigger so we need a smaller size
+// 									(Bullet 2.76 Physics SDK Manual page 18)
+   size = boundingB.getSize()*0.95f;
+    //entity->setMaterialName("barrel");
+    Ogre::SceneNode *node = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode();
+    node->attachObject(entity);
+    //node->scale(20f, 20f, 20f);	// the cube is too big for us
+  // 	size *= 0.05f;						// don't forget to scale down the Bullet-box too
+
+    // after that create the Bullet shape with the calculated size
+    OgreBulletCollisions::BoxCollisionShape *sceneBoxShape =
+    new OgreBulletCollisions::BoxCollisionShape(size);
+
+    // and the Bullet rigid body
+    OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
+        "defaultBoxRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
+        mWorld);
+
+    // OgreBulletCollisions::CollisionShape *collisionShape =
+    defaultBody->setShape(node,
+          sceneBoxShape,
+          0.6f,			// dynamic body restitution
+          100.f,			// dynamic body friction
+          1000.0f, 			// dynamic bodymass
+          position,		// starting position of the box
+          Ogre::Quaternion(180,0,0,1));// orientation of the box
+      mNumEntitiesInstanced++;
+
+      defaultBody->enableActiveState();
+      mWorld->addRigidBody(defaultBody,0,0);
+      defaultBody->setLinearVelocity(
+      _camera->getDerivedDirection().normalisedCopy() * 7.0f ); // shooting speed
+    // push the created objects to the dequese
+    mShapes.push_back(sceneBoxShape);
+    mBodies.push_back(defaultBody);
+    //mTimeUntilNextToggle = 0.5;
+  }
+
     if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
     {
         Ogre::TextureFilterOptions tfo;
