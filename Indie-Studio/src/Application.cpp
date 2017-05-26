@@ -96,8 +96,8 @@ void Application::createScene()
 	jinx->setMaxDistance(800.f);
 	mNode->attachObject(jinx);
 
-	Ogre::SceneNode *map = mSceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
-
+	Ogre::SceneNode *map = mSceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0, 27, 0));
+	// Ogre::Entity castle = static_cast<Entity*>(map->getAttachedObject(0));
 	DotSceneLoader loader;
    loader.parseDotScene("map.scene","General", mSceneMgr, map);
 
@@ -180,6 +180,12 @@ bool Application::processUnbufferedKeyInput(const Ogre::FrameEvent& evt)
  			Ogre::SceneNode *node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
  			node->attachObject(entity);
 
+			// const Ogre::Real       gSphereBodyBounds    = 1.0f;
+			//
+			// OgreBulletCollisions::SphereCollisionShape *sceneCubeShape =
+			// new OgreBulletCollisions::SphereCollisionShape(gSphereBodyBounds);
+
+
  			// after that create the Bullet shape with the calculated size
 			OgreBulletCollisions::StaticMeshToShapeConverter *trimeshConverter = new
       	OgreBulletCollisions::StaticMeshToShapeConverter(entity);
@@ -190,8 +196,13 @@ bool Application::processUnbufferedKeyInput(const Ogre::FrameEvent& evt)
 
  			// and the Bullet rigid body
 			OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
- 					"defaultBoxRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
+ 					"defaulRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
  					mWorld);
+
+					// BtOgre::StaticMeshToShapeConverter convProva(entity);
+					btCollisionShape* shProva;
+					// shProva->setLocalScaling(BtOgre::Convert::toBullet(nProva->getScale()));
+					// btRigidBody* rbProva=this->createRigidBody(0.1,nProva,tr,shProva);
 
  			defaultBody->setShape(node,
  						sceneTriMeshShape,
