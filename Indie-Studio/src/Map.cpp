@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Fri May 26 15:55:28 2017 gastal_r
+// Last update Fri May 26 17:13:06 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -51,19 +51,24 @@ void Map::enter(void)
 
 void Map::createScene(void)
 {
-	_player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 2,
-		Entity::Status::IMMOBILE, { 0, 0, 25.0 }, { 0.f, 0.f, 0.f, 0.f });
-	//_player->setCamera(_cameraMan);
-	_player->setDestination({ 550, 0, 50 });
+	_player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 42,
+		Entity::Status::IMMOBILE, { 0, 30, 0.0 }, { 0.f, 0.f, 0.f, 0.f });
+//	_player->setCamera(_cameraMan);
+	//_player->setDestination({ 550, 0, 50 });
 	sendEntity(*_player);
 	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-	mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
+	mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
 	mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 	Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
 	DotSceneLoader loader;
 	loader.parseDotScene("moutain.scene","General", mDevice->sceneMgr, map);
   map->setPosition({0.f, 0.f, 0.f});
+
+  Ogre::Light* spotLight1 = mDevice->sceneMgr->createLight("SpotLight1");
+  spotLight1->setType(Ogre::Light::LT_POINT);
+  spotLight1->setDirection(0, 0, 0);
+  spotLight1->setPosition(Ogre::Vector3(0, 40, 0));
 }
 
 void Map::exit(void)
@@ -99,7 +104,6 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
     _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
     mDevice->soundManager->update(evt.timeSinceLastFrame);
 
-	//_player->goToLocation(evt.timeSinceLastFrame);
     return true;
 }
 
@@ -244,7 +248,7 @@ void  Map::mouseRaycast(void)
     _rayCast->setRay(ray);
 
    _rayCast->setSortByDistance(true, 1);
-   _rayCast->setQueryTypeMask(Ogre::SceneManager::ENTITY_TYPE_MASK);
+   //_rayCast->setQueryTypeMask(Ogre::SceneManager::WORLD_GEOMETRY_TYPE_MASK);
 
    Ogre::RaySceneQueryResult res = _rayCast->execute();
    Ogre::RaySceneQueryResult::iterator it = res.begin();
@@ -255,6 +259,7 @@ void  Map::mouseRaycast(void)
     float mSelectedEntityDist = it->distance;
     Ogre::Vector3 pos = ray.getPoint(mSelectedEntityDist);
     std::cout << "POS X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
+    _player->setDestination(pos);
     printf("clicked: %s Distance %f\n", mSelectedEntity->getName().c_str(), mSelectedEntityDist);
   }
   else

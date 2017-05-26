@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Fri May 26 15:08:56 2017 Leo HUBERT
+// Last update Fri May 26 16:47:02 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -64,7 +64,6 @@ public:
 
 
   void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
-  void					setPlayer(Ogre::Entity *_mPlayer) { _entity = _mPlayer; }
   void					setWalkSpd(Ogre::Real _mWalkSpd) { _walkSpd = _mWalkSpd; }
   void					setDistance(Ogre::Real _mDistance) { _distance = _mDistance; }
   void					setDestination(Ogre::Vector3 destination) { _destination = destination; }
