@@ -74,6 +74,10 @@ io.on('connection', function (socket) {
 
   socket.on("create_entity", function (data) {
     io.to(socket.room).emit("create_entity", data);
+    if (users[socket.user_server_id])
+    {
+      users[socket.user_server_id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
+    }
     console.log(data);
   })
 
@@ -89,14 +93,17 @@ io.on('connection', function (socket) {
     for (user in users)
     {
       if (users[user]["room"] == socket.room)
-          io.to(socket.room).emit("login", { user_id: users[user]["id"], send_to: data["user_id"] });
+      {
+        io.to(socket.room).emit("login", { user_id: users[user]["id"], send_to: data["user_id"] });
+        io.to(socket.room).emit("create_entity", { send_by: 0, send_to: data["user_id"], position: users[user]["pos"] });
+      }
     }
 
     log("Connected! ID: " + data["user_id"]);
 
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[totalConnected] = new Entity(data["user_id"], "User " + data["user_id"], 0);
+    users[totalConnected] = new Entity(data["user_id"], "User " + data["user_id"], 0, data["room"]);
     totalConnected++;
   });
 

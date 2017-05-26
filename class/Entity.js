@@ -1,7 +1,8 @@
-function Entity(id, username, type) {
+function Entity(id, username, type, room) {
   this.id = id;
   this.username = username;
   this.type = type;
+  this.room = room;
 
   this.pos = {x: 0, y: 0, z: 0};
 
