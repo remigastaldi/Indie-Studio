@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Fri May 26 13:58:03 2017 Leo HUBERT
+** Last update Fri May 26 16:12:10 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -99,11 +99,17 @@ void Socket::events()
                 (void)ack_resp;
                 _lock.lock();
 
-                std::cout << data->get_map()["send_to"]->get_string() << '\n';
-
                 if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
                 {
-                  //CODE OF create_entity
+                  Ogre::Vector3 position;
+
+                  position.x = data->get_map()["position"]->get_map()["x"]->get_double();
+                  position.y = data->get_map()["position"]->get_map()["y"]->get_double();
+                  position.z = data->get_map()["position"]->get_map()["z"]->get_double();
+                  _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, data->get_map()["send_by"]->get_int(),
+                                  	                                            Entity::Status::IMMOBILE, position, { 0.f, 0.f, 0.f, 0.f });
+                  std::cout << _entity.size() << '\n';
+
                 }
                 _lock.unlock();
         }));
@@ -133,7 +139,10 @@ void Socket::events()
                 _lock.lock();
                 if (data->get_map()["user_id"]->get_int() != _id)
                 {
-                    std::cout <<  "User disconnected ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
+                  delete(_entity[data->get_map()["user_id"]->get_int()]);
+                  _entity.erase(data->get_map()["user_id"]->get_int());
+                  std::cout <<  "User disconnected ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
+                  std::cout << _entity.size() << '\n';
                 }
                 _lock.unlock();
         }));
@@ -169,10 +178,18 @@ void Socket::emit(const std::string &event, std::shared_ptr<sio::message> const 
         _current_socket->emit(event, request);
 }
 
-void Socket::sendEntity(Entity const &entity)
+void Socket::sendEntity(const Entity &entity)
 {
         auto obj = sio::object_message::create();
-        obj.get()->get_map()["message"] =  sio::string_message::create("TEST");
+        auto pos = sio::object_message::create();
+
+        //CREATE POS
+        pos.get()->get_map()["x"] =   sio::double_message::create(entity.getPosition().x);
+        pos.get()->get_map()["y"] =   sio::double_message::create(entity.getPosition().y);
+        pos.get()->get_map()["z"] =   sio::double_message::create(entity.getPosition().z);
+
+        //CREATE SOCKET
+        obj.get()->get_map()["position"] =  pos;
         obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
         obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
         emit("create_entity", obj);

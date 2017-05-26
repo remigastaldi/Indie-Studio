@@ -55,6 +55,7 @@ void Map::createScene(void)
 		Entity::Status::IMMOBILE, { 0, 0, 25.0 }, { 0.f, 0.f, 0.f, 0.f });
 	//_player->setCamera(_cameraMan);
 	_player->setDestination({ 550, 0, 50 });
+	sendEntity(*_player);
 	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
 	mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
 	mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
