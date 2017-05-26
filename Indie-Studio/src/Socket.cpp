@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Fri May 26 19:10:02 2017 Leo HUBERT
+** Last update Fri May 26 20:26:09 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -152,9 +152,12 @@ void Socket::events()
                 _lock.lock();
                 if (data->get_map()["user_id"]->get_int() != _id)
                 {
-                  //_entity[data->get_map()["user_id"]->get_int()]->destroy();
-                  delete(_entity[data->get_map()["user_id"]->get_int()]);
-                  _entity.erase(data->get_map()["user_id"]->get_int());
+                  if (_entity[data->get_map()["user_id"]->get_int()])
+                  {
+                    _entity[data->get_map()["user_id"]->get_int()]->destroy();
+                    delete(_entity[data->get_map()["user_id"]->get_int()]);
+                    _entity.erase(data->get_map()["user_id"]->get_int());
+                  }
                   std::cout <<  "User disconnected ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
                 }
                 _lock.unlock();
