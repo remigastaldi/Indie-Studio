@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Fri May 26 18:39:36 2017 gastal_r
+// Last update Fri May 26 20:19:08 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -23,6 +23,7 @@ Map::Map() :
   mGravityVector(Ogre::Vector3(0,-9.81,0)),
   mBounds(Ogre::AxisAlignedBox(Ogre::Vector3 (-10000, -10000, -10000),
   Ogre::Vector3 (10000,  10000,  10000))),
+  debugDrawer(nullptr),
   _rayCast(nullptr)
 {}
 
@@ -32,8 +33,6 @@ Map::~Map()
 void Map::enter(void)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Enter Map =====");
-
-  connect();
 
   _camera = mDevice->sceneMgr->createCamera("PlayerCamMap");
   _camera->setNearClipDistance(5);
@@ -51,14 +50,16 @@ void Map::enter(void)
 
   _world = new OgreBulletDynamics::DynamicsWorld(mDevice->sceneMgr, mBounds, mGravityVector);
 	debugDrawer = new OgreBulletCollisions::DebugDrawer();
+  std::cout << "DEBUG DRAWER " << debugDrawer << std::endl;
 	debugDrawer->setDrawWireframe(true);
 
-	_world->setDebugDrawer(debugDrawer);
-	_world->setShowDebugShapes(true);
 
+std::cout << "BEFORE " << _world << std::endl;
   setWorld(_world);
 
   createScene();
+  // _world->setDebugDrawer(debugDrawer);
+  // _world->setShowDebugShapes(true);
 }
 
 void Map::createScene(void)
@@ -67,7 +68,6 @@ void Map::createScene(void)
 		Entity::Status::IMMOBILE, { 0, 30, 0.0 }, { 0.f, 0.f, 0.f, 0.f });
 //	_player->setCamera(_cameraMan);
 	//_player->setDestination({ 550, 0, 50 });
-	sendEntity(*_player);
 	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
 	mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
 	mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
@@ -106,6 +106,8 @@ void Map::createScene(void)
       // push the created objects to the deques
   // mShapes.push_back(Shape);
   // mBodies.push_back(defaultPlaneBody);
+  connect();
+  sendEntity(*_player);
 }
 
 void Map::exit(void)
