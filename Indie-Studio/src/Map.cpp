@@ -21,7 +21,8 @@ Map::Map() :
   mRMouseDown(false),
   mCurObject(0),
   mGravityVector(Ogre::Vector3(0,-9.81,0)),
-  mBounds(Ogre::AxisAlignedBox(Ogre::Vector3 (-10000, -10000, -10000), Ogre::Vector3 (10000,  10000,  10000)))
+  mBounds(Ogre::AxisAlignedBox(Ogre::Vector3 (-10000, -10000, -10000),
+  Ogre::Vector3 (10000,  10000,  10000))),
   _rayCast(nullptr)
 {}
 
