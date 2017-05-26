@@ -1,9 +1,10 @@
 var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-
 var exec = require('child_process').exec;
 
+
+var Entity = require("./class/Entity.js");
 
 /* LOCAL VAR */
 var totalConnected = 0;
@@ -15,6 +16,12 @@ var rl = readline.createInterface({
   output: process.stdout,
   terminal: false
 });
+
+function log(message)
+{
+  var date = new Date();
+  console.log(date + ": " + message);
+}
 
 function exec_command(command, from)
 {
@@ -65,6 +72,9 @@ io.on('connection', function (socket) {
     io.to(socket.room).emit("move", data);
   });
 
+  socket.on("create_entity", function (data) {
+    io.to(socket.room).emit("create_entity", data);
+  })
 
   socket.on('test', function (data) {
     console.log(data);
@@ -81,12 +91,11 @@ io.on('connection', function (socket) {
           io.to(socket.room).emit("login", { user_id: users[user]["id"], send_to: data["user_id"] });
     }
 
+    log("Connected! ID: " + data["user_id"]);      
 
-
-    console.log("Connected! ID: " + data["user_id"]);
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[totalConnected] = {id: data["user_id"], username: "User " + totalConnected, room: socket.room};
+    users[totalConnected] = new Entity(data["user_id"], "User " + data["user_id"], 0);
     totalConnected++;
   });
 
@@ -95,7 +104,7 @@ io.on('connection', function (socket) {
     totalConnected--;
     if (totalConnected < 0)
       totalConnected = 0;
-		console.log("Disconnected ! ID: " + socket.user_id);
+		log("Disconnected ! ID: " + socket.user_id);
     io.to(socket.room).emit("logout", {user_id: socket.user_id});
 	});
 
