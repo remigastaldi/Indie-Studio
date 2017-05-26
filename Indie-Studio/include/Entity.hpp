@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Fri May 26 16:47:02 2017 gastal_r
+// Last update Fri May 26 18:04:51 2017 Leo HUBERT
 //
 
 #ifndef       _ENTITY_HPP_
@@ -55,13 +55,14 @@ public:
 
   void	updateAnimation(std::string, Ogre::Real);
 
+  void  destroy();
+
   Ogre::Entity  const			*getPlayer() const { return _entity; }
   Ogre::Real  const			  getWalkSpd() const { return _walkSpd; }
   Ogre::Real  const 			getDistance() const { return _distance; }
   Ogre::Vector3 const     getPosition() const { return _position; }
   Ogre::Quaternion const  getOrientation() const { return _orientation; }
   Entity::Status const    getStatus() const { return _status; }
-
 
   void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
   void					setWalkSpd(Ogre::Real _mWalkSpd) { _walkSpd = _mWalkSpd; }

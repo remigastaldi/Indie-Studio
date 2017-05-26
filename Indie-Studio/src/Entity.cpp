@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Wed May 24 19:02:20 2017 gastal_r
+// Last update Fri May 26 18:06:24 2017 Leo HUBERT
 //
 
 #include        "Entity.hpp"
@@ -85,4 +85,9 @@ void	Entity::goToLocation(Ogre::Real timeSinceLastFrame)
 			_node->translate(move * _direction);
 		}
 	}
+}
+
+void 	Entity::destroy()
+{
+	_sceneMgr.destroySceneNode(_node);
 }
