@@ -52,3 +52,7 @@ Indie-Studio.VC.db
 install_manifest\.txt
 .suo
 Indie-Studio/dist/IndieStudio
+
+Indie-Studio-Dependencies
+
+*.opendb
