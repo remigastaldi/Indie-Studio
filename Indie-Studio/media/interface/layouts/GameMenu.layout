@@ -14,5 +14,11 @@
             <Property name="Area" value="{{0,274},{0,325},{0,460},{0,378}}" />
             <Property name="Text" value="Quit" />
         </Window>
+        <Window type="Generic/ImageButton" name="Infos" >
+            <Property name="Area" value="{{0,1830},{0,31},{0,1877},{0,72}}" />
+            <Property name="HoverImage" value="GameMenuImages/Infos" />
+            <Property name="NormalImage" value="GameMenuImages/Infos" />
+            <Property name="PushedImage" value="GameMenuImages/Infos" />
+        </Window>
     </Window>
 </GUILayout>

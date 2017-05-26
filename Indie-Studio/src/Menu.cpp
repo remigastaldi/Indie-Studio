@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Fri May 26 19:39:15 2017 Matthias Prost
+// Last update Fri May 26 20:34:51 2017 Matthias Prost
 //
 
 #include        "Menu.hpp"
@@ -66,6 +66,23 @@ bool Menu::buttonQuit(const CEGUI::EventArgs &e)
   return (true);
 }
 
+bool Menu::buttonClose(const CEGUI::EventArgs &e)
+{
+  _closeButton->destroy();
+  _credits->destroy();
+  return (true);
+}
+
+bool Menu::buttonInfos(const CEGUI::EventArgs &e)
+{
+  _credits = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Credits.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_credits);
+
+  _closeButton = _credits->getChild("Close");
+  _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonClose, this));
+  return (true);
+}
+
 void Menu::createScene(void)
 {
   CEGUI::System &sys = CEGUI::System::getSingleton();
@@ -108,6 +125,9 @@ void Menu::createScene(void)
 
   _quitButton = _gameMenu->getChild("Button2");
   _quitButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
+
+  _infosButton = _gameMenu->getChild("Infos");
+  _infosButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonInfos, this));
 
 }
 
