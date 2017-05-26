@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Fri May 26 18:48:43 2017 gastal_r
+** Last update Fri May 26 19:10:02 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -110,14 +110,14 @@ void Socket::events()
                   position.y = data->get_map()["position"]->get_map()["y"]->get_double();
                   position.z = data->get_map()["position"]->get_map()["z"]->get_double();
 
-                  Ogre::Quaternion orientation;
+                  /*Ogre::Quaternion orientation;
+                  orientation.w = data->get_map()["orientation"]->get_map()["w"]->get_double();
                   orientation.x = data->get_map()["orientation"]->get_map()["x"]->get_double();
                   orientation.y = data->get_map()["orientation"]->get_map()["y"]->get_double();
-                  orientation.z = data->get_map()["orientation"]->get_map()["z"]->get_double();
-                  orientation.w = data->get_map()["orientation"]->get_map()["w"]->get_double();
+                  orientation.z = data->get_map()["orientation"]->get_map()["z"]->get_double();*/
 
-                  Entity::Status status;
-                  status = (Entity::Status)data->get_map()["status"]->get_int();
+                  /*Entity::Status status;
+                  status = (Entity::Status)data->get_map()["status"]->get_int();*/
 
                   _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, data->get_map()["send_by"]->get_int(),
                                   	                                            Entity::Status::IMMOBILE, position, { 0.f, 0.f, 0.f, 0.f });
@@ -152,7 +152,7 @@ void Socket::events()
                 _lock.lock();
                 if (data->get_map()["user_id"]->get_int() != _id)
                 {
-                  _entity[data->get_map()["user_id"]->get_int()]->destroy();
+                  //_entity[data->get_map()["user_id"]->get_int()]->destroy();
                   delete(_entity[data->get_map()["user_id"]->get_int()]);
                   _entity.erase(data->get_map()["user_id"]->get_int());
                   std::cout <<  "User disconnected ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
