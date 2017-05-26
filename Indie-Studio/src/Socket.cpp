@@ -109,6 +109,16 @@ void Socket::events()
                   position.x = data->get_map()["position"]->get_map()["x"]->get_double();
                   position.y = data->get_map()["position"]->get_map()["y"]->get_double();
                   position.z = data->get_map()["position"]->get_map()["z"]->get_double();
+
+                  Ogre::Quaternion orientation;
+                  orientation.x = data->get_map()["orientation"]->get_map()["x"]->get_double();
+                  orientation.y = data->get_map()["orientation"]->get_map()["y"]->get_double();
+                  orientation.z = data->get_map()["orientation"]->get_map()["z"]->get_double();
+                  orientation.w = data->get_map()["orientation"]->get_map()["w"]->get_double();
+
+                  Entity::Status status;
+                  status = (Entity::Status)data->get_map()["status"]->get_int();
+
                   _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, data->get_map()["send_by"]->get_int(),
                                   	                                            Entity::Status::IMMOBILE, position, { 0.f, 0.f, 0.f, 0.f });
                   std::cout << _entity.size() << '\n';
@@ -185,14 +195,24 @@ void Socket::sendEntity(const Entity &entity)
 {
         auto obj = sio::object_message::create();
         auto pos = sio::object_message::create();
+        auto orientation = sio::object_message::create();
 
         //CREATE POS
         pos.get()->get_map()["x"] =   sio::double_message::create(entity.getPosition().x);
         pos.get()->get_map()["y"] =   sio::double_message::create(entity.getPosition().y);
         pos.get()->get_map()["z"] =   sio::double_message::create(entity.getPosition().z);
 
+        //CREATE ORIENTATION
+        orientation.get()->get_map()["x"] =   sio::double_message::create(entity.getOrientation().x);
+        orientation.get()->get_map()["y"] =   sio::double_message::create(entity.getOrientation().y);
+        orientation.get()->get_map()["z"] =   sio::double_message::create(entity.getOrientation().z);
+        orientation.get()->get_map()["w"] =   sio::double_message::create(entity.getOrientation().w);
+
         //CREATE SOCKET
         obj.get()->get_map()["position"] =  pos;
+        obj.get()->get_map()["orientation"] =  orientation;
+        //obj.get()->get_map()["type"] =  sio::int_message::create(entity.getType());
+        obj.get()->get_map()["status"] =  sio::int_message::create((int)entity.getStatus());
         obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
         obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
         emit("create_entity", obj);
