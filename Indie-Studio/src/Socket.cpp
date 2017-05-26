@@ -5,12 +5,15 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Fri May 26 18:07:02 2017 Leo HUBERT
+** Last update Fri May 26 18:48:43 2017 gastal_r
 */
 
 #include "Socket.hpp"
 
-Socket::Socket(std::string const &addr, int const port, int const id, std::string const &room) : _id(id), _room(room)
+Socket::Socket(std::string const &addr, int const port, int const id, std::string const &room)
+  : _id(id),
+   _room(room),
+   _world(nullptr)
 {
         _connect_finish = false;
         _addr = addr + ":" + std::to_string(port);
@@ -106,7 +109,7 @@ void Socket::events()
                   position.x = data->get_map()["position"]->get_map()["x"]->get_double();
                   position.y = data->get_map()["position"]->get_map()["y"]->get_double();
                   position.z = data->get_map()["position"]->get_map()["z"]->get_double();
-                  _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, data->get_map()["send_by"]->get_int(),
+                  _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, data->get_map()["send_by"]->get_int(),
                                   	                                            Entity::Status::IMMOBILE, position, { 0.f, 0.f, 0.f, 0.f });
                   std::cout << _entity.size() << '\n';
 

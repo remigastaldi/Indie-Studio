@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Fri May 26 17:13:06 2017 gastal_r
+// Last update Fri May 26 18:39:36 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -49,12 +49,21 @@ void Map::enter(void)
   _camera->setPosition(Ogre::Vector3(0, 30, 15));
   _camera->lookAt(Ogre::Vector3(-5, 0, 0));
 
+  _world = new OgreBulletDynamics::DynamicsWorld(mDevice->sceneMgr, mBounds, mGravityVector);
+	debugDrawer = new OgreBulletCollisions::DebugDrawer();
+	debugDrawer->setDrawWireframe(true);
+
+	_world->setDebugDrawer(debugDrawer);
+	_world->setShowDebugShapes(true);
+
+  setWorld(_world);
+
   createScene();
 }
 
 void Map::createScene(void)
 {
-	_player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 42,
+	_player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 42,
 		Entity::Status::IMMOBILE, { 0, 30, 0.0 }, { 0.f, 0.f, 0.f, 0.f });
 //	_player->setCamera(_cameraMan);
 	//_player->setDestination({ 550, 0, 50 });
@@ -73,13 +82,6 @@ void Map::createScene(void)
   spotLight1->setDirection(0, 0, 0);
   spotLight1->setPosition(Ogre::Vector3(0, 40, 0));
 
-  mWorld = new OgreBulletDynamics::DynamicsWorld(mDevice->sceneMgr, mBounds, mGravityVector);
-	debugDrawer = new OgreBulletCollisions::DebugDrawer();
-	debugDrawer->setDrawWireframe(true);
-
-
-	mWorld->setDebugDrawer(debugDrawer);
-	mWorld->setShowDebugShapes(true);
 	// mNode->attachObject(static_cast <Ogre::SimpleRenderable *> (debugDrawer));
 
   Ogre::Entity *ent;
@@ -99,11 +101,11 @@ void Map::createScene(void)
   Shape = new OgreBulletCollisions::StaticPlaneCollisionShape(Ogre::Vector3(0,1,0), 0);
 
   OgreBulletDynamics::RigidBody *defaultPlaneBody = new OgreBulletDynamics::RigidBody("BasePlane",
-                                mWorld);
+                                _world);
   defaultPlaneBody->setStaticShape(Shape, 0.1, 0.8);// (shape, restitution, friction)
       // push the created objects to the deques
-  mShapes.push_back(Shape);
-  mBodies.push_back(defaultPlaneBody);
+  // mShapes.push_back(Shape);
+  // mBodies.push_back(defaultPlaneBody);
 }
 
 void Map::exit(void)
@@ -121,7 +123,7 @@ void Map::exit(void)
 
 bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
 {
-  mWorld->stepSimulation(evt.timeSinceLastFrame);
+  _world->stepSimulation(evt.timeSinceLastFrame);
   return true;
 }
 
@@ -145,7 +147,7 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 bool Map::frameEnded(const Ogre::FrameEvent& evt)
 {
-  mWorld->stepSimulation(evt.timeSinceLastFrame);
+  _world->stepSimulation(evt.timeSinceLastFrame);
   return (true);
 }
 
@@ -185,7 +187,7 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
     // and the Bullet rigid body
     OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
         "defaulRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
-        mWorld);
+        _world);
 
         // BtOgre::StaticMeshToShapeConverter convProva(entity);
         btCollisionShape* shProva;
@@ -202,12 +204,12 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
       mNumEntitiesInstanced++;
 
       defaultBody->enableActiveState();
-      mWorld->addRigidBody(defaultBody,0,0);
+      _world->addRigidBody(defaultBody,0,0);
       defaultBody->setLinearVelocity(
       _camera->getDerivedDirection().normalisedCopy() * 7.0f ); // shooting speed
     // push the created objects to the dequese
-    mShapes.push_back(sceneTriMeshShape);
-    mBodies.push_back(defaultBody);
+    // mShapes.push_back(sceneTriMeshShape);
+    // mBodies.push_back(defaultBody);
     //mTimeUntilNextToggle = 0.5;
   }
 
@@ -240,7 +242,7 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
     // and the Bullet rigid body
     OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
         "defaultBoxRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
-        mWorld);
+        _world);
 
     // OgreBulletCollisions::CollisionShape *collisionShape =
     defaultBody->setShape(node,
@@ -253,12 +255,12 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
       mNumEntitiesInstanced++;
 
       defaultBody->enableActiveState();
-      mWorld->addRigidBody(defaultBody,0,0);
+      _world->addRigidBody(defaultBody,0,0);
       defaultBody->setLinearVelocity(
       _camera->getDerivedDirection().normalisedCopy() * 7.0f ); // shooting speed
     // push the created objects to the dequese
-    mShapes.push_back(sceneBoxShape);
-    mBodies.push_back(defaultBody);
+    // mShapes.push_back(sceneBoxShape);
+    // mBodies.push_back(defaultBody);
     //mTimeUntilNextToggle = 0.5;
   }
 

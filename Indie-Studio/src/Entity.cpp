@@ -5,15 +5,16 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Fri May 26 18:06:24 2017 Leo HUBERT
+// Last update Fri May 26 18:25:07 2017 gastal_r
 //
 
 #include        "Entity.hpp"
 
-Entity::Entity(Ogre::SceneManager &sceneMgr, size_t id, Status status, const Ogre::Vector3 &position,
+Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, Status status, const Ogre::Vector3 &position,
 	const Ogre::Quaternion &orientation)
 	:
 	_sceneMgr(sceneMgr),
+	_world(world),
 	_id(id),
 	_entity(nullptr),
 	_node(nullptr),

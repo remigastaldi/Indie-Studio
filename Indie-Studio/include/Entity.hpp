@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Fri May 26 18:04:51 2017 Leo HUBERT
+// Last update Fri May 26 18:41:43 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -16,6 +16,15 @@
 #include <OgreSceneNode.h>
 #include <OgreLogManager.h>
 #include <OgreSceneManager.h>
+
+#include "OgreBulletDynamicsRigidBody.h"
+#include "OgreBulletCollisionsPreRequisites.h"
+#include "OgreBulletCollisions.h"
+
+#include "Shapes/OgreBulletCollisionsStaticPlaneShape.h"
+#include "Shapes/OgreBulletCollisionsBoxShape.h"
+#include "Shapes/OgreBulletCollisionsTrimeshShape.h"
+#include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
 
 #include <string>
 #include <unordered_map>
@@ -41,7 +50,7 @@ public:
   };
 
 public:
-  Entity(Ogre::SceneManager &sceneMgr, size_t id, Status status, const Ogre::Vector3 &position,
+  Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, Status status, const Ogre::Vector3 &position,
    const Ogre::Quaternion &orientation);
 
   ~Entity();
@@ -73,18 +82,20 @@ public:
 
 protected:
   Ogre::SceneManager  &_sceneMgr;
+  OgreBulletDynamics::DynamicsWorld &_world;
   Ogre::Entity        *_entity;
   Ogre::SceneNode     *_node;
 
-  size_t				_id;
-  Entity::Status		_status;
-  Ogre::Vector3			_position;
-  Ogre::Quaternion		_orientation;
+
+  size_t				        _id;
+  Entity::Status		    _status;
+  Ogre::Vector3			    _position;
+  Ogre::Quaternion		  _orientation;
   Ogre::AnimationState	*_animationState;
-  Ogre::Real			_distance;
-  Ogre::Real			_walkSpd;
-  Ogre::Vector3			_destination;
-  Ogre::Vector3			_direction;
+  Ogre::Real			      _distance;
+  Ogre::Real			      _walkSpd;
+  Ogre::Vector3			    _destination;
+  Ogre::Vector3			    _direction;
 };
 
 #ifndef   _ENTITY_CREATE_
@@ -94,13 +105,13 @@ protected:
 class Player;
 
 #define   ENTITY_INIT_PARAMETERS                                 \
-Ogre::SceneManager &sceneMgr, size_t id, Entity::Status status,  \
+Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, Entity::Status status,  \
 const Ogre::Vector3 &position, const Ogre::Quaternion &orientation
 
 template<typename T>
 inline Entity * createInstance(ENTITY_INIT_PARAMETERS)
 {
- return (new T(sceneMgr, id, status, position, orientation));
+ return (new T(sceneMgr, world, id, status, position, orientation));
 }
 
 static std::unordered_map<Entity::Type, Entity*(*)(ENTITY_INIT_PARAMETERS)> typeIndex
@@ -110,7 +121,7 @@ static std::unordered_map<Entity::Type, Entity*(*)(ENTITY_INIT_PARAMETERS)> type
 
 inline Entity * createEntity(Entity::Type type, ENTITY_INIT_PARAMETERS)
 {
-  return (typeIndex[type](sceneMgr, id, status, position, orientation));
+  return (typeIndex[type](sceneMgr, world, id, status, position, orientation));
 }
 
 #endif  /* !_ENTITY_CREATE_ */

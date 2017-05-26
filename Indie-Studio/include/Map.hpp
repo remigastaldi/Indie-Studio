@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Fri May 26 15:06:05 2017 gastal_r
+// Last update Fri May 26 18:33:00 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -53,9 +53,9 @@ private:
 
   //OgreBullet
   int mNumEntitiesInstanced;
-  OgreBulletDynamics::DynamicsWorld *mWorld;
-  std::deque<OgreBulletCollisions::CollisionShape *>  mShapes;
-  std::deque<OgreBulletDynamics::RigidBody *>         mBodies;
+  OgreBulletDynamics::DynamicsWorld *_world;
+  // std::deque<OgreBulletCollisions::CollisionShape *>  mShapes;
+  // std::deque<OgreBulletDynamics::RigidBody *>         mBodies;
   Ogre::AxisAlignedBox                                mBounds;
   Ogre::Vector3                                       mGravityVector;
   OgreBulletCollisions::DebugDrawer                   *debugDrawer;
