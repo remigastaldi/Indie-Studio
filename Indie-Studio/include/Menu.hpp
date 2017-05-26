@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:59:44 2017 gastal_r
-// Last update Wed May 24 18:08:13 2017 Matthias Prost
+// Last update Fri May 26 18:38:42 2017 Matthias Prost
 //
 
 #ifndef _MENU_HPP_
@@ -63,20 +63,15 @@ private:
   Ogre::SceneNode* mCurObject;
 
 //CEGUI
-CEGUI::MouseCursor  *mCursor;
-CEGUI::Window* myRoot;
-CEGUI::Window *newWindow;
-CEGUI::Window *_playButton;
-CEGUI::Window *_quitButton;
+  CEGUI::MouseCursor  *mCursor;
+  CEGUI::Window* _myRoot;
+  CEGUI::Window *_gameMenu;
+  CEGUI::Window *_playButton;
+  CEGUI::Window *_quitButton;
 
   bool mShutDown;
   Ogre::Camera *_camera;
   OgreCookies::CameraMan* _cameraMan;
-
-  //Menu button
-  CEGUI::Window* d_loginContainer;
-  CEGUI::Window* d_loginAcceptButton;
-  CEGUI::String d_userName;
 
 };
 

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Fri May 26 18:10:45 2017 Matthias Prost
+// Last update Fri May 26 18:41:57 2017 Matthias Prost
 //
 
 #include        "Menu.hpp"
@@ -47,9 +47,10 @@ void Menu::enter(void)
 
 bool Menu::buttonPlay(const CEGUI::EventArgs &e)
 {
-  // _playButton->destroy();
-  // _quitButton->destroy();
-  myRoot->destroy();
+  _playButton->destroy();
+  _quitButton->destroy();
+  _gameMenu->destroy();
+  _myRoot->destroy();
   GameState *menu = findByName("Map");
   changeGameState(menu);
   return (true);
@@ -59,6 +60,8 @@ bool Menu::buttonQuit(const CEGUI::EventArgs &e)
 {
   _playButton->destroy();
   _quitButton->destroy();
+  _gameMenu->destroy();
+  _myRoot->destroy();
   Shutdown();
   return (true);
 }
@@ -88,30 +91,22 @@ void Menu::createScene(void)
   CEGUI::SchemeManager::getSingleton().createFromFile( "OgreTray.scheme" );
   CEGUI::SchemeManager::getSingleton().createFromFile( "Generic.scheme" );
   CEGUI::SchemeManager::getSingleton().createFromFile( "GameMenu.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
 
   CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
 
-  myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
-  CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( myRoot );
+  _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
+  CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
-  CEGUI::Window *myImageWindow = CEGUI::WindowManager::getSingleton().createWindow("TaharezLook/StaticImage","PrettyWindow" );
-  myImageWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5,0),CEGUI::UDim(0.5,0)));
-  myImageWindow->setSize(CEGUI::USize(CEGUI::UDim(0,150), CEGUI::UDim(0,100)));
-  myImageWindow->setProperty("Image","TaharezLook/full_image");
-  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(myImageWindow);
+  _gameMenu = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("GameMenu.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_gameMenu);
 
-  CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
 
-  newWindow = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("GameMenu.layout");
-  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(newWindow);
+  _playButton = _gameMenu->getChild("Button");
+  _playButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonPlay, this));
 
-  CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
-
-  d_loginAcceptButton = newWindow->getChild("Button");
-  d_loginAcceptButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonPlay, this));
-
-  d_loginAcceptButton = newWindow->getChild("Button2");
-  d_loginAcceptButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
+  _quitButton = _gameMenu->getChild("Button2");
+  _quitButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
 
 }
 
