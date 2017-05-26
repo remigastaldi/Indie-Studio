@@ -5,8 +5,6 @@
     <Image Include="Indie-Studio.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="src\BaseApplication.cpp" />
     <ClCompile Include="src\CameraMan.cpp" />
     <ClCompile Include="src\HUD.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -18,10 +16,9 @@
     <ClCompile Include="src\Indie.cpp" />
     <ClCompile Include="src\GameStateManager.cpp" />
     <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\SplashScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Application.hpp" />
-    <ClInclude Include="include\BaseApplication.hpp" />
     <ClInclude Include="include\CameraMan.hpp" />
     <ClInclude Include="include\HUD.hpp" />
     <ClInclude Include="include\DotSceneLoader.h" />
@@ -41,6 +38,7 @@
     <ClInclude Include="include\Player.hpp" />
     <ClInclude Include="include\Socket.hpp" />
     <ClInclude Include="include\Core.hpp" />
+    <ClInclude Include="include\SplashScreen.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="media\map\jinxMono.wav" />
@@ -54,6 +52,12 @@
     <Image Include="media\map\SKYBOX_sphere.jpg" />
     <Image Include="media\map\TreeAtlas.jpg" />
     <Image Include="media\map\Windows.png" />
+    <Image Include="media\particles\textures\flare.png" />
+    <Image Include="media\particles\textures\aureola.png" />
+    <Image Include="media\particles\textures\basic_droplet.png" />
+    <Image Include="media\particles\textures\flaretrail.png" />
+    <Image Include="media\particles\textures\rockwall.tga" />
+    <Image Include="media\particles\textures\RustySteel.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang_complete" />
@@ -119,6 +123,77 @@
     <None Include="media\map\Tree.025.mesh" />
     <None Include="media\map\Tree.mesh" />
     <None Include="media\map\Windows.001.material" />
+    <None Include="src\particles\sun.particle" />
+    <None Include="media\particles\particles\sun.particle" />
+    <None Include="media\particles\materials\spell.material" />
+    <None Include="media\particles\particles\spell.particle" />
+    <None Include="media\particles\materials\AdaptivePNTrianglesTessellation.material" />
+    <None Include="media\particles\materials\ASCII.material" />
+    <None Include="media\particles\materials\AtomicCounters.material" />
+    <None Include="media\particles\materials\BlackAndWhite.material" />
+    <None Include="media\particles\materials\Bloom.material" />
+    <None Include="media\particles\materials\Bloom2.material" />
+    <None Include="media\particles\materials\CompositorDemo.material" />
+    <None Include="media\particles\materials\Compute.material" />
+    <None Include="media\particles\materials\DepthShadowmap.material" />
+    <None Include="media\particles\materials\Dither.material" />
+    <None Include="media\particles\materials\DOF.material" />
+    <None Include="media\particles\materials\DualQuaternion.material" />
+    <None Include="media\particles\materials\DualQuaternion.program" />
+    <None Include="media\particles\materials\Embossed.material" />
+    <None Include="media\particles\materials\Examples-Advanced.material" />
+    <None Include="media\particles\materials\Examples-DynTex.material" />
+    <None Include="media\particles\materials\Examples-Water.material" />
+    <None Include="media\particles\materials\facial.material" />
+    <None Include="media\particles\materials\FluidSim.material" />
+    <None Include="media\particles\materials\Glass.material" />
+    <None Include="media\particles\materials\Hair.material" />
+    <None Include="media\particles\materials\Halftone.material" />
+    <None Include="media\particles\materials\hdr.material" />
+    <None Include="media\particles\materials\HeatVision.material" />
+    <None Include="media\particles\materials\Hurt.material" />
+    <None Include="media\particles\materials\HW_VTF_LUTInstancing.material" />
+    <None Include="media\particles\materials\HW_VTFInstancing.material" />
+    <None Include="media\particles\materials\HWInstancing.material" />
+    <None Include="media\particles\materials\instancing.material" />
+    <None Include="media\particles\materials\Instancing.program" />
+    <None Include="media\particles\materials\InstancingMisc.material" />
+    <None Include="media\particles\materials\Invert.material" />
+    <None Include="media\particles\materials\Island.material" />
+    <None Include="media\particles\materials\IsoSurf.material" />
+    <None Include="media\particles\materials\Laplace.material" />
+    <None Include="media\particles\materials\MotionBlur.material" />
+    <None Include="media\particles\materials\MRTtest.material" />
+    <None Include="media\particles\materials\NightVision.material" />
+    <None Include="media\particles\materials\Ocean.controls" />
+    <None Include="media\particles\materials\Ocean.material" />
+    <None Include="media\particles\materials\OffsetMapping.material" />
+    <None Include="media\particles\materials\OldMovie.material" />
+    <None Include="media\particles\materials\OldTV.material" />
+    <None Include="media\particles\materials\ParticleGS.material" />
+    <None Include="media\particles\materials\Penguin.material" />
+    <None Include="media\particles\materials\Posterize.material" />
+    <None Include="media\particles\materials\pssm.material" />
+    <None Include="media\particles\materials\RadialBlur.material" />
+    <None Include="media\particles\materials\RasterizationOrder.material" />
+    <None Include="media\particles\materials\RZR-002.material" />
+    <None Include="media\particles\materials\ShaderInstancing.material" />
+    <None Include="media\particles\materials\ShaderSystem.material" />
+    <None Include="media\particles\materials\shadows.material" />
+    <None Include="media\particles\materials\SharpenEdges.material" />
+    <None Include="media\particles\materials\sibenik.material" />
+    <None Include="media\particles\materials\smoke.material" />
+    <None Include="media\particles\materials\StdQuad_vp.program" />
+    <None Include="media\particles\materials\Swizzle.material" />
+    <None Include="media\particles\materials\TerrainTessellation.material" />
+    <None Include="media\particles\materials\Tessellation.material" />
+    <None Include="media\particles\materials\TextureAtlasSampleOrg.tai" />
+    <None Include="media\particles\materials\TextureAtlasSampleWrap.tai" />
+    <None Include="media\particles\materials\Tiling.material" />
+    <None Include="media\particles\materials\VarianceShadowmap.material" />
+    <None Include="media\particles\materials\VTFInstancing.material" />
+    <None Include="media\particles\particles\smoke.particle" />
+    <None Include="media\particles\materials\Examples.material" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeFiles\CMakeOutput.log" />

@@ -46,10 +46,16 @@
 #include "OgreBulletDynamicsRigidBody.h"
 #include "OgreBulletCollisionsPreRequisites.h"
 #include "OgreBulletCollisions.h"
+
 #include "Shapes/OgreBulletCollisionsStaticPlaneShape.h"
 #include "Shapes/OgreBulletCollisionsBoxShape.h"
 #include "Shapes/OgreBulletCollisionsTrimeshShape.h"
 #include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
+
+#include "OgreParticleSystem.h"
+#include "OgreSceneNode.h"
+
+#include "Player.hpp"
 
 typedef struct
 {

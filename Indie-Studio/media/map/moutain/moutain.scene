@@ -1,0 +1,31 @@
+<scene export_time="1495805983.4265301" exported_by="gastal_r" formatVersion="1.0.1" previous_export_time="0" >
+  <nodes >
+    <node name="MT038a" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="0.010000" y="0.010000" z="0.010000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="ID7.mesh" name="ID7" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEID7", name="ogre_mesh_exporter", address=0x7f5870b1fe48&gt;' />
+      </entity>
+    </node>
+    <node name="Hemi" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+    </node>
+  </nodes>
+  <externals >
+    <item type="material" >
+      <file name="/home/gastal_r/rendu/Indie-Studio/Indie-Studio/media/map/moutain/MT038a.material" />
+    </item>
+  </externals>
+  <environment />
+</scene>

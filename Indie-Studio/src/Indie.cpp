@@ -145,10 +145,9 @@ bool            Indie::init()
   	_device.ogre->loadPlugin("OgreOggSound.dll");
   	_device.ogre->loadPlugin("Plugin_OctreeZone.dll");
   	_device.ogre->loadPlugin("Plugin_PCZSceneManager.dll");
-  	//_device.ogre->loadPlugin("Plugin_CgProgramManager.dll");
   	_device.ogre->loadPlugin("Plugin_OctreeSceneManager.dll");
-  	//_device.ogre->loadPlugin("RenderSystem_GL3Plus.dll");
   	_device.ogre->loadPlugin("RenderSystem_GL.dll");
+	_device.ogre->loadPlugin("Plugin_ParticleFX.dll");
   #else
 	  _device.ogre->loadPlugin("libOgreOggSound.so");
   #endif

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Tue May 23 15:23:08 2017 gastal_r
+// Last update Fri May 26 17:13:06 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -19,7 +19,8 @@ Map::Map() :
   mRotSpd(0.1),
   mLMouseDown(false),
   mRMouseDown(false),
-  mCurObject(0)
+  mCurObject(0),
+  _rayCast(nullptr)
 {}
 
 Map::~Map()
@@ -32,10 +33,7 @@ void Map::enter(void)
   connect();
 
   _camera = mDevice->sceneMgr->createCamera("PlayerCamMap");
-  _camera->setPosition(Ogre::Vector3(0, 0, 80));
-  _camera->lookAt(Ogre::Vector3(0, 0, -300));
   _camera->setNearClipDistance(5);
-
 
   _cameraMan = new OgreCookies::CameraMan(_camera);
   Ogre::Viewport* vp = mDevice->window->addViewport(_camera);
@@ -45,26 +43,41 @@ void Map::enter(void)
   _camera->setAspectRatio(
       Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
 
+  _camera->setPosition(Ogre::Vector3(0, 30, 15));
+  _camera->lookAt(Ogre::Vector3(-5, 0, 0));
+
   createScene();
 }
 
 void Map::createScene(void)
 {
-  CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-  mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
-  mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	_player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 42,
+		Entity::Status::IMMOBILE, { 0, 30, 0.0 }, { 0.f, 0.f, 0.f, 0.f });
+//	_player->setCamera(_cameraMan);
+	//_player->setDestination({ 550, 0, 50 });
+	sendEntity(*_player);
+	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+	mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
+	mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-  Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
+	Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
+	DotSceneLoader loader;
+	loader.parseDotScene("moutain.scene","General", mDevice->sceneMgr, map);
+  map->setPosition({0.f, 0.f, 0.f});
 
-  DotSceneLoader loader;
-  loader.parseDotScene("map.scene","General", mDevice->sceneMgr, map);
+  Ogre::Light* spotLight1 = mDevice->sceneMgr->createLight("SpotLight1");
+  spotLight1->setType(Ogre::Light::LT_POINT);
+  spotLight1->setDirection(0, 0, 0);
+  spotLight1->setPosition(Ogre::Vector3(0, 40, 0));
 }
 
 void Map::exit(void)
 {
+  mDevice->sceneMgr->destroyQuery(_rayCast);
+
   mDevice->sceneMgr->clearScene();
- mDevice->sceneMgr->destroyAllCameras();
- mDevice->window->removeAllViewports();
+  mDevice->sceneMgr->destroyAllCameras();
+  mDevice->window->removeAllViewports();
 
  disconnect();
 
@@ -79,19 +92,18 @@ bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
 //-------------------------------------------------------------------------------------
 bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-	if (mDevice->window->isClosed()) {
+	if (mDevice->window->isClosed())
 		return false;
-	}
 
-  	if (mShutDown) {
-  		return false;
-  	}
+  	if (mShutDown)
+		return false;
 
      //Need to inject timestamps to CEGUI System.
     CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
     _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
     mDevice->soundManager->update(evt.timeSinceLastFrame);
+
     return true;
 }
 
@@ -216,36 +228,74 @@ CEGUI::MouseButton convertButon(OIS::MouseButtonID id)
   }
 }
 
+void  Map::mouseRaycast(void)
+{
+  CEGUI::Vector2f absMouse = CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
+  CEGUI::Vector2f relativeMouse = CEGUI::CoordConverter::screenToWindow(
+    *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), absMouse);
+
+  float windowWidth = CEGUI::CoordConverter::screenToWindowX(
+    *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), CEGUI::UDim(1,0));
+
+  float windowHeight = CEGUI::CoordConverter::screenToWindowY(
+    *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), CEGUI::UDim(1,0));
+
+  Ogre::Ray ray = _camera->getCameraToViewportRay((float) relativeMouse.d_x / windowWidth, (float) relativeMouse.d_y / windowHeight);
+
+  if (!_rayCast)
+    _rayCast = mDevice->sceneMgr->createRayQuery(ray);
+  else
+    _rayCast->setRay(ray);
+
+   _rayCast->setSortByDistance(true, 1);
+   //_rayCast->setQueryTypeMask(Ogre::SceneManager::WORLD_GEOMETRY_TYPE_MASK);
+
+   Ogre::RaySceneQueryResult res = _rayCast->execute();
+   Ogre::RaySceneQueryResult::iterator it = res.begin();
+
+  if (it != res.end())
+  {
+    Ogre::MovableObject *mSelectedEntity = it->movable;
+    float mSelectedEntityDist = it->distance;
+    Ogre::Vector3 pos = ray.getPoint(mSelectedEntityDist);
+    std::cout << "POS X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
+    _player->setDestination(pos);
+    printf("clicked: %s Distance %f\n", mSelectedEntity->getName().c_str(), mSelectedEntityDist);
+  }
+  else
+    printf("cleared selection.\n");
+}
+
 bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
   // _cameraMan->injectMouseDown(arg, id);
-CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-context.injectMouseButtonDown(convertButon(id));
-if (id == OIS::MB_Left)
-{
-mLMouseDown = true;
-}
-else if (id == OIS::MB_Right)
-{
-mRMouseDown = true;
-context.getMouseCursor().hide();
-}
-return true;
+  CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+  context.injectMouseButtonDown(convertButon(id));
+  if (id == OIS::MB_Left)
+  {
+    mLMouseDown = true;
+    mouseRaycast();
+  }
+  else if (id == OIS::MB_Right)
+  {
+    mRMouseDown = true;
+  }
+  return true;
 }
 
 bool Map::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
   //  _cameraMan->injectMouseUp(arg, id);
-CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-context.injectMouseButtonUp(convertButon(id));
-if (id == OIS::MB_Left)
-{
-mLMouseDown = false;
-}
-else if (id == OIS::MB_Right)
-{
-mRMouseDown = false;
-context.getMouseCursor().show();
-}
-    return true;
+  CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+  context.injectMouseButtonUp(convertButon(id));
+  if (id == OIS::MB_Left)
+  {
+    mLMouseDown = false;
+  }
+  else if (id == OIS::MB_Right)
+  {
+    mRMouseDown = false;
+    context.getMouseCursor().show();
+  }
+  return true;
 }

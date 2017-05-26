@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Wed May 24 18:24:50 2017 gastal_r
+// Last update Fri May 26 15:24:18 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -15,7 +15,7 @@ Player::Player(Ogre::SceneManager &sceneMgr, size_t id, Entity::Status status, c
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Player =====");
 
-  _entity = sceneMgr.createEntity("Ogre.mesh");
+  _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
   _node->attachObject(_entity);
   _node->setPosition(_position);

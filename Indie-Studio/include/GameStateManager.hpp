@@ -1,7 +1,6 @@
 #ifndef __gamestatemanager_h__
 #define __gamestatemanager_h__
 
-#include "BaseApplication.hpp"
 #include "GameState.hpp"
 
 /** \class GameStateManager

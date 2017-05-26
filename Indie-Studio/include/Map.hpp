@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Tue May 23 20:48:46 2017 gastal_r
+// Last update Fri May 26 15:06:05 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -46,10 +46,10 @@ public:
   virtual bool mousePressed(const OIS::MouseEvent &, OIS::MouseButtonID);
   virtual bool mouseReleased(const OIS::MouseEvent &, OIS::MouseButtonID);
 
+  virtual void mouseRaycast(void);
+
 private:
   char mPolygonRenderingMode;
-
-  Ogre::Camera *mCamera;
 
   // OgreCookies
   OgreCookies::CameraMan* mCameraMan;       // basic camera controller
@@ -60,12 +60,18 @@ private:
   float   mRotSpd;
   Ogre::SceneNode* mCurObject;
 
-//CEGUI
-CEGUI::MouseCursor  *mCursor;
+  //CEGUI
+  CEGUI::MouseCursor  *mCursor;
 
+  //Camera
   Ogre::Camera *_camera;
   OgreCookies::CameraMan* _cameraMan;
+
+  //Mouse RayCast
+  Ogre::RaySceneQuery * _rayCast;
   bool mShutDown;
+
+  Entity *_player;
 };
 
 #endif /* _MAP_HPP_ */

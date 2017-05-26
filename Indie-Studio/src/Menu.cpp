@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Thu May 25 11:04:05 2017 gastal_r
+// Last update Thu May 25 21:03:54 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -67,9 +67,6 @@ void Menu::createScene(void)
   CEGUI::System &sys = CEGUI::System::getSingleton();
 	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
 	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-
-  Entity *player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 2,
-    Entity::Status::IMMOBILE, {0.f, 0.f, 0.f}, {0.f, 0.f, 0.f, 0.f});
 
 	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
   CEGUI::SchemeManager::getSingleton().createFromFile( "OgreTray.scheme" );
@@ -133,6 +130,8 @@ bool Menu::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
     _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
     mDevice->soundManager->update(evt.timeSinceLastFrame);
+
+
     return true;
 }
 
@@ -206,6 +205,10 @@ bool Menu::keyPressed( const OIS::KeyEvent &arg )
         mShutDown = true;
         Shutdown();
     }
+	else if (arg.key == OIS::KC_P)
+	{
+		Ogre::SceneNode *test = mDevice->sceneMgr->getSceneNode("Particle");
+	}
     else
     {
         _cameraMan->injectKeyDown(arg);
