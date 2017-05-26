@@ -15,7 +15,7 @@ Player::Player(Ogre::SceneManager &sceneMgr, size_t id, Entity::Status status, c
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Player =====");
 
-  _entity = sceneMgr.createEntity( "TEST RAYCAST", "Ogre.mesh");
+  _entity = sceneMgr.createEntity("Robot", "robot.mesh");
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
   _node->attachObject(_entity);
   _node->setPosition(_position);

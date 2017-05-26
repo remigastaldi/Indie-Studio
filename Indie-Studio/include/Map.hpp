@@ -64,6 +64,8 @@ CEGUI::MouseCursor  *mCursor;
   Ogre::Camera *_camera;
   OgreCookies::CameraMan* _cameraMan;
   bool mShutDown;
+
+  Entity *_player;
 };
 
 #endif /* _MAP_HPP_ */

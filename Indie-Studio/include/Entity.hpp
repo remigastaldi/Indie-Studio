@@ -20,6 +20,8 @@
 #include <string>
 #include <unordered_map>
 
+#include <CameraMan.hpp>
+
 class Entity
 {
 public:
@@ -48,7 +50,22 @@ public:
   Entity& operator=(const Entity& other) = default;
   Entity& operator=(Entity&& other) = default;
 
-  void   setPosition(const Ogre::Vector3 &);
+  void	goToLocation(Ogre::Real);
+  /*bool	nextLocation(std::deque<Ogre::Vector3> &, Ogre::SceneNode *);*/
+
+  void	updateAnimation(std::string, Ogre::Real);
+
+  Ogre::Entity			*getPlayer() { return _entity; }
+  Ogre::Real			getWalkSpd() { return _walkSpd; }
+  Ogre::Real			getDistance() { return _distance; }
+  
+
+  void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
+  void					setPlayer(Ogre::Entity *_mPlayer) { _entity = _mPlayer; }
+  void					setWalkSpd(Ogre::Real _mWalkSpd) { _walkSpd = _mWalkSpd; }
+  void					setDistance(Ogre::Real _mDistance) { _distance = _mDistance; }
+  void					setDestination(Ogre::Vector3 destination) { _destination = destination; }
+  void					setPosition(const Ogre::Vector3 &pos) { _node->setPosition(pos); }
   
 
 protected:
@@ -56,10 +73,15 @@ protected:
   Ogre::Entity        *_entity;
   Ogre::SceneNode     *_node;
 
-  size_t              _id;
-  Entity::Status      _status;
-  Ogre::Vector3       _position;
-  Ogre::Quaternion    _orientation;
+  size_t				_id;
+  Entity::Status		_status;
+  Ogre::Vector3			_position;
+  Ogre::Quaternion		_orientation;
+  Ogre::AnimationState	*_animationState;
+  Ogre::Real			_distance;
+  Ogre::Real			_walkSpd;
+  Ogre::Vector3			_destination;
+  Ogre::Vector3			_direction;
 };
 
 #ifndef   _ENTITY_CREATE_

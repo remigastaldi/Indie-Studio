@@ -11,15 +11,15 @@
 #include        "Map.hpp"
 
 Map::Map() :
-  mPolygonRenderingMode('B'),
-  mShutDown(false),
-  _camera(nullptr),
-  _cameraMan(nullptr),
-  Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room"),
-  mRotSpd(0.1),
-  mLMouseDown(false),
-  mRMouseDown(false),
-  mCurObject(0)
+	mPolygonRenderingMode('B'),
+	mShutDown(false),
+	_camera(nullptr),
+	_cameraMan(nullptr),
+	Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room"),
+	mRotSpd(0.1),
+	mLMouseDown(false),
+	mRMouseDown(false),
+	mCurObject(0)
 {}
 
 Map::~Map()
@@ -50,28 +50,28 @@ void Map::enter(void)
 
 void Map::createScene(void)
 {
-  CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-  mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
-  mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	_player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 2,
+		Entity::Status::IMMOBILE, { 0, 0, 25.0 }, { 0.f, 0.f, 0.f, 0.f });
+	_player->setCamera(_cameraMan);
+	_player->setDestination({ 550, 0, 50 });
+	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+	mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
+	mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-  Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
-
-    DotSceneLoader loader;
-    loader.parseDotScene("map.scene","General", mDevice->sceneMgr, map);
-
-  Entity *player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 2,
-    Entity::Status::IMMOBILE, {0.f, 0.f, -150.f}, {0.f, 0.f, 0.f, 0.f});
+	Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
+	/*DotSceneLoader loader;
+	loader.parseDotScene("map.scene","General", mDevice->sceneMgr, map);*/
 }
 
 void Map::exit(void)
 {
-  mDevice->sceneMgr->clearScene();
- mDevice->sceneMgr->destroyAllCameras();
- mDevice->window->removeAllViewports();
-
- disconnect();
-
- Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Map =====");
+	mDevice->sceneMgr->clearScene();
+	mDevice->sceneMgr->destroyAllCameras();
+	mDevice->window->removeAllViewports();
+	
+	disconnect();
+	
+	Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Map =====");
 }
 
 bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
@@ -82,19 +82,19 @@ bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
 //-------------------------------------------------------------------------------------
 bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-	if (mDevice->window->isClosed()) {
+	if (mDevice->window->isClosed()) 
 		return false;
-	}
 
-  	if (mShutDown) {
-  		return false;
-  	}
+  	if (mShutDown) 
+		return false;
 
      //Need to inject timestamps to CEGUI System.
     CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
     _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
     mDevice->soundManager->update(evt.timeSinceLastFrame);
+
+	_player->goToLocation(evt.timeSinceLastFrame);
     return true;
 }
 
