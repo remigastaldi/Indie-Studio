@@ -95,7 +95,7 @@ io.on('connection', function (socket) {
       if (users[user]["room"] == socket.room)
       {
         io.to(socket.room).emit("login", { user_id: users[user]["id"], send_to: data["user_id"] });
-        io.to(socket.room).emit("create_entity", { send_by: 0, send_to: data["user_id"], position: users[user]["pos"] });
+        io.to(socket.room).emit("create_entity", { send_by: users[user]["id"], send_to: data["user_id"], position: users[user]["pos"] });
       }
     }
 
