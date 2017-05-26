@@ -41,7 +41,7 @@ CXXFLAGS				+=			-I../Indie-Studio-Dependencies/linux/include/OgreBullet/Dynamic
 
 CXXFLAGS				+=			-L../Indie-Studio-Dependencies/linux/lib
 CXXFLAGS				+=			-L../Indie-Studio-Dependencies/linux/lib/OGRE
-CXXFLAGS				+=			-L../Indie-Studio-Dependencies/linux/lib/cegui-8
+CXXFLAGS				+=			-L../Indie-Studio-Dependencies/linux/lib/cegui-0.8
 CXXFLAGS				+=			-lOIS
 CXXFLAGS				+=			-lOgreBites -lOgreHLMS -lOgreMain -lOgreMeshLodGenerator -lOgreOverlay
 CXXFLAGS        +=  		-lOgrePaging -lOgreProperty -lOgreRTShaderSystem -lOgreTerrain -lOgreVolume

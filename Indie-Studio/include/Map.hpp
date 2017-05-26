@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Tue May 23 20:48:46 2017 gastal_r
+// Last update Fri May 26 00:06:36 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -48,8 +48,6 @@ public:
 
 private:
   char mPolygonRenderingMode;
-
-  Ogre::Camera *mCamera;
 
   // OgreCookies
   OgreCookies::CameraMan* mCameraMan;       // basic camera controller

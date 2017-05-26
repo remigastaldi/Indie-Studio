@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Tue May 23 15:23:08 2017 gastal_r
+// Last update Fri May 26 13:45:22 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -32,8 +32,8 @@ void Map::enter(void)
   connect();
 
   _camera = mDevice->sceneMgr->createCamera("PlayerCamMap");
-  _camera->setPosition(Ogre::Vector3(0, 0, 80));
-  _camera->lookAt(Ogre::Vector3(0, 0, -300));
+  _camera->setPosition(Ogre::Vector3(0, 200, 100));
+  _camera->lookAt(Ogre::Vector3(0, 0, 0));
   _camera->setNearClipDistance(5);
 
 
@@ -56,8 +56,11 @@ void Map::createScene(void)
 
   Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
 
-  DotSceneLoader loader;
-  loader.parseDotScene("map.scene","General", mDevice->sceneMgr, map);
+    DotSceneLoader loader;
+    loader.parseDotScene("map.scene","General", mDevice->sceneMgr, map);
+
+  Entity *player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 2,
+    Entity::Status::IMMOBILE, {0.f, 0.f, -150.f}, {0.f, 0.f, 0.f, 0.f});
 }
 
 void Map::exit(void)
@@ -219,33 +222,84 @@ CEGUI::MouseButton convertButon(OIS::MouseButtonID id)
 bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
   // _cameraMan->injectMouseDown(arg, id);
-CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-context.injectMouseButtonDown(convertButon(id));
-if (id == OIS::MB_Left)
-{
-mLMouseDown = true;
-}
-else if (id == OIS::MB_Right)
-{
-mRMouseDown = true;
-context.getMouseCursor().hide();
-}
-return true;
+  CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+  context.injectMouseButtonDown(convertButon(id));
+  if (id == OIS::MB_Left)
+  {
+    mLMouseDown = true;
+
+    //o-- Get Mouse Position
+    CEGUI::Vector2f absMouse = CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
+    CEGUI::Vector2f relativeMouse = CEGUI::CoordConverter::screenToWindow(
+      *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), absMouse);
+
+    //o-- Get Screen Coordinates
+    float screenX = relativeMouse.d_x;
+    float screenY = relativeMouse.d_y;
+
+    //o-- Get Window Size
+    float windowWidth = CEGUI::CoordConverter::screenToWindowX(
+      *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(),
+      CEGUI::UDim(1,0)
+    );
+    float windowHeight = CEGUI::CoordConverter::screenToWindowY(
+      *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(),
+      CEGUI::UDim(1,0)
+    );
+
+     Ogre::Ray ray = _camera->getCameraToViewportRay((float) screenX / windowWidth, (float) screenY / windowHeight);
+
+     // Set up the ray query - you will probably not want to create this every time
+     Ogre::RaySceneQuery * rq = mDevice->sceneMgr->createRayQuery(ray);
+
+     // Sort by distance, and say we're only interested in the first hit; also, only pick entities
+     rq->setSortByDistance(true, 1);
+//     rq->setQueryTypeMask(Ogre::SceneManager::ENTITY_TYPE_MASK);
+
+     // Execute
+     Ogre::RaySceneQueryResult res = rq->execute();
+     Ogre::RaySceneQueryResult::iterator it = res.begin();
+
+     // these two things should probably be encapsulated in their own class/struct
+     Ogre::MovableObject *mSelectedEntity = NULL;
+     float mSelectedEntityDist = 0.0f;
+
+       if (it != res.end())
+       {
+         mSelectedEntity = it->movable;
+         mSelectedEntityDist = it->distance;
+         Ogre::Vector3 pos = ray.getPoint(mSelectedEntityDist);
+         std::cout << "POS " <<  pos[0] << " " << pos[1] << " " << pos[2] << std::endl;
+         printf("clicked: %s Distance %f\n", mSelectedEntity->getName().c_str(), mSelectedEntityDist);
+       }
+       else
+       {
+         printf("cleared selection.\n");
+       }
+
+       mDevice->sceneMgr->destroyQuery(rq);
+  }
+  else if (id == OIS::MB_Right)
+  {
+    mRMouseDown = true;
+    //context.getMouseCursor().hide();
+  }
+  return true;
 }
 
 bool Map::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
   //  _cameraMan->injectMouseUp(arg, id);
-CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-context.injectMouseButtonUp(convertButon(id));
-if (id == OIS::MB_Left)
-{
-mLMouseDown = false;
-}
-else if (id == OIS::MB_Right)
-{
-mRMouseDown = false;
-context.getMouseCursor().show();
-}
-    return true;
+  CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+  context.injectMouseButtonUp(convertButon(id));
+  if (id == OIS::MB_Left)
+  {
+    mLMouseDown = false;
+  }
+  else if (id == OIS::MB_Right)
+  {
+    mRMouseDown = false;
+    context.getMouseCursor().show();
+  }
+  return true;
 }
