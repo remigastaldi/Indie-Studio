@@ -5,21 +5,22 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Fri May 26 13:45:22 2017 gastal_r
+// Last update Fri May 26 15:55:28 2017 gastal_r
 //
 
 #include        "Map.hpp"
 
 Map::Map() :
-	mPolygonRenderingMode('B'),
-	mShutDown(false),
-	_camera(nullptr),
-	_cameraMan(nullptr),
-	Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room"),
-	mRotSpd(0.1),
-	mLMouseDown(false),
-	mRMouseDown(false),
-	mCurObject(0)
+  mPolygonRenderingMode('B'),
+  mShutDown(false),
+  _camera(nullptr),
+  _cameraMan(nullptr),
+  Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room"),
+  mRotSpd(0.1),
+  mLMouseDown(false),
+  mRMouseDown(false),
+  mCurObject(0),
+  _rayCast(nullptr)
 {}
 
 Map::~Map()
@@ -32,10 +33,7 @@ void Map::enter(void)
   connect();
 
   _camera = mDevice->sceneMgr->createCamera("PlayerCamMap");
-  _camera->setPosition(Ogre::Vector3(0, 200, 100));
-  _camera->lookAt(Ogre::Vector3(0, 0, 0));
   _camera->setNearClipDistance(5);
-
 
   _cameraMan = new OgreCookies::CameraMan(_camera);
   Ogre::Viewport* vp = mDevice->window->addViewport(_camera);
@@ -45,6 +43,9 @@ void Map::enter(void)
   _camera->setAspectRatio(
       Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
 
+  _camera->setPosition(Ogre::Vector3(0, 30, 15));
+  _camera->lookAt(Ogre::Vector3(-5, 0, 0));
+
   createScene();
 }
 
@@ -52,26 +53,29 @@ void Map::createScene(void)
 {
 	_player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, 2,
 		Entity::Status::IMMOBILE, { 0, 0, 25.0 }, { 0.f, 0.f, 0.f, 0.f });
-	_player->setCamera(_cameraMan);
+	//_player->setCamera(_cameraMan);
 	_player->setDestination({ 550, 0, 50 });
 	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
 	mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
 	mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 	Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
-	/*DotSceneLoader loader;
-	loader.parseDotScene("map.scene","General", mDevice->sceneMgr, map);*/
+	DotSceneLoader loader;
+	loader.parseDotScene("moutain.scene","General", mDevice->sceneMgr, map);
+  map->setPosition({0.f, 0.f, 0.f});
 }
 
 void Map::exit(void)
 {
-	mDevice->sceneMgr->clearScene();
-	mDevice->sceneMgr->destroyAllCameras();
-	mDevice->window->removeAllViewports();
-	
-	disconnect();
-	
-	Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Map =====");
+  mDevice->sceneMgr->destroyQuery(_rayCast);
+
+  mDevice->sceneMgr->clearScene();
+  mDevice->sceneMgr->destroyAllCameras();
+  mDevice->window->removeAllViewports();
+
+ disconnect();
+
+ Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Map =====");
 }
 
 bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
@@ -82,10 +86,10 @@ bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
 //-------------------------------------------------------------------------------------
 bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-	if (mDevice->window->isClosed()) 
+	if (mDevice->window->isClosed())
 		return false;
 
-  	if (mShutDown) 
+  	if (mShutDown)
 		return false;
 
      //Need to inject timestamps to CEGUI System.
@@ -94,7 +98,7 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
     _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
     mDevice->soundManager->update(evt.timeSinceLastFrame);
 
-	_player->goToLocation(evt.timeSinceLastFrame);
+	//_player->goToLocation(evt.timeSinceLastFrame);
     return true;
 }
 
@@ -219,6 +223,43 @@ CEGUI::MouseButton convertButon(OIS::MouseButtonID id)
   }
 }
 
+void  Map::mouseRaycast(void)
+{
+  CEGUI::Vector2f absMouse = CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
+  CEGUI::Vector2f relativeMouse = CEGUI::CoordConverter::screenToWindow(
+    *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), absMouse);
+
+  float windowWidth = CEGUI::CoordConverter::screenToWindowX(
+    *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), CEGUI::UDim(1,0));
+
+  float windowHeight = CEGUI::CoordConverter::screenToWindowY(
+    *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), CEGUI::UDim(1,0));
+
+  Ogre::Ray ray = _camera->getCameraToViewportRay((float) relativeMouse.d_x / windowWidth, (float) relativeMouse.d_y / windowHeight);
+
+  if (!_rayCast)
+    _rayCast = mDevice->sceneMgr->createRayQuery(ray);
+  else
+    _rayCast->setRay(ray);
+
+   _rayCast->setSortByDistance(true, 1);
+   _rayCast->setQueryTypeMask(Ogre::SceneManager::ENTITY_TYPE_MASK);
+
+   Ogre::RaySceneQueryResult res = _rayCast->execute();
+   Ogre::RaySceneQueryResult::iterator it = res.begin();
+
+  if (it != res.end())
+  {
+    Ogre::MovableObject *mSelectedEntity = it->movable;
+    float mSelectedEntityDist = it->distance;
+    Ogre::Vector3 pos = ray.getPoint(mSelectedEntityDist);
+    std::cout << "POS X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
+    printf("clicked: %s Distance %f\n", mSelectedEntity->getName().c_str(), mSelectedEntityDist);
+  }
+  else
+    printf("cleared selection.\n");
+}
+
 bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
   // _cameraMan->injectMouseDown(arg, id);
@@ -227,62 +268,11 @@ bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
   if (id == OIS::MB_Left)
   {
     mLMouseDown = true;
-
-    //o-- Get Mouse Position
-    CEGUI::Vector2f absMouse = CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
-    CEGUI::Vector2f relativeMouse = CEGUI::CoordConverter::screenToWindow(
-      *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), absMouse);
-
-    //o-- Get Screen Coordinates
-    float screenX = relativeMouse.d_x;
-    float screenY = relativeMouse.d_y;
-
-    //o-- Get Window Size
-    float windowWidth = CEGUI::CoordConverter::screenToWindowX(
-      *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(),
-      CEGUI::UDim(1,0)
-    );
-    float windowHeight = CEGUI::CoordConverter::screenToWindowY(
-      *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(),
-      CEGUI::UDim(1,0)
-    );
-
-     Ogre::Ray ray = _camera->getCameraToViewportRay((float) screenX / windowWidth, (float) screenY / windowHeight);
-
-     // Set up the ray query - you will probably not want to create this every time
-     Ogre::RaySceneQuery * rq = mDevice->sceneMgr->createRayQuery(ray);
-
-     // Sort by distance, and say we're only interested in the first hit; also, only pick entities
-     rq->setSortByDistance(true, 1);
-//     rq->setQueryTypeMask(Ogre::SceneManager::ENTITY_TYPE_MASK);
-
-     // Execute
-     Ogre::RaySceneQueryResult res = rq->execute();
-     Ogre::RaySceneQueryResult::iterator it = res.begin();
-
-     // these two things should probably be encapsulated in their own class/struct
-     Ogre::MovableObject *mSelectedEntity = NULL;
-     float mSelectedEntityDist = 0.0f;
-
-       if (it != res.end())
-       {
-         mSelectedEntity = it->movable;
-         mSelectedEntityDist = it->distance;
-         Ogre::Vector3 pos = ray.getPoint(mSelectedEntityDist);
-         std::cout << "POS " <<  pos[0] << " " << pos[1] << " " << pos[2] << std::endl;
-         printf("clicked: %s Distance %f\n", mSelectedEntity->getName().c_str(), mSelectedEntityDist);
-       }
-       else
-       {
-         printf("cleared selection.\n");
-       }
-
-       mDevice->sceneMgr->destroyQuery(rq);
+    mouseRaycast();
   }
   else if (id == OIS::MB_Right)
   {
     mRMouseDown = true;
-    //context.getMouseCursor().hide();
   }
   return true;
 }
