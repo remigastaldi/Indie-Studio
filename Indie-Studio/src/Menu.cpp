@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat May 27 15:41:50 2017 Matthias Prost
+// Last update Sat May 27 15:47:45 2017 Matthias Prost
 //
 
 #include        "Menu.hpp"
@@ -70,21 +70,26 @@ bool Menu::buttonClose(const CEGUI::EventArgs &e)
 {
   _closeButton->destroy();
   _credits->destroy();
+  _credits = nullptr;
   return (true);
 }
 
 bool Menu::buttonInfos(const CEGUI::EventArgs &e)
 {
-  _credits = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Credits.layout");
-  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_credits);
+  if (_credits == nullptr)
+  {
+    _credits = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Credits.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_credits);
 
-  _closeButton = _credits->getChild("Close");
-  _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonClose, this));
+    _closeButton = _credits->getChild("Close");
+    _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonClose, this));
+  }
   return (true);
 }
 
 void Menu::createScene(void)
 {
+  _credits = nullptr;
   CEGUI::System &sys = CEGUI::System::getSingleton();
   CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
 	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
