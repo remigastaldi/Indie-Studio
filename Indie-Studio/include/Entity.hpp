@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Sat May 27 15:01:10 2017 Leo HUBERT
+// Last update Sat May 27 15:51:33 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -70,7 +70,7 @@ public:
   Ogre::Entity  const			*getPlayer() const  { return _entity; }
   Ogre::Real  const			  getWalkSpd() const  { return _walkSpd; }
   Ogre::Real  const 			getDistance() const { return _distance; }
-  Ogre::Vector3 const     &getPosition() const { return _position; }
+  Ogre::Vector3 const     &getPosition() const { return _node->getPosition(); }
   Ogre::Quaternion const  &getOrientation() const  { return _orientation; }
   Entity::Status const    getStatus() const       { return _status; }
   size_t const            getId() const   { return (_id); }
@@ -78,7 +78,6 @@ public:
   void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
   void					setWalkSpd(const Ogre::Real &_mWalkSpd)            { _walkSpd = _mWalkSpd; }
   void					setDistance(const Ogre::Real &_mDistance)          { _distance = _mDistance; }
-  void					setPosition(const Ogre::Vector3 &pos)              { _node->setPosition(pos); }
   void					setOrientation(const Ogre::Quaternion &orientation)              { _node->setOrientation(orientation); }
   void					setDestination(const Ogre::Vector3 &destination);
 
@@ -92,7 +91,6 @@ protected:
 
   size_t				        _id;
   Entity::Status		    _status;
-  Ogre::Vector3			    _position;
   Ogre::Quaternion		  _orientation;
   Ogre::AnimationState	*_animationState;
   Ogre::Real			      _distance;
