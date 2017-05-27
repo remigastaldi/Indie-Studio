@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Sat May 27 17:03:23 2017 gastal_r
+// Last update Sat May 27 20:07:48 2017 Leo HUBERT
 //
 
 #ifndef       _ENTITY_HPP_
@@ -71,6 +71,7 @@ public:
   Ogre::Real  const			  getWalkSpd() const  { return _walkSpd; }
   Ogre::Real  const 			getDistance() const { return _distance; }
   Ogre::Vector3 const     &getPosition() const { return _node->getPosition(); }
+  Ogre::Vector3 const     &getDestination() const { return _destination; }
   Ogre::Quaternion const  &getOrientation() const  { return _orientation; }
   Entity::Status const    getStatus() const       { return _status; }
   size_t const            getId() const   { return (_id); }
@@ -78,7 +79,7 @@ public:
   void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
   void          setPosition(const Ogre::Vector3 &pos)        { _node->setPosition(pos); }
   void					setWalkSpd(const Ogre::Real &_mWalkSpd)            { _walkSpd = _mWalkSpd; }
-  void					setDistance(const Ogre::Real &_mDistance)          { _distance = _mDistance; }
+  void					setDistance(const Ogre::Real &_mDistance)          { _distance = _mDistance; }  
   void					setOrientation(const Ogre::Quaternion &orientation) { _node->setOrientation(orientation); }
   void					setDestination(const Ogre::Vector3 &destination);
 
