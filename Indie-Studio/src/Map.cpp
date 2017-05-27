@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat May 27 13:13:57 2017 gastal_r
+// Last update Sat May 27 13:21:39 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -347,21 +347,6 @@ bool Map::keyReleased( const OIS::KeyEvent &arg )
     return true;
 }
 
-bool Map::mouseMoved( const OIS::MouseEvent &arg )
-{
-  // _cameraMan->injectMouseMove(arg);
-  CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-  context.injectMouseMove(arg.state.X.rel, arg.state.Y.rel);
-  if (mLMouseDown)
-  {
-    mouseRaycast();
-  }
-  else if (mRMouseDown)
-  {
-  }
-  return true;
-}
-
 //Helper function for mouse events
 CEGUI::MouseButton convertButon(OIS::MouseButtonID id)
 {
@@ -414,12 +399,28 @@ void  Map::mouseRaycast(void)
   }
 }
 
+bool Map::mouseMoved( const OIS::MouseEvent &arg )
+{
+  // _cameraMan->injectMouseMove(arg);
+  CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+  context.injectMouseMove(arg.state.X.rel, arg.state.Y.rel);
+  if (mLMouseDown)
+  {
+    mouseRaycast();
+  }
+  else if (mRMouseDown)
+  {
+  }
+  return true;
+}
+
 bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
   CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
   context.injectMouseButtonDown(convertButon(id));
   if (id == OIS::MB_Left)
   {
+    mouseRaycast();
     mLMouseDown = true;
   }
   else if (id == OIS::MB_Right)
