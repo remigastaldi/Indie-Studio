@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Sat May 27 16:24:03 2017 gastal_r
+// Last update Sat May 27 17:01:01 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -21,21 +21,7 @@ Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   setPosition(position);
   if (orientation != Ogre::Quaternion::ZERO)
     setOrientation(orientation);
-  switch (status)
-  {
-  case Entity::Status::IMMOBILE :
-    changeAnimation("Idle");
-    break;
-  case Entity::Status::MOVE :
-    changeAnimation("Walk");
-    break;
-  case Entity::Status::ATTACK :
-    break;
-  case Entity::Status::HITTED :
-    break;
-  case Entity::Status::DEAD :
-    break;
-  }
+  changeAnimation(status);
 
 return;
   Ogre::AxisAlignedBox boundingB = _entity->getBoundingBox();

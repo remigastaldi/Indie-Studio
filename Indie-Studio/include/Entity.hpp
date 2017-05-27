@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Sat May 27 15:55:43 2017 gastal_r
+// Last update Sat May 27 17:03:23 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -61,7 +61,7 @@ public:
 
   void	goToLocation(Ogre::Real);
   /*bool	nextLocation(std::deque<Ogre::Vector3> &, Ogre::SceneNode *);*/
-  void  changeAnimation(const std::string &animation);
+  void  changeAnimation(Entity::Status status);
   void  frameRenderingQueued(const Ogre::FrameEvent &evt);
   void	updateAnimation(std::string, Ogre::Real);
 

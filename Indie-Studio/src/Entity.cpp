@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Sat May 27 16:07:27 2017 gastal_r
+// Last update Sat May 27 17:03:03 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -30,9 +30,23 @@ Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 Entity::~Entity()
 {}
 
-void 	Entity::changeAnimation(const std::string &animation)
+void 	Entity::changeAnimation(Entity::Status status)
 {
-	_animationState = _entity->getAnimationState(animation);
+	switch (status)
+	{
+	case Entity::Status::IMMOBILE :
+		_animationState = _entity->getAnimationState("Idle");
+		break;
+	case Entity::Status::MOVE :
+		_animationState = _entity->getAnimationState("Walk");
+		break;
+	case Entity::Status::ATTACK :
+		break;
+	case Entity::Status::HITTED :
+		break;
+	case Entity::Status::DEAD :
+		break;
+	}
 	_animationState->setLoop(true);
 	_animationState->setEnabled(true);
 }
@@ -53,7 +67,7 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
 			_node->setPosition(_destination);
 			_direction = Ogre::Vector3::ZERO;
 			_destination = Ogre::Vector3::ZERO;
-			changeAnimation("Idle");
+			changeAnimation(Entity::Status::IMMOBILE);
 		}
 		else
 		{
@@ -77,7 +91,7 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
 void					Entity::setDestination(const Ogre::Vector3 &destination)
 {
 	_destination = destination;
-	changeAnimation("Walk");
+	changeAnimation(Entity::Status::MOVE);
 }
 
 void 	Entity::destroy()
