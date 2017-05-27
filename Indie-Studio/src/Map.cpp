@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat May 27 15:31:51 2017 gastal_r
+// Last update Sat May 27 16:12:36 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -71,7 +71,7 @@ void Map::createScene(void)
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
 
 	_player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 42,
-		Entity::Status::IMMOBILE, { 0, 30, 0.0 }, { 0.f, 0.f, 0.f, 0.f });
+		Entity::Status::IMMOBILE, { 0, 30, 0.0 }, Ogre::Quaternion::ZERO);
 	mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 	mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
 

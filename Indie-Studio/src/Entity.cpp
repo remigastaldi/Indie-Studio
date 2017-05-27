@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Sat May 27 16:04:35 2017 gastal_r
+// Last update Sat May 27 16:07:27 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -25,10 +25,7 @@ Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 	_animationState(0),
 	_distance(0),
 	_walkSpd(70.0)
-{
-	setPosition(position);
-	setOrientation(orientation);
-}
+{}
 
 Entity::~Entity()
 {}
