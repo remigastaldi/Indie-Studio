@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat May 27 14:47:27 2017 gastal_r
+// Last update Sat May 27 15:41:50 2017 Matthias Prost
 //
 
 #include        "Menu.hpp"
@@ -90,12 +90,12 @@ void Menu::createScene(void)
 	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
 
   Ogre::ResourceGroupManager& files = Ogre::ResourceGroupManager::getSingleton();
-   files.createResourceGroup("imagesets");
-   files.createResourceGroup("fonts");
-   files.createResourceGroup("layouts");
-   files.createResourceGroup("schemes");
-   files.createResourceGroup("looknfeels");
-   files.createResourceGroup("schemas");
+  files.createResourceGroup("imagesets");
+  files.createResourceGroup("fonts");
+  files.createResourceGroup("layouts");
+  files.createResourceGroup("schemes");
+  files.createResourceGroup("looknfeels");
+  files.createResourceGroup("schemas");
 
   CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
   CEGUI::Scheme::setDefaultResourceGroup("schemes");
@@ -119,10 +119,10 @@ void Menu::createScene(void)
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_gameMenu);
 
 
-  _playButton = _gameMenu->getChild("Button");
+  _playButton = _gameMenu->getChild("Play");
   _playButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonPlay, this));
 
-  _quitButton = _gameMenu->getChild("Button2");
+  _quitButton = _gameMenu->getChild("Quit");
   _quitButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
 
   _infosButton = _gameMenu->getChild("Infos");
