@@ -70,6 +70,12 @@ io.on('connection', function (socket) {
 
   socket.on('move', function (data) {
     io.to(socket.room).emit("move", data);
+    if (users[socket.user_server_id])
+    {
+      users[socket.user_server_id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
+      users[socket.user_server_id].setOrientation(data["orientation"]["w"], data["orientation"]["x"], data["orientation"]["y"], data["orientation"]["z"]);
+      users[socket.user_server_id].setStatus(data["status"]);
+    }
   });
 
   socket.on("create_entity", function (data) {
@@ -77,6 +83,8 @@ io.on('connection', function (socket) {
     if (users[socket.user_server_id])
     {
       users[socket.user_server_id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
+      users[socket.user_server_id].setOrientation(data["orientation"]["w"], data["orientation"]["x"], data["orientation"]["y"], data["orientation"]["z"]);
+      users[socket.user_server_id].setStatus(data["status"]);
     }
     console.log(data);
   })
@@ -95,7 +103,13 @@ io.on('connection', function (socket) {
       if (users[user]["room"] == socket.room)
       {
         io.to(socket.room).emit("login", { user_id: users[user]["id"], send_to: data["user_id"] });
-        io.to(socket.room).emit("create_entity", { send_by: users[user]["id"], send_to: data["user_id"], position: users[user]["pos"] });
+        io.to(socket.room).emit("create_entity", {
+          send_by: users[user]["id"],
+          send_to: data["user_id"],
+          position: users[user]["position"],
+          orientation: users[user]["orientation"],
+          status: users[user]["status"]
+        });
       }
     }
 
