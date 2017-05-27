@@ -5,13 +5,13 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Sat May 27 12:40:00 2017 gastal_r
+// Last update Sat May 27 14:15:17 2017 gastal_r
 //
 
 #include        "Player.hpp"
 
 Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, Entity::Status status, const Ogre::Vector3 &position, const Ogre::Quaternion &orientation)
-  : Entity(sceneMgr, world, id, status, position, orientation)
+  : Entity(ENTITY_INIT_VARS)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Player =====");
 

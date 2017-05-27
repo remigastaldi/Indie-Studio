@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Sat May 27 13:05:36 2017 gastal_r
+// Last update Sat May 27 14:11:26 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -50,8 +50,8 @@ public:
   };
 
 public:
-  Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, Status status, const Ogre::Vector3 &position,
-   const Ogre::Quaternion &orientation);
+  Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, Status status,
+    const Ogre::Vector3 &position, const Ogre::Quaternion &orientation);
 
   ~Entity();
   Entity(const Entity& other) = default;
@@ -106,25 +106,26 @@ protected:
 #include "Player.hpp"
 class Player;
 
+#define   ENTITY_INDEX    \
+{ Entity::Type::RANGER, &createInstance<Player> }
+
+
 #define   ENTITY_INIT_PARAMETERS                                 \
-Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, Entity::Status status,  \
-const Ogre::Vector3 &position, const Ogre::Quaternion &orientation
+Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, \
+Entity::Status status, const Ogre::Vector3 &position, const Ogre::Quaternion &orientation
+
+#define   ENTITY_INIT_VARS    \
+sceneMgr, world, id, status, position, orientation
 
 template<typename T>
 inline Entity * createInstance(ENTITY_INIT_PARAMETERS)
-{
- return (new T(sceneMgr, world, id, status, position, orientation));
-}
+{ return (new T(ENTITY_INIT_VARS)); }
 
 static std::unordered_map<Entity::Type, Entity*(*)(ENTITY_INIT_PARAMETERS)> typeIndex
-{
-  { Entity::Type::RANGER, &createInstance<Player> }
-};
+{ ENTITY_INDEX };
 
 inline Entity * createEntity(Entity::Type type, ENTITY_INIT_PARAMETERS)
-{
-  return (typeIndex[type](sceneMgr, world, id, status, position, orientation));
-}
+{ return (typeIndex[type](ENTITY_INIT_VARS)); }
 
 #endif  /* !_ENTITY_CREATE_ */
 

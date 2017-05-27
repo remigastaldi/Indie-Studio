@@ -65,6 +65,8 @@ SRC             =				src/CameraMan.cpp							\
 												src/Menu.cpp									\
 												src/Indie.cpp									\
 												src/SplashScreen.cpp  				\
+												src/Spell.cpp									\
+												src/Bullet.cpp								\
 												src/main.cpp
 
 
