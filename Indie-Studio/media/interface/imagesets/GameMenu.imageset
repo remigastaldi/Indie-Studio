@@ -43,5 +43,7 @@
     <Image height="101" name="PopupLinesQuit" width="219" xPos="711" yPos="1066" />
     <Image height="30" name="InfosHover" width="30" xPos="2726" yPos="1145" />
     <Image height="30" name="InfosNormal" width="30" xPos="2797" yPos="1145" />
-    <Image height="220" name="Logo" width="2782" xPos="2207" yPos="289" />
+    <Image height="90" name="SettingsNormal" width="90" xPos="3051" yPos="1131" />
+    <Image height="90" name="SettingsHover" width="91" xPos="3225" yPos="1131" />
+    <Image height="101" name="BackgroundSpell" width="178" xPos="2683" yPos="610" />
 </Imageset>

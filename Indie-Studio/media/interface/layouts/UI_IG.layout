@@ -4,10 +4,18 @@
     <Window type="DefaultWindow" name="DefaultWindow" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
-        <Window type="SampleBrowserSkin/Button" name="Button" >
-            <Property name="Area" value="{{0,1898},{0,0},{0,1920},{0,20}}" />
-            <Property name="HoverImage" value="AlfiskoSkin/CloseButtonPushed" />
-            <Property name="NormalImage" value="AlfiskoSkin/CloseButtonNormal" />
+        <Window type="Generic/Image" name="BackgroundSpell" >
+            <Property name="Area" value="{{0,658},{0,970},{0,1238},{0,1060}}" />
+            <Property name="Alpha" value="0.8" />
+            <Property name="Image" value="GameMenuImages/BackgroundSpell" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="DragDropTarget" value="false" />
+        </Window>
+        <Window type="Generic/ImageButton" name="Settings" >
+            <Property name="Area" value="{{0,1864},{0,5},{0,1914},{0,51}}" />
+            <Property name="HoverImage" value="GameMenuImages/SettingsHover" />
+            <Property name="NormalImage" value="GameMenuImages/SettingsNormal" />
+            <Property name="PushedImage" value="GameMenuImages/SettingsHover" />
         </Window>
     </Window>
 </GUILayout>
