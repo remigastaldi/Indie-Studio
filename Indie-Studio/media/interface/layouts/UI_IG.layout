@@ -5,14 +5,14 @@
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="Generic/Image" name="BackgroundSpell" >
-            <Property name="Area" value="{{0,658},{0,970},{0,1238},{0,1060}}" />
+            <Property name="Area" value="{{0,668},{0,942},{0,1300},{0,1032}}" />
             <Property name="Alpha" value="0.8" />
             <Property name="Image" value="GameMenuImages/BackgroundSpell" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="DragDropTarget" value="false" />
         </Window>
         <Window type="Generic/ImageButton" name="Settings" >
-            <Property name="Area" value="{{0,1864},{0,5},{0,1914},{0,51}}" />
+            <Property name="Area" value="{{0,1874},{0,5},{0,1913},{0,38}}" />
             <Property name="HoverImage" value="GameMenuImages/SettingsHover" />
             <Property name="NormalImage" value="GameMenuImages/SettingsNormal" />
             <Property name="PushedImage" value="GameMenuImages/SettingsHover" />

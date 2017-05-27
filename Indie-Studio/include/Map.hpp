@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Sat May 27 15:31:36 2017 gastal_r
+// Last update Sat May 27 17:51:50 2017 Matthias Prost
 //
 
 #ifndef       _MAP_HPP_
@@ -50,6 +50,12 @@ public:
 
   virtual void mouseRaycast(void);
 
+  // CEGUI
+  bool buttonSettings(const CEGUI::EventArgs &e);
+  bool buttonClose(const CEGUI::EventArgs &e);
+  bool buttonCredits(const CEGUI::EventArgs &e);
+  bool buttonCloseCredits(const CEGUI::EventArgs &e);
+
 private:
   char mPolygonRenderingMode;
 
@@ -68,10 +74,15 @@ private:
   float   mRotSpd;
   Ogre::SceneNode* mCurObject;
 
-//CEGUI
-CEGUI::MouseCursor  *mCursor;
-CEGUI::Window* _myRoot;
-CEGUI::Window *_ui;
+  //CEGUI
+  CEGUI::MouseCursor  *mCursor;
+  CEGUI::Window *_myRoot;
+  CEGUI::Window *_ui;
+
+  CEGUI::Window *_settingsButton;
+
+  CEGUI::Window *_settings;
+  CEGUI::Window *_closeButton;
 
   //Camera
   Ogre::Camera *_camera;

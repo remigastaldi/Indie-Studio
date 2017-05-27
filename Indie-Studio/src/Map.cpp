@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat May 27 16:12:36 2017 gastal_r
+// Last update Sat May 27 17:52:17 2017 Matthias Prost
 //
 
 #include        "Map.hpp"
@@ -62,13 +62,33 @@ std::cout << "BEFORE " << _world << std::endl;
   // _world->setShowDebugShapes(true);
 }
 
+bool Map::buttonClose(const CEGUI::EventArgs &e)
+{
+  _closeButton->destroy();
+  _settings->destroy();
+  _settings = nullptr;
+  return (true);
+}
+
+bool Map::buttonSettings(const CEGUI::EventArgs &e)
+{
+  if (_settings == nullptr)
+  {
+    _settings = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("IG_MENU.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_settings);
+
+    _closeButton = _settings->getChild("BackToGame");
+    _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::buttonClose, this));
+  }
+  return (true);
+}
+
 void Map::createScene(void)
 {
+  _settings = nullptr;
+
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
-
-  _ui = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("UI_IG.layout");
-  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
 
 	_player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 42,
 		Entity::Status::IMMOBILE, { 0, 30, 0.0 }, Ogre::Quaternion::ZERO);
@@ -101,14 +121,19 @@ void Map::createScene(void)
 
   Shape = new OgreBulletCollisions::StaticPlaneCollisionShape(Ogre::Vector3(0,1,0), 0);
 
-  defaultPlaneBody = new OgreBulletDynamics::RigidBody("BasePlane",
-                                _world);
+  defaultPlaneBody = new OgreBulletDynamics::RigidBody("BasePlane",_world);
   defaultPlaneBody->setStaticShape(Shape, 0.1, 0.8);// (shape, restitution, friction)
       // push the created objects to the deques
   // mShapes.push_back(Shape);
   // mBodies.push_back(defaultPlaneBody);
   connect();
   sendEntity(*_player);
+
+  _ui = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("UI_IG.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
+
+  _settingsButton = _ui->getChild("Settings");
+  _settingsButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::buttonSettings, this));
 }
 
 void Map::exit(void)
