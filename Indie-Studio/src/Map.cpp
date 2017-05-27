@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat May 27 16:12:36 2017 gastal_r
+// Last update Sat May 27 20:22:55 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -137,7 +137,7 @@ void Map::sendPlayerPos()
   static std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
 
   std::chrono::high_resolution_clock::time_point        t2 = std::chrono::high_resolution_clock::now();
-  if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 1)
+  if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 50)
   {
     t1 = std::chrono::high_resolution_clock::now();
     move(*_player);
@@ -159,7 +159,11 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
     _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
     mDevice->soundManager->update(evt.timeSinceLastFrame);
     _player->frameRenderingQueued(evt);
-    sendPlayerPos();
+
+    for (auto & it : _entity)
+    {
+      it.second->frameRenderingQueued(evt);
+    }
     return true;
 }
 
@@ -406,7 +410,10 @@ void  Map::mouseRaycast(void)
     Ogre::Vector3 pos = ray.getPoint(mSelectedEntityDist);
     std::cout << "Clicked: " << mSelectedEntity->getName().c_str() << "POS: X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
     if (mSelectedEntity->getName() != std::to_string(_player->getId()))
+    {
       _player->setDestination(pos);
+      sendPlayerPos();
+    }
   }
 }
 

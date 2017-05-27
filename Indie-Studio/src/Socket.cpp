@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Sat May 27 20:06:30 2017 Leo HUBERT
+** Last update Sat May 27 20:26:06 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -108,7 +108,7 @@ void Socket::events()
                   if (_entity[data->get_map()["send_by"]->get_int()])
                   {
                     _entity[data->get_map()["send_by"]->get_int()]->setPosition(position);
-                    _entity[data->get_map()["send_by"]->get_int()]->setOrientation(orientation);
+                  //  _entity[data->get_map()["send_by"]->get_int()]->setOrientation(orientation);
                     _entity[data->get_map()["send_by"]->get_int()]->setDestination(destination);
                   }
                 }

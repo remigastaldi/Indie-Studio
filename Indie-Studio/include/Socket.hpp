@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Sat May 27 14:44:49 2017 Leo HUBERT
+// Last update Sat May 27 20:21:56 2017 gastal_r
 //
 
 #ifndef _CLIENT_HPP_
@@ -63,7 +63,7 @@ public:
 
   void setWorld(OgreBulletDynamics::DynamicsWorld *world) { _world = world; }
 
-private:
+protected:
   int                         _id;
   std::mutex                  _lock;
   std::condition_variable_any _cond;

@@ -83,13 +83,11 @@ public:
   void					setOrientation(const Ogre::Quaternion &orientation) { _node->setOrientation(orientation); }
   void					setDestination(const Ogre::Vector3 &destination);
 
-
 protected:
   Ogre::SceneManager  &_sceneMgr;
   OgreBulletDynamics::DynamicsWorld &_world;
   Ogre::Entity        *_entity;
   Ogre::SceneNode     *_node;
-
 
   size_t				        _id;
   Entity::Status		    _status;

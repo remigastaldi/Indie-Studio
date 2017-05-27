@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Sat May 27 15:31:36 2017 gastal_r
+// Last update Sat May 27 17:58:25 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -80,7 +80,10 @@ CEGUI::Window *_ui;
   //Mouse RayCast
   Ogre::RaySceneQuery * _rayCast;
 
-  Entity *_player;
+  //Player
+  Entity    *_player;
+  size_t    _currentSpellIndex;
+  std::vector<size_t>  _availableSpellIndex;
 
   Ogre::Entity *_ent;
   OgreBulletCollisions::CollisionShape *Shape;
