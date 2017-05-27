@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Fri May 26 20:26:09 2017 Leo HUBERT
+** Last update Sat May 27 14:44:41 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -83,12 +83,28 @@ void Socket::events()
                 (void)name;
                 (void)isAck;
                 (void)ack_resp;
-                float test;
                 _lock.lock();
                 if (data->get_map()["send_by"]->get_int() != _id)
                 {
-                        test = data->get_map()["fw"]->get_double();
-                        std::cout <<  test  << '\n';
+                  Ogre::Vector3 position;
+                  position.x = data->get_map()["position"]->get_map()["x"]->get_double();
+                  position.y = data->get_map()["position"]->get_map()["y"]->get_double();
+                  position.z = data->get_map()["position"]->get_map()["z"]->get_double();
+
+                  Ogre::Quaternion orientation;
+                  orientation.w = data->get_map()["orientation"]->get_map()["w"]->get_double();
+                  orientation.x = data->get_map()["orientation"]->get_map()["x"]->get_double();
+                  orientation.y = data->get_map()["orientation"]->get_map()["y"]->get_double();
+                  orientation.z = data->get_map()["orientation"]->get_map()["z"]->get_double();
+
+                  Entity::Status status;
+                  status = (Entity::Status)data->get_map()["status"]->get_int();
+
+                  if (_entity[data->get_map()["send_by"]->get_int()])
+                  {
+                    _entity[data->get_map()["send_by"]->get_int()]->setPosition(position);
+                    _entity[data->get_map()["send_by"]->get_int()]->setOrientation(orientation);
+                  }
                 }
                 _lock.unlock();
         }));
@@ -105,22 +121,21 @@ void Socket::events()
                 if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
                 {
                   Ogre::Vector3 position;
-
                   position.x = data->get_map()["position"]->get_map()["x"]->get_double();
                   position.y = data->get_map()["position"]->get_map()["y"]->get_double();
                   position.z = data->get_map()["position"]->get_map()["z"]->get_double();
 
-                  /*Ogre::Quaternion orientation;
+                  Ogre::Quaternion orientation;
                   orientation.w = data->get_map()["orientation"]->get_map()["w"]->get_double();
                   orientation.x = data->get_map()["orientation"]->get_map()["x"]->get_double();
                   orientation.y = data->get_map()["orientation"]->get_map()["y"]->get_double();
-                  orientation.z = data->get_map()["orientation"]->get_map()["z"]->get_double();*/
+                  orientation.z = data->get_map()["orientation"]->get_map()["z"]->get_double();
 
-                  /*Entity::Status status;
-                  status = (Entity::Status)data->get_map()["status"]->get_int();*/
+                  Entity::Status status;
+                  status = (Entity::Status)data->get_map()["status"]->get_int();
 
                   _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, data->get_map()["send_by"]->get_int(),
-                                  	                                            Entity::Status::IMMOBILE, position, { 0.f, 0.f, 0.f, 0.f });
+                                  	                                            status, position, orientation);
                   std::cout << _entity.size() << '\n';
 
                 }
@@ -206,10 +221,10 @@ void Socket::sendEntity(const Entity &entity)
         pos.get()->get_map()["z"] =   sio::double_message::create(entity.getPosition().z);
 
         //CREATE ORIENTATION
+        orientation.get()->get_map()["w"] =   sio::double_message::create(entity.getOrientation().w);
         orientation.get()->get_map()["x"] =   sio::double_message::create(entity.getOrientation().x);
         orientation.get()->get_map()["y"] =   sio::double_message::create(entity.getOrientation().y);
         orientation.get()->get_map()["z"] =   sio::double_message::create(entity.getOrientation().z);
-        orientation.get()->get_map()["w"] =   sio::double_message::create(entity.getOrientation().w);
 
         //CREATE SOCKET
         obj.get()->get_map()["position"] =  pos;
@@ -230,16 +245,32 @@ void Socket::sendMessage(std::string const &message)
         emit("message", obj);
 }
 
-void Socket::move(float fw, float x, float y, float z)
+void Socket::move(const Entity &entity)
 {
-        auto obj = sio::object_message::create();
-        obj.get()->get_map()["fw"] =  sio::double_message::create(fw);
-        obj.get()->get_map()["x"] =  sio::double_message::create(x);
-        obj.get()->get_map()["y"] =  sio::double_message::create(y);
-        obj.get()->get_map()["z"] =  sio::double_message::create(z);
-        obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
-        obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
-        emit("move", obj);
+    auto obj = sio::object_message::create();
+    auto pos = sio::object_message::create();
+    auto orientation = sio::object_message::create();
+
+    //CREATE POS
+    pos.get()->get_map()["x"] =   sio::double_message::create(entity.getPosition().x);
+    pos.get()->get_map()["y"] =   sio::double_message::create(entity.getPosition().y);
+    pos.get()->get_map()["z"] =   sio::double_message::create(entity.getPosition().z);
+
+    //CREATE ORIENTATION
+    orientation.get()->get_map()["x"] =   sio::double_message::create(entity.getOrientation().x);
+    orientation.get()->get_map()["y"] =   sio::double_message::create(entity.getOrientation().y);
+    orientation.get()->get_map()["z"] =   sio::double_message::create(entity.getOrientation().z);
+    orientation.get()->get_map()["w"] =   sio::double_message::create(entity.getOrientation().w);
+
+    //CREATE SOCKET
+    obj.get()->get_map()["position"] =  pos;
+    obj.get()->get_map()["orientation"] =  orientation;
+
+    //obj.get()->get_map()["type"] =  sio::int_message::create(entity.getType());
+    obj.get()->get_map()["status"] =  sio::int_message::create((int)entity.getStatus());
+    obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
+    obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
+    emit("move", obj);
 }
 
 void Socket::consoleChat()
@@ -248,12 +279,6 @@ void Socket::consoleChat()
 
         while (getline(std::cin, line))
         {
-                if (line == "test")
-                {
-                        move(123.123, 12344.123,123.123,123.123);
-                        continue;
-                }
-
                 auto obj = sio::object_message::create();
                 obj.get()->get_map()["message"] =  sio::string_message::create(line);
                 obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat May 27 14:36:36 2017 gastal_r
+// Last update Sat May 27 16:12:36 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -71,7 +71,7 @@ void Map::createScene(void)
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
 
 	_player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 42,
-		Entity::Status::IMMOBILE, { 0, 30, 0.0 }, { 0.f, 0.f, 0.f, 0.f });
+		Entity::Status::IMMOBILE, { 0, 30, 0.0 }, Ogre::Quaternion::ZERO);
 	mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 	mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
 
@@ -132,6 +132,18 @@ bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
   return true;
 }
 
+void Map::sendPlayerPos()
+{
+  static std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+
+  std::chrono::high_resolution_clock::time_point        t2 = std::chrono::high_resolution_clock::now();
+  if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 1)
+  {
+    t1 = std::chrono::high_resolution_clock::now();
+    move(*_player);
+  }
+}
+
 //-------------------------------------------------------------------------------------
 bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
@@ -147,6 +159,7 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
     _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
     mDevice->soundManager->update(evt.timeSinceLastFrame);
     _player->frameRenderingQueued(evt);
+    sendPlayerPos();
     return true;
 }
 
@@ -399,7 +412,6 @@ void  Map::mouseRaycast(void)
 
 bool Map::mouseMoved( const OIS::MouseEvent &arg )
 {
-  // _cameraMan->injectMouseMove(arg);
   CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
   context.injectMouseMove(arg.state.X.rel, arg.state.Y.rel);
   if (mLMouseDown)

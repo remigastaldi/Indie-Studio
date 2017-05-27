@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat May 27 15:47:45 2017 Matthias Prost
+// Last update Sat May 27 16:31:14 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -132,7 +132,6 @@ void Menu::createScene(void)
 
   _infosButton = _gameMenu->getChild("Infos");
   _infosButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonInfos, this));
-
 }
 
 // bool GameMenuDemo::handleLoginAcceptButtonClicked(const CEGUI::EventArgs&)

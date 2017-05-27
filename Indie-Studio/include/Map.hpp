@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Sat May 27 12:59:40 2017 gastal_r
+// Last update Sat May 27 15:31:36 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -32,6 +32,8 @@ public:
   virtual void createScene(void);
   /** Inherit to supply state exit code. */
   virtual void exit(void);
+
+  virtual void sendPlayerPos();
 
   // Ogre::FrameListener
   virtual bool frameRenderingQueued(const Ogre::FrameEvent &);

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Sat May 27 14:15:17 2017 gastal_r
+// Last update Sat May 27 16:24:03 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -18,7 +18,25 @@ Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
   _node->attachObject(_entity);
-  _node->setPosition(_position);
+  setPosition(position);
+  if (orientation != Ogre::Quaternion::ZERO)
+    setOrientation(orientation);
+  switch (status)
+  {
+  case Entity::Status::IMMOBILE :
+    changeAnimation("Idle");
+    break;
+  case Entity::Status::MOVE :
+    changeAnimation("Walk");
+    break;
+  case Entity::Status::ATTACK :
+    break;
+  case Entity::Status::HITTED :
+    break;
+  case Entity::Status::DEAD :
+    break;
+  }
+
 return;
   Ogre::AxisAlignedBox boundingB = _entity->getBoundingBox();
   Ogre::Vector3  size = boundingB.getSize();
