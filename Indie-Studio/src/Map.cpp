@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat May 27 17:52:17 2017 Matthias Prost
+// Last update Sat May 27 19:49:19 2017 Matthias Prost
 //
 
 #include        "Map.hpp"
@@ -70,6 +70,19 @@ bool Map::buttonClose(const CEGUI::EventArgs &e)
   return (true);
 }
 
+bool Map::buttonMenu(const CEGUI::EventArgs &e)
+{
+  _closeButton->destroy();
+  _settings->destroy();
+  _settingsButton->destroy();
+  // _goToMenuButton->destroy();
+  _ui->destroy();
+  _myRoot->destroy();
+  GameState *menu = findByName("Menu");
+  changeGameState(menu);
+  return (true);
+}
+
 bool Map::buttonSettings(const CEGUI::EventArgs &e)
 {
   if (_settings == nullptr)
@@ -79,6 +92,9 @@ bool Map::buttonSettings(const CEGUI::EventArgs &e)
 
     _closeButton = _settings->getChild("BackToGame");
     _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::buttonClose, this));
+
+    _goToMenuButton = _settings->getChild("BackToMenu");
+    _goToMenuButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::buttonMenu, this));
   }
   return (true);
 }
@@ -140,7 +156,13 @@ void Map::exit(void)
 {
   disconnect();
 
+  delete(_cameraMan);
+  _cameraMan = nullptr;
+  delete(_player);
+  _player = nullptr;
+
   mDevice->sceneMgr->destroyQuery(_rayCast);
+  _rayCast = nullptr;
 
   mDevice->sceneMgr->clearScene();
   mDevice->sceneMgr->destroyAllCameras();
@@ -404,20 +426,15 @@ void  Map::mouseRaycast(void)
   CEGUI::Vector2f absMouse = CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
   CEGUI::Vector2f relativeMouse = CEGUI::CoordConverter::screenToWindow(
     *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), absMouse);
-
   float windowWidth = CEGUI::CoordConverter::screenToWindowX(
     *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), CEGUI::UDim(1,0));
-
   float windowHeight = CEGUI::CoordConverter::screenToWindowY(
     *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), CEGUI::UDim(1,0));
-
   Ogre::Ray ray = _camera->getCameraToViewportRay((float) relativeMouse.d_x / windowWidth, (float) relativeMouse.d_y / windowHeight);
-
   if (!_rayCast)
     _rayCast = mDevice->sceneMgr->createRayQuery(ray);
   else
     _rayCast->setRay(ray);
-
    _rayCast->setSortByDistance(true, 1);
    //_rayCast->setQueryTypeMask(Ogre::SceneManager::WORLD_GEOMETRY_TYPE_MASK);
 

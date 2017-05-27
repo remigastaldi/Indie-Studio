@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Mon May 22 23:27:25 2017 gastal_r
+// Last update Sat May 27 19:51:12 2017 Matthias Prost
 //
 
 #include        "Indie.hpp"
@@ -174,6 +174,31 @@ bool            Indie::init()
   _device.soundManager->setDistanceModel(AL_LINEAR_DISTANCE);
 
   createOISListener();
+
+  CEGUI::System &sys = CEGUI::System::getSingleton();
+  CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
+  CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
+
+  Ogre::ResourceGroupManager& files = Ogre::ResourceGroupManager::getSingleton();
+  files.createResourceGroup("imagesets");
+  files.createResourceGroup("fonts");
+  files.createResourceGroup("layouts");
+  files.createResourceGroup("schemes");
+  files.createResourceGroup("looknfeels");
+  files.createResourceGroup("schemas");
+
+  CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
+  CEGUI::Scheme::setDefaultResourceGroup("schemes");
+  CEGUI::Font::setDefaultResourceGroup("fonts");
+  CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
+  CEGUI::WindowManager::setDefaultResourceGroup("layouts");
+
+  CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "OgreTray.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "Generic.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "GameMenu.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "SampleBrowser.scheme" );
 
   return true;
 }

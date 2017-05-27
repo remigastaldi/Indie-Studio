@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat May 27 17:42:44 2017 Matthias Prost
+// Last update Sat May 27 18:34:49 2017 Matthias Prost
 //
 
 #include        "Menu.hpp"
@@ -90,30 +90,6 @@ bool Menu::buttonInfos(const CEGUI::EventArgs &e)
 void Menu::createScene(void)
 {
   _credits = nullptr;
-  CEGUI::System &sys = CEGUI::System::getSingleton();
-  CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-
-  Ogre::ResourceGroupManager& files = Ogre::ResourceGroupManager::getSingleton();
-  files.createResourceGroup("imagesets");
-  files.createResourceGroup("fonts");
-  files.createResourceGroup("layouts");
-  files.createResourceGroup("schemes");
-  files.createResourceGroup("looknfeels");
-  files.createResourceGroup("schemas");
-
-  CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
-  CEGUI::Scheme::setDefaultResourceGroup("schemes");
-  CEGUI::Font::setDefaultResourceGroup("fonts");
-  CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
-  CEGUI::WindowManager::setDefaultResourceGroup("layouts");
-
-  CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
-  CEGUI::SchemeManager::getSingleton().createFromFile( "OgreTray.scheme" );
-  CEGUI::SchemeManager::getSingleton().createFromFile( "Generic.scheme" );
-  CEGUI::SchemeManager::getSingleton().createFromFile( "GameMenu.scheme" );
-  CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
-  CEGUI::SchemeManager::getSingleton().createFromFile( "SampleBrowser.scheme" );
 
   CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
 

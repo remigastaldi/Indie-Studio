@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Sat May 27 17:51:50 2017 Matthias Prost
+// Last update Sat May 27 18:19:26 2017 Matthias Prost
 //
 
 #ifndef       _MAP_HPP_
@@ -53,8 +53,7 @@ public:
   // CEGUI
   bool buttonSettings(const CEGUI::EventArgs &e);
   bool buttonClose(const CEGUI::EventArgs &e);
-  bool buttonCredits(const CEGUI::EventArgs &e);
-  bool buttonCloseCredits(const CEGUI::EventArgs &e);
+  bool buttonMenu(const CEGUI::EventArgs &e);
 
 private:
   char mPolygonRenderingMode;
@@ -83,6 +82,7 @@ private:
 
   CEGUI::Window *_settings;
   CEGUI::Window *_closeButton;
+  CEGUI::Window *_goToMenuButton;
 
   //Camera
   Ogre::Camera *_camera;
