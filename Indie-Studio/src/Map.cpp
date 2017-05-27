@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Fri May 26 20:19:08 2017 gastal_r
+// Last update Sat May 27 13:13:57 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -84,7 +84,6 @@ void Map::createScene(void)
 
 	// mNode->attachObject(static_cast <Ogre::SimpleRenderable *> (debugDrawer));
 
-  Ogre::Entity *ent;
 	Ogre::Plane p;
 	p.normal = Ogre::Vector3(0,1,0);
 	p.d = 0;
@@ -92,15 +91,14 @@ void Map::createScene(void)
   Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
   p, 200000, 200000, 20, 20, true, 1, 9000, 9000,
   Ogre::Vector3::UNIT_Z);
-	ent = mDevice->sceneMgr->createEntity("floor", "FloorPlane");
-	ent->setMaterialName("Examples/Rockwall");
-  mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(ent);
+	_ent = mDevice->sceneMgr->createEntity("floor", "FloorPlane");
+	_ent->setMaterialName("Examples/Rockwall");
+  mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(_ent);
 
-  OgreBulletCollisions::CollisionShape *Shape;
 
   Shape = new OgreBulletCollisions::StaticPlaneCollisionShape(Ogre::Vector3(0,1,0), 0);
 
-  OgreBulletDynamics::RigidBody *defaultPlaneBody = new OgreBulletDynamics::RigidBody("BasePlane",
+  defaultPlaneBody = new OgreBulletDynamics::RigidBody("BasePlane",
                                 _world);
   defaultPlaneBody->setStaticShape(Shape, 0.1, 0.8);// (shape, restitution, friction)
       // push the created objects to the deques
@@ -112,15 +110,17 @@ void Map::createScene(void)
 
 void Map::exit(void)
 {
+  disconnect();
+
   mDevice->sceneMgr->destroyQuery(_rayCast);
 
   mDevice->sceneMgr->clearScene();
   mDevice->sceneMgr->destroyAllCameras();
   mDevice->window->removeAllViewports();
 
- disconnect();
+  Ogre::MeshManager::getSingleton().remove("FloorPlane");
 
- Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Map =====");
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Map =====");
 }
 
 bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
@@ -143,7 +143,7 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
     _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
     mDevice->soundManager->update(evt.timeSinceLastFrame);
-
+    _player->frameRenderingQueued(evt);
     return true;
 }
 
@@ -354,11 +354,10 @@ bool Map::mouseMoved( const OIS::MouseEvent &arg )
   context.injectMouseMove(arg.state.X.rel, arg.state.Y.rel);
   if (mLMouseDown)
   {
+    mouseRaycast();
   }
   else if (mRMouseDown)
   {
-    // mCamera->yaw(Ogre::Degree(-arg.state.X.rel * mRotSpd));
-    // mCamera->pitch(Ogre::Degree(-arg.state.Y.rel * mRotSpd));
   }
   return true;
 }
@@ -409,23 +408,19 @@ void  Map::mouseRaycast(void)
     Ogre::MovableObject *mSelectedEntity = it->movable;
     float mSelectedEntityDist = it->distance;
     Ogre::Vector3 pos = ray.getPoint(mSelectedEntityDist);
-    std::cout << "POS X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
-    _player->setDestination(pos);
-    printf("clicked: %s Distance %f\n", mSelectedEntity->getName().c_str(), mSelectedEntityDist);
+    std::cout << "Clicked: " << mSelectedEntity->getName().c_str() << "POS: X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
+    if (mSelectedEntity->getName() != std::to_string(_player->getId()))
+      _player->setDestination(pos);
   }
-  else
-    printf("cleared selection.\n");
 }
 
 bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
-  // _cameraMan->injectMouseDown(arg, id);
   CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
   context.injectMouseButtonDown(convertButon(id));
   if (id == OIS::MB_Left)
   {
     mLMouseDown = true;
-    mouseRaycast();
   }
   else if (id == OIS::MB_Right)
   {
@@ -436,7 +431,6 @@ bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 
 bool Map::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
 {
-  //  _cameraMan->injectMouseUp(arg, id);
   CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
   context.injectMouseButtonUp(convertButon(id));
   if (id == OIS::MB_Left)

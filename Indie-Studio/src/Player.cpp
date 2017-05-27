@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Fri May 26 20:20:29 2017 gastal_r
+// Last update Sat May 27 12:40:00 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -19,7 +19,7 @@ Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
   _node->attachObject(_entity);
   _node->setPosition(_position);
-
+return;
   Ogre::AxisAlignedBox boundingB = _entity->getBoundingBox();
   Ogre::Vector3  size = boundingB.getSize();
   size /= 2.0f; // only the half needed

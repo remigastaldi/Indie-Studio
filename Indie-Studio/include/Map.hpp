@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Fri May 26 18:33:00 2017 gastal_r
+// Last update Sat May 27 12:59:40 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -60,11 +60,6 @@ private:
   Ogre::Vector3                                       mGravityVector;
   OgreBulletCollisions::DebugDrawer                   *debugDrawer;
 
-  Ogre::Camera *mCamera;
-
-  // OgreCookies
-  OgreCookies::CameraMan* mCameraMan;       // basic camera controller
-
   //OIS Input devices
   bool    mLMouseDown;
   bool    mRMouseDown;
@@ -80,9 +75,14 @@ private:
 
   //Mouse RayCast
   Ogre::RaySceneQuery * _rayCast;
-  bool mShutDown;
 
   Entity *_player;
+
+  Ogre::Entity *_ent;
+  OgreBulletCollisions::CollisionShape *Shape;
+  OgreBulletDynamics::RigidBody *defaultPlaneBody;
+
+  bool mShutDown;
 };
 
 #endif /* _MAP_HPP_ */

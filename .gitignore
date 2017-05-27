@@ -56,3 +56,5 @@ Indie-Studio/dist/IndieStudio
 Indie-Studio-Dependencies
 
 *.opendb
+
+vgcore.*

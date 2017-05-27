@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Fri May 26 18:41:43 2017 gastal_r
+// Last update Sat May 27 13:05:36 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -61,23 +61,25 @@ public:
 
   void	goToLocation(Ogre::Real);
   /*bool	nextLocation(std::deque<Ogre::Vector3> &, Ogre::SceneNode *);*/
-
+  void  changeAnimation(const std::string &animation);
+  void  frameRenderingQueued(const Ogre::FrameEvent &evt);
   void	updateAnimation(std::string, Ogre::Real);
 
   void  destroy();
 
-  Ogre::Entity  const			*getPlayer() const { return _entity; }
-  Ogre::Real  const			  getWalkSpd() const { return _walkSpd; }
+  Ogre::Entity  const			*getPlayer() const  { return _entity; }
+  Ogre::Real  const			  getWalkSpd() const  { return _walkSpd; }
   Ogre::Real  const 			getDistance() const { return _distance; }
-  Ogre::Vector3 const     getPosition() const { return _position; }
-  Ogre::Quaternion const  getOrientation() const { return _orientation; }
-  Entity::Status const    getStatus() const { return _status; }
+  Ogre::Vector3 const     &getPosition() const { return _position; }
+  Ogre::Quaternion const  &getOrientation() const  { return _orientation; }
+  Entity::Status const    getStatus() const       { return _status; }
+  size_t const            getId() const   { return (_id); }
 
   void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
-  void					setWalkSpd(Ogre::Real _mWalkSpd) { _walkSpd = _mWalkSpd; }
-  void					setDistance(Ogre::Real _mDistance) { _distance = _mDistance; }
-  void					setDestination(Ogre::Vector3 destination) { _destination = destination; }
-  void					setPosition(const Ogre::Vector3 &pos) { _node->setPosition(pos); }
+  void					setWalkSpd(const Ogre::Real &_mWalkSpd)            { _walkSpd = _mWalkSpd; }
+  void					setDistance(const Ogre::Real &_mDistance)          { _distance = _mDistance; }
+  void					setPosition(const Ogre::Vector3 &pos)              { _node->setPosition(pos); }
+  void					setDestination(const Ogre::Vector3 &destination);
 
 
 protected:
