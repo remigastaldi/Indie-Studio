@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Sat May 27 15:54:52 2017 gastal_r
+// Last update Sat May 27 15:55:43 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -76,7 +76,7 @@ public:
   size_t const            getId() const   { return (_id); }
 
   void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
-  void          setPosition(const Ogre::Vector3 &pos)        {_node->setPosition(pos); }
+  void          setPosition(const Ogre::Vector3 &pos)        { _node->setPosition(pos); }
   void					setWalkSpd(const Ogre::Real &_mWalkSpd)            { _walkSpd = _mWalkSpd; }
   void					setDistance(const Ogre::Real &_mDistance)          { _distance = _mDistance; }
   void					setOrientation(const Ogre::Quaternion &orientation) { _node->setOrientation(orientation); }
