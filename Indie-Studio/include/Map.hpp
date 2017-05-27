@@ -66,8 +66,10 @@ private:
   float   mRotSpd;
   Ogre::SceneNode* mCurObject;
 
-  //CEGUI
-  CEGUI::MouseCursor  *mCursor;
+//CEGUI
+CEGUI::MouseCursor  *mCursor;
+CEGUI::Window* _myRoot;
+CEGUI::Window *_ui;
 
   //Camera
   Ogre::Camera *_camera;

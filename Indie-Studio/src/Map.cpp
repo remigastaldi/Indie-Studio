@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat May 27 13:21:39 2017 gastal_r
+// Last update Sat May 27 14:36:36 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -64,13 +64,16 @@ std::cout << "BEFORE " << _world << std::endl;
 
 void Map::createScene(void)
 {
+  _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
+  CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
+
+  _ui = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("UI_IG.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
+
 	_player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 42,
 		Entity::Status::IMMOBILE, { 0, 30, 0.0 }, { 0.f, 0.f, 0.f, 0.f });
-//	_player->setCamera(_cameraMan);
-	//_player->setDestination({ 550, 0, 50 });
-	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-	mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
 	mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
 
 	Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
 	DotSceneLoader loader;
@@ -318,11 +321,6 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
     else if(arg.key == OIS::KC_F5)   // refresh all textures
     {
       Ogre::TextureManager::getSingleton().reloadAll();
-    }
-    else if(arg.key == OIS::KC_S)
-    {
-      GameState *menu = findByName("Menu");
-      changeGameState(menu);
     }
     else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
     {

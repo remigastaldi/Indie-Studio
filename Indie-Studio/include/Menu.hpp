@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:59:44 2017 gastal_r
-// Last update Wed May 24 18:08:13 2017 Matthias Prost
+// Last update Fri May 26 20:31:48 2017 Matthias Prost
 //
 
 #ifndef _MENU_HPP_
@@ -47,6 +47,8 @@ public:
 
   bool         buttonPlay(const CEGUI::EventArgs &e);
   bool         buttonQuit(const CEGUI::EventArgs &e);
+  bool         buttonInfos(const CEGUI::EventArgs &e);
+  bool         buttonClose(const CEGUI::EventArgs &e);
 
 private:
   char mPolygonRenderingMode;
@@ -63,13 +65,19 @@ private:
   Ogre::SceneNode* mCurObject;
 
 //CEGUI
-CEGUI::MouseCursor  *mCursor;
-CEGUI::Window *_playButton;
-CEGUI::Window *_quitButton;
+  CEGUI::MouseCursor  *mCursor;
+  CEGUI::Window* _myRoot;
+  CEGUI::Window *_gameMenu;
+  CEGUI::Window *_credits;
+  CEGUI::Window *_playButton;
+  CEGUI::Window *_quitButton;
+  CEGUI::Window *_infosButton;
+  CEGUI::Window *_closeButton;
 
   bool mShutDown;
   Ogre::Camera *_camera;
   OgreCookies::CameraMan* _cameraMan;
+
 };
 
 #endif /* end of include guard: _MENU_HPP_ */

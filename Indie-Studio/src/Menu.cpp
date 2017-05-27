@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Thu May 25 21:03:54 2017 gastal_r
+// Last update Sat May 27 14:47:27 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -49,6 +49,8 @@ bool Menu::buttonPlay(const CEGUI::EventArgs &e)
 {
   _playButton->destroy();
   _quitButton->destroy();
+  _gameMenu->destroy();
+  _myRoot->destroy();
   GameState *menu = findByName("Map");
   changeGameState(menu);
   return (true);
@@ -58,45 +60,97 @@ bool Menu::buttonQuit(const CEGUI::EventArgs &e)
 {
   _playButton->destroy();
   _quitButton->destroy();
+  _gameMenu->destroy();
+  _myRoot->destroy();
   Shutdown();
+  return (true);
+}
+
+bool Menu::buttonClose(const CEGUI::EventArgs &e)
+{
+  _closeButton->destroy();
+  _credits->destroy();
+  return (true);
+}
+
+bool Menu::buttonInfos(const CEGUI::EventArgs &e)
+{
+  _credits = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Credits.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_credits);
+
+  _closeButton = _credits->getChild("Close");
+  _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonClose, this));
   return (true);
 }
 
 void Menu::createScene(void)
 {
   CEGUI::System &sys = CEGUI::System::getSingleton();
-	CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
+  CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
 	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
 
-	CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
+  Ogre::ResourceGroupManager& files = Ogre::ResourceGroupManager::getSingleton();
+   files.createResourceGroup("imagesets");
+   files.createResourceGroup("fonts");
+   files.createResourceGroup("layouts");
+   files.createResourceGroup("schemes");
+   files.createResourceGroup("looknfeels");
+   files.createResourceGroup("schemas");
+
+  CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
+  CEGUI::Scheme::setDefaultResourceGroup("schemes");
+  CEGUI::Font::setDefaultResourceGroup("fonts");
+  CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
+  CEGUI::WindowManager::setDefaultResourceGroup("layouts");
+
+  CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
   CEGUI::SchemeManager::getSingleton().createFromFile( "OgreTray.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "Generic.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "GameMenu.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "SampleBrowser.scheme" );
 
-	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
 
-	CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
-	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( myRoot );
+  _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
+  CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
-//	CEGUI::SchemeManager::getSingleton().createFromFile( "OgreTray.scheme" );
+  _gameMenu = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("GameMenu.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_gameMenu);
 
-	CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
 
-	// CEGUI::Window *newWindow = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("ChatBox.layout");
-	// CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(newWindow);
+  _playButton = _gameMenu->getChild("Button");
+  _playButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonPlay, this));
 
-  _playButton = CEGUI::WindowManager::getSingleton().createWindow("Vanilla/Button","JumpPushButton");
-	_playButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.49,0),CEGUI::UDim(0.37,0)));
-	_playButton->setSize(CEGUI::USize(CEGUI::UDim(0,100),CEGUI::UDim(0,60)));
-	_playButton->setText("PLAY");
-  _playButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Menu::buttonPlay, this));
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_playButton);
+  _quitButton = _gameMenu->getChild("Button2");
+  _quitButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
 
-  _quitButton = CEGUI::WindowManager::getSingleton().createWindow("Vanilla/Button","Exit");
-	_quitButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.49,0),CEGUI::UDim(0.43,0)));
-	_quitButton->setSize(CEGUI::USize(CEGUI::UDim(0,100),CEGUI::UDim(0,60)));
-	_quitButton->setText("QUIT");
-  _quitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
-	CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_quitButton);
+  _infosButton = _gameMenu->getChild("Infos");
+  _infosButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonInfos, this));
+
 }
+
+// bool GameMenuDemo::handleLoginAcceptButtonClicked(const CEGUI::EventArgs&)
+// {
+//     d_startButtonClickArea->setAlpha(0.0f);
+//     d_startButtonBlendInAnimInst->start();
+//
+//     enableNavigationBarElements();
+//
+//     d_loginContainerMoveOutInst->start();
+//     d_navigationTravelIcon->setEnabled(true);
+//
+//     CEGUI::Editbox* loginEditbox = static_cast<CEGUI::Editbox*>(d_root->getChild("LoginContainer/LoginEditbox"));
+//     d_userName = loginEditbox->getText();
+//
+//     d_timeSinceLoginAccepted = 0.0f;
+//     d_loginWasAccepted = true;
+//     d_currentWriteFocus = WF_TopBar;
+//
+//     d_botNaviContainer->setEnabled(true);
+//
+//     return false;
+// }
 
 void Menu::exit(void)
 {

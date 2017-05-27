@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="Generic/Image" name="GameMenuRoot" >
+        <Property name="Area" value="{{0,0},{0,-1},{1,0},{1,-1}}" />
+        <Property name="Image" value="GameMenuImages/Background" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="RiseOnClickEnabled" value="false" />
+        <Window type="Vanilla/StaticText" name="StaticText" >
+            <Property name="Area" value="{{0,834},{0,914},{0,1090},{0,1042}}" />
+            <Property name="Text" value="Loading in progress ..." />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="HorzFormatting" value="CentreAligned" />
+            <Property name="BackgroundEnabled" value="false" />
+            <Property name="HorzScrollPageSize" value="238" />
+            <Property name="VertScrollPageSize" value="110" />
+            <Property name="HorzScrollDocumentSize" value="210" />
+            <Property name="VertScrollDocumentSize" value="20.5273" />
+        </Window>
+    </Window>
+</GUILayout>
