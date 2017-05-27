@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Sat May 27 14:11:26 2017 gastal_r
+// Last update Sat May 27 15:01:10 2017 Leo HUBERT
 //
 
 #ifndef       _ENTITY_HPP_
@@ -79,6 +79,7 @@ public:
   void					setWalkSpd(const Ogre::Real &_mWalkSpd)            { _walkSpd = _mWalkSpd; }
   void					setDistance(const Ogre::Real &_mDistance)          { _distance = _mDistance; }
   void					setPosition(const Ogre::Vector3 &pos)              { _node->setPosition(pos); }
+  void					setOrientation(const Ogre::Quaternion &orientation)              { _node->setOrientation(orientation); }
   void					setDestination(const Ogre::Vector3 &destination);
 
 

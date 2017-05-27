@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Fri May 26 18:47:57 2017 gastal_r
+// Last update Sat May 27 14:44:49 2017 Leo HUBERT
 //
 
 #ifndef _CLIENT_HPP_
@@ -56,7 +56,7 @@ public:
   void  wait();
   void  consoleChat();
   void  emit(const std::string &event, std::shared_ptr<sio::message> const &request);
-  void  move(float fw, float x, float y, float z);
+  void  move(const Entity &entity);
 
   void sendMessage(std::string const &);
   void sendEntity(const Entity &);
