@@ -41,5 +41,9 @@
     <Image height="24" name="PopupLinesLoad" width="115" xPos="283" yPos="773" />
     <Image height="249" name="PopupLinesCharacter" width="262" xPos="89" yPos="800" />
     <Image height="101" name="PopupLinesQuit" width="219" xPos="711" yPos="1066" />
-    <Image height="359" name="Infos" width="360" xPos="2970" yPos="394" />
+    <Image height="30" name="InfosHover" width="30" xPos="2726" yPos="1145" />
+    <Image height="30" name="InfosNormal" width="30" xPos="2797" yPos="1145" />
+    <Image height="98" name="SettingsNormal" width="96" xPos="3235" yPos="906" />
+    <Image height="98" name="SettingsHover" width="96" xPos="3043" yPos="906" />
+    <Image height="101" name="BackgroundSpell" width="178" xPos="2683" yPos="610" />
 </Imageset>

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat May 27 14:51:40 2017 gastal_r
+// Last update Sat May 27 18:34:49 2017 Matthias Prost
 //
 
 #include        "Menu.hpp"
@@ -70,45 +70,26 @@ bool Menu::buttonClose(const CEGUI::EventArgs &e)
 {
   _closeButton->destroy();
   _credits->destroy();
+  _credits = nullptr;
   return (true);
 }
 
 bool Menu::buttonInfos(const CEGUI::EventArgs &e)
 {
-  _credits = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Credits.layout");
-  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_credits);
+  if (_credits == nullptr)
+  {
+    _credits = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Credits.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_credits);
 
-  _closeButton = _credits->getChild("Close");
-  _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonClose, this));
+    _closeButton = _credits->getChild("Close");
+    _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonClose, this));
+  }
   return (true);
 }
 
 void Menu::createScene(void)
 {
-  CEGUI::System &sys = CEGUI::System::getSingleton();
-  CEGUI::Logger::getSingleton().setLoggingLevel(CEGUI::Informative);
-	CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
-
-  Ogre::ResourceGroupManager& files = Ogre::ResourceGroupManager::getSingleton();
-   files.createResourceGroup("imagesets");
-   files.createResourceGroup("fonts");
-   files.createResourceGroup("layouts");
-   files.createResourceGroup("schemes");
-   files.createResourceGroup("looknfeels");
-   files.createResourceGroup("schemas");
-
-  CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
-  CEGUI::Scheme::setDefaultResourceGroup("schemes");
-  CEGUI::Font::setDefaultResourceGroup("fonts");
-  CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeels");
-  CEGUI::WindowManager::setDefaultResourceGroup("layouts");
-
-  CEGUI::SchemeManager::getSingleton().createFromFile( "TaharezLook.scheme" );
-  CEGUI::SchemeManager::getSingleton().createFromFile( "OgreTray.scheme" );
-  CEGUI::SchemeManager::getSingleton().createFromFile( "Generic.scheme" );
-  CEGUI::SchemeManager::getSingleton().createFromFile( "GameMenu.scheme" );
-  CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
-  CEGUI::SchemeManager::getSingleton().createFromFile( "SampleBrowser.scheme" );
+  _credits = nullptr;
 
   CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
 
@@ -119,21 +100,14 @@ void Menu::createScene(void)
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_gameMenu);
 
 
-  _playButton = _gameMenu->getChild("Button");
+  _playButton = _gameMenu->getChild("Play");
   _playButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonPlay, this));
 
-  _quitButton = _gameMenu->getChild("Button2");
+  _quitButton = _gameMenu->getChild("Quit");
   _quitButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
 
   _infosButton = _gameMenu->getChild("Infos");
   _infosButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonInfos, this));
-
-  _playButton->destroy();
-  _quitButton->destroy();
-  _gameMenu->destroy();
-  _myRoot->destroy();
-  GameState *menu = findByName("Map");
-  changeGameState(menu);
 }
 
 // bool GameMenuDemo::handleLoginAcceptButtonClicked(const CEGUI::EventArgs&)

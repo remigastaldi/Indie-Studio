@@ -62,6 +62,11 @@ public:
 
   virtual void mouseRaycast(void);
 
+  // CEGUI
+  bool buttonSettings(const CEGUI::EventArgs &e);
+  bool buttonClose(const CEGUI::EventArgs &e);
+  bool buttonMenu(const CEGUI::EventArgs &e);
+
 private:
   char mPolygonRenderingMode;
 
@@ -79,10 +84,16 @@ private:
   float   mRotSpd;
   Ogre::SceneNode* mCurObject;
 
-//CEGUI
-CEGUI::MouseCursor  *mCursor;
-CEGUI::Window* _myRoot;
-CEGUI::Window *_ui;
+  //CEGUI
+  CEGUI::MouseCursor  *mCursor;
+  CEGUI::Window *_myRoot;
+  CEGUI::Window *_ui;
+
+  CEGUI::Window *_settingsButton;
+
+  CEGUI::Window *_settings;
+  CEGUI::Window *_closeButton;
+  CEGUI::Window *_goToMenuButton;
 
   //Camera
   Ogre::Camera *_camera;

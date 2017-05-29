@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:59:44 2017 gastal_r
-// Last update Fri May 26 20:31:48 2017 Matthias Prost
+// Last update Sat May 27 15:45:23 2017 Matthias Prost
 //
 
 #ifndef _MENU_HPP_
@@ -66,7 +66,7 @@ private:
 
 //CEGUI
   CEGUI::MouseCursor  *mCursor;
-  CEGUI::Window* _myRoot;
+  CEGUI::Window *_myRoot;
   CEGUI::Window *_gameMenu;
   CEGUI::Window *_credits;
   CEGUI::Window *_playButton;

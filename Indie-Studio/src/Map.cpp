@@ -59,13 +59,50 @@ void Map::enter(void)
   createScene();
 }
 
+bool Map::buttonClose(const CEGUI::EventArgs &e)
+{
+  _closeButton->destroy();
+  _settings->destroy();
+  _settings = nullptr;
+  return (true);
+}
+
+bool Map::buttonMenu(const CEGUI::EventArgs &e)
+{
+  _closeButton->destroy();
+  _settings->destroy();
+  _settingsButton->destroy();
+  // _goToMenuButton->destroy();
+  _ui->destroy();
+  _myRoot->destroy();
+  GameState *menu = findByName("Menu");
+  changeGameState(menu);
+  return (true);
+}
+
+bool Map::buttonSettings(const CEGUI::EventArgs &e)
+{
+  if (_settings == nullptr)
+  {
+    _settings = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("IG_MENU.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_settings);
+
+    _closeButton = _settings->getChild("BackToGame");
+    _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::buttonClose, this));
+
+    _goToMenuButton = _settings->getChild("BackToMenu");
+    _goToMenuButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::buttonMenu, this));
+  }
+  return (true);
+}
+
 void Map::createScene(void)
 {
+  _settings = nullptr;
+
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
-  _ui = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("UI_IG.layout");
-  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
 
 
   _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 42,
@@ -109,8 +146,7 @@ void Map::createScene(void)
 
   Shape = new OgreBulletCollisions::StaticPlaneCollisionShape(Ogre::Vector3(0,1,0), 0);
 
-  defaultPlaneBody = new OgreBulletDynamics::RigidBody("BasePlane",
-                                _world);
+  defaultPlaneBody = new OgreBulletDynamics::RigidBody("BasePlane",_world);
   defaultPlaneBody->setStaticShape(Shape, 0.1, 0.8);// (shape, restitution, friction)
       // push the created objects to the deques
   // mShapes.push_back(Shape);
@@ -119,13 +155,25 @@ void Map::createScene(void)
   connect();
   sendEntity(*_player);
 #endif
+
+  _ui = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("UI_IG.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
+
+  _settingsButton = _ui->getChild("Settings");
+  _settingsButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::buttonSettings, this));
 }
 
 void Map::exit(void)
 {
   disconnect();
 
+  delete(_cameraMan);
+  _cameraMan = nullptr;
+  delete(_player);
+  _player = nullptr;
+
   mDevice->sceneMgr->destroyQuery(_rayCast);
+  _rayCast = nullptr;
 
   mDevice->sceneMgr->clearScene();
   mDevice->sceneMgr->destroyAllCameras();
@@ -404,15 +452,11 @@ void  Map::mouseRaycast(void)
   CEGUI::Vector2f absMouse = CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
   CEGUI::Vector2f relativeMouse = CEGUI::CoordConverter::screenToWindow(
     *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), absMouse);
-
   float windowWidth = CEGUI::CoordConverter::screenToWindowX(
     *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), CEGUI::UDim(1,0));
-
   float windowHeight = CEGUI::CoordConverter::screenToWindowY(
     *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), CEGUI::UDim(1,0));
-
   Ogre::Ray ray = _camera->getCameraToViewportRay((float) relativeMouse.d_x / windowWidth, (float) relativeMouse.d_y / windowHeight);
-
   if (!_rayCast)
     _rayCast = mDevice->sceneMgr->createRayQuery(ray);
   else
