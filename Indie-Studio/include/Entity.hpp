@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Mon May 29 14:06:45 2017 gastal_r
+// Last update Mon May 29 16:28:08 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -89,7 +89,7 @@ protected:
   OgreBulletDynamics::DynamicsWorld &_world;
   Ogre::Entity        *_entity;
   Ogre::SceneNode     *_node;
-
+OgreBulletDynamics::RigidBody *defaultBody;
   size_t				        _id;
   Entity::Status		    _status;
   Ogre::Quaternion		  _orientation;

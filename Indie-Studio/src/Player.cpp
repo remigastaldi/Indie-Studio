@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Mon May 29 15:53:03 2017 gastal_r
+// Last update Mon May 29 19:24:15 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -37,15 +37,15 @@ Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   new OgreBulletCollisions::BoxCollisionShape(size);
 
   // and the Bullet rigid body
-  OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
+  defaultBody = new OgreBulletDynamics::RigidBody(
       "defaultBoxRigid" + Ogre::StringConverter::toString(id),    &_world);
 
   // OgreBulletCollisions::CollisionShape *collisionShape =
   defaultBody->setShape(_node,
         sceneBoxShape,
         0.6f,			// dynamic body restitution
-        100.f,			// dynamic body friction
-        0.0f, 			// dynamic bodymass
+        0.6f,			// dynamic body friction
+        10.f, 			// dynamic bodymass
         position,		// starting position of the box
         Ogre::Quaternion(180,0,0,1));// orientation of the box
 

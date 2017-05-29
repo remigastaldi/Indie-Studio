@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Mon May 29 17:16:57 2017 gastal_r
+// Last update Mon May 29 19:20:21 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -235,8 +235,8 @@ void Map::checkCollisions()
                 // std::cout << "Collision Body B: " << obB->getCollisionShape()->getName() << std::endl;
                 Ogre::SceneNode *node1 = (Ogre::SceneNode *) obA->getUserPointer();
                 Ogre::SceneNode *node2 = (Ogre::SceneNode *) obA->getUserPointer();
-                std::cout << node1->getName() << std::endl;
-                std::cout << node2->getName() << std::endl;
+                // std::cout << node1->getName() << std::endl;
+                // std::cout << node2->getName() << std::endl;
                 std::cout << "====================================" << std::endl;
             }
         }

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Sat May 27 17:03:03 2017 gastal_r
+// Last update Mon May 29 19:21:25 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -80,7 +80,10 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
 				_orientation = src.getRotationTo(_direction);
 				_node->rotate(_orientation);
 			}
-			_node->translate(move * _direction);
+
+    defaultBody->setLinearVelocity( _direction.normalisedCopy() * move * 10.f);
+    //defaultBody->setLinearVelocity( direction * 30.f);
+	  // _node->translate(move * _direction);
 		}
 	}
 
