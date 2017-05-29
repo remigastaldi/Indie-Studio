@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Mon May 29 14:05:01 2017 gastal_r
+// Last update Mon May 29 14:51:02 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -167,8 +167,10 @@ void Map::exit(void)
 {
   disconnect();
 
+#if DEBUG_CAMERA
   delete(_cameraMan);
   _cameraMan = nullptr;
+#endif
   delete(_player);
   _player = nullptr;
 
