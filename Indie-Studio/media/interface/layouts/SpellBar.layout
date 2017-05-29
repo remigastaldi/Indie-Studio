@@ -2,9 +2,8 @@
 
 <GUILayout version="4" >
     <Window type="Generic/Image" name="BackgroundSpell" >
-        <Property name="Area" value="{{0,786},{0,902},{0,1133},{0,992}}" />
-        <Property name="Alpha" value="0.3" />
-        <Property name="Image" value="GameMenuImages/BackgroundSpell" />
+        <Property name="Area" value="{{0,786},{0,939},{0,1133},{0,1029}}" />
+        <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="Generic/ImageButton" name="SpellEyeFire" >
             <Property name="Area" value="{{0,9},{0,8},{0,84},{0,83}}" />

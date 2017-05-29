@@ -39,4 +39,5 @@
     <Image height="256" name="SpellBullet_Click" width="255" xPos="2560" yPos="2186" />
     <Image height="256" name="SpellHandBeard" width="255" xPos="1280" yPos="2183" />
     <Image height="256" name="SpellHandBeard_Click" width="255" xPos="2880" yPos="2186" />
+    <Image height="586" name="BackgroundSpell2" width="737" xPos="2014" yPos="488" />
 </Imageset>
