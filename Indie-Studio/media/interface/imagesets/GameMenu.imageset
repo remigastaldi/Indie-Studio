@@ -46,4 +46,21 @@
     <Image height="98" name="SettingsNormal" width="96" xPos="3235" yPos="906" />
     <Image height="98" name="SettingsHover" width="96" xPos="3043" yPos="906" />
     <Image height="101" name="BackgroundSpell" width="178" xPos="2683" yPos="610" />
+    <Image height="256" name="SpellTornado" width="255" xPos="3210" yPos="371" />
+    <Image height="256" name="SpellFireBall" width="255" xPos="3530" yPos="368" />
+    <Image height="256" name="SpellBlasingShield" width="255" xPos="3850" yPos="371" />
+    <Image height="256" name="SpellLeaf" width="255" xPos="4169" yPos="371" />
+    <Image height="256" name="SpellTree" width="255" xPos="4490" yPos="371" />
+    <Image height="256" name="SpellDagger" width="255" xPos="4490" yPos="39" />
+    <Image height="256" name="SpellHeart" width="255" xPos="4170" yPos="37" />
+    <Image height="256" name="SpellSword" width="255" xPos="3850" yPos="36" />
+    <Image height="256" name="SpellFireGun" width="255" xPos="3849" yPos="702" />
+    <Image height="256" name="SpellFear" width="255" xPos="4490" yPos="702" />
+    <Image height="256" name="SpellBearHand" width="255" xPos="4489" yPos="1037" />
+    <Image height="256" name="SpellMiniGun" width="255" xPos="4169" yPos="1036" />
+    <Image height="256" name="SpellIce" width="255" xPos="3849" yPos="1038" />
+    <Image height="256" name="SpellStone" width="255" xPos="3530" yPos="1037" />
+    <Image height="256" name="SpellAngel" width="255" xPos="3530" yPos="705" />
+    <Image height="256" name="SpellFireEyes" width="255" xPos="3531" yPos="38" />
+    <Image height="256" name="SpellFireStorm" width="255" xPos="4170" yPos="702" />
 </Imageset>

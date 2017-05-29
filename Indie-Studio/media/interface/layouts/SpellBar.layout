@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="Spell" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Generic/Image" name="Image" >
+            <Property name="Area" value="{{0,860},{0,955},{0,1064},{0,1009}}" />
+            <Property name="Alpha" value="0.7" />
+            <Property name="Image" value="GameMenuImages/BackgroundSpell" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="Generic/ImageButton" name="SpellDagger" >
+                <Property name="Area" value="{{0,7},{0,7},{0,47},{0,47}}" />
+                <Property name="HoverImage" value="GameMenuImages/SpellDagger" />
+                <Property name="NormalImage" value="GameMenuImages/SpellDagger" />
+                <Property name="PushedImage" value="GameMenuImages/SpellDagger" />
+                <Property name="InheritsAlpha" value="false" />
+                <Property name="DragDropTarget" value="false" />
+            </Window>
+            <Window type="Generic/ImageButton" name="SpellSword" >
+                <Property name="Area" value="{{0,57},{0,7},{0,97},{0,47}}" />
+                <Property name="HoverImage" value="GameMenuImages/SpellSword" />
+                <Property name="NormalImage" value="GameMenuImages/SpellSword" />
+                <Property name="PushedImage" value="GameMenuImages/SpellSword" />
+                <Property name="InheritsAlpha" value="false" />
+                <Property name="DragDropTarget" value="false" />
+            </Window>
+            <Window type="Generic/ImageButton" name="SpellFireEye" >
+                <Property name="Area" value="{{0,107},{0,7},{0,147},{0,47}}" />
+                <Property name="HoverImage" value="GameMenuImages/SpellFireEyes" />
+                <Property name="NormalImage" value="GameMenuImages/SpellFireEyes" />
+                <Property name="PushedImage" value="GameMenuImages/SpellFireEyes" />
+                <Property name="InheritsAlpha" value="false" />
+                <Property name="DragDropTarget" value="false" />
+            </Window>
+            <Window type="Generic/ImageButton" name="SpellHeart" >
+                <Property name="Area" value="{{0,157},{0,7},{0,197},{0,47}}" />
+                <Property name="HoverImage" value="GameMenuImages/SpellHeart" />
+                <Property name="NormalImage" value="GameMenuImages/SpellHeart" />
+                <Property name="PushedImage" value="GameMenuImages/SpellHeart" />
+                <Property name="InheritsAlpha" value="false" />
+                <Property name="DragDropTarget" value="false" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>

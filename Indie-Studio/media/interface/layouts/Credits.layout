@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <GUILayout version="4" >
-    <Window type="Vanilla/FrameWindow" name="Console" >
+    <Window type="Vanilla/FrameWindow" name="Credits" >
         <Property name="Area" value="{{0.5,-446},{0.5,-244},{1,-446},{0.95,-244}}" />
         <Property name="Text" value="Credits" />
         <Property name="MaxSize" value="{{0.8,0},{0.8,0}}" />
