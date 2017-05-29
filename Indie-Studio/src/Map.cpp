@@ -74,9 +74,31 @@ bool Map::buttonMenu(const CEGUI::EventArgs &e)
   _settingsButton->destroy();
   // _goToMenuButton->destroy();
   _ui->destroy();
+  _spellBar->destroy();
   _myRoot->destroy();
   GameState *menu = findByName("Menu");
   changeGameState(menu);
+  return (true);
+}
+
+bool  Map::infosClose(const CEGUI::EventArgs &e)
+{
+  _closeInfos->destroy();
+  _credits->destroy();
+  _credits = nullptr;
+  return (true);
+}
+
+bool  Map::infosSettings(const CEGUI::EventArgs &e)
+{
+  if (_credits == nullptr)
+  {
+    _credits = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Credits.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_credits);
+
+    _closeInfos = _credits->getChild("Close");
+    _closeInfos->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::infosClose, this));
+  }
   return (true);
 }
 
@@ -99,6 +121,7 @@ bool Map::buttonSettings(const CEGUI::EventArgs &e)
 void Map::createScene(void)
 {
   _settings = nullptr;
+  _credits = nullptr;
 
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
@@ -159,8 +182,15 @@ void Map::createScene(void)
   _ui = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("UI_IG.layout");
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
 
-  _settingsButton = _ui->getChild("Settings");
+  _settingsButton = _ui->getChild("Parameters");
   _settingsButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::buttonSettings, this));
+  _creditsButton = _ui->getChild("Infos");
+  _creditsButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::infosSettings, this));
+
+  //Création du fond de la barre de sort
+  _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("SpellBar.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_spellBar);
+  // Attribution des boxes des spell
 }
 
 void Map::exit(void)
