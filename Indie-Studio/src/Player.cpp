@@ -51,6 +51,7 @@ Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 
     defaultBody->enableActiveState();
     // defaultBody->setKinematicObject(true);
+    defaultBody->getBulletObject()->setUserPointer((void *) _node);
     _world.addRigidBody(defaultBody,0,0);
 }
 

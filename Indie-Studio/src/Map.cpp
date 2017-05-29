@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Mon May 29 15:49:40 2017 gastal_r
+// Last update Mon May 29 17:16:57 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -109,7 +109,7 @@ void Map::createScene(void)
 		Entity::Status::IMMOBILE, { 0.f, 18.f, 0.f }, Ogre::Quaternion::ZERO);
 
   _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 43,
-		Entity::Status::IMMOBILE, { 0.f, 18.f, 0.f }, Ogre::Quaternion::ZERO);
+		Entity::Status::IMMOBILE, { 0.f, 18.f, 18.f }, Ogre::Quaternion::ZERO);
 
 #if DEBUG_CAMERA
   _camera->setPosition(Ogre::Vector3(0, 30, 15));
@@ -214,9 +214,9 @@ void Map::checkCollisions()
 
     int numManifolds = collisionWorld->getDispatcher()->getNumManifolds();
     bool collide = false;
+    std::cout << "$$$$$$$$$$$$$$$$$$$$$$$$ " << numManifolds << std::endl;
     for (int i=0;i<numManifolds;i++)
     {
-      std::cout << numManifolds << std::endl;
         btPersistentManifold* contactManifold =  collisionWorld->getDispatcher()->getManifoldByIndexInternal(i);
         btCollisionObject* obA = (btCollisionObject *) contactManifold->getBody0();
         btCollisionObject* obB = (btCollisionObject *) contactManifold->getBody1();
@@ -231,8 +231,13 @@ void Map::checkCollisions()
                 const btVector3& ptB = pt.getPositionWorldOnB();
                 const btVector3& normalOnB = pt.m_normalWorldOnB;
                 collide = true;
-                std::cout << "Collision Body A: " << obA->getCollisionShape()->getName() << std::endl;
-                std::cout << "Collision Body B: " << obB->getCollisionShape()->getName() << std::endl;
+                // std::cout << "Collision Body A: " << obA->getCollisionShape()->getName() << std::endl;
+                // std::cout << "Collision Body B: " << obB->getCollisionShape()->getName() << std::endl;
+                Ogre::SceneNode *node1 = (Ogre::SceneNode *) obA->getUserPointer();
+                Ogre::SceneNode *node2 = (Ogre::SceneNode *) obA->getUserPointer();
+                std::cout << node1->getName() << std::endl;
+                std::cout << node2->getName() << std::endl;
+                std::cout << "====================================" << std::endl;
             }
         }
     }
