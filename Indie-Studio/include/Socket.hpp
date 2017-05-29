@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Sat May 27 20:21:56 2017 gastal_r
+// Last update Sun May 28 11:48:33 2017 gastal_r
 //
 
 #ifndef _CLIENT_HPP_
@@ -61,8 +61,6 @@ public:
   void sendMessage(std::string const &);
   void sendEntity(const Entity &);
 
-  void setWorld(OgreBulletDynamics::DynamicsWorld *world) { _world = world; }
-
 protected:
   int                         _id;
   std::mutex                  _lock;
@@ -72,6 +70,7 @@ protected:
   sio::client                 _client;
   std::string                 _addr;
   std::string                 _room;
+
   std::unordered_map<size_t, Entity *>  _entity;
   OgreBulletDynamics::DynamicsWorld *_world;
 };

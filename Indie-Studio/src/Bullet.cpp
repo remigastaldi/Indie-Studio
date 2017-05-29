@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:57:19 2017 gastal_r
-// Last update Sat May 27 17:10:53 2017 gastal_r
+// Last update Sat May 27 20:12:25 2017 gastal_r
 //
 
 #include      "Bullet.hpp"
@@ -16,8 +16,8 @@ Bullet::Bullet(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Bullet =====");
 
-  _entity = sceneMgr.createEntity("Bullet" + std::to_string(id), "Barrel.mesh");
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
-  _node->attachObject(_entity);
-  _node->setPosition(_position);
+  // _entity = sceneMgr.createEntity("Bullet" + std::to_string(id), "Barrel.mesh");
+  // _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
+  // _node->attachObject(_entity);
+  // _node->setPosition(_position);
 }

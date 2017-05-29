@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Sat May 27 20:07:48 2017 Leo HUBERT
+// Last update Mon May 29 14:06:45 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -28,6 +28,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <functional>
 
 #include <CameraMan.hpp>
 
@@ -79,7 +80,7 @@ public:
   void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
   void          setPosition(const Ogre::Vector3 &pos)        { _node->setPosition(pos); }
   void					setWalkSpd(const Ogre::Real &_mWalkSpd)            { _walkSpd = _mWalkSpd; }
-  void					setDistance(const Ogre::Real &_mDistance)          { _distance = _mDistance; }  
+  void					setDistance(const Ogre::Real &_mDistance)          { _distance = _mDistance; }
   void					setOrientation(const Ogre::Quaternion &orientation) { _node->setOrientation(orientation); }
   void					setDestination(const Ogre::Vector3 &destination);
 

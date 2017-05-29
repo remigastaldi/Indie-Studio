@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Sat May 27 17:58:25 2017 gastal_r
+// Last update Mon May 29 14:07:22 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -13,6 +13,18 @@
 
 #include      "GameState.hpp"
 #include      "Socket.hpp"
+
+#include      <functional>
+
+#define DEBUG_LOCAL false
+#define DEBUG_CAMERA false
+
+// Don't touch
+#if DEBUG_LOCAL
+  #define DEBUG_DRAWER true
+#else
+  #define DEBUG_DRAWER false
+#endif
 
 class Map :  public Socket
 {
@@ -55,7 +67,6 @@ private:
 
   //OgreBullet
   int mNumEntitiesInstanced;
-  OgreBulletDynamics::DynamicsWorld *_world;
   // std::deque<OgreBulletCollisions::CollisionShape *>  mShapes;
   // std::deque<OgreBulletDynamics::RigidBody *>         mBodies;
   Ogre::AxisAlignedBox                                mBounds;
@@ -75,15 +86,24 @@ CEGUI::Window *_ui;
 
   //Camera
   Ogre::Camera *_camera;
+  Ogre::SceneNode *_cameraNode;
+  float   _offsetX = -5;
+  float   _offsetZ = 25;
+  float   _maximumDistance = 1;
+  float   _playerVelocity = 25;
+  float   _movementX;
+  float   _movementZ;
+
+#if DEBUG_CAMERA
   OgreCookies::CameraMan* _cameraMan;
+#endif
 
   //Mouse RayCast
   Ogre::RaySceneQuery * _rayCast;
 
   //Player
   Entity    *_player;
-  size_t    _currentSpellIndex;
-  std::vector<size_t>  _availableSpellIndex;
+  std::vector<size_t>  _availableSpellId;
 
   Ogre::Entity *_ent;
   OgreBulletCollisions::CollisionShape *Shape;

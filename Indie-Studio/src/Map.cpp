@@ -5,17 +5,19 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat May 27 20:22:55 2017 gastal_r
+// Last update Mon May 29 14:05:01 2017 gastal_r
 //
 
 #include        "Map.hpp"
 
 Map::Map() :
+  Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room"),
   mPolygonRenderingMode('B'),
   mShutDown(false),
   _camera(nullptr),
+#if DEBUG_CAMERA
   _cameraMan(nullptr),
-  Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room"),
+#endif
   mRotSpd(0.1),
   mLMouseDown(false),
   mRMouseDown(false),
@@ -34,32 +36,27 @@ void Map::enter(void)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Enter Map =====");
 
-  _camera = mDevice->sceneMgr->createCamera("PlayerCamMap");
+  _camera = mDevice->sceneMgr->createCamera("MapCamera");
   _camera->setNearClipDistance(5);
 
-  _cameraMan = new OgreCookies::CameraMan(_camera);
   Ogre::Viewport* vp = mDevice->window->addViewport(_camera);
+  _camera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
   vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
   vp->update();
 
-  _camera->setAspectRatio(
-      Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
-
-  _camera->setPosition(Ogre::Vector3(0, 30, 15));
-  _camera->lookAt(Ogre::Vector3(-5, 0, 0));
-
   _world = new OgreBulletDynamics::DynamicsWorld(mDevice->sceneMgr, mBounds, mGravityVector);
-	debugDrawer = new OgreBulletCollisions::DebugDrawer();
-  std::cout << "DEBUG DRAWER " << debugDrawer << std::endl;
-	debugDrawer->setDrawWireframe(true);
 
+  #if DEBUG_DRAWER
+  	debugDrawer = new OgreBulletCollisions::DebugDrawer();
+    debugDrawer->setDrawWireframe(true);
+    _world->setDebugDrawer(debugDrawer);
+    _world->setShowDebugShapes(true);
+  #endif
 
-std::cout << "BEFORE " << _world << std::endl;
-  setWorld(_world);
+  mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+  mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
 
   createScene();
-  // _world->setDebugDrawer(debugDrawer);
-  // _world->setShowDebugShapes(true);
 }
 
 void Map::createScene(void)
@@ -70,10 +67,21 @@ void Map::createScene(void)
   _ui = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("UI_IG.layout");
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
 
-	_player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 42,
-		Entity::Status::IMMOBILE, { 0, 30, 0.0 }, Ogre::Quaternion::ZERO);
-	mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-	mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
+
+  _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 42,
+		Entity::Status::IMMOBILE, { 0.f, 18.f, 0.f }, Ogre::Quaternion::ZERO);
+
+#if DEBUG_CAMERA
+  _camera->setPosition(Ogre::Vector3(0, 30, 15));
+  _camera->lookAt(Ogre::Vector3(-5, 0, 0));
+  _cameraMan = new OgreCookies::CameraMan(_camera);
+#else
+  _cameraNode = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("CamNode");
+  _cameraNode->setPosition(_player->getPosition() + Ogre::Vector3(0.f, 20.f, 20.f));
+  _cameraNode->attachObject(_camera);
+  _camera->setPosition(_cameraNode->getPosition());
+  _camera->lookAt(_player->getPosition());
+#endif
 
 	Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
 	DotSceneLoader loader;
@@ -107,8 +115,10 @@ void Map::createScene(void)
       // push the created objects to the deques
   // mShapes.push_back(Shape);
   // mBodies.push_back(defaultPlaneBody);
+#if !DEBUG_LOCAL
   connect();
   sendEntity(*_player);
+#endif
 }
 
 void Map::exit(void)
@@ -129,7 +139,7 @@ void Map::exit(void)
 bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
 {
   _world->stepSimulation(evt.timeSinceLastFrame);
-  return true;
+  return (true);
 }
 
 void Map::sendPlayerPos()
@@ -148,23 +158,33 @@ void Map::sendPlayerPos()
 bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	if (mDevice->window->isClosed())
-		return false;
+		return (false);
 
-  	if (mShutDown)
-		return false;
+	if (mShutDown)
+	  return (false);
 
-     //Need to inject timestamps to CEGUI System.
-    CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+   //Need to inject timestamps to CEGUI System.
+  CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
-    _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
-    mDevice->soundManager->update(evt.timeSinceLastFrame);
-    _player->frameRenderingQueued(evt);
+  mDevice->soundManager->update(evt.timeSinceLastFrame);
 
-    for (auto & it : _entity)
-    {
-      it.second->frameRenderingQueued(evt);
-    }
-    return true;
+  _player->frameRenderingQueued(evt);
+
+#if DEBUG_LOCAL == false
+  for (auto & it : _entity)
+    it.second->frameRenderingQueued(evt);
+#endif
+
+#if DEBUG_CAMERA
+  _cameraMan->frameRenderingQueued(evt);
+  std::cout << "X: " << _camera->getPosition().x << " Y: " << _camera->getPosition().y << " Z: " << _camera->getPosition().z << std::endl;
+#else
+  _movementX = ((_player->getPosition().x + _offsetX - _cameraNode->getPosition().x)) / _maximumDistance;
+  _movementZ = ((_player->getPosition().z + _offsetZ - _cameraNode->getPosition().z)) / _maximumDistance;
+  _cameraNode->translate(Ogre::Vector3((_movementX * _playerVelocity * evt.timeSinceLastFrame), 0, (_movementZ * _playerVelocity * evt.timeSinceLastFrame)));
+#endif
+
+  return (true);
 }
 
 bool Map::frameEnded(const Ogre::FrameEvent& evt)
@@ -350,16 +370,17 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
     }
     else
     {
-        _cameraMan->injectKeyDown(arg);
+    #if DEBUG_CAMERA
+      _cameraMan->injectKeyDown(arg);
+    #endif
     }
 
-    return true;
+  return (true);
 }
 
 bool Map::keyReleased( const OIS::KeyEvent &arg )
 {
-    _cameraMan->injectKeyUp(arg);
-    return true;
+  return (true);
 }
 
 //Helper function for mouse events
@@ -397,22 +418,33 @@ void  Map::mouseRaycast(void)
   else
     _rayCast->setRay(ray);
 
-   _rayCast->setSortByDistance(true, 1);
-   //_rayCast->setQueryTypeMask(Ogre::SceneManager::WORLD_GEOMETRY_TYPE_MASK);
+#if DEBUG_DRAWER
+  _rayCast->setSortByDistance(true);
+#else
+  _rayCast->setSortByDistance(true, 1);
+#endif
+  _rayCast->setQueryTypeMask(Ogre::SceneManager::ENTITY_TYPE_MASK);
 
-   Ogre::RaySceneQueryResult res = _rayCast->execute();
-   Ogre::RaySceneQueryResult::iterator it = res.begin();
+  Ogre::RaySceneQueryResult res = _rayCast->execute();
 
-  if (it != res.end())
+  for (const auto & it : res)
   {
-    Ogre::MovableObject *mSelectedEntity = it->movable;
-    float mSelectedEntityDist = it->distance;
+    Ogre::MovableObject *mSelectedEntity = it.movable;
+    float mSelectedEntityDist = it.distance;
     Ogre::Vector3 pos = ray.getPoint(mSelectedEntityDist);
-    std::cout << "Clicked: " << mSelectedEntity->getName().c_str() << "POS: X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
+  #if DEBUG_DRAWER
+    if (mSelectedEntity->getName() != std::to_string(_player->getId())
+      && mSelectedEntity->getName().find("SimpleRenderable") == std::string::npos)
+  #else
     if (mSelectedEntity->getName() != std::to_string(_player->getId()))
+  #endif
     {
+      std::cout << "Clicked: " << mSelectedEntity->getName().c_str() << "POS: X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
       _player->setDestination(pos);
+    #if !DEBUG_LOCAL
       sendPlayerPos();
+    #endif
+      return;
     }
   }
 }
@@ -426,9 +458,9 @@ bool Map::mouseMoved( const OIS::MouseEvent &arg )
     mouseRaycast();
   }
   else if (mRMouseDown)
-  {
-  }
-  return true;
+  {}
+
+  return (true);
 }
 
 bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
@@ -444,7 +476,7 @@ bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
   {
     mRMouseDown = true;
   }
-  return true;
+  return (true);
 }
 
 bool Map::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
@@ -460,5 +492,5 @@ bool Map::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
     mRMouseDown = false;
     context.getMouseCursor().show();
   }
-  return true;
+  return (true);
 }

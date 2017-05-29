@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Sat May 27 17:01:01 2017 gastal_r
+// Last update Sun May 28 18:31:44 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -23,15 +23,14 @@ Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
     setOrientation(orientation);
   changeAnimation(status);
 
-return;
+//return;
   Ogre::AxisAlignedBox boundingB = _entity->getBoundingBox();
   Ogre::Vector3  size = boundingB.getSize();
   size /= 2.0f; // only the half needed
   size *= 0.95f;	// Bullet margin is a bit bigger so we need a smaller size
 // 									(Bullet 2.76 Physics SDK Manual page 18)
- size = boundingB.getSize() * 0.95f;
 
- 	//size *= 0.5f;						// don't forget to scale down the Bullet-box too
+  size.x /= 2.0f;
 
   // after that create the Bullet shape with the calculated size
   OgreBulletCollisions::BoxCollisionShape *sceneBoxShape =
@@ -46,11 +45,11 @@ return;
         sceneBoxShape,
         0.6f,			// dynamic body restitution
         100.f,			// dynamic body friction
-        1000.0f, 			// dynamic bodymass
+        0.0f, 			// dynamic bodymass
         position,		// starting position of the box
         Ogre::Quaternion(180,0,0,1));// orientation of the box
 
-    defaultBody->enableActiveState();
+    // defaultBody->enableActiveState();
     _world.addRigidBody(defaultBody,0,0);
 }
 
