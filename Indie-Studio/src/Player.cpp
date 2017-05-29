@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Sun May 28 18:31:44 2017 gastal_r
+// Last update Mon May 29 15:53:03 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -49,7 +49,8 @@ Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
         position,		// starting position of the box
         Ogre::Quaternion(180,0,0,1));// orientation of the box
 
-    // defaultBody->enableActiveState();
+    defaultBody->enableActiveState();
+    // defaultBody->setKinematicObject(true);
     _world.addRigidBody(defaultBody,0,0);
 }
 

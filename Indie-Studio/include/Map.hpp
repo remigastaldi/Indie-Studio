@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Mon May 29 14:07:22 2017 gastal_r
+// Last update Mon May 29 15:38:59 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -16,7 +16,7 @@
 
 #include      <functional>
 
-#define DEBUG_LOCAL false
+#define DEBUG_LOCAL true
 #define DEBUG_CAMERA false
 
 // Don't touch
@@ -46,7 +46,7 @@ public:
   virtual void exit(void);
 
   virtual void sendPlayerPos();
-
+  virtual void checkCollisions();
   // Ogre::FrameListener
   virtual bool frameRenderingQueued(const Ogre::FrameEvent &);
   virtual bool frameStarted (const Ogre::FrameEvent &evt);

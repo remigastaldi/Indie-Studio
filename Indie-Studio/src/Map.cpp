@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Mon May 29 14:51:02 2017 gastal_r
+// Last update Mon May 29 15:49:40 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -108,6 +108,9 @@ void Map::createScene(void)
   _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 42,
 		Entity::Status::IMMOBILE, { 0.f, 18.f, 0.f }, Ogre::Quaternion::ZERO);
 
+  _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 43,
+		Entity::Status::IMMOBILE, { 0.f, 18.f, 0.f }, Ogre::Quaternion::ZERO);
+
 #if DEBUG_CAMERA
   _camera->setPosition(Ogre::Vector3(0, 30, 15));
   _camera->lookAt(Ogre::Vector3(-5, 0, 0));
@@ -204,6 +207,37 @@ void Map::sendPlayerPos()
   }
 }
 
+void Map::checkCollisions()
+{
+    btCollisionWorld *collisionWorld = _world->getBulletCollisionWorld();
+    btDynamicsWorld *dynamicWorld = _world->getBulletDynamicsWorld();
+
+    int numManifolds = collisionWorld->getDispatcher()->getNumManifolds();
+    bool collide = false;
+    for (int i=0;i<numManifolds;i++)
+    {
+      std::cout << numManifolds << std::endl;
+        btPersistentManifold* contactManifold =  collisionWorld->getDispatcher()->getManifoldByIndexInternal(i);
+        btCollisionObject* obA = (btCollisionObject *) contactManifold->getBody0();
+        btCollisionObject* obB = (btCollisionObject *) contactManifold->getBody1();
+
+        int numContacts = contactManifold->getNumContacts();
+        for (int j=0;j<numContacts;j++)
+        {
+            btManifoldPoint& pt = contactManifold->getContactPoint(j);
+            if (pt.getDistance()<0.f)
+            {
+                const btVector3& ptA = pt.getPositionWorldOnA();
+                const btVector3& ptB = pt.getPositionWorldOnB();
+                const btVector3& normalOnB = pt.m_normalWorldOnB;
+                collide = true;
+                std::cout << "Collision Body A: " << obA->getCollisionShape()->getName() << std::endl;
+                std::cout << "Collision Body B: " << obB->getCollisionShape()->getName() << std::endl;
+            }
+        }
+    }
+}
+
 //-------------------------------------------------------------------------------------
 bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
@@ -233,7 +267,7 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
   _movementZ = ((_player->getPosition().z + _offsetZ - _cameraNode->getPosition().z)) / _maximumDistance;
   _cameraNode->translate(Ogre::Vector3((_movementX * _playerVelocity * evt.timeSinceLastFrame), 0, (_movementZ * _playerVelocity * evt.timeSinceLastFrame)));
 #endif
-
+checkCollisions();
   return (true);
 }
 
