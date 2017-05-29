@@ -16,7 +16,7 @@
             <Property name="VerticalAlignment" value="Centre" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
-        <Window type="Generic/ImageButton" name="Parameters2" >
+        <Window type="Generic/ImageButton" name="Infos" >
             <Property name="Area" value="{{0,28},{0,0},{0,63},{0,35}}" />
             <Property name="HoverImage" value="GameMenuImages/InfosHover" />
             <Property name="NormalImage" value="GameMenuImages/InfosNormal" />
