@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Mon May 29 19:20:21 2017 gastal_r
+// Last update Tue May 30 12:58:14 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -108,8 +108,8 @@ void Map::createScene(void)
   _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 42,
 		Entity::Status::IMMOBILE, { 0.f, 18.f, 0.f }, Ogre::Quaternion::ZERO);
 
-  _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 43,
-		Entity::Status::IMMOBILE, { 0.f, 18.f, 18.f }, Ogre::Quaternion::ZERO);
+  // _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 43,
+	// 	Entity::Status::IMMOBILE, { 0.f, 18.f, 18.f }, Ogre::Quaternion::ZERO);
 
 #if DEBUG_CAMERA
   _camera->setPosition(Ogre::Vector3(0, 30, 15));
@@ -214,30 +214,39 @@ void Map::checkCollisions()
 
     int numManifolds = collisionWorld->getDispatcher()->getNumManifolds();
     bool collide = false;
-    std::cout << "$$$$$$$$$$$$$$$$$$$$$$$$ " << numManifolds << std::endl;
     for (int i=0;i<numManifolds;i++)
     {
         btPersistentManifold* contactManifold =  collisionWorld->getDispatcher()->getManifoldByIndexInternal(i);
-        btCollisionObject* obA = (btCollisionObject *) contactManifold->getBody0();
-        btCollisionObject* obB = (btCollisionObject *) contactManifold->getBody1();
+        btCollisionObject* obA = const_cast<btCollisionObject*>(contactManifold->getBody0());
+        btCollisionObject* obB = const_cast<btCollisionObject*>(contactManifold->getBody1());
+        // btCollisionObject* obA = (btCollisionObject *) contactManifold->getBody0();
+        // btCollisionObject* obB = (btCollisionObject *) contactManifold->getBody1();
 
+        std::cout << obA << " : " << obB << std::endl;
         int numContacts = contactManifold->getNumContacts();
         for (int j=0;j<numContacts;j++)
         {
             btManifoldPoint& pt = contactManifold->getContactPoint(j);
-            if (pt.getDistance()<0.f)
+            if (pt.getDistance()<0.f )
             {
                 const btVector3& ptA = pt.getPositionWorldOnA();
                 const btVector3& ptB = pt.getPositionWorldOnB();
                 const btVector3& normalOnB = pt.m_normalWorldOnB;
                 collide = true;
-                // std::cout << "Collision Body A: " << obA->getCollisionShape()->getName() << std::endl;
-                // std::cout << "Collision Body B: " << obB->getCollisionShape()->getName() << std::endl;
+                std::cout << "Collision Body A: " << obA->getCollisionShape()->getName() << std::endl;
+                std::cout << "Collision Body B: " << obB->getCollisionShape()->getName() << std::endl;
                 Ogre::SceneNode *node1 = (Ogre::SceneNode *) obA->getUserPointer();
-                Ogre::SceneNode *node2 = (Ogre::SceneNode *) obA->getUserPointer();
-                // std::cout << node1->getName() << std::endl;
-                // std::cout << node2->getName() << std::endl;
-                std::cout << "====================================" << std::endl;
+                Ogre::SceneNode *node2 = (Ogre::SceneNode *) obB->getUserPointer();
+                if (node1)
+                  std::cout << node1->getName() << std::endl;
+                if (node2)
+                  std::cout << node2->getName() << std::endl;
+                if (node1 && node2)
+                {
+                  std::cout << "====================================" << std::endl;
+                  if (node1->getName() !=  node2->getName())
+                    exit();
+                }
             }
         }
     }

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Mon May 29 19:24:15 2017 gastal_r
+// Last update Tue May 30 12:44:31 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -23,7 +23,7 @@ Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
     setOrientation(orientation);
   changeAnimation(status);
 
-//return;
+// return;
   Ogre::AxisAlignedBox boundingB = _entity->getBoundingBox();
   Ogre::Vector3  size = boundingB.getSize();
   size /= 2.0f; // only the half needed
@@ -43,9 +43,9 @@ Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   // OgreBulletCollisions::CollisionShape *collisionShape =
   defaultBody->setShape(_node,
         sceneBoxShape,
-        0.6f,			// dynamic body restitution
-        0.6f,			// dynamic body friction
-        10.f, 			// dynamic bodymass
+        0.f,			// dynamic body restitution
+        0.f,			// dynamic body friction
+        0.f, 			// dynamic bodymass
         position,		// starting position of the box
         Ogre::Quaternion(180,0,0,1));// orientation of the box
 

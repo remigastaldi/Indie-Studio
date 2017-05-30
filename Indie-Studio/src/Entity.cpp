@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Mon May 29 19:21:25 2017 gastal_r
+// Last update Tue May 30 13:01:56 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -73,17 +73,39 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
 		{
 			Ogre::Vector3 src = _node->getOrientation() * Ogre::Vector3::UNIT_X;
 			src.y = 0;
-			if ((1.0 + src.dotProduct(_direction)) < 0.0001)
-				_node->yaw(Ogre::Degree(180));
-			else
-			{
-				_orientation = src.getRotationTo(_direction);
-				_node->rotate(_orientation);
-			}
+			// if ((1.0 + src.dotProduct(_direction)) < 0.0001)
+			// 	_node->yaw(Ogre::Degree(180));
+			// else
+			// {
+			// 	_orientation = src.getRotationTo(_direction);
+			// 	_node->rotate(_orientation);
+			// }
 
-    defaultBody->setLinearVelocity( _direction.normalisedCopy() * move * 10.f);
+			//  defaultBody->setLinearVelocity( _direction.normalisedCopy() * move * 10.f);
+			  // defaultBody->applyForce( _direction.normalisedCopy() * move * 10.f, _direction.normalisedCopy() * move * 10.f);
+		//  defaultBody->applyImpulse( _direction.normalisedCopy() * move, _direction.normalisedCopy() * move);
     //defaultBody->setLinearVelocity( direction * 30.f);
-	  // _node->translate(move * _direction);
+		// _node->setPosition(defaultBody->getCenterOfMassPosition());
+		  // defaultBody->setPosition(move * _direction);
+
+			// _node->translate(move * _direction);
+
+			// btRigidBody* body = btRigidBody::upcast(defaultBody->getBulletObject());
+  		// body->translate(btVector3(_direction.x, _direction.y, _direction.z));
+			// defaultBody->getBulletObject()->translate(move * _direction);
+
+			btTransform initialTransform;
+			btRigidBody *test;
+			_direction *= move;
+			btVector3 direction( _direction.x, _direction.y, _direction.z);
+			btQuaternion quaternion(_orientation.x, _orientation.y, _orientation.z, _orientation.w);
+
+			initialTransform.setOrigin(direction);
+			initialTransform.setRotation(quaternion);
+
+			defaultBody->getBulletObject()->setWorldTransform(initialTransform);
+			test = static_cast<btRigidBody *>(defaultBody->getBulletObject());
+			test->getMotionState()->setWorldTransform(initialTransform);
 		}
 	}
 
