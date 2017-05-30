@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:59:44 2017 gastal_r
-// Last update Sat May 27 15:45:23 2017 Matthias Prost
+// Last update Tue May 30 19:24:51 2017 Matthias Prost
 //
 
 #ifndef _MENU_HPP_
@@ -46,6 +46,8 @@ public:
   virtual bool mouseReleased(const OIS::MouseEvent &, OIS::MouseButtonID);
 
   bool         buttonPlay(const CEGUI::EventArgs &e);
+  bool         buttonBack(const CEGUI::EventArgs &e);
+  bool         buttonSelected(const CEGUI::EventArgs &e);
   bool         buttonQuit(const CEGUI::EventArgs &e);
   bool         buttonInfos(const CEGUI::EventArgs &e);
   bool         buttonClose(const CEGUI::EventArgs &e);
@@ -69,10 +71,14 @@ private:
   CEGUI::Window *_myRoot;
   CEGUI::Window *_gameMenu;
   CEGUI::Window *_credits;
+  CEGUI::Window *_play;
+
+  CEGUI::Window *_backButton;
   CEGUI::Window *_playButton;
   CEGUI::Window *_quitButton;
   CEGUI::Window *_infosButton;
   CEGUI::Window *_closeButton;
+  CEGUI::Window *_selectDarkFiend;
 
   bool mShutDown;
   Ogre::Camera *_camera;

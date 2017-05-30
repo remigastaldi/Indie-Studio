@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Sat May 27 19:51:12 2017 Matthias Prost
+// Last update Tue May 30 18:54:42 2017 Matthias Prost
 //
 
 #include        "Indie.hpp"
@@ -199,6 +199,7 @@ bool            Indie::init()
   CEGUI::SchemeManager::getSingleton().createFromFile( "GameMenu.scheme" );
   CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
   CEGUI::SchemeManager::getSingleton().createFromFile( "SampleBrowser.scheme" );
+  CEGUI::SchemeManager::getSingleton().createFromFile( "HUDDemo.scheme" );
 
   return true;
 }

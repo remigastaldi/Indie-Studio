@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat May 27 18:34:49 2017 Matthias Prost
+// Last update Tue May 30 19:36:08 2017 Matthias Prost
 //
 
 #include        "Menu.hpp"
@@ -45,14 +45,45 @@ void Menu::enter(void)
   createScene();
 }
 
+bool Menu::buttonSelected(const CEGUI::EventArgs &e)
+{
+  _play->destroy();
+  _myRoot->destroy();
+  GameState *menu = findByName("Map");
+  changeGameState(menu);
+  return (true);
+}
+
+bool Menu::buttonBack(const CEGUI::EventArgs &e)
+{
+  _play->destroy();
+  _gameMenu = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("GameMenu.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_gameMenu);
+
+  _playButton = _gameMenu->getChild("Play");
+  _playButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonPlay, this));
+
+  _quitButton = _gameMenu->getChild("Quit");
+  _quitButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
+
+  _infosButton = _gameMenu->getChild("Infos");
+  _infosButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonInfos, this));
+  return (true);
+}
+
 bool Menu::buttonPlay(const CEGUI::EventArgs &e)
 {
   _playButton->destroy();
   _quitButton->destroy();
   _gameMenu->destroy();
-  _myRoot->destroy();
-  GameState *menu = findByName("Map");
-  changeGameState(menu);
+  _play = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("selectChar.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_play);
+
+  _backButton = _play->getChild("BackButton");
+  _backButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonBack, this));
+
+  _selectDarkFiend = _play->getChild("Ingenior/SelectIngenior");
+  _selectDarkFiend->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected, this));
   return (true);
 }
 

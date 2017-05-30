@@ -63,7 +63,7 @@ Increase your fire distance</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
-            <Window type="Generic/ImageButton" name="SelectDarkFiend" >
+            <Window type="Generic/ImageButton" name="SelectIngenior" >
                 <Property name="Area" value="{{0,0.5},{0,-35},{0,115.5},{0,3}}" />
                 <Property name="HoverImage" value="GameMenuImages/SelectHover" />
                 <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
