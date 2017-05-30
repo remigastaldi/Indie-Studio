@@ -1,4 +1,4 @@
-var app = require('express')();
+var app = require("./app.js");
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var exec = require('child_process').exec;
@@ -75,7 +75,7 @@ io.on('connection', function (socket) {
       users[socket.user_server_id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
       users[socket.user_server_id].setOrientation(data["orientation"]["w"], data["orientation"]["x"], data["orientation"]["y"], data["orientation"]["z"]);
       users[socket.user_server_id].setStatus(data["status"]);
-    }
+    }    
   });
 
   socket.on("create_entity", function (data) {
@@ -115,17 +115,20 @@ io.on('connection', function (socket) {
 
     log("Connected! ID: " + data["user_id"]);
 
+
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[totalConnected] = new Entity(data["user_id"], "User " + data["user_id"], 0, data["room"]);
+    users[socket.user_server_id] = new Entity(data["user_id"], "User " + data["user_id"], 0, data["room"]);
     totalConnected++;
   });
 
 	socket.on('disconnect', function () {
-    users.splice(socket.user_server_id, 1);
-    totalConnected--;
-    if (totalConnected < 0)
-      totalConnected = 0;
+    if (socket.user_server_id)
+    {
+      delete(users[socket.user_server_id]);
+      users[socket.user_server_id].erase();
+      totalConnected--;
+    }
 		log("Disconnected ! ID: " + socket.user_id);
     io.to(socket.room).emit("logout", {user_id: socket.user_id});
 	});
@@ -135,6 +138,11 @@ io.on('connection', function (socket) {
 app.get('/', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify({ connected: totalConnected, users: users}));
-})
+});
+
+app.get('/clear', function (req, res) {
+  users = [];
+  users[0] = {test: "test"};
+});
 
 server.listen(3000);

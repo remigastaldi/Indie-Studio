@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:12:48 2017 Matthias Prost
-// Last update Tue May 23 10:22:11 2017 John Doe
+// Last update Tue May 30 11:45:15 2017 Leo HUBERT
 //
 
 #include "Socket.hpp"
@@ -22,7 +22,7 @@ int   main(int ac, char **av)
         std::cout << "Plus d'argummenntnennentnnn " << "\n";
         return (9);
     }
-    Socket client("http://ezgames.eu", 3000, id, av[1]);
+    Socket client("http://localhost", 3000, id, av[1]);
     client.connect();
     client.consoleChat();
     return (0);
