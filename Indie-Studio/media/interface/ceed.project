@@ -29,11 +29,13 @@
             <Item path="imagesets/logo.png" type="file" />
             <Item path="imagesets/mainMenu.imageset" type="file" />
             <Item path="imagesets/vanilla.png" type="file" />
+            <Item path="imagesets/Portraits.imageset" type="file" />
         </Item>
         <Item name="layout" type="folder">
             <Item path="layouts/ChatBox.layout" type="file" />
             <Item path="layouts/Console.wnd" type="file" />
             <Item path="layouts/Credits.layout" type="file" />
+            <Item path="layouts/DarkFiendSpell.layout" type="file" />
             <Item path="layouts/Demo8.layout" type="file" />
             <Item path="layouts/DragDropDemo.layout" type="file" />
             <Item path="layouts/EffectsDemo.layout" type="file" />
@@ -42,6 +44,7 @@
             <Item path="layouts/HUDDemoGameOver.layout" type="file" />
             <Item path="layouts/HUDDemoIngame.layout" type="file" />
             <Item path="layouts/IG_MENU.layout" type="file" />
+            <Item path="layouts/IngeniorSpell.layout" type="file" />
             <Item path="layouts/LoadingScreen.layout" type="file" />
             <Item path="layouts/SampleBrowser.layout" type="file" />
             <Item path="layouts/SampleBrowserLoadScreen.layout" type="file" />
@@ -56,12 +59,12 @@
             <Item path="layouts/VanillaConsole.layout" type="file" />
             <Item path="layouts/VanillaLookOverview.layout" type="file" />
             <Item path="layouts/VanillaWindows.layout" type="file" />
-            <Item path="layouts/application_templates.layout" type="file" />
-            <Item path="layouts/mainMenu.layout" type="file" />
             <Item path="layouts/WarriorSpellBar.layout" type="file" />
             <Item path="layouts/WizzardSpellBar.layout" type="file" />
-            <Item path="layouts/DarkFiendSpell.layout" type="file" />
-            <Item path="layouts/IngeniorSpell.layout" type="file" />
+            <Item path="layouts/application_templates.layout" type="file" />
+            <Item path="layouts/mainMenu.layout" type="file" />
+            <Item path="layouts/PlayerCaracts.layout" type="file" />
+            <Item path="layouts/selectChar.layout" type="file" />
         </Item>
         <Item name="looknfeel" type="folder">
             <Item path="looknfeel/AlfiskoSkin.looknfeel" type="file" />
