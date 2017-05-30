@@ -22,16 +22,6 @@
             <Property name="VerticalAlignment" value="Bottom" />
             <Property name="HorizontalAlignment" value="Right" />
         </Window>
-        <Window type="Vanilla/Button" name="Credits" >
-            <Property name="ID" value="1" />
-            <Property name="Area" value="{{0,-74},{0,-90},{0.25,38},{0,-54}}" />
-            <Property name="Text" value="Credits" />
-            <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            <Property name="AlwaysOnTop" value="true" />
-            <Property name="DragDropTarget" value="false" />
-            <Property name="VerticalAlignment" value="Bottom" />
-            <Property name="HorizontalAlignment" value="Right" />
-        </Window>
         <Window type="Vanilla/Button" name="BackToGame" >
             <Property name="ID" value="1" />
             <Property name="Area" value="{{0,-77},{0,-363},{0.25,35},{0,-327}}" />

@@ -13,14 +13,14 @@
     <Image height="256" name="SpellHeart_Click" width="255" xPos="2560" yPos="1184" />
     <Image height="256" name="SpellDagger" width="255" xPos="1284" yPos="1184" />
     <Image height="256" name="SpellDagger_Click" width="255" xPos="2881" yPos="1190" />
-    <Image height="256" name="SpellTornado" width="255" xPos="0" yPos="1513" />
+    <Image height="256" name="SpellTornado" width="255" xPos="0" yPos="1517" />
     <Image height="256" name="SpellTornado_Click" width="255" xPos="1600" yPos="1519" />
-    <Image height="256" name="SpellFireBall" width="255" xPos="318" yPos="1513" />
-    <Image height="256" name="SpellFireBall_Click" width="255" xPos="1920" yPos="1517" />
+    <Image height="256" name="SpellFireBall" width="255" xPos="320" yPos="1514" />
+    <Image height="256" name="SpellFireBall_Click" width="255" xPos="1921" yPos="1517" />
     <Image height="256" name="SpellShield" width="255" xPos="640" yPos="1515" />
     <Image height="256" name="SpellShield_Click" width="255" xPos="2240" yPos="1517" />
-    <Image height="256" name="SpellLeaf" width="255" xPos="958" yPos="1515" />
-    <Image height="256" name="SpellLeaf_Click" width="255" xPos="2558" yPos="1519" />
+    <Image height="256" name="SpellLeaf" width="255" xPos="960" yPos="1517" />
+    <Image height="256" name="SpellLeaf_Click" width="255" xPos="2560" yPos="1520" />
     <Image height="256" name="SpellTree" width="255" xPos="1278" yPos="1517" />
     <Image height="256" name="SpellTree_Click" width="255" xPos="2881" yPos="1519" />
     <Image height="256" name="SpellAngel" width="255" xPos="318" yPos="1847" />
@@ -31,12 +31,12 @@
     <Image height="256" name="SpellThunderStorm_Click" width="255" xPos="2560" yPos="1851" />
     <Image height="256" name="SpellSpectre" width="255" xPos="1280" yPos="1847" />
     <Image height="256" name="SpellSpectre_Click" width="255" xPos="2881" yPos="1849" />
-    <Image height="256" name="SpellStoneBall" width="255" xPos="320" yPos="2179" />
-    <Image height="256" name="SpellStoneBall_Click" width="255" xPos="1920" yPos="2186" />
+    <Image height="256" name="SpellStoneBall" width="255" xPos="320" yPos="2182" />
+    <Image height="256" name="SpellStoneBall_Click" width="255" xPos="1921" yPos="2184" />
     <Image height="256" name="SpellIce" width="255" xPos="642" yPos="2183" />
     <Image height="256" name="SpellIce_Click" width="255" xPos="2242" yPos="2186" />
     <Image height="256" name="SpellBullet" width="255" xPos="962" yPos="2181" />
-    <Image height="256" name="SpellBullet_Click" width="255" xPos="2560" yPos="2186" />
+    <Image height="256" name="SpellBullet_Click" width="255" xPos="2560" yPos="2184" />
     <Image height="256" name="SpellHandBeard" width="255" xPos="1280" yPos="2183" />
     <Image height="256" name="SpellHandBeard_Click" width="255" xPos="2880" yPos="2186" />
     <Image height="586" name="BackgroundSpell2" width="737" xPos="2014" yPos="488" />

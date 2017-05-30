@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <GUILayout version="4" >
-    <Window type="Generic/Image" name="BackgroundSpell" >
+    <Window type="Generic/Image" name="WarriorSpellBar" >
         <Property name="Area" value="{{0,786},{0,939},{0,1133},{0,1029}}" />
         <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
