@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Tue May 30 12:58:14 2017 gastal_r
+// Last update Wed May 31 12:07:43 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -26,7 +26,8 @@ Map::Map() :
   mBounds(Ogre::AxisAlignedBox(Ogre::Vector3 (-10000, -10000, -10000),
   Ogre::Vector3 (10000,  10000,  10000))),
   debugDrawer(nullptr),
-  _rayCast(nullptr)
+  _rayCast(nullptr),
+  _collisionRayCast(nullptr)
 {}
 
 Map::~Map()
@@ -55,6 +56,10 @@ void Map::enter(void)
 
   mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
   mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
+
+  _collision = new Collision::CollisionTools();
+
+  _collisionRayCast = mDevice->sceneMgr->createRayQuery(Ogre::Ray());
 
   createScene();
 }
@@ -103,30 +108,39 @@ void Map::createScene(void)
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
-
-
-  _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 42,
-		Entity::Status::IMMOBILE, { 0.f, 18.f, 0.f }, Ogre::Quaternion::ZERO);
-
-  // _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, 43,
-	// 	Entity::Status::IMMOBILE, { 0.f, 18.f, 18.f }, Ogre::Quaternion::ZERO);
+  _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_collision, 42,
+		Entity::Status::IMMOBILE, Ogre::Vector3(-14.f, 2.f, -3.f), Ogre::Quaternion::ZERO);
 
 #if DEBUG_CAMERA
-  _camera->setPosition(Ogre::Vector3(0, 30, 15));
-  _camera->lookAt(Ogre::Vector3(-5, 0, 0));
+  _camera->setPosition(_player->getPosition() + Ogre::Vector3(0, 40.f, 40.f));
   _cameraMan = new OgreCookies::CameraMan(_camera);
+  _camera->lookAt(_player->getPosition());
 #else
   _cameraNode = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("CamNode");
-  _cameraNode->setPosition(_player->getPosition() + Ogre::Vector3(0.f, 20.f, 20.f));
+  _cameraNode->setPosition(_player->getPosition() + Ogre::Vector3(0.f, 40.f, 40.f));
   _cameraNode->attachObject(_camera);
-  _camera->setPosition(_cameraNode->getPosition());
   _camera->lookAt(_player->getPosition());
 #endif
 
 	Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
 	DotSceneLoader loader;
-	loader.parseDotScene("moutain.scene","General", mDevice->sceneMgr, map);
+	loader.parseDotScene("brick_wall_without_proxy.scene","General", mDevice->sceneMgr, map);
   map->setPosition({0.f, 0.f, 0.f});
+  map->setScale(Ogre::Vector3(0.03f, 0.03f, 0.03f));
+  for (auto & it : loader.dynamicObjects)
+  {
+    std::cout << "Dynamics ==> " << it << std::endl;
+    std::cout << mDevice->sceneMgr->getSceneNode(it) << std::endl;
+    Ogre::Entity* entity = static_cast<Ogre::Entity*>(mDevice->sceneMgr->getSceneNode(it)->getAttachedObject(0));
+    _collision->register_entity(entity, Collision::COLLISION_ACCURATE);
+  }
+  for (auto & it : loader.staticObjects)
+  {
+    std::cout << "Statics ==> " << it << std::endl;
+    std::cout << mDevice->sceneMgr->getSceneNode(it) << std::endl;
+    Ogre::Entity* entity = static_cast<Ogre::Entity*>(mDevice->sceneMgr->getSceneNode(it)->getAttachedObject(0));
+    _collision->register_entity(entity, Collision::COLLISION_ACCURATE);
+}
 
   Ogre::Light* spotLight1 = mDevice->sceneMgr->createLight("SpotLight1");
   spotLight1->setType(Ogre::Light::LT_POINT);
@@ -179,6 +193,8 @@ void Map::exit(void)
 
   mDevice->sceneMgr->destroyQuery(_rayCast);
   _rayCast = nullptr;
+  mDevice->sceneMgr->destroyQuery(_collisionRayCast);
+  _collisionRayCast = nullptr;
 
   mDevice->sceneMgr->clearScene();
   mDevice->sceneMgr->destroyAllCameras();
@@ -207,51 +223,6 @@ void Map::sendPlayerPos()
   }
 }
 
-void Map::checkCollisions()
-{
-    btCollisionWorld *collisionWorld = _world->getBulletCollisionWorld();
-    btDynamicsWorld *dynamicWorld = _world->getBulletDynamicsWorld();
-
-    int numManifolds = collisionWorld->getDispatcher()->getNumManifolds();
-    bool collide = false;
-    for (int i=0;i<numManifolds;i++)
-    {
-        btPersistentManifold* contactManifold =  collisionWorld->getDispatcher()->getManifoldByIndexInternal(i);
-        btCollisionObject* obA = const_cast<btCollisionObject*>(contactManifold->getBody0());
-        btCollisionObject* obB = const_cast<btCollisionObject*>(contactManifold->getBody1());
-        // btCollisionObject* obA = (btCollisionObject *) contactManifold->getBody0();
-        // btCollisionObject* obB = (btCollisionObject *) contactManifold->getBody1();
-
-        std::cout << obA << " : " << obB << std::endl;
-        int numContacts = contactManifold->getNumContacts();
-        for (int j=0;j<numContacts;j++)
-        {
-            btManifoldPoint& pt = contactManifold->getContactPoint(j);
-            if (pt.getDistance()<0.f )
-            {
-                const btVector3& ptA = pt.getPositionWorldOnA();
-                const btVector3& ptB = pt.getPositionWorldOnB();
-                const btVector3& normalOnB = pt.m_normalWorldOnB;
-                collide = true;
-                std::cout << "Collision Body A: " << obA->getCollisionShape()->getName() << std::endl;
-                std::cout << "Collision Body B: " << obB->getCollisionShape()->getName() << std::endl;
-                Ogre::SceneNode *node1 = (Ogre::SceneNode *) obA->getUserPointer();
-                Ogre::SceneNode *node2 = (Ogre::SceneNode *) obB->getUserPointer();
-                if (node1)
-                  std::cout << node1->getName() << std::endl;
-                if (node2)
-                  std::cout << node2->getName() << std::endl;
-                if (node1 && node2)
-                {
-                  std::cout << "====================================" << std::endl;
-                  if (node1->getName() !=  node2->getName())
-                    exit();
-                }
-            }
-        }
-    }
-}
-
 //-------------------------------------------------------------------------------------
 bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
@@ -264,6 +235,9 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
    //Need to inject timestamps to CEGUI System.
   CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
+  if (mLMouseDown)
+    mouseRaycast();
+
   mDevice->soundManager->update(evt.timeSinceLastFrame);
 
   _player->frameRenderingQueued(evt);
@@ -275,13 +249,12 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 #if DEBUG_CAMERA
   _cameraMan->frameRenderingQueued(evt);
-  std::cout << "X: " << _camera->getPosition().x << " Y: " << _camera->getPosition().y << " Z: " << _camera->getPosition().z << std::endl;
+  // std::cout << "Camera position ==> X: " << _camera->getPosition().x << " Y: " << _camera->getPosition().y << " Z: " << _camera->getPosition().z << std::endl;
 #else
   _movementX = ((_player->getPosition().x + _offsetX - _cameraNode->getPosition().x)) / _maximumDistance;
   _movementZ = ((_player->getPosition().z + _offsetZ - _cameraNode->getPosition().z)) / _maximumDistance;
   _cameraNode->translate(Ogre::Vector3((_movementX * _playerVelocity * evt.timeSinceLastFrame), 0, (_movementZ * _playerVelocity * evt.timeSinceLastFrame)));
 #endif
-checkCollisions();
   return (true);
 }
 
@@ -294,190 +267,87 @@ bool Map::frameEnded(const Ogre::FrameEvent& evt)
 //-------------------------------------------------------------------------------------
 bool Map::keyPressed( const OIS::KeyEvent &arg )
 {
-  if(arg.key == OIS::KC_B)
+  if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
   {
-    Ogre::Vector3 size = Ogre::Vector3::ZERO;	// size of the box
-    // starting position of the box
-    Ogre::Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 10);
+    Ogre::TextureFilterOptions tfo;
+    unsigned int aniso;
 
-    // create an ordinary, Ogre mesh with texture
-    Ogre::Entity *entity = mDevice->sceneMgr->createEntity(
-        "Barrel" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
-        "Barrel.mesh");
-    entity->setCastShadows(true);
-    // we need the bounding box of the box to be able to set the size of the Bullet-box
+    switch (mPolygonRenderingMode)
+    {
+    case 'B':
+      mPolygonRenderingMode = 'T';
+      tfo = Ogre::TFO_TRILINEAR;
+      aniso = 1;
+      break;
+    case 'T':
+      mPolygonRenderingMode = 'A';
+      tfo = Ogre::TFO_ANISOTROPIC;
+      aniso = 8;
+      break;
+    case 'A':
+      mPolygonRenderingMode = 'N';
+      tfo = Ogre::TFO_NONE;
+      aniso = 1;
+      break;
+    default:
+      mPolygonRenderingMode = 'B';
+      tfo = Ogre::TFO_BILINEAR;
+      aniso = 1;
+    }
 
-    Ogre::SceneNode *node = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode();
-    node->attachObject(entity);
-
-    // const Ogre::Real       gSphereBodyBounds    = 1.0f;
-    //
-    // OgreBulletCollisions::SphereCollisionShape *sceneCubeShape =
-    // new OgreBulletCollisions::SphereCollisionShape(gSphereBodyBounds);
-
-
-    // after that create the Bullet shape with the calculated size
-    OgreBulletCollisions::StaticMeshToShapeConverter *trimeshConverter = new
-      OgreBulletCollisions::StaticMeshToShapeConverter(entity);
-
-      OgreBulletCollisions::TriangleMeshCollisionShape *sceneTriMeshShape = NULL;
-      sceneTriMeshShape = trimeshConverter->createTrimesh();
-      delete trimeshConverter;
-
-    // and the Bullet rigid body
-    OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
-        "defaulRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
-        _world);
-
-        // BtOgre::StaticMeshToShapeConverter convProva(entity);
-        btCollisionShape* shProva;
-        // shProva->setLocalScaling(BtOgre::Convert::toBullet(nProva->getScale()));
-        // btRigidBody* rbProva=this->createRigidBody(0.1,nProva,tr,shProva);
-
-    defaultBody->setShape(node,
-          sceneTriMeshShape,
-          0.6f,			// dynamic body restitution
-          0.6f,			// dynamic body friction
-          1.0f, 			// dynamic bodymass
-          position,		// starting position of the box
-          Ogre::Quaternion(180,0,0,1));// orientation of the box
-      mNumEntitiesInstanced++;
-
-      defaultBody->enableActiveState();
-      _world->addRigidBody(defaultBody,0,0);
-      defaultBody->setLinearVelocity(
-      _camera->getDerivedDirection().normalisedCopy() * 7.0f ); // shooting speed
-    // push the created objects to the dequese
-    // mShapes.push_back(sceneTriMeshShape);
-    // mBodies.push_back(defaultBody);
-    //mTimeUntilNextToggle = 0.5;
+    Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
+    Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
   }
-
-  if(arg.key == OIS::KC_V)
+  else if (arg.key == OIS::KC_R)   // cycle polygon rendering mode
   {
-    Ogre::Vector3 size = Ogre::Vector3::ZERO;
-    Ogre::Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 10);
+    Ogre::PolygonMode pm;
 
-    Ogre::Entity *entity = mDevice->sceneMgr->createEntity(
-        "Barrel" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
-        "Barrel.mesh");
-    entity->setCastShadows(true);
-    // we need the bounding box of the box to be able to set the size of the Bullet-box
-    Ogre::AxisAlignedBox boundingB = entity->getBoundingBox();
-    size = boundingB.getSize();
-    size /= 2.0f; // only the half needed
-    size *= 0.95f;	// Bullet margin is a bit bigger so we need a smaller size
-// 									(Bullet 2.76 Physics SDK Manual page 18)
-   size = boundingB.getSize()*0.95f;
-    //entity->setMaterialName("barrel");
-    Ogre::SceneNode *node = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode();
-    node->attachObject(entity);
-    //node->scale(20f, 20f, 20f);	// the cube is too big for us
-  // 	size *= 0.05f;						// don't forget to scale down the Bullet-box too
+    switch (_camera->getPolygonMode())
+    {
+    case Ogre::PM_SOLID:
+      pm = Ogre::PM_WIREFRAME;
+      break;
+    case Ogre::PM_WIREFRAME:
+      pm = Ogre::PM_POINTS;
+      break;
+    default:
+      pm = Ogre::PM_SOLID;
+    }
 
-    // after that create the Bullet shape with the calculated size
-    OgreBulletCollisions::BoxCollisionShape *sceneBoxShape =
-    new OgreBulletCollisions::BoxCollisionShape(size);
-
-    // and the Bullet rigid body
-    OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
-        "defaultBoxRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
-        _world);
-
-    // OgreBulletCollisions::CollisionShape *collisionShape =
-    defaultBody->setShape(node,
-          sceneBoxShape,
-          0.6f,			// dynamic body restitution
-          100.f,			// dynamic body friction
-          1000.0f, 			// dynamic bodymass
-          position,		// starting position of the box
-          Ogre::Quaternion(180,0,0,1));// orientation of the box
-      mNumEntitiesInstanced++;
-
-      defaultBody->enableActiveState();
-      _world->addRigidBody(defaultBody,0,0);
-      defaultBody->setLinearVelocity(
-      _camera->getDerivedDirection().normalisedCopy() * 7.0f ); // shooting speed
-    // push the created objects to the dequese
-    // mShapes.push_back(sceneBoxShape);
-    // mBodies.push_back(defaultBody);
-    //mTimeUntilNextToggle = 0.5;
+    _camera->setPolygonMode(pm);
   }
-
-    if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
-    {
-        Ogre::TextureFilterOptions tfo;
-        unsigned int aniso;
-
-        switch (mPolygonRenderingMode)
-        {
-        case 'B':
-			mPolygonRenderingMode = 'T';
-            tfo = Ogre::TFO_TRILINEAR;
-            aniso = 1;
-            break;
-        case 'T':
-			mPolygonRenderingMode = 'A';
-            tfo = Ogre::TFO_ANISOTROPIC;
-            aniso = 8;
-            break;
-        case 'A':
-			mPolygonRenderingMode = 'N';
-            tfo = Ogre::TFO_NONE;
-            aniso = 1;
-            break;
-        default:
-			mPolygonRenderingMode = 'B';
-            tfo = Ogre::TFO_BILINEAR;
-            aniso = 1;
-        }
-
-        Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
-        Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
-    }
-    else if (arg.key == OIS::KC_R)   // cycle polygon rendering mode
-    {
-        Ogre::PolygonMode pm;
-
-        switch (_camera->getPolygonMode())
-        {
-        case Ogre::PM_SOLID:
-            pm = Ogre::PM_WIREFRAME;
-            break;
-        case Ogre::PM_WIREFRAME:
-            pm = Ogre::PM_POINTS;
-            break;
-        default:
-            pm = Ogre::PM_SOLID;
-        }
-
-        _camera->setPolygonMode(pm);
-    }
-    else if(arg.key == OIS::KC_F5)   // refresh all textures
-    {
-      Ogre::TextureManager::getSingleton().reloadAll();
-    }
-    else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
-    {
-        mDevice->window->writeContentsToTimestampedFile("screenshot", ".jpg");
-    }
-    else if (arg.key == OIS::KC_ESCAPE)
-    {
-        mShutDown = true;
-        Shutdown();
-    }
-    else
-    {
+  else if(arg.key == OIS::KC_F5)   // refresh all textures
+  {
+    Ogre::TextureManager::getSingleton().reloadAll();
+  }
+  else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
+  {
+    mDevice->window->writeContentsToTimestampedFile("screenshot", ".jpg");
+  }
+  else if (arg.key == OIS::KC_ESCAPE)
+  {
+    // mShutDown = true;
+    Shutdown();
+  }
+  else
+  {
+    std::cout << "camera" << std::endl;
     #if DEBUG_CAMERA
       _cameraMan->injectKeyDown(arg);
+      std::cout << "Camera position ==> X: " << _camera->getPosition().x << " Y: " << _camera->getPosition().y << " Z: " << _camera->getPosition().z << std::endl;
     #endif
-    }
+  }
 
   return (true);
 }
 
 bool Map::keyReleased( const OIS::KeyEvent &arg )
 {
+  #if DEBUG_CAMERA
+    _cameraMan->injectKeyUp(arg);
+    std::cout << "Camera position ==> X: " << _camera->getPosition().x << " Y: " << _camera->getPosition().y << " Z: " << _camera->getPosition().z << std::endl;
+  #endif
+
   return (true);
 }
 
@@ -507,6 +377,7 @@ void  Map::mouseRaycast(void)
   float windowHeight = CEGUI::CoordConverter::screenToWindowY(
     *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), CEGUI::UDim(1,0));
   Ogre::Ray ray = _camera->getCameraToViewportRay((float) relativeMouse.d_x / windowWidth, (float) relativeMouse.d_y / windowHeight);
+
   if (!_rayCast)
     _rayCast = mDevice->sceneMgr->createRayQuery(ray);
   else
@@ -548,11 +419,13 @@ bool Map::mouseMoved( const OIS::MouseEvent &arg )
   CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
   context.injectMouseMove(arg.state.X.rel, arg.state.Y.rel);
   if (mLMouseDown)
-  {
-    mouseRaycast();
-  }
+  {}
   else if (mRMouseDown)
   {}
+
+  #if DEBUG_CAMERA
+    _cameraMan->injectMouseMove(arg);
+  #endif
 
   return (true);
 }
@@ -563,13 +436,17 @@ bool Map::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
   context.injectMouseButtonDown(convertButon(id));
   if (id == OIS::MB_Left)
   {
-    mouseRaycast();
     mLMouseDown = true;
   }
   else if (id == OIS::MB_Right)
   {
     mRMouseDown = true;
   }
+
+  #if DEBUG_CAMERA
+    _cameraMan->injectMouseDown(arg, id);
+  #endif
+
   return (true);
 }
 
@@ -586,5 +463,10 @@ bool Map::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id )
     mRMouseDown = false;
     context.getMouseCursor().show();
   }
+
+  #if DEBUG_CAMERA
+    _cameraMan->injectMouseUp(arg, id);
+  #endif
+
   return (true);
 }

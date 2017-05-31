@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Sat May 27 20:26:06 2017 gastal_r
+** Last update Tue May 30 14:26:06 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -140,7 +140,7 @@ void Socket::events()
                   Entity::Status status;
                   status = (Entity::Status)data->get_map()["status"]->get_int();
 
-                  _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, data->get_map()["send_by"]->get_int(),
+                  _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_collision, data->get_map()["send_by"]->get_int(),
                                   	                                            status, position, orientation);
                   std::cout << _entity.size() << '\n';
 

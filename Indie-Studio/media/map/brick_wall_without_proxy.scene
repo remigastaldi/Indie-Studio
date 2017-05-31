@@ -1,0 +1,327 @@
+<scene export_time="1496156783.5518317" exported_by="gastal_r" formatVersion="1.0.1" previous_export_time="0" >
+  <nodes >
+    <node name="brick_pile_messy" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_pile_messy.mesh" name="brick_pile_messy" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_pile_messy", name="ogre_mesh_exporter", address=0x7f59e6e9af88&gt;' />
+      </entity>
+    </node>
+    <node name="brick_pile" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_pile.mesh" name="brick_pile" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_pile", name="ogre_mesh_exporter", address=0x7f59e6f8f8a8&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_column_thin" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_column_thin.mesh" name="brick_wall_column_thin" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_column_thin", name="ogre_mesh_exporter", address=0x7f59e6f8f948&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_large_2_columns" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_large_2_columns.mesh" name="brick_wall_large_2_columns" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_large_2_columns", name="ogre_mesh_exporter", address=0x7f59e6e98b48&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_large_corner" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_large_corner.mesh" name="brick_wall_large_corner" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_large_corner", name="ogre_mesh_exporter", address=0x7f59e023a768&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_large_1_column" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_large_1_column.mesh" name="brick_wall_large_1_column" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_large_1_column", name="ogre_mesh_exporter", address=0x7f59e023a948&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_large" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_large.mesh" name="brick_wall_large" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_large", name="ogre_mesh_exporter", address=0x7f59e023aa88&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_large_without_top" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_large_without_top.mesh" name="brick_wall_large_without_top" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_large_without_top", name="ogre_mesh_exporter", address=0x7f59e023ac68&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_large_top" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_large_top.mesh" name="brick_wall_large_top" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_large_top", name="ogre_mesh_exporter", address=0x7f59e023ada8&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_medium_2_columns" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_medium_2_columns.mesh" name="brick_wall_medium_2_columns" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_medium_2_columns", name="ogre_mesh_exporter", address=0x7f59e023aee8&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_medium_corner" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_medium_corner.mesh" name="brick_wall_medium_corner" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_medium_corner", name="ogre_mesh_exporter", address=0x7f59e023b028&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_medium_1_column" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_medium_1_column.mesh" name="brick_wall_medium_1_column" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_medium_1_column", name="ogre_mesh_exporter", address=0x7f59e023b168&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_medium_without_top" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_medium_without_top.mesh" name="brick_wall_medium_without_top" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_medium_without_top", name="ogre_mesh_exporter", address=0x7f59e023b2a8&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_medium_top" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_medium_top.mesh" name="brick_wall_medium_top" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_medium_top", name="ogre_mesh_exporter", address=0x7f59e023b3e8&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_small_top" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_small_top.mesh" name="brick_wall_small_top" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_small_top", name="ogre_mesh_exporter", address=0x7f59e023b528&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_medium" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_medium.mesh" name="brick_wall_medium" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_medium", name="ogre_mesh_exporter", address=0x7f59e023b668&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_column_big" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_column_big.mesh" name="brick_wall_column_big" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_column_big", name="ogre_mesh_exporter", address=0x7f59e023b7a8&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_small_without_top" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_small_without_top.mesh" name="brick_wall_small_without_top" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_small_without_top", name="ogre_mesh_exporter", address=0x7f59e023b8e8&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_small_2_columns" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_small_2_columns.mesh" name="brick_wall_small_2_columns" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_small_2_columns", name="ogre_mesh_exporter", address=0x7f59e023ba28&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_small_corner" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_small_corner.mesh" name="brick_wall_small_corner" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_small_corner", name="ogre_mesh_exporter", address=0x7f59e023bb68&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_small" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_small.mesh" name="brick_wall_small" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_small", name="ogre_mesh_exporter", address=0x7f59e023bca8&gt;' />
+      </entity>
+    </node>
+    <node name="brick_wall_small_1_column" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_wall_small_1_column.mesh" name="brick_wall_small_1_column" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_wall_small_1_column", name="ogre_mesh_exporter", address=0x7f59e023bde8&gt;' />
+      </entity>
+    </node>
+    <node name="brick_single" >
+      <position x="0.000000" y="0.000000" z="-0.000000" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="brick_single.mesh" name="brick_single" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="MEbrick_single", name="ogre_mesh_exporter", address=0x7f59e023bf28&gt;' />
+      </entity>
+    </node>
+    <node name="Lamp" >
+      <position x="4.076245" y="5.903862" z="-1.005454" />
+      <rotation qw="0.570947" qx="0.169076" qy="0.755880" qz="-0.272171" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light name="Lamp" powerScale="1.0" shadow="true" type="point" >
+        <position x="4.076245" y="5.903862" z="-1.005454" />
+        <lightAttenuation constant="1.0" linear="0.03333335240683057" quadratic="0.0" range="5000" />
+        <colourDiffuse b="1.0" g="1.0" r="1.0" />
+        <colourSpecular b="1.0" g="1.0" r="1.0" />
+        <colourShadow b="1.0" g="1.0" r="1.0" />
+      </light>
+    </node>
+    <node name="Camera" >
+      <position x="7.481132" y="5.343665" z="6.507640" />
+      <rotation qw="0.780483" qx="0.483536" qy="0.336872" qz="-0.208704" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <camera fov="0.5033799435163735" name="Camera" projectionType="perspective" >
+        <clipping far="100.0" farPlaneDist="100.0" near="0.10000000149011612" nearPlaneDist="0.10000000149011612" />
+      </camera>
+    </node>
+  </nodes>
+  <externals >
+    <item type="material" >
+      <file name="/home/gastal_r/rendu/Indie-Studio/Indie-Studio/media/map/brick.material" />
+    </item>
+    <item type="material" >
+      <file name="/home/gastal_r/rendu/Indie-Studio/Indie-Studio/media/map/column.material" />
+    </item>
+    <item type="material" >
+      <file name="/home/gastal_r/rendu/Indie-Studio/Indie-Studio/media/map/cement.material" />
+    </item>
+    <item type="material" >
+      <file name="/home/gastal_r/rendu/Indie-Studio/Indie-Studio/media/map/wall.material" />
+    </item>
+  </externals>
+  <environment >
+    <colourAmbient b="0.0" g="0.0" r="0.0" />
+    <colourBackground b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+    <colourDiffuse b="0.05087608844041824" g="0.05087608844041824" r="0.05087608844041824" />
+  </environment>
+</scene>

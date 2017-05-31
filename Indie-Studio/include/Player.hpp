@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:29:53 2017 gastal_r
-// Last update Fri May 26 18:41:28 2017 gastal_r
+// Last update Tue May 30 14:31:11 2017 gastal_r
 //
 
 #ifndef         _PLAYER_HPP_
@@ -16,7 +16,7 @@
 class Player : public Entity
 {
 public:
-  Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, Status status, const Ogre::Vector3 &position,
+  Player(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id, Status status, const Ogre::Vector3 &position,
    const Ogre::Quaternion &orientation);
 
   ~Player();

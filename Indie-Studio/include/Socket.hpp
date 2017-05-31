@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Sun May 28 11:48:33 2017 gastal_r
+// Last update Tue May 30 14:22:35 2017 gastal_r
 //
 
 #ifndef _CLIENT_HPP_
@@ -22,6 +22,7 @@
 #include <unordered_map>
 #include "Entity.hpp"
 #include "GameState.hpp"
+#include      "NewMOC.h"
 
 #define SOCKET_SERVER "http://ezgames.eu"
 #define SOCKET_PORT 3000
@@ -62,6 +63,7 @@ public:
   void sendEntity(const Entity &);
 
 protected:
+  Collision::CollisionTools*  _collision;
   int                         _id;
   std::mutex                  _lock;
   std::condition_variable_any _cond;

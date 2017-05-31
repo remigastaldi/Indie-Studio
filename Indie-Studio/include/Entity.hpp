@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Mon May 29 16:28:08 2017 gastal_r
+// Last update Tue May 30 14:30:25 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -32,6 +32,8 @@
 
 #include <CameraMan.hpp>
 
+#include "NewMOC.h"
+
 class Entity
 {
 public:
@@ -51,7 +53,7 @@ public:
   };
 
 public:
-  Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, Status status,
+  Entity(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id, Status status,
     const Ogre::Vector3 &position, const Ogre::Quaternion &orientation);
 
   ~Entity();
@@ -61,7 +63,6 @@ public:
   Entity& operator=(Entity&& other) = default;
 
   void	goToLocation(Ogre::Real);
-  /*bool	nextLocation(std::deque<Ogre::Vector3> &, Ogre::SceneNode *);*/
   void  changeAnimation(Entity::Status status);
   void  frameRenderingQueued(const Ogre::FrameEvent &evt);
   void	updateAnimation(std::string, Ogre::Real);
@@ -85,11 +86,12 @@ public:
   void					setDestination(const Ogre::Vector3 &destination);
 
 protected:
+  Collision::CollisionTools &_collision;
   Ogre::SceneManager  &_sceneMgr;
-  OgreBulletDynamics::DynamicsWorld &_world;
+  // OgreBulletDynamics::DynamicsWorld &_world;
   Ogre::Entity        *_entity;
   Ogre::SceneNode     *_node;
-OgreBulletDynamics::RigidBody *defaultBody;
+  OgreBulletDynamics::RigidBody *defaultBody;
   size_t				        _id;
   Entity::Status		    _status;
   Ogre::Quaternion		  _orientation;
@@ -111,11 +113,11 @@ class Player;
 
 
 #define   ENTITY_INIT_PARAMETERS                                 \
-Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, \
+Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id, \
 Entity::Status status, const Ogre::Vector3 &position, const Ogre::Quaternion &orientation
 
 #define   ENTITY_INIT_VARS    \
-sceneMgr, world, id, status, position, orientation
+sceneMgr, collision, id, status, position, orientation
 
 template<typename T>
 inline Entity * createInstance(ENTITY_INIT_PARAMETERS)
