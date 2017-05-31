@@ -17,6 +17,7 @@
             <Item path="imagesets/HUDDemoGameOver.png" type="file" />
             <Item path="imagesets/OgreTray.imageset" type="file" />
             <Item path="imagesets/OgreTrayImages.png" type="file" />
+            <Item path="imagesets/Portraits.imageset" type="file" />
             <Item path="imagesets/ReadMe.txt" type="file" />
             <Item path="imagesets/SampleBrowser.imageset" type="file" />
             <Item path="imagesets/SampleBrowser.png" type="file" />
@@ -29,7 +30,6 @@
             <Item path="imagesets/logo.png" type="file" />
             <Item path="imagesets/mainMenu.imageset" type="file" />
             <Item path="imagesets/vanilla.png" type="file" />
-            <Item path="imagesets/Portraits.imageset" type="file" />
         </Item>
         <Item name="layout" type="folder">
             <Item path="layouts/ChatBox.layout" type="file" />
@@ -46,6 +46,7 @@
             <Item path="layouts/IG_MENU.layout" type="file" />
             <Item path="layouts/IngeniorSpell.layout" type="file" />
             <Item path="layouts/LoadingScreen.layout" type="file" />
+            <Item path="layouts/PlayerCaracts.layout" type="file" />
             <Item path="layouts/SampleBrowser.layout" type="file" />
             <Item path="layouts/SampleBrowserLoadScreen.layout" type="file" />
             <Item path="layouts/TabControlDemo.layout" type="file" />
@@ -63,8 +64,8 @@
             <Item path="layouts/WizzardSpellBar.layout" type="file" />
             <Item path="layouts/application_templates.layout" type="file" />
             <Item path="layouts/mainMenu.layout" type="file" />
-            <Item path="layouts/PlayerCaracts.layout" type="file" />
             <Item path="layouts/selectChar.layout" type="file" />
+            <Item path="layouts/Avatar.layout" type="file" />
         </Item>
         <Item name="looknfeel" type="folder">
             <Item path="looknfeel/AlfiskoSkin.looknfeel" type="file" />

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="Generic/Image" name="Image" >
+        <Property name="Area" value="{{0,0},{0,0},{0,534},{0,150}}" />
+        <Property name="Alpha" value="0" />
+        <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Generic/Image" name="Image" >
+            <Property name="Area" value="{{0,9},{0,11},{0,137},{0,139}}" />
+            <Property name="Image" value="HUDDemo/DarkFiend" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="InheritsAlpha" value="false" />
+        </Window>
+        <Window type="Generic/Image" name="Image2" >
+            <Property name="Area" value="{{0,137},{0,11},{0,519},{0,139}}" />
+            <Property name="Alpha" value="0.95" />
+            <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="InheritsAlpha" value="false" />
+            <Window type="Vanilla/StaticText" name="StaticText" >
+                <Property name="Area" value="{{0,11},{0,8},{0,169},{0,34}}" />
+                <Property name="Text" value="WARRIOR" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="158" />
+                <Property name="VertScrollPageSize" value="26" />
+                <Property name="HorzScrollDocumentSize" value="84" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+            <Window type="Vanilla/ProgressBar" name="ProgressBar" >
+                <Property name="Area" value="{{0,10},{0,39},{0,362},{0,62}}" />
+                <Property name="StepSize" value="0.01" />
+                <Property name="EnabledColour" value="tl:FFC41D00 tr:FFC41D00 bl:FFC41D00 br:FFC41D00" />
+                <Property name="InheritsAlpha" value="false" />
+                <Property name="DragDropTarget" value="false" />
+                <Property name="CurrentProgress" value="0.5" />
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>

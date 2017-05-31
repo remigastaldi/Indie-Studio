@@ -45,4 +45,5 @@
     <Image height="101" name="SelectHover" width="314" xPos="2339" yPos="361" />
     <Image height="105" name="BackHover" width="314" xPos="2182" yPos="34" />
     <Image height="106" name="BackNormal" width="314" xPos="2530" yPos="34" />
+    <Image height="256" name="AvatarBackground" width="96" xPos="1680" yPos="1172" />
 </Imageset>
