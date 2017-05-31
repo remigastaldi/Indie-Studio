@@ -82,8 +82,18 @@ bool Menu::buttonPlay(const CEGUI::EventArgs &e)
   _backButton = _play->getChild("BackButton");
   _backButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonBack, this));
 
-  _selectDarkFiend = _play->getChild("Ingenior/SelectIngenior");
+  _selectIngenior = _play->getChild("Ingenior/SelectIngenior");
+  _selectIngenior->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected, this));
+
+  _selectDarkFiend = _play->getChild("DarkFiend/SelectDarkFiend");
   _selectDarkFiend->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected, this));
+
+  _selectWarrior = _play->getChild("Warrior/SelectWarrior");
+  _selectWarrior->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected, this));
+
+  _selectMage = _play->getChild("Wizzard/SelectWizzard");
+  _selectMage->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected, this));
+
   return (true);
 }
 

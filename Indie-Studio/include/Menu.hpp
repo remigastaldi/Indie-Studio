@@ -79,6 +79,9 @@ private:
   CEGUI::Window *_infosButton;
   CEGUI::Window *_closeButton;
   CEGUI::Window *_selectDarkFiend;
+  CEGUI::Window *_selectIngenior;
+  CEGUI::Window *_selectWarrior;
+  CEGUI::Window *_selectMage;
 
   bool mShutDown;
   Ogre::Camera *_camera;
