@@ -1,0 +1,24 @@
+Skeleton Crossbowmen Animation List
+
+frame: 0030-0059: backpedal (loop)
+frame: 0090-0179: shot
+frame: 0180-0219: attack
+frame: 0220-0249: die
+frame: 0250-0294: dodge
+frame: 0295-0324: gethit from behind
+frame: 0325-0354: gethit from front
+frame: 0355-0384: gethit from left
+frame: 0385-0414: gethit from right
+frame: 0444-0473: idle (loop)
+frame: 0505-0549: jump
+frame: 0579-0608: rapid shot (loop)
+frame: 0639-0713: roar
+frame: 0738-0761: run (loop)
+frame: 0804-0823: shuffle left (loop)
+frame: 0864-0883: shuffle right (loop)
+frame: 0905-0994: spawn
+frame: 1024-1053: strafe left (loop)
+frame: 1114-1143: strafe right (loop)
+frame: 1204-1233: walk (loop)
+frame: 1265-1294: whack
+
