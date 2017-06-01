@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Wed May 31 11:30:22 2017 gastal_r
+// Last update Thu Jun  1 20:23:51 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -13,11 +13,10 @@
 
 #include      "GameState.hpp"
 #include      "Socket.hpp"
-
 #include      <functional>
 
 #define DEBUG_LOCAL true
-#define DEBUG_CAMERA false
+#define DEBUG_CAMERA true
 
 #if DEBUG_LOCAL
   #define DEBUG_DRAWER true

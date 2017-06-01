@@ -5,12 +5,12 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Tue May 30 19:18:19 2017 gastal_r
+// Last update Thu Jun  1 22:14:52 2017 gastal_r
 //
 
 #include        "Player.hpp"
 
-Player::Player(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id, Entity::Status status, const Ogre::Vector3 &position, const Ogre::Quaternion &orientation)
+Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, Entity::Status status, const Ogre::Vector3 &position, const Ogre::Quaternion &orientation)
   : Entity(ENTITY_INIT_VARS)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Player =====");
@@ -24,6 +24,29 @@ Player::Player(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
   changeAnimation(status);
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE);
+
+  btTransform startTransform;
+  startTransform.setIdentity();
+  startTransform.setOrigin(btVector3(-14.f, 10.f, -3.f));
+
+  _ghostObject = new btPairCachingGhostObject();
+  _ghostObject->setUserPointer((void*) _node);
+
+  _ghostObject->setWorldTransform(startTransform);
+  Ogre::AxisAlignedBox boundingB(_entity->getBoundingBox());
+  Ogre::Vector3 size(boundingB.getSize());
+  size /= 2.0f;
+  btScalar characterHeight = size.y;
+  btScalar characterWidth = size.x;
+  btConvexShape* capsule = new btCapsuleShape(characterWidth, characterHeight);
+  _ghostObject->setCollisionShape(capsule);
+  _ghostObject->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
+
+  btScalar stepHeight(btScalar(0.35));
+  _character = new btKinematicCharacterController(_ghostObject, capsule, stepHeight);
+  _world.getBulletDynamicsWorld()->addCollisionObject(_ghostObject, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::AllFilter);
+  _world.getBulletDynamicsWorld()->addAction(_character);
+  _world.getBulletDynamicsWorld()->getPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
 }
 
 Player::~Player()

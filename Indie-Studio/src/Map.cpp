@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Wed May 31 12:07:43 2017 gastal_r
+// Last update Thu Jun  1 20:23:46 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -49,10 +49,17 @@ void Map::enter(void)
 
   #if DEBUG_DRAWER
   	debugDrawer = new OgreBulletCollisions::DebugDrawer();
-    debugDrawer->setDrawWireframe(true);
-    _world->setDebugDrawer(debugDrawer);
+    debugDrawer->setDrawAabb (true);
+    debugDrawer->setDrawWireframe (true);
+    debugDrawer->setDrawFeaturesText (true);
+    debugDrawer->setDrawContactPoints (true);
+    debugDrawer->setDrawText (true);
+    debugDrawer->setProfileTimings (true);
+    debugDrawer->setEnableSatComparison (true);
+    debugDrawer->setEnableCCD (true);
     _world->setShowDebugShapes(true);
-  #endif
+    _world->setDebugDrawer(debugDrawer);
+#endif
 
   mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
   mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
@@ -108,8 +115,8 @@ void Map::createScene(void)
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
-  _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_collision, 42,
-		Entity::Status::IMMOBILE, Ogre::Vector3(-14.f, 2.f, -3.f), Ogre::Quaternion::ZERO);
+  _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, *_collision, 42,
+		Entity::Status::IMMOBILE, Ogre::Vector3(-14.f, 10.f, -3.f), Ogre::Quaternion::ZERO);
 
 #if DEBUG_CAMERA
   _camera->setPosition(_player->getPosition() + Ogre::Vector3(0, 40.f, 40.f));
@@ -126,20 +133,38 @@ void Map::createScene(void)
 	DotSceneLoader loader;
 	loader.parseDotScene("brick_wall_without_proxy.scene","General", mDevice->sceneMgr, map);
   map->setPosition({0.f, 0.f, 0.f});
-  map->setScale(Ogre::Vector3(0.03f, 0.03f, 0.03f));
+  // map->setScale(Ogre::Vector3(0.03f, 0.03f, 0.03f));
+
   for (auto & it : loader.dynamicObjects)
   {
     std::cout << "Dynamics ==> " << it << std::endl;
-    std::cout << mDevice->sceneMgr->getSceneNode(it) << std::endl;
-    Ogre::Entity* entity = static_cast<Ogre::Entity*>(mDevice->sceneMgr->getSceneNode(it)->getAttachedObject(0));
-    _collision->register_entity(entity, Collision::COLLISION_ACCURATE);
+    Ogre::SceneNode *node = mDevice->sceneMgr->getSceneNode(it);
+    Ogre::Entity *entity = static_cast<Ogre::Entity*>(node->getAttachedObject(0));
+
+    OgreBulletCollisions::StaticMeshToShapeConverter trimeshConverter(entity);
+    OgreBulletCollisions::TriangleMeshCollisionShape *sceneTriMeshShape =  trimeshConverter.createTrimesh();
+
+    OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
+      "MapBody" + Ogre::StringConverter::toString(mNumEntitiesInstanced),  _world);
+    defaultBody->setShape(node,
+          sceneTriMeshShape,
+          0.6f,      // dynamic body restitution
+          0.6f,      // dynamic body friction
+          0.0f,       // dynamic bodymass
+          node->getPosition(),    // starting position of the box
+          Ogre::Quaternion(0, 0, -1, 1));// orientation of the box
+    mNumEntitiesInstanced++;
+
+    defaultBody->enableActiveState();
+    _world->addRigidBody(defaultBody,0,0);
+
+    _collision->register_entity(entity, Collision::COLLISION_BOX);
   }
   for (auto & it : loader.staticObjects)
   {
     std::cout << "Statics ==> " << it << std::endl;
-    std::cout << mDevice->sceneMgr->getSceneNode(it) << std::endl;
     Ogre::Entity* entity = static_cast<Ogre::Entity*>(mDevice->sceneMgr->getSceneNode(it)->getAttachedObject(0));
-    _collision->register_entity(entity, Collision::COLLISION_ACCURATE);
+    _collision->register_entity(entity, Collision::COLLISION_BOX);
 }
 
   Ogre::Light* spotLight1 = mDevice->sceneMgr->createLight("SpotLight1");
@@ -241,6 +266,7 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
   mDevice->soundManager->update(evt.timeSinceLastFrame);
 
   _player->frameRenderingQueued(evt);
+  // _world->getBulletDynamicsWorld()->debugDrawWorld();
 
 #if DEBUG_LOCAL == false
   for (auto & it : _entity)
@@ -249,7 +275,6 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 #if DEBUG_CAMERA
   _cameraMan->frameRenderingQueued(evt);
-  // std::cout << "Camera position ==> X: " << _camera->getPosition().x << " Y: " << _camera->getPosition().y << " Z: " << _camera->getPosition().z << std::endl;
 #else
   _movementX = ((_player->getPosition().x + _offsetX - _cameraNode->getPosition().x)) / _maximumDistance;
   _movementZ = ((_player->getPosition().z + _offsetZ - _cameraNode->getPosition().z)) / _maximumDistance;
@@ -267,6 +292,56 @@ bool Map::frameEnded(const Ogre::FrameEvent& evt)
 //-------------------------------------------------------------------------------------
 bool Map::keyPressed( const OIS::KeyEvent &arg )
 {
+  if(arg.key == OIS::KC_V)
+{
+  Ogre::Vector3 size = Ogre::Vector3::ZERO;
+  Ogre::Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 10);
+
+  Ogre::Entity *entity = mDevice->sceneMgr->createEntity(
+      "Barrel" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
+      "Barrel.mesh");
+  // entity->setCastShadows(true);
+  // we need the bounding box of the box to be able to set the size of the Bullet-box
+  Ogre::AxisAlignedBox boundingB = entity->getBoundingBox();
+  size = boundingB.getSize();
+  size /= 2.0f; // only the half needed
+  size *= 0.95f;  // Bullet margin is a bit bigger so we need a smaller size
+//                   (Bullet 2.76 Physics SDK Manual page 18)
+ size = boundingB.getSize()*0.95f;
+  //entity->setMaterialName("barrel");
+  Ogre::SceneNode *node = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode();
+  node->attachObject(entity);
+  //node->scale(20f, 20f, 20f);  // the cube is too big for us
+//   size *= 0.05f;            // don't forget to scale down the Bullet-box too
+
+  // after that create the Bullet shape with the calculated size
+  OgreBulletCollisions::BoxCollisionShape *sceneBoxShape =
+  new OgreBulletCollisions::BoxCollisionShape(size);
+
+  // and the Bullet rigid body
+  OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
+      "defaultBoxRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
+      _world);
+
+  // OgreBulletCollisions::CollisionShape *collisionShape =
+  defaultBody->setShape(node,
+        sceneBoxShape,
+        0.6f,      // dynamic body restitution
+        1.f,      // dynamic body friction
+        1.0f,       // dynamic bodymass
+        position,    // starting position of the box
+        Ogre::Quaternion(180,0,0,1));// orientation of the box
+    mNumEntitiesInstanced++;
+
+    defaultBody->enableActiveState();
+    _world->addRigidBody(defaultBody,0,0);
+    defaultBody->setLinearVelocity(
+    _camera->getDerivedDirection().normalisedCopy() * 7.0f ); // shooting speed
+  // push the created objects to the dequese
+  // mShapes.push_back(sceneBoxShape);
+  // mBodies.push_back(defaultBody);
+  //mTimeUntilNextToggle = 0.5;
+  }
   if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
   {
     Ogre::TextureFilterOptions tfo;
@@ -331,7 +406,6 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
   }
   else
   {
-    std::cout << "camera" << std::endl;
     #if DEBUG_CAMERA
       _cameraMan->injectKeyDown(arg);
       std::cout << "Camera position ==> X: " << _camera->getPosition().x << " Y: " << _camera->getPosition().y << " Z: " << _camera->getPosition().z << std::endl;
@@ -388,6 +462,7 @@ void  Map::mouseRaycast(void)
 #else
   _rayCast->setSortByDistance(true, 1);
 #endif
+
   _rayCast->setQueryTypeMask(Ogre::SceneManager::ENTITY_TYPE_MASK);
 
   Ogre::RaySceneQueryResult res = _rayCast->execute();
@@ -421,11 +496,11 @@ bool Map::mouseMoved( const OIS::MouseEvent &arg )
   if (mLMouseDown)
   {}
   else if (mRMouseDown)
-  {}
-
-  #if DEBUG_CAMERA
-    _cameraMan->injectMouseMove(arg);
-  #endif
+  {
+    #if DEBUG_CAMERA
+      _cameraMan->injectMouseMove(arg);
+    #endif
+  }
 
   return (true);
 }
