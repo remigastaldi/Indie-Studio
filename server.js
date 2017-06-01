@@ -1,3 +1,14 @@
+/* LOCAL VAR */
+var totalConnected = 0;
+var users = [];
+
+
+module.exports = {
+  users: users,
+  totalConnected: totalConnected
+}
+
+/* REQUIRE ALL DEPS */
 var app = require("./app.js");
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
@@ -5,10 +16,6 @@ var exec = require('child_process').exec;
 
 
 var Entity = require("./class/Entity.js");
-
-/* LOCAL VAR */
-var totalConnected = 0;
-var users = [];
 
 var readline = require('readline');
 var rl = readline.createInterface({
@@ -75,7 +82,7 @@ io.on('connection', function (socket) {
       users[socket.user_server_id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
       users[socket.user_server_id].setOrientation(data["orientation"]["w"], data["orientation"]["x"], data["orientation"]["y"], data["orientation"]["z"]);
       users[socket.user_server_id].setStatus(data["status"]);
-    }    
+    }
   });
 
   socket.on("create_entity", function (data) {
@@ -133,16 +140,6 @@ io.on('connection', function (socket) {
     io.to(socket.room).emit("logout", {user_id: socket.user_id});
 	});
 
-});
-
-app.get('/', function (req, res) {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify({ connected: totalConnected, users: users}));
-});
-
-app.get('/clear', function (req, res) {
-  users = [];
-  users[0] = {test: "test"};
 });
 
 server.listen(3000);
