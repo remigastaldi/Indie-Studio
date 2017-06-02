@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Fri Jun  2 16:54:14 2017 gastal_r
+// Last update Fri Jun  2 18:40:35 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -61,16 +61,6 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
 		Ogre::Vector3 direction(_destination - cvt(ghostOrigin));
 		direction.y = 0;
 
-		Ogre::Vector3 src(_node->getOrientation() * Ogre::Vector3::UNIT_X);
-		src.y = 0;
-		if ((1.0 + src.dotProduct(direction)) < 0.0001)
-			_node->yaw(Ogre::Degree(180));
-		else
-		{
-			_orientation = src.getRotationTo(direction);
-			_node->rotate(_orientation);
-		}
-
 		Ogre::Real distance(direction.normalise());
 		Ogre::Real move(_walkSpd * evt.timeSinceLastFrame);
 		distance -= move;
@@ -78,14 +68,24 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
 		{
 			changeAnimation(Entity::Status::IMMOBILE);
 			_character->setWalkDirection(btVector3(0.f, 0.f, 0.f));
-	    // _node->setPosition(cvt(ghostOrigin));
+	    _node->setPosition(cvt(ghostOrigin));
 			_destination = Ogre::Vector3::ZERO;
 			return;
 		}
 		_character->setWalkDirection(cvt(direction * move));
-		// _node->translate(cvt(ghostOrigin));
     _node->setPosition(cvt(ghostOrigin));
-	}
+
+    Ogre::Vector3 src(_node->getOrientation() * Ogre::Vector3::UNIT_X);
+    src.y = 0;
+    if ((1.0 + src.dotProduct(direction)) < 0.0001)
+    	_node->yaw(Ogre::Degree(180));
+    else
+    {
+    	_orientation = src.getRotationTo(direction);
+    	_node->rotate(_orientation);
+    }
+    _node->yaw(Ogre::Degree(90.f));
+  }
 	if (_animationState)
 		_animationState->addTime(evt.timeSinceLastFrame);
 }

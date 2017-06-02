@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Fri Jun  2 16:50:06 2017 gastal_r
+// Last update Fri Jun  2 18:41:43 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -42,12 +42,13 @@ Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   btConvexShape* capsule = new btCapsuleShape(characterWidth, characterHeight);
   _ghostObject->setCollisionShape(capsule);
   _ghostObject->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
+  // _ghostObject->setActivationState(DISABLE_DEACTIVATION);
 
   btScalar stepHeight(btScalar(0.35));
   _character = new btKinematicCharacterController(_ghostObject, capsule, stepHeight);
+  _world.getBulletDynamicsWorld()->getPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
   _world.getBulletDynamicsWorld()->addCollisionObject(_ghostObject, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::AllFilter);
   _world.getBulletDynamicsWorld()->addAction(_character);
-  _world.getBulletDynamicsWorld()->getPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
 
   // _node->setPosition(cvt(_ghostObject->getWorldTransform().getOrigin()));
   _node->setPosition(cvt(_ghostObject->getWorldTransform().getOrigin()));
