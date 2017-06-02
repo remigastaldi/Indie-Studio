@@ -5,6 +5,7 @@ function Entity(id, username, type, room) {
   this.room = room;
   this.status = 0;
 
+  this.destination = {x: 0, y: 0, z: 0};
   this.position = {x: 0, y: 0, z: 0};
   this.orientation = {w: 0, x: 0, y: 0, z: 0};
 
@@ -17,6 +18,17 @@ function Entity(id, username, type, room) {
     this.position.y = y;
     this.position.z = z;
   }
+
+  this.getDestination = function () {
+    return (this.destination);
+  }
+
+  this.setDestination = function (x, y, z) {
+    this.destination.x = x;
+    this.destination.y = y;
+    this.destination.z = z;
+  }
+
 
   this.getOrientation = function () {
     return (this.orientation);

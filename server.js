@@ -1,6 +1,6 @@
 /* LOCAL VAR */
 var totalConnected = 0;
-var users = [];
+var users = {};
 
 
 module.exports = {
@@ -77,21 +77,23 @@ io.on('connection', function (socket) {
 
   socket.on('move', function (data) {
     io.to(socket.room).emit("move", data);
-    if (users[socket.user_server_id])
+    if (users[socket.id])
     {
-      users[socket.user_server_id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
-      users[socket.user_server_id].setOrientation(data["orientation"]["w"], data["orientation"]["x"], data["orientation"]["y"], data["orientation"]["z"]);
-      users[socket.user_server_id].setStatus(data["status"]);
+      users[socket.id].setDestination(data["destination"]["x"], data["destination"]["y"], data["destination"]["z"]);
+      users[socket.id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
+      users[socket.id].setOrientation(data["orientation"]["w"], data["orientation"]["x"], data["orientation"]["y"], data["orientation"]["z"]);
+      users[socket.id].setStatus(data["status"]);
     }
   });
 
   socket.on("create_entity", function (data) {
     io.to(socket.room).emit("create_entity", data);
-    if (users[socket.user_server_id])
+    if (users[socket.id])
     {
-      users[socket.user_server_id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
-      users[socket.user_server_id].setOrientation(data["orientation"]["w"], data["orientation"]["x"], data["orientation"]["y"], data["orientation"]["z"]);
-      users[socket.user_server_id].setStatus(data["status"]);
+      users[socket.id].setDestination(data["destination"]["x"], data["destination"]["y"], data["destination"]["z"]);
+      users[socket.id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
+      users[socket.id].setOrientation(data["orientation"]["w"], data["orientation"]["x"], data["orientation"]["y"], data["orientation"]["z"]);
+      users[socket.id].setStatus(data["status"]);
     }
     console.log(data);
   })
@@ -115,31 +117,39 @@ io.on('connection', function (socket) {
           send_to: data["user_id"],
           position: users[user]["position"],
           orientation: users[user]["orientation"],
-          status: users[user]["status"]
+          status: users[user]["status"],
+          destination: users[user]["destination"]
         });
       }
     }
 
     log("Connected! ID: " + data["user_id"]);
 
-
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[socket.user_server_id] = new Entity(data["user_id"], "User " + data["user_id"], 0, data["room"]);
+    users[socket.id] = new Entity(data["user_id"], "User " + data["user_id"], 0, data["room"]);
     totalConnected++;
   });
 
 	socket.on('disconnect', function () {
-    if (socket.user_server_id)
-    {
-      delete(users[socket.user_server_id]);
-      users[socket.user_server_id].erase();
-      totalConnected--;
-    }
-		log("Disconnected ! ID: " + socket.user_id);
+    delete(users[socket.id]);    
     io.to(socket.room).emit("logout", {user_id: socket.user_id});
-	});
+    log("Disconnected ! ID: " + socket.user_id);
+    totalConnected--;
+  });
 
+});
+
+
+
+app.get('/', function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({ connected: totalConnected, users: users}));
+});
+
+app.get('/clear', function (req, res) {
+  users = {};
+  totalConnected = 0;
 });
 
 server.listen(3000);
