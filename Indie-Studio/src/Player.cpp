@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Thu Jun  1 22:14:52 2017 gastal_r
+// Last update Fri Jun  2 16:50:06 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -15,19 +15,20 @@ Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Player =====");
 
-  _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
+  // DotSceneLoader war;
+  // war.parseDotScene("warrior.scene", "General", &_sceneMgr, _node);
+  _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
   _node->attachObject(_entity);
-  setPosition(position);
   if (orientation != Ogre::Quaternion::ZERO)
     setOrientation(orientation);
   changeAnimation(status);
 
-  _collision.register_entity(_entity, Collision::COLLISION_ACCURATE);
+  // _collision.register_entity(_entity, Collision::COLLISION_ACCURATE);
 
   btTransform startTransform;
   startTransform.setIdentity();
-  startTransform.setOrigin(btVector3(-14.f, 10.f, -3.f));
+  startTransform.setOrigin(cvt(position));
 
   _ghostObject = new btPairCachingGhostObject();
   _ghostObject->setUserPointer((void*) _node);
@@ -47,6 +48,9 @@ Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   _world.getBulletDynamicsWorld()->addCollisionObject(_ghostObject, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::AllFilter);
   _world.getBulletDynamicsWorld()->addAction(_character);
   _world.getBulletDynamicsWorld()->getPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
+
+  // _node->setPosition(cvt(_ghostObject->getWorldTransform().getOrigin()));
+  _node->setPosition(cvt(_ghostObject->getWorldTransform().getOrigin()));
 }
 
 Player::~Player()

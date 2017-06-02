@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Thu Jun  1 20:23:46 2017 gastal_r
+// Last update Fri Jun  2 16:55:07 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -165,7 +165,7 @@ void Map::createScene(void)
     std::cout << "Statics ==> " << it << std::endl;
     Ogre::Entity* entity = static_cast<Ogre::Entity*>(mDevice->sceneMgr->getSceneNode(it)->getAttachedObject(0));
     _collision->register_entity(entity, Collision::COLLISION_BOX);
-}
+  }
 
   Ogre::Light* spotLight1 = mDevice->sceneMgr->createLight("SpotLight1");
   spotLight1->setType(Ogre::Light::LT_POINT);
@@ -241,7 +241,7 @@ void Map::sendPlayerPos()
   static std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
 
   std::chrono::high_resolution_clock::time_point        t2 = std::chrono::high_resolution_clock::now();
-  if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 50)
+  if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 16)
   {
     t1 = std::chrono::high_resolution_clock::now();
     move(*_player);

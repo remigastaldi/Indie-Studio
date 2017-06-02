@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Thu Jun  1 22:11:12 2017 gastal_r
+// Last update Fri Jun  2 16:25:01 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -77,17 +77,17 @@ public:
   Ogre::SceneNode *getNode() const { return (_node); }
   Ogre::Entity  const			*getPlayer() const  { return _entity; }
   Ogre::Real  const			  getWalkSpd() const  { return _walkSpd; }
-  Ogre::Vector3 const     &getPosition() const { return _node->getPosition(); }
+  Ogre::Vector3 const     getPosition() const { return (cvt(_ghostObject->getWorldTransform().getOrigin())); }
   Ogre::Vector3 const     &getDestination() const { return _destination; }
   Ogre::Quaternion const  &getOrientation() const  { return _orientation; }
   Entity::Status const    getStatus() const       { return _status; }
   size_t const            getId() const   { return (_id); }
 
+  void          setPosition(const Ogre::Vector3 &pos);
+  void					setDestination(const Ogre::Vector3 &destination);
   void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
-  void          setPosition(const Ogre::Vector3 &pos)        { _node->setPosition(pos); }
   void					setWalkSpd(const Ogre::Real &_mWalkSpd)            { _walkSpd = _mWalkSpd; }
   void					setOrientation(const Ogre::Quaternion &orientation) { _node->setOrientation(orientation); }
-  void					setDestination(const Ogre::Vector3 &destination);
 
 protected:
   btPairCachingGhostObject* _ghostObject;

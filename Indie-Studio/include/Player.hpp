@@ -5,13 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:29:53 2017 gastal_r
-// Last update Wed May 31 21:59:48 2017 gastal_r
+// Last update Fri Jun  2 00:34:23 2017 gastal_r
 //
 
 #ifndef         _PLAYER_HPP_
 #define         _PLAYER_HPP_
 
 #include        "Entity.hpp"
+#include "DotSceneLoader.h"
 
 class Player : public Entity
 {
