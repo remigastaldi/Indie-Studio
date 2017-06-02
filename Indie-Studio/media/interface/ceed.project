@@ -17,6 +17,7 @@
             <Item path="imagesets/HUDDemoGameOver.png" type="file" />
             <Item path="imagesets/OgreTray.imageset" type="file" />
             <Item path="imagesets/OgreTrayImages.png" type="file" />
+            <Item path="imagesets/Portraits.imageset" type="file" />
             <Item path="imagesets/ReadMe.txt" type="file" />
             <Item path="imagesets/SampleBrowser.imageset" type="file" />
             <Item path="imagesets/SampleBrowser.png" type="file" />
@@ -33,6 +34,8 @@
         <Item name="layout" type="folder">
             <Item path="layouts/ChatBox.layout" type="file" />
             <Item path="layouts/Console.wnd" type="file" />
+            <Item path="layouts/Credits.layout" type="file" />
+            <Item path="layouts/DarkFiendSpell.layout" type="file" />
             <Item path="layouts/Demo8.layout" type="file" />
             <Item path="layouts/DragDropDemo.layout" type="file" />
             <Item path="layouts/EffectsDemo.layout" type="file" />
@@ -40,7 +43,10 @@
             <Item path="layouts/GameMenu.layout" type="file" />
             <Item path="layouts/HUDDemoGameOver.layout" type="file" />
             <Item path="layouts/HUDDemoIngame.layout" type="file" />
+            <Item path="layouts/IG_MENU.layout" type="file" />
+            <Item path="layouts/IngeniorSpell.layout" type="file" />
             <Item path="layouts/LoadingScreen.layout" type="file" />
+            <Item path="layouts/PlayerCaracts.layout" type="file" />
             <Item path="layouts/SampleBrowser.layout" type="file" />
             <Item path="layouts/SampleBrowserLoadScreen.layout" type="file" />
             <Item path="layouts/TabControlDemo.layout" type="file" />
@@ -50,12 +56,16 @@
             <Item path="layouts/TaharezLookOverview.layout" type="file" />
             <Item path="layouts/TextDemo.layout" type="file" />
             <Item path="layouts/TreeDemoTaharez.layout" type="file" />
+            <Item path="layouts/UI_IG.layout" type="file" />
             <Item path="layouts/VanillaConsole.layout" type="file" />
             <Item path="layouts/VanillaLookOverview.layout" type="file" />
             <Item path="layouts/VanillaWindows.layout" type="file" />
+            <Item path="layouts/WarriorSpellBar.layout" type="file" />
+            <Item path="layouts/WizzardSpellBar.layout" type="file" />
             <Item path="layouts/application_templates.layout" type="file" />
             <Item path="layouts/mainMenu.layout" type="file" />
-            <Item path="layouts/Credits.layout" type="file" />
+            <Item path="layouts/selectChar.layout" type="file" />
+            <Item path="layouts/Avatar.layout" type="file" />
         </Item>
         <Item name="looknfeel" type="folder">
             <Item path="looknfeel/AlfiskoSkin.looknfeel" type="file" />

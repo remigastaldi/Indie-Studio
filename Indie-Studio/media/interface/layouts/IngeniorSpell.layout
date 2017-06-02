@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="Generic/Image" name="IngeniorSpellBar" >
+        <Property name="Area" value="{{0,786},{0,939},{0,1133},{0,1029}}" />
+        <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Generic/ImageButton" name="SpellStoneBall" >
+            <Property name="Area" value="{{0,9},{0,8},{0,84},{0,83}}" />
+            <Property name="HoverImage" value="GameMenuImages/SpellStoneBall" />
+            <Property name="NormalImage" value="GameMenuImages/SpellStoneBall" />
+            <Property name="PushedImage" value="GameMenuImages/SpellStoneBall_Click" />
+            <Property name="InheritsAlpha" value="false" />
+        </Window>
+        <Window type="Generic/ImageButton" name="SpellBullet" >
+            <Property name="Area" value="{{0,181},{0,8},{0,256},{0,83}}" />
+            <Property name="HoverImage" value="GameMenuImages/SpellBullet" />
+            <Property name="NormalImage" value="GameMenuImages/SpellBullet" />
+            <Property name="PushedImage" value="GameMenuImages/SpellBullet_Click" />
+            <Property name="InheritsAlpha" value="false" />
+        </Window>
+        <Window type="Generic/ImageButton" name="SpellHandBeard" >
+            <Property name="Area" value="{{0,266},{0,8},{0,341},{0,83}}" />
+            <Property name="HoverImage" value="GameMenuImages/SpellHandBeard" />
+            <Property name="NormalImage" value="GameMenuImages/SpellHandBeard" />
+            <Property name="PushedImage" value="GameMenuImages/SpellHandBeard_Click" />
+            <Property name="InheritsAlpha" value="false" />
+        </Window>
+        <Window type="Generic/ImageButton" name="SpellIce" >
+            <Property name="Area" value="{{0,95},{0,8},{0,170},{0,83}}" />
+            <Property name="HoverImage" value="GameMenuImages/SpellIce" />
+            <Property name="NormalImage" value="GameMenuImages/SpellIce" />
+            <Property name="PushedImage" value="GameMenuImages/SpellIce_Click" />
+            <Property name="InheritsAlpha" value="false" />
+        </Window>
+    </Window>
+</GUILayout>

@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="Generic/Image" name="SelectChar" >
+        <Property name="Area" value="{{0,0},{0,0},{0,1920},{0,1082}}" />
+        <Property name="Image" value="GameMenuImages/Background" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Generic/Image" name="Ingenior" >
+            <Property name="Area" value="{{0,1385},{0,120},{0,1791},{0,1020}}" />
+            <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="Vanilla/StaticText" name="TextIce" >
+                <Property name="Area" value="{{0,34},{0,76.5},{0,290},{0,153.5}}" />
+                <Property name="Text" >Ice
+
+Launch stalactites</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="256" />
+                <Property name="VertScrollPageSize" value="77" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="182" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Generic/Image" name="SpellStoneBall" >
+                <Property name="Area" value="{{0,25},{0,-23.5},{0,100},{0,51.5}}" />
+                <Property name="Image" value="GameMenuImages/SpellStoneBall" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextBear" >
+                <Property name="Area" value="{{0,49.5},{0,276.5},{0,336.5},{0,353.5}}" />
+                <Property name="Text" >Bear
+
+Increase your fire distance</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="287" />
+                <Property name="VertScrollPageSize" value="77" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="262" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Generic/Image" name="ImageDarkFiend" >
+                <Property name="Area" value="{{-0.00246305,0},{0.104384,10},{-0.00246305,250},{0.104384,260}}" />
+                <Property name="Image" value="HUDDemo/Ingenior" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="SpellBear" >
+                <Property name="Area" value="{{0,25},{0,277},{0,100},{0,352}}" />
+                <Property name="Image" value="GameMenuImages/SpellHandBeard" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="SpellBullets" >
+                <Property name="Area" value="{{0,25},{0,177},{0,100},{0,252}}" />
+                <Property name="Image" value="GameMenuImages/SpellBullet" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/ImageButton" name="SelectIngenior" >
+                <Property name="Area" value="{{0,0.5},{0,-35},{0,115.5},{0,3}}" />
+                <Property name="HoverImage" value="GameMenuImages/SelectHover" />
+                <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
+                <Property name="PushedImage" value="GameMenuImages/SelectHover" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextBullets" >
+                <Property name="Area" value="{{0,49.5},{0,176.5},{0,336.5},{0,253.5}}" />
+                <Property name="Text" >Bullets
+
+Use your gun to fire bullets</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="287" />
+                <Property name="VertScrollPageSize" value="77" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="270" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextIngenior" >
+                <Property name="Area" value="{{0,0},{0,0},{0,256},{0,81}}" />
+                <Property name="Text" value="ENGINEER" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="256" />
+                <Property name="VertScrollPageSize" value="81" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="91" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextStoneBall" >
+                <Property name="Area" value="{{0,55},{0,-23.5},{0,353},{0,53.5}}" />
+                <Property name="Text" >StoneBall
+
+Lanch a stoneball</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="298" />
+                <Property name="VertScrollPageSize" value="77" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="175" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Generic/Image" name="SpellIce" >
+                <Property name="Area" value="{{0,25},{0,77},{0,100},{0,152}}" />
+                <Property name="Image" value="GameMenuImages/SpellIce" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+        </Window>
+        <Window type="Generic/Image" name="Warrior" >
+            <Property name="Area" value="{{0,122},{0,120},{0,528},{0,1020}}" />
+            <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="Vanilla/StaticText" name="TextWarrior" >
+                <Property name="Area" value="{{0,0},{0,0},{0,256},{0,81}}" />
+                <Property name="Text" value="WARRIOR" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="256" />
+                <Property name="VertScrollPageSize" value="63" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="84" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextSword" >
+                <Property name="Area" value="{{0,34},{0,76.5},{0,290},{0,153.5}}" />
+                <Property name="Text" >Sword
+
+Use your sword</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="256" />
+                <Property name="VertScrollPageSize" value="59" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="154" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextHeart" >
+                <Property name="Area" value="{{0,49.5},{0,176.5},{0,336.5},{0,253.5}}" />
+                <Property name="Text" >Heart
+
+Attack directly in the heart</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="287" />
+                <Property name="VertScrollPageSize" value="59" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="260" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextEyeFire" >
+                <Property name="Area" value="{{0,34},{0,-23.5},{0,290},{0,53.5}}" />
+                <Property name="Text" >Fire Eyes
+
+Launch a wall of fire</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="256" />
+                <Property name="VertScrollPageSize" value="59" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="196" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextDagger" >
+                <Property name="Area" value="{{0,49.5},{0,276.5},{0,336.5},{0,353.5}}" />
+                <Property name="Text" >Dagger
+
+Use your dagger</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="287" />
+                <Property name="VertScrollPageSize" value="59" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="165" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Generic/Image" name="SpellSword" >
+                <Property name="Area" value="{{0,25},{0,77},{0,100},{0,152}}" />
+                <Property name="Image" value="GameMenuImages/SpellSword" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="SpellHeart" >
+                <Property name="Area" value="{{0,25},{0,177},{0,100},{0,252}}" />
+                <Property name="Image" value="GameMenuImages/SpellHeart" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="SpellEyeFire" >
+                <Property name="Area" value="{{0,25},{0,-23.5},{0,100},{0,51.5}}" />
+                <Property name="Image" value="GameMenuImages/SpellEyeFire" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="SpellDagger" >
+                <Property name="Area" value="{{0,25},{0,277},{0,100},{0,352}}" />
+                <Property name="Image" value="GameMenuImages/SpellDagger" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/ImageButton" name="SelectWarrior" >
+                <Property name="Area" value="{{0,0.5},{0,-35},{0,115.5},{0,3}}" />
+                <Property name="HoverImage" value="GameMenuImages/SelectHover" />
+                <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
+                <Property name="PushedImage" value="GameMenuImages/SelectHover" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="ImageWarrior" >
+                <Property name="Area" value="{{0,-0.999998},{0,103.946},{0,249},{0,353.946}}" />
+                <Property name="Image" value="HUDDemo/Warrior" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+        </Window>
+        <Window type="Generic/Image" name="Wizzard" >
+            <Property name="Area" value="{{0,544},{0,120},{0,950},{0,1020}}" />
+            <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="Vanilla/StaticText" name="TextWizzard" >
+                <Property name="Area" value="{{0,0},{0,0},{0,256},{0,81}}" />
+                <Property name="Text" value="WIZZARD" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="256" />
+                <Property name="VertScrollPageSize" value="81" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="85" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextFireBall" >
+                <Property name="Area" value="{{0,34},{0,76.5},{0,290},{0,153.5}}" />
+                <Property name="Text" >Fire Ball
+
+Launch a fire ball</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="256" />
+                <Property name="VertScrollPageSize" value="77" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="169" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextShield" >
+                <Property name="Area" value="{{0,49.5},{0,176.5},{0,336.5},{0,253.5}}" />
+                <Property name="Text" >Shield
+
+Add a buff to protect you</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="287" />
+                <Property name="VertScrollPageSize" value="77" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="248" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextTornado" >
+                <Property name="Area" value="{{0,34},{0,-23.5},{0,290},{0,53.5}}" />
+                <Property name="Text" >Tornado
+
+Launch a tornado</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="256" />
+                <Property name="VertScrollPageSize" value="77" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="174" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextLeaf" >
+                <Property name="Area" value="{{0,49.5},{0,276.5},{0,336.5},{0,353.5}}" />
+                <Property name="Text" >Magic Leaf
+
+Add a buff to a friend</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="287" />
+                <Property name="VertScrollPageSize" value="77" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="205" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Generic/Image" name="SpellFireBall" >
+                <Property name="Area" value="{{0,25},{0,77},{0,100},{0,152}}" />
+                <Property name="Image" value="GameMenuImages/SpellFireBall" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="SpellShield" >
+                <Property name="Area" value="{{0,25},{0,177},{0,100},{0,252}}" />
+                <Property name="Image" value="GameMenuImages/SpellShield" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="SpellTornado" >
+                <Property name="Area" value="{{0,25},{0,-23.5},{0,100},{0,51.5}}" />
+                <Property name="Image" value="GameMenuImages/SpellTornado" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="SpellLeaf" >
+                <Property name="Area" value="{{0,25},{0,277},{0,100},{0,352}}" />
+                <Property name="Image" value="GameMenuImages/SpellLeaf" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/ImageButton" name="SelectWizzard" >
+                <Property name="Area" value="{{0,0.5},{0,-35},{0,115.5},{0,3}}" />
+                <Property name="HoverImage" value="GameMenuImages/SelectHover" />
+                <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
+                <Property name="PushedImage" value="GameMenuImages/SelectHover" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="ImageWizzard" >
+                <Property name="Area" value="{{-0.00246305,0},{0.104384,10},{-0.00246305,250},{0.104384,260}}" />
+                <Property name="Image" value="HUDDemo/Wizzard" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+        </Window>
+        <Window type="Generic/Image" name="DarkFiend" >
+            <Property name="Area" value="{{0,964},{0,120},{0,1370},{0,1020}}" />
+            <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="Generic/Image" name="SpellThunderStorm" >
+                <Property name="Area" value="{{0,25},{0,177},{0,100},{0,252}}" />
+                <Property name="Image" value="GameMenuImages/SpellThunderStorm" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="SpellSpectre" >
+                <Property name="Area" value="{{0,25},{0,277},{0,100},{0,352}}" />
+                <Property name="Image" value="GameMenuImages/SpellSpectre" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="SpellFire" >
+                <Property name="Area" value="{{0,25},{0,77},{0,100},{0,152}}" />
+                <Property name="Image" value="GameMenuImages/SpellFire" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextLeaf" >
+                <Property name="Area" value="{{0,49.5},{0,276.5},{0,336.5},{0,353.5}}" />
+                <Property name="Text" >Spectre
+
+Launch a spectre</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="287" />
+                <Property name="VertScrollPageSize" value="77" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="171" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextAngel" >
+                <Property name="Area" value="{{0,55},{0,-23.5},{0,353},{0,53.5}}" />
+                <Property name="Text" >Agel
+
+Buff to increase damages</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="298" />
+                <Property name="VertScrollPageSize" value="77" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="247" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextDarkFiend" >
+                <Property name="Area" value="{{0,0},{0,0},{0,256},{0,81}}" />
+                <Property name="Text" value="DARK FIEND" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="256" />
+                <Property name="VertScrollPageSize" value="81" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="108" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+            <Window type="Generic/ImageButton" name="SelectDarkFiend" >
+                <Property name="Area" value="{{0,0.5},{0,-35},{0,115.5},{0,3}}" />
+                <Property name="HoverImage" value="GameMenuImages/SelectHover" />
+                <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
+                <Property name="PushedImage" value="GameMenuImages/SelectHover" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextThunderStorm" >
+                <Property name="Area" value="{{0,49.5},{0,176.5},{0,336.5},{0,253.5}}" />
+                <Property name="Text" >Thunderstorm
+
+Launch a thunderstorm</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="287" />
+                <Property name="VertScrollPageSize" value="77" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="232" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="TextFire" >
+                <Property name="Area" value="{{0,34},{0,76.5},{0,290},{0,153.5}}" />
+                <Property name="Text" >Fire
+
+Launch a fire line</Property>
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="256" />
+                <Property name="VertScrollPageSize" value="77" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="167" />
+                <Property name="VertScrollDocumentSize" value="61.582" />
+            </Window>
+            <Window type="Generic/Image" name="SpellAngel" >
+                <Property name="Area" value="{{0,25},{0,-23.5},{0,100},{0,51.5}}" />
+                <Property name="Image" value="GameMenuImages/SpellAngel" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="ImageDarkFiend" >
+                <Property name="Area" value="{{-0.00246305,0},{0.104384,10},{-0.00246305,250},{0.104384,260}}" />
+                <Property name="Image" value="HUDDemo/DarkFiend" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+        </Window>
+        <Window type="Generic/ImageButton" name="BackButton" >
+            <Property name="Area" value="{{0,120},{0,48},{0,235},{0,86}}" />
+            <Property name="HoverImage" value="GameMenuImages/BackHover" />
+            <Property name="NormalImage" value="GameMenuImages/BackNormal" />
+            <Property name="PushedImage" value="GameMenuImages/BackHover" />
+        </Window>
+    </Window>
+</GUILayout>

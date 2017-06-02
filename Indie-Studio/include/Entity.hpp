@@ -44,7 +44,10 @@ public:
   enum class Type
   {
     RANGER,
-    ALIEN
+    WARRIOR,
+    MAGE,
+    DARKFIEND,
+    INGENIOR
   };
 
   enum class Status

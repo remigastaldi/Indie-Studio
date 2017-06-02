@@ -1,0 +1,15 @@
+<Imageset autoScaled="vertical" imagefile="Portraits.png" name="Characters" nativeHorzRes="1920" nativeVertRes="1080" version="2">
+    <Image height="100" name="women" width="100" xPos="0" yPos="0" />
+    <Image height="100" name="men" width="100" xPos="124" yPos="0" />
+    <Image height="100" name="wizzard" width="100" xPos="248" yPos="0" />
+    <Image height="100" name="asiangirl" width="101" xPos="372" yPos="0" />
+    <Image height="100" name="BlackWarrior" width="100" xPos="372" yPos="125" />
+    <Image height="100" name="Gandhi" width="100" xPos="248" yPos="125" />
+    <Image height="100" name="WarriorGirl" width="100" xPos="124" yPos="125" />
+    <Image height="100" name="Indianagirl" width="100" xPos="0" yPos="125" />
+    <Image height="100" name="professor" width="100" xPos="0" yPos="250" />
+    <Image height="100" name="asianWarrior" width="100" xPos="124" yPos="250" />
+    <Image height="100" name="hippie" width="100" xPos="248" yPos="250" />
+    <Image height="100" name="WarriorScared" width="100" xPos="372" yPos="250" />
+    <Image height="100" name="Jesus" width="100" xPos="0" yPos="375" />
+</Imageset>

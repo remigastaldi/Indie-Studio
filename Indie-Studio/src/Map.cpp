@@ -86,9 +86,31 @@ bool Map::buttonMenu(const CEGUI::EventArgs &e)
   _settingsButton->destroy();
   // _goToMenuButton->destroy();
   _ui->destroy();
+  _spellBar->destroy();
   _myRoot->destroy();
   GameState *menu = findByName("Menu");
   changeGameState(menu);
+  return (true);
+}
+
+bool  Map::infosClose(const CEGUI::EventArgs &e)
+{
+  _closeInfos->destroy();
+  _credits->destroy();
+  _credits = nullptr;
+  return (true);
+}
+
+bool  Map::infosSettings(const CEGUI::EventArgs &e)
+{
+  if (_credits == nullptr)
+  {
+    _credits = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Credits.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_credits);
+
+    _closeInfos = _credits->getChild("Close");
+    _closeInfos->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::infosClose, this));
+  }
   return (true);
 }
 
@@ -108,9 +130,158 @@ bool Map::buttonSettings(const CEGUI::EventArgs &e)
   return (true);
 }
 
+bool  Map::SpellSword(const CEGUI::EventArgs &e)
+{
+  _firstSpell->destroy();
+  return (true);
+}
+
+bool  Map::SpellEyeFire(const CEGUI::EventArgs &e)
+{
+  _secondSpell->destroy();
+  return (true);
+}
+
+bool  Map::SpellHeart(const CEGUI::EventArgs &e)
+{
+  _thirdSpell->destroy();
+  return (true);
+}
+
+bool  Map::SpellDagger(const CEGUI::EventArgs &e)
+{
+  _fourthSpell->destroy();
+  return (true);
+}
+
+bool  Map::setupWarriorSpell()
+{
+  _firstSpell = _spellBar->getChild("SpellSword");
+  _firstSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellSword, this));
+  _secondSpell = _spellBar->getChild("SpellEyeFire");
+  _secondSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellEyeFire, this));
+  _thirdSpell = _spellBar->getChild("SpellHeart");
+  _thirdSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellHeart, this));
+  _fourthSpell = _spellBar->getChild("SpellDagger");
+  _fourthSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellDagger, this));
+  return (true);
+}
+
+bool Map::SpellTornado(const CEGUI::EventArgs &e)
+{
+  _firstSpell->destroy();
+  return (true);
+}
+
+bool Map::SpellFireBall(const CEGUI::EventArgs &e)
+{
+  _secondSpell->destroy();
+  return (true);
+}
+
+bool Map::SpellShield(const CEGUI::EventArgs &e)
+{
+  _thirdSpell->destroy();
+  return (true);
+}
+
+bool Map::SpellLeaf(const CEGUI::EventArgs &e)
+{
+  _fourthSpell->destroy();
+  return (true);
+}
+
+bool  Map::setupMageSpell()
+{
+  _firstSpell = _spellBar->getChild("SpellTornado");
+  _firstSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellTornado, this));
+  _secondSpell = _spellBar->getChild("SpellFireBall");
+  _secondSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellFireBall, this));
+  _thirdSpell = _spellBar->getChild("SpellShield");
+  _thirdSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellShield, this));
+  _fourthSpell = _spellBar->getChild("SpellLeaf");
+  _fourthSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellLeaf, this));
+  return (true);
+}
+
+bool  Map::SpellAngel(const CEGUI::EventArgs &e)
+{
+  _firstSpell->destroy();
+  return (true);
+}
+
+bool  Map::SpellThunderStorm(const CEGUI::EventArgs &e)
+{
+  _secondSpell->destroy();
+  return (true);
+}
+
+bool  Map::SpellSpectre(const CEGUI::EventArgs &e)
+{
+  _thirdSpell->destroy();
+  return (true);
+}
+
+bool  Map::SpellFire(const CEGUI::EventArgs &e)
+{
+  _fourthSpell->destroy();
+  return (true);
+}
+
+bool  Map::setupDarkFiendSpell()
+{
+  _firstSpell = _spellBar->getChild("SpellAngel");
+  _firstSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellAngel, this));
+  _secondSpell = _spellBar->getChild("SpellThunderStorm");
+  _secondSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellThunderStorm, this));
+  _thirdSpell = _spellBar->getChild("SpellSpectre");
+  _thirdSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellSpectre, this));
+  _fourthSpell = _spellBar->getChild("SpellFire");
+  _fourthSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellFire, this));
+  return (true);
+}
+
+bool  Map::SpellStoneBall(const CEGUI::EventArgs &e)
+{
+  _firstSpell->destroy();
+  return (true);
+}
+
+bool  Map::SpellBullet(const CEGUI::EventArgs &e)
+{
+  _secondSpell->destroy();
+  return (true);
+}
+
+bool  Map::SpellHandBeard(const CEGUI::EventArgs &e)
+{
+  _thirdSpell->destroy();
+  return (true);
+}
+
+bool  Map::SpellIce(const CEGUI::EventArgs &e)
+{
+  _fourthSpell->destroy();
+  return (true);
+}
+
+bool  Map::setupIngeniorSpell()
+{
+  _firstSpell = _spellBar->getChild("SpellStoneBall");
+  _firstSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellStoneBall, this));
+  _secondSpell = _spellBar->getChild("SpellBullet");
+  _secondSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellBullet, this));
+  _thirdSpell = _spellBar->getChild("SpellHandBeard");
+  _thirdSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellHandBeard, this));
+  _fourthSpell = _spellBar->getChild("SpellIce");
+  _fourthSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::SpellIce, this));
+  return (true);
+}
+
 void Map::createScene(void)
 {
   _settings = nullptr;
+  _credits = nullptr;
 
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
@@ -201,8 +372,35 @@ void Map::createScene(void)
   _ui = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("UI_IG.layout");
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
 
-  _settingsButton = _ui->getChild("Settings");
+  _settingsButton = _ui->getChild("Parameters");
   _settingsButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::buttonSettings, this));
+  _creditsButton = _ui->getChild("Infos");
+  _creditsButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::infosSettings, this));
+
+  classType = Entity::Type::DARKFIEND;
+  //Création du fond de la barre de sort
+  if (classType == Entity::Type::WARRIOR)
+  {
+    _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("WarriorSpellBar.layout");
+    setupWarriorSpell();
+  }
+  else if (classType == Entity::Type::MAGE)
+  {
+    _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("WizzardSpellBar.layout");
+    setupMageSpell();
+  }
+  else if (classType == Entity::Type::DARKFIEND)
+  {
+    _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("DarkFiendSpell.layout");
+    setupDarkFiendSpell();
+  }
+  else if (classType == Entity::Type::INGENIOR)
+  {
+    _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("IngeniorSpell.layout");
+    setupIngeniorSpell();
+  }
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_spellBar);
+  // Attribution des boxes des spell
 }
 
 void Map::exit(void)

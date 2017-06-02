@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="Generic/Image" name="WarriorSpellBar" >
+        <Property name="Area" value="{{0,786},{0,939},{0,1133},{0,1029}}" />
+        <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Generic/ImageButton" name="SpellEyeFire" >
+            <Property name="Area" value="{{0,9},{0,8},{0,84},{0,83}}" />
+            <Property name="HoverImage" value="GameMenuImages/SpellEyeFire" />
+            <Property name="NormalImage" value="GameMenuImages/SpellEyeFire" />
+            <Property name="PushedImage" value="GameMenuImages/SpellEyeFire_Click" />
+            <Property name="InheritsAlpha" value="false" />
+        </Window>
+        <Window type="Generic/ImageButton" name="SpellSword" >
+            <Property name="Area" value="{{0,95},{0,8},{0,170},{0,83}}" />
+            <Property name="HoverImage" value="GameMenuImages/SpellSword" />
+            <Property name="NormalImage" value="GameMenuImages/SpellSword" />
+            <Property name="PushedImage" value="GameMenuImages/SpellSword_Click" />
+            <Property name="InheritsAlpha" value="false" />
+        </Window>
+        <Window type="Generic/ImageButton" name="SpellHeart" >
+            <Property name="Area" value="{{0,181},{0,8},{0,256},{0,83}}" />
+            <Property name="HoverImage" value="GameMenuImages/SpellHeart" />
+            <Property name="NormalImage" value="GameMenuImages/SpellHeart" />
+            <Property name="PushedImage" value="GameMenuImages/SpellHeart_Click" />
+            <Property name="InheritsAlpha" value="false" />
+        </Window>
+        <Window type="Generic/ImageButton" name="SpellDagger" >
+            <Property name="Area" value="{{0,266},{0,8},{0,341},{0,83}}" />
+            <Property name="HoverImage" value="GameMenuImages/SpellDagger" />
+            <Property name="NormalImage" value="GameMenuImages/SpellDagger" />
+            <Property name="PushedImage" value="GameMenuImages/SpellDagger_Click" />
+            <Property name="InheritsAlpha" value="false" />
+        </Window>
+    </Window>
+</GUILayout>

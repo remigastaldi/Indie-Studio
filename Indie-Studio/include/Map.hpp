@@ -64,6 +64,28 @@ public:
   bool buttonSettings(const CEGUI::EventArgs &e);
   bool buttonClose(const CEGUI::EventArgs &e);
   bool buttonMenu(const CEGUI::EventArgs &e);
+  bool infosSettings(const CEGUI::EventArgs &e);
+  bool infosClose(const CEGUI::EventArgs &e);
+  bool  setupWarriorSpell();
+  bool  SpellDagger(const CEGUI::EventArgs &e);
+  bool  SpellSword(const CEGUI::EventArgs &e);
+  bool  SpellEyeFire(const CEGUI::EventArgs &e);
+  bool  SpellHeart(const CEGUI::EventArgs &e);
+  bool  setupMageSpell();
+  bool  SpellTornado(const CEGUI::EventArgs &e);
+  bool  SpellFireBall(const CEGUI::EventArgs &e);
+  bool  SpellShield(const CEGUI::EventArgs &e);
+  bool  SpellLeaf(const CEGUI::EventArgs &e);
+  bool  setupDarkFiendSpell();
+  bool  SpellAngel(const CEGUI::EventArgs &e);
+  bool  SpellThunderStorm(const CEGUI::EventArgs &e);
+  bool  SpellSpectre(const CEGUI::EventArgs &e);
+  bool  SpellFire(const CEGUI::EventArgs &e);
+  bool  setupIngeniorSpell();
+  bool  SpellStoneBall(const CEGUI::EventArgs &e);
+  bool  SpellBullet(const CEGUI::EventArgs &e);
+  bool  SpellHandBeard(const CEGUI::EventArgs &e);
+  bool  SpellIce(const CEGUI::EventArgs &e);
 
 private:
   char mPolygonRenderingMode;
@@ -86,8 +108,12 @@ private:
   CEGUI::Window *_ui;
 
   CEGUI::Window *_settingsButton;
+  CEGUI::Window *_creditsButton;
+  CEGUI::Window *_spellBar;
 
   CEGUI::Window *_settings;
+  CEGUI::Window *_credits;
+  CEGUI::Window *_closeInfos;
   CEGUI::Window *_closeButton;
   CEGUI::Window *_goToMenuButton;
 
@@ -100,6 +126,15 @@ private:
   float   _playerVelocity = 10;
   float   _movementX;
   float   _movementZ;
+
+  //Player
+  Entity::Type  classType;
+
+  //Spell button
+  CEGUI::Window   *_firstSpell;
+  CEGUI::Window   *_secondSpell;
+  CEGUI::Window   *_thirdSpell;
+  CEGUI::Window   *_fourthSpell;
 
 #if DEBUG_CAMERA
   OgreCookies::CameraMan* _cameraMan;
