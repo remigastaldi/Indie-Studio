@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Fri Jun  2 18:50:18 2017 gastal_r
+** Last update Fri Jun  2 18:57:11 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -60,133 +60,133 @@ void Socket::on_fail()
 void Socket::events()
 {
   _current_socket->on("message", sio::socket::event_listener_aux([&](std::string const& name,
-  sio::message::ptr const& data,
-  bool isAck, const sio::message::list &ack_resp)
-  {
-    (void)name;
-    (void)isAck;
-    (void)ack_resp;
-    _lock.lock();
-    if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
+    sio::message::ptr const& data,
+    bool isAck, const sio::message::list &ack_resp)
     {
-      if (data->get_map()["send_by"]->get_int() == 42)
-      HIGHLIGHT_N("SYSTEM: ");
-      std::cout <<  data->get_map()["message"]->get_string() << '\n';
-    }
-    _lock.unlock();
-  }));
+      (void)name;
+      (void)isAck;
+      (void)ack_resp;
+      _lock.lock();
+      if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
+      {
+        if (data->get_map()["send_by"]->get_int() == 42)
+        HIGHLIGHT_N("SYSTEM: ");
+        std::cout <<  data->get_map()["message"]->get_string() << '\n';
+      }
+      _lock.unlock();
+    }));
 
   _current_socket->on("move", sio::socket::event_listener_aux([&](std::string const& name,
-  sio::message::ptr const& data,
-  bool isAck, const sio::message::list &ack_resp)
-  {
-    (void)name;
-    (void)isAck;
-    (void)ack_resp;
-    _lock.lock();
-    if (data->get_map()["send_by"]->get_int() != _id)
+    sio::message::ptr const& data,
+    bool isAck, const sio::message::list &ack_resp)
     {
-      Ogre::Vector3 position;
-      position.x = data->get_map()["position"]->get_map()["x"]->get_double();
-      position.y = data->get_map()["position"]->get_map()["y"]->get_double();
-      position.z = data->get_map()["position"]->get_map()["z"]->get_double();
-
-      Ogre::Quaternion orientation;
-      orientation.w = data->get_map()["orientation"]->get_map()["w"]->get_double();
-      orientation.x = data->get_map()["orientation"]->get_map()["x"]->get_double();
-      orientation.y = data->get_map()["orientation"]->get_map()["y"]->get_double();
-      orientation.z = data->get_map()["orientation"]->get_map()["z"]->get_double();
-
-      Ogre::Vector3 destination;
-      destination.x = data->get_map()["destination"]->get_map()["x"]->get_double();
-      destination.y = data->get_map()["destination"]->get_map()["y"]->get_double();
-      destination.z = data->get_map()["destination"]->get_map()["z"]->get_double();
-
-      Entity::Status status;
-      status = (Entity::Status)data->get_map()["status"]->get_int();
-
-      if (_entity[data->get_map()["send_by"]->get_int()])
+      (void)name;
+      (void)isAck;
+      (void)ack_resp;
+      _lock.lock();
+      if (data->get_map()["send_by"]->get_int() != _id)
       {
-        // _entity[data->get_map()["send_by"]->get_int()]->setOrientation(orientation);
-        _entity[data->get_map()["send_by"]->get_int()]->setDestination(destination);
-        _entity[data->get_map()["send_by"]->get_int()]->setPosition(position);
+        Ogre::Vector3 position;
+        position.x = data->get_map()["position"]->get_map()["x"]->get_double();
+        position.y = data->get_map()["position"]->get_map()["y"]->get_double();
+        position.z = data->get_map()["position"]->get_map()["z"]->get_double();
+
+        Ogre::Quaternion orientation;
+        orientation.w = data->get_map()["orientation"]->get_map()["w"]->get_double();
+        orientation.x = data->get_map()["orientation"]->get_map()["x"]->get_double();
+        orientation.y = data->get_map()["orientation"]->get_map()["y"]->get_double();
+        orientation.z = data->get_map()["orientation"]->get_map()["z"]->get_double();
+
+        Ogre::Vector3 destination;
+        destination.x = data->get_map()["destination"]->get_map()["x"]->get_double();
+        destination.y = data->get_map()["destination"]->get_map()["y"]->get_double();
+        destination.z = data->get_map()["destination"]->get_map()["z"]->get_double();
+
+        Entity::Status status;
+        status = (Entity::Status)data->get_map()["status"]->get_int();
+
+        if (_entity[data->get_map()["send_by"]->get_int()])
+        {
+          // _entity[data->get_map()["send_by"]->get_int()]->setOrientation(orientation);
+          _entity[data->get_map()["send_by"]->get_int()]->setDestination(destination);
+          _entity[data->get_map()["send_by"]->get_int()]->setPosition(position);
+        }
       }
-    }
-    _lock.unlock();
-  }));
+      _lock.unlock();
+    }));
 
   _current_socket->on("create_entity", sio::socket::event_listener_aux([&](std::string const& name,
-  sio::message::ptr const& data,
-  bool isAck, const sio::message::list &ack_resp)
-  {
-    (void)name;
-    (void)isAck;
-    (void)ack_resp;
-    _lock.lock();
-
-    if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
+    sio::message::ptr const& data,
+    bool isAck, const sio::message::list &ack_resp)
     {
-      Ogre::Vector3 position;
-      position.x = data->get_map()["position"]->get_map()["x"]->get_double();
-      position.y = data->get_map()["position"]->get_map()["y"]->get_double();
-      position.z = data->get_map()["position"]->get_map()["z"]->get_double();
+      (void)name;
+      (void)isAck;
+      (void)ack_resp;
+      _lock.lock();
 
-      Ogre::Quaternion orientation;
-      orientation.w = data->get_map()["orientation"]->get_map()["w"]->get_double();
-      orientation.x = data->get_map()["orientation"]->get_map()["x"]->get_double();
-      orientation.y = data->get_map()["orientation"]->get_map()["y"]->get_double();
-      orientation.z = data->get_map()["orientation"]->get_map()["z"]->get_double();
+      if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
+      {
+        Ogre::Vector3 position;
+        position.x = data->get_map()["position"]->get_map()["x"]->get_double();
+        position.y = data->get_map()["position"]->get_map()["y"]->get_double();
+        position.z = data->get_map()["position"]->get_map()["z"]->get_double();
 
-      Ogre::Vector3 destination;
-      destination.x = data->get_map()["destination"]->get_map()["x"]->get_double();
-      destination.y = data->get_map()["destination"]->get_map()["y"]->get_double();
-      destination.z = data->get_map()["destination"]->get_map()["z"]->get_double();
+        Ogre::Quaternion orientation;
+        orientation.w = data->get_map()["orientation"]->get_map()["w"]->get_double();
+        orientation.x = data->get_map()["orientation"]->get_map()["x"]->get_double();
+        orientation.y = data->get_map()["orientation"]->get_map()["y"]->get_double();
+        orientation.z = data->get_map()["orientation"]->get_map()["z"]->get_double();
 
-      Entity::Status status;
-      status = (Entity::Status)data->get_map()["status"]->get_int();
+        Ogre::Vector3 destination;
+        destination.x = data->get_map()["destination"]->get_map()["x"]->get_double();
+        destination.y = data->get_map()["destination"]->get_map()["y"]->get_double();
+        destination.z = data->get_map()["destination"]->get_map()["z"]->get_double();
 
-      _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, *_collision, data->get_map()["send_by"]->get_int(),
-      status, position, orientation);
-      _entity[data->get_map()["send_by"]->get_int()]->setDestination(destination);
-    }
-    _lock.unlock();
-  }));
+        Entity::Status status;
+        status = (Entity::Status)data->get_map()["status"]->get_int();
+
+        _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, *_collision, data->get_map()["send_by"]->get_int(),
+        status, position, orientation);
+        _entity[data->get_map()["send_by"]->get_int()]->setDestination(destination);
+      }
+      _lock.unlock();
+    }));
 
   _current_socket->on("login", sio::socket::event_listener_aux([&](std::string const& name,
-  sio::message::ptr const& data,
-  bool isAck, const sio::message::list &ack_resp)
-  {
-    (void)name;
-    (void)isAck;
-    (void)ack_resp;
-    _lock.lock();
-    if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["user_id"]->get_int() != _id)
+    sio::message::ptr const& data,
+    bool isAck, const sio::message::list &ack_resp)
     {
-      std::cout <<  "User connected! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
-    }
-    _lock.unlock();
-  }));
+      (void)name;
+      (void)isAck;
+      (void)ack_resp;
+      _lock.lock();
+      if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["user_id"]->get_int() != _id)
+      {
+        std::cout <<  "User connected! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
+      }
+      _lock.unlock();
+    }));
 
   _current_socket->on("logout", sio::socket::event_listener_aux([&](std::string const& name,
-  sio::message::ptr const& data,
-  bool isAck, const sio::message::list &ack_resp)
-  {
-    (void)name;
-    (void)isAck;
-    (void)ack_resp;
-    _lock.lock();
-    if (data->get_map()["user_id"]->get_int() != _id)
+    sio::message::ptr const& data,
+    bool isAck, const sio::message::list &ack_resp)
     {
-      if (_entity[data->get_map()["user_id"]->get_int()])
+      (void)name;
+      (void)isAck;
+      (void)ack_resp;
+      _lock.lock();
+      if (data->get_map()["user_id"]->get_int() != _id)
       {
-        _entity[data->get_map()["user_id"]->get_int()]->destroy();
-        delete(_entity[data->get_map()["user_id"]->get_int()]);
-        _entity.erase(data->get_map()["user_id"]->get_int());
+        if (_entity[data->get_map()["user_id"]->get_int()])
+        {
+          _entity[data->get_map()["user_id"]->get_int()]->destroy();
+          delete(_entity[data->get_map()["user_id"]->get_int()]);
+          _entity.erase(data->get_map()["user_id"]->get_int());
+        }
+        std::cout <<  "User disconnected ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
       }
-      std::cout <<  "User disconnected ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
-    }
-    _lock.unlock();
-  }));
+      _lock.unlock();
+    }));
 }
 
 void Socket::connect()
