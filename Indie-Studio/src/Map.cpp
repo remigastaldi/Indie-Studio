@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Fri Jun  2 16:55:07 2017 gastal_r
+// Last update Fri Jun  2 17:31:51 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -439,7 +439,7 @@ void Map::sendPlayerPos()
   static std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
 
   std::chrono::high_resolution_clock::time_point        t2 = std::chrono::high_resolution_clock::now();
-  if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 16)
+  if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 50)
   {
     t1 = std::chrono::high_resolution_clock::now();
     move(*_player);
@@ -464,6 +464,9 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
   mDevice->soundManager->update(evt.timeSinceLastFrame);
 
   _player->frameRenderingQueued(evt);
+  #if !DEBUG_LOCAL
+    sendPlayerPos();
+  #endif
   // _world->getBulletDynamicsWorld()->debugDrawWorld();
 
 #if DEBUG_LOCAL == false
@@ -679,9 +682,6 @@ void  Map::mouseRaycast(void)
     {
       std::cout << "Clicked: " << mSelectedEntity->getName().c_str() << "POS: X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
       _player->setDestination(pos);
-    #if !DEBUG_LOCAL
-      sendPlayerPos();
-    #endif
       return;
     }
   }
