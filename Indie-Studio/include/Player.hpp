@@ -5,18 +5,19 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:29:53 2017 gastal_r
-// Last update Fri May 26 18:41:28 2017 gastal_r
+// Last update Fri Jun  2 00:34:23 2017 gastal_r
 //
 
 #ifndef         _PLAYER_HPP_
 #define         _PLAYER_HPP_
 
 #include        "Entity.hpp"
+#include "DotSceneLoader.h"
 
 class Player : public Entity
 {
 public:
-  Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, Status status, const Ogre::Vector3 &position,
+  Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, Status status, const Ogre::Vector3 &position,
    const Ogre::Quaternion &orientation);
 
   ~Player();

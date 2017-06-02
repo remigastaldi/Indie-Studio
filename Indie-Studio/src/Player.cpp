@@ -5,52 +5,52 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Sun May 28 18:31:44 2017 gastal_r
+// Last update Fri Jun  2 16:50:06 2017 gastal_r
 //
 
 #include        "Player.hpp"
 
-Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, Entity::Status status, const Ogre::Vector3 &position, const Ogre::Quaternion &orientation)
+Player::Player(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, Entity::Status status, const Ogre::Vector3 &position, const Ogre::Quaternion &orientation)
   : Entity(ENTITY_INIT_VARS)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Player =====");
 
-  _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
+  // DotSceneLoader war;
+  // war.parseDotScene("warrior.scene", "General", &_sceneMgr, _node);
+  _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
   _node->attachObject(_entity);
-  setPosition(position);
   if (orientation != Ogre::Quaternion::ZERO)
     setOrientation(orientation);
   changeAnimation(status);
 
-//return;
-  Ogre::AxisAlignedBox boundingB = _entity->getBoundingBox();
-  Ogre::Vector3  size = boundingB.getSize();
-  size /= 2.0f; // only the half needed
-  size *= 0.95f;	// Bullet margin is a bit bigger so we need a smaller size
-// 									(Bullet 2.76 Physics SDK Manual page 18)
+  // _collision.register_entity(_entity, Collision::COLLISION_ACCURATE);
 
-  size.x /= 2.0f;
+  btTransform startTransform;
+  startTransform.setIdentity();
+  startTransform.setOrigin(cvt(position));
 
-  // after that create the Bullet shape with the calculated size
-  OgreBulletCollisions::BoxCollisionShape *sceneBoxShape =
-  new OgreBulletCollisions::BoxCollisionShape(size);
+  _ghostObject = new btPairCachingGhostObject();
+  _ghostObject->setUserPointer((void*) _node);
 
-  // and the Bullet rigid body
-  OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
-      "defaultBoxRigid" + Ogre::StringConverter::toString(id),    &_world);
+  _ghostObject->setWorldTransform(startTransform);
+  Ogre::AxisAlignedBox boundingB(_entity->getBoundingBox());
+  Ogre::Vector3 size(boundingB.getSize());
+  size /= 2.0f;
+  btScalar characterHeight = size.y;
+  btScalar characterWidth = size.x;
+  btConvexShape* capsule = new btCapsuleShape(characterWidth, characterHeight);
+  _ghostObject->setCollisionShape(capsule);
+  _ghostObject->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
 
-  // OgreBulletCollisions::CollisionShape *collisionShape =
-  defaultBody->setShape(_node,
-        sceneBoxShape,
-        0.6f,			// dynamic body restitution
-        100.f,			// dynamic body friction
-        0.0f, 			// dynamic bodymass
-        position,		// starting position of the box
-        Ogre::Quaternion(180,0,0,1));// orientation of the box
+  btScalar stepHeight(btScalar(0.35));
+  _character = new btKinematicCharacterController(_ghostObject, capsule, stepHeight);
+  _world.getBulletDynamicsWorld()->addCollisionObject(_ghostObject, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::AllFilter);
+  _world.getBulletDynamicsWorld()->addAction(_character);
+  _world.getBulletDynamicsWorld()->getPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
 
-    // defaultBody->enableActiveState();
-    _world.addRigidBody(defaultBody,0,0);
+  // _node->setPosition(cvt(_ghostObject->getWorldTransform().getOrigin()));
+  _node->setPosition(cvt(_ghostObject->getWorldTransform().getOrigin()));
 }
 
 Player::~Player()

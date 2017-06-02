@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat May 27 18:34:49 2017 Matthias Prost
+// Last update Mon May 29 15:34:56 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -108,6 +108,13 @@ void Menu::createScene(void)
 
   _infosButton = _gameMenu->getChild("Infos");
   _infosButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonInfos, this));
+
+  _playButton->destroy();
+  _quitButton->destroy();
+  _gameMenu->destroy();
+  _myRoot->destroy();
+  GameState *menu = findByName("Map");
+  changeGameState(menu);
 }
 
 // bool GameMenuDemo::handleLoginAcceptButtonClicked(const CEGUI::EventArgs&)

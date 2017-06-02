@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Mon May 29 14:06:45 2017 gastal_r
+// Last update Fri Jun  2 16:25:01 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -26,11 +26,17 @@
 #include "Shapes/OgreBulletCollisionsTrimeshShape.h"
 #include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
 
+#include "BulletCollision/CollisionDispatch/btGhostObject.h"
+#include "BulletDynamics/Character/btKinematicCharacterController.h"
+
 #include <string>
 #include <unordered_map>
 #include <functional>
 
 #include <CameraMan.hpp>
+
+#include "NewMOC.h"
+#include "OgreBulletUtils.h"
 
 class Entity
 {
@@ -51,7 +57,7 @@ public:
   };
 
 public:
-  Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, Status status,
+  Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, Status status,
     const Ogre::Vector3 &position, const Ogre::Quaternion &orientation);
 
   ~Entity();
@@ -61,43 +67,43 @@ public:
   Entity& operator=(Entity&& other) = default;
 
   void	goToLocation(Ogre::Real);
-  /*bool	nextLocation(std::deque<Ogre::Vector3> &, Ogre::SceneNode *);*/
   void  changeAnimation(Entity::Status status);
   void  frameRenderingQueued(const Ogre::FrameEvent &evt);
   void	updateAnimation(std::string, Ogre::Real);
 
   void  destroy();
 
+  Ogre::Entity * getEntity() const { return (_entity); }
+  Ogre::SceneNode *getNode() const { return (_node); }
   Ogre::Entity  const			*getPlayer() const  { return _entity; }
   Ogre::Real  const			  getWalkSpd() const  { return _walkSpd; }
-  Ogre::Real  const 			getDistance() const { return _distance; }
-  Ogre::Vector3 const     &getPosition() const { return _node->getPosition(); }
+  Ogre::Vector3 const     getPosition() const { return (cvt(_ghostObject->getWorldTransform().getOrigin())); }
   Ogre::Vector3 const     &getDestination() const { return _destination; }
   Ogre::Quaternion const  &getOrientation() const  { return _orientation; }
   Entity::Status const    getStatus() const       { return _status; }
   size_t const            getId() const   { return (_id); }
 
-  void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
-  void          setPosition(const Ogre::Vector3 &pos)        { _node->setPosition(pos); }
-  void					setWalkSpd(const Ogre::Real &_mWalkSpd)            { _walkSpd = _mWalkSpd; }
-  void					setDistance(const Ogre::Real &_mDistance)          { _distance = _mDistance; }
-  void					setOrientation(const Ogre::Quaternion &orientation) { _node->setOrientation(orientation); }
+  void          setPosition(const Ogre::Vector3 &pos);
   void					setDestination(const Ogre::Vector3 &destination);
+  void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
+  void					setWalkSpd(const Ogre::Real &_mWalkSpd)            { _walkSpd = _mWalkSpd; }
+  void					setOrientation(const Ogre::Quaternion &orientation) { _node->setOrientation(orientation); }
 
 protected:
+  btPairCachingGhostObject* _ghostObject;
+  btKinematicCharacterController* _character;
   Ogre::SceneManager  &_sceneMgr;
   OgreBulletDynamics::DynamicsWorld &_world;
+  Collision::CollisionTools &_collision;
   Ogre::Entity        *_entity;
   Ogre::SceneNode     *_node;
-
+  OgreBulletDynamics::RigidBody *defaultBody;
   size_t				        _id;
   Entity::Status		    _status;
   Ogre::Quaternion		  _orientation;
   Ogre::AnimationState	*_animationState;
-  Ogre::Real			      _distance;
   Ogre::Real			      _walkSpd;
   Ogre::Vector3			    _destination;
-  Ogre::Vector3			    _direction;
 };
 
 #ifndef   _ENTITY_CREATE_
@@ -109,13 +115,12 @@ class Player;
 #define   ENTITY_INDEX    \
 { Entity::Type::RANGER, &createInstance<Player> }
 
-
 #define   ENTITY_INIT_PARAMETERS                                 \
-Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id, \
+Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, \
 Entity::Status status, const Ogre::Vector3 &position, const Ogre::Quaternion &orientation
 
 #define   ENTITY_INIT_VARS    \
-sceneMgr, world, id, status, position, orientation
+sceneMgr, world, collision, id, status, position, orientation
 
 template<typename T>
 inline Entity * createInstance(ENTITY_INIT_PARAMETERS)

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Mon May 29 14:07:22 2017 gastal_r
+// Last update Fri Jun  2 11:58:21 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -13,16 +13,15 @@
 
 #include      "GameState.hpp"
 #include      "Socket.hpp"
-
 #include      <functional>
 
 #define DEBUG_LOCAL false
-#define DEBUG_CAMERA false
+#define DEBUG_CAMERA true
 
-// Don't touch
 #if DEBUG_LOCAL
   #define DEBUG_DRAWER true
 #else
+// Don't touch
   #define DEBUG_DRAWER false
 #endif
 
@@ -46,7 +45,6 @@ public:
   virtual void exit(void);
 
   virtual void sendPlayerPos();
-
   // Ogre::FrameListener
   virtual bool frameRenderingQueued(const Ogre::FrameEvent &);
   virtual bool frameStarted (const Ogre::FrameEvent &evt);
@@ -72,8 +70,6 @@ private:
 
   //OgreBullet
   int mNumEntitiesInstanced;
-  // std::deque<OgreBulletCollisions::CollisionShape *>  mShapes;
-  // std::deque<OgreBulletDynamics::RigidBody *>         mBodies;
   Ogre::AxisAlignedBox                                mBounds;
   Ogre::Vector3                                       mGravityVector;
   OgreBulletCollisions::DebugDrawer                   *debugDrawer;
@@ -99,9 +95,9 @@ private:
   Ogre::Camera *_camera;
   Ogre::SceneNode *_cameraNode;
   float   _offsetX = -5;
-  float   _offsetZ = 25;
-  float   _maximumDistance = 1;
-  float   _playerVelocity = 25;
+  float   _offsetZ = 35;
+  float   _maximumDistance = 2;
+  float   _playerVelocity = 10;
   float   _movementX;
   float   _movementZ;
 
@@ -111,6 +107,8 @@ private:
 
   //Mouse RayCast
   Ogre::RaySceneQuery * _rayCast;
+  //Collision RayCast
+  Ogre::RaySceneQuery * _collisionRayCast;
 
   //Player
   Entity    *_player;
