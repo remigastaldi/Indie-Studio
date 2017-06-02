@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Tue May 30 14:22:35 2017 gastal_r
+// Last update Fri Jun  2 17:59:00 2017 Leo HUBERT
 //
 
 #ifndef _CLIENT_HPP_
@@ -24,7 +24,7 @@
 #include "GameState.hpp"
 #include      "NewMOC.h"
 
-#define SOCKET_SERVER "http://ezgames.eu"
+#define SOCKET_SERVER "http://localhost"
 #define SOCKET_PORT 3000
 
 #ifdef WIN32
