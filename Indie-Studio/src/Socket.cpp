@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Fri Jun  2 18:57:11 2017 gastal_r
+** Last update Sat Jun  3 23:18:06 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -13,6 +13,7 @@
 Socket::Socket(std::string const &addr, int const port, int const id, std::string const &room)
   : _id(id),
   _room(room),
+  _collision(nullptr),
   _world(nullptr)
 {
   _connect_finish = false;
@@ -145,7 +146,7 @@ void Socket::events()
         Entity::Status status;
         status = (Entity::Status)data->get_map()["status"]->get_int();
 
-        _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, *_collision, data->get_map()["send_by"]->get_int(),
+        _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::DARKFIEND, *mDevice->sceneMgr, *_world, *_collision, data->get_map()["send_by"]->get_int(),
         status, position, orientation);
         _entity[data->get_map()["send_by"]->get_int()]->setDestination(destination);
       }

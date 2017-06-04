@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Fri Jun  2 18:42:16 2017 Leo HUBERT
+// Last update Sat Jun  3 23:10:13 2017 gastal_r
 //
 
 #ifndef _CLIENT_HPP_
@@ -22,7 +22,7 @@
 #include <unordered_map>
 #include "Entity.hpp"
 #include "GameState.hpp"
-#include      "NewMOC.h"
+#include      "Collision.h"
 
 #define SOCKET_SERVER "http://ezgames.eu"
 #define SOCKET_PORT 3000
@@ -63,7 +63,6 @@ public:
   void sendEntity(const Entity &);
 
 protected:
-  Collision::CollisionTools*  _collision;
   int                         _id;
   std::mutex                  _lock;
   std::condition_variable_any _cond;
@@ -73,6 +72,7 @@ protected:
   std::string                 _addr;
   std::string                 _room;
 
+  Collision::CollisionTools   *_collision;
   std::unordered_map<size_t, Entity *>  _entity;
   OgreBulletDynamics::DynamicsWorld *_world;
 };

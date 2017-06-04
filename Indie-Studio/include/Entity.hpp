@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Fri Jun  2 16:25:01 2017 gastal_r
+// Last update Sat Jun  3 23:51:58 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -35,15 +35,15 @@
 
 #include <CameraMan.hpp>
 
-#include "NewMOC.h"
+#include "Collision.h"
 #include "OgreBulletUtils.h"
+#include "Spell.hpp"
 
 class Entity
 {
 public:
   enum class Type
   {
-    RANGER,
     WARRIOR,
     MAGE,
     DARKFIEND,
@@ -69,7 +69,7 @@ public:
   Entity& operator=(const Entity& other) = default;
   Entity& operator=(Entity&& other) = default;
 
-  void	goToLocation(Ogre::Real);
+  void  addToBulletWorld(const Ogre::Vector3 &position);
   void  changeAnimation(Entity::Status status);
   void  frameRenderingQueued(const Ogre::FrameEvent &evt);
   void	updateAnimation(std::string, Ogre::Real);
@@ -83,8 +83,9 @@ public:
   Ogre::Vector3 const     getPosition() const { return (cvt(_ghostObject->getWorldTransform().getOrigin())); }
   Ogre::Vector3 const     &getDestination() const { return _destination; }
   Ogre::Quaternion const  &getOrientation() const  { return _orientation; }
-  Entity::Status const    getStatus() const       { return _status; }
-  size_t const            getId() const   { return (_id); }
+  Entity::Status          getStatus() const       { return _status; }
+  size_t                  getId() const   { return (_id); }
+  Spell::Type             getSpell(size_t id)  { return (_spells[id]); }
 
   void          setPosition(const Ogre::Vector3 &pos);
   void					setDestination(const Ogre::Vector3 &destination);
@@ -107,16 +108,17 @@ protected:
   Ogre::AnimationState	*_animationState;
   Ogre::Real			      _walkSpd;
   Ogre::Vector3			    _destination;
+  std::unordered_map<size_t, Spell::Type>  _spells;
 };
 
 #ifndef   _ENTITY_CREATE_
 #define   _ENTITY_CREATE_
 
 #include "Player.hpp"
-class Player;
+class DarkFiend;
 
 #define   ENTITY_INDEX    \
-{ Entity::Type::RANGER, &createInstance<Player> }
+{ Entity::Type::DARKFIEND, &createInstance<DarkFiend> }
 
 #define   ENTITY_INIT_PARAMETERS                                 \
 Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, \
@@ -129,11 +131,11 @@ template<typename T>
 inline Entity * createInstance(ENTITY_INIT_PARAMETERS)
 { return (new T(ENTITY_INIT_VARS)); }
 
-static std::unordered_map<Entity::Type, Entity*(*)(ENTITY_INIT_PARAMETERS)> typeIndex
+static std::unordered_map<Entity::Type, Entity*(*)(ENTITY_INIT_PARAMETERS)> EntityTypeIndex
 { ENTITY_INDEX };
 
 inline Entity * createEntity(Entity::Type type, ENTITY_INIT_PARAMETERS)
-{ return (typeIndex[type](ENTITY_INIT_VARS)); }
+{ return (EntityTypeIndex[type](ENTITY_INIT_VARS)); }
 
 #endif  /* !_ENTITY_CREATE_ */
 

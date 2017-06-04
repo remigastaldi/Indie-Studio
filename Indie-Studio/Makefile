@@ -66,8 +66,9 @@ SRC             =				src/CameraMan.cpp							\
 												src/Indie.cpp									\
 												src/SplashScreen.cpp  				\
 												src/Spell.cpp									\
-												src/NewMOC.cpp								\
-												src/Bullet.cpp								\
+												src/SpellManager.cpp					\
+												src/Collision.cpp							\
+												src/Angel.cpp								\
 												src/main.cpp
 
 

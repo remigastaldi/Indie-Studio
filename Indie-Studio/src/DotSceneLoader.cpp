@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed May 10 23:43:20 2017 gastal_r
-// Last update Sun Jun  4 15:24:07 2017 gastal_r
+// Last update Sun Jun  4 17:42:19 2017 gastal_r
 //
 #include "DotSceneLoader.h"
 #include <Ogre.h>
@@ -301,7 +301,7 @@ void DotSceneLoader::processLight(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode
   // static int i = 0;
   // if (i == 0)
   //   return;
-    // ++i;
+  //   ++i;
     // Process attributes
     Ogre::String name = getAttrib(XMLNode, "name");
     Ogre::String id = getAttrib(XMLNode, "id");
@@ -696,6 +696,11 @@ void DotSceneLoader::processEntity(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
         Ogre::MeshPtr mMesh = Ogre::MeshManager::getSingleton().load(meshFile, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
         mMesh->buildEdgeList();
         pEntity =  mSceneMgr->createEntity(name,mMesh);
+        // if (name.find("Ground") != std::string::npos)
+        // {
+        //   std::cout << "======================" << std::endl;
+        //   pEntity->setCastShadows(false);
+        // }
         pEntity->setCastShadows(castShadows);
         pParent->attachObject(pEntity);
 

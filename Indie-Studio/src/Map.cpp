@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Fri Jun  2 17:31:51 2017 gastal_r
+// Last update Sun Jun  4 17:20:57 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -23,8 +23,7 @@ Map::Map() :
   mRMouseDown(false),
   mCurObject(0),
   mGravityVector(Ogre::Vector3(0,-9.81,0)),
-  mBounds(Ogre::AxisAlignedBox(Ogre::Vector3 (-10000, -10000, -10000),
-  Ogre::Vector3 (10000,  10000,  10000))),
+  mBounds(Ogre::AxisAlignedBox(Ogre::Vector3 (-10000, -10000, -10000), Ogre::Vector3 (10000,  10000,  10000))),
   debugDrawer(nullptr),
   _rayCast(nullptr),
   _collisionRayCast(nullptr)
@@ -45,26 +44,27 @@ void Map::enter(void)
   vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
   vp->update();
 
+  _collision = new Collision::CollisionTools();
   _world = new OgreBulletDynamics::DynamicsWorld(mDevice->sceneMgr, mBounds, mGravityVector);
 
-  #if DEBUG_DRAWER
-  	debugDrawer = new OgreBulletCollisions::DebugDrawer();
-    debugDrawer->setDrawAabb (true);
-    debugDrawer->setDrawWireframe (true);
-    debugDrawer->setDrawFeaturesText (true);
-    debugDrawer->setDrawContactPoints (true);
-    debugDrawer->setDrawText (true);
-    debugDrawer->setProfileTimings (true);
-    debugDrawer->setEnableSatComparison (true);
-    debugDrawer->setEnableCCD (true);
-    _world->setShowDebugShapes(true);
-    _world->setDebugDrawer(debugDrawer);
+  _spellManager = new SpellManager(*mDevice->sceneMgr, *_collision);
+
+#if DEBUG_DRAWER
+	debugDrawer = new OgreBulletCollisions::DebugDrawer();
+  debugDrawer->setDrawAabb (true);
+  debugDrawer->setDrawWireframe (true);
+  debugDrawer->setDrawFeaturesText (true);
+  debugDrawer->setDrawContactPoints (true);
+  debugDrawer->setDrawText (true);
+  debugDrawer->setProfileTimings (true);
+  debugDrawer->setEnableSatComparison (true);
+  debugDrawer->setEnableCCD (true);
+  _world->setShowDebugShapes(true);
+  _world->setDebugDrawer(debugDrawer);
 #endif
 
-  mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-  mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
-
-  _collision = new Collision::CollisionTools();
+  mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+  mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(1.0, 1.0, 1.0));
 
   _collisionRayCast = mDevice->sceneMgr->createRayQuery(Ogre::Ray());
 
@@ -280,14 +280,11 @@ bool  Map::setupIngeniorSpell()
 
 void Map::createScene(void)
 {
-  _settings = nullptr;
-  _credits = nullptr;
-
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
-  _player = createEntity(Entity::Type::RANGER, *mDevice->sceneMgr, *_world, *_collision, 42,
-		Entity::Status::IMMOBILE, Ogre::Vector3(-14.f, 10.f, -3.f), Ogre::Quaternion::ZERO);
+  _player = createEntity(Entity::Type::DARKFIEND, *mDevice->sceneMgr, *_world, *_collision, 42,
+		Entity::Status::IMMOBILE, Ogre::Vector3(46.f, 32.f, 153.f), Ogre::Quaternion::ZERO);
 
 #if DEBUG_CAMERA
   _camera->setPosition(_player->getPosition() + Ogre::Vector3(0, 40.f, 40.f));
@@ -302,9 +299,27 @@ void Map::createScene(void)
 
 	Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
 	DotSceneLoader loader;
-	loader.parseDotScene("brick_wall_without_proxy.scene","General", mDevice->sceneMgr, map);
+	loader.parseDotScene("dungeon.scene","General", mDevice->sceneMgr, map);
   map->setPosition({0.f, 0.f, 0.f});
   // map->setScale(Ogre::Vector3(0.03f, 0.03f, 0.03f));
+
+  Ogre::Light* spotLight = mDevice->sceneMgr->createLight("SpotLight");
+//   spotLight->setDiffuseColour(0, 0, 1.0);
+// spotLight->setSpecularColour(0, 0, 1.0);
+spotLight->setType(Ogre::Light::LT_POINT);
+spotLight->setDirection(46.f, 0.f, 153.f);
+spotLight->setPosition(Ogre::Vector3(46.f, 42.f, 153.f));
+// spotLight->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
+
+
+// spotLight->setDiffuseColour(0.05738838016986847, 0.34849655628204346, 1.0);
+// spotLight->setSpecularColour(0.05738838016986847, 0.34849655628204346, 1.0);
+// spotLight->setAttenuation(5000, 1.0, 0.04, 0.0);
+// spotLight->setCastShadows(false);
+// spotLight->setVisible(true);
+// <colourShadow b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+// spotLight->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
+
 
   for (auto & it : loader.dynamicObjects)
   {
@@ -315,8 +330,7 @@ void Map::createScene(void)
     OgreBulletCollisions::StaticMeshToShapeConverter trimeshConverter(entity);
     OgreBulletCollisions::TriangleMeshCollisionShape *sceneTriMeshShape =  trimeshConverter.createTrimesh();
 
-    OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
-      "MapBody" + Ogre::StringConverter::toString(mNumEntitiesInstanced),  _world);
+    OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(entity->getName(),  _world);
     defaultBody->setShape(node,
           sceneTriMeshShape,
           0.6f,      // dynamic body restitution
@@ -324,12 +338,17 @@ void Map::createScene(void)
           0.0f,       // dynamic bodymass
           node->getPosition(),    // starting position of the box
           Ogre::Quaternion(0, 0, -1, 1));// orientation of the box
-    mNumEntitiesInstanced++;
 
     defaultBody->enableActiveState();
     _world->addRigidBody(defaultBody,0,0);
 
     _collision->register_entity(entity, Collision::COLLISION_BOX);
+
+    if (it.find("Ground") != std::string::npos)
+    {
+      std::cout << "======================" << std::endl;
+      entity->setCastShadows(false);
+    }
   }
   for (auto & it : loader.staticObjects)
   {
@@ -358,12 +377,9 @@ void Map::createScene(void)
 
 
   Shape = new OgreBulletCollisions::StaticPlaneCollisionShape(Ogre::Vector3(0,1,0), 0);
-
-  defaultPlaneBody = new OgreBulletDynamics::RigidBody("BasePlane",_world);
-  defaultPlaneBody->setStaticShape(Shape, 0.1, 0.8);// (shape, restitution, friction)
-      // push the created objects to the deques
-  // mShapes.push_back(Shape);
-  // mBodies.push_back(defaultPlaneBody);
+  //
+  // defaultPlaneBody = new OgreBulletDynamics::RigidBody("BasePlane",_world);
+  // defaultPlaneBody->setStaticShape(Shape, 0.1, 0.8);// (shape, restitution, friction)
 #if !DEBUG_LOCAL
   connect();
   sendEntity(*_player);
@@ -425,6 +441,9 @@ void Map::exit(void)
 
   Ogre::MeshManager::getSingleton().remove("FloorPlane");
 
+  _settings = nullptr;
+  _credits = nullptr;
+
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Map =====");
 }
 
@@ -461,13 +480,15 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
   if (mLMouseDown)
     mouseRaycast();
 
-  mDevice->soundManager->update(evt.timeSinceLastFrame);
+  _spellManager->frameRenderingQueued(evt);
 
   _player->frameRenderingQueued(evt);
+
   #if !DEBUG_LOCAL
     sendPlayerPos();
   #endif
-  // _world->getBulletDynamicsWorld()->debugDrawWorld();
+
+  mDevice->soundManager->update(evt.timeSinceLastFrame);
 
 #if DEBUG_LOCAL == false
   for (auto & it : _entity)
@@ -481,6 +502,7 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
   _movementZ = ((_player->getPosition().z + _offsetZ - _cameraNode->getPosition().z)) / _maximumDistance;
   _cameraNode->translate(Ogre::Vector3((_movementX * _playerVelocity * evt.timeSinceLastFrame), 0, (_movementZ * _playerVelocity * evt.timeSinceLastFrame)));
 #endif
+
   return (true);
 }
 
@@ -495,6 +517,8 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
 {
   if(arg.key == OIS::KC_V)
 {
+  _spellManager->launchSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());
+  // return true;
   Ogre::Vector3 size = Ogre::Vector3::ZERO;
   Ogre::Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 10);
 
@@ -658,6 +682,43 @@ void  Map::mouseRaycast(void)
   else
     _rayCast->setRay(ray);
 
+  _rayCast->setSortByDistance(true);
+
+  _rayCast->setQueryTypeMask(Ogre::SceneManager::ENTITY_TYPE_MASK);
+
+  Ogre::RaySceneQueryResult res = _rayCast->execute();
+
+  for (const auto & it : res)
+  {
+    Ogre::MovableObject *mSelectedEntity = it.movable;
+    float mSelectedEntityDist = it.distance;
+    Ogre::Vector3 pos = ray.getPoint(mSelectedEntityDist);
+    if (mSelectedEntity->getName() != std::to_string(_player->getId())
+      && mSelectedEntity->getName().find("Ground") != std::string::npos)
+    {
+      std::cout << "Clicked: " << mSelectedEntity->getName().c_str() << "POS: X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
+      _player->setDestination(pos);
+      return;
+    }
+  }
+}
+
+Ogre::Vector3   Map::getMouseFocusPos(void)
+{
+  CEGUI::Vector2f absMouse = CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
+  CEGUI::Vector2f relativeMouse = CEGUI::CoordConverter::screenToWindow(
+    *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), absMouse);
+  float windowWidth = CEGUI::CoordConverter::screenToWindowX(
+    *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), CEGUI::UDim(1,0));
+  float windowHeight = CEGUI::CoordConverter::screenToWindowY(
+    *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), CEGUI::UDim(1,0));
+  Ogre::Ray ray = _camera->getCameraToViewportRay((float) relativeMouse.d_x / windowWidth, (float) relativeMouse.d_y / windowHeight);
+
+  if (!_rayCast)
+    _rayCast = mDevice->sceneMgr->createRayQuery(ray);
+  else
+    _rayCast->setRay(ray);
+
 #if DEBUG_DRAWER
   _rayCast->setSortByDistance(true);
 #else
@@ -681,8 +742,7 @@ void  Map::mouseRaycast(void)
   #endif
     {
       std::cout << "Clicked: " << mSelectedEntity->getName().c_str() << "POS: X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
-      _player->setDestination(pos);
-      return;
+      return (pos);
     }
   }
 }

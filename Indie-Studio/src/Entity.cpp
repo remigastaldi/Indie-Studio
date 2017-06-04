@@ -5,15 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Fri Jun  2 18:40:35 2017 gastal_r
+// Last update Sun Jun  4 16:13:44 2017 gastal_r
 //
 
 #include        "Entity.hpp"
 
 Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id,
  	Status status, const Ogre::Vector3 &position, const Ogre::Quaternion &orientation)
-	:
-	_sceneMgr(sceneMgr),
+	:	_sceneMgr(sceneMgr),
 	_world(world),
 	_collision(collision),
 	_id(id),
@@ -23,13 +22,41 @@ Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 	_orientation(orientation),
 	_destination(Ogre::Vector3::ZERO),
 	_animationState(0),
-	_walkSpd(20.f),
+	_walkSpd(5.f),
 	_ghostObject(nullptr),
-	_character(nullptr)
+	_character(nullptr),
+  _spells(4)
 {}
 
 Entity::~Entity()
 {}
+
+void  Entity::addToBulletWorld(const Ogre::Vector3 &position)
+{
+  btTransform startTransform;
+  startTransform.setIdentity();
+  startTransform.setOrigin(cvt(position));
+
+  _ghostObject = new btPairCachingGhostObject();
+  _ghostObject->setUserPointer((void*) _node);
+
+  _ghostObject->setWorldTransform(startTransform);
+  Ogre::AxisAlignedBox boundingB(_entity->getBoundingBox());
+  Ogre::Vector3 size(boundingB.getSize());
+  size /= 20.0f;
+  btScalar characterHeight = size.y;
+  btScalar characterWidth = size.x;
+  btConvexShape* capsule = new btCapsuleShape(characterWidth, characterHeight);
+  _ghostObject->setCollisionShape(capsule);
+  _ghostObject->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
+  // _ghostObject->setActivationState(DISABLE_DEACTIVATION);
+
+  btScalar stepHeight(btScalar(0.35));
+  _character = new btKinematicCharacterController(_ghostObject, capsule, stepHeight);
+  _world.getBulletDynamicsWorld()->getPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
+  _world.getBulletDynamicsWorld()->addCollisionObject(_ghostObject, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::AllFilter);
+  _world.getBulletDynamicsWorld()->addAction(_character);
+}
 
 void 	Entity::changeAnimation(Entity::Status status)
 {
@@ -50,6 +77,7 @@ void 	Entity::changeAnimation(Entity::Status status)
 	}
 	_animationState->setLoop(true);
 	_animationState->setEnabled(true);
+  _status = status;
 }
 
 void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
@@ -86,6 +114,8 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
     }
     _node->yaw(Ogre::Degree(90.f));
   }
+  else if (_status != Entity::Status::IMMOBILE)
+    changeAnimation(Entity::Status::IMMOBILE);
 	if (_animationState)
 		_animationState->addTime(evt.timeSinceLastFrame);
 }

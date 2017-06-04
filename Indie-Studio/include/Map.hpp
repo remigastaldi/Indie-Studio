@@ -5,21 +5,25 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Fri Jun  2 11:58:21 2017 gastal_r
+// Last update Sun Jun  4 15:13:29 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
 #define       _MAP_HPP_
 
+#include      <functional>
+#include      <memory>
+
 #include      "GameState.hpp"
 #include      "Socket.hpp"
-#include      <functional>
+#include      "SpellManager.hpp"
 
-#define DEBUG_LOCAL false
+
+#define DEBUG_LOCAL true
 #define DEBUG_CAMERA true
 
 #if DEBUG_LOCAL
-  #define DEBUG_DRAWER true
+  #define DEBUG_DRAWER false
 #else
 // Don't touch
   #define DEBUG_DRAWER false
@@ -59,6 +63,7 @@ public:
   virtual bool mouseReleased(const OIS::MouseEvent &, OIS::MouseButtonID);
 
   virtual void mouseRaycast(void);
+  virtual Ogre::Vector3   getMouseFocusPos(void);
 
   // CEGUI
   bool buttonSettings(const CEGUI::EventArgs &e);
@@ -135,6 +140,8 @@ private:
   CEGUI::Window   *_secondSpell;
   CEGUI::Window   *_thirdSpell;
   CEGUI::Window   *_fourthSpell;
+
+  SpellManager    *_spellManager;
 
 #if DEBUG_CAMERA
   OgreCookies::CameraMan* _cameraMan;

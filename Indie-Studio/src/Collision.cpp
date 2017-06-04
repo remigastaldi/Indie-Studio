@@ -1,4 +1,14 @@
-#include "NewMOC.h"
+//
+// Collision.cpp for Indie-Studio in /home/gastal_r/rendu/Indie-Studio/Indie-Studio/src/
+//
+// Made by gastal_r
+// Login   <remi.gastaldi@epitech.eu>
+//
+// Started on  Sat Jun  3 19:42:53 2017 gastal_r
+// Last update Sat Jun  3 19:42:58 2017 gastal_r
+//
+
+#include "Collision.h"
 
    namespace Collision {
 
@@ -82,7 +92,7 @@
          std::list<CollisionTools::RayQueryEntry> results = get_basic_ray_query_entities_list(ray, queryMask, ignore, maxDistance, stopOnFirstPositive);
 
          // no results? stop here
-         if (results.size() <= 0)
+         if (results.size() == 0)
          {
             return ret;
          }

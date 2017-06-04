@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:43:07 2017 gastal_r
-// Last update Sat May 27 14:11:29 2017 gastal_r
+// Last update Sun Jun  4 17:37:03 2017 gastal_r
 //
 
 #ifndef _SPELL_HPP_
@@ -29,18 +29,35 @@
 #include <string>
 #include <unordered_map>
 
+#include "Collision.h"
+
 class Spell
 {
 public:
   enum class Type
   {
-    BULLET,
-    METEOR
+    /** DarkFiend */
+    ANGEL,
+    THUNDERSTORM,
+    SPECTRE,
+    FIRE
+  };
+
+  enum class Status
+  {
+    MOVE,
+    HIT,
+    DEAD
   };
 
 public:
-  Spell(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id,
-    const Ogre::Vector3 &position, const Ogre::Vector3 &destination);
+  Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id,
+    const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Ogre::Real distance, Ogre::Real speed);
+
+  void 	changeAnimation(Spell::Status status);
+  void 	frameRenderingQueued(const Ogre::FrameEvent &evt);
+  void  setDestination(const Ogre::Vector3 &destination);
+  void 	destroy();
 
   ~Spell() = default;
   Spell(const Spell& other) = default;
@@ -48,35 +65,54 @@ public:
   Spell& operator=(const Spell& other) = default;
   Spell& operator=(Spell&& other) = default;
 
+protected:
+  Ogre::SceneManager        &_sceneMgr;
+  Collision::CollisionTools &_collision;
+  Ogre::Entity          *_entity;
+  Ogre::SceneNode       *_node;
+  size_t				        _id;
+  Ogre::Quaternion		  _orientation;
+  Ogre::AnimationState	*_animationState;
+  Spell::Status         _status;
+  Ogre::Real			      _speed;
+  Ogre::Vector3			    _destination;
+  Ogre::Real            _distance;
+  Ogre::Vector3         _direction;
+};
+
+class Angel : public Spell
+{
+public:
+  #define SPEED 70.f
+public:
+  Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id,
+    const Ogre::Vector3 &position, const Ogre::Vector3 &destination);
 };
 
 
 #ifndef   _SPELL_CREATE_
 #define   _SPELL_CREATE_
 
-#include "Bullet.hpp"
-class Bullet;
-
 #define   SPELL_INDEX   \
-{ Spell::Type::BULLET, &createInstance<Bullet> }
+{   Spell::Type::ANGEL, &createInstance<Angel>   }
 
 
 #define   SPELL_INIT_PARAMETERS   \
-Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, size_t id,  \
+Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id,  \
 const Ogre::Vector3 &position, const Ogre::Vector3 &destination
 
 #define   SPELL_INIT_VARS   \
-sceneMgr, world, id, position, destination
+sceneMgr, collision, id, position, destination
 
 template<typename T>
 inline Spell * createInstance(SPELL_INIT_PARAMETERS)
 { return (new T(SPELL_INIT_VARS)); }
 
-static std::unordered_map<Spell::Type, Spell*(*)(SPELL_INIT_PARAMETERS)> typeIndex
+static std::unordered_map<Spell::Type, Spell*(*)(SPELL_INIT_PARAMETERS)> spellTypeIndex
 { SPELL_INDEX };
 
 inline Spell * createSpell(Spell::Type type, SPELL_INIT_PARAMETERS)
-{ return (typeIndex[type](SPELL_INIT_VARS)); }
+{ return (spellTypeIndex[type](SPELL_INIT_VARS)); }
 
 #endif  /* !_SPELL_CREATE_ */
 
