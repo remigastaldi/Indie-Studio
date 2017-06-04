@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Sun Jun  4 15:13:29 2017 gastal_r
+// Last update Sun Jun  4 19:50:41 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -20,7 +20,7 @@
 
 
 #define DEBUG_LOCAL true
-#define DEBUG_CAMERA true
+#define DEBUG_CAMERA false
 
 #if DEBUG_LOCAL
   #define DEBUG_DRAWER false
@@ -125,11 +125,13 @@ private:
   //Camera
   Ogre::Camera *_camera;
   Ogre::SceneNode *_cameraNode;
-  float   _offsetX = -5;
-  float   _offsetZ = 35;
+  float   _offsetX = 0;
+  float   _offsetY = 10;
+  float   _offsetZ = 10;
   float   _maximumDistance = 2;
   float   _playerVelocity = 10;
   float   _movementX;
+  float   _movementY;
   float   _movementZ;
 
   //Player

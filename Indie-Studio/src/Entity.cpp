@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Sun Jun  4 16:13:44 2017 gastal_r
+// Last update Sun Jun  4 19:25:58 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -38,7 +38,7 @@ void  Entity::addToBulletWorld(const Ogre::Vector3 &position)
   startTransform.setOrigin(cvt(position));
 
   _ghostObject = new btPairCachingGhostObject();
-  _ghostObject->setUserPointer((void*) _node);
+  // _ghostObject->setUserPointer((void*) _node);
 
   _ghostObject->setWorldTransform(startTransform);
   Ogre::AxisAlignedBox boundingB(_entity->getBoundingBox());

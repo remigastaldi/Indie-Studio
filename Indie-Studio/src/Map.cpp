@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sun Jun  4 17:20:57 2017 gastal_r
+// Last update Sun Jun  4 19:41:39 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -287,7 +287,7 @@ void Map::createScene(void)
 		Entity::Status::IMMOBILE, Ogre::Vector3(46.f, 32.f, 153.f), Ogre::Quaternion::ZERO);
 
 #if DEBUG_CAMERA
-  _camera->setPosition(_player->getPosition() + Ogre::Vector3(0, 40.f, 40.f));
+  _camera->setPosition(_player->getPosition() + Ogre::Vector3(0, 50.f, 50.f));
   _cameraMan = new OgreCookies::CameraMan(_camera);
   _camera->lookAt(_player->getPosition());
 #else
@@ -499,8 +499,9 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
   _cameraMan->frameRenderingQueued(evt);
 #else
   _movementX = ((_player->getPosition().x + _offsetX - _cameraNode->getPosition().x)) / _maximumDistance;
+  _movementY = ((_player->getPosition().y + _offsetY - _cameraNode->getPosition().y)) / _maximumDistance;
   _movementZ = ((_player->getPosition().z + _offsetZ - _cameraNode->getPosition().z)) / _maximumDistance;
-  _cameraNode->translate(Ogre::Vector3((_movementX * _playerVelocity * evt.timeSinceLastFrame), 0, (_movementZ * _playerVelocity * evt.timeSinceLastFrame)));
+  _cameraNode->translate(Ogre::Vector3((_movementX * _playerVelocity * evt.timeSinceLastFrame), (_movementY * _playerVelocity * evt.timeSinceLastFrame), (_movementZ * _playerVelocity * evt.timeSinceLastFrame)));
 #endif
 
   return (true);
