@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed May 10 23:43:20 2017 gastal_r
-// Last update Thu May 11 04:32:12 2017 gastal_r
+// Last update Sun Jun  4 15:24:07 2017 gastal_r
 //
 #include "DotSceneLoader.h"
 #include <Ogre.h>
@@ -117,9 +117,9 @@ void DotSceneLoader::processScene(rapidxml::xml_node<>* XMLRoot)
         processOctree(pElement);
 
     // Process light (?)
-    //pElement = XMLRoot->first_node("light");
-    //if(pElement)
-    //    processLight(pElement);
+    pElement = XMLRoot->first_node("light");
+    if(pElement)
+       processLight(pElement);
 
     // Process camera (?)
     pElement = XMLRoot->first_node("camera");
@@ -298,16 +298,20 @@ void DotSceneLoader::processOctree(rapidxml::xml_node<>* XMLNode)
 
 void DotSceneLoader::processLight(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent)
 {
+  // static int i = 0;
+  // if (i == 0)
+  //   return;
+    // ++i;
     // Process attributes
     Ogre::String name = getAttrib(XMLNode, "name");
     Ogre::String id = getAttrib(XMLNode, "id");
 
     // Create the light
     Ogre::Light *pLight = mSceneMgr->createLight(name);
-    if(pParent)
-        pParent->attachObject(pLight);
-
+    // if(pParent)
+    //     pParent->attachObject(pLight);
     Ogre::String sValue = getAttrib(XMLNode, "type");
+    std::cout << "TYPE" << sValue << std::endl;
     if(sValue == "point")
         pLight->setType(Ogre::Light::LT_POINT);
     else if(sValue == "directional")
@@ -318,7 +322,8 @@ void DotSceneLoader::processLight(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode
         pLight->setType(Ogre::Light::LT_POINT);
 
     pLight->setVisible(getAttribBool(XMLNode, "visible", true));
-    pLight->setCastShadows(getAttribBool(XMLNode, "castShadows", true));
+    // pLight->setCastShadows(getAttribBool(XMLNode, "castShadows", true));
+    pLight->setCastShadows(true);
 
     rapidxml::xml_node<>* pElement;
 
@@ -330,7 +335,7 @@ void DotSceneLoader::processLight(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode
     // Process normal (?)
     pElement = XMLNode->first_node("normal");
     if(pElement)
-        pLight->setDirection(parseVector3(pElement));
+      pLight->setDirection(parseVector3(pElement));
 
     pElement = XMLNode->first_node("directionVector");
     if(pElement)
@@ -365,6 +370,9 @@ void DotSceneLoader::processLight(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode
     pElement = XMLNode->first_node("userDataReference");
     if(pElement)
         ;//processUserDataReference(pElement, pLight);
+
+        std::cout << pLight->getPosition() << std::endl;
+        pLight->setPosition(Ogre::Vector3(pLight->getPosition().x * -1, pLight->getPosition().y, pLight->getPosition().z * -1));
 }
 
 void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent)
@@ -530,12 +538,12 @@ void DotSceneLoader::processNode(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode 
     }
 
     // Process light (*)
-    //pElement = XMLNode->first_node("light");
-    //while(pElement)
-    //{
-    //    processLight(pElement, pNode);
-    //    pElement = pElement->next_sibling("light");
-    //}
+    pElement = XMLNode->first_node("light");
+    while(pElement)
+    {
+       processLight(pElement, pNode);
+       pElement = pElement->next_sibling("light");
+    }
 
     // Process camera (*)
     pElement = XMLNode->first_node("camera");
@@ -685,8 +693,9 @@ void DotSceneLoader::processEntity(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
     Ogre::Entity *pEntity = 0;
     try
     {
-        Ogre::MeshManager::getSingleton().load(meshFile, m_sGroupName);
-        pEntity = mSceneMgr->createEntity(name, meshFile);
+        Ogre::MeshPtr mMesh = Ogre::MeshManager::getSingleton().load(meshFile, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+        mMesh->buildEdgeList();
+        pEntity =  mSceneMgr->createEntity(name,mMesh);
         pEntity->setCastShadows(castShadows);
         pParent->attachObject(pEntity);
 
