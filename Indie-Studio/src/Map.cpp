@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sun Jun  4 19:41:39 2017 gastal_r
+// Last update Mon Jun  5 16:48:34 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -63,8 +63,14 @@ void Map::enter(void)
   _world->setDebugDrawer(debugDrawer);
 #endif
 
-  mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
-  mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(1.0, 1.0, 1.0));
+  mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+  mDevice->sceneMgr->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+  mDevice->sceneMgr->setShadowTextureSelfShadow(true);
+  mDevice->sceneMgr->setShadowTextureSize(4096);
+  mDevice->sceneMgr->setShadowFarDistance(100);
+  // mDevice->sceneMgr->setShadowTextureCount(1);
+
+   mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
 
   _collisionRayCast = mDevice->sceneMgr->createRayQuery(Ogre::Ray());
 
@@ -284,7 +290,7 @@ void Map::createScene(void)
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
   _player = createEntity(Entity::Type::DARKFIEND, *mDevice->sceneMgr, *_world, *_collision, 42,
-		Entity::Status::IMMOBILE, Ogre::Vector3(46.f, 32.f, 153.f), Ogre::Quaternion::ZERO);
+		Entity::Status::IMMOBILE, Ogre::Vector3(40.f, 20.f, 160.f), Ogre::Quaternion::ZERO);
 
 #if DEBUG_CAMERA
   _camera->setPosition(_player->getPosition() + Ogre::Vector3(0, 50.f, 50.f));
@@ -312,9 +318,9 @@ spotLight->setPosition(Ogre::Vector3(46.f, 42.f, 153.f));
 // spotLight->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
 
 
-// spotLight->setDiffuseColour(0.05738838016986847, 0.34849655628204346, 1.0);
-// spotLight->setSpecularColour(0.05738838016986847, 0.34849655628204346, 1.0);
-// spotLight->setAttenuation(5000, 1.0, 0.04, 0.0);
+spotLight->setDiffuseColour(0.05738838016986847, 0.34849655628204346, 1.0);
+spotLight->setSpecularColour(0.05738838016986847, 0.34849655628204346, 1.0);
+spotLight->setAttenuation(5000, 1.0, 0.04, 0.0);
 // spotLight->setCastShadows(false);
 // spotLight->setVisible(true);
 // <colourShadow b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
@@ -357,10 +363,10 @@ spotLight->setPosition(Ogre::Vector3(46.f, 42.f, 153.f));
     _collision->register_entity(entity, Collision::COLLISION_BOX);
   }
 
-  Ogre::Light* spotLight1 = mDevice->sceneMgr->createLight("SpotLight1");
-  spotLight1->setType(Ogre::Light::LT_POINT);
-  spotLight1->setDirection(0, 0, 0);
-  spotLight1->setPosition(Ogre::Vector3(0, 40, 0));
+  // Ogre::Light* spotLight1 = mDevice->sceneMgr->createLight("SpotLight1");
+  // spotLight1->setType(Ogre::Light::LT_POINT);
+  // spotLight1->setDirection(0, 0, 0);
+  // spotLight1->setPosition(Ogre::Vector3(0, 40, 0));
 
 	// mNode->attachObject(static_cast <Ogre::SimpleRenderable *> (debugDrawer));
 
@@ -519,7 +525,7 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
   if(arg.key == OIS::KC_V)
 {
   _spellManager->launchSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());
-  // return true;
+  return true;
   Ogre::Vector3 size = Ogre::Vector3::ZERO;
   Ogre::Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 10);
 

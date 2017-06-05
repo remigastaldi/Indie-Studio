@@ -5,13 +5,12 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Sun Jun  4 19:50:41 2017 gastal_r
+// Last update Mon Jun  5 15:31:16 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
 #define       _MAP_HPP_
 
-#include      <functional>
 #include      <memory>
 
 #include      "GameState.hpp"
@@ -128,7 +127,7 @@ private:
   float   _offsetX = 0;
   float   _offsetY = 10;
   float   _offsetZ = 10;
-  float   _maximumDistance = 2;
+  float   _maximumDistance = 4;
   float   _playerVelocity = 10;
   float   _movementX;
   float   _movementY;
