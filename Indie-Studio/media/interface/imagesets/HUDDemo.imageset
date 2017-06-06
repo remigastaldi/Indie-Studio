@@ -3,4 +3,5 @@
     <Image height="100" name="Wizzard" width="100" xPos="248" yPos="1" />
     <Image height="100" name="Ingenior" width="100" xPos="372" yPos="251" />
     <Image height="100" name="Warrior" width="100" xPos="124" yPos="251" />
+    <Image height="1080" name="SplashScreen" width="1920" xPos="499" yPos="0" />
 </Imageset>
