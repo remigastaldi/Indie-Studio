@@ -51,6 +51,8 @@ public:
   bool         buttonQuit(const CEGUI::EventArgs &e);
   bool         buttonInfos(const CEGUI::EventArgs &e);
   bool         buttonClose(const CEGUI::EventArgs &e);
+  bool         buttonOptions(const CEGUI::EventArgs &e);
+  bool        Backbutton(const CEGUI::EventArgs &e);
 
 private:
   char mPolygonRenderingMode;
@@ -71,9 +73,12 @@ private:
   CEGUI::Window *_myRoot;
   CEGUI::Window *_gameMenu;
   CEGUI::Window *_credits;
+  CEGUI::Window *_options;
   CEGUI::Window *_play;
 
   CEGUI::Window *_backButton;
+  CEGUI::Window *_optionButton;
+  CEGUI::Window *_ButtonBack;
   CEGUI::Window *_playButton;
   CEGUI::Window *_quitButton;
   CEGUI::Window *_infosButton;

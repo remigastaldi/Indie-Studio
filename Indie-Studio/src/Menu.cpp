@@ -128,9 +128,30 @@ bool Menu::buttonInfos(const CEGUI::EventArgs &e)
   return (true);
 }
 
+bool        Menu::Backbutton(const CEGUI::EventArgs &e)
+{
+  _ButtonBack->destroy();
+  _options->destroy();
+  _options = nullptr;
+  return (true);
+}
+bool         Menu::buttonOptions(const CEGUI::EventArgs &e)
+{
+  if (_options == nullptr)
+  {
+    _options = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Settings.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_options);
+
+    _ButtonBack = _options->getChild("BackButton");
+    _ButtonBack->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::Backbutton, this));
+  }
+}
+
+
 void Menu::createScene(void)
 {
   _credits = nullptr;
+  _options = nullptr;
 
   CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
 
@@ -150,12 +171,15 @@ void Menu::createScene(void)
   _infosButton = _gameMenu->getChild("Infos");
   _infosButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonInfos, this));
 
-  _playButton->destroy();
-  _quitButton->destroy();
-  _gameMenu->destroy();
-  _myRoot->destroy();
-  GameState *menu = findByName("Map");
-  changeGameState(menu);
+  _optionButton = _gameMenu->getChild("Options");
+  _optionButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonOptions, this));
+
+  // _playButton->destroy();
+  // _quitButton->destroy();
+  // _gameMenu->destroy();
+  // _myRoot->destroy();
+  // GameState *menu = findByName("Map");
+  // changeGameState(menu);
 }
 
 // bool GameMenuDemo::handleLoginAcceptButtonClicked(const CEGUI::EventArgs&)
