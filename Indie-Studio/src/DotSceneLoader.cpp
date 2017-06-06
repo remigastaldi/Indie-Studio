@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed May 10 23:43:20 2017 gastal_r
-// Last update Tue Jun  6 17:09:59 2017 gastal_r
+// Last update Tue Jun  6 17:50:02 2017 gastal_r
 //
 #include "DotSceneLoader.h"
 #include <Ogre.h>
@@ -322,13 +322,22 @@ void DotSceneLoader::processLight(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode
     // pLight->setCastShadows(getAttribBool(XMLNode, "shadow", false));
     //
     rapidxml::xml_node<>* pElement;
+    LightProperties lightProperties;
 
-    // Process position (?)
+    lightProperties.name = std::string(name);
     pElement = XMLNode->first_node("position");
-    Ogre::Vector3 pos(parseVector3(pElement));
-    std::pair<std::string, Ogre::Vector3> pair(std::string(name), Ogre::Vector3(pos.x * -1, pos.y, pos.z * -1));
+    lightProperties.pos = parseVector3(pElement);
+    // Process colourDiffuse (?)
+    pElement = XMLNode->first_node("colourDiffuse");
     if(pElement)
-        _lightPos.push_back(pair);
+      lightProperties.colourDiffuse = parseColour(pElement);
+
+    // Process colourSpecular (?)
+    pElement = XMLNode->first_node("colourSpecular");
+    if(pElement)
+      lightProperties.colourSpecular = parseColour(pElement);
+    if(pElement)
+        _lightPos.push_back(lightProperties);
 
     // // Process normal (?)
     // pElement = XMLNode->first_node("normal");
@@ -342,15 +351,6 @@ void DotSceneLoader::processLight(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode
     //     mLightDirection = parseVector3(pElement);
     // }
     //
-    // // Process colourDiffuse (?)
-    // pElement = XMLNode->first_node("colourDiffuse");
-    // if(pElement)
-    //     pLight->setDiffuseColour(parseColour(pElement));
-    //
-    // // Process colourSpecular (?)
-    // pElement = XMLNode->first_node("colourSpecular");
-    // if(pElement)
-    //     pLight->setSpecularColour(parseColour(pElement));
     //
     // if(sValue != "directional")
     // {

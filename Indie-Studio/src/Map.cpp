@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Tue Jun  6 16:44:40 2017 gastal_r
+// Last update Tue Jun  6 17:37:21 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -76,7 +76,7 @@ void Map::enter(void)
 // mDevice->sceneMgr->setShadowTextureCount(4);
 // mDevice->sceneMgr->setShadowCameraSetup(Ogre::ShadowCameraSetupPtr(new Ogre::FocusedShadowCameraSetup()));
 
-   mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
+   mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(1.f, 1.f, 1.f));
 
   _collisionRayCast = mDevice->sceneMgr->createRayQuery(Ogre::Ray());
 
@@ -312,6 +312,7 @@ void Map::createScene(void)
 	Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
 	DotSceneLoader loader;
 	loader.parseDotScene("dungeon.scene","General", mDevice->sceneMgr, map);
+  mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.1f, 0.1f, 0.1f));
   map->setPosition({0.f, 0.f, 0.f});
   // map->setScale(Ogre::Vector3(0.03f, 0.03f, 0.03f));
 
@@ -346,8 +347,8 @@ void Map::createScene(void)
 
     if (it.find("Ground") != std::string::npos)
     {
-      // std::cout << "======================" << std::endl;
-      // entity->setCastShadows(false);
+      entity->setCastShadows(false);
+      std::cout << "======================" << std::endl;
     }
   }
   for (auto & it : loader.staticObjects)
