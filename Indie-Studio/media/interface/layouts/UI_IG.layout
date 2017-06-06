@@ -8,7 +8,7 @@
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Property name="HorizontalAlignment" value="Right" />
         <Window type="Generic/ImageButton" name="Parameters" >
-            <Property name="Area" value="{{0,72},{0,0},{0.15,72},{0.55,0}}" />
+            <Property name="Area" value="{{0.32,0},{0,0},{0.47,0},{0.55,0}}" />
             <Property name="HoverImage" value="GameMenuImages/SettingsHover" />
             <Property name="NormalImage" value="GameMenuImages/SettingsNormal" />
             <Property name="PushedImage" value="GameMenuImages/SettingsHover" />
