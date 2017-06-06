@@ -1,3 +1,9 @@
+var EntityType =
+{
+  FRIEND: 0,
+  ENEMIS: 1
+}
+
 function Entity(id, username, type, room) {
   this.id = id;
   this.username = username;
@@ -48,4 +54,7 @@ function Entity(id, username, type, room) {
   return (this);
 }
 
-module.exports = Entity;
+module.exports = {
+  Entity: Entity,
+  EntityType: EntityType
+} ;

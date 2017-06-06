@@ -1,7 +1,7 @@
 /* LOCAL VAR */
 var totalConnected = 0;
 var users = {};
-
+var enemis = {};
 
 module.exports = {
   users: users,
@@ -13,9 +13,9 @@ var app = require("./app.js");
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var exec = require('child_process').exec;
+var math = require('mathjs');
 
-
-var Entity = require("./class/Entity.js");
+var { Entity, EntityType } = require("./class/Entity.js");
 
 var readline = require('readline');
 var rl = readline.createInterface({
@@ -23,6 +23,55 @@ var rl = readline.createInterface({
   output: process.stdout,
   terminal: false
 });
+
+
+/*
+  TEST MOBS
+*/
+
+enemis["test"] = new Entity(2342, "BOT 1", EntityType.ENEMIS, "room");
+enemis["test"].setPosition(48.796180725097656, 20.14305305480957, 143.03273010253906);
+enemis["test"].setDestination(48.796180725097656, 20.14305305480957, 143.03273010253906);
+
+
+function checkDistance(userPosition, enemisPosition)
+{
+  var xPos = math.pow((userPosition.x - enemisPosition.x), 2);
+  var yPos = math.pow((userPosition.y - enemisPosition.y), 2);
+  var distance = math.sqrt(xPos + yPos);
+  return (distance)
+}
+
+
+function IAEnemis()
+{
+
+  for (bot in enemis)
+  {
+      for (user in users)
+      {
+        if (checkDistance(users[user].position, enemis[bot].position) < 1)
+        {
+            io.emit("move", {
+              send_by: enemis[bot].id,
+              send_to: 0,
+              position: enemis[bot].position,
+              destination: users[user].position,
+              orientation: enemis[bot].orientation,
+              status: enemis[bot].status
+            });
+        }
+      }
+  }
+
+  setTimeout(function(){
+    IAEnemis();
+  }, 500  );
+}
+
+
+IAEnemis();
+
 
 function log(message)
 {
@@ -96,7 +145,12 @@ io.on('connection', function (socket) {
       users[socket.id].setStatus(data["status"]);
     }
     console.log(data);
-  })
+  });
+
+  socket.on("create_spell", function (data) {
+    io.to(socket.room).emit("create_spell", data);
+    console.log(data);
+  });
 
   socket.on('test', function (data) {
     console.log(data);
@@ -106,6 +160,18 @@ io.on('connection', function (socket) {
     socket.join(data["room"]);
     socket.room = data["room"];
     io.to(socket.room).emit("login", data);
+
+    for (bot in enemis)
+    {
+        io.to(socket.room).emit("create_entity", {
+          send_by: enemis[bot]["id"],
+          send_to: data["user_id"],
+          position: enemis[bot]["position"],
+          orientation: enemis[bot]["orientation"],
+          status: enemis[bot]["status"],
+          destination: enemis[bot]["destination"]
+        });
+    }
 
     for (user in users)
     {
@@ -127,12 +193,12 @@ io.on('connection', function (socket) {
 
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[socket.id] = new Entity(data["user_id"], "User " + data["user_id"], 0, data["room"]);
+    users[socket.id] = new Entity(data["user_id"], "User " + data["user_id"], EntityType.FRIEND, data["room"]);
     totalConnected++;
   });
 
 	socket.on('disconnect', function () {
-    delete(users[socket.id]);    
+    delete(users[socket.id]);
     io.to(socket.room).emit("logout", {user_id: socket.user_id});
     log("Disconnected ! ID: " + socket.user_id);
     totalConnected--;
@@ -140,7 +206,7 @@ io.on('connection', function (socket) {
 
 });
 
-
+/* WEB SERVER */
 
 app.get('/', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
