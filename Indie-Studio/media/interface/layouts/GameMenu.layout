@@ -7,25 +7,25 @@
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Property name="RiseOnClickEnabled" value="false" />
         <Window type="Vanilla/Button" name="Play" >
-            <Property name="Area" value="{{0,274},{0,257},{0,459},{0,312}}" />
+            <Property name="Area" value="{{0.15,0},{0.22,0},{0.245,0},{0.28,0}}" />
             <Property name="HoverImage" value="GameMenuImages/PlayHover" />
             <Property name="NormalImage" value="GameMenuImages/PlayNormal" />
             <Property name="PushedImage" value="GameMenuImages/PlayHover" />
         </Window>
         <Window type="Vanilla/Button" name="Options" >
-            <Property name="Area" value="{{0,274},{0,325},{0,459},{0,380}}" />
+            <Property name="Area" value="{{0.15,0},{0.3,0},{0.245,0},{0.36,0}}" />
             <Property name="HoverImage" value="GameMenuImages/OptionsHover" />
             <Property name="NormalImage" value="GameMenuImages/OptionsNormal" />
             <Property name="PushedImage" value="GameMenuImages/OptionsHover" />
         </Window>
         <Window type="Generic/ImageButton" name="Infos" >
-            <Property name="Area" value="{{0,1861},{0,23},{0,1891},{0,53}}" />
+            <Property name="Area" value="{{0.95,0},{0.05,0},{0.95,30},{0.05,30}}" />
             <Property name="HoverImage" value="GameMenuImages/InfosHover" />
             <Property name="NormalImage" value="GameMenuImages/InfosNormal" />
             <Property name="PushedImage" value="GameMenuImages/InfosNormal" />
         </Window>
         <Window type="Vanilla/Button" name="Quit" >
-            <Property name="Area" value="{{0,274},{0,393},{0,459},{0,448}}" />
+            <Property name="Area" value="{{0.15,0},{0.38,0},{0.245,0},{0.44,0}}" />
             <Property name="HoverImage" value="GameMenuImages/QuitHover" />
             <Property name="NormalImage" value="GameMenuImages/QuitNormal" />
             <Property name="PushedImage" value="GameMenuImages/QuitHover" />
