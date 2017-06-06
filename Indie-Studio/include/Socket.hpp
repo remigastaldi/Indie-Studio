@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Sat Jun  3 23:10:13 2017 gastal_r
+// Last update Tue Jun  6 12:15:29 2017 gastal_r
 //
 
 #ifndef _CLIENT_HPP_
@@ -23,6 +23,7 @@
 #include "Entity.hpp"
 #include "GameState.hpp"
 #include      "Collision.h"
+#include      "SpellManager.hpp"
 
 #define SOCKET_SERVER "http://ezgames.eu"
 #define SOCKET_PORT 3000
@@ -59,6 +60,7 @@ public:
   void  emit(const std::string &event, std::shared_ptr<sio::message> const &request);
   void  move(const Entity &entity);
 
+  void sendCollision(Spell::Type type, const std::string &id);
   void sendMessage(std::string const &);
   void sendEntity(const Entity &);
 
@@ -72,6 +74,7 @@ protected:
   std::string                 _addr;
   std::string                 _room;
 
+  SpellManager    *_spellManagerSocket;
   Collision::CollisionTools   *_collision;
   std::unordered_map<size_t, Entity *>  _entity;
   OgreBulletDynamics::DynamicsWorld *_world;

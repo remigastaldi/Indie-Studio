@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed May 10 23:43:20 2017 gastal_r
-// Last update Sun Jun  4 17:42:19 2017 gastal_r
+// Last update Tue Jun  6 16:41:54 2017 gastal_r
 //
 #include "DotSceneLoader.h"
 #include <Ogre.h>
@@ -298,81 +298,78 @@ void DotSceneLoader::processOctree(rapidxml::xml_node<>* XMLNode)
 
 void DotSceneLoader::processLight(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent)
 {
-  // static int i = 0;
-  // if (i == 0)
-  //   return;
-  //   ++i;
     // Process attributes
     Ogre::String name = getAttrib(XMLNode, "name");
     Ogre::String id = getAttrib(XMLNode, "id");
 
     // Create the light
-    Ogre::Light *pLight = mSceneMgr->createLight(name);
+
+    // Ogre::Light *pLight = mSceneMgr->createLight(name);
     // if(pParent)
     //     pParent->attachObject(pLight);
-    Ogre::String sValue = getAttrib(XMLNode, "type");
-    std::cout << "TYPE" << sValue << std::endl;
-    if(sValue == "point")
-        pLight->setType(Ogre::Light::LT_POINT);
-    else if(sValue == "directional")
-        pLight->setType(Ogre::Light::LT_DIRECTIONAL);
-    else if(sValue == "spot")
-        pLight->setType(Ogre::Light::LT_SPOTLIGHT);
-    else if(sValue == "radPoint")
-        pLight->setType(Ogre::Light::LT_POINT);
-
-    pLight->setVisible(getAttribBool(XMLNode, "visible", true));
-    // pLight->setCastShadows(getAttribBool(XMLNode, "castShadows", true));
-    pLight->setCastShadows(true);
-
+    // Ogre::String sValue = getAttrib(XMLNode, "type");
+    // std::cout << "TYPE" << sValue << std::endl;
+    // if(sValue == "point")
+    //     pLight->setType(Ogre::Light::LT_POINT);
+    // else if(sValue == "directional")
+    //     pLight->setType(Ogre::Light::LT_DIRECTIONAL);
+    // else if(sValue == "spot")
+    //     pLight->setType(Ogre::Light::LT_SPOTLIGHT);
+    // else if(sValue == "radPoint")
+    //     pLight->setType(Ogre::Light::LT_POINT);
+    //
+    // pLight->setVisible(getAttribBool(XMLNode, "visible", true));
+    // pLight->setCastShadows(getAttribBool(XMLNode, "shadow", false));
+    //
     rapidxml::xml_node<>* pElement;
 
     // Process position (?)
     pElement = XMLNode->first_node("position");
+    Ogre::Vector3 pos(parseVector3(pElement));
     if(pElement)
-        pLight->setPosition(parseVector3(pElement));
+        _lightPos.push_back(Ogre::Vector3(pos.x * -1, pos.y, pos.z * -1));
 
-    // Process normal (?)
-    pElement = XMLNode->first_node("normal");
-    if(pElement)
-      pLight->setDirection(parseVector3(pElement));
-
-    pElement = XMLNode->first_node("directionVector");
-    if(pElement)
-    {
-        pLight->setDirection(parseVector3(pElement));
-        mLightDirection = parseVector3(pElement);
-    }
-
-    // Process colourDiffuse (?)
-    pElement = XMLNode->first_node("colourDiffuse");
-    if(pElement)
-        pLight->setDiffuseColour(parseColour(pElement));
-
-    // Process colourSpecular (?)
-    pElement = XMLNode->first_node("colourSpecular");
-    if(pElement)
-        pLight->setSpecularColour(parseColour(pElement));
-
-    if(sValue != "directional")
-    {
-        // Process lightRange (?)
-        pElement = XMLNode->first_node("lightRange");
-        if(pElement)
-            processLightRange(pElement, pLight);
-
-        // Process lightAttenuation (?)
-        pElement = XMLNode->first_node("lightAttenuation");
-        if(pElement)
-            processLightAttenuation(pElement, pLight);
-    }
-    // Process userDataReference (?)
-    pElement = XMLNode->first_node("userDataReference");
-    if(pElement)
-        ;//processUserDataReference(pElement, pLight);
-
-        std::cout << pLight->getPosition() << std::endl;
-        pLight->setPosition(Ogre::Vector3(pLight->getPosition().x * -1, pLight->getPosition().y, pLight->getPosition().z * -1));
+    // // Process normal (?)
+    // pElement = XMLNode->first_node("normal");
+    // if(pElement)
+    //   pLight->setDirection(parseVector3(pElement));
+    //
+    // pElement = XMLNode->first_node("directionVector");
+    // if(pElement)
+    // {
+    //     pLight->setDirection(parseVector3(pElement));
+    //     mLightDirection = parseVector3(pElement);
+    // }
+    //
+    // // Process colourDiffuse (?)
+    // pElement = XMLNode->first_node("colourDiffuse");
+    // if(pElement)
+    //     pLight->setDiffuseColour(parseColour(pElement));
+    //
+    // // Process colourSpecular (?)
+    // pElement = XMLNode->first_node("colourSpecular");
+    // if(pElement)
+    //     pLight->setSpecularColour(parseColour(pElement));
+    //
+    // if(sValue != "directional")
+    // {
+    //     // Process lightRange (?)
+    //     pElement = XMLNode->first_node("lightRange");
+    //     if(pElement)
+    //         processLightRange(pElement, pLight);
+    //
+    //     // Process lightAttenuation (?)
+    //     pElement = XMLNode->first_node("lightAttenuation");
+    //     if(pElement)
+    //         processLightAttenuation(pElement, pLight);
+    // }
+    // // Process userDataReference (?)
+    // pElement = XMLNode->first_node("userDataReference");
+    // if(pElement)
+    //     ;//processUserDataReference(pElement, pLight);
+    //
+    //     std::cout << pLight->getPosition() << std::endl;
+    //     pLight->setPosition(Ogre::Vector3(pLight->getPosition().x * -1, pLight->getPosition().y, pLight->getPosition().z * -1));
 }
 
 void DotSceneLoader::processCamera(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode *pParent)

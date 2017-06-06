@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Sat Jun  3 23:18:06 2017 gastal_r
+** Last update Tue Jun  6 12:38:45 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -14,7 +14,8 @@ Socket::Socket(std::string const &addr, int const port, int const id, std::strin
   : _id(id),
   _room(room),
   _collision(nullptr),
-  _world(nullptr)
+  _world(nullptr),
+  _spellManagerSocket(nullptr)
 {
   _connect_finish = false;
   _addr = addr + ":" + std::to_string(port);
@@ -218,6 +219,11 @@ void Socket::wait()
 void Socket::emit(const std::string &event, std::shared_ptr<sio::message> const &request)
 {
   _current_socket->emit(event, request);
+}
+
+void Socket::sendCollision(Spell::Type type, const std::string &id)
+{
+  std::cout << "COLLISION SENDED" << std::endl;
 }
 
 void Socket::sendEntity(const Entity &entity)

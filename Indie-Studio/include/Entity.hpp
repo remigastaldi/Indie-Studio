@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Sat Jun  3 23:51:58 2017 gastal_r
+// Last update Mon Jun  5 23:09:51 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -61,7 +61,7 @@ public:
 
 public:
   Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, Status status,
-    const Ogre::Vector3 &position, const Ogre::Quaternion &orientation);
+    const Ogre::Vector3 &position, const Ogre::Quaternion &orientation, float walkspeed);
 
   ~Entity();
   Entity(const Entity& other) = default;

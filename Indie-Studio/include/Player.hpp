@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:29:53 2017 gastal_r
-// Last update Sat Jun  3 23:37:33 2017 gastal_r
+// Last update Mon Jun  5 23:13:53 2017 gastal_r
 //
 
 #ifndef         _PLAYER_HPP_
@@ -14,6 +14,7 @@
 #include        "Entity.hpp"
 #include "DotSceneLoader.h"
 
+#define DARKFIEND_SPEED 3.f
 class DarkFiend : public Entity
 {
 public:

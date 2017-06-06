@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Mon Jun  5 16:48:34 2017 gastal_r
+// Last update Tue Jun  6 16:44:40 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -26,7 +26,8 @@ Map::Map() :
   mBounds(Ogre::AxisAlignedBox(Ogre::Vector3 (-10000, -10000, -10000), Ogre::Vector3 (10000,  10000,  10000))),
   debugDrawer(nullptr),
   _rayCast(nullptr),
-  _collisionRayCast(nullptr)
+  _collisionRayCast(nullptr),
+  _spellManager(nullptr)
 {}
 
 Map::~Map()
@@ -47,7 +48,9 @@ void Map::enter(void)
   _collision = new Collision::CollisionTools();
   _world = new OgreBulletDynamics::DynamicsWorld(mDevice->sceneMgr, mBounds, mGravityVector);
 
-  _spellManager = new SpellManager(*mDevice->sceneMgr, *_collision);
+  _spellManagerSocket = new SpellManager(*mDevice->sceneMgr, *_collision);
+  std::function<void(Spell::Type, const std::string &)> sendCollisionFunc([=] (Spell::Type type, const std::string &id) { this->sendCollision(type, id); } );
+  _spellManager = new SpellManager(*mDevice->sceneMgr, *_collision, sendCollisionFunc);
 
 #if DEBUG_DRAWER
 	debugDrawer = new OgreBulletCollisions::DebugDrawer();
@@ -63,12 +66,15 @@ void Map::enter(void)
   _world->setDebugDrawer(debugDrawer);
 #endif
 
-  mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
-  mDevice->sceneMgr->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
-  mDevice->sceneMgr->setShadowTextureSelfShadow(true);
-  mDevice->sceneMgr->setShadowTextureSize(4096);
-  mDevice->sceneMgr->setShadowFarDistance(100);
-  // mDevice->sceneMgr->setShadowTextureCount(1);
+ mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+// mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+// mDevice->sceneMgr->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+// mDevice->sceneMgr->setShadowTextureSelfShadow(true);
+// mDevice->sceneMgr->setShadowTextureSize(4096);
+// // mDevice->sceneMgr->setShadowDirectionalLightExtrusionDistance(10);
+// // mDevice->sceneMgr->setShadowFarDistance(10);
+// mDevice->sceneMgr->setShadowTextureCount(4);
+// mDevice->sceneMgr->setShadowCameraSetup(Ogre::ShadowCameraSetupPtr(new Ogre::FocusedShadowCameraSetup()));
 
    mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
 
@@ -310,22 +316,10 @@ void Map::createScene(void)
   // map->setScale(Ogre::Vector3(0.03f, 0.03f, 0.03f));
 
   Ogre::Light* spotLight = mDevice->sceneMgr->createLight("SpotLight");
-//   spotLight->setDiffuseColour(0, 0, 1.0);
-// spotLight->setSpecularColour(0, 0, 1.0);
-spotLight->setType(Ogre::Light::LT_POINT);
-spotLight->setDirection(46.f, 0.f, 153.f);
-spotLight->setPosition(Ogre::Vector3(46.f, 42.f, 153.f));
-// spotLight->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
-
-
-spotLight->setDiffuseColour(0.05738838016986847, 0.34849655628204346, 1.0);
-spotLight->setSpecularColour(0.05738838016986847, 0.34849655628204346, 1.0);
-spotLight->setAttenuation(5000, 1.0, 0.04, 0.0);
-// spotLight->setCastShadows(false);
-// spotLight->setVisible(true);
-// <colourShadow b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
-// spotLight->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
-
+  spotLight->setDiffuseColour(0.5, 0.5, 0.5);
+  spotLight->setSpecularColour(0.5, 0.5, 0.5);
+  spotLight->setType(Ogre::Light::LT_POINT);
+  spotLight->setPosition(Ogre::Vector3(46.f, 42.f, 153.f));
 
   for (auto & it : loader.dynamicObjects)
   {
@@ -352,8 +346,8 @@ spotLight->setAttenuation(5000, 1.0, 0.04, 0.0);
 
     if (it.find("Ground") != std::string::npos)
     {
-      std::cout << "======================" << std::endl;
-      entity->setCastShadows(false);
+      // std::cout << "======================" << std::endl;
+      // entity->setCastShadows(false);
     }
   }
   for (auto & it : loader.staticObjects)
@@ -486,6 +480,9 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
   if (mLMouseDown)
     mouseRaycast();
 
+#if DEBUG_LOCAL == false
+  _spellManagerSocket->frameRenderingQueued(evt);
+#endif
   _spellManager->frameRenderingQueued(evt);
 
   _player->frameRenderingQueued(evt);
@@ -726,11 +723,7 @@ Ogre::Vector3   Map::getMouseFocusPos(void)
   else
     _rayCast->setRay(ray);
 
-#if DEBUG_DRAWER
-  _rayCast->setSortByDistance(true);
-#else
-  _rayCast->setSortByDistance(true, 1);
-#endif
+_rayCast->setSortByDistance(true);
 
   _rayCast->setQueryTypeMask(Ogre::SceneManager::ENTITY_TYPE_MASK);
 
@@ -741,12 +734,8 @@ Ogre::Vector3   Map::getMouseFocusPos(void)
     Ogre::MovableObject *mSelectedEntity = it.movable;
     float mSelectedEntityDist = it.distance;
     Ogre::Vector3 pos = ray.getPoint(mSelectedEntityDist);
-  #if DEBUG_DRAWER
     if (mSelectedEntity->getName() != std::to_string(_player->getId())
-      && mSelectedEntity->getName().find("SimpleRenderable") == std::string::npos)
-  #else
-    if (mSelectedEntity->getName() != std::to_string(_player->getId()))
-  #endif
+      && mSelectedEntity->getName().find("Ground") != std::string::npos)
     {
       std::cout << "Clicked: " << mSelectedEntity->getName().c_str() << "POS: X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
       return (pos);

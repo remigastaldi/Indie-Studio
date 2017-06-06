@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Mon Jun  5 15:31:16 2017 gastal_r
+// Last update Tue Jun  6 13:26:13 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -15,8 +15,6 @@
 
 #include      "GameState.hpp"
 #include      "Socket.hpp"
-#include      "SpellManager.hpp"
-
 
 #define DEBUG_LOCAL true
 #define DEBUG_CAMERA false
@@ -142,8 +140,6 @@ private:
   CEGUI::Window   *_thirdSpell;
   CEGUI::Window   *_fourthSpell;
 
-  SpellManager    *_spellManager;
-
 #if DEBUG_CAMERA
   OgreCookies::CameraMan* _cameraMan;
 #endif
@@ -155,12 +151,12 @@ private:
 
   //Player
   Entity    *_player;
-  std::vector<size_t>  _availableSpellId;
 
   Ogre::Entity *_ent;
   OgreBulletCollisions::CollisionShape *Shape;
   OgreBulletDynamics::RigidBody *defaultPlaneBody;
 
+  SpellManager    *_spellManager;
   bool mShutDown;
 };
 

@@ -5,7 +5,7 @@
 ** Login   <remi.gastaldi@epitech.eu>
 **
 ** Started on  Wed May 31 11:05:50 2017 gastal_r
-** Last update Wed May 31 11:05:54 2017 gastal_r
+** Last update Tue Jun  6 16:43:18 2017 gastal_r
 */
 
 #ifndef DOT_SCENELOADER_H
@@ -98,6 +98,7 @@ protected:
   Ogre::Quaternion parseQuaternion(rapidxml::xml_node<>* XMLNode);
   Ogre::ColourValue parseColour(rapidxml::xml_node<>* XMLNode);
 
+  const std::vector<Ogre::Vector3> &getLightPos(void) const { return (_lightPos); }
 
   Ogre::SceneManager *mSceneMgr;
   Ogre::SceneNode *mAttachNode;
@@ -106,6 +107,8 @@ protected:
   Ogre::TerrainGroup* mTerrainGroup;
   Ogre::Vector3 mTerrainPosition;
   Ogre::Vector3 mLightDirection;
+
+  std::vector<Ogre::Vector3> _lightPos;
 };
 
 #endif // DOT_SCENELOADER_H

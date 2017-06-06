@@ -5,22 +5,25 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:56:53 2017 gastal_r
-// Last update Sat Jun  3 20:00:58 2017 gastal_r
+// Last update Tue Jun  6 11:23:50 2017 gastal_r
 //
 
 #include      "Spell.hpp"
 
 Spell::Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id,
-  const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Ogre::Real distance, Ogre::Real speed)
+ const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback,
+  Ogre::Real distance, Ogre::Real speed, Spell::Type type)
   :  _sceneMgr(sceneMgr),
   _collision(collision),
-  _id(id),
   _entity(nullptr),
   _node(nullptr),
-  _destination(destination),
+  _id(id),
   _animationState(nullptr),
+  _speed(speed),
+  _destination(destination),
+  _disableCallback(disableCallback),
   _distance(distance),
-  _speed(speed)
+  _type(type)
 {}
 
 void 	Spell::changeAnimation(Spell::Status status)
@@ -40,7 +43,7 @@ void 	Spell::changeAnimation(Spell::Status status)
   _status = status;
 }
 
-void 	Spell::frameRenderingQueued(const Ogre::FrameEvent &evt)
+bool 	Spell::frameRenderingQueued(const Ogre::FrameEvent &evt)
 {
   if (_destination != Ogre::Vector3::ZERO)
   {
@@ -53,15 +56,16 @@ void 	Spell::frameRenderingQueued(const Ogre::FrameEvent &evt)
 
     if (ret.collided)
     {
-      std::cout << "Collide with " << ret.entity->getName() << std::endl;
-      return;
+      std::cout << _entity->getName() << " collide with " << ret.entity->getName() << std::endl;
+      _collideWith = _entity->getName();
+      return (false);
     }
 
     if (_distance <= 0.0)
     {
       _direction = Ogre::Vector3::ZERO;
       _destination = Ogre::Vector3::ZERO;
-      return;
+      return (false);
     }
     else
     {
@@ -71,20 +75,21 @@ void 	Spell::frameRenderingQueued(const Ogre::FrameEvent &evt)
       _node->yaw(Ogre::Degree(180));
       else
       {
-        _orientation = src.getRotationTo(_direction);
-        _node->rotate(_orientation);
+        Ogre::Quaternion orientation = src.getRotationTo(_direction);
+        _node->rotate(orientation);
       }
     }
     _node->translate(move * _direction);
   }
   if (_animationState)
       _animationState->addTime(evt.timeSinceLastFrame);
+  return (true);
 }
 
 void  Spell::setDestination(const Ogre::Vector3 &destination)
 {
   _destination = destination;
-	// changeAnimation(Spell::Status::MOVE);ss
+	// changeAnimation(Spell::Status::MOVE);
 }
 
 void 	Spell::destroy()
