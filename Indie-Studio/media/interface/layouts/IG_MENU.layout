@@ -11,7 +11,7 @@
             <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="InheritsAlpha" value="false" />
-            <Window type="Generic/ImageButton" name="PlayButton" >
+            <Window type="Generic/ImageButton" name="BackToGame" >
                 <Property name="Area" value="{{0,0},{0.15,0},{0.35,0},{0.24,0}}" />
                 <Property name="HoverImage" value="GameMenuImages/PlayHover" />
                 <Property name="NormalImage" value="GameMenuImages/PlayNormal" />
@@ -31,7 +31,7 @@
                 <Property name="HorzScrollDocumentSize" value="88" />
                 <Property name="VertScrollDocumentSize" value="20.5273" />
             </Window>
-            <Window type="Generic/ImageButton" name="ImageButton" >
+            <Window type="Generic/ImageButton" name="BackToMenu" >
                 <Property name="Area" value="{{0,0},{0.8,0},{0.35,0},{0.89,0}}" />
                 <Property name="HoverImage" value="GameMenuImages/MainMenuHover" />
                 <Property name="NormalImage" value="GameMenuImages/MainMenuNormal" />
