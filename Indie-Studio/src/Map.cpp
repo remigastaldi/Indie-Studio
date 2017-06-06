@@ -400,7 +400,8 @@ void Map::createScene(void)
     setupIngeniorSpell();
   }
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_spellBar);
-  // Attribution des boxes des spell
+  _healthBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Avatar.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
 }
 
 void Map::exit(void)
