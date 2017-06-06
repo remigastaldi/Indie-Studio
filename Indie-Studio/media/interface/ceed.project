@@ -32,6 +32,7 @@
             <Item path="imagesets/vanilla.png" type="file" />
         </Item>
         <Item name="layout" type="folder">
+            <Item path="layouts/Avatar.layout" type="file" />
             <Item path="layouts/ChatBox.layout" type="file" />
             <Item path="layouts/Console.wnd" type="file" />
             <Item path="layouts/Credits.layout" type="file" />
@@ -65,7 +66,7 @@
             <Item path="layouts/application_templates.layout" type="file" />
             <Item path="layouts/mainMenu.layout" type="file" />
             <Item path="layouts/selectChar.layout" type="file" />
-            <Item path="layouts/Avatar.layout" type="file" />
+            <Item path="layouts/Settings.layout" type="file" />
         </Item>
         <Item name="looknfeel" type="folder">
             <Item path="looknfeel/AlfiskoSkin.looknfeel" type="file" />
