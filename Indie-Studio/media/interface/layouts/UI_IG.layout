@@ -2,13 +2,13 @@
 
 <GUILayout version="4" >
     <Window type="Generic/Image" name="Buttons" >
-        <Property name="Area" value="{{0,0},{0,0},{0,200},{0,49}}" />
+        <Property name="Area" value="{{0,0},{0,0},{0.12,0},{0.05,0}}" />
         <Property name="Alpha" value="0.2" />
         <Property name="Image" value="GameMenuImages/BackgroundSpell" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Property name="HorizontalAlignment" value="Right" />
         <Window type="Generic/ImageButton" name="Parameters" >
-            <Property name="Area" value="{{0,72},{0,0},{0,107},{0,35}}" />
+            <Property name="Area" value="{{0,72},{0,0},{0.15,72},{0.55,0}}" />
             <Property name="HoverImage" value="GameMenuImages/SettingsHover" />
             <Property name="NormalImage" value="GameMenuImages/SettingsNormal" />
             <Property name="PushedImage" value="GameMenuImages/SettingsHover" />
@@ -17,7 +17,7 @@
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Generic/ImageButton" name="Infos" >
-            <Property name="Area" value="{{0,28},{0,0},{0,63},{0,35}}" />
+            <Property name="Area" value="{{0,28},{0,0},{0.15,28},{0.55,0}}" />
             <Property name="HoverImage" value="GameMenuImages/InfosHover" />
             <Property name="NormalImage" value="GameMenuImages/InfosNormal" />
             <Property name="PushedImage" value="GameMenuImages/InfosHover" />

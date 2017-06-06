@@ -2,32 +2,32 @@
 
 <GUILayout version="4" >
     <Window type="Generic/Image" name="WizzardSpellBar" >
-        <Property name="Area" value="{{0,786},{0,939},{0,1133},{0,1029}}" />
+        <Property name="Area" value="{{0.42,0},{0.87,0},{0.604,0},{0.955,0}}" />
         <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="Generic/ImageButton" name="SpellTornado" >
-            <Property name="Area" value="{{0,9},{0,8},{0,84},{0,83}}" />
+            <Property name="Area" value="{{0.03,0},{0.1,0},{0.25,0},{0.9,0}}" />
             <Property name="HoverImage" value="GameMenuImages/SpellTornado" />
             <Property name="NormalImage" value="GameMenuImages/SpellTornado" />
             <Property name="PushedImage" value="GameMenuImages/SpellTornado_Click" />
             <Property name="InheritsAlpha" value="false" />
         </Window>
         <Window type="Generic/ImageButton" name="SpellFireBall" >
-            <Property name="Area" value="{{0,95},{0,8},{0,170},{0,83}}" />
+            <Property name="Area" value="{{0.27,0},{0.1,0},{0.49,0},{0.9,0}}" />
             <Property name="HoverImage" value="GameMenuImages/SpellFireBall" />
             <Property name="NormalImage" value="GameMenuImages/SpellFireBall" />
             <Property name="PushedImage" value="GameMenuImages/SpellFireBall_Click" />
             <Property name="InheritsAlpha" value="false" />
         </Window>
         <Window type="Generic/ImageButton" name="SpellShield" >
-            <Property name="Area" value="{{0,181},{0,8},{0,256},{0,83}}" />
+            <Property name="Area" value="{{0.51,0},{0.1,0},{0.73,0},{0.9,0}}" />
             <Property name="HoverImage" value="GameMenuImages/SpellShield" />
             <Property name="NormalImage" value="GameMenuImages/SpellShield" />
             <Property name="PushedImage" value="GameMenuImages/SpellShield_Click" />
             <Property name="InheritsAlpha" value="false" />
         </Window>
         <Window type="Generic/ImageButton" name="SpellLeaf" >
-            <Property name="Area" value="{{0,266},{0,8},{0,341},{0,83}}" />
+            <Property name="Area" value="{{0.75,0},{0.1,0},{0.97,0},{0.9,0}}" />
             <Property name="HoverImage" value="GameMenuImages/SpellLeaf" />
             <Property name="NormalImage" value="GameMenuImages/SpellLeaf" />
             <Property name="PushedImage" value="GameMenuImages/SpellLeaf_Click" />
