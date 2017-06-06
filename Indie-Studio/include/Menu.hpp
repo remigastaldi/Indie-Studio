@@ -53,6 +53,7 @@ public:
   bool         buttonClose(const CEGUI::EventArgs &e);
   bool         buttonOptions(const CEGUI::EventArgs &e);
   bool        Backbutton(const CEGUI::EventArgs &e);
+  bool        SplashButton(const CEGUI::EventArgs &e);
 
 private:
   char mPolygonRenderingMode;
@@ -76,6 +77,7 @@ private:
   CEGUI::Window *_options;
   CEGUI::Window *_play;
   CEGUI::Window *_splashScreen;
+  CEGUI::Window *_splashButton;
 
   CEGUI::Window *_backButton;
   CEGUI::Window *_optionButton;
