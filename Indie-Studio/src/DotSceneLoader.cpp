@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed May 10 23:43:20 2017 gastal_r
-// Last update Tue Jun  6 16:41:54 2017 gastal_r
+// Last update Tue Jun  6 17:09:59 2017 gastal_r
 //
 #include "DotSceneLoader.h"
 #include <Ogre.h>
@@ -326,8 +326,9 @@ void DotSceneLoader::processLight(rapidxml::xml_node<>* XMLNode, Ogre::SceneNode
     // Process position (?)
     pElement = XMLNode->first_node("position");
     Ogre::Vector3 pos(parseVector3(pElement));
+    std::pair<std::string, Ogre::Vector3> pair(std::string(name), Ogre::Vector3(pos.x * -1, pos.y, pos.z * -1));
     if(pElement)
-        _lightPos.push_back(Ogre::Vector3(pos.x * -1, pos.y, pos.z * -1));
+        _lightPos.push_back(pair);
 
     // // Process normal (?)
     // pElement = XMLNode->first_node("normal");
