@@ -75,6 +75,7 @@ private:
   CEGUI::Window *_credits;
   CEGUI::Window *_options;
   CEGUI::Window *_play;
+  CEGUI::Window *_splashScreen;
 
   CEGUI::Window *_backButton;
   CEGUI::Window *_optionButton;
