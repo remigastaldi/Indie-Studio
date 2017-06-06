@@ -3,7 +3,7 @@
 <GUILayout version="4" >
     <Window type="Generic/Image" name="BackgroundSettings" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-        <Property name="Alpha" value="0.4" />
+        <Property name="Alpha" value="0.6" />
         <Property name="Image" value="GameMenuImages/BackgroundSpell" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="Generic/Image" name="Settings" >
