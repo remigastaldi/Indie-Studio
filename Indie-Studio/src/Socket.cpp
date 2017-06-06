@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Tue Jun  6 12:38:45 2017 gastal_r
+** Last update Tue Jun  6 20:57:52 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -45,12 +45,12 @@ void Socket::on_connected()
   obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
   emit("login", obj);
 
-  HIGHLIGHT_N("Socket.IO: Connected");
+  HIGHLIGHT_N("Socket.IO: Connected\n");
 }
 
 void Socket::on_close(sio::client::close_reason const& reason)
 {
-  HIGHLIGHT("Socket.IO: Disconnected");
+  HIGHLIGHT("Socket.IO: Disconnected\n");
 }
 
 void Socket::on_fail()
@@ -77,6 +77,36 @@ void Socket::events()
       }
       _lock.unlock();
     }));
+
+
+  _current_socket->on("create_spell", sio::socket::event_listener_aux([&](std::string const& name,
+    sio::message::ptr const& data,
+    bool isAck, const sio::message::list &ack_resp)
+    {
+      (void)name;
+      (void)isAck;
+      (void)ack_resp;
+      _lock.lock();
+      if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
+      {
+        Ogre::Vector3 position;
+        position.x = data->get_map()["position"]->get_map()["x"]->get_double();
+        position.y = data->get_map()["position"]->get_map()["y"]->get_double();
+        position.z = data->get_map()["position"]->get_map()["z"]->get_double();
+
+        Ogre::Vector3 destination;
+        destination.x = data->get_map()["destination"]->get_map()["x"]->get_double();
+        destination.y = data->get_map()["destination"]->get_map()["y"]->get_double();
+        destination.z = data->get_map()["destination"]->get_map()["z"]->get_double();
+
+        Spell::Type type;
+        type = (Spell::Type)data->get_map()["type"]->get_int();
+
+        _spellManagerSocket->launchSpell(type, position, destination);
+      }
+      _lock.unlock();
+    }));
+
 
   _current_socket->on("move", sio::socket::event_listener_aux([&](std::string const& name,
     sio::message::ptr const& data,
@@ -224,6 +254,31 @@ void Socket::emit(const std::string &event, std::shared_ptr<sio::message> const 
 void Socket::sendCollision(Spell::Type type, const std::string &id)
 {
   std::cout << "COLLISION SENDED" << std::endl;
+}
+
+void Socket::sendSpell(Spell::Type type, const Ogre::Vector3 &playerPos, const Ogre::Vector3 &dest)
+{
+  auto obj = sio::object_message::create();
+  auto position = sio::object_message::create();
+  auto destination = sio::object_message::create();
+
+  //CREATE POS
+  position.get()->get_map()["x"] =   sio::double_message::create(playerPos.x);
+  position.get()->get_map()["y"] =   sio::double_message::create(playerPos.y);
+  position.get()->get_map()["z"] =   sio::double_message::create(playerPos.z);
+
+  //CREATE DESTINATION
+  destination.get()->get_map()["x"] =   sio::double_message::create(dest.x);
+  destination.get()->get_map()["y"] =   sio::double_message::create(dest.y);
+  destination.get()->get_map()["z"] =   sio::double_message::create(dest.z);
+
+  obj.get()->get_map()["type"] =  sio::int_message::create((int)type);
+  obj.get()->get_map()["position"] =  position;
+  obj.get()->get_map()["destination"] =  destination;
+  obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
+  obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
+
+  emit("create_spell", obj);
 }
 
 void Socket::sendEntity(const Entity &entity)

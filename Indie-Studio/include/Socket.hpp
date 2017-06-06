@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Tue Jun  6 12:15:29 2017 gastal_r
+// Last update Tue Jun  6 20:10:07 2017 Leo HUBERT
 //
 
 #ifndef _CLIENT_HPP_
@@ -60,9 +60,10 @@ public:
   void  emit(const std::string &event, std::shared_ptr<sio::message> const &request);
   void  move(const Entity &entity);
 
-  void sendCollision(Spell::Type type, const std::string &id);
+  void sendCollision(Spell::Type, const std::string &);
   void sendMessage(std::string const &);
   void sendEntity(const Entity &);
+  void sendSpell(Spell::Type, const Ogre::Vector3 &, const Ogre::Vector3 &);
 
 protected:
   int                         _id;

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Tue Jun  6 17:37:21 2017 gastal_r
+// Last update Tue Jun  6 20:57:37 2017 Leo HUBERT
 //
 
 #include        "Map.hpp"
@@ -522,7 +522,8 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
 {
   if(arg.key == OIS::KC_V)
 {
-  _spellManager->launchSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());
+  sendSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());
+  _spellManager->launchSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());  
   return true;
   Ogre::Vector3 size = Ogre::Vector3::ZERO;
   Ogre::Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 10);

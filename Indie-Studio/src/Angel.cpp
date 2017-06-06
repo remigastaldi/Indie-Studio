@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun Jun  4 17:24:51 2017 gastal_r
-// Last update Mon Jun  5 22:56:37 2017 gastal_r
+// Last update Tue Jun  6 21:06:13 2017 Leo HUBERT
 //
 
 #include      "Spell.hpp"
@@ -17,7 +17,9 @@ Angel::Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
     Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Angel [id] " + std::to_string(id) +" =====");
 
     _node = sceneMgr.getRootSceneNode()->createChildSceneNode("Angel:" + std::to_string(id));
-    _entity = sceneMgr.createEntity("Angel:" + std::to_string(id), "Barrel.mesh");
+    _entity = sceneMgr.createEntity((_disableCallback ? "AngelServer:" : "Angel:") + std::to_string(id), "Ogre.mesh");
+    //_entity = sceneMgr.createEntity("Angel:" + std::to_string(id), "Barrel.mesh");
+
     _node->attachObject(_entity);
     _node->setPosition(Ogre::Vector3(position.x, position.y + 2.f, position.z));
     // _node->setPosition(position);

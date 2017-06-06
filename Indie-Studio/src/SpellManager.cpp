@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun  3 18:43:48 2017 gastal_r
-// Last update Tue Jun  6 12:43:20 2017 gastal_r
+// Last update Tue Jun  6 21:10:36 2017 Leo HUBERT
 //
 
 #include      "SpellManager.hpp"
@@ -65,5 +65,5 @@ void        SpellManager::launchSpell(Spell::Type type, const Ogre::Vector3 &sta
     _currentMaxIndex++;
     _spellsIndex.push_back(_currentMaxIndex);
   }
-  _spells.push_back(createSpell(type, _sceneMgr, _collision, id, startPos, dest, false));
+  _spells.push_back(createSpell(type, _sceneMgr, _collision, id , startPos, dest, _disableCallback));
 }
