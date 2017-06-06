@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <GUILayout version="4" >
-    <Window type="Generic/Image" name="Image" >
+    <Window type="Generic/ImageButton" name="SplashScreenButton" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-        <Property name="Image" value="HUDDemo/SplashScreen" />
-        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="HoverImage" value="HUDDemo/SplashScreen" />
+        <Property name="NormalImage" value="HUDDemo/SplashScreen" />
+        <Property name="PushedImage" value="HUDDemo/SplashScreen" />
     </Window>
 </GUILayout>
