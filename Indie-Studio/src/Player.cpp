@@ -5,14 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Wed Jun  7 16:08:45 2017 gastal_r
+// Last update Wed Jun  7 21:37:11 2017 gastal_r
 //
 
 #include        "Player.hpp"
 
 DarkFiend::DarkFiend(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision,
   size_t id, Entity::Status status, const Ogre::Vector3 &position, const Ogre::Vector3 &destination)
-  : Entity(ENTITY_INIT_VARS, DARKFIEND_SPEED)
+  : Entity(ENTITY_INIT_VARS, DARKFIEND_SPEED, DARKFIEND_HEALTH)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create DarkFiend [id] " + std::to_string(id) + " =====");
 

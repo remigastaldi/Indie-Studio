@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Wed Jun  7 15:13:46 2017 gastal_r
+// Last update Wed Jun  7 21:39:51 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -61,7 +61,7 @@ public:
 
 public:
   Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, Status status,
-    const Ogre::Vector3 &position, const Ogre::Vector3 &destination, float walkspeed);
+    const Ogre::Vector3 &position, const Ogre::Vector3 &destination, float walkspeed, size_t health);
 
   ~Entity();
   Entity(const Entity& other) = default;
@@ -94,20 +94,21 @@ public:
   void					setOrientation(const Ogre::Quaternion &orientation) { _node->setOrientation(orientation); }
 
 protected:
-  btPairCachingGhostObject* _ghostObject;
-  btKinematicCharacterController* _character;
   Ogre::SceneManager  &_sceneMgr;
   OgreBulletDynamics::DynamicsWorld &_world;
   Collision::CollisionTools &_collision;
+  Entity::Status		    _status;
+  size_t				        _id;
+  Ogre::Quaternion		  _orientation;
+  Ogre::Vector3			    _destination;
+  Ogre::Real			      _walkSpd;
+  size_t                _health;
+  btPairCachingGhostObject* _ghostObject;
+  btKinematicCharacterController* _character;
   Ogre::Entity        *_entity;
   Ogre::SceneNode     *_node;
   OgreBulletDynamics::RigidBody *defaultBody;
-  size_t				        _id;
-  Entity::Status		    _status;
-  Ogre::Quaternion		  _orientation;
   Ogre::AnimationState	*_animationState;
-  Ogre::Real			      _walkSpd;
-  Ogre::Vector3			    _destination;
   std::unordered_map<size_t, Spell::Type>  _spells;
 };
 

@@ -5,24 +5,24 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Wed Jun  7 19:53:50 2017 gastal_r
+// Last update Wed Jun  7 21:53:43 2017 gastal_r
 //
 
 #include        "Entity.hpp"
 
 Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id,
- 	Status status, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, float walkspeed)
+ 	Status status, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, float walkspeed, size_t health)
 	:	_sceneMgr(sceneMgr),
 	_world(world),
 	_collision(collision),
+  _status(status),
 	_id(id),
+  _destination(destination),
+  _walkSpd(walkspeed),
+  _health(health),
 	_entity(nullptr),
 	_node(nullptr),
-	_status(status),
-	_orientation(Ogre::Quaternion::ZERO),
-	_destination(Ogre::Vector3::ZERO),
 	_animationState(0),
-	_walkSpd(walkspeed),
 	_ghostObject(nullptr),
 	_character(nullptr),
   _spells(4)
