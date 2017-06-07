@@ -24,12 +24,11 @@ var rl = readline.createInterface({
   terminal: false
 });
 
-
 /*
   TEST MOBS
 */
 
-enemis["test"] = new Entity(2342, "BOT 1", EntityType.ENEMIS, "room");
+enemis["test"] = new Entity(23455, "BOT 1", EntityType.ENEMIS, "room");
 enemis["test"].setPosition(48.796180725097656, 20.14305305480957, 143.03273010253906);
 enemis["test"].setDestination(48.796180725097656, 20.14305305480957, 143.03273010253906);
 
@@ -57,7 +56,6 @@ function IAEnemis()
               send_to: 0,
               position: enemis[bot].position,
               destination: users[user].position,
-              orientation: enemis[bot].orientation,
               status: enemis[bot].status
             });
         }
@@ -130,7 +128,6 @@ io.on('connection', function (socket) {
     {
       users[socket.id].setDestination(data["destination"]["x"], data["destination"]["y"], data["destination"]["z"]);
       users[socket.id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
-      users[socket.id].setOrientation(data["orientation"]["w"], data["orientation"]["x"], data["orientation"]["y"], data["orientation"]["z"]);
       users[socket.id].setStatus(data["status"]);
     }
   });
@@ -141,7 +138,6 @@ io.on('connection', function (socket) {
     {
       users[socket.id].setDestination(data["destination"]["x"], data["destination"]["y"], data["destination"]["z"]);
       users[socket.id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
-      users[socket.id].setOrientation(data["orientation"]["w"], data["orientation"]["x"], data["orientation"]["y"], data["orientation"]["z"]);
       users[socket.id].setStatus(data["status"]);
     }
     console.log(data);
@@ -167,7 +163,6 @@ io.on('connection', function (socket) {
           send_by: enemis[bot]["id"],
           send_to: data["user_id"],
           position: enemis[bot]["position"],
-          orientation: enemis[bot]["orientation"],
           status: enemis[bot]["status"],
           destination: enemis[bot]["destination"]
         });
@@ -182,7 +177,6 @@ io.on('connection', function (socket) {
           send_by: users[user]["id"],
           send_to: data["user_id"],
           position: users[user]["position"],
-          orientation: users[user]["orientation"],
           status: users[user]["status"],
           destination: users[user]["destination"]
         });
