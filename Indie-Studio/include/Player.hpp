@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:29:53 2017 gastal_r
-// Last update Mon Jun  5 23:13:53 2017 gastal_r
+// Last update Wed Jun  7 15:12:09 2017 gastal_r
 //
 
 #ifndef         _PLAYER_HPP_
@@ -19,7 +19,7 @@ class DarkFiend : public Entity
 {
 public:
   DarkFiend(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, Status status, const Ogre::Vector3 &position,
-   const Ogre::Quaternion &orientation);
+   const Ogre::Vector3 &destination);
 };
 
 #endif /* !_PLAYER_HPP_ */

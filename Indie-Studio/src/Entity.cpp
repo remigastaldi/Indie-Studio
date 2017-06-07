@@ -5,13 +5,13 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Tue Jun  6 21:32:56 2017 gastal_r
+// Last update Wed Jun  7 18:41:45 2017 gastal_r
 //
 
 #include        "Entity.hpp"
 
 Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id,
- 	Status status, const Ogre::Vector3 &position, const Ogre::Quaternion &orientation, float walkspeed)
+ 	Status status, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, float walkspeed)
 	:	_sceneMgr(sceneMgr),
 	_world(world),
 	_collision(collision),
@@ -19,7 +19,7 @@ Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 	_entity(nullptr),
 	_node(nullptr),
 	_status(status),
-	_orientation(orientation),
+	_orientation(Ogre::Quaternion::ZERO),
 	_destination(Ogre::Vector3::ZERO),
 	_animationState(0),
 	_walkSpd(walkspeed),
@@ -148,9 +148,4 @@ void					Entity::setDestination(const Ogre::Vector3 &destination)
 {
   _destination = destination;
 	changeAnimation(Entity::Status::MOVE);
-}
-
-void 	Entity::destroy()
-{
-	_sceneMgr.destroySceneNode(_node);
 }

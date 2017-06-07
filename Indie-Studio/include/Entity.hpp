@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Mon Jun  5 23:09:51 2017 gastal_r
+// Last update Wed Jun  7 15:13:46 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -61,7 +61,7 @@ public:
 
 public:
   Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, Status status,
-    const Ogre::Vector3 &position, const Ogre::Quaternion &orientation, float walkspeed);
+    const Ogre::Vector3 &position, const Ogre::Vector3 &destination, float walkspeed);
 
   ~Entity();
   Entity(const Entity& other) = default;
@@ -122,10 +122,10 @@ class DarkFiend;
 
 #define   ENTITY_INIT_PARAMETERS                                 \
 Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, \
-Entity::Status status, const Ogre::Vector3 &position, const Ogre::Quaternion &orientation
+Entity::Status status, const Ogre::Vector3 &position, const Ogre::Vector3 &destination
 
 #define   ENTITY_INIT_VARS    \
-sceneMgr, world, collision, id, status, position, orientation
+sceneMgr, world, collision, id, status, position, destination
 
 template<typename T>
 inline Entity * createInstance(ENTITY_INIT_PARAMETERS)

@@ -5,13 +5,13 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Mon Jun  5 23:10:16 2017 gastal_r
+// Last update Wed Jun  7 16:08:45 2017 gastal_r
 //
 
 #include        "Player.hpp"
 
 DarkFiend::DarkFiend(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision,
-  size_t id, Entity::Status status, const Ogre::Vector3 &position, const Ogre::Quaternion &orientation)
+  size_t id, Entity::Status status, const Ogre::Vector3 &position, const Ogre::Vector3 &destination)
   : Entity(ENTITY_INIT_VARS, DARKFIEND_SPEED)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create DarkFiend [id] " + std::to_string(id) + " =====");
@@ -25,8 +25,8 @@ DarkFiend::DarkFiend(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsW
   _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
   _node->attachObject(_entity);
   _node->setScale(0.2f, 0.2f, 0.2f);
-  if (orientation != Ogre::Quaternion::ZERO)
-    setOrientation(orientation);
+  // if (orientation != Ogre::Quaternion::ZERO)
+  //   setOrientation(orientation);
   changeAnimation(status);
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE);
@@ -34,4 +34,5 @@ DarkFiend::DarkFiend(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsW
   addToBulletWorld(position);
   btVector3 posBody(_ghostObject->getWorldTransform().getOrigin());
   _node->setPosition(cvt(posBody));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== DARKFIEND created [id] " + std::to_string(id) + " =====");
 }

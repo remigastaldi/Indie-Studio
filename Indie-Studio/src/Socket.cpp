@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Wed Jun  7 02:52:40 2017 gastal_r
+** Last update Wed Jun  7 18:36:17 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -65,6 +65,7 @@ void Socket::events()
       (void)name;
       (void)isAck;
       (void)ack_resp;
+
       _lock.lock();
       if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
       {
@@ -72,8 +73,8 @@ void Socket::events()
         HIGHLIGHT_N("SYSTEM: ");
         std::cout <<  data->get_map()["message"]->get_string() << '\n';
       }
-      _lock.unlock();
-    }));
+    _lock.unlock();
+  }));
 
 
   _current_socket->on("create_spell", sio::socket::event_listener_aux([&](std::string const& name,
@@ -83,23 +84,22 @@ void Socket::events()
       (void)name;
       (void)isAck;
       (void)ack_resp;
+
       _lock.lock();
       if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
       {
-        Ogre::Vector3 position;
-        position.x = data->get_map()["position"]->get_map()["x"]->get_double();
-        position.y = data->get_map()["position"]->get_map()["y"]->get_double();
-        position.z = data->get_map()["position"]->get_map()["z"]->get_double();
+        Ogre::Vector3 position(
+          data->get_map()["position"]->get_map()["x"]->get_double(),
+          data->get_map()["position"]->get_map()["y"]->get_double(),
+          data->get_map()["position"]->get_map()["z"]->get_double());
 
-        Ogre::Vector3 destination;
-        destination.x = data->get_map()["destination"]->get_map()["x"]->get_double();
-        destination.y = data->get_map()["destination"]->get_map()["y"]->get_double();
-        destination.z = data->get_map()["destination"]->get_map()["z"]->get_double();
+        Ogre::Vector3 destination(
+          data->get_map()["destination"]->get_map()["x"]->get_double(),
+          data->get_map()["destination"]->get_map()["y"]->get_double(),
+          data->get_map()["destination"]->get_map()["z"]->get_double());
 
-        Spell::Type type;
-        type = (Spell::Type)data->get_map()["type"]->get_int();
-
-        _spellManagerSocket->launchSpell(type, position, destination);
+        WorkingQueue::Data queueData((Spell::Type)data->get_map()["type"]->get_int(), Spell::Status::MOVE, position, destination);
+        pushToQueue(WorkingQueue::Action::CREATE_SPELL, queueData);
       }
       _lock.unlock();
     }));
@@ -112,38 +112,22 @@ void Socket::events()
       (void)name;
       (void)isAck;
       (void)ack_resp;
+
       _lock.lock();
-      if (data->get_map()["send_by"]->get_int() != _id)
-      {
+      Ogre::Vector3 position(
+      data->get_map()["position"]->get_map()["x"]->get_double(),
+      data->get_map()["position"]->get_map()["y"]->get_double(),
+      data->get_map()["position"]->get_map()["z"]->get_double());
 
-        Ogre::Vector3 position;
-        position.x = data->get_map()["position"]->get_map()["x"]->get_double();
-        position.y = data->get_map()["position"]->get_map()["y"]->get_double();
-        position.z = data->get_map()["position"]->get_map()["z"]->get_double();
+      Ogre::Vector3 destination(
+      data->get_map()["destination"]->get_map()["x"]->get_double(),
+      data->get_map()["destination"]->get_map()["y"]->get_double(),
+      data->get_map()["destination"]->get_map()["z"]->get_double());
 
-        Ogre::Quaternion orientation;
-        orientation.w = data->get_map()["orientation"]->get_map()["w"]->get_double();
-        orientation.x = data->get_map()["orientation"]->get_map()["x"]->get_double();
-        orientation.y = data->get_map()["orientation"]->get_map()["y"]->get_double();
-        orientation.z = data->get_map()["orientation"]->get_map()["z"]->get_double();
-
-        Ogre::Vector3 destination;
-        destination.x = data->get_map()["destination"]->get_map()["x"]->get_double();
-        destination.y = data->get_map()["destination"]->get_map()["y"]->get_double();
-        destination.z = data->get_map()["destination"]->get_map()["z"]->get_double();
-
-        Entity::Status status;
-        status = (Entity::Status)data->get_map()["status"]->get_int();
-
-        if (_entity[data->get_map()["send_by"]->get_int()])
-        {
-          // _entity[data->get_map()["send_by"]->get_int()]->setOrientation(orientation);
-          _entity[data->get_map()["send_by"]->get_int()]->setDestination(destination);
-          _entity[data->get_map()["send_by"]->get_int()]->setPosition(position);
-        }
-      }
-      _lock.unlock();
-    }));
+      WorkingQueue::Data queueData((Entity::Status)data->get_map()["status"]->get_int(), data->get_map()["send_by"]->get_int(), position, destination);
+      pushToQueue(WorkingQueue::Action::MOVE_ENTITY, queueData);
+    _lock.unlock();
+  }));
 
   _current_socket->on("create_entity", sio::socket::event_listener_aux([&](std::string const& name,
     sio::message::ptr const& data,
@@ -156,28 +140,19 @@ void Socket::events()
 
       if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
       {
-        Ogre::Vector3 position;
-        position.x = data->get_map()["position"]->get_map()["x"]->get_double();
-        position.y = data->get_map()["position"]->get_map()["y"]->get_double();
-        position.z = data->get_map()["position"]->get_map()["z"]->get_double();
+        Ogre::Vector3 position(
+          data->get_map()["position"]->get_map()["x"]->get_double(),
+          data->get_map()["position"]->get_map()["y"]->get_double(),
+          data->get_map()["position"]->get_map()["z"]->get_double());
 
-        Ogre::Quaternion orientation;
-        orientation.w = data->get_map()["orientation"]->get_map()["w"]->get_double();
-        orientation.x = data->get_map()["orientation"]->get_map()["x"]->get_double();
-        orientation.y = data->get_map()["orientation"]->get_map()["y"]->get_double();
-        orientation.z = data->get_map()["orientation"]->get_map()["z"]->get_double();
+        Ogre::Vector3 destination(
+          data->get_map()["destination"]->get_map()["x"]->get_double(),
+          data->get_map()["destination"]->get_map()["y"]->get_double(),
+          data->get_map()["destination"]->get_map()["z"]->get_double());
 
-        Ogre::Vector3 destination;
-        destination.x = data->get_map()["destination"]->get_map()["x"]->get_double();
-        destination.y = data->get_map()["destination"]->get_map()["y"]->get_double();
-        destination.z = data->get_map()["destination"]->get_map()["z"]->get_double();
-
-        Entity::Status status;
-        status = (Entity::Status)data->get_map()["status"]->get_int();
-
-        // _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::DARKFIEND, *mDevice->sceneMgr, *_world, *_collision, data->get_map()["send_by"]->get_int(),
-        // status, position, orientation);
-        // _entity[data->get_map()["send_by"]->get_int()]->setDestination(destination);
+        Data queueData(Entity::Type::DARKFIEND, (Entity::Status)data->get_map()["status"]->get_int(),
+          data->get_map()["send_by"]->get_int(), position, destination);
+        pushToQueue(WorkingQueue::Action::CREATE_ENTITY, queueData);
       }
       _lock.unlock();
     }));
@@ -189,6 +164,7 @@ void Socket::events()
       (void)name;
       (void)isAck;
       (void)ack_resp;
+
       _lock.lock();
       if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["user_id"]->get_int() != _id)
       {
@@ -204,16 +180,12 @@ void Socket::events()
       (void)name;
       (void)isAck;
       (void)ack_resp;
+
       _lock.lock();
       if (data->get_map()["user_id"]->get_int() != _id)
       {
-        if (_entity[data->get_map()["user_id"]->get_int()])
-        {
-          // _entity[data->get_map()["user_id"]->get_int()]->destroy();
-          Entity *entity = _entity[data->get_map()["user_id"]->get_int()];
-          _entity.erase(data->get_map()["user_id"]->get_int());
-          delete(entity);
-        }
+        WorkingQueue::Data queueData(data->get_map()["user_id"]->get_int());
+        pushToQueue(WorkingQueue::Action::DELETE_ENTITY, queueData);
         std::cout <<  "User disconnected ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
       }
       _lock.unlock();
@@ -292,12 +264,6 @@ void Socket::sendEntity(const Entity &entity)
   pos.get()->get_map()["y"] =   sio::double_message::create(entity.getPosition().y);
   pos.get()->get_map()["z"] =   sio::double_message::create(entity.getPosition().z);
 
-  //CREATE ORIENTATION
-  orientation.get()->get_map()["w"] =   sio::double_message::create(entity.getOrientation().w);
-  orientation.get()->get_map()["x"] =   sio::double_message::create(entity.getOrientation().x);
-  orientation.get()->get_map()["y"] =   sio::double_message::create(entity.getOrientation().y);
-  orientation.get()->get_map()["z"] =   sio::double_message::create(entity.getOrientation().z);
-
   //CREATE DESTINATION
   destination.get()->get_map()["x"] =   sio::double_message::create(entity.getDestination().x);
   destination.get()->get_map()["y"] =   sio::double_message::create(entity.getDestination().y);
@@ -306,7 +272,6 @@ void Socket::sendEntity(const Entity &entity)
   //CREATE SOCKET
   obj.get()->get_map()["destination"] =  destination;
   obj.get()->get_map()["position"] =  pos;
-  obj.get()->get_map()["orientation"] =  orientation;
   //obj.get()->get_map()["type"] =  sio::int_message::create(entity.getType());
   obj.get()->get_map()["status"] =  sio::int_message::create((int)entity.getStatus());
   obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
@@ -335,12 +300,6 @@ void Socket::move(const Entity &entity)
   pos.get()->get_map()["y"] =   sio::double_message::create(entity.getPosition().y);
   pos.get()->get_map()["z"] =   sio::double_message::create(entity.getPosition().z);
 
-  //CREATE ORIENTATION
-  orientation.get()->get_map()["x"] =   sio::double_message::create(entity.getOrientation().x);
-  orientation.get()->get_map()["y"] =   sio::double_message::create(entity.getOrientation().y);
-  orientation.get()->get_map()["z"] =   sio::double_message::create(entity.getOrientation().z);
-  orientation.get()->get_map()["w"] =   sio::double_message::create(entity.getOrientation().w);
-
   //CREATE DESTINATION
   destination.get()->get_map()["x"] =   sio::double_message::create(entity.getDestination().x);
   destination.get()->get_map()["y"] =   sio::double_message::create(entity.getDestination().y);
@@ -348,7 +307,6 @@ void Socket::move(const Entity &entity)
 
   //CREATE SOCKET
   obj.get()->get_map()["position"] =  pos;
-  obj.get()->get_map()["orientation"] =  orientation;
   obj.get()->get_map()["destination"] =  destination;
 
   //obj.get()->get_map()["type"] =  sio::int_message::create(entity.getType());
