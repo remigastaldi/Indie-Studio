@@ -7,7 +7,14 @@
 ## Started on  Sat Apr 29 23:26:33 2017 gastal_r
 ##
 
-ECHO            =       /bin/echo -e
+OS							=				$(shell uname -s)
+
+ifeq ($(OS), Darwin)
+	ECHO            =       echo
+else
+	ECHO            =       /bin/echo -e
+endif
+
 DEFAULT         =       "\033[00m"
 GREEN           =       "\033[0;32m"
 TEAL            =       "\033[1;36m"
