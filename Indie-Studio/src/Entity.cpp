@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Wed Jun  7 18:41:45 2017 gastal_r
+// Last update Wed Jun  7 19:53:50 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -123,7 +123,7 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
     changeAnimation(Entity::Status::IMMOBILE);
 	if (_animationState)
 		_animationState->addTime(evt.timeSinceLastFrame);
-  // _node->setPosition(cvt(_ghostObject->getWorldTransform().getOrigin()));
+  _node->setPosition(cvt(_ghostObject->getWorldTransform().getOrigin()));
 }
 
 void          Entity::setPosition(const Ogre::Vector3 &pos)

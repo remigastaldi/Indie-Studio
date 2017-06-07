@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Tue Jun  6 20:32:48 2017 Matthias Prost
+// Last update Wed Jun  7 19:54:17 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -486,7 +486,7 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
   _player->frameRenderingQueued(evt);
 
   #if !DEBUG_LOCAL
-    refreshServerPlayerPos();
+   refreshServerPlayerPos();
   #endif
 
   mDevice->soundManager->update(evt.timeSinceLastFrame);

@@ -5,15 +5,13 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Wed Jun  7 15:18:38 2017 gastal_r
+// Last update Wed Jun  7 19:47:09 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
 #define       _MAP_HPP_
 
 #include      <memory>
-
-// #include      "GameState.hpp"
 #include      "Socket.hpp"
 
 #define DEBUG_LOCAL false

@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Wed Jun  7 18:36:17 2017 gastal_r
+** Last update Wed Jun  7 19:52:00 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -114,18 +114,21 @@ void Socket::events()
       (void)ack_resp;
 
       _lock.lock();
-      Ogre::Vector3 position(
-      data->get_map()["position"]->get_map()["x"]->get_double(),
-      data->get_map()["position"]->get_map()["y"]->get_double(),
-      data->get_map()["position"]->get_map()["z"]->get_double());
+      if (data->get_map()["send_by"]->get_int() != _id)
+      {
+        Ogre::Vector3 position(
+          data->get_map()["position"]->get_map()["x"]->get_double(),
+          data->get_map()["position"]->get_map()["y"]->get_double(),
+          data->get_map()["position"]->get_map()["z"]->get_double());
 
-      Ogre::Vector3 destination(
-      data->get_map()["destination"]->get_map()["x"]->get_double(),
-      data->get_map()["destination"]->get_map()["y"]->get_double(),
-      data->get_map()["destination"]->get_map()["z"]->get_double());
+        Ogre::Vector3 destination(
+          data->get_map()["destination"]->get_map()["x"]->get_double(),
+          data->get_map()["destination"]->get_map()["y"]->get_double(),
+          data->get_map()["destination"]->get_map()["z"]->get_double());
 
-      WorkingQueue::Data queueData((Entity::Status)data->get_map()["status"]->get_int(), data->get_map()["send_by"]->get_int(), position, destination);
-      pushToQueue(WorkingQueue::Action::MOVE_ENTITY, queueData);
+        WorkingQueue::Data queueData((Entity::Status)data->get_map()["status"]->get_int(), data->get_map()["send_by"]->get_int(), position, destination);
+        pushToQueue(WorkingQueue::Action::MOVE_ENTITY, queueData);
+      }
     _lock.unlock();
   }));
 
@@ -136,8 +139,8 @@ void Socket::events()
       (void)name;
       (void)isAck;
       (void)ack_resp;
-      _lock.lock();
 
+      _lock.lock();
       if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
       {
         Ogre::Vector3 position(
@@ -256,7 +259,6 @@ void Socket::sendEntity(const Entity &entity)
 {
   auto obj = sio::object_message::create();
   auto pos = sio::object_message::create();
-  auto orientation = sio::object_message::create();
   auto destination = sio::object_message::create();
 
   //CREATE POS
@@ -292,7 +294,6 @@ void Socket::move(const Entity &entity)
 {
   auto obj = sio::object_message::create();
   auto pos = sio::object_message::create();
-  auto orientation = sio::object_message::create();
   auto destination = sio::object_message::create();
 
   //CREATE POS
@@ -313,7 +314,6 @@ void Socket::move(const Entity &entity)
   obj.get()->get_map()["status"] =  sio::int_message::create((int)entity.getStatus());
   obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
   obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
-  std::cout << "SEND " << entity.getPosition() << std::endl;
   emit("move", obj);
 }
 

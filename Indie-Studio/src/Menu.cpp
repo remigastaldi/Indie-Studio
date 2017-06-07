@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Wed Jun  7 05:28:54 2017 gastal_r
+// Last update Wed Jun  7 19:22:43 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -183,6 +183,9 @@ void Menu::createScene(void)
 
   _splashButton = _splashScreen->getChild("SplashScreenButton");
   _splashButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::SplashButton, this));
+
+  GameState *menu = findByName("Map");
+  changeGameState(menu);
 }
 
 // bool GameMenuDemo::handleLoginAcceptButtonClicked(const CEGUI::EventArgs&)
