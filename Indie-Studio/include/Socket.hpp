@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Tue Jun  6 20:10:07 2017 Leo HUBERT
+// Last update Wed Jun  7 05:01:51 2017 gastal_r
 //
 
 #ifndef _CLIENT_HPP_
@@ -19,11 +19,7 @@
 #include <functional>
 #include <sio_client.h>
 #include <condition_variable>
-#include <unordered_map>
-#include "Entity.hpp"
-#include "GameState.hpp"
-#include      "Collision.h"
-#include      "SpellManager.hpp"
+#include "WorkingQueue.hpp"
 
 #define SOCKET_SERVER "http://ezgames.eu"
 #define SOCKET_PORT 3000
@@ -44,7 +40,7 @@
 
 #endif
 
-class Socket : public GameState
+class Socket : virtual public WorkingQueue
 {
 public:
   Socket(std::string const &addr, int const port, int const id, std::string const &room);
@@ -74,11 +70,6 @@ protected:
   sio::client                 _client;
   std::string                 _addr;
   std::string                 _room;
-
-  SpellManager    *_spellManagerSocket;
-  Collision::CollisionTools   *_collision;
-  std::unordered_map<size_t, Entity *>  _entity;
-  OgreBulletDynamics::DynamicsWorld *_world;
 };
 
 #endif /* _CLIENT_HPP_ */

@@ -5,12 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Tue Jun  6 20:57:37 2017 Leo HUBERT
+// Last update Wed Jun  7 05:31:17 2017 gastal_r
 //
 
 #include        "Map.hpp"
 
 Map::Map() :
+  GameState(),
+  WorkingQueue(),
   Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room"),
   mPolygonRenderingMode('B'),
   mShutDown(false),
@@ -26,8 +28,7 @@ Map::Map() :
   mBounds(Ogre::AxisAlignedBox(Ogre::Vector3 (-10000, -10000, -10000), Ogre::Vector3 (10000,  10000,  10000))),
   debugDrawer(nullptr),
   _rayCast(nullptr),
-  _collisionRayCast(nullptr),
-  _spellManager(nullptr)
+  _collisionRayCast(nullptr)
 {}
 
 Map::~Map()
@@ -37,7 +38,8 @@ void Map::enter(void)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Enter Map =====");
 
-  _camera = mDevice->sceneMgr->createCamera("MapCamera");
+  _sceneMgr = mDevice->sceneMgr;
+  _camera = _sceneMgr->createCamera("MapCamera");
   _camera->setNearClipDistance(5);
 
   Ogre::Viewport* vp = mDevice->window->addViewport(_camera);
@@ -45,12 +47,12 @@ void Map::enter(void)
   vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
   vp->update();
 
-  _collision = new Collision::CollisionTools();
-  _world = new OgreBulletDynamics::DynamicsWorld(mDevice->sceneMgr, mBounds, mGravityVector);
+  _collision.reset(new Collision::CollisionTools());
+  _world.reset(new OgreBulletDynamics::DynamicsWorld(_sceneMgr, mBounds, mGravityVector));
 
-  _spellManagerSocket = new SpellManager(*mDevice->sceneMgr, *_collision);
+  _spellManagerSocket.reset(new SpellManager(*_sceneMgr, *_collision));
   std::function<void(Spell::Type, const std::string &)> sendCollisionFunc([=] (Spell::Type type, const std::string &id) { this->sendCollision(type, id); } );
-  _spellManager = new SpellManager(*mDevice->sceneMgr, *_collision, sendCollisionFunc);
+  _spellManager.reset(new SpellManager(*_sceneMgr, *_collision, sendCollisionFunc));
 
 #if DEBUG_DRAWER
 	debugDrawer = new OgreBulletCollisions::DebugDrawer();
@@ -66,19 +68,19 @@ void Map::enter(void)
   _world->setDebugDrawer(debugDrawer);
 #endif
 
- mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-// mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
-// mDevice->sceneMgr->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
-// mDevice->sceneMgr->setShadowTextureSelfShadow(true);
-// mDevice->sceneMgr->setShadowTextureSize(4096);
-// // mDevice->sceneMgr->setShadowDirectionalLightExtrusionDistance(10);
-// // mDevice->sceneMgr->setShadowFarDistance(10);
-// mDevice->sceneMgr->setShadowTextureCount(4);
-// mDevice->sceneMgr->setShadowCameraSetup(Ogre::ShadowCameraSetupPtr(new Ogre::FocusedShadowCameraSetup()));
+ _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+// _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+// _sceneMgr->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+// _sceneMgr->setShadowTextureSelfShadow(true);
+// _sceneMgr->setShadowTextureSize(4096);
+// // _sceneMgr->setShadowDirectionalLightExtrusionDistance(10);
+// // _sceneMgr->setShadowFarDistance(10);
+// _sceneMgr->setShadowTextureCount(4);
+// _sceneMgr->setShadowCameraSetup(Ogre::ShadowCameraSetupPtr(new Ogre::FocusedShadowCameraSetup()));
 
-   mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(1.f, 1.f, 1.f));
+   _sceneMgr->setAmbientLight(Ogre::ColourValue(1.f, 1.f, 1.f));
 
-  _collisionRayCast = mDevice->sceneMgr->createRayQuery(Ogre::Ray());
+  _collisionRayCast = _sceneMgr->createRayQuery(Ogre::Ray());
 
   createScene();
 }
@@ -295,7 +297,7 @@ void Map::createScene(void)
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
-  _player = createEntity(Entity::Type::DARKFIEND, *mDevice->sceneMgr, *_world, *_collision, 42,
+  _player = createEntity(Entity::Type::DARKFIEND, *_sceneMgr, *_world, *_collision, 42,
 		Entity::Status::IMMOBILE, Ogre::Vector3(40.f, 20.f, 160.f), Ogre::Quaternion::ZERO);
 
 #if DEBUG_CAMERA
@@ -303,20 +305,20 @@ void Map::createScene(void)
   _cameraMan = new OgreCookies::CameraMan(_camera);
   _camera->lookAt(_player->getPosition());
 #else
-  _cameraNode = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("CamNode");
+  _cameraNode = _sceneMgr->getRootSceneNode()->createChildSceneNode("CamNode");
   _cameraNode->setPosition(_player->getPosition() + Ogre::Vector3(0.f, 40.f, 40.f));
   _cameraNode->attachObject(_camera);
   _camera->lookAt(_player->getPosition());
 #endif
 
-	Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
+	Ogre::SceneNode *map = _sceneMgr->getRootSceneNode()->createChildSceneNode("Map", Ogre::Vector3(0,0,0));
 	DotSceneLoader loader;
-	loader.parseDotScene("dungeon.scene","General", mDevice->sceneMgr, map);
-  mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.1f, 0.1f, 0.1f));
+	loader.parseDotScene("dungeon.scene","General", _sceneMgr, map);
+  _sceneMgr->setAmbientLight(Ogre::ColourValue(0.1f, 0.1f, 0.1f));
   map->setPosition({0.f, 0.f, 0.f});
   // map->setScale(Ogre::Vector3(0.03f, 0.03f, 0.03f));
 
-  Ogre::Light* spotLight = mDevice->sceneMgr->createLight("SpotLight");
+  Ogre::Light* spotLight = _sceneMgr->createLight("SpotLight");
   spotLight->setDiffuseColour(0.5, 0.5, 0.5);
   spotLight->setSpecularColour(0.5, 0.5, 0.5);
   spotLight->setType(Ogre::Light::LT_POINT);
@@ -324,14 +326,13 @@ void Map::createScene(void)
 
   for (auto & it : loader.dynamicObjects)
   {
-    std::cout << "Dynamics ==> " << it << std::endl;
-    Ogre::SceneNode *node = mDevice->sceneMgr->getSceneNode(it);
+    Ogre::SceneNode *node = _sceneMgr->getSceneNode(it);
     Ogre::Entity *entity = static_cast<Ogre::Entity*>(node->getAttachedObject(0));
 
     OgreBulletCollisions::StaticMeshToShapeConverter trimeshConverter(entity);
     OgreBulletCollisions::TriangleMeshCollisionShape *sceneTriMeshShape =  trimeshConverter.createTrimesh();
 
-    OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(entity->getName(),  _world);
+    OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(entity->getName(),  _world.get());
     defaultBody->setShape(node,
           sceneTriMeshShape,
           0.6f,      // dynamic body restitution
@@ -347,40 +348,24 @@ void Map::createScene(void)
 
     if (it.find("Ground") != std::string::npos)
     {
-      entity->setCastShadows(false);
-      std::cout << "======================" << std::endl;
+      // entity->setCastShadows(false);
+      // std::cout << "======================" << std::endl;
     }
   }
   for (auto & it : loader.staticObjects)
   {
     std::cout << "Statics ==> " << it << std::endl;
-    Ogre::Entity* entity = static_cast<Ogre::Entity*>(mDevice->sceneMgr->getSceneNode(it)->getAttachedObject(0));
+    Ogre::Entity* entity = static_cast<Ogre::Entity*>(_sceneMgr->getSceneNode(it)->getAttachedObject(0));
     _collision->register_entity(entity, Collision::COLLISION_BOX);
   }
 
-  // Ogre::Light* spotLight1 = mDevice->sceneMgr->createLight("SpotLight1");
+  // Ogre::Light* spotLight1 = _sceneMgr->createLight("SpotLight1");
   // spotLight1->setType(Ogre::Light::LT_POINT);
   // spotLight1->setDirection(0, 0, 0);
   // spotLight1->setPosition(Ogre::Vector3(0, 40, 0));
 
 	// mNode->attachObject(static_cast <Ogre::SimpleRenderable *> (debugDrawer));
 
-	Ogre::Plane p;
-	p.normal = Ogre::Vector3(0,1,0);
-	p.d = 0;
-	Ogre::MeshManager::getSingleton().createPlane("FloorPlane",
-  Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-  p, 200000, 200000, 20, 20, true, 1, 9000, 9000,
-  Ogre::Vector3::UNIT_Z);
-	_ent = mDevice->sceneMgr->createEntity("floor", "FloorPlane");
-	_ent->setMaterialName("Examples/Rockwall");
-  mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(_ent);
-
-
-  Shape = new OgreBulletCollisions::StaticPlaneCollisionShape(Ogre::Vector3(0,1,0), 0);
-  //
-  // defaultPlaneBody = new OgreBulletDynamics::RigidBody("BasePlane",_world);
-  // defaultPlaneBody->setStaticShape(Shape, 0.1, 0.8);// (shape, restitution, friction)
 #if !DEBUG_LOCAL
   connect();
   sendEntity(*_player);
@@ -431,16 +416,14 @@ void Map::exit(void)
   delete(_player);
   _player = nullptr;
 
-  mDevice->sceneMgr->destroyQuery(_rayCast);
+  _sceneMgr->destroyQuery(_rayCast);
   _rayCast = nullptr;
-  mDevice->sceneMgr->destroyQuery(_collisionRayCast);
+  _sceneMgr->destroyQuery(_collisionRayCast);
   _collisionRayCast = nullptr;
 
-  mDevice->sceneMgr->clearScene();
-  mDevice->sceneMgr->destroyAllCameras();
+  _sceneMgr->clearScene();
+  _sceneMgr->destroyAllCameras();
   mDevice->window->removeAllViewports();
-
-  Ogre::MeshManager::getSingleton().remove("FloorPlane");
 
   _settings = nullptr;
   _credits = nullptr;
@@ -454,12 +437,24 @@ bool 	Map::frameStarted(const Ogre::FrameEvent &evt)
   return (true);
 }
 
-void Map::sendPlayerPos()
+void Map::refreshServerPlayerPos(void)
 {
   static std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
 
   std::chrono::high_resolution_clock::time_point        t2 = std::chrono::high_resolution_clock::now();
-  if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 50)
+  if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 500)
+  {
+    t1 = std::chrono::high_resolution_clock::now();
+    move(*_player);
+  }
+}
+
+void Map::sendServerPlayerPos(void)
+{
+  static std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+
+  std::chrono::high_resolution_clock::time_point        t2 = std::chrono::high_resolution_clock::now();
+  if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 100)
   {
     t1 = std::chrono::high_resolution_clock::now();
     move(*_player);
@@ -489,7 +484,7 @@ bool Map::frameRenderingQueued(const Ogre::FrameEvent& evt)
   _player->frameRenderingQueued(evt);
 
   #if !DEBUG_LOCAL
-    sendPlayerPos();
+    refreshServerPlayerPos();
   #endif
 
   mDevice->soundManager->update(evt.timeSinceLastFrame);
@@ -523,12 +518,12 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
   if(arg.key == OIS::KC_V)
 {
   sendSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());
-  _spellManager->launchSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());  
+  _spellManager->launchSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());
   return true;
   Ogre::Vector3 size = Ogre::Vector3::ZERO;
   Ogre::Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 10);
 
-  Ogre::Entity *entity = mDevice->sceneMgr->createEntity(
+  Ogre::Entity *entity = _sceneMgr->createEntity(
       "Barrel" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
       "Barrel.mesh");
   // entity->setCastShadows(true);
@@ -540,7 +535,7 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
 //                   (Bullet 2.76 Physics SDK Manual page 18)
  size = boundingB.getSize()*0.95f;
   //entity->setMaterialName("barrel");
-  Ogre::SceneNode *node = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode();
+  Ogre::SceneNode *node = _sceneMgr->getRootSceneNode()->createChildSceneNode();
   node->attachObject(entity);
   //node->scale(20f, 20f, 20f);  // the cube is too big for us
 //   size *= 0.05f;            // don't forget to scale down the Bullet-box too
@@ -552,7 +547,7 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
   // and the Bullet rigid body
   OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
       "defaultBoxRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
-      _world);
+      _world.get());
 
   // OgreBulletCollisions::CollisionShape *collisionShape =
   defaultBody->setShape(node,
@@ -684,7 +679,7 @@ void  Map::mouseRaycast(void)
   Ogre::Ray ray = _camera->getCameraToViewportRay((float) relativeMouse.d_x / windowWidth, (float) relativeMouse.d_y / windowHeight);
 
   if (!_rayCast)
-    _rayCast = mDevice->sceneMgr->createRayQuery(ray);
+    _rayCast = _sceneMgr->createRayQuery(ray);
   else
     _rayCast->setRay(ray);
 
@@ -704,6 +699,9 @@ void  Map::mouseRaycast(void)
     {
       std::cout << "Clicked: " << mSelectedEntity->getName().c_str() << "POS: X " <<  pos[0] << " Y " << pos[1] << " Z " << pos[2] << std::endl;
       _player->setDestination(pos);
+    #if DEBUG_LOCAL == false
+      sendServerPlayerPos();
+    #endif
       return;
     }
   }
@@ -721,7 +719,7 @@ Ogre::Vector3   Map::getMouseFocusPos(void)
   Ogre::Ray ray = _camera->getCameraToViewportRay((float) relativeMouse.d_x / windowWidth, (float) relativeMouse.d_y / windowHeight);
 
   if (!_rayCast)
-    _rayCast = mDevice->sceneMgr->createRayQuery(ray);
+    _rayCast = _sceneMgr->createRayQuery(ray);
   else
     _rayCast->setRay(ray);
 

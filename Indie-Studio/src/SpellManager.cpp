@@ -43,10 +43,6 @@ void        SpellManager::frameRenderingQueued(const Ogre::FrameEvent& evt)
         if (!_disableCallback)
           _sendCollisionToServer((*it)->getType(), (*it)->getCollidedObjectName());
         _spellsIndex.push_back((*it)->getId());
-        _collision.remove_entity((*it)->getEntity());
-        // (*it)->getNode()->removeAndDestroyAllChildren();
-        _sceneMgr.destroyEntity((*it)->getEntity());
-        _sceneMgr.destroySceneNode((*it)->getNode());
         delete(*it);
         if ((it = _spells.erase(it)) == _spells.end())
           break;

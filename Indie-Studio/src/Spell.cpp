@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:56:53 2017 gastal_r
-// Last update Tue Jun  6 11:23:50 2017 gastal_r
+// Last update Tue Jun  6 19:21:19 2017 gastal_r
 //
 
 #include      "Spell.hpp"
@@ -25,6 +25,13 @@ Spell::Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
   _distance(distance),
   _type(type)
 {}
+
+Spell::~Spell()
+{
+  _collision.remove_entity(_entity);
+  _sceneMgr.destroyEntity(_entity);
+  _sceneMgr.destroySceneNode(_node);
+}
 
 void 	Spell::changeAnimation(Spell::Status status)
 {

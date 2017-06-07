@@ -68,7 +68,8 @@ SRC             =				src/CameraMan.cpp							\
 												src/Spell.cpp									\
 												src/SpellManager.cpp					\
 												src/Collision.cpp							\
-												src/Angel.cpp								\
+												src/Angel.cpp									\
+												src/WorkingQueue.cpp					\
 												src/main.cpp
 
 

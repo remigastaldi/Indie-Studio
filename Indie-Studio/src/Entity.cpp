@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Mon Jun  5 23:09:30 2017 gastal_r
+// Last update Tue Jun  6 21:32:56 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -29,7 +29,12 @@ Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 {}
 
 Entity::~Entity()
-{}
+{
+  _world.getBulletDynamicsWorld()->removeAction(_character);
+  _collision.remove_entity(_entity);
+  _sceneMgr.destroyEntity(_entity);
+  _sceneMgr.destroySceneNode(_node);
+}
 
 void  Entity::addToBulletWorld(const Ogre::Vector3 &position)
 {

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:43:07 2017 gastal_r
-// Last update Tue Jun  6 12:28:59 2017 gastal_r
+// Last update Tue Jun  6 19:23:27 2017 gastal_r
 //
 
 #ifndef _SPELL_HPP_
@@ -55,6 +55,12 @@ public:
   Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id,
     const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback, Ogre::Real distance, Ogre::Real speed, Spell::Type type);
 
+  virtual ~Spell();
+  Spell(const Spell& other) = default;
+  Spell(Spell&& other) = default;
+  Spell& operator=(const Spell& other) = default;
+  Spell& operator=(Spell&& other) = default;
+
   void 	changeAnimation(Spell::Status status);
   bool 	frameRenderingQueued(const Ogre::FrameEvent &evt);
   void  setDestination(const Ogre::Vector3 &destination);
@@ -65,12 +71,6 @@ public:
   size_t getId() { return (_id); };
   Ogre::Entity *getEntity() { return (_entity); }
   Ogre::SceneNode * getNode() { return (_node); }
-
-  ~Spell() = default;
-  Spell(const Spell& other) = default;
-  Spell(Spell&& other) = default;
-  Spell& operator=(const Spell& other) = default;
-  Spell& operator=(Spell&& other) = default;
 
 protected:
   Ogre::SceneManager        &_sceneMgr;

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:59:44 2017 gastal_r
-// Last update Tue May 30 19:24:51 2017 Matthias Prost
+// Last update Wed Jun  7 04:18:18 2017 gastal_r
 //
 
 #ifndef _MENU_HPP_
@@ -26,11 +26,9 @@ public:
 
   DECLARE_GAMESTATE_CLASS(Menu);
 
-  /** Inherit to supply game state enter code. */
   virtual void enter(void);
-  virtual void createScene(void);
-  /** Inherit to supply state exit code. */
   virtual void exit(void);
+  virtual void createScene(void);
 
   // Ogre::FrameListener
   virtual bool frameRenderingQueued(const Ogre::FrameEvent &);
@@ -85,8 +83,6 @@ private:
 
   bool mShutDown;
   Ogre::Camera *_camera;
-  OgreCookies::CameraMan* _cameraMan;
-
 };
 
 #endif /* end of include guard: _MENU_HPP_ */

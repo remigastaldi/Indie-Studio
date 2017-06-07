@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Tue Jun  6 17:38:37 2017 gastal_r
+// Last update Wed Jun  7 05:27:15 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -13,11 +13,11 @@
 
 #include      <memory>
 
-#include      "GameState.hpp"
+// #include      "GameState.hpp"
 #include      "Socket.hpp"
 
 #define DEBUG_LOCAL true
-#define DEBUG_CAMERA true
+#define DEBUG_CAMERA false
 
 #if DEBUG_LOCAL
   #define DEBUG_DRAWER false
@@ -26,7 +26,7 @@
   #define DEBUG_DRAWER false
 #endif
 
-class Map :  public Socket
+class Map : public GameState, virtual public WorkingQueue, public Socket
 {
 public:
   Map();
@@ -41,11 +41,11 @@ public:
 
   /** Inherit to supply game state enter code. */
   virtual void enter(void);
-  virtual void createScene(void);
-  /** Inherit to supply state exit code. */
   virtual void exit(void);
+  virtual void createScene(void);
 
-  virtual void sendPlayerPos();
+  virtual void refreshServerPlayerPos(void);
+  virtual void sendServerPlayerPos(void);
   // Ogre::FrameListener
   virtual bool frameRenderingQueued(const Ogre::FrameEvent &);
   virtual bool frameStarted (const Ogre::FrameEvent &evt);
@@ -156,7 +156,7 @@ private:
   OgreBulletCollisions::CollisionShape *Shape;
   OgreBulletDynamics::RigidBody *defaultPlaneBody;
 
-  SpellManager    *_spellManager;
+  std::unique_ptr<SpellManager>    _spellManager;
   bool mShutDown;
 };
 

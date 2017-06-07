@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Tue May 30 19:36:08 2017 Matthias Prost
+// Last update Wed Jun  7 05:28:54 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -15,7 +15,7 @@ Menu::Menu() :
   mPolygonRenderingMode('B'),
   mShutDown(false),
   _camera(nullptr),
-  _cameraMan(nullptr),
+  // _cameraMan(nullptr),
 	mRotSpd(0.1),
   mLMouseDown(false),
   mRMouseDown(false),
@@ -29,13 +29,13 @@ void Menu::enter(void)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Enter Menu =====");
 
-  _camera = mDevice->sceneMgr->createCamera("PlayerCamMenu");
-  _camera->setPosition(Ogre::Vector3(0,0,80));
-  _camera->lookAt(Ogre::Vector3(0,0,-300));
-  _camera->setNearClipDistance(5);
-
-  _cameraMan = new OgreCookies::CameraMan(_camera);
-
+  _camera = mDevice->sceneMgr->createCamera("CameraMenu");
+  // _camera->setPosition(Ogre::Vector3(0,0,80));
+  // _camera->lookAt(Ogre::Vector3(0,0,-300));
+  // _camera->setNearClipDistance(5);
+  //
+  // _cameraMan = new OgreCookies::CameraMan(_camera);
+  //
   Ogre::Viewport* vp = mDevice->window->addViewport(_camera);
   vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
   vp->update();
@@ -182,7 +182,7 @@ void Menu::createScene(void)
 
 void Menu::exit(void)
 {
-  mDevice->sceneMgr->clearScene();
+  // mDevice->sceneMgr->clearScene();
   mDevice->sceneMgr->destroyAllCameras();
   mDevice->window->removeAllViewports();
 
@@ -210,7 +210,7 @@ bool Menu::frameRenderingQueued(const Ogre::FrameEvent& evt)
      //Need to inject timestamps to CEGUI System.
     CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
-    _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
+    // _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
     mDevice->soundManager->update(evt.timeSinceLastFrame);
 
 
@@ -260,19 +260,19 @@ bool Menu::keyPressed( const OIS::KeyEvent &arg )
     {
         Ogre::PolygonMode pm;
 
-        switch (_camera->getPolygonMode())
-        {
-        case Ogre::PM_SOLID:
-            pm = Ogre::PM_WIREFRAME;
-            break;
-        case Ogre::PM_WIREFRAME:
-            pm = Ogre::PM_POINTS;
-            break;
-        default:
-            pm = Ogre::PM_SOLID;
-        }
-
-        _camera->setPolygonMode(pm);
+        // switch (_camera->getPolygonMode())
+        // {
+        // case Ogre::PM_SOLID:
+        //     pm = Ogre::PM_WIREFRAME;
+        //     break;
+        // case Ogre::PM_WIREFRAME:
+        //     pm = Ogre::PM_POINTS;
+        //     break;
+        // default:
+        //     pm = Ogre::PM_SOLID;
+        // }
+        //
+        // _camera->setPolygonMode(pm);
     }
     else if(arg.key == OIS::KC_F5)   // refresh all textures
     {
@@ -289,11 +289,11 @@ bool Menu::keyPressed( const OIS::KeyEvent &arg )
     }
 	else if (arg.key == OIS::KC_P)
 	{
-		Ogre::SceneNode *test = mDevice->sceneMgr->getSceneNode("Particle");
+		// Ogre::SceneNode *test = mDevice->sceneMgr->getSceneNode("Particle");
 	}
     else
     {
-        _cameraMan->injectKeyDown(arg);
+        // _cameraMan->injectKeyDown(arg);
     }
 
     return true;
@@ -301,7 +301,7 @@ bool Menu::keyPressed( const OIS::KeyEvent &arg )
 
 bool Menu::keyReleased( const OIS::KeyEvent &arg )
 {
-    _cameraMan->injectKeyUp(arg);
+    // _cameraMan->injectKeyUp(arg);
     return true;
 }
 

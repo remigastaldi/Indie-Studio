@@ -5,17 +5,14 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Tue Jun  6 20:57:52 2017 Leo HUBERT
+** Last update Wed Jun  7 02:52:40 2017 gastal_r
 */
 
 #include "Socket.hpp"
 
 Socket::Socket(std::string const &addr, int const port, int const id, std::string const &room)
   : _id(id),
-  _room(room),
-  _collision(nullptr),
-  _world(nullptr),
-  _spellManagerSocket(nullptr)
+  _room(room)
 {
   _connect_finish = false;
   _addr = addr + ":" + std::to_string(port);
@@ -56,7 +53,7 @@ void Socket::on_close(sio::client::close_reason const& reason)
 void Socket::on_fail()
 {
   std::cout << "sio failed: " <<std::endl;
-  exit();
+  exit(0);
 }
 
 void Socket::events()
@@ -118,6 +115,7 @@ void Socket::events()
       _lock.lock();
       if (data->get_map()["send_by"]->get_int() != _id)
       {
+
         Ogre::Vector3 position;
         position.x = data->get_map()["position"]->get_map()["x"]->get_double();
         position.y = data->get_map()["position"]->get_map()["y"]->get_double();
@@ -177,9 +175,9 @@ void Socket::events()
         Entity::Status status;
         status = (Entity::Status)data->get_map()["status"]->get_int();
 
-        _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::DARKFIEND, *mDevice->sceneMgr, *_world, *_collision, data->get_map()["send_by"]->get_int(),
-        status, position, orientation);
-        _entity[data->get_map()["send_by"]->get_int()]->setDestination(destination);
+        // _entity[data->get_map()["send_by"]->get_int()] = createEntity(Entity::Type::DARKFIEND, *mDevice->sceneMgr, *_world, *_collision, data->get_map()["send_by"]->get_int(),
+        // status, position, orientation);
+        // _entity[data->get_map()["send_by"]->get_int()]->setDestination(destination);
       }
       _lock.unlock();
     }));
@@ -211,9 +209,10 @@ void Socket::events()
       {
         if (_entity[data->get_map()["user_id"]->get_int()])
         {
-          _entity[data->get_map()["user_id"]->get_int()]->destroy();
-          delete(_entity[data->get_map()["user_id"]->get_int()]);
+          // _entity[data->get_map()["user_id"]->get_int()]->destroy();
+          Entity *entity = _entity[data->get_map()["user_id"]->get_int()];
           _entity.erase(data->get_map()["user_id"]->get_int());
+          delete(entity);
         }
         std::cout <<  "User disconnected ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
       }
@@ -356,6 +355,7 @@ void Socket::move(const Entity &entity)
   obj.get()->get_map()["status"] =  sio::int_message::create((int)entity.getStatus());
   obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
   obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
+  std::cout << "SEND " << entity.getPosition() << std::endl;
   emit("move", obj);
 }
 
