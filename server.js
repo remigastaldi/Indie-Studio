@@ -28,10 +28,11 @@ var rl = readline.createInterface({
   TEST MOBS
 */
 
-enemis["test"] = new Entity(23455, "BOT 1", EntityType.ENEMIS, "room");
-enemis["test"].setPosition(48.796180725097656, 20.14305305480957, 143.03273010253906);
-enemis["test"].setDestination(48.796180725097656, 20.14305305480957, 143.03273010253906);
-
+/*
+  enemis["test"] = new Entity(23455, "BOT 1", EntityType.ENEMIS, "room");
+  enemis["test"].setPosition(48.796180725097656, 20.14305305480957, 143.03273010253906);
+  enemis["test"].setDestination(48.796180725097656, 20.14305305480957, 143.03273010253906);
+*/
 
 function checkDistance(userPosition, enemisPosition)
 {
