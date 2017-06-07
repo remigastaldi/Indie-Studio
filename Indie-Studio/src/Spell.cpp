@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:56:53 2017 gastal_r
-// Last update Tue Jun  6 19:21:19 2017 gastal_r
+// Last update Wed Jun  7 20:55:14 2017 gastal_r
 //
 
 #include      "Spell.hpp"
@@ -59,7 +59,7 @@ bool 	Spell::frameRenderingQueued(const Ogre::FrameEvent &evt)
 
     Ogre::Ray ray(_node->getPosition(), _direction * move);
     Collision::SCheckCollisionAnswer ret = _collision.check_ray_collision(
-    ray, Ogre::SceneManager::ENTITY_TYPE_MASK, _entity, _entity->getBoundingBox().getSize().x, true);
+    ray, Ogre::SceneManager::ENTITY_TYPE_MASK, _entity, _entity->getBoundingBox().getSize().x / 2, true);
 
     if (ret.collided)
     {
