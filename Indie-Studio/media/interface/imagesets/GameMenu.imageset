@@ -46,4 +46,12 @@
     <Image height="105" name="BackHover" width="314" xPos="2182" yPos="34" />
     <Image height="106" name="BackNormal" width="314" xPos="2530" yPos="34" />
     <Image height="256" name="AvatarBackground" width="96" xPos="1680" yPos="1172" />
+    <Image height="106" name="OptionsHover" width="314" xPos="3187" yPos="1182" />
+    <Image height="106" name="PlayHover" width="314" xPos="3187" yPos="1313" />
+    <Image height="106" name="QuitHover" width="314" xPos="3187" yPos="1445" />
+    <Image height="106" name="QuitNormal" width="314" xPos="3545" yPos="1444" />
+    <Image height="106" name="PlayNormal" width="314" xPos="3545" yPos="1313" />
+    <Image height="106" name="OptionsNormal" width="314" xPos="3545" yPos="1182" />
+    <Image height="106" name="MainMenuNormal" width="314" xPos="3187" yPos="1589" />
+    <Image height="106" name="MainMenuHover" width="314" xPos="3545" yPos="1589" />
 </Imageset>

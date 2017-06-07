@@ -2,32 +2,32 @@
 
 <GUILayout version="4" >
     <Window type="Generic/Image" name="DarkFiendSpellBar" >
-        <Property name="Area" value="{{0,786},{0,939},{0,1133},{0,1029}}" />
+        <Property name="Area" value="{{0.42,0},{0.87,0},{0.604,0},{0.955,0}}" />
         <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="Generic/ImageButton" name="SpellAngel" >
-            <Property name="Area" value="{{0,9},{0,8},{0,84},{0,83}}" />
+            <Property name="Area" value="{{0.03,0},{0.1,0},{0.25,0},{0.9,0}}" />
             <Property name="HoverImage" value="GameMenuImages/SpellAngel" />
             <Property name="NormalImage" value="GameMenuImages/SpellAngel" />
             <Property name="PushedImage" value="GameMenuImages/SpellAngel_Click" />
             <Property name="InheritsAlpha" value="false" />
         </Window>
         <Window type="Generic/ImageButton" name="SpellThunderStorm" >
-            <Property name="Area" value="{{0,181},{0,8},{0,256},{0,83}}" />
+            <Property name="Area" value="{{0.51,0},{0.1,0},{0.73,0},{0.9,0}}" />
             <Property name="HoverImage" value="GameMenuImages/SpellThunderStorm" />
             <Property name="NormalImage" value="GameMenuImages/SpellThunderStorm" />
             <Property name="PushedImage" value="GameMenuImages/SpellThunderStorm_Click" />
             <Property name="InheritsAlpha" value="false" />
         </Window>
         <Window type="Generic/ImageButton" name="SpellSpectre" >
-            <Property name="Area" value="{{0,266},{0,8},{0,341},{0,83}}" />
+            <Property name="Area" value="{{0.75,0},{0.1,0},{0.97,0},{0.9,0}}" />
             <Property name="HoverImage" value="GameMenuImages/SpellSpectre" />
             <Property name="NormalImage" value="GameMenuImages/SpellSpectre" />
             <Property name="PushedImage" value="GameMenuImages/SpellSpectre_Click" />
             <Property name="InheritsAlpha" value="false" />
         </Window>
         <Window type="Generic/ImageButton" name="SpellFire" >
-            <Property name="Area" value="{{0,95},{0,8},{0,170},{0,83}}" />
+            <Property name="Area" value="{{0.27,0},{0.1,0},{0.49,0},{0.9,0}}" />
             <Property name="HoverImage" value="GameMenuImages/SpellFire" />
             <Property name="NormalImage" value="GameMenuImages/SpellFire" />
             <Property name="PushedImage" value="GameMenuImages/SpellFire_Click" />

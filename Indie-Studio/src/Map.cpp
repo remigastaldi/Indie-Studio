@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Wed Jun  7 15:36:25 2017 gastal_r
+// Last update Tue Jun  6 20:32:48 2017 Matthias Prost
 //
 
 #include        "Map.hpp"
@@ -135,10 +135,10 @@ bool Map::buttonSettings(const CEGUI::EventArgs &e)
     _settings = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("IG_MENU.layout");
     CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_settings);
 
-    _closeButton = _settings->getChild("BackToGame");
+    _closeButton = _settings->getChild("Settings/BackToGame");
     _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::buttonClose, this));
 
-    _goToMenuButton = _settings->getChild("BackToMenu");
+    _goToMenuButton = _settings->getChild("Settings/BackToMenu");
     _goToMenuButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::buttonMenu, this));
   }
   return (true);
@@ -402,7 +402,8 @@ void Map::createScene(void)
     setupIngeniorSpell();
   }
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_spellBar);
-  // Attribution des boxes des spell
+  _healthBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Avatar.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
 }
 
 void Map::exit(void)

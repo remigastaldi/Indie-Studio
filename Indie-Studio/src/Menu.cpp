@@ -128,18 +128,32 @@ bool Menu::buttonInfos(const CEGUI::EventArgs &e)
   return (true);
 }
 
-void Menu::createScene(void)
+bool        Menu::Backbutton(const CEGUI::EventArgs &e)
 {
-  _credits = nullptr;
+  _ButtonBack->destroy();
+  _options->destroy();
+  _options = nullptr;
+  return (true);
+}
+bool         Menu::buttonOptions(const CEGUI::EventArgs &e)
+{
+  if (_options == nullptr)
+  {
+    _options = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Settings.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_options);
 
-  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
+    _ButtonBack = _options->getChild("BackButton");
+    _ButtonBack->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::Backbutton, this));
+  }
+}
 
-  _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
-  CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
+bool  Menu::SplashButton(const CEGUI::EventArgs &e)
+{
+    _splashButton->destroy();
+    _splashScreen->destroy();
 
   _gameMenu = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("GameMenu.layout");
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_gameMenu);
-
 
   _playButton = _gameMenu->getChild("Play");
   _playButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonPlay, this));
@@ -150,12 +164,25 @@ void Menu::createScene(void)
   _infosButton = _gameMenu->getChild("Infos");
   _infosButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonInfos, this));
 
-  _playButton->destroy();
-  _quitButton->destroy();
-  _gameMenu->destroy();
-  _myRoot->destroy();
-  GameState *menu = findByName("Map");
-  changeGameState(menu);
+  _optionButton = _gameMenu->getChild("Options");
+  _optionButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonOptions, this));
+}
+
+void Menu::createScene(void)
+{
+  _credits = nullptr;
+  _options = nullptr;
+
+  CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("OgreTrayImages/MouseArrow");
+
+  _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
+  CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
+
+  _splashScreen = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("SplashScreen.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_splashScreen);
+
+  _splashButton = _splashScreen->getChild("SplashScreenButton");
+  _splashButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::SplashButton, this));
 }
 
 // bool GameMenuDemo::handleLoginAcceptButtonClicked(const CEGUI::EventArgs&)

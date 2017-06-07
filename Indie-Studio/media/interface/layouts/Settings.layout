@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="Generic/Image" name="Background" >
+        <Property name="Area" value="{{0,0},{0,0},{0,1920},{0,1080}}" />
+        <Property name="Image" value="GameMenuImages/Background" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Generic/Image" name="Background_Settings" >
+            <Property name="Area" value="{{0.05,0},{0.1,0},{0.95,0},{0.9,0}}" />
+            <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Window type="Vanilla/StaticText" name="Audio" >
+                <Property name="Area" value="{{0,0},{0,0},{0.5,0},{0.15,0}}" />
+                <Property name="Text" value="AUDIO" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="864" />
+                <Property name="VertScrollPageSize" value="130" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="55" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="ShandingQuality" >
+                <Property name="Area" value="{{0,0},{-0.3,0},{0.5,0},{-0.15,0}}" />
+                <Property name="Text" value="SHADING QUALITY" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorzScrollPageSize" value="864" />
+                <Property name="VertScrollPageSize" value="130" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="160" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+            <Window type="Vanilla/HorizontalScrollbar" name="AudioScrollBar" >
+                <Property name="Area" value="{{0,0},{0.1,0},{0.4,0},{0.125,0}}" />
+                <Property name="AlwaysOnTop" value="true" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="Vanilla/Combobox" name="ComboboxShading" >
+                <Property name="Area" value="{{0,0},{-0.12,0},{0.3,0},{0.18,0}}" />
+                <Property name="ReadOnly" value="true" />
+                <Property name="AlwaysOnTop" value="true" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="ForceVertScrollbar" value="true" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <AutoWindow namePath="__auto_editbox__" >
+                    <Property name="ReadOnly" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_droplist__" >
+                    <AutoWindow namePath="__auto_hscrollbar__" >
+                        <AutoWindow namePath="__auto_incbtn__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_decbtn__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_thumb__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_vscrollbar__" >
+                        <AutoWindow namePath="__auto_incbtn__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_decbtn__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_thumb__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                    </AutoWindow>
+                </AutoWindow>
+                <AutoWindow namePath="__auto_button__" >
+                    <Property name="HoverImage" value="Vanilla-Images/DropDownButtonHover" />
+                    <Property name="NormalImage" value="Vanilla-Images/DropDownButtonNormal" />
+                    <Property name="PushedImage" value="Vanilla-Images/DropDownButtonPushed" />
+                </AutoWindow>
+            </Window>
+            <Window type="Vanilla/Combobox" name="ComboboxResol" >
+                <Property name="Area" value="{{0,0},{-0.05,0},{0.3,0},{0.25,0}}" />
+                <Property name="ReadOnly" value="true" />
+                <Property name="AlwaysOnTop" value="true" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="ForceVertScrollbar" value="true" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <AutoWindow namePath="__auto_editbox__" >
+                    <Property name="ReadOnly" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_droplist__" >
+                    <AutoWindow namePath="__auto_hscrollbar__" >
+                        <AutoWindow namePath="__auto_incbtn__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_decbtn__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_thumb__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                    </AutoWindow>
+                    <AutoWindow namePath="__auto_vscrollbar__" >
+                        <AutoWindow namePath="__auto_incbtn__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_decbtn__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                        <AutoWindow namePath="__auto_thumb__" >
+                            <Property name="RestoreOldCapture" value="true" />
+                        </AutoWindow>
+                    </AutoWindow>
+                </AutoWindow>
+                <AutoWindow namePath="__auto_button__" >
+                    <Property name="HoverImage" value="Vanilla-Images/DropDownButtonHover" />
+                    <Property name="NormalImage" value="Vanilla-Images/DropDownButtonNormal" />
+                    <Property name="PushedImage" value="Vanilla-Images/DropDownButtonPushed" />
+                </AutoWindow>
+            </Window>
+            <Window type="Vanilla/StaticText" name="Resolution" >
+                <Property name="Area" value="{{0,0},{-0.31,0},{0.5,0},{-0.16,0}}" />
+                <Property name="Text" value="RESOLUTION" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="HorzScrollPageSize" value="864" />
+                <Property name="VertScrollPageSize" value="130" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Property name="HorzScrollDocumentSize" value="113" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+        </Window>
+        <Window type="Generic/ImageButton" name="BackButton" >
+            <Property name="Area" value="{{0.05,0},{0.02,0},{0.12,0},{0.06,0}}" />
+            <Property name="HoverImage" value="GameMenuImages/BackHover" />
+            <Property name="NormalImage" value="GameMenuImages/BackNormal" />
+            <Property name="PushedImage" value="GameMenuImages/BackHover" />
+        </Window>
+    </Window>
+</GUILayout>

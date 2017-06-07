@@ -133,6 +133,7 @@ private:
 
   //Player
   Entity::Type  classType;
+  CEGUI::Window   *_healthBar;
 
   //Spell button
   CEGUI::Window   *_firstSpell;
