@@ -52,6 +52,7 @@ public:
   bool         buttonOptions(const CEGUI::EventArgs &e);
   bool        Backbutton(const CEGUI::EventArgs &e);
   bool        SplashButton(const CEGUI::EventArgs &e);
+  bool        ApplyButton(const CEGUI::EventArgs &e);
 
 private:
   char mPolygonRenderingMode;
@@ -88,6 +89,10 @@ private:
   CEGUI::Window *_selectIngenior;
   CEGUI::Window *_selectWarrior;
   CEGUI::Window *_selectMage;
+
+  CEGUI::Combobox   *_shadingBox;
+  CEGUI::Combobox   *_resolBox;
+  CEGUI::Window     *_applyButton;
 
   bool mShutDown;
   Ogre::Camera *_camera;
