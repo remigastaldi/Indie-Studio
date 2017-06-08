@@ -16,11 +16,11 @@
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
-                <Property name="HorzScrollPageSize" value="864" />
-                <Property name="VertScrollPageSize" value="130" />
+                <Property name="HorzScrollPageSize" value="576" />
+                <Property name="VertScrollPageSize" value="86" />
                 <Property name="HorizontalAlignment" value="Centre" />
-                <Property name="HorzScrollDocumentSize" value="55" />
-                <Property name="VertScrollDocumentSize" value="20.5273" />
+                <Property name="HorzScrollDocumentSize" value="38" />
+                <Property name="VertScrollDocumentSize" value="13.6796" />
             </Window>
             <Window type="Vanilla/StaticText" name="ShandingQuality" >
                 <Property name="Area" value="{{0,0},{-0.3,0},{0.5,0},{-0.15,0}}" />
@@ -30,11 +30,11 @@
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
-                <Property name="HorzScrollPageSize" value="864" />
-                <Property name="VertScrollPageSize" value="130" />
+                <Property name="HorzScrollPageSize" value="576" />
+                <Property name="VertScrollPageSize" value="86" />
                 <Property name="HorizontalAlignment" value="Centre" />
-                <Property name="HorzScrollDocumentSize" value="160" />
-                <Property name="VertScrollDocumentSize" value="20.5273" />
+                <Property name="HorzScrollDocumentSize" value="109" />
+                <Property name="VertScrollDocumentSize" value="13.6796" />
             </Window>
             <Window type="Vanilla/HorizontalScrollbar" name="AudioScrollBar" >
                 <Property name="Area" value="{{0,0},{0.1,0},{0.4,0},{0.125,0}}" />
@@ -129,11 +129,17 @@
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Bottom" />
-                <Property name="HorzScrollPageSize" value="864" />
-                <Property name="VertScrollPageSize" value="130" />
+                <Property name="HorzScrollPageSize" value="576" />
+                <Property name="VertScrollPageSize" value="86" />
                 <Property name="HorizontalAlignment" value="Centre" />
-                <Property name="HorzScrollDocumentSize" value="113" />
-                <Property name="VertScrollDocumentSize" value="20.5273" />
+                <Property name="HorzScrollDocumentSize" value="78" />
+                <Property name="VertScrollDocumentSize" value="13.6796" />
+            </Window>
+            <Window type="Generic/ImageButton" name="ApplyButton" >
+                <Property name="Area" value="{{0.9,0},{0.9,0},{0.98,0},{0.955,0}}" />
+                <Property name="HoverImage" value="GameMenuImages/ApplyHover" />
+                <Property name="NormalImage" value="GameMenuImages/ApplyNormal" />
+                <Property name="PushedImage" value="GameMenuImages/ApplyHover" />
             </Window>
         </Window>
         <Window type="Generic/ImageButton" name="BackButton" >

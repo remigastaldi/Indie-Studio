@@ -57,4 +57,6 @@
     <Image height="87" name="ResurectNormal" width="300" xPos="2301" yPos="160" />
     <Image height="87" name="ResurectHover" width="300" xPos="2650" yPos="160" />
     <Image height="151" name="YouDied" width="1033" xPos="3029" yPos="78" />
+    <Image height="87" name="ApplyNormal" width="300" xPos="3190" yPos="1617" />
+    <Image height="87" name="ApplyHover" width="300" xPos="3546" yPos="1617" />
 </Imageset>
