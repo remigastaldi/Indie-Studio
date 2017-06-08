@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Wed Jun  7 19:54:17 2017 gastal_r
+// Last update Thu Jun  8 10:59:38 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -37,6 +37,10 @@ Map::~Map()
 void Map::enter(void)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Enter Map =====");
+
+#if !DEBUG_LOCAL
+  connect();
+#endif
 
   _sceneMgr = mDevice->sceneMgr;
   _camera = _sceneMgr->createCamera("MapCamera");
@@ -367,7 +371,6 @@ void Map::createScene(void)
 	// mNode->attachObject(static_cast <Ogre::SimpleRenderable *> (debugDrawer));
 
 #if !DEBUG_LOCAL
-  connect();
   sendEntity(*_player);
 #endif
 
