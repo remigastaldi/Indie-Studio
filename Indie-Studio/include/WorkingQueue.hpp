@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Thu Jun  8 10:58:31 2017 Leo HUBERT
+// Last update Thu Jun  8 11:21:09 2017 gastal_r
 //
 
 #ifndef _WORKING_HPP_
@@ -51,17 +51,19 @@ public:
 public:
   WorkingQueue();
 
-  void processQueue(void);
   void pushToQueue(WorkingQueue::Action, const WorkingQueue::Data &);
 
+private:
   void createEntityQueue(const WorkingQueue::Data &);
   void removeEntityQueue(const WorkingQueue::Data &);
   void createSpellQueue(const WorkingQueue::Data &);
   void moveEntityQueue(const WorkingQueue::Data &);
 
-protected:
   std::mutex  _mutex;
   std::vector<std::pair<void(WorkingQueue::*)(const WorkingQueue::Data &data), WorkingQueue::Data>> _queue;
+
+protected:
+  void processQueue(void);
 
   Ogre::SceneManager *_sceneMgr;
   std::unique_ptr<SpellManager>    _spellManagerSocket;

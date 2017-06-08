@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Wed Jun  7 05:01:51 2017 gastal_r
+// Last update Thu Jun  8 11:21:20 2017 gastal_r
 //
 
 #ifndef _CLIENT_HPP_
@@ -40,7 +40,7 @@
 
 #endif
 
-class Socket : virtual public WorkingQueue
+class Socket : virtual private WorkingQueue
 {
 public:
   Socket(std::string const &addr, int const port, int const id, std::string const &room);

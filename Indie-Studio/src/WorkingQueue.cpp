@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:49:15 2017 gastal_r
-// Last update Wed Jun  7 18:43:23 2017 gastal_r
+// Last update Thu Jun  8 10:57:57 2017 gastal_r
 //
 
 #include      "WorkingQueue.hpp"

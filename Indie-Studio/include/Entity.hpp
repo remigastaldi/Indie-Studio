@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Wed Jun  7 21:39:51 2017 gastal_r
+// Last update Thu Jun  8 12:09:05 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -61,7 +61,7 @@ public:
 
 public:
   Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, Status status,
-    const Ogre::Vector3 &position, const Ogre::Vector3 &destination, float walkspeed, size_t health);
+    const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Entity::Type, float walkspeed, size_t health);
 
   ~Entity();
   Entity(const Entity& other) = default;
@@ -82,6 +82,7 @@ public:
   Ogre::Real  const			  getWalkSpd() const  { return _walkSpd; }
   Ogre::Vector3 const     getPosition() const { return (cvt(_ghostObject->getWorldTransform().getOrigin())); }
   Ogre::Vector3 const     &getDestination() const { return _destination; }
+  Entity::Type            getType() const { return (_type); }
   Ogre::Quaternion const  &getOrientation() const  { return _orientation; }
   Entity::Status          getStatus() const       { return _status; }
   size_t                  getId() const   { return (_id); }
@@ -101,6 +102,7 @@ protected:
   size_t				        _id;
   Ogre::Quaternion		  _orientation;
   Ogre::Vector3			    _destination;
+  Entity::Type          _type;
   Ogre::Real			      _walkSpd;
   size_t                _health;
   btPairCachingGhostObject* _ghostObject;
