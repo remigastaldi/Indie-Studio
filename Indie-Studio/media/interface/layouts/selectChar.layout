@@ -64,7 +64,7 @@ Increase your fire distance</Property>
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/ImageButton" name="SelectIngenior" >
-                <Property name="Area" value="{{0,0},{-0.04,0},{0,115},{-0.04,38}}" />
+                <Property name="Area" value="{{0,0},{-0.04,0},{0.35,0},{0.015,0}}" />
                 <Property name="HoverImage" value="GameMenuImages/SelectHover" />
                 <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
                 <Property name="PushedImage" value="GameMenuImages/SelectHover" />
@@ -223,7 +223,7 @@ Use your dagger</Property>
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/ImageButton" name="SelectWarrior" >
-                <Property name="Area" value="{{0,0},{-0.04,0},{0,115},{-0.04,38}}" />
+                <Property name="Area" value="{{0,0},{-0.04,0},{0.35,0},{0.015,0}}" />
                 <Property name="HoverImage" value="GameMenuImages/SelectHover" />
                 <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
                 <Property name="PushedImage" value="GameMenuImages/SelectHover" />
@@ -339,7 +339,7 @@ Add a buff to a friend</Property>
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/ImageButton" name="SelectWizzard" >
-                <Property name="Area" value="{{0,0},{-0.04,0},{0,115},{-0.04,38}}" />
+                <Property name="Area" value="{{0,0},{-0.04,0},{0.35,0},{0.015,0}}" />
                 <Property name="HoverImage" value="GameMenuImages/SelectHover" />
                 <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
                 <Property name="PushedImage" value="GameMenuImages/SelectHover" />
@@ -419,7 +419,7 @@ Buff to increase damages</Property>
                 <Property name="VertScrollDocumentSize" value="20.5273" />
             </Window>
             <Window type="Generic/ImageButton" name="SelectDarkFiend" >
-                <Property name="Area" value="{{0,0},{-0.04,0},{0,115},{-0.04,38}}" />
+                <Property name="Area" value="{{0,0},{-0.04,0},{0.35,0},{0.015,0}}" />
                 <Property name="HoverImage" value="GameMenuImages/SelectHover" />
                 <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
                 <Property name="PushedImage" value="GameMenuImages/SelectHover" />
