@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Wed Jun  7 19:52:00 2017 gastal_r
+** Last update Thu Jun  8 10:58:46 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -52,7 +52,7 @@ void Socket::on_close(sio::client::close_reason const& reason)
 
 void Socket::on_fail()
 {
-  std::cout << "sio failed: " <<std::endl;
+  HIGHLIGHT("Socket.IO: Connetion to the sever failed\n");
   exit(0);
 }
 
@@ -198,6 +198,7 @@ void Socket::events()
 void Socket::connect()
 {
   _client.connect(_addr);
+  _client.set_reconnect_attempts(1);
   _current_socket = _client.socket();
   _lock.lock();
   if(!_connect_finish)

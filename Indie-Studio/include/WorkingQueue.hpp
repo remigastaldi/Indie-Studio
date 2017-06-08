@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Wed Jun  7 18:30:01 2017 gastal_r
+// Last update Thu Jun  8 10:58:31 2017 Leo HUBERT
 //
 
 #ifndef _WORKING_HPP_
