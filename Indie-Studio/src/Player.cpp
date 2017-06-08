@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Thu Jun  8 11:53:13 2017 gastal_r
+// Last update Fri Jun  9 00:13:22 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -33,6 +33,6 @@ DarkFiend::DarkFiend(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsW
 
   addToBulletWorld(position);
   btVector3 posBody(_ghostObject->getWorldTransform().getOrigin());
-  _node->setPosition(cvt(posBody));
+  _node->setPosition(Utils::cvt(posBody));
   Ogre::LogManager::getSingletonPtr()->logMessage("===== DARKFIEND created [id] " + std::to_string(id) + " =====");
 }

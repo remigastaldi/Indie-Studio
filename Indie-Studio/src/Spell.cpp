@@ -5,31 +5,38 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:56:53 2017 gastal_r
-// Last update Wed Jun  7 21:11:40 2017 gastal_r
+// Last update Fri Jun  9 00:07:28 2017 gastal_r
 //
 
 #include      "Spell.hpp"
 
-Spell::Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id,
- const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback,
+Spell::Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback,
   Ogre::Real distance, Ogre::Real speed, Spell::Type type)
   :  _sceneMgr(sceneMgr),
   _collision(collision),
-  _entity(nullptr),
-  _node(nullptr),
+  _soundManager(soundManager),
   _id(id),
-  _animationState(nullptr),
-  _speed(speed),
   _destination(destination),
   _disableCallback(disableCallback),
   _distance(distance),
-  _type(type)
+  _speed(speed),
+  _type(type),
+  _entity(nullptr),
+  _node(nullptr),
+  _animationState(nullptr),
+  _createSound(nullptr)
 {}
 
 Spell::~Spell()
 {
+  std::cout << "==== DELETE SPELL =====" << std::endl;
+  _soundManager.destroySound(_createSound);
   _collision.remove_entity(_entity);
   _sceneMgr.destroyEntity(_entity);
+  Utils::destroyAllAttachedMovableObjects(*_node, _sceneMgr);
+  _node->removeAndDestroyAllChildren();
+  // _sceneMgr.destroyMovableObject(_createSound);
   _sceneMgr.destroySceneNode(_node);
 }
 

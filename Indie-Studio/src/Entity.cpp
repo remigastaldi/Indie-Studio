@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Thu Jun  8 11:55:27 2017 gastal_r
+// Last update Fri Jun  9 00:08:16 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -41,7 +41,7 @@ void  Entity::addToBulletWorld(const Ogre::Vector3 &position)
 {
   btTransform startTransform;
   startTransform.setIdentity();
-  startTransform.setOrigin(cvt(position));
+  startTransform.setOrigin(Utils::cvt(position));
 
   _ghostObject = new btPairCachingGhostObject();
   // _ghostObject->setUserPointer((void*) _node);
@@ -92,7 +92,7 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
 	{
 		btVector3 ghostOrigin(_ghostObject->getWorldTransform().getOrigin());
 		_destination.y = 0;
-		Ogre::Vector3 direction(_destination - cvt(ghostOrigin));
+		Ogre::Vector3 direction(_destination - Utils::cvt(ghostOrigin));
 		direction.y = 0;
 
 		Ogre::Real distance(direction.normalise());
@@ -102,12 +102,12 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
 		{
 			changeAnimation(Entity::Status::IMMOBILE);
 			_character->setWalkDirection(btVector3(0.f, 0.f, 0.f));
-	    _node->setPosition(cvt(ghostOrigin));
+	    _node->setPosition(Utils::cvt(ghostOrigin));
 			_destination = Ogre::Vector3::ZERO;
 			return;
 		}
-		_character->setWalkDirection(cvt(direction * move));
-    _node->setPosition(cvt(ghostOrigin));
+		_character->setWalkDirection(Utils::cvt(direction * move));
+    _node->setPosition(Utils::cvt(ghostOrigin));
 
     Ogre::Vector3 src(_node->getOrientation() * Ogre::Vector3::UNIT_X);
     src.y = 0;
@@ -124,22 +124,22 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
     changeAnimation(Entity::Status::IMMOBILE);
 	if (_animationState)
 		_animationState->addTime(evt.timeSinceLastFrame);
-  _node->setPosition(cvt(_ghostObject->getWorldTransform().getOrigin()));
+  _node->setPosition(Utils::cvt(_ghostObject->getWorldTransform().getOrigin()));
 }
 
 void          Entity::setPosition(const Ogre::Vector3 &pos)
 {
   if (_ghostObject)
   {
-    Ogre::Vector3 direction(pos - cvt(_ghostObject->getWorldTransform().getOrigin()));
+    Ogre::Vector3 direction(pos - Utils::cvt(_ghostObject->getWorldTransform().getOrigin()));
     if (direction.normalise() > 5.f)
     {
       btTransform startTransform;
       startTransform.setIdentity();
-      startTransform.setOrigin(cvt(pos));
+      startTransform.setOrigin(Utils::cvt(pos));
       {
         _ghostObject->setWorldTransform(startTransform);
-        _node->setPosition(cvt(_ghostObject->getWorldTransform().getOrigin()));
+        _node->setPosition(Utils::cvt(_ghostObject->getWorldTransform().getOrigin()));
       }
     }
   }

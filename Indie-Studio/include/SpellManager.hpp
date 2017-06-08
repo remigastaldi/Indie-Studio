@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun  3 18:44:20 2017 gastal_r
-// Last update Tue Jun  6 12:25:37 2017 gastal_r
+// Last update Thu Jun  8 14:28:02 2017 gastal_r
 //
 
 #ifndef _SPELLMANAGER_hPP
@@ -16,8 +16,8 @@
 class SpellManager
 {
 public:
-  SpellManager(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision);
-  SpellManager(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, std::function<void(Spell::Type, const std::string &)> sendCollisionToServer);
+  SpellManager(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager);
+  SpellManager(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager, std::function<void(Spell::Type, const std::string &)> sendCollisionToServer);
 
   void frameRenderingQueued(const Ogre::FrameEvent& evt);
   void launchSpell(Spell::Type type, const Ogre::Vector3 &startPos, const Ogre::Vector3 &dest);
@@ -25,6 +25,7 @@ public:
 private:
   Collision::CollisionTools &_collision;
   Ogre::SceneManager    &_sceneMgr;
+  OgreOggSound::OgreOggSoundManager &_soundManager;
   size_t                _currentMaxIndex;
   std::vector<size_t>   _spellsIndex;
   std::vector<Spell *>  _spells;

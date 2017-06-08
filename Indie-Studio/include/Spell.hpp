@@ -5,17 +5,24 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:43:07 2017 gastal_r
-// Last update Tue Jun  6 19:23:27 2017 gastal_r
+// Last update Fri Jun  9 00:07:14 2017 gastal_r
 //
 
 #ifndef _SPELL_HPP_
 #define _SPELL_HPP_
+
+#include <string>
+#include <unordered_map>
+#include <functional>
 
 #include <OgreRoot.h>
 #include <OgreEntity.h>
 #include <OgreSceneNode.h>
 #include <OgreLogManager.h>
 #include <OgreSceneManager.h>
+
+#include <OgreOggSound/OgreOggSound.h>
+#include <OgreOggSound/OgreOggSoundManager.h>
 
 #include "OgreBulletDynamicsRigidBody.h"
 #include "OgreBulletCollisionsPreRequisites.h"
@@ -26,11 +33,8 @@
 #include "Shapes/OgreBulletCollisionsTrimeshShape.h"
 #include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
 
-#include <string>
-#include <unordered_map>
-#include <functional>
-
 #include "Collision.h"
+#include "Utils.hpp"
 
 class Spell
 {
@@ -52,8 +56,9 @@ public:
   };
 
 public:
-  Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id,
-    const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback, Ogre::Real distance, Ogre::Real speed, Spell::Type type);
+  Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
+    size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback,
+    Ogre::Real distance, Ogre::Real speed, Spell::Type type);
 
   virtual ~Spell();
   Spell(const Spell& other) = default;
@@ -75,28 +80,30 @@ public:
 protected:
   Ogre::SceneManager        &_sceneMgr;
   Collision::CollisionTools &_collision;
+  OgreOggSound::OgreOggSoundManager &_soundManager;
+  size_t				        _id;
+  Ogre::Vector3         _direction;
+  Ogre::Vector3			    _destination;
+  bool                  _disableCallback;
+  Ogre::Real            _distance;
+  Ogre::Real			      _speed;
+  Spell::Type           _type;
   Ogre::Entity          *_entity;
   Ogre::SceneNode       *_node;
-  size_t				        _id;
   Ogre::AnimationState	*_animationState;
   Spell::Status         _status;
-  Ogre::Real			      _speed;
-  Ogre::Vector3			    _destination;
-  Ogre::Real            _distance;
-  Ogre::Vector3         _direction;
-  bool                  _disableCallback;
-  Spell::Type           _type;
   std::string           _collideWith;
+  OgreOggSound::OgreOggISound *_createSound;
 };
 
 
 #define ANGEL_SPEED 4.f
-#define ANGEL_DISTANCE 50.f
+#define ANGEL_DISTANCE 10.f
 class Angel : public Spell
 {
 public:
-  Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id,
-   const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
+    size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
 };
 
 
@@ -108,11 +115,11 @@ public:
 
 
 #define   SPELL_INIT_PARAMETERS   \
-Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, size_t id, \
-  const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback
+Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager, \
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback
 
 #define   SPELL_INIT_VARS   \
-sceneMgr, collision, id, position, destination, disableCallback
+sceneMgr, collision, soundManager, id, position, destination, disableCallback
 
 template<typename T>
 inline Spell * createInstance(SPELL_INIT_PARAMETERS)

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Thu Jun  8 12:09:05 2017 gastal_r
+// Last update Fri Jun  9 00:09:58 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -36,7 +36,6 @@
 #include <CameraMan.hpp>
 
 #include "Collision.h"
-#include "OgreBulletUtils.h"
 #include "Spell.hpp"
 
 class Entity
@@ -80,7 +79,7 @@ public:
   Ogre::SceneNode *getNode() const { return (_node); }
   Ogre::Entity  const			*getPlayer() const  { return _entity; }
   Ogre::Real  const			  getWalkSpd() const  { return _walkSpd; }
-  Ogre::Vector3 const     getPosition() const { return (cvt(_ghostObject->getWorldTransform().getOrigin())); }
+  Ogre::Vector3 const     getPosition() const { return (Utils::cvt(_ghostObject->getWorldTransform().getOrigin())); }
   Ogre::Vector3 const     &getDestination() const { return _destination; }
   Entity::Type            getType() const { return (_type); }
   Ogre::Quaternion const  &getOrientation() const  { return _orientation; }

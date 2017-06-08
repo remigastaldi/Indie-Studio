@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Thu Jun  8 10:59:38 2017 gastal_r
+// Last update Thu Jun  8 23:55:08 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -43,8 +43,10 @@ void Map::enter(void)
 #endif
 
   _sceneMgr = mDevice->sceneMgr;
+
   _camera = _sceneMgr->createCamera("MapCamera");
   _camera->setNearClipDistance(5);
+
 
   Ogre::Viewport* vp = mDevice->window->addViewport(_camera);
   _camera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
@@ -54,9 +56,9 @@ void Map::enter(void)
   _collision.reset(new Collision::CollisionTools());
   _world.reset(new OgreBulletDynamics::DynamicsWorld(_sceneMgr, mBounds, mGravityVector));
 
-  _spellManagerSocket.reset(new SpellManager(*_sceneMgr, *_collision));
+  _spellManagerSocket.reset(new SpellManager(*_sceneMgr, *_collision, *mDevice->soundManager));
   std::function<void(Spell::Type, const std::string &)> sendCollisionFunc([=] (Spell::Type type, const std::string &id) { this->sendCollision(type, id); } );
-  _spellManager.reset(new SpellManager(*_sceneMgr, *_collision, sendCollisionFunc));
+  _spellManager.reset(new SpellManager(*_sceneMgr, *_collision, *mDevice->soundManager, sendCollisionFunc));
 
 #if DEBUG_DRAWER
 	debugDrawer = new OgreBulletCollisions::DebugDrawer();
@@ -302,7 +304,7 @@ void Map::createScene(void)
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
   _player = createEntity(Entity::Type::DARKFIEND, *_sceneMgr, *_world, *_collision, 42,
-		Entity::Status::IMMOBILE, Ogre::Vector3(40.f, 20.f, 160.f), Ogre::Vector3::ZERO);
+		Entity::Status::IMMOBILE, Ogre::Vector3(0.f, 10.f, 0.f), Ogre::Vector3::ZERO);
 
 #if DEBUG_CAMERA
   _camera->setPosition(_player->getPosition() + Ogre::Vector3(0, 50.f, 50.f));
@@ -312,6 +314,7 @@ void Map::createScene(void)
   _cameraNode = _sceneMgr->getRootSceneNode()->createChildSceneNode("CamNode");
   _cameraNode->setPosition(_player->getPosition() + Ogre::Vector3(0.f, 40.f, 40.f));
   _cameraNode->attachObject(_camera);
+  _cameraNode->attachObject(mDevice->soundManager->getListener());
   _camera->lookAt(_player->getPosition());
 #endif
 
@@ -522,7 +525,9 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
 {
   if(arg.key == OIS::KC_V)
 {
+  #if DEBUG_LOCAL == false
   sendSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());
+  #endif
   _spellManager->launchSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());
   return true;
   Ogre::Vector3 size = Ogre::Vector3::ZERO;
