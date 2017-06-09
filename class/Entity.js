@@ -8,6 +8,14 @@ var EntityType =
   SKELETON: 5
 }
 
+var Spell =
+{
+  ANGEL : 0,
+  THUNDERSTORM: 1,
+  SPECTRE: 2,
+  FIRE: 3
+}
+
 function Entity(id, server_id, username, type, room, health) {
   this.id = id;
   this.username = username;
@@ -17,6 +25,12 @@ function Entity(id, server_id, username, type, room, health) {
   this.maxhealth = health;
   this.server_id = server_id
   this.status = 0;
+
+  /* BOT SECTION */
+
+  this.focus = 0;
+
+  /* END BOT SECTION */
 
   this.destination = {x: 0, y: 0, z: 0};
   this.position = {x: 0, y: 0, z: 0};
@@ -50,5 +64,6 @@ function Entity(id, server_id, username, type, room, health) {
 
 module.exports = {
   Entity: Entity,
-  EntityType: EntityType
+  EntityType: EntityType,
+  Spell: Spell
 } ;
