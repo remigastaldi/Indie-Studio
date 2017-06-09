@@ -1,14 +1,21 @@
 var EntityType =
 {
-  FRIEND: 0,
-  ENEMIS: 1
+  WARRIOR: 0,
+  MAGE: 1,
+  DARKFIEND: 2,
+  INGENIOR: 3,
+  ZOMBIE: 4,
+  SKELETON: 5
 }
 
-function Entity(id, username, type, room) {
+function Entity(id, server_id, username, type, room, health) {
   this.id = id;
   this.username = username;
   this.type = type;
   this.room = room;
+  this.health = health;
+  this.maxhealth = health;
+  this.server_id = server_id
   this.status = 0;
 
   this.destination = {x: 0, y: 0, z: 0};

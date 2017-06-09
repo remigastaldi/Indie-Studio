@@ -6,6 +6,7 @@
   "dependencies": {
     "express": "^4.15.3",
     "jade": "^1.11.0",
+    "json-query": "^2.2.2",
     "mathjs": "^3.13.3",
     "socket.io": "^1.7.3",
     "supervisor": "^0.12.0"

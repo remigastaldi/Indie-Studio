@@ -14,6 +14,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var exec = require('child_process').exec;
 var math = require('mathjs');
+var jsonQuery = require('json-query');
 
 var { Entity, EntityType } = require("./class/Entity.js");
 
@@ -28,11 +29,9 @@ var rl = readline.createInterface({
   TEST MOBS
 */
 
-/*
-  enemis["test"] = new Entity(23455, "BOT 1", EntityType.ENEMIS, "room");
-  enemis["test"].setPosition(48.796180725097656, 20.14305305480957, 143.03273010253906);
-  enemis["test"].setDestination(48.796180725097656, 20.14305305480957, 143.03273010253906);
-*/
+enemis[23455] = new Entity(23455, 1, "BOT 1", EntityType.ZOMBIE, "room", 100);
+enemis[23455].setPosition(32.924129486083984, 20.143051147460938, 151.13072204589844);
+enemis[23455].setDestination(32.924129486083984, 20.143051147460938, 151.13072204589844);
 
 function checkDistance(userPosition, enemisPosition)
 {
@@ -50,7 +49,7 @@ function IAEnemis()
   {
       for (user in users)
       {
-        if (checkDistance(users[user].position, enemis[bot].position) < 1)
+        if (checkDistance(users[user].position, enemis[bot].position) < 5)
         {
             io.emit("move", {
               send_by: enemis[bot].id,
@@ -76,6 +75,27 @@ function log(message)
 {
   var date = new Date();
   console.log(date + ": " + message);
+}
+
+function touched(local, entity, spell_type, room)
+{
+  var damages = 0;
+
+  switch (spell_type) {
+    case 0:
+      damages = 20;
+      break;
+    default:
+  }
+
+  log(entity);
+  entity.health -= damages;
+  if (entity.health <= 0)
+  {
+    io.emit("killed", {user_id: entity.id});
+    delete(entity);
+  }
+
 }
 
 function exec_command(command, from)
@@ -111,7 +131,7 @@ function exec_command(command, from)
 }
 
 rl.on('line', function(line){
-    exec_command(line, 0);
+    //exec_command(line, 0);
 });
 
 io.on('connection', function (socket) {
@@ -137,15 +157,32 @@ io.on('connection', function (socket) {
     io.to(socket.room).emit("create_entity", data);
     if (users[socket.id])
     {
+      users[socket.id].health = data["health"];
+      users[socket.id].maxhealth = data["health"];
       users[socket.id].setDestination(data["destination"]["x"], data["destination"]["y"], data["destination"]["z"]);
       users[socket.id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
       users[socket.id].setStatus(data["status"]);
     }
-    console.log(data);
   });
 
   socket.on("create_spell", function (data) {
     io.to(socket.room).emit("create_spell", data);
+  });
+
+  socket.on('collision', function (data) {
+    if (enemis[data.touch])
+    {
+      touched(1, enemis[data.touch], data.spell_type, socket.room);
+    }
+
+    var user_id = jsonQuery('.[*][id=' + data.touch +'].server_id', {
+      data: users
+    }).value;
+
+    if (users[user_id])
+    {
+      touched(0, users[user_id], data.spell_type, socket.room);
+    }
     console.log(data);
   });
 
@@ -160,13 +197,17 @@ io.on('connection', function (socket) {
 
     for (bot in enemis)
     {
+      if (enemis[bot]["room"] == socket.room)
+      {
         io.to(socket.room).emit("create_entity", {
           send_by: enemis[bot]["id"],
           send_to: data["user_id"],
+          health: enemis[bot]["health"],
           position: enemis[bot]["position"],
           status: enemis[bot]["status"],
           destination: enemis[bot]["destination"]
         });
+      }
     }
 
     for (user in users)
@@ -177,6 +218,7 @@ io.on('connection', function (socket) {
         io.to(socket.room).emit("create_entity", {
           send_by: users[user]["id"],
           send_to: data["user_id"],
+          health: users[user]["health"],
           position: users[user]["position"],
           status: users[user]["status"],
           destination: users[user]["destination"]
@@ -188,7 +230,7 @@ io.on('connection', function (socket) {
 
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[socket.id] = new Entity(data["user_id"], "User " + data["user_id"], EntityType.FRIEND, data["room"]);
+    users[socket.id] = new Entity(data["user_id"], socket.id, "User " + data["user_id"], EntityType.ANGEL, data["room"], data["health"]);
     totalConnected++;
   });
 
@@ -206,6 +248,11 @@ io.on('connection', function (socket) {
 app.get('/', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify({ connected: totalConnected, users: users}));
+});
+
+app.get('/bots', function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify(enemis));
 });
 
 app.get('/clear', function (req, res) {
