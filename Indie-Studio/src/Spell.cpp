@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:56:53 2017 gastal_r
-// Last update Fri Jun  9 17:38:11 2017 Leo HUBERT
+// Last update Fri Jun  9 22:59:58 2017 gastal_r
 //
 
 #include      "Spell.hpp"
@@ -71,7 +71,8 @@ bool 	Spell::frameRenderingQueued(const Ogre::FrameEvent &evt)
 
     if (ret.collided)
     {
-      std::cout << _entity->getName() << " collide with " << ret.entity->getName() << std::endl;
+      // if ()
+      std::cout << _entity->getName() << " collide with " << ret.entity->getName() << " of type => " << (int) ret.type << std::endl;
       _collideWith = ret.entity->getName();
       return (false);
     }

@@ -91,7 +91,6 @@ private:
   char mPolygonRenderingMode;
 
   //OgreBullet
-  int mNumEntitiesInstanced;
   Ogre::AxisAlignedBox                                mBounds;
   Ogre::Vector3                                       mGravityVector;
   OgreBulletCollisions::DebugDrawer                   *debugDrawer;

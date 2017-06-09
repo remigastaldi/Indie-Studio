@@ -12,8 +12,14 @@
 #include <unordered_map>
 
    namespace Collision {
+      enum Type
+      {
+        PLAYER,
+        MOB,
+        WALL,
+        OTHER
+      };
 
-      
       // return struct for the function check_ray_collision (all the data about collision)
       // collided - weather or not there was a collision and the data in the struct is valid (if false ignore other fields).
       // position - will contain the collision position
@@ -25,6 +31,7 @@
          Ogre::Vector3         position;
          Ogre::Entity*         entity;
          float               closest_distance;
+         Collision::Type     type;
       };
 
       // different collision types
@@ -62,6 +69,7 @@
          Ogre::Entity*         Entity;            // the entity to check
          ECollisionType         CollisionType;      // the prefered collision type for this entity
          bool               IsStatic;         // is this entity part of a static geometry
+         Collision::Type    Type;
 
          // Data used only for static entities
          struct SStaticData
@@ -69,6 +77,7 @@
             Ogre::Sphere         Sphere;            // used only for static objects with sphere collision
             Ogre::AxisAlignedBox   Box;            // used only for static objects with box or accurate collision
             Ogre::Matrix4         Mat;            // transformation matrix
+            Collision::Type    type;
          } *StaticData;
 
          // delete the static data if have it
@@ -93,10 +102,10 @@
          ~CollisionTools();
 
          // register a dynamic entity for collision detection
-         void register_entity(Ogre::Entity* Entity, ECollisionType CollisionType = COLLISION_ACCURATE);
+         void register_entity(Ogre::Entity* Entity, ECollisionType CollisionType = COLLISION_ACCURATE, Collision::Type = Collision::Type::OTHER);
 
          // register a static entity for collision detection
-         void register_static_entity(Ogre::Entity* Entity, const Ogre::Vector3& position, const Ogre::Quaternion orientation, const Ogre::Vector3 scale, ECollisionType CollisionType = COLLISION_ACCURATE);
+         void register_static_entity(Ogre::Entity* Entity, const Ogre::Vector3& position, const Ogre::Quaternion orientation, const Ogre::Vector3 scale, ECollisionType CollisionType = COLLISION_ACCURATE, Collision::Type = Collision::Type::OTHER);
 
          // unregister an entity from collision detection (make sure to call this when the entity is deleted!)
          void remove_entity(Ogre::Entity* Entity);
@@ -118,7 +127,7 @@
          // queryMask - ogre's query mask (you can set for every entity
          // ignore - will ignore the entity who has the address of 'ignore'. use this if you want to prevent a character from colliding with itself..
          // stopOnFirstPositive - if true, will stop on first positive collision (instead of nearest)
-         SCheckCollisionAnswer check_ray_collision(const Ogre::Vector3& fromPoint, const Ogre::Vector3& toPoint, const float collisionRadius = 1.0f, 
+         SCheckCollisionAnswer check_ray_collision(const Ogre::Vector3& fromPoint, const Ogre::Vector3& toPoint, const float collisionRadius = 1.0f,
             const float rayHeightLevel = 0.0f, const Ogre::uint32 queryMask = 0xFFFFFFFF, void* ignore = nullptr, bool stopOnFirstPositive = false);
 
 
@@ -129,7 +138,7 @@
          // all the accurate checks and range limit is done in one of the 'check_ray_collision' functions
          // stopOnFirstPositive - if true, will stop on first positive bounding box or sphere collision (not relevant for accurate collisions)
          typedef std::pair<const SCollidableEntity*, Ogre::Real> RayQueryEntry;
-         std::list<RayQueryEntry> get_basic_ray_query_entities_list(const Ogre::Ray &ray, const Ogre::uint32 queryMask = 0xFFFFFFFF, 
+         std::list<RayQueryEntry> get_basic_ray_query_entities_list(const Ogre::Ray &ray, const Ogre::uint32 queryMask = 0xFFFFFFFF,
                      void* ignore = nullptr, Ogre::Real maxDistance = 0xffff, bool stopOnFirstPositive = false);
 
          // comparing function to arranage the result list of get_basic_ray_query_entities_list

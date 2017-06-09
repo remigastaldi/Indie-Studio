@@ -15,7 +15,6 @@ Menu::Menu() :
   mPolygonRenderingMode('B'),
   mShutDown(false),
   _camera(nullptr),
-  // _cameraMan(nullptr),
 	mRotSpd(0.1),
   mLMouseDown(false),
   mRMouseDown(false),

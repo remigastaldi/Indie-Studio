@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun Jun  4 17:24:51 2017 gastal_r
-// Last update Fri Jun  9 14:32:08 2017 gastal_r
+// Last update Fri Jun  9 22:53:01 2017 gastal_r
 //
 
 #include      "Spell.hpp"
@@ -29,7 +29,7 @@ Angel::Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
 
     _collision.register_entity(_entity, Collision::COLLISION_ACCURATE);
 
-    _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "AngelServerParticle:" : "AngelParticle:") + std::to_string(id), "Spell/Heal");
+    _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "AngelServerParticle:" : "AngelParticle:") + std::to_string(id), "Space/Sun");
     _node->attachObject(_particleSystem);
 
     //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager

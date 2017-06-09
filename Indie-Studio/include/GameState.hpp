@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:20:33 2017 gastal_r
-// Last update Fri Jun  9 16:43:51 2017 gastal_r
+// Last update Fri Jun  9 18:48:00 2017 gastal_r
 //
 
 #ifndef         __GAMESTATE_HPP__
@@ -51,6 +51,8 @@
 #include "Shapes/OgreBulletCollisionsBoxShape.h"
 #include "Shapes/OgreBulletCollisionsTrimeshShape.h"
 #include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
+#include "Collisions/OgreBulletCollisions.h"
+#include "Collisions/Shapes/OgreBulletCollisionsCapsuleShape.h"
 
 #include "OgreParticleSystem.h"
 #include "OgreSceneNode.h"

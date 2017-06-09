@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Fri Jun  9 00:13:22 2017 gastal_r
+// Last update Fri Jun  9 22:56:15 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -29,7 +29,7 @@ DarkFiend::DarkFiend(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsW
   //   setOrientation(orientation);
   changeAnimation(status);
 
-  _collision.register_entity(_entity, Collision::COLLISION_ACCURATE);
+  _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::PLAYER);
 
   addToBulletWorld(position);
   btVector3 posBody(_ghostObject->getWorldTransform().getOrigin());
