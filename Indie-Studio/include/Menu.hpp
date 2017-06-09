@@ -46,6 +46,9 @@ public:
   bool         buttonPlay(const CEGUI::EventArgs &e);
   bool         buttonBack(const CEGUI::EventArgs &e);
   bool         buttonSelected(const CEGUI::EventArgs &e);
+  bool         buttonSelected2(const CEGUI::EventArgs &e);
+  bool         buttonSelected3(const CEGUI::EventArgs &e);
+  bool         buttonSelected4(const CEGUI::EventArgs &e);
   bool         buttonQuit(const CEGUI::EventArgs &e);
   bool         buttonInfos(const CEGUI::EventArgs &e);
   bool         buttonClose(const CEGUI::EventArgs &e);

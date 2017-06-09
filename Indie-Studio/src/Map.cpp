@@ -385,24 +385,23 @@ void Map::createScene(void)
   _creditsButton = _ui->getChild("Infos");
   _creditsButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Map::infosSettings, this));
 
-  classType = Entity::Type::DARKFIEND;
   //Création du fond de la barre de sort
-  if (classType == Entity::Type::WARRIOR)
+  if (mDevice->data.Class == Entity::Type::WARRIOR)
   {
     _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("WarriorSpellBar.layout");
     setupWarriorSpell();
   }
-  else if (classType == Entity::Type::MAGE)
+  else if (mDevice->data.Class == Entity::Type::MAGE)
   {
     _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("WizzardSpellBar.layout");
     setupMageSpell();
   }
-  else if (classType == Entity::Type::DARKFIEND)
+  else if (mDevice->data.Class == Entity::Type::DARKFIEND)
   {
     _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("DarkFiendSpell.layout");
     setupDarkFiendSpell();
   }
-  else if (classType == Entity::Type::INGENIOR)
+  else if (mDevice->data.Class == Entity::Type::INGENIOR)
   {
     _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("IngeniorSpell.layout");
     setupIngeniorSpell();

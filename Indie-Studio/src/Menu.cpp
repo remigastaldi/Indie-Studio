@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Fri Jun  9 16:10:03 2017 gastal_r
+// Last update Wed Jun  7 05:28:54 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -47,6 +47,37 @@ void Menu::enter(void)
 
 bool Menu::buttonSelected(const CEGUI::EventArgs &e)
 {
+  mDevice->data.Class = Entity::Type::INGENIOR;
+  _play->destroy();
+  _myRoot->destroy();
+  GameState *menu = findByName("Map");
+  changeGameState(menu);
+  return (true);
+}
+
+bool Menu::buttonSelected2(const CEGUI::EventArgs &e)
+{
+  mDevice->data.Class = Entity::Type::DARKFIEND;
+  _play->destroy();
+  _myRoot->destroy();
+  GameState *menu = findByName("Map");
+  changeGameState(menu);
+  return (true);
+}
+
+bool Menu::buttonSelected3(const CEGUI::EventArgs &e)
+{
+  mDevice->data.Class = Entity::Type::WARRIOR;
+  _play->destroy();
+  _myRoot->destroy();
+  GameState *menu = findByName("Map");
+  changeGameState(menu);
+  return (true);
+}
+
+bool Menu::buttonSelected4(const CEGUI::EventArgs &e)
+{
+  mDevice->data.Class = Entity::Type::MAGE;
   _play->destroy();
   _myRoot->destroy();
   GameState *menu = findByName("Map");
@@ -86,13 +117,13 @@ bool Menu::buttonPlay(const CEGUI::EventArgs &e)
   _selectIngenior->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected, this));
 
   _selectDarkFiend = _play->getChild("DarkFiend/SelectDarkFiend");
-  _selectDarkFiend->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected, this));
+  _selectDarkFiend->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected2, this));
 
   _selectWarrior = _play->getChild("Warrior/SelectWarrior");
-  _selectWarrior->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected, this));
+  _selectWarrior->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected3, this));
 
   _selectMage = _play->getChild("Wizzard/SelectWizzard");
-  _selectMage->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected, this));
+  _selectMage->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected4, this));
 
   return (true);
 }
@@ -144,19 +175,23 @@ bool        Menu::ApplyButton(const CEGUI::EventArgs &e)
   CEGUI::ListboxTextItem *item = (CEGUI::ListboxTextItem *)_resolBox->getSelectedItem();
   switch (item->getID())
   {
-    case 1:
+    case 0:
+      mDevice->window->resize(1280, 720);
       mDevice->data.r_height = 720;
       mDevice->data.r_length = 1280;
       break;
-    case 2:
+    case 1:
+      mDevice->window->resize(1600, 900);
       mDevice->data.r_height = 1200;
       mDevice->data.r_length = 1600;
       break;
-    case 3:
+    case 2:
+      mDevice->window->resize(1920, 1080);
       mDevice->data.r_height = 1080;
       mDevice->data.r_length = 1980;
       break;
-    case 4:
+    case 3:
+      mDevice->window->resize(3840, 2160);
       mDevice->data.r_height = 2160;
       mDevice->data.r_length = 3840;
       break;
@@ -164,19 +199,20 @@ bool        Menu::ApplyButton(const CEGUI::EventArgs &e)
   item = (CEGUI::ListboxTextItem *)_shadingBox->getSelectedItem();
   switch (item->getID())
   {
-    case 1:
+    case 0:
       mDevice->data.shader = 1;
       break;
-    case 2:
+    case 1:
       mDevice->data.shader = 2;
       break;
-    case 3:
+    case 2:
       mDevice->data.shader = 3;
       break;
-    case 4:
+    case 3:
       mDevice->data.shader = 4;
       break;
   }
+  CEGUI::System::getSingleton().getRenderer()->setDisplaySize(CEGUI::Sizef(mDevice->data.r_length, mDevice->data.r_height));
   _ButtonBack->destroy();
   _shadingBox->destroy();
   _resolBox->destroy();
@@ -198,28 +234,27 @@ bool         Menu::buttonOptions(const CEGUI::EventArgs &e)
 
     // Shader drop down menu
     _shadingBox = (CEGUI::Combobox*)_options->getChild("Background_Settings/ComboboxShading");
-    CEGUI::ListboxTextItem *item = new CEGUI::ListboxTextItem("Select a quality", 0);
+    CEGUI::ListboxTextItem *item;
+    item = new CEGUI::ListboxTextItem("Low", 0);
     _shadingBox->addItem(item);
-    item = new CEGUI::ListboxTextItem("Low", 1);
+    item = new CEGUI::ListboxTextItem("Medium", 1);
     _shadingBox->addItem(item);
-    item = new CEGUI::ListboxTextItem("Medium", 2);
+    _shadingBox->setItemSelectState(item, true);
+    item = new CEGUI::ListboxTextItem("High", 2);
     _shadingBox->addItem(item);
-    item = new CEGUI::ListboxTextItem("High", 3);
-    _shadingBox->addItem(item);
-    item = new CEGUI::ListboxTextItem("Ultra", 4);
+    item = new CEGUI::ListboxTextItem("Ultra", 3);
     _shadingBox->addItem(item);
 
     // Resolution drop down menu
     _resolBox = (CEGUI::Combobox*)_options->getChild("Background_Settings/ComboboxResol");
-    item = new CEGUI::ListboxTextItem("Select a resolution", 0);
+    item = new CEGUI::ListboxTextItem("1280x720", 0);
     _resolBox->addItem(item);
-    item = new CEGUI::ListboxTextItem("1280x720", 1);
+    item = new CEGUI::ListboxTextItem("1600x1200", 1);
     _resolBox->addItem(item);
-    item = new CEGUI::ListboxTextItem("1600x1200", 2);
+    item = new CEGUI::ListboxTextItem("1920x1080", 2);
     _resolBox->addItem(item);
-    item = new CEGUI::ListboxTextItem("1920x1080", 3);
-    _resolBox->addItem(item);
-    item = new CEGUI::ListboxTextItem("3840x2160", 4);
+    _resolBox->setItemSelectState(item, true);
+    item = new CEGUI::ListboxTextItem("3840x2160", 3);
     _resolBox->addItem(item);
 
     // Apply Button
@@ -265,9 +300,6 @@ void Menu::createScene(void)
 
   _splashButton = _splashScreen->getChild("SplashScreenButton");
   _splashButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::SplashButton, this));
-
-  // GameState *menu = findByName("Map");
-  // changeGameState(menu);
 }
 
 // bool GameMenuDemo::handleLoginAcceptButtonClicked(const CEGUI::EventArgs&)
