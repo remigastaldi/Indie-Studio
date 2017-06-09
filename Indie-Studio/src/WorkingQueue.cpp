@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:49:15 2017 gastal_r
-// Last update Fri Jun  9 20:51:49 2017 Leo HUBERT
+// Last update Sat Jun 10 00:25:10 2017 Leo HUBERT
 //
 
 #include      "WorkingQueue.hpp"
@@ -71,6 +71,18 @@ void        WorkingQueue::createSpellQueue(const WorkingQueue::Data &data)
   _spellManagerSocket->launchSpell(data._spell_type, data._position, data._destination);
 }
 
+void        WorkingQueue::focusEntityQueue(const WorkingQueue::Data &data)
+{
+  _focus.push_back(data._id);
+}
+
+void        WorkingQueue::unfocusEntityQueue(const WorkingQueue::Data &data)
+{
+  std::vector<size_t>::iterator pos = std::find(_focus.begin(), _focus.end(), data._id);
+  if (pos != _focus.end())
+    _focus.erase(pos);
+}
+
 void        WorkingQueue::moveEntityQueue(const WorkingQueue::Data &data)
 {
   if (_entity[data._id])
@@ -87,6 +99,12 @@ void        WorkingQueue::pushToQueue(WorkingQueue::Action action, const Working
   {
   case Action::DELETE_ENTITY:
     _queue.push_back(std::make_pair(&WorkingQueue::removeEntityQueue, data));
+    break;
+  case Action::FOCUS:
+    _queue.push_back(std::make_pair(&WorkingQueue::focusEntityQueue, data));
+    break;
+  case Action::UNFOCUS:
+    _queue.push_back(std::make_pair(&WorkingQueue::unfocusEntityQueue, data));
     break;
   case Action::KILLED:
     _queue.push_back(std::make_pair(&WorkingQueue::killedEntityQueue, data));

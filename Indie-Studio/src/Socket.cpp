@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Fri Jun  9 20:58:01 2017 Leo HUBERT
+** Last update Sat Jun 10 00:26:19 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -178,6 +178,36 @@ void Socket::events()
       _lock.unlock();
     }));
 
+    _current_socket->on("focus", sio::socket::event_listener_aux([&](std::string const& name,
+      sio::message::ptr const& data,
+      bool isAck, const sio::message::list &ack_resp)
+      {
+        (void)name;
+        (void)isAck;
+        (void)ack_resp;
+
+        _lock.lock();
+        if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
+        {
+          if (data->get_map()["focus"]->get_int() == 1)
+          {
+            WorkingQueue::Data queueData(data->get_map()["send_by"]->get_int());
+            pushToQueue(WorkingQueue::Action::FOCUS, queueData);
+
+            std::cout << "Start focus by: " << data->get_map()["send_by"]->get_int()  << '\n';
+          }
+          else
+          {
+            WorkingQueue::Data queueData(data->get_map()["send_by"]->get_int());
+            pushToQueue(WorkingQueue::Action::UNFOCUS, queueData);
+
+            std::cout << "End focus by: " << data->get_map()["send_by"]->get_int()  << '\n';
+          }
+
+        }
+        _lock.unlock();
+      }));
+
     _current_socket->on("killed", sio::socket::event_listener_aux([&](std::string const& name,
       sio::message::ptr const& data,
       bool isAck, const sio::message::list &ack_resp)
@@ -190,7 +220,9 @@ void Socket::events()
         if (data->get_map()["user_id"]->get_int() != _id)
         {
           WorkingQueue::Data queueData(data->get_map()["user_id"]->get_int());
+          pushToQueue(WorkingQueue::Action::UNFOCUS, queueData);
           pushToQueue(WorkingQueue::Action::KILLED, queueData);
+          
           std::cout <<  "User killed ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
         }
         else
@@ -350,6 +382,25 @@ void Socket::move(const Entity &entity)
   obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
   obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
   emit("move", obj);
+}
+
+
+void Socket::refreshPos(const Entity &entity)
+{
+  auto obj = sio::object_message::create();
+  auto pos = sio::object_message::create();
+
+  //CREATE POS
+  pos.get()->get_map()["x"] =   sio::double_message::create(entity.getPosition().x);
+  pos.get()->get_map()["y"] =   sio::double_message::create(entity.getPosition().y);
+  pos.get()->get_map()["z"] =   sio::double_message::create(entity.getPosition().z);
+
+  //CREATE SOCKET
+  obj.get()->get_map()["position"] =  pos;
+  obj.get()->get_map()["user_id"] =  sio::int_message::create(entity.getId());
+  obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
+  obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
+  emit("refresh_pos", obj);
 }
 
 void Socket::consoleChat()

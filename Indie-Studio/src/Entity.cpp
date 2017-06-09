@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Fri Jun  9 17:09:55 2017 gastal_r
+// Last update Fri Jun  9 20:54:47 2017 Leo HUBERT
 //
 
 #include        "Entity.hpp"
@@ -89,7 +89,7 @@ void 	Entity::changeAnimation(Entity::Status status)
 }
 
 void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
-{
+{  
 	if (_destination != Ogre::Vector3::ZERO)
 	{
 		btVector3 ghostOrigin(_ghostObject->getWorldTransform().getOrigin());

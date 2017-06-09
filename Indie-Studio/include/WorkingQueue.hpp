@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Fri Jun  9 20:36:29 2017 Leo HUBERT
+// Last update Sat Jun 10 00:26:47 2017 Leo HUBERT
 //
 
 #ifndef _WORKING_HPP_
@@ -29,6 +29,8 @@ public:
     DELETE_ENTITY,
     CREATE_SPELL,
     KILLED,
+    FOCUS,
+    UNFOCUS,
     MOVE_ENTITY
   };
 
@@ -60,6 +62,8 @@ private:
   void createSpellQueue(const WorkingQueue::Data &);
   void moveEntityQueue(const WorkingQueue::Data &);
   void killedEntityQueue(const WorkingQueue::Data &);
+  void unfocusEntityQueue(const WorkingQueue::Data &);
+  void focusEntityQueue(const WorkingQueue::Data &);
 
   std::mutex  _mutex;
   std::vector<std::pair<void(WorkingQueue::*)(const WorkingQueue::Data &data), WorkingQueue::Data>> _queue;
@@ -72,6 +76,7 @@ protected:
   std::unique_ptr<Collision::CollisionTools>  _collision;
   std::unordered_map<size_t, Entity *>  _entity;
   std::unique_ptr<OgreBulletDynamics::DynamicsWorld> _world;
+  std::vector<size_t>         _focus;
 };
 
 #endif /* _WORKING_HPP_ */

@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Fri Jun  9 20:45:52 2017 Leo HUBERT
+// Last update Sat Jun 10 00:19:15 2017 Leo HUBERT
 //
 
 #ifndef _CLIENT_HPP_
@@ -55,14 +55,14 @@ public:
   void  consoleChat();
   void  emit(const std::string &event, std::shared_ptr<sio::message> const &request);
   void  move(const Entity &entity);
+  void  refreshPos(const Entity &entity);
 
   void sendCollision(Spell::Type, const std::string &);
   void sendMessage(std::string const &);
   void sendEntity(const Entity &);
   void sendSpell(Spell::Type, const Ogre::Vector3 &, const Ogre::Vector3 &);
 
-protected:
-  int                         _id;
+private:
   std::mutex                  _lock;
   std::condition_variable_any _cond;
   bool                        _connect_finish;
@@ -70,7 +70,10 @@ protected:
   sio::client                 _client;
   std::string                 _addr;
   std::string                 _room;
+
+protected:
   bool                        _killed;
+  int                         _id;
 };
 
 #endif /* _CLIENT_HPP_ */

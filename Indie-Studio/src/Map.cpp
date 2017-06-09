@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Fri Jun  9 20:31:00 2017 Leo HUBERT
+// Last update Sat Jun 10 00:03:37 2017 Leo HUBERT
 //
 
 #include        "Map.hpp"
@@ -468,10 +468,14 @@ void Map::refreshServerPlayerPos(void)
   static std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
 
   std::chrono::high_resolution_clock::time_point        t2 = std::chrono::high_resolution_clock::now();
-  if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 500)
+  if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 100)
   {
     t1 = std::chrono::high_resolution_clock::now();
     move(*_player);
+    for (const auto & it : _focus)
+    {
+      refreshPos(*_entity[it]);
+    }
   }
 }
 
@@ -650,6 +654,8 @@ CEGUI::MouseButton convertButon(OIS::MouseButtonID id)
 
 void  Map::mouseRaycast(void)
 {
+  if (_killed)
+    return;
   CEGUI::Vector2f absMouse = CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().getPosition();
   CEGUI::Vector2f relativeMouse = CEGUI::CoordConverter::screenToWindow(
     *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), absMouse);
