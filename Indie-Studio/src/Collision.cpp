@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun  3 19:42:53 2017 gastal_r
-// Last update Sat Jun  3 19:42:58 2017 gastal_r
+// Last update Fri Jun  9 23:46:17 2017 gastal_r
 //
 
 #include "Collision.h"
@@ -112,6 +112,7 @@
             {
                ret.closest_distance = abs(query_result->second);
                ret.collided = true;
+               ret.type = query_result->first->Type;
                ret.entity = query_result->first->Entity;
                ret.position = ray.getPoint(ret.closest_distance);
                return ret;
@@ -311,12 +312,13 @@
       }
 
       // register a dynamic entity for collision detection
-      void CollisionTools::register_entity(Ogre::Entity* Entity, ECollisionType CollisionType)
+      void CollisionTools::register_entity(Ogre::Entity* Entity, ECollisionType CollisionType, Collision::Type type)
       {
          // create the new data struct
          SCollidableEntity New;
          New.Entity = Entity;
          New.CollisionType = CollisionType;
+         New.Type = type;
          New.IsStatic = false;
          New.StaticData = nullptr;
 
@@ -329,12 +331,13 @@
       }
 
       // register a static entity for collision detection
-      void CollisionTools::register_static_entity(Ogre::Entity* Entity, const Ogre::Vector3& position, const Ogre::Quaternion orientation, const Ogre::Vector3 scale, ECollisionType CollisionType)
+      void CollisionTools::register_static_entity(Ogre::Entity* Entity, const Ogre::Vector3& position, const Ogre::Quaternion orientation, const Ogre::Vector3 scale, ECollisionType CollisionType, Collision::Type type)
       {
          // create the new data struct
          SCollidableEntity New;
          New.Entity = Entity;
          New.CollisionType = CollisionType;
+         New.Type = type;
          New.IsStatic = true;
          New.StaticData = new SCollidableEntity::SStaticData();
          New.StaticData->Mat.makeTransform(position, scale, orientation);
@@ -407,6 +410,9 @@
          bool Stop = false;
          for (auto data = m_Entities.begin(); (data != m_Entities.end() && !Stop); ++data)
          {
+            if (data->Type == Collision::Type::PLAYER || data->Type == Collision::Type::OTHER)
+              continue;
+
             // skip the ignored entity
             if (data->Entity == ignore)
                continue;

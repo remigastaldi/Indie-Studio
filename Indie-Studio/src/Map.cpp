@@ -337,7 +337,7 @@ void Map::createScene(void)
     Ogre::SceneNode *node = _sceneMgr->getSceneNode(it);
     Ogre::Entity *entity = static_cast<Ogre::Entity*>(node->getAttachedObject(0));
 
-    else if (it.find("Barrel") != std::string::npos)
+    if (it.find("Barrel") != std::string::npos)
     {
       Ogre::AxisAlignedBox boundingB = entity->getBoundingBox();
       Ogre::Vector3 size = boundingB.getSize();
