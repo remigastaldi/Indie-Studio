@@ -333,30 +333,48 @@ void Map::createScene(void)
 
   for (auto & it : loader.dynamicObjects)
   {
+    std::cout << "Dynamics ==> " << it << std::endl;
     Ogre::SceneNode *node = _sceneMgr->getSceneNode(it);
     Ogre::Entity *entity = static_cast<Ogre::Entity*>(node->getAttachedObject(0));
 
-    OgreBulletCollisions::StaticMeshToShapeConverter trimeshConverter(entity);
-    OgreBulletCollisions::TriangleMeshCollisionShape *sceneTriMeshShape =  trimeshConverter.createTrimesh();
-
-    OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(entity->getName(),  _world.get());
-    defaultBody->setShape(node,
-          sceneTriMeshShape,
-          0.6f,      // dynamic body restitution
-          0.6f,      // dynamic body friction
-          0.0f,       // dynamic bodymass
-          node->getPosition(),    // starting position of the box
-          Ogre::Quaternion(0, 0, -1, 1));// orientation of the box
-
-    defaultBody->enableActiveState();
-    _world->addRigidBody(defaultBody,0,0);
-
-    _collision->register_entity(entity, Collision::COLLISION_BOX);
-
-    if (it.find("Ground") != std::string::npos)
+    else if (it.find("Barrel") != std::string::npos)
     {
-      // entity->setCastShadows(false);
-      // std::cout << "======================" << std::endl;
+      Ogre::AxisAlignedBox boundingB = entity->getBoundingBox();
+      Ogre::Vector3 size = boundingB.getSize();
+      size = boundingB.getSize();
+      size /= 2.0f;
+      size *= 0.95f;
+      OgreBulletCollisions::CapsuleCollisionShape *capsule = new OgreBulletCollisions::CapsuleCollisionShape(1.f, 1.f, Ogre::Vector3(0, 1, 0));
+
+      OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(it, _world.get());
+      defaultBody->setShape(node,
+            capsule,
+            0.6f,      // dynamic body restitution
+            1.f,      // dynamic body friction
+            1.0f,       // dynamic bodymass
+            node->getPosition(),
+            Ogre::Quaternion(180,0,0,1));
+
+        defaultBody->enableActiveState();
+        _world->addRigidBody(defaultBody, 0, 0);
+    }
+    else
+    {
+      OgreBulletCollisions::StaticMeshToShapeConverter trimeshConverter(entity);
+      OgreBulletCollisions::TriangleMeshCollisionShape *sceneTriMeshShape =  trimeshConverter.createTrimesh();
+
+      OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(entity->getName(),  _world.get());
+      defaultBody->setShape(node,
+            sceneTriMeshShape,
+            0.6f,      // dynamic body restitution
+            1.f,      // dynamic body friction
+            0.0f,       // dynamic bodymass
+            node->getPosition(),    // starting position of the box
+            Ogre::Quaternion(0, 0, -1, 1));// orientation of the box
+
+      defaultBody->enableActiveState();
+      _world->addRigidBody(defaultBody,0,0);
+      _collision->register_entity(entity, Collision::COLLISION_BOX, Collision::Type::WALL);
     }
   }
   for (auto & it : loader.staticObjects)
@@ -530,53 +548,6 @@ bool Map::keyPressed( const OIS::KeyEvent &arg )
   #endif
   _spellManager->launchSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());
   return true;
-  Ogre::Vector3 size = Ogre::Vector3::ZERO;
-  Ogre::Vector3 position = (_camera->getDerivedPosition() + _camera->getDerivedDirection().normalisedCopy() * 10);
-
-  Ogre::Entity *entity = _sceneMgr->createEntity(
-      "Barrel" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
-      "Barrel.mesh");
-  // entity->setCastShadows(true);
-  // we need the bounding box of the box to be able to set the size of the Bullet-box
-  Ogre::AxisAlignedBox boundingB = entity->getBoundingBox();
-  size = boundingB.getSize();
-  size /= 2.0f; // only the half needed
-  size *= 0.95f;  // Bullet margin is a bit bigger so we need a smaller size
-//                   (Bullet 2.76 Physics SDK Manual page 18)
- size = boundingB.getSize()*0.95f;
-  //entity->setMaterialName("barrel");
-  Ogre::SceneNode *node = _sceneMgr->getRootSceneNode()->createChildSceneNode();
-  node->attachObject(entity);
-  //node->scale(20f, 20f, 20f);  // the cube is too big for us
-//   size *= 0.05f;            // don't forget to scale down the Bullet-box too
-
-  // after that create the Bullet shape with the calculated size
-  OgreBulletCollisions::BoxCollisionShape *sceneBoxShape =
-  new OgreBulletCollisions::BoxCollisionShape(size);
-
-  // and the Bullet rigid body
-  OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(
-      "defaultBoxRigid" + Ogre::StringConverter::toString(mNumEntitiesInstanced),
-      _world.get());
-
-  // OgreBulletCollisions::CollisionShape *collisionShape =
-  defaultBody->setShape(node,
-        sceneBoxShape,
-        0.6f,      // dynamic body restitution
-        1.f,      // dynamic body friction
-        1.0f,       // dynamic bodymass
-        position,    // starting position of the box
-        Ogre::Quaternion(180,0,0,1));// orientation of the box
-    mNumEntitiesInstanced++;
-
-    defaultBody->enableActiveState();
-    _world->addRigidBody(defaultBody,0,0);
-    defaultBody->setLinearVelocity(
-    _camera->getDerivedDirection().normalisedCopy() * 7.0f ); // shooting speed
-  // push the created objects to the dequese
-  // mShapes.push_back(sceneBoxShape);
-  // mBodies.push_back(defaultBody);
-  //mTimeUntilNextToggle = 0.5;
   }
   if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
   {
