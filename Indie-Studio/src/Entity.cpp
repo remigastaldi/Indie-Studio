@@ -33,6 +33,7 @@ Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 Entity::~Entity()
 {
   _world.getBulletDynamicsWorld()->removeAction(_character);
+  _world.getBulletDynamicsWorld()->removeCollisionObject(_ghostObject);
   _collision.remove_entity(_entity);
   _sceneMgr.destroyEntity(_entity);
   _sceneMgr.destroySceneNode(_node);
