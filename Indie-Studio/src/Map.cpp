@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Thu Jun  8 23:55:08 2017 gastal_r
+// Last update Fri Jun  9 13:54:39 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -304,7 +304,7 @@ void Map::createScene(void)
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
   _player = createEntity(Entity::Type::DARKFIEND, *_sceneMgr, *_world, *_collision, 42,
-		Entity::Status::IMMOBILE, Ogre::Vector3(0.f, 10.f, 0.f), Ogre::Vector3::ZERO);
+		Entity::Status::IMMOBILE, Ogre::Vector3(40.f, 20.f, 160.f), Ogre::Vector3::ZERO);
 
 #if DEBUG_CAMERA
   _camera->setPosition(_player->getPosition() + Ogre::Vector3(0, 50.f, 50.f));

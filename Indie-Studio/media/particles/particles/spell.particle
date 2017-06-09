@@ -1,13 +1,12 @@
 particle_system Spell/Heal
 {
-    material        Examples/FlarePointSprite
-    particle_width	35
-    particle_height 35
+    material        Examples/Flare
+    particle_width	5
+    particle_height 5
     cull_each       false
-	cull_each       false
     quota           5000
     billboard_type  point
-    
+
     // Area emitter
     emitter Box
     {
@@ -18,9 +17,9 @@ particle_system Spell/Heal
         velocity    	0
         colour_range_start  1 1 0
         colour_range_end    0.3 1 0.3
-        width           60
-        height          60
-        depth           60
+        width           1
+        height          1
+        depth           1
     }
 
     // Make em float upwards
