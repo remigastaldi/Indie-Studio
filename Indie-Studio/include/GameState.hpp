@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:20:33 2017 gastal_r
-// Last update Mon May 22 23:09:15 2017 gastal_r
+// Last update Fri Jun  9 16:43:51 2017 gastal_r
 //
 
 #ifndef         __GAMESTATE_HPP__
@@ -64,14 +64,12 @@ typedef struct
     int     shader;
     int     r_height;
     int     r_length;
-//    int     Class;
     Entity::Type    Class;
 }s_data;
 
 typedef struct
 {
     Ogre::Root *ogre;
-    Ogre::RenderWindow *rwindow;
     OIS::InputManager *inputMgr;
     OIS::Keyboard *keyboard;
     OIS::Mouse *mouse;

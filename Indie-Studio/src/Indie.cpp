@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Tue May 30 18:54:42 2017 Matthias Prost
+// Last update Fri Jun  9 16:43:49 2017 gastal_r
 //
 
 #include        "Indie.hpp"
@@ -15,7 +15,6 @@ Indie::Indie() :
   mPluginsCfg("plugins.cfg")
 {
   _device.ogre = nullptr;
-  _device.rwindow = nullptr;
   _device.inputMgr = nullptr;
   _device.keyboard = nullptr;
   _device.mouse = nullptr;

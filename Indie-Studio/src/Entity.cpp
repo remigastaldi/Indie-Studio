@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Fri Jun  9 00:08:16 2017 gastal_r
+// Last update Fri Jun  9 17:09:55 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -21,6 +21,7 @@ Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   _type(type),
   _walkSpd(walkspeed),
   _health(health),
+  _maxHealth(health),
 	_entity(nullptr),
 	_node(nullptr),
 	_animationState(0),

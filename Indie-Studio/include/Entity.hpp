@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Fri Jun  9 00:09:58 2017 gastal_r
+// Last update Fri Jun  9 17:10:00 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -86,12 +86,14 @@ public:
   Entity::Status          getStatus() const       { return _status; }
   size_t                  getId() const   { return (_id); }
   Spell::Type             getSpell(size_t id)  { return (_spells[id]); }
+  size_t                  getHealth(void) const { return (_health); }
 
   void          setPosition(const Ogre::Vector3 &pos);
   void					setDestination(const Ogre::Vector3 &destination);
   void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
   void					setWalkSpd(const Ogre::Real &_mWalkSpd)            { _walkSpd = _mWalkSpd; }
   void					setOrientation(const Ogre::Quaternion &orientation) { _node->setOrientation(orientation); }
+  void          setHealth(size_t health) { _health = health; }
 
 protected:
   Ogre::SceneManager  &_sceneMgr;
@@ -104,6 +106,7 @@ protected:
   Entity::Type          _type;
   Ogre::Real			      _walkSpd;
   size_t                _health;
+  size_t                _maxHealth;
   btPairCachingGhostObject* _ghostObject;
   btKinematicCharacterController* _character;
   Ogre::Entity        *_entity;
