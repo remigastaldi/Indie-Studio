@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Fri Jun  9 16:43:49 2017 gastal_r
+// Last update Sat Jun 10 00:51:06 2017 gastal_r
 //
 
 #include        "Indie.hpp"
@@ -199,6 +199,8 @@ bool            Indie::init()
   CEGUI::SchemeManager::getSingleton().createFromFile( "VanillaSkin.scheme" );
   CEGUI::SchemeManager::getSingleton().createFromFile( "SampleBrowser.scheme" );
   CEGUI::SchemeManager::getSingleton().createFromFile( "HUDDemo.scheme" );
+
+  _device.data.shader = 3;
 
   return true;
 }

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat Jun 10 00:03:37 2017 Leo HUBERT
+// Last update Sat Jun 10 00:50:48 2017 gastal_r
 //
 
 #include        "Map.hpp"
@@ -74,15 +74,32 @@ void Map::enter(void)
   _world->setDebugDrawer(debugDrawer);
 #endif
 
- _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-// _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
-// _sceneMgr->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
-// _sceneMgr->setShadowTextureSelfShadow(true);
-// _sceneMgr->setShadowTextureSize(4096);
-// // _sceneMgr->setShadowDirectionalLightExtrusionDistance(10);
-// // _sceneMgr->setShadowFarDistance(10);
-// _sceneMgr->setShadowTextureCount(4);
-// _sceneMgr->setShadowCameraSetup(Ogre::ShadowCameraSetupPtr(new Ogre::FocusedShadowCameraSetup()));
+  switch (mDevice->data.shader)
+  {
+  case 0:
+    _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+    _sceneMgr->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+    _sceneMgr->setShadowTextureSelfShadow(true);
+    _sceneMgr->setShadowTextureSize(1024);
+    _sceneMgr->setShadowCameraSetup(Ogre::ShadowCameraSetupPtr(new Ogre::FocusedShadowCameraSetup()));
+    break;
+  case 1:
+    _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
+    _sceneMgr->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+    _sceneMgr->setShadowTextureSelfShadow(true);
+    _sceneMgr->setShadowTextureSize(2048);
+    _sceneMgr->setShadowCameraSetup(Ogre::ShadowCameraSetupPtr(new Ogre::FocusedShadowCameraSetup()));
+    break;
+  case 2:
+    _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+    break;
+  case 3:
+    _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+    break;
+  }
+// _sceneMgr->setShadowDirectionalLightExtrusionDistance(10);
+// _sceneMgr->setShadowFarDistance(10);
+// _sceneMgr->setShadowTextureCount();
 
    _sceneMgr->setAmbientLight(Ogre::ColourValue(1.f, 1.f, 1.f));
 
@@ -374,6 +391,8 @@ void Map::createScene(void)
 
       defaultBody->enableActiveState();
       _world->addRigidBody(defaultBody,0,0);
+      if (it.find("Brick") != std::string::npos || it.find("Jail") != std::string::npos
+        || it.find("Wall") != std::string::npos)
       _collision->register_entity(entity, Collision::COLLISION_BOX, Collision::Type::WALL);
     }
   }
