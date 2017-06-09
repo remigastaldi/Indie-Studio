@@ -131,10 +131,61 @@ bool Menu::buttonInfos(const CEGUI::EventArgs &e)
 bool        Menu::Backbutton(const CEGUI::EventArgs &e)
 {
   _ButtonBack->destroy();
+  _shadingBox->destroy();
+  _applyButton->destroy();
+  _resolBox->destroy();
   _options->destroy();
   _options = nullptr;
   return (true);
 }
+
+bool        Menu::ApplyButton(const CEGUI::EventArgs &e)
+{
+  CEGUI::ListboxTextItem *item = (CEGUI::ListboxTextItem *)_resolBox->getSelectedItem();
+  switch (item->getID())
+  {
+    case 1:
+      mDevice->data.r_height = 720;
+      mDevice->data.r_length = 1280;
+      break;
+    case 2:
+      mDevice->data.r_height = 1200;
+      mDevice->data.r_length = 1600;
+      break;
+    case 3:
+      mDevice->data.r_height = 1080;
+      mDevice->data.r_length = 1980;
+      break;
+    case 4:
+      mDevice->data.r_height = 2160;
+      mDevice->data.r_length = 3840;
+      break;
+  }
+  item = (CEGUI::ListboxTextItem *)_shadingBox->getSelectedItem();
+  switch (item->getID())
+  {
+    case 1:
+      mDevice->data.shader = 1;
+      break;
+    case 2:
+      mDevice->data.shader = 2;
+      break;
+    case 3:
+      mDevice->data.shader = 3;
+      break;
+    case 4:
+      mDevice->data.shader = 4;
+      break;
+  }
+  _ButtonBack->destroy();
+  _shadingBox->destroy();
+  _resolBox->destroy();
+  _applyButton->destroy();
+  _options->destroy();
+  _options = nullptr;
+  return (true);
+}
+
 bool         Menu::buttonOptions(const CEGUI::EventArgs &e)
 {
   if (_options == nullptr)
@@ -144,7 +195,38 @@ bool         Menu::buttonOptions(const CEGUI::EventArgs &e)
 
     _ButtonBack = _options->getChild("BackButton");
     _ButtonBack->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::Backbutton, this));
+
+    // Shader drop down menu
+    _shadingBox = (CEGUI::Combobox*)_options->getChild("Background_Settings/ComboboxShading");
+    CEGUI::ListboxTextItem *item = new CEGUI::ListboxTextItem("Select a quality", 0);
+    _shadingBox->addItem(item);
+    item = new CEGUI::ListboxTextItem("Low", 1);
+    _shadingBox->addItem(item);
+    item = new CEGUI::ListboxTextItem("Medium", 2);
+    _shadingBox->addItem(item);
+    item = new CEGUI::ListboxTextItem("High", 3);
+    _shadingBox->addItem(item);
+    item = new CEGUI::ListboxTextItem("Ultra", 4);
+    _shadingBox->addItem(item);
+
+    // Resolution drop down menu
+    _resolBox = (CEGUI::Combobox*)_options->getChild("Background_Settings/ComboboxResol");
+    item = new CEGUI::ListboxTextItem("Select a resolution", 0);
+    _resolBox->addItem(item);
+    item = new CEGUI::ListboxTextItem("1280x720", 1);
+    _resolBox->addItem(item);
+    item = new CEGUI::ListboxTextItem("1600x1200", 2);
+    _resolBox->addItem(item);
+    item = new CEGUI::ListboxTextItem("1920x1080", 3);
+    _resolBox->addItem(item);
+    item = new CEGUI::ListboxTextItem("3840x2160", 4);
+    _resolBox->addItem(item);
+
+    // Apply Button
+    _applyButton = _options->getChild("Background_Settings/ApplyButton");
+    _applyButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::ApplyButton, this));
   }
+  return (true);
 }
 
 bool  Menu::SplashButton(const CEGUI::EventArgs &e)

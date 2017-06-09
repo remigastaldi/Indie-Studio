@@ -41,17 +41,22 @@
     <Image height="256" name="SpellHandBeard_Click" width="255" xPos="2880" yPos="2186" />
     <Image height="585" name="BackgroundSpell2" width="736" xPos="2015" yPos="488" />
     <Image height="669" name="BackgroundCharSelect" width="748" xPos="2846" yPos="410" />
-    <Image height="106" name="SelectNormal" width="314" xPos="2014" yPos="359" />
-    <Image height="101" name="SelectHover" width="314" xPos="2339" yPos="361" />
-    <Image height="105" name="BackHover" width="314" xPos="2182" yPos="34" />
-    <Image height="106" name="BackNormal" width="314" xPos="2530" yPos="34" />
+    <Image height="86" name="SelectNormal" width="300" xPos="2301" yPos="281" />
+    <Image height="87" name="SelectHover" width="300" xPos="2650" yPos="280" />
+    <Image height="87" name="BackHover" width="300" xPos="2650" yPos="40" />
+    <Image height="87" name="BackNormal" width="300" xPos="2301" yPos="40" />
     <Image height="256" name="AvatarBackground" width="96" xPos="1680" yPos="1172" />
-    <Image height="106" name="OptionsHover" width="314" xPos="3187" yPos="1182" />
-    <Image height="106" name="PlayHover" width="314" xPos="3187" yPos="1313" />
-    <Image height="106" name="QuitHover" width="314" xPos="3187" yPos="1445" />
-    <Image height="106" name="QuitNormal" width="314" xPos="3545" yPos="1444" />
-    <Image height="106" name="PlayNormal" width="314" xPos="3545" yPos="1313" />
-    <Image height="106" name="OptionsNormal" width="314" xPos="3545" yPos="1182" />
-    <Image height="106" name="MainMenuNormal" width="314" xPos="3187" yPos="1589" />
-    <Image height="106" name="MainMenuHover" width="314" xPos="3545" yPos="1589" />
+    <Image height="87" name="OptionsHover" width="300" xPos="3547" yPos="1177" />
+    <Image height="87" name="PlayHover" width="300" xPos="3547" yPos="1284" />
+    <Image height="87" name="QuitHover" width="300" xPos="3547" yPos="1391" />
+    <Image height="87" name="QuitNormal" width="300" xPos="3184" yPos="1391" />
+    <Image height="87" name="PlayNormal" width="300" xPos="3184" yPos="1284" />
+    <Image height="86" name="OptionsNormal" width="300" xPos="3184" yPos="1178" />
+    <Image height="87" name="MainMenuNormal" width="300" xPos="3184" yPos="1498" />
+    <Image height="87" name="MainMenuHover" width="300" xPos="3547" yPos="1498" />
+    <Image height="87" name="ResurectNormal" width="300" xPos="2301" yPos="160" />
+    <Image height="87" name="ResurectHover" width="300" xPos="2650" yPos="160" />
+    <Image height="151" name="YouDied" width="1033" xPos="3029" yPos="78" />
+    <Image height="87" name="ApplyNormal" width="300" xPos="3190" yPos="1617" />
+    <Image height="87" name="ApplyHover" width="300" xPos="3546" yPos="1617" />
 </Imageset>

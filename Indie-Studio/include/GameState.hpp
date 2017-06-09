@@ -57,6 +57,17 @@
 
 #include "Player.hpp"
 
+#include "Entity.hpp"
+
+typedef struct
+{
+    int     shader;
+    int     r_height;
+    int     r_length;
+//    int     Class;
+    Entity::Type    Class;
+}s_data;
+
 typedef struct
 {
     Ogre::Root *ogre;
@@ -69,6 +80,7 @@ typedef struct
     Ogre::RenderWindow *window;
     OgreOggSound::OgreOggSoundManager *soundManager;
     Ogre::SceneManager *sceneMgr;
+    s_data              data;
 } device_info;
 
 class GameState;

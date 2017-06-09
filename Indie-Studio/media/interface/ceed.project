@@ -51,6 +51,7 @@
             <Item path="layouts/SampleBrowser.layout" type="file" />
             <Item path="layouts/SampleBrowserLoadScreen.layout" type="file" />
             <Item path="layouts/Settings.layout" type="file" />
+            <Item path="layouts/SplashScreen.layout" type="file" />
             <Item path="layouts/TabControlDemo.layout" type="file" />
             <Item path="layouts/TabPage.layout" type="file" />
             <Item path="layouts/TabPage1.layout" type="file" />
@@ -67,7 +68,7 @@
             <Item path="layouts/application_templates.layout" type="file" />
             <Item path="layouts/mainMenu.layout" type="file" />
             <Item path="layouts/selectChar.layout" type="file" />
-            <Item path="layouts/SplashScreen.layout" type="file" />
+            <Item path="layouts/GameOver.layout" type="file" />
         </Item>
         <Item name="looknfeel" type="folder">
             <Item path="looknfeel/AlfiskoSkin.looknfeel" type="file" />
