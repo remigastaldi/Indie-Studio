@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Thu Jun  8 10:58:46 2017 Leo HUBERT
+** Last update Fri Jun  9 20:58:01 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -15,6 +15,7 @@ Socket::Socket(std::string const &addr, int const port, int const id, std::strin
   _room(room)
 {
   _connect_finish = false;
+  _killed = false;
   _addr = addr + ":" + std::to_string(port);
 
   _client.set_open_listener(std::bind(&Socket::on_connected, this));
@@ -42,6 +43,7 @@ void Socket::on_connected()
   obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
   emit("login", obj);
 
+  _client.set_reconnect_attempts(3);
   HIGHLIGHT_N("Socket.IO: Connected\n");
 }
 
@@ -176,6 +178,28 @@ void Socket::events()
       _lock.unlock();
     }));
 
+    _current_socket->on("killed", sio::socket::event_listener_aux([&](std::string const& name,
+      sio::message::ptr const& data,
+      bool isAck, const sio::message::list &ack_resp)
+      {
+        (void)name;
+        (void)isAck;
+        (void)ack_resp;
+
+        _lock.lock();
+        if (data->get_map()["user_id"]->get_int() != _id)
+        {
+          WorkingQueue::Data queueData(data->get_map()["user_id"]->get_int());
+          pushToQueue(WorkingQueue::Action::KILLED, queueData);
+          std::cout <<  "User killed ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
+        }
+        else
+        {
+          _killed = true;
+        }
+        _lock.unlock();
+      }));
+
   _current_socket->on("logout", sio::socket::event_listener_aux([&](std::string const& name,
     sio::message::ptr const& data,
     bool isAck, const sio::message::list &ack_resp)
@@ -223,12 +247,23 @@ void Socket::wait()
 
 void Socket::emit(const std::string &event, std::shared_ptr<sio::message> const &request)
 {
-  _current_socket->emit(event, request);
+  if (_killed == false)
+    _current_socket->emit(event, request);
 }
 
 void Socket::sendCollision(Spell::Type type, const std::string &id)
 {
-  std::cout << "COLLISION SENDED" << std::endl;
+    auto obj = sio::object_message::create();
+
+    if (!id.empty() && (id.find_first_not_of( "0123456789" ) == std::string::npos))
+      obj.get()->get_map()["touch"] =  sio::int_message::create(std::stoi(id));
+    else
+      obj.get()->get_map()["touch"] =  sio::int_message::create(-1);
+    obj.get()->get_map()["spell_type"] =  sio::int_message::create((int)type);
+    obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
+    obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
+
+    emit("collision", obj);
 }
 
 void Socket::sendSpell(Spell::Type type, const Ogre::Vector3 &playerPos, const Ogre::Vector3 &dest)
@@ -275,7 +310,8 @@ void Socket::sendEntity(const Entity &entity)
   //CREATE SOCKET
   obj.get()->get_map()["destination"] =  destination;
   obj.get()->get_map()["position"] =  pos;
-  //obj.get()->get_map()["type"] =  sio::int_message::create(entity.getType());
+  obj.get()->get_map()["type"] =  sio::int_message::create((int)entity.getType());
+  obj.get()->get_map()["health"] =  sio::int_message::create(entity.getHealth());
   obj.get()->get_map()["status"] =  sio::int_message::create((int)entity.getStatus());
   obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
   obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
@@ -310,8 +346,6 @@ void Socket::move(const Entity &entity)
   //CREATE SOCKET
   obj.get()->get_map()["position"] =  pos;
   obj.get()->get_map()["destination"] =  destination;
-
-  //obj.get()->get_map()["type"] =  sio::int_message::create(entity.getType());
   obj.get()->get_map()["status"] =  sio::int_message::create((int)entity.getStatus());
   obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
   obj.get()->get_map()["send_to"] =  sio::int_message::create(0);

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Thu Jun  8 11:21:09 2017 gastal_r
+// Last update Fri Jun  9 20:36:29 2017 Leo HUBERT
 //
 
 #ifndef _WORKING_HPP_
@@ -28,6 +28,7 @@ public:
     CREATE_ENTITY,
     DELETE_ENTITY,
     CREATE_SPELL,
+    KILLED,
     MOVE_ENTITY
   };
 
@@ -58,6 +59,7 @@ private:
   void removeEntityQueue(const WorkingQueue::Data &);
   void createSpellQueue(const WorkingQueue::Data &);
   void moveEntityQueue(const WorkingQueue::Data &);
+  void killedEntityQueue(const WorkingQueue::Data &);
 
   std::mutex  _mutex;
   std::vector<std::pair<void(WorkingQueue::*)(const WorkingQueue::Data &data), WorkingQueue::Data>> _queue;

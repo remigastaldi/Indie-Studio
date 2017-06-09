@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Thu Jun  8 11:21:20 2017 gastal_r
+// Last update Fri Jun  9 20:45:52 2017 Leo HUBERT
 //
 
 #ifndef _CLIENT_HPP_
@@ -70,6 +70,7 @@ protected:
   sio::client                 _client;
   std::string                 _addr;
   std::string                 _room;
+  bool                        _killed;
 };
 
 #endif /* _CLIENT_HPP_ */

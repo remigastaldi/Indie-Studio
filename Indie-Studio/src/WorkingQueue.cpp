@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:49:15 2017 gastal_r
-// Last update Thu Jun  8 10:57:57 2017 gastal_r
+// Last update Fri Jun  9 20:51:49 2017 Leo HUBERT
 //
 
 #include      "WorkingQueue.hpp"
@@ -44,10 +44,20 @@ WorkingQueue::WorkingQueue()
 
 void        WorkingQueue::createEntityQueue(const WorkingQueue::Data &data)
 {
-  _entity[data._id] = createEntity(data._ent_type, *_sceneMgr, *_world.get(), *_collision.get(), data._id, data._ent_status, data._position, data._destination);
+  if (!_entity[data._id])
+    _entity[data._id] = createEntity(data._ent_type, *_sceneMgr, *_world.get(), *_collision.get(), data._id, data._ent_status, data._position, data._destination);
 }
 
 void        WorkingQueue::removeEntityQueue(const WorkingQueue::Data &data)
+{
+  if (_entity[data._id])
+  {
+    delete(_entity[data._id]);
+    _entity.erase(data._id);
+  }
+}
+
+void        WorkingQueue::killedEntityQueue(const WorkingQueue::Data &data)
 {
   if (_entity[data._id])
   {
@@ -75,6 +85,12 @@ void        WorkingQueue::pushToQueue(WorkingQueue::Action action, const Working
   _mutex.lock();
   switch (action)
   {
+  case Action::DELETE_ENTITY:
+    _queue.push_back(std::make_pair(&WorkingQueue::removeEntityQueue, data));
+    break;
+  case Action::KILLED:
+    _queue.push_back(std::make_pair(&WorkingQueue::killedEntityQueue, data));
+    break;
   case Action::CREATE_ENTITY:
     _queue.push_back(std::make_pair(&WorkingQueue::createEntityQueue, data));
     break;
