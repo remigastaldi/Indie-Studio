@@ -338,7 +338,7 @@ app.get('/bots/new', function (req, res) {
 
 app.get('/clear', function (req, res) {
   users = {};
-  bots = {};
+  enemis = {};
   totalConnected = 0;
 });
 
