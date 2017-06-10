@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:29:53 2017 gastal_r
-// Last update Sat Jun 10 15:20:25 2017 gastal_r
+// Last update Sat Jun 10 16:10:08 2017 gastal_r
 //
 
 #ifndef         _PLAYER_HPP_
@@ -14,7 +14,7 @@
 #include        "Entity.hpp"
 #include        "DotSceneLoader.h"
 
-#define WARRIOR_SPEED 3.f
+#define WARRIOR_SPEED 1.5f
 #define WARRIOR_HEALTH 300
 class Warrior : public Entity
 {
@@ -24,7 +24,7 @@ public:
 };
 
 #define WIZZARD_SPEED 3.f
-#define WIZZARD_HEALTH 300
+#define WIZZARD_HEALTH 200
 class Wizzard : public Entity
 {
 public:
@@ -32,8 +32,8 @@ public:
    const Ogre::Vector3 &destination);
 };
 
-#define DARKFIEND_SPEED 5.f
-#define DARKFIEND_HEALTH 200
+#define DARKFIEND_SPEED 1.5f
+#define DARKFIEND_HEALTH 250
 class DarkFiend : public Entity
 {
 public:
@@ -41,7 +41,7 @@ public:
    const Ogre::Vector3 &destination);
 };
 
-#define ENGINEER_SPEED 5.f
+#define ENGINEER_SPEED 3.f
 #define ENGINEER_HEALTH 200
 class Engineer : public Entity
 {

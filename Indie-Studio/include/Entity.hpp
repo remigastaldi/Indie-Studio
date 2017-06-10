@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Sat Jun 10 15:35:30 2017 gastal_r
+// Last update Sat Jun 10 17:37:32 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -126,10 +126,10 @@ class DarkFiend;
 class Engineer;
 
 #define   ENTITY_INDEX    \
-{ Entity::Type::WARRIOR, &createInstance<Warrior> },      \
-{ Entity::Type::WIZZARD, &createInstance<Wizzard> },      \
-{ Entity::Type::DARKFIEND, &createInstance<DarkFiend> },  \
-{ Entity::Type::ENGINEER, &createInstance<Engineer> }
+{ Entity::Type::WARRIOR,    &createInstance<Warrior>    },  \
+{ Entity::Type::WIZZARD,    &createInstance<Wizzard>    },  \
+{ Entity::Type::DARKFIEND,  &createInstance<DarkFiend>  },  \
+{ Entity::Type::ENGINEER,   &createInstance<Engineer>   }
 
 #define   ENTITY_INIT_PARAMETERS                                 \
 Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, \

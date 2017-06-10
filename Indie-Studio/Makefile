@@ -68,14 +68,14 @@ SRC             =				src/CameraMan.cpp							\
 												src/Entity.cpp								\
 												src/Player.cpp								\
 												src/GameStateManager.cpp			\
-												src/Dungeon.cpp										\
+												src/Dungeon.cpp								\
 												src/Menu.cpp									\
 												src/Indie.cpp									\
 												src/SplashScreen.cpp  				\
 												src/Spell.cpp									\
 												src/SpellManager.cpp					\
 												src/Collision.cpp							\
-												src/Angel.cpp									\
+												src/AllSpells.cpp							\
 												src/WorkingQueue.cpp					\
 												src/GameLogic.cpp							\
 												src/main.cpp

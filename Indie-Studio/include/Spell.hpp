@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:43:07 2017 gastal_r
-// Last update Sat Jun 10 15:18:45 2017 gastal_r
+// Last update Sat Jun 10 17:40:08 2017 gastal_r
 //
 
 #ifndef _SPELL_HPP_
@@ -82,7 +82,7 @@ public:
   Spell& operator=(Spell&& other) = default;
 
   void 	changeAnimation(Spell::Status status);
-  bool 	frameRenderingQueued(const Ogre::FrameEvent &evt);
+  virtual bool 	frameRenderingQueued(const Ogre::FrameEvent &evt);
   void  setDestination(const Ogre::Vector3 &destination);
   void 	destroy();
   const std::string &getCollidedObjectName(void) const { return (_collideWith); }
@@ -112,22 +112,44 @@ protected:
   Ogre::ParticleSystem        *_particleSystem;
 };
 
-
-#define ANGEL_SPEED 4.f
-#define ANGEL_DISTANCE 10.f
-class Angel : public Spell
-{
-public:
-  Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-    size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
-};
-
-
 #ifndef   _SPELL_CREATE_
 #define   _SPELL_CREATE_
 
+#include  "AllSpells.hpp"
+class EyeFire;
+class Sword;
+class Hearth;
+class Dagger;
+class Tornado;
+class Fireball;
+class ShieldBuff;
+class LeafBuff;
+class Angel;
+class Thunderstorm;
+class Spectre;
+class Fire;
+class StoneBall;
+class Stalactites;
+class Bullet;
+class BearBuff;
+
 #define   SPELL_INDEX   \
-{   Spell::Type::ANGEL, &createInstance<Angel>   }
+{   Spell::Type::EYE_FIRE,     &createInstance<EyeFire>      },  \
+{   Spell::Type::SWORD,        &createInstance<Sword>        },  \
+{   Spell::Type::HEARTH,       &createInstance<Hearth>       },  \
+{   Spell::Type::DAGGER,       &createInstance<Dagger>       },  \
+{   Spell::Type::TORNADO,      &createInstance<Tornado>      },  \
+{   Spell::Type::FIREBALL,     &createInstance<Fireball>     },  \
+{   Spell::Type::SHIELD_BUFF,  &createInstance<ShieldBuff>   },  \
+{   Spell::Type::LEAF_BUFF,    &createInstance<LeafBuff>     },  \
+{   Spell::Type::ANGEL,        &createInstance<Angel>        },  \
+{   Spell::Type::THUNDERSTORM, &createInstance<Thunderstorm> },  \
+{   Spell::Type::SPECTRE,      &createInstance<Spectre>      },  \
+{   Spell::Type::FIRE,         &createInstance<Fire>         },  \
+{   Spell::Type::STONEBALL,    &createInstance<StoneBall>    },  \
+{   Spell::Type::STALACTITES,  &createInstance<Stalactites>  },  \
+{   Spell::Type::BULLET,       &createInstance<BearBuff>     },  \
+{   Spell::Type::BEAR_BUFF,    &createInstance<BearBuff>     }
 
 
 #define   SPELL_INIT_PARAMETERS   \

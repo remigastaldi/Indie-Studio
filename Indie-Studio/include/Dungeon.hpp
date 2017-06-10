@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Sat Jun 10 15:39:23 2017 gastal_r
+// Last update Sat Jun 10 16:14:04 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -42,8 +42,6 @@ public:
   bool  setupMageSpell();
   bool  setupDarkFiendSpell();
   bool  setupIngeniorSpell();
-
-private:
 };
 
 #endif /* _MAP_HPP_ */
