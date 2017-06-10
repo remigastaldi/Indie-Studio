@@ -68,7 +68,7 @@ SRC             =				src/CameraMan.cpp							\
 												src/Entity.cpp								\
 												src/Player.cpp								\
 												src/GameStateManager.cpp			\
-												src/Map.cpp										\
+												src/Dungeon.cpp										\
 												src/Menu.cpp									\
 												src/Indie.cpp									\
 												src/SplashScreen.cpp  				\
@@ -77,6 +77,7 @@ SRC             =				src/CameraMan.cpp							\
 												src/Collision.cpp							\
 												src/Angel.cpp									\
 												src/WorkingQueue.cpp					\
+												src/GameLogic.cpp							\
 												src/main.cpp
 
 

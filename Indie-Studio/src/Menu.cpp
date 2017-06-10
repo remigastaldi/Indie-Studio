@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Wed Jun  7 05:28:54 2017 gastal_r
+// Last update Sat Jun 10 15:40:34 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -15,10 +15,8 @@ Menu::Menu() :
   mPolygonRenderingMode('B'),
   mShutDown(false),
   _camera(nullptr),
-	mRotSpd(0.1),
   mLMouseDown(false),
-  mRMouseDown(false),
-  mCurObject(0)
+  mRMouseDown(false)
 {}
 
 Menu::~Menu()
@@ -29,12 +27,6 @@ void Menu::enter(void)
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Enter Menu =====");
 
   _camera = mDevice->sceneMgr->createCamera("CameraMenu");
-  // _camera->setPosition(Ogre::Vector3(0,0,80));
-  // _camera->lookAt(Ogre::Vector3(0,0,-300));
-  // _camera->setNearClipDistance(5);
-  //
-  // _cameraMan = new OgreCookies::CameraMan(_camera);
-  //
   Ogre::Viewport* vp = mDevice->window->addViewport(_camera);
   vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
   vp->update();
@@ -46,10 +38,10 @@ void Menu::enter(void)
 
 bool Menu::buttonSelected(const CEGUI::EventArgs &e)
 {
-  mDevice->data.Class = Entity::Type::INGENIOR;
+  mDevice->data.Class = Entity::Type::ENGINEER;
   _play->destroy();
   _myRoot->destroy();
-  GameState *menu = findByName("Map");
+  GameState *menu = findByName("Dungeon");
   changeGameState(menu);
   return (true);
 }
@@ -59,7 +51,7 @@ bool Menu::buttonSelected2(const CEGUI::EventArgs &e)
   mDevice->data.Class = Entity::Type::DARKFIEND;
   _play->destroy();
   _myRoot->destroy();
-  GameState *menu = findByName("Map");
+  GameState *menu = findByName("Dungeon");
   changeGameState(menu);
   return (true);
 }
@@ -69,17 +61,17 @@ bool Menu::buttonSelected3(const CEGUI::EventArgs &e)
   mDevice->data.Class = Entity::Type::WARRIOR;
   _play->destroy();
   _myRoot->destroy();
-  GameState *menu = findByName("Map");
+  GameState *menu = findByName("Dungeon");
   changeGameState(menu);
   return (true);
 }
 
 bool Menu::buttonSelected4(const CEGUI::EventArgs &e)
 {
-  mDevice->data.Class = Entity::Type::MAGE;
+  mDevice->data.Class = Entity::Type::WIZZARD;
   _play->destroy();
   _myRoot->destroy();
-  GameState *menu = findByName("Map");
+  GameState *menu = findByName("Dungeon");
   changeGameState(menu);
   return (true);
 }
@@ -458,8 +450,6 @@ bool Menu::mouseMoved( const OIS::MouseEvent &arg )
 		}
 		else if (mRMouseDown)
 		{
-			mCamera->yaw(Ogre::Degree(-arg.state.X.rel * mRotSpd));
-			mCamera->pitch(Ogre::Degree(-arg.state.Y.rel * mRotSpd));
 		}
     return true;
 }

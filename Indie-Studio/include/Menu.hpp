@@ -5,13 +5,13 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:59:44 2017 gastal_r
-// Last update Wed Jun  7 04:18:18 2017 gastal_r
+// Last update Sat Jun 10 12:33:20 2017 gastal_r
 //
 
-#ifndef _MENU_HPP_
-#define _MENU_HPP_
+#ifndef       _MENU_HPP_
+#define       _MENU_HPP_
 
-#include  "GameState.hpp"
+#include      "GameState.hpp"
 
 class Menu : public GameState
 {
@@ -60,15 +60,12 @@ public:
 private:
   char mPolygonRenderingMode;
 
-  Ogre::Camera *mCamera;
-
   // OgreCookies
   OgreCookies::CameraMan* mCameraMan;       // basic camera controller
 
   //OIS Input devices
   bool    mLMouseDown;
   bool    mRMouseDown;
-  float   mRotSpd;
   Ogre::SceneNode* mCurObject;
 
 //CEGUI

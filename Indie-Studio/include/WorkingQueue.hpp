@@ -5,20 +5,27 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Sat Jun 10 00:26:47 2017 Leo HUBERT
+// Last update Sat Jun 10 14:32:58 2017 gastal_r
 //
 
-#ifndef _WORKING_HPP_
-#define _WORKING_HPP_
+#ifndef     _WORKING_HPP_
+#define     _WORKING_HPP_
 
-#include <mutex>
-#include <vector>
-#include <memory>
-#include <unordered_map>
-#include "GameState.hpp"
-#include "Entity.hpp"
-#include "Collision.h"
-#include "SpellManager.hpp"
+#include    <mutex>
+#include    <vector>
+#include    <memory>
+#include    <thread>
+#include    <string>
+#include    <iostream>
+#include    <functional>
+#include    <sio_client.h>
+#include    <unordered_map>
+#include    <condition_variable>
+
+#include    "Entity.hpp"
+#include    "Collision.h"
+#include    "GameState.hpp"
+#include    "SpellManager.hpp"
 
 class WorkingQueue
 {

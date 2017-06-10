@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Sat Jun 10 00:51:06 2017 gastal_r
+// Last update Sat Jun 10 15:40:21 2017 gastal_r
 //
 
 #include        "Indie.hpp"
@@ -39,7 +39,7 @@ void            Indie::start()
 {
   GameStateManager gameStateMgr(&_device);
   Menu::Create(&gameStateMgr, "Menu");
-  Map::Create(&gameStateMgr, "Map");
+  Dungeon::Create(&gameStateMgr, "Dungeon");
   GameState *menu = gameStateMgr.findByName("Menu");
   gameStateMgr.start(menu);
 }

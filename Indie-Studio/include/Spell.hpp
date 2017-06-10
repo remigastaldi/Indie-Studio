@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:43:07 2017 gastal_r
-// Last update Fri Jun  9 12:52:16 2017 gastal_r
+// Last update Sat Jun 10 15:18:45 2017 gastal_r
 //
 
 #ifndef _SPELL_HPP_
@@ -41,11 +41,26 @@ class Spell
 public:
   enum class Type
   {
+    /** Warrior */
+    EYE_FIRE,
+    SWORD,
+    HEARTH,
+    DAGGER,
+    /** Wizzard */
+    TORNADO,
+    FIREBALL,
+    SHIELD_BUFF,
+    LEAF_BUFF,
     /** DarkFiend */
     ANGEL,
     THUNDERSTORM,
     SPECTRE,
-    FIRE
+    FIRE,
+    /** Engineer */
+    STONEBALL,
+    STALACTITES,
+    BULLET,
+    BEAR_BUFF
   };
 
   enum class Status

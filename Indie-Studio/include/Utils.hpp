@@ -5,11 +5,15 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri Jun  9 00:04:17 2017 gastal_r
-// Last update Fri Jun  9 00:09:20 2017 gastal_r
+// Last update Sat Jun 10 14:23:17 2017 gastal_r
 //
 
 #ifndef _UTILS_HPP_
 #define _UTILS_HPP_
+
+#include      <CEGUI/CEGUI.h>
+#include      <OISKeyboard.h>
+#include      <OISMouse.h>
 
 class Utils
 {
@@ -49,6 +53,21 @@ public:
   {
     return Ogre::Quaternion(Q.w(), Q.x(), Q.y(), Q.z());
   };
+
+  static CEGUI::MouseButton convertButon(OIS::MouseButtonID id)
+  {
+    switch (id)
+    {
+    case OIS::MB_Left:
+      return CEGUI::LeftButton;
+    case OIS::MB_Right:
+      return CEGUI::RightButton;
+    case OIS::MB_Middle:
+      return CEGUI::MiddleButton;
+    default:
+      return CEGUI::LeftButton;
+    }
+  }
 };
 
 #endif /* !_UTILS_HPP_ */

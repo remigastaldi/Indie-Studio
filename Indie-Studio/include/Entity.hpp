@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Fri Jun  9 17:10:00 2017 gastal_r
+// Last update Sat Jun 10 15:35:30 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -44,9 +44,9 @@ public:
   enum class Type
   {
     WARRIOR,
-    MAGE,
+    WIZZARD,
     DARKFIEND,
-    INGENIOR
+    ENGINEER
   };
 
   enum class Status
@@ -120,10 +120,16 @@ protected:
 #define   _ENTITY_CREATE_
 
 #include "Player.hpp"
+class Warrior;
+class Wizzard;
 class DarkFiend;
+class Engineer;
 
 #define   ENTITY_INDEX    \
-{ Entity::Type::DARKFIEND, &createInstance<DarkFiend> }
+{ Entity::Type::WARRIOR, &createInstance<Warrior> },      \
+{ Entity::Type::WIZZARD, &createInstance<Wizzard> },      \
+{ Entity::Type::DARKFIEND, &createInstance<DarkFiend> },  \
+{ Entity::Type::ENGINEER, &createInstance<Engineer> }
 
 #define   ENTITY_INIT_PARAMETERS                                 \
 Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, \
