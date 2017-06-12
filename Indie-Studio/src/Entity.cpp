@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Fri Jun  9 20:54:47 2017 Leo HUBERT
+// Last update Sat Jun 10 22:35:48 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -68,6 +68,7 @@ void  Entity::addToBulletWorld(const Ogre::Vector3 &position)
 
 void 	Entity::changeAnimation(Entity::Status status)
 {
+  return;
 	switch (status)
 	{
 	case Entity::Status::IMMOBILE :
@@ -89,7 +90,7 @@ void 	Entity::changeAnimation(Entity::Status status)
 }
 
 void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
-{  
+{
 	if (_destination != Ogre::Vector3::ZERO)
 	{
 		btVector3 ghostOrigin(_ghostObject->getWorldTransform().getOrigin());

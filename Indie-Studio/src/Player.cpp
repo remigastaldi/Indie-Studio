@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Sat Jun 10 15:26:04 2017 gastal_r
+// Last update Sun Jun 11 10:27:43 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -22,9 +22,12 @@ Warrior::Warrior(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
   _spells[3] = Spell::Type::DAGGER;
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
-  _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
+  Ogre::MeshPtr mMesh = Ogre::MeshManager::getSingleton().load("Ogre.mesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+  mMesh->buildEdgeList();
+  _entity =  sceneMgr.createEntity("Warrior",mMesh);
+  // _entity = sceneMgr.createEntity(std::to_string(id), "Untitled.004.mesh");
   _node->attachObject(_entity);
-  _node->setScale(0.2f, 0.2f, 0.2f);
+  // _node->setScale(0.2f, 0.2f, 0.2f);
   changeAnimation(status);
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::PLAYER);

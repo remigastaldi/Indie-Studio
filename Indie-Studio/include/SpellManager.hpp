@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun  3 18:44:20 2017 gastal_r
-// Last update Thu Jun  8 14:28:02 2017 gastal_r
+// Last update Sat Jun 10 16:10:55 2017 gastal_r
 //
 
 #ifndef _SPELLMANAGER_hPP
@@ -33,4 +33,4 @@ private:
   bool                  _disableCallback;
 };
 
-#endif /* end of include guard: _SPELLMANAGER_hPP */
+#endif /* !_SPELLMANAGER_hPP */

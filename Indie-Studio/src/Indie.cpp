@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Sat Jun 10 15:40:21 2017 gastal_r
+// Last update Mon Jun 12 01:59:29 2017 gastal_r
 //
 
 #include        "Indie.hpp"
@@ -201,6 +201,7 @@ bool            Indie::init()
   CEGUI::SchemeManager::getSingleton().createFromFile( "HUDDemo.scheme" );
 
   _device.data.shader = 3;
+  _device.data.Class = Entity::Type::WARRIOR;
 
   return true;
 }

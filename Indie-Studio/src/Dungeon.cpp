@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat Jun 10 15:38:48 2017 gastal_r
+// Last update Mon Jun 12 17:25:19 2017 gastal_r
 //
 
 #include        "Dungeon.hpp"
@@ -30,24 +30,94 @@ void Dungeon::createScene(void)
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
-	Ogre::SceneNode *map = _sceneMgr->getRootSceneNode()->createChildSceneNode("Dungeon", Ogre::Vector3(0,0,0));
-	DotSceneLoader loader;
+    Ogre::Light* spotLight = _sceneMgr->createLight("SpotLight");
+
+  spotLight->setType(Ogre::Light::LT_SPOTLIGHT);
+  spotLight->setDiffuseColour(1.0, 1.0, 1.0);
+  spotLight->setSpecularColour(1.0, 1.0, 1.0);
+
+  spotLight->setDirection(-1, -1, 0);
+  spotLight->setPosition(Ogre::Vector3(0, 40, 0));
+
+// Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
+//
+// Ogre::MeshManager::getSingleton().createPlane(
+//   "ground",
+//   Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+//   plane,
+//   1500, 1500, 20, 20,
+//   true,
+//   1, 5, 5,
+//   Ogre::Vector3::UNIT_Z);
+//   Ogre::Entity* groundEntity = _sceneMgr->createEntity("ground");
+//   _sceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(groundEntity);
+//   groundEntity->setCastShadows(false);
+//   Ogre::SceneNode *node = _sceneMgr->getRootSceneNode()->createChildSceneNode("qdsd", Ogre::Vector3(-50, 3, 0));
+//   Ogre::MeshPtr mMesh = Ogre::MeshManager::getSingleton().load("Ogre.mesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+//   mMesh->buildEdgeList();
+//   Ogre::Entity *entity =  _sceneMgr->createEntity("Warrisor",mMesh);
+//   // entity = sceneMgr.createEntity(std::to_string(id), "Untitled.004.mesh");
+//   node->attachObject(entity);
+
+
+
+
+  Ogre::SceneNode *map = _sceneMgr->getRootSceneNode()->createChildSceneNode("Dungeon", Ogre::Vector3(0,0,0));
+  DotSceneLoader loader;
 	loader.parseDotScene("dungeon.scene","General", _sceneMgr, map);
   map->setPosition({0.f, 0.f, 0.f});
-
-  _sceneMgr->setAmbientLight(Ogre::ColourValue(0.3f, 0.3f, 0.3f));
-
-  Ogre::Light* spotLight = _sceneMgr->createLight("SpotLight");
-  spotLight->setDiffuseColour(0.5, 0.5, 0.5);
-  spotLight->setSpecularColour(0.5, 0.5, 0.5);
-  spotLight->setType(Ogre::Light::LT_POINT);
-  spotLight->setPosition(Ogre::Vector3(46.f, 42.f, 153.f));
-
+  _sceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
+  // return;s
+  for (auto & it : loader.getLightPos())
+    {
+      if (it.name.find("Spot") != std::string::npos /*  ||  it.name.find("Area") != std::string::npos*/)
+        continue;
+        std::cout << "light: " << it.name << std::endl;
+      if (it.name.find("Point") != std::string::npos)
+        {
+          Ogre::Light* candlelight = _sceneMgr->createLight(it.name);
+          // candlelight->setDiffuseColour(it.colourDiffuse + Ogre::ColourValue(1.f, 1.f, 1.f));
+          // candlelight->setSpecularColour(it.colourSpecular + Ogre::ColourValue(1.f, 1.f, 1.f));
+          candlelight->setDiffuseColour(it.colourDiffuse);
+          candlelight->setSpecularColour(it.colourSpecular);
+          candlelight->setPosition(it.pos);
+          candlelight->setType(Ogre::Light::LT_POINT);
+          //TODO sauvegarde des pointeurs pour les delete
+          // Ogre::SceneNode *test = _sceneMgr->getRootSceneNode()->createChildSceneNode("Dungeon" + std::to_string(std::rand()), it.pos);
+          // Ogre::ParticleSystem *_particleSystem = _sceneMgr->createParticleSystem(("EyeFireServerParticle") + std::to_string(std::rand()), "Space/Sun");
+          // test->attachObject(_particleSystem);
+          candlelight->setAttenuation	(32, 0.3, 0.0014, 0.07);
+          candlelight->setCastShadows(true);
+        }
+      else if (it.name.find("Area") != std::string::npos)
+        {
+          // candlelight->setType(Ogre::Light::LT_POINT);
+          // candlelight->setAttenuation	(100, 1.0, 0.045, 0.0075);
+          // candlelight->setCastShadows(true);
+        }
+        else if (it.name.find("Spot") != std::string::npos)
+        {
+          // candlelight->setType(Ogre::Light::LT_SPOTLIGHT);
+          // candlelight->setDiffuseColour(0, 0, 1.0);
+          // candlelight->setSpecularColour(0, 0, 1.0);
+          // // candlelight->setDiffuseColour(1, 1, 1);
+          // // candlelight->setSpecularColour(1, 1, 1);
+          // // candlelight->setDirection(Ogre::Vector3(0, 0, 0));
+          // // candlelight->setSpotlightFalloff(1.5f);
+          // candlelight->setDirection(Ogre::Vector3(it.pos.x, -1, it.pos.z));
+          // candlelight->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
+          // // candlelight->setCastShadows(true);
+          // candlelight->setCastShadows(true);
+        }
+    }
+// return;
   for (auto & it : loader.dynamicObjects)
   {
     std::cout << "Dynamics ==> " << it << std::endl;
     Ogre::SceneNode *node = _sceneMgr->getSceneNode(it);
     Ogre::Entity *entity = static_cast<Ogre::Entity*>(node->getAttachedObject(0));
+    Ogre::Vector3 pos(node->getPosition());
+    Ogre::Quaternion orientation(node->getOrientation());
 
     if (it.find("Barrel") != std::string::npos)
     {
@@ -56,16 +126,17 @@ void Dungeon::createScene(void)
       size = boundingB.getSize();
       size /= 2.0f;
       size *= 0.95f;
-      OgreBulletCollisions::CapsuleCollisionShape *capsule = new OgreBulletCollisions::CapsuleCollisionShape(1.f, 1.f, Ogre::Vector3(0, 1, 0));
+      OgreBulletCollisions::CapsuleCollisionShape *capsule = new OgreBulletCollisions::CapsuleCollisionShape(size.x, size.y, Ogre::Vector3(0, 0, 1));
 
       OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(it, _world.get());
+
       defaultBody->setShape(node,
             capsule,
             0.6f,      // dynamic body restitution
             1.f,      // dynamic body friction
             1.0f,       // dynamic bodymass
-            node->getPosition(),
-            Ogre::Quaternion(180,0,0,1));
+            pos,
+            orientation);
 
         defaultBody->enableActiveState();
         _world->addRigidBody(defaultBody, 0, 0);
@@ -74,15 +145,14 @@ void Dungeon::createScene(void)
     {
       OgreBulletCollisions::StaticMeshToShapeConverter trimeshConverter(entity);
       OgreBulletCollisions::TriangleMeshCollisionShape *sceneTriMeshShape =  trimeshConverter.createTrimesh();
-
       OgreBulletDynamics::RigidBody *defaultBody = new OgreBulletDynamics::RigidBody(entity->getName(),  _world.get());
       defaultBody->setShape(node,
             sceneTriMeshShape,
             0.6f,      // dynamic body restitution
             1.f,      // dynamic body friction
             0.0f,       // dynamic bodymass
-            node->getPosition(),    // starting position of the box
-            Ogre::Quaternion(0, 0, -1, 1));// orientation of the box
+            pos,    // starting position of the box
+            orientation);// orientation of the box
 
       defaultBody->enableActiveState();
       _world->addRigidBody(defaultBody,0,0);

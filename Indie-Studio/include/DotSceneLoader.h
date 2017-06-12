@@ -5,7 +5,7 @@
 ** Login   <remi.gastaldi@epitech.eu>
 **
 ** Started on  Wed May 31 11:05:50 2017 gastal_r
-** Last update Tue Jun  6 17:53:12 2017 gastal_r
+** Last update Sat Jun 10 19:22:29 2017 gastal_r
 */
 
 #ifndef DOT_SCENELOADER_H
@@ -55,6 +55,8 @@ class DotSceneLoader
 {
 public:
   Ogre::TerrainGlobalOptions *mTerrainGlobalOptions;
+  const std::vector<LightProperties> &getLightPos(void) const { return (_lightPos); }
+
 
   DotSceneLoader();
   virtual ~DotSceneLoader();
@@ -107,8 +109,6 @@ protected:
   Ogre::Vector3 parseVector3(rapidxml::xml_node<>* XMLNode);
   Ogre::Quaternion parseQuaternion(rapidxml::xml_node<>* XMLNode);
   Ogre::ColourValue parseColour(rapidxml::xml_node<>* XMLNode);
-
-  const std::vector<LightProperties> &getLightPos(void) const { return (_lightPos); }
 
   Ogre::SceneManager *mSceneMgr;
   Ogre::SceneNode *mAttachNode;

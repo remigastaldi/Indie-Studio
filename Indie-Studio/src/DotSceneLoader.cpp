@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed May 10 23:43:20 2017 gastal_r
-// Last update Tue Jun  6 17:50:02 2017 gastal_r
+// Last update Sun Jun 11 14:10:19 2017 gastal_r
 //
 #include "DotSceneLoader.h"
 #include <Ogre.h>
@@ -92,9 +92,9 @@ void DotSceneLoader::processScene(rapidxml::xml_node<>* XMLRoot)
     rapidxml::xml_node<>* pElement;
 
     // Process environment (?)
-    pElement = XMLRoot->first_node("environment");
-    if(pElement)
-        processEnvironment(pElement);
+    // pElement = XMLRoot->first_node("environment");
+    // if(pElement)
+    //     processEnvironment(pElement);
 
     // Process nodes (?)
     pElement = XMLRoot->first_node("nodes");
@@ -102,14 +102,14 @@ void DotSceneLoader::processScene(rapidxml::xml_node<>* XMLRoot)
         processNodes(pElement);
 
     // Process externals (?)
-    pElement = XMLRoot->first_node("externals");
-    if(pElement)
-        processExternals(pElement);
+    // pElement = XMLRoot->first_node("externals");
+    // if(pElement)
+    //     processExternals(pElement);
 
     // Process userDataReference (?)
-    pElement = XMLRoot->first_node("userDataReference");
-    if(pElement)
-        processUserDataReference(pElement);
+    // pElement = XMLRoot->first_node("userDataReference");
+    // if(pElement)
+    //     processUserDataReference(pElement);
 
     // Process octree (?)
     pElement = XMLRoot->first_node("octree");
@@ -122,14 +122,14 @@ void DotSceneLoader::processScene(rapidxml::xml_node<>* XMLRoot)
        processLight(pElement);
 
     // Process camera (?)
-    pElement = XMLRoot->first_node("camera");
-    if(pElement)
-        processCamera(pElement);
+    // pElement = XMLRoot->first_node("camera");
+    // if(pElement)
+    //     processCamera(pElement);
 
     // Process terrain (?)
-    pElement = XMLRoot->first_node("terrain");
-    if(pElement)
-        processTerrain(pElement);
+    // pElement = XMLRoot->first_node("terrain");
+    // if(pElement)
+    //     processTerrain(pElement);
 }
 
 void DotSceneLoader::processNodes(rapidxml::xml_node<>* XMLNode)
@@ -694,11 +694,6 @@ void DotSceneLoader::processEntity(rapidxml::xml_node<>* XMLNode, Ogre::SceneNod
         Ogre::MeshPtr mMesh = Ogre::MeshManager::getSingleton().load(meshFile, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
         mMesh->buildEdgeList();
         pEntity =  mSceneMgr->createEntity(name,mMesh);
-        // if (name.find("Ground") != std::string::npos)
-        // {
-        //   std::cout << "======================" << std::endl;
-        //   pEntity->setCastShadows(false);
-        // }
         pEntity->setCastShadows(castShadows);
         pParent->attachObject(pEntity);
 

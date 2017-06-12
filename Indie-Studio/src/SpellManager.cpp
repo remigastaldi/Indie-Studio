@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun  3 18:43:48 2017 gastal_r
-// Last update Thu Jun  8 21:06:18 2017 gastal_r
+// Last update Sat Jun 10 19:19:08 2017 gastal_r
 //
 
 #include      "SpellManager.hpp"
@@ -42,7 +42,7 @@ void        SpellManager::frameRenderingQueued(const Ogre::FrameEvent& evt)
   {
     if ((*it)->frameRenderingQueued(evt) == false)
       {
-        if (!_disableCallback)
+        if (_disableCallback)
           _sendCollisionToServer((*it)->getType(), (*it)->getCollidedObjectName());
         _spellsIndex.push_back((*it)->getId());
         delete (*it);

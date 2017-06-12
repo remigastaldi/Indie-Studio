@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Sat Jun 10 14:19:14 2017 gastal_r
+// Last update Mon Jun 12 15:26:33 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -37,12 +37,42 @@ void          GameLogic::initGameLogic(void)
   _sceneMgr = mDevice->sceneMgr;
 
   _camera = _sceneMgr->createCamera("PlayerCamera");
+  // _camera->setFarClipDistance(0);
   _camera->setNearClipDistance(5);
 
   Ogre::Viewport* vp = mDevice->window->addViewport(_camera);
   _camera->setAspectRatio(Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
   vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
+
+  if (!Ogre::RTShader::ShaderGenerator::initialize())
+    exit();
+
+  Ogre::RTShader::ShaderGenerator *mShaderGenerator = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
+
+  // Ogre::ResourceGroupManager::getSingleton().addResourceLocation("../media", "FileSystem");
+   // Set shader cache path.
+  mShaderGenerator->setShaderCachePath("../media/RTShaderLib/cache/");
+  // Set the scene manager.
+  mShaderGenerator->addSceneManager(_sceneMgr);
+  // Add a specialized sub-render (per-pixel lighting) state to the default scheme render state
+  Ogre::RTShader::RenderState* pMainRenderState =
+      mShaderGenerator->createOrRetrieveRenderState(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME).first;
+  pMainRenderState->reset();
+  // mShaderGenerator->addSubRenderStateFactory(new Ogre::RTShader::PerPixelLightingFactory);
+  pMainRenderState->addTemplateSubRenderState(
+    mShaderGenerator->createSubRenderState(Ogre::RTShader::PerPixelLighting::Type));
+  // Create shader based technique from the default technique of the given material.
+  // Ogre::MaterialManager::getSingleton().addListener(new Ogre::RTSSDefaultTechniqueListener());
+  mShaderGenerator->createShaderBasedTechnique("DungeonRoof.001", Ogre::MaterialManager::DEFAULT_SCHEME_NAME, Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+  mShaderGenerator->createShaderBasedTechnique("Base_D_02.002", Ogre::MaterialManager::DEFAULT_SCHEME_NAME, Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+  for (size_t i = 0; i < 37; ++i)
+    mShaderGenerator->createShaderBasedTechnique("Base_D_02.0" + std::to_string(i), Ogre::MaterialManager::DEFAULT_SCHEME_NAME, Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+  for (size_t i = 0; i < 149; ++i)
+    mShaderGenerator->createShaderBasedTechnique("Base_D_01.0" + std::to_string(i), Ogre::MaterialManager::DEFAULT_SCHEME_NAME, Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+  // Apply the shader generated based techniques.
+  vp->setMaterialScheme(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
   vp->update();
+
 
   _collision.reset(new Collision::CollisionTools());
   _world.reset(new OgreBulletDynamics::DynamicsWorld(
@@ -88,18 +118,32 @@ void          GameLogic::initGameLogic(void)
     _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
     break;
   case 3:
-    _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+    _sceneMgr->setShadowTextureSelfShadow(true);
+    _sceneMgr->setShadowTextureCasterMaterial("newLighting");
+    //  _sceneMgr->setShadowTextureCasterMaterial("Ogre/DepthShadowmap/Receiver/Float");
+     _sceneMgr->setShadowTexturePixelFormat(Ogre::PF_FLOAT32_R);
+     _sceneMgr->setShadowCasterRenderBackFaces(true);
+     _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED);
+     _sceneMgr->setShadowTextureSize(2048);
+     _sceneMgr->setShadowTextureCountPerLightType(Ogre::Light::LT_POINT, 20);
+    _sceneMgr->setShadowCameraSetup(Ogre::ShadowCameraSetupPtr(new Ogre::FocusedShadowCameraSetup()));
+    _sceneMgr->setShadowFarDistance(100);
+
+    vp->update();
+    // _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+    // _sceneMgr->setShadowUseInfiniteFarPlane(false);
+    // _sceneMgr->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+    // _sceneMgr->setShadowCameraSetup(Ogre::ShadowCameraSetupPtr(new Ogre::FocusedShadowCameraSetup()));
+    // _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
     break;
   }
   // _sceneMgr->setShadowDirectionalLightExtrusionDistance(10);
   // _sceneMgr->setShadowFarDistance(10);
-  // _sceneMgr->setShadowTextureCount();
-
-  _sceneMgr->setAmbientLight(Ogre::ColourValue(1.f, 1.f, 1.f));
+  // _sceneMgr->setShadowTextureCount(10);
 
   _collisionRayCast = _sceneMgr->createRayQuery(Ogre::Ray());
   _player = createEntity(mDevice->data.Class, *_sceneMgr, *_world, *_collision, _id,
-    Entity::Status::IMMOBILE, Ogre::Vector3(40.f, 20.f, 160.f), Ogre::Vector3::ZERO);
+    Entity::Status::IMMOBILE, Ogre::Vector3(0.f, 0.f, 0.f), Ogre::Vector3::ZERO);
 
 #if DEBUG_CAMERA
   _camera->setPosition(_player->getPosition() + Ogre::Vector3(0, 50.f, 50.f));
