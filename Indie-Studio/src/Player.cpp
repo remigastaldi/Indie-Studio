@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Sun Jun 11 10:27:43 2017 gastal_r
+// Last update Tue Jun 13 19:24:56 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -16,10 +16,10 @@ Warrior::Warrior(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Warrior [id] " + std::to_string(id) + " =====");
 
-  _spells[0] = Spell::Type::EYE_FIRE;
-  _spells[1] = Spell::Type::SWORD;
-  _spells[2] = Spell::Type::HEARTH;
-  _spells[3] = Spell::Type::DAGGER;
+  _spells[0] = { Spell::Type::EYE_FIRE, EYE_FIRE_COOLDOWN };
+  _spells[1] = { Spell::Type::SWORD, SWORD_COOLDOWN };
+  _spells[2] = { Spell::Type::HEARTH, HEARTH_COOLDOWN };
+  _spells[3] = { Spell::Type::DAGGER, DAGGER_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
   Ogre::MeshPtr mMesh = Ogre::MeshManager::getSingleton().load("Ogre.mesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
@@ -44,10 +44,10 @@ Wizzard::Wizzard(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Wizzard [id] " + std::to_string(id) + " =====");
 
-  _spells[0] = Spell::Type::TORNADO;
-  _spells[1] = Spell::Type::THUNDERSTORM;
-  _spells[2] = Spell::Type::SHIELD_BUFF;
-  _spells[3] = Spell::Type::LEAF_BUFF;
+  _spells[0] = { Spell::Type::TORNADO, TORNADO_COOLDOWN };
+  _spells[1] = { Spell::Type::THUNDERSTORM, THUNDERSTORM_COOLDOWN };
+  _spells[2] = { Spell::Type::SHIELD_BUFF, SHIELD_BUFF_COOLDOWN };
+  _spells[3] = { Spell::Type::LEAF_BUFF, LEAF_BUFF_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
   _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
@@ -69,10 +69,10 @@ DarkFiend::DarkFiend(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsW
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create DarkFiend [id] " + std::to_string(id) + " =====");
 
-  _spells[0] = Spell::Type::ANGEL;
-  _spells[1] = Spell::Type::FIRE;
-  _spells[2] = Spell::Type::SPECTRE;
-  _spells[3] = Spell::Type::THUNDERSTORM;
+  _spells[0] = { Spell::Type::ANGEL, ANGEL_COOLDOWN };
+  _spells[1] = { Spell::Type::FIRE, FIRE_COOLDOWN };
+  _spells[2] = { Spell::Type::SPECTRE, SPECTRE_COOLDOWN };
+  _spells[3] = { Spell::Type::THUNDERSTORM, THUNDERSTORM_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
   _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
@@ -94,10 +94,10 @@ Engineer::Engineer(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWor
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Engineer [id] " + std::to_string(id) + " =====");
 
-  _spells[0] = Spell::Type::STONEBALL;
-  _spells[1] = Spell::Type::STALACTITES;
-  _spells[2] = Spell::Type::BULLET;
-  _spells[3] = Spell::Type::BEAR_BUFF;
+  _spells[0] = { Spell::Type::STONEBALL, STONEBALL_COOLDOWN };
+  _spells[1] = { Spell::Type::STALACTITES, STALACTITES_COOLDOWN };
+  _spells[2] = { Spell::Type::BULLET, BULLET_COOLDOWN };
+  _spells[3] = { Spell::Type::BEAR_BUFF, BEAR_BUFF_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
   _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");

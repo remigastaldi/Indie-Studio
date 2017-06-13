@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 16:33:57 2017 gastal_r
-// Last update Sat Jun 10 17:15:09 2017 gastal_r
+// Last update Tue Jun 13 18:21:48 2017 gastal_r
 //
 
 #ifndef     _ALLSPELLS_HPP_
@@ -18,6 +18,7 @@
 -----------------------------------------------------------------------------*/
 #define     EYE_FIRE_SPEED 4.f
 #define     EYE_FIRE_DISTANCE 10.f
+#define     EYE_FIRE_COOLDOWN 3
 class EyeFire : public Spell
 {
 public:
@@ -27,6 +28,7 @@ public:
 
 #define     SWORD_SPEED 4.f
 #define     SWORD_DISTANCE 10.f
+#define     SWORD_COOLDOWN 0.5
 class Sword : public Spell
 {
 public:
@@ -36,6 +38,7 @@ public:
 
 #define     HEARTH_SPEED 4.f
 #define     HEARTH_DISTANCE 10.f
+#define     HEARTH_COOLDOWN 2
 class Hearth : public Spell
 {
 public:
@@ -45,6 +48,7 @@ public:
 
 #define     DAGGER_SPEED 4.f
 #define     DAGGER_DISTANCE 10.f
+#define     DAGGER_COOLDOWN 0.5
 class Dagger : public Spell
 {
 public:
@@ -58,6 +62,7 @@ public:
 -----------------------------------------------------------------------------*/
 #define     TORNADO_SPEED 4.f
 #define     TORNADO_DISTANCE 10.f
+#define     TORNADO_COOLDOWN 2
 class Tornado : public Spell
 {
 public:
@@ -67,6 +72,7 @@ public:
 
 #define     FIREBALL_SPEED 4.f
 #define     FIREBALL_DISTANCE 10.f
+#define     FIREBALL_COOLDOWN 1
 class Fireball : public Spell
 {
 public:
@@ -74,8 +80,9 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
 };
 
-#define     SHIELDBUFF_SPEED 4.f
-#define     SHIELDBUFF_DISTANCE 10.f
+#define     SHIELD_BUFF_SPEED 4.f
+#define     SHIELD_BUFF_DISTANCE 10.f
+#define     SHIELD_BUFF_COOLDOWN 10
 class ShieldBuff : public Spell
 {
 public:
@@ -83,8 +90,9 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
 };
 
-#define     LEAFBUFF_SPEED 4.f
-#define     LEAFBUFF_DISTANCE 10.f
+#define     LEAF_BUFF_SPEED 4.f
+#define     LEAF_BUFF_DISTANCE 10.f
+#define     LEAF_BUFF_COOLDOWN 10
 class LeafBuff : public Spell
 {
 public:
@@ -98,6 +106,7 @@ public:
 -----------------------------------------------------------------------------*/
 #define     ANGEL_SPEED 4.f
 #define     ANGEL_DISTANCE 10.f
+#define     ANGEL_COOLDOWN 3
 class Angel : public Spell
 {
 public:
@@ -107,6 +116,7 @@ public:
 
 #define     THUNDERSTORM_SPEED 4.f
 #define     THUNDERSTORM_DISTANCE 10.f
+#define     THUNDERSTORM_COOLDOWN 8
 class Thunderstorm : public Spell
 {
 public:
@@ -116,6 +126,7 @@ public:
 
 #define     SPECTRE_SPEED 4.f
 #define     SPECTRE_DISTANCE 10.f
+#define     SPECTRE_COOLDOWN 7
 class Spectre : public Spell
 {
 public:
@@ -125,6 +136,7 @@ public:
 
 #define     FIRE_SPEED 4.f
 #define     FIRE_DISTANCE 10.f
+#define     FIRE_COOLDOWN 2
 class Fire : public Spell
 {
 public:
@@ -139,6 +151,7 @@ public:
 
 #define     STONEBALL_SPEED 4.f
 #define     STONEBALL_DISTANCE 10.f
+#define     STONEBALL_COOLDOWN 8
 class StoneBall : public Spell
 {
 public:
@@ -148,6 +161,7 @@ public:
 
 #define     STALACTITES_SPEED 4.f
 #define     STALACTITES_DISTANCE 10.f
+#define     STALACTITES_COOLDOWN 2
 class Stalactites : public Spell
 {
 public:
@@ -157,6 +171,7 @@ public:
 
 #define     BULLET_SPEED 4.f
 #define     BULLET_DISTANCE 10.f
+#define     BULLET_COOLDOWN 0.5
 class Bullet : public Spell
 {
 public:
@@ -164,8 +179,9 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
 };
 
-#define     BEARBUFF_SPEED 4.f
-#define     BEARBUFF_DISTANCE 10.f
+#define     BEAR_BUFF_SPEED 4.f
+#define     BEAR_BUFF_DISTANCE 10.f
+#define     BEAR_BUFF_COOLDOWN 15
 class BearBuff : public Spell
 {
 public:

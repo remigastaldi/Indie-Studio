@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun Jun  4 17:24:51 2017 gastal_r
-// Last update Sat Jun 10 17:06:46 2017 gastal_r
+// Last update Tue Jun 13 18:20:21 2017 gastal_r
 //
 
 #include      "AllSpells.hpp"
@@ -15,7 +15,7 @@
 -----------------------------------------------------------------------------*/
 EyeFire::EyeFire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, EYE_FIRE_DISTANCE, EYE_FIRE_SPEED, EYE_FIRE_COOLDOWN, Spell::Type::EYE_FIRE)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create EyeFireServer [id] " + std::to_string(id) +" =====");
 
@@ -46,7 +46,7 @@ EyeFire::EyeFire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
 
 Sword::Sword(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, SWORD_DISTANCE, SWORD_SPEED, SWORD_COOLDOWN, Spell::Type::SWORD)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create SwordServer [id] " + std::to_string(id) +" =====");
 
@@ -77,7 +77,7 @@ Sword::Sword(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
 
 Hearth::Hearth(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, HEARTH_DISTANCE, HEARTH_SPEED, HEARTH_COOLDOWN, Spell::Type::HEARTH)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create HearthServer [id] " + std::to_string(id) +" =====");
 
@@ -108,7 +108,7 @@ Hearth::Hearth(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
 
 Dagger::Dagger(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, DAGGER_DISTANCE, DAGGER_SPEED, DAGGER_COOLDOWN, Spell::Type::DAGGER)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create DaggerServer [id] " + std::to_string(id) +" =====");
 
@@ -143,7 +143,7 @@ Dagger::Dagger(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
 -----------------------------------------------------------------------------*/
 Tornado::Tornado(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, TORNADO_DISTANCE, TORNADO_SPEED, TORNADO_COOLDOWN, Spell::Type::TORNADO)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create TornadoServer [id] " + std::to_string(id) +" =====");
 
@@ -174,7 +174,7 @@ Tornado::Tornado(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
 
 Fireball::Fireball(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, FIREBALL_DISTANCE, FIREBALL_SPEED, FIREBALL_COOLDOWN, Spell::Type::FIREBALL)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create FireballServer [id] " + std::to_string(id) +" =====");
 
@@ -205,7 +205,7 @@ Fireball::Fireball(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
 
 ShieldBuff::ShieldBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, SHIELD_BUFF_DISTANCE, SHIELD_BUFF_SPEED, SHIELD_BUFF_COOLDOWN, Spell::Type::SHIELD_BUFF)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create ShieldBuffServer [id] " + std::to_string(id) +" =====");
 
@@ -236,7 +236,7 @@ ShieldBuff::ShieldBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &
 
 LeafBuff::LeafBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, LEAF_BUFF_DISTANCE, LEAF_BUFF_SPEED, LEAF_BUFF_COOLDOWN, Spell::Type::LEAF_BUFF)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create LeafBuffServer [id] " + std::to_string(id) +" =====");
 
@@ -270,7 +270,7 @@ LeafBuff::LeafBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
 -----------------------------------------------------------------------------*/
 Angel::Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, ANGEL_COOLDOWN, Spell::Type::ANGEL)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create AngelServer [id] " + std::to_string(id) +" =====");
 
@@ -301,7 +301,7 @@ Angel::Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
 
 Thunderstorm::Thunderstorm(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, THUNDERSTORM_DISTANCE, THUNDERSTORM_SPEED, THUNDERSTORM_COOLDOWN, Spell::Type::THUNDERSTORM)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create ThunderstormServer [id] " + std::to_string(id) +" =====");
 
@@ -332,7 +332,7 @@ Thunderstorm::Thunderstorm(Ogre::SceneManager &sceneMgr, Collision::CollisionToo
 
 Spectre::Spectre(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, SPECTRE_DISTANCE, SPECTRE_SPEED, SPECTRE_COOLDOWN, Spell::Type::SPECTRE)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create SpectreServer [id] " + std::to_string(id) +" =====");
 
@@ -363,7 +363,7 @@ Spectre::Spectre(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
 
 Fire::Fire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, FIRE_DISTANCE, FIRE_SPEED, FIRE_COOLDOWN, Spell::Type::FIRE)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create FireServer [id] " + std::to_string(id) +" =====");
 
@@ -397,7 +397,7 @@ Fire::Fire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, O
 -----------------------------------------------------------------------------*/
 StoneBall::StoneBall(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, STONEBALL_DISTANCE, STONEBALL_SPEED, STONEBALL_COOLDOWN, Spell::Type::STONEBALL)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create StoneBallServer [id] " + std::to_string(id) +" =====");
 
@@ -428,7 +428,7 @@ StoneBall::StoneBall(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &co
 
 Stalactites::Stalactites(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, STALACTITES_DISTANCE, STALACTITES_SPEED, STALACTITES_COOLDOWN, Spell::Type::STALACTITES)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create StalactitesServer [id] " + std::to_string(id) +" =====");
 
@@ -459,7 +459,7 @@ Stalactites::Stalactites(Ogre::SceneManager &sceneMgr, Collision::CollisionTools
 
 Bullet::Bullet(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, BULLET_DISTANCE, BULLET_SPEED, BULLET_COOLDOWN, Spell::Type::BULLET)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create BulletServer [id] " + std::to_string(id) +" =====");
 
@@ -490,7 +490,7 @@ Bullet::Bullet(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
 
 BearBuff::BearBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, Spell::Type::ANGEL)
+  : Spell(SPELL_INIT_VARS, BEAR_BUFF_DISTANCE, BEAR_BUFF_SPEED, BEAR_BUFF_COOLDOWN, Spell::Type::BEAR_BUFF)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create BearBuffServer [id] " + std::to_string(id) +" =====");
 

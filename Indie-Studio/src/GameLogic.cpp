@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Tue Jun 13 16:44:39 2017 gastal_r
+// Last update Tue Jun 13 21:04:05 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -108,10 +108,14 @@ void          GameLogic::initGameLogic(void)
   _camera->lookAt(_player->getPosition());
 #endif
 
+  _t1 = std::chrono::high_resolution_clock::now();
+  _t2 = std::chrono::high_resolution_clock::now();
+  _t3 = std::chrono::high_resolution_clock::now();
+  _t4 = std::chrono::high_resolution_clock::now();
+
 #if !DEBUG_LOCAL
   sendEntity(*_player);
 #endif
-
 }
 
 bool 	        GameLogic::frameStarted(const Ogre::FrameEvent &evt)
@@ -198,92 +202,61 @@ void          GameLogic::sendServerPlayerPos(void)
   }
 }
 
-
-bool GameLogic::keyPressed( const OIS::KeyEvent &arg )
+void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
 {
   switch (arg.key)
   {
   case OIS::KC_A:
-    #if DEBUG_LOCAL == false
-      sendSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
-    #endif
-    _spellManager->launchSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
+    _cdSpell1 = std::chrono::high_resolution_clock::now();
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell1 - _t1).count() >= _player->getSpellCooldown(0))
+    {
+      #if DEBUG_LOCAL == false
+        sendSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
+      #endif
+      _spellManager->launchSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
+      _t1 = std::chrono::high_resolution_clock::now();
+    }
     break;
   case OIS::KC_Z:
-    #if DEBUG_LOCAL == false
-      sendSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
-    #endif
-    _spellManager->launchSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
+    _cdSpell2 = std::chrono::high_resolution_clock::now();
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell2 - _t2).count() >= _player->getSpellCooldown(1))
+    {
+      #if DEBUG_LOCAL == false
+        sendSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
+      #endif
+      _spellManager->launchSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
+      _t2 = std::chrono::high_resolution_clock::now();
+    }
     break;
   case OIS::KC_E:
-    #if DEBUG_LOCAL == false
-      sendSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
-    #endif
-    _spellManager->launchSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
+    _cdSpell3 = std::chrono::high_resolution_clock::now();
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell3 - _t3).count() >= _player->getSpellCooldown(2))
+    {
+      #if DEBUG_LOCAL == false
+        sendSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
+      #endif
+      _spellManager->launchSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
+      _t3 = std::chrono::high_resolution_clock::now();
+    }
     break;
   case OIS::KC_R:
-    #if DEBUG_LOCAL == false
-      sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
-    #endif
-    _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
+    _cdSpell4 = std::chrono::high_resolution_clock::now();
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell4 - _t4).count() >= _player->getSpellCooldown(3))
+    {
+      #if DEBUG_LOCAL == false
+        sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
+      #endif
+      _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
+      _t4 = std::chrono::high_resolution_clock::now();
+    }
     break;
   }
-	// _mSSAO->toggle();
-  // return true;
-  if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
-  {
-    Ogre::TextureFilterOptions tfo;
-    unsigned int aniso;
+}
 
-    switch (mPolygonRenderingMode)
-    {
-    case 'B':
-      mPolygonRenderingMode = 'T';
-      tfo = Ogre::TFO_TRILINEAR;
-      aniso = 1;
-      break;
-    case 'T':
-      mPolygonRenderingMode = 'A';
-      tfo = Ogre::TFO_ANISOTROPIC;
-      aniso = 8;
-      break;
-    case 'A':
-      mPolygonRenderingMode = 'N';
-      tfo = Ogre::TFO_NONE;
-      aniso = 1;
-      break;
-    default:
-      mPolygonRenderingMode = 'B';
-      tfo = Ogre::TFO_BILINEAR;
-      aniso = 1;
-    }
-
-    Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
-    Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
-  }
-  else if (arg.key == OIS::KC_R)   // cycle polygon rendering mode
-  {
-    Ogre::PolygonMode pm;
-
-    switch (_camera->getPolygonMode())
-    {
-    case Ogre::PM_SOLID:
-      pm = Ogre::PM_WIREFRAME;
-      break;
-    case Ogre::PM_WIREFRAME:
-      pm = Ogre::PM_POINTS;
-      break;
-    default:
-      pm = Ogre::PM_SOLID;
-    }
-
-    _camera->setPolygonMode(pm);
-  }
-  else if(arg.key == OIS::KC_F5)   // refresh all textures
-  {
-    Ogre::TextureManager::getSingleton().reloadAll();
-  }
-  else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
+bool GameLogic::keyPressed(const OIS::KeyEvent &arg)
+{
+  checkSpellKeyPressed(arg);
+  if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
   {
     mDevice->window->writeContentsToTimestampedFile("screenshot", ".jpg");
   }

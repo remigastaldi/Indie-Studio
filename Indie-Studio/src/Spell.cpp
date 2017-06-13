@@ -5,14 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:56:53 2017 gastal_r
-// Last update Fri Jun  9 22:59:58 2017 gastal_r
+// Last update Tue Jun 13 18:26:59 2017 gastal_r
 //
 
 #include      "Spell.hpp"
 
 Spell::Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback,
-  Ogre::Real distance, Ogre::Real speed, Spell::Type type)
+  Ogre::Real distance, Ogre::Real speed, Ogre::Real cooldown, Spell::Type type)
   :  _sceneMgr(sceneMgr),
   _collision(collision),
   _soundManager(soundManager),
@@ -21,6 +21,7 @@ Spell::Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
   _disableCallback(disableCallback),
   _distance(distance),
   _speed(speed),
+  _cooldown(cooldown),
   _type(type),
   _entity(nullptr),
   _node(nullptr),
