@@ -410,8 +410,8 @@
          bool Stop = false;
          for (auto data = m_Entities.begin(); (data != m_Entities.end() && !Stop); ++data)
          {
-            if (data->Type == Collision::Type::PLAYER || data->Type == Collision::Type::OTHER)
-              continue;
+            // if (data->Type == Collision::Type::PLAYER || data->Type == Collision::Type::OTHER)
+            //   continue;
 
             // skip the ignored entity
             if (data->Entity == ignore)
