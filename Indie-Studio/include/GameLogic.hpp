@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Sun Jun 11 16:33:33 2017 gastal_r
+// Last update Tue Jun 13 01:14:22 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -14,6 +14,7 @@
 #include <RTShaderSystem/OgreRTShaderSystem.h>
 #include      "WorkingQueue.hpp"
 #include      "Socket.hpp"
+#include "PFXSSAO.h"
 
 #define DEBUG_LOCAL true
 #define DEBUG_CAMERA true
@@ -118,6 +119,8 @@ protected:
   Entity    *_player;
 
   std::unique_ptr<SpellManager>    _spellManager;
+
+  PFXSSAO   *_mSSAO;
   bool mShutDown;
 };
 
