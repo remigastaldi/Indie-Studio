@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Tue Jun 13 20:02:35 2017 gastal_r
+// Last update Tue Jun 13 20:51:58 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -50,6 +50,7 @@ public:
   virtual Ogre::Vector3  getMouseFocusPos(void);
 
   // OIS::KeyListener
+  virtual void checkSpellKeyPressed(const OIS::KeyEvent &arg);
   virtual bool keyPressed(const OIS::KeyEvent &arg);
   virtual bool keyReleased(const OIS::KeyEvent &arg);
 
@@ -123,15 +124,15 @@ protected:
   PFXSSAO   *_mSSAO;
 
   //Spells cooldown
-  std::chrono::high_resolution_clock::time_point _t1;
-  std::chrono::high_resolution_clock::time_point _t2;
-  std::chrono::high_resolution_clock::time_point _t3;
-  std::chrono::high_resolution_clock::time_point _t4;
+  std::chrono::high_resolution_clock::time_point   _t1;
+  std::chrono::high_resolution_clock::time_point   _t2;
+  std::chrono::high_resolution_clock::time_point   _t3;
+  std::chrono::high_resolution_clock::time_point   _t4;
 
-  std::chrono::high_resolution_clock::time_point _cdSpell1;
-  std::chrono::high_resolution_clock::time_point _cdSpell2;
-  std::chrono::high_resolution_clock::time_point _cdSpell3;
-  std::chrono::high_resolution_clock::time_point _cdSpell4;
+  std::chrono::high_resolution_clock::time_point   _cdSpell1;
+  std::chrono::high_resolution_clock::time_point   _cdSpell2;
+  std::chrono::high_resolution_clock::time_point   _cdSpell3;
+  std::chrono::high_resolution_clock::time_point   _cdSpell4;
   bool mShutDown;
 };
 
