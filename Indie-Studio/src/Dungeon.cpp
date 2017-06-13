@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Tue Jun 13 14:10:36 2017 gastal_r
+// Last update Tue Jun 13 15:47:28 2017 gastal_r
 //
 
 #include        "Dungeon.hpp"
@@ -43,36 +43,29 @@ void Dungeon::createScene(void)
   DotSceneLoader loader;
 	loader.parseDotScene("dungeon.scene","General", _sceneMgr, map);
   map->setPosition({0.f, 0.f, 0.f});
-  _sceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
+  _sceneMgr->setAmbientLight(Ogre::ColourValue(0.15, 0.15, 0.15));
   // return;s
   for (auto & it : loader.getLightPos())
     {
       if (it.name.find("Spot") != std::string::npos /*  ||  it.name.find("Area") != std::string::npos*/)
         continue;
         std::cout << "light: " << it.name << std::endl;
+      Ogre::Light* candlelight = _sceneMgr->createLight(it.name);
+      candlelight->setDiffuseColour(it.colourDiffuse);
+      candlelight->setSpecularColour(it.colourSpecular);
+      candlelight->setPosition(it.pos);
       if (it.name.find("Point") != std::string::npos)
         {
-          Ogre::Light* candlelight = _sceneMgr->createLight(it.name);
-          // candlelight->setDiffuseColour(Ogre::ColourValue(it.colourDiffuse.r + 1.f, it.colourDiffuse.g + 1.f, it.colourDiffuse.b + 1.f, it.colourDiffuse.a));
-          // candlelight->setSpecularColour(Ogre::ColourValue(it.colourSpecular.r + 1.f, it.colourSpecular.g + 1.f, it.colourSpecular.b + 1.f, it.colourSpecular.a));
-          candlelight->setDiffuseColour(it.colourDiffuse);
-          candlelight->setSpecularColour(it.colourSpecular);
-          candlelight->setPosition(it.pos);
           candlelight->setType(Ogre::Light::LT_POINT);
           //TODO sauvegarde des pointeurs pour les delete
           Ogre::SceneNode *test = _sceneMgr->getRootSceneNode()->createChildSceneNode("Dungeon" + std::to_string(std::rand()), it.pos);
           Ogre::ParticleSystem *_particleSystem = _sceneMgr->createParticleSystem(("EyeFireParticle") + std::to_string(std::rand()), "Space/Sun");
           test->attachObject(_particleSystem);
-          candlelight->setAttenuation	(32, 0.3, 0.0014, 0.07);
+          candlelight->setAttenuation	(32, 0.5, 0.0014, 0.07);
           candlelight->setCastShadows(false);
         }
       else if (it.name.find("Area") != std::string::npos)
         {
-          Ogre::Light* candlelight = _sceneMgr->createLight(it.name);
-          // candlelight->setDiffuseColour(it.colourDiffuse + Ogre::ColourValue(1.f, 1.f, 1.f, 1.f));
-          // candlelight->setSpecularColour(it.colourSpecular + Ogre::ColourValue(1.f, 1.f, 1.f, 1.f));
-          candlelight->setDiffuseColour(it.colourDiffuse);
-          candlelight->setSpecularColour(it.colourSpecular);
           candlelight->setPosition(it.pos);
           candlelight->setType(Ogre::Light::LT_POINT);
           candlelight->setAttenuation	(100, 1.0, 0.045, 0.0075);
@@ -93,7 +86,6 @@ void Dungeon::createScene(void)
           // candlelight->setCastShadows(true);
         }
     }
-// return;
   for (auto & it : loader.dynamicObjects)
   {
     std::cout << "Dynamics ==> " << it << std::endl;
@@ -101,12 +93,6 @@ void Dungeon::createScene(void)
     Ogre::Entity *entity = static_cast<Ogre::Entity*>(node->getAttachedObject(0));
     Ogre::Vector3 pos(node->getPosition());
     Ogre::Quaternion orientation(node->getOrientation());
-
-    // entity->setMaterialName("TestShadow");
-    // Ogre::MaterialPtr themat = Ogre::MaterialManager::getSingleton().getByName("TestShadow");
-    // Ogre::GpuProgramParametersSharedPtr mCustomAtheneVparams = themat->getTechnique(0)->getPass(1)->getShadowReceiverVertexProgramParameters();
-    // Ogre::GpuProgramParametersSharedPtr mCustomAtheneFparams = themat->getTechnique(0)->getPass(1)->getShadowReceiverFragmentProgramParameters();
-
 
     if (it.find("Barrel") != std::string::npos)
     {

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Tue Jun 13 12:55:11 2017 gastal_r
+// Last update Tue Jun 13 16:10:41 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -89,27 +89,8 @@ void          GameLogic::initGameLogic(void)
     _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
     break;
   case 3:
-    // _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
     _mSSAO = new PFXSSAO(mDevice->window, _camera);
-    // _sceneMgr->setShadowTexturePixelFormat(Ogre::PF_FLOAT16_R);
-    // // _sceneMgr->setShadowTexturePixelFormat(PF_FLOAT32_R);
-    // _sceneMgr->setShadowTextureCasterMaterial("Ogre/DepthShadowmap/Caster/Float");
-    // _sceneMgr->setShadowTextureReceiverMaterial("Ogre/DepthShadowmap/Receiver/Float");
-    // _sceneMgr->setShadowTextureSelfShadow(true);
-    // _sceneMgr->setShadowTextureSettings(512, 2);
-    // _sceneMgr->setShadowCameraSetup(Ogre::ShadowCameraSetupPtr(new Ogre::FocusedShadowCameraSetup()));
-    // _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED);
-    // _sceneMgr->setShadowCasterRenderBackFaces(false);
-    // _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
-    // _sceneMgr->setShadowUseInfiniteFarPlane(false);
-    // _sceneMgr->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
-    // _sceneMgr->setShadowCameraSetup(Ogre::ShadowCameraSetupPtr(new Ogre::FocusedShadowCameraSetup()));
-    // _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-    break;
   }
-  // _sceneMgr->setShadowDirectionalLightExtrusionDistance(10);
-  // _sceneMgr->setShadowFarDistance(50);
-  // _sceneMgr->setShadowTextureCount(1);
 
   _collisionRayCast = _sceneMgr->createRayQuery(Ogre::Ray());
   _player = createEntity(mDevice->data.Class, *_sceneMgr, *_world, *_collision, _id,
@@ -220,16 +201,35 @@ void          GameLogic::sendServerPlayerPos(void)
 
 bool GameLogic::keyPressed( const OIS::KeyEvent &arg )
 {
-  if(arg.key == OIS::KC_V)
-{
-  		_mSSAO->toggle();
-  return true;
-  #if DEBUG_LOCAL == false
-    sendSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());
-  #endif
-  _spellManager->launchSpell(Spell::Type::ANGEL, _player->getPosition(), getMouseFocusPos());
-  return true;
+  switch (arg.key)
+  {
+  case OIS::KC_A:
+    #if DEBUG_LOCAL == false
+      sendSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
+    #endif
+    _spellManager->launchSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
+    break;
+  case OIS::KC_Z:
+    #if DEBUG_LOCAL == false
+      sendSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
+    #endif
+    _spellManager->launchSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
+    break;
+  case OIS::KC_E:
+    #if DEBUG_LOCAL == false
+      sendSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
+    #endif
+    _spellManager->launchSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
+    break;
+  case OIS::KC_R:
+    #if DEBUG_LOCAL == false
+      sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
+    #endif
+    _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
+    break;
   }
+	// _mSSAO->toggle();
+  return;
   if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
   {
     Ogre::TextureFilterOptions tfo;
