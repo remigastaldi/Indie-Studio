@@ -78,6 +78,7 @@ SRC             =				src/CameraMan.cpp							\
 												src/AllSpells.cpp							\
 												src/WorkingQueue.cpp					\
 												src/GameLogic.cpp							\
+												src/Mobs.cpp							\
 												src/main.cpp
 
 

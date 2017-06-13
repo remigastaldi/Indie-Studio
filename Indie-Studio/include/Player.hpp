@@ -5,14 +5,13 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:29:53 2017 gastal_r
-// Last update Sat Jun 10 16:10:08 2017 gastal_r
+// Last update Tue Jun 13 21:30:28 2017 gastal_r
 //
 
 #ifndef         _PLAYER_HPP_
 #define         _PLAYER_HPP_
 
 #include        "Entity.hpp"
-#include        "DotSceneLoader.h"
 
 #define WARRIOR_SPEED 1.5f
 #define WARRIOR_HEALTH 300

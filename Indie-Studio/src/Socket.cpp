@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Sat Jun 10 00:26:19 2017 Leo HUBERT
+** Last update Tue Jun 13 21:37:03 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -155,7 +155,7 @@ void Socket::events()
           data->get_map()["destination"]->get_map()["y"]->get_double(),
           data->get_map()["destination"]->get_map()["z"]->get_double());
 
-        Data queueData(Entity::Type::DARKFIEND, (Entity::Status)data->get_map()["status"]->get_int(),
+        Data queueData((Entity::Type)data->get_map()["type"]->get_int(), (Entity::Status)data->get_map()["status"]->get_int(),
           data->get_map()["send_by"]->get_int(), position, destination);
         pushToQueue(WorkingQueue::Action::CREATE_ENTITY, queueData);
       }
@@ -222,7 +222,7 @@ void Socket::events()
           WorkingQueue::Data queueData(data->get_map()["user_id"]->get_int());
           pushToQueue(WorkingQueue::Action::UNFOCUS, queueData);
           pushToQueue(WorkingQueue::Action::KILLED, queueData);
-          
+
           std::cout <<  "User killed ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
         }
         else
