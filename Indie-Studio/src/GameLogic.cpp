@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Tue Jun 13 16:44:39 2017 gastal_r
+// Last update Tue Jun 13 17:40:09 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -228,62 +228,7 @@ bool GameLogic::keyPressed( const OIS::KeyEvent &arg )
     _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
     break;
   }
-	// _mSSAO->toggle();
-  // return true;
-  if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
-  {
-    Ogre::TextureFilterOptions tfo;
-    unsigned int aniso;
-
-    switch (mPolygonRenderingMode)
-    {
-    case 'B':
-      mPolygonRenderingMode = 'T';
-      tfo = Ogre::TFO_TRILINEAR;
-      aniso = 1;
-      break;
-    case 'T':
-      mPolygonRenderingMode = 'A';
-      tfo = Ogre::TFO_ANISOTROPIC;
-      aniso = 8;
-      break;
-    case 'A':
-      mPolygonRenderingMode = 'N';
-      tfo = Ogre::TFO_NONE;
-      aniso = 1;
-      break;
-    default:
-      mPolygonRenderingMode = 'B';
-      tfo = Ogre::TFO_BILINEAR;
-      aniso = 1;
-    }
-
-    Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
-    Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
-  }
-  else if (arg.key == OIS::KC_R)   // cycle polygon rendering mode
-  {
-    Ogre::PolygonMode pm;
-
-    switch (_camera->getPolygonMode())
-    {
-    case Ogre::PM_SOLID:
-      pm = Ogre::PM_WIREFRAME;
-      break;
-    case Ogre::PM_WIREFRAME:
-      pm = Ogre::PM_POINTS;
-      break;
-    default:
-      pm = Ogre::PM_SOLID;
-    }
-
-    _camera->setPolygonMode(pm);
-  }
-  else if(arg.key == OIS::KC_F5)   // refresh all textures
-  {
-    Ogre::TextureManager::getSingleton().reloadAll();
-  }
-  else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
+  if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
   {
     mDevice->window->writeContentsToTimestampedFile("screenshot", ".jpg");
   }
