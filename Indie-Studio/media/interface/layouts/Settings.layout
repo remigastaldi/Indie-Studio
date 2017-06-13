@@ -18,7 +18,6 @@
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="576" />
                 <Property name="VertScrollPageSize" value="86" />
-                <Property name="HorizontalAlignment" value="Centre" />
                 <Property name="HorzScrollDocumentSize" value="38" />
                 <Property name="VertScrollDocumentSize" value="13.6796" />
             </Window>
@@ -32,22 +31,19 @@
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="576" />
                 <Property name="VertScrollPageSize" value="86" />
-                <Property name="HorizontalAlignment" value="Centre" />
                 <Property name="HorzScrollDocumentSize" value="109" />
                 <Property name="VertScrollDocumentSize" value="13.6796" />
             </Window>
             <Window type="Vanilla/HorizontalScrollbar" name="AudioScrollBar" >
-                <Property name="Area" value="{{0,0},{0.1,0},{0.4,0},{0.125,0}}" />
+                <Property name="Area" value="{{0.05,0},{0.1,0},{0.45,0},{0.125,0}}" />
                 <Property name="AlwaysOnTop" value="true" />
-                <Property name="HorizontalAlignment" value="Centre" />
             </Window>
             <Window type="Vanilla/Combobox" name="ComboboxShading" >
-                <Property name="Area" value="{{0,0},{-0.12,0},{0.3,0},{0.18,0}}" />
+                <Property name="Area" value="{{0.1,0},{-0.12,0},{0.4,0},{0.18,0}}" />
                 <Property name="ReadOnly" value="true" />
                 <Property name="AlwaysOnTop" value="true" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="ForceVertScrollbar" value="true" />
-                <Property name="HorizontalAlignment" value="Centre" />
                 <AutoWindow namePath="__auto_editbox__" >
                     <Property name="ReadOnly" value="true" />
                 </AutoWindow>
@@ -82,12 +78,11 @@
                 </AutoWindow>
             </Window>
             <Window type="Vanilla/Combobox" name="ComboboxResol" >
-                <Property name="Area" value="{{0,0},{-0.05,0},{0.3,0},{0.25,0}}" />
+                <Property name="Area" value="{{0.1,0},{-0.05,0},{0.4,0},{0.25,0}}" />
                 <Property name="ReadOnly" value="true" />
                 <Property name="AlwaysOnTop" value="true" />
                 <Property name="VerticalAlignment" value="Bottom" />
                 <Property name="ForceVertScrollbar" value="true" />
-                <Property name="HorizontalAlignment" value="Centre" />
                 <AutoWindow namePath="__auto_editbox__" >
                     <Property name="ReadOnly" value="true" />
                 </AutoWindow>
@@ -131,7 +126,6 @@
                 <Property name="VerticalAlignment" value="Bottom" />
                 <Property name="HorzScrollPageSize" value="576" />
                 <Property name="VertScrollPageSize" value="86" />
-                <Property name="HorizontalAlignment" value="Centre" />
                 <Property name="HorzScrollDocumentSize" value="78" />
                 <Property name="VertScrollDocumentSize" value="13.6796" />
             </Window>
@@ -140,6 +134,78 @@
                 <Property name="HoverImage" value="GameMenuImages/ApplyHover" />
                 <Property name="NormalImage" value="GameMenuImages/ApplyNormal" />
                 <Property name="PushedImage" value="GameMenuImages/ApplyHover" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="KeyBinding" >
+                <Property name="Area" value="{{0.5,0},{0,0},{1,0},{0.15,0}}" />
+                <Property name="Text" value="KEY BINDING" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="864" />
+                <Property name="VertScrollPageSize" value="130" />
+                <Property name="HorzScrollDocumentSize" value="112" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="Spell1" >
+                <Property name="Area" value="{{0.65,0},{0.15,0},{0.75,0},{0.3,0}}" />
+                <Property name="Text" value="SPELL 1" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="173" />
+                <Property name="VertScrollPageSize" value="130" />
+                <Property name="HorzScrollDocumentSize" value="75" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="Spell2" >
+                <Property name="Area" value="{{0.65,0},{0.3,0},{0.75,0},{0.45,0}}" />
+                <Property name="Text" value="SPELL 2" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="173" />
+                <Property name="VertScrollPageSize" value="130" />
+                <Property name="HorzScrollDocumentSize" value="75" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="SPell3" >
+                <Property name="Area" value="{{0.65,0},{0.45,0},{0.75,0},{0.6,0}}" />
+                <Property name="Text" value="SPELL 3" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="173" />
+                <Property name="VertScrollPageSize" value="130" />
+                <Property name="HorzScrollDocumentSize" value="75" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="Spell4" >
+                <Property name="Area" value="{{0.65,0},{0.6,0},{0.75,0},{0.75,0}}" />
+                <Property name="Text" value="SPELL 4" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="173" />
+                <Property name="VertScrollPageSize" value="130" />
+                <Property name="HorzScrollDocumentSize" value="75" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
+            <Window type="Vanilla/Button" name="Spell1Button" >
+                <Property name="Area" value="{{0.8,0},{0.2,0},{0.88,0},{0.25,0}}" />
+            </Window>
+            <Window type="Vanilla/Button" name="Spell2Button" >
+                <Property name="Area" value="{{0.8,0},{0.35,0},{0.88,0},{0.4,0}}" />
+            </Window>
+            <Window type="Vanilla/Button" name="Spell3Button" >
+                <Property name="Area" value="{{0.8,0},{0.5,0},{0.88,0},{0.55,0}}" />
+            </Window>
+            <Window type="Vanilla/Button" name="Spell4Button" >
+                <Property name="Area" value="{{0.8,0},{0.65,0},{0.88,0},{0.7,0}}" />
             </Window>
         </Window>
         <Window type="Generic/ImageButton" name="BackButton" >
