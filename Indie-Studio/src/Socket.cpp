@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Tue Jun 13 21:37:03 2017 gastal_r
+** Last update Wed Jun 14 00:18:33 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -222,13 +222,14 @@ void Socket::events()
           WorkingQueue::Data queueData(data->get_map()["user_id"]->get_int());
           pushToQueue(WorkingQueue::Action::UNFOCUS, queueData);
           pushToQueue(WorkingQueue::Action::KILLED, queueData);
-
-          std::cout <<  "User killed ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
         }
         else
         {
-          _killed = true;
+          WorkingQueue::Data queueData(data->get_map()["user_id"]->get_int(), true);
+          pushToQueue(WorkingQueue::Action::UNFOCUS, queueData);
+          pushToQueue(WorkingQueue::Action::KILLED, queueData);
         }
+        std::cout <<  "User killed ! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
         _lock.unlock();
       }));
 

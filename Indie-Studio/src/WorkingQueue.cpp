@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:49:15 2017 gastal_r
-// Last update Sat Jun 10 00:25:10 2017 Leo HUBERT
+// Last update Wed Jun 14 00:26:36 2017 gastal_r
 //
 
 #include      "WorkingQueue.hpp"
@@ -32,8 +32,9 @@ WorkingQueue::Data::Data(Spell::Type type, Spell::Status status, Ogre::Vector3 &
   _destination(destination)
 {}
 
-WorkingQueue::Data::Data(size_t id)
-  : _id(id)
+WorkingQueue::Data::Data(size_t id, bool player)
+  : _id(id),
+  _player(player)
 {}
 
 WorkingQueue::WorkingQueue()
@@ -59,7 +60,11 @@ void        WorkingQueue::removeEntityQueue(const WorkingQueue::Data &data)
 
 void        WorkingQueue::killedEntityQueue(const WorkingQueue::Data &data)
 {
-  if (_entity[data._id])
+  if (data._player)
+  {
+    
+  }
+  else if (_entity[data._id])
   {
     delete(_entity[data._id]);
     _entity.erase(data._id);

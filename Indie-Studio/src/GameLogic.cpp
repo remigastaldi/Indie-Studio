@@ -5,24 +5,26 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Tue Jun 13 21:04:05 2017 gastal_r
+// Last update Wed Jun 14 00:50:32 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
 
 GameLogic::GameLogic()
   : GameState(),
-  WorkingQueue(),
+  WorkingQueue() ,
   Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room"),
-  mPolygonRenderingMode('B'),
-  mShutDown(false),
+  _shutDown(false),
   _camera(nullptr),
 #if DEBUG_CAMERA
   _cameraMan(nullptr),
 #endif
-  mLMouseDown(false),
-  mRMouseDown(false),
-  debugDrawer(nullptr),
+  _movementX(0.f),
+  _movementY(0.f),
+  _movementZ(0.f),
+  _lMouseDown(false),
+  _rMouseDown(false),
+  _debugDrawer(nullptr),
   _rayCast(nullptr),
   _collisionRayCast(nullptr),
   _player(nullptr)
@@ -130,12 +132,12 @@ bool          GameLogic::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	if (mDevice->window->isClosed())
 		return (false);
 
-	if (mShutDown)
+	if (_shutDown)
 	  return (false);
 
   CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
 
-  if (mLMouseDown)
+  if (_lMouseDown)
     mouseRaycast();
 
   #if DEBUG_LOCAL == false
@@ -240,25 +242,14 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
     }
     break;
   case OIS::KC_R:
-    #if DEBUG_LOCAL == false
-      sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
-    #endif
-    _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
-    break;
-  }
-	// _mSSAO->toggle();  
-  if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
-  {
-    Ogre::TextureFilterOptions tfo;
-    unsigned int aniso;
-
-    switch (mPolygonRenderingMode)
+    _cdSpell4 = std::chrono::high_resolution_clock::now();
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell4 - _t4).count() >= _player->getSpellCooldown(3))
     {
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
       #endif
-      _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
-      _t4 = std::chrono::high_resolution_clock::now();
+        _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
+        _t4 = std::chrono::high_resolution_clock::now();
     }
     break;
   }
@@ -273,7 +264,7 @@ bool GameLogic::keyPressed(const OIS::KeyEvent &arg)
   }
   else if (arg.key == OIS::KC_ESCAPE)
   {
-    // mShutDown = true;
+    // _shutDown = true;
     Shutdown();
   }
   else
@@ -379,9 +370,9 @@ bool GameLogic::mouseMoved( const OIS::MouseEvent &arg )
 {
   CEGUI::GUIContext& context = CEGUI::System::getSingleton().getDefaultGUIContext();
   context.injectMouseMove(arg.state.X.rel, arg.state.Y.rel);
-  if (mLMouseDown)
+  if (_lMouseDown)
   {}
-  else if (mRMouseDown)
+  else if (_rMouseDown)
   {
     #if DEBUG_CAMERA
       _cameraMan->injectMouseMove(arg);
@@ -397,11 +388,11 @@ bool GameLogic::mousePressed( const OIS::MouseEvent &arg, OIS::MouseButtonID id 
   context.injectMouseButtonDown(Utils::convertButon(id));
   if (id == OIS::MB_Left)
   {
-    mLMouseDown = true;
+    _lMouseDown = true;
   }
   else if (id == OIS::MB_Right)
   {
-    mRMouseDown = true;
+    _rMouseDown = true;
   }
 
   #if DEBUG_CAMERA
@@ -417,11 +408,11 @@ bool GameLogic::mouseReleased( const OIS::MouseEvent &arg, OIS::MouseButtonID id
   context.injectMouseButtonUp(Utils::convertButon(id));
   if (id == OIS::MB_Left)
   {
-    mLMouseDown = false;
+    _lMouseDown = false;
   }
   else if (id == OIS::MB_Right)
   {
-    mRMouseDown = false;
+    _rMouseDown = false;
     context.getMouseCursor().show();
   }
 

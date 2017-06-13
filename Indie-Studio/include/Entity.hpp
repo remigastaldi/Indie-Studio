@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Tue Jun 13 21:35:05 2017 gastal_r
+// Last update Wed Jun 14 00:18:54 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -48,7 +48,7 @@ public:
     WIZZARD,
     DARKFIEND,
     ENGINEER,
-    //Bots
+    //Mobs
     ZOMBIE,
     SKELETON
   };
@@ -79,25 +79,25 @@ public:
 
   void  destroy();
 
-  Ogre::Entity * getEntity() const { return (_entity); }
-  Ogre::SceneNode *getNode() const { return (_node); }
+  Ogre::Entity            *getEntity() const  { return (_entity); }
+  Ogre::SceneNode         *getNode() const    { return (_node); }
   Ogre::Entity  const			*getPlayer() const  { return _entity; }
   Ogre::Real  const			  getWalkSpd() const  { return _walkSpd; }
   Ogre::Vector3 const     getPosition() const { return (Utils::cvt(_ghostObject->getWorldTransform().getOrigin())); }
   Ogre::Vector3 const     &getDestination() const { return _destination; }
   Entity::Type            getType() const { return (_type); }
   Ogre::Quaternion const  &getOrientation() const  { return _orientation; }
-  Entity::Status          getStatus() const       { return _status; }
-  size_t                  getId() const   { return (_id); }
-  Spell::Type             getSpell(size_t id)  { return (_spells[id].first); }
+  Entity::Status          getStatus() const  { return _status; }
+  size_t                  getId() const      { return (_id); }
+  Spell::Type             getSpell(size_t id)   { return (_spells[id].first); }
   Ogre::Real              getSpellCooldown(size_t id)  { return (_spells[id].second); }
   size_t                  getHealth(void) const { return (_health); }
 
   void          setPosition(const Ogre::Vector3 &pos);
   void					setDestination(const Ogre::Vector3 &destination);
   void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
-  void					setWalkSpd(const Ogre::Real &_mWalkSpd)            { _walkSpd = _mWalkSpd; }
-  void					setOrientation(const Ogre::Quaternion &orientation) { _node->setOrientation(orientation); }
+  void					setWalkSpd(const Ogre::Real &_mWalkSpd)      { _walkSpd = _mWalkSpd; }
+  void					setOrientation(const Ogre::Quaternion &orientation)  { _node->setOrientation(orientation); }
   void          setHealth(size_t health) { _health = health; }
 
 protected:

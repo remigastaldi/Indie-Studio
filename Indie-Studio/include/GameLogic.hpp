@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Tue Jun 13 20:51:58 2017 gastal_r
+// Last update Wed Jun 14 00:27:19 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -62,14 +62,12 @@ public:
   virtual bool mouseReleased(const OIS::MouseEvent &arg, OIS::MouseButtonID id);
 
 protected:
-  char mPolygonRenderingMode;
-
   //OgreBullet
-  OgreBulletCollisions::DebugDrawer                   *debugDrawer;
+  OgreBulletCollisions::DebugDrawer   *_debugDrawer;
 
   //OIS Input devices
-  bool    mLMouseDown;
-  bool    mRMouseDown;
+  bool    _lMouseDown;
+  bool    _rMouseDown;
   //CEGUI
   CEGUI::MouseCursor  *mCursor;
   CEGUI::Window *_myRoot;
@@ -98,7 +96,7 @@ protected:
   float   _movementZ;
 
   //Player
-  Entity::Type  classType;
+  Entity::Type    _classType;
   CEGUI::Window   *_healthBar;
 
   //Spell button
@@ -133,7 +131,7 @@ protected:
   std::chrono::high_resolution_clock::time_point   _cdSpell2;
   std::chrono::high_resolution_clock::time_point   _cdSpell3;
   std::chrono::high_resolution_clock::time_point   _cdSpell4;
-  bool mShutDown;
+  bool _shutDown;
 };
 
 #endif /* !_GAMELOGIC_HPP */
