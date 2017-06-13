@@ -16,8 +16,8 @@
 #include      "Socket.hpp"
 #include      "PFXSSAO.hpp"
 
-#define DEBUG_LOCAL true
-#define DEBUG_CAMERA true
+#define DEBUG_LOCAL false
+#define DEBUG_CAMERA false
 
 #if DEBUG_LOCAL
   #define DEBUG_DRAWER false

@@ -49,7 +49,8 @@ public:
     DARKFIEND,
     ENGINEER,
     //Bots
-    ZOMBIE
+    ZOMBIE,
+    SKELETON
   };
 
   enum class Status
