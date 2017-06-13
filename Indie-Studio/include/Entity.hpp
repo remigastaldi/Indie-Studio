@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Sat Jun 10 17:37:32 2017 gastal_r
+// Last update Tue Jun 13 19:27:29 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -85,7 +85,8 @@ public:
   Ogre::Quaternion const  &getOrientation() const  { return _orientation; }
   Entity::Status          getStatus() const       { return _status; }
   size_t                  getId() const   { return (_id); }
-  Spell::Type             getSpell(size_t id)  { return (_spells[id]); }
+  Spell::Type             getSpell(size_t id)  { return (_spells[id].first); }
+  Ogre::Real              getSpellCooldown(size_t id)  { return (_spells[id].second); }
   size_t                  getHealth(void) const { return (_health); }
 
   void          setPosition(const Ogre::Vector3 &pos);
@@ -113,7 +114,7 @@ protected:
   Ogre::SceneNode     *_node;
   OgreBulletDynamics::RigidBody *defaultBody;
   Ogre::AnimationState	*_animationState;
-  std::unordered_map<size_t, Spell::Type>  _spells;
+  std::unordered_map<size_t, std::pair<Spell::Type, Ogre::Real>>  _spells;
 };
 
 #ifndef   _ENTITY_CREATE_

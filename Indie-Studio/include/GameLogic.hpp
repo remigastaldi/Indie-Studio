@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Tue Jun 13 17:19:19 2017 gastal_r
+// Last update Tue Jun 13 20:02:35 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -121,6 +121,17 @@ protected:
   std::unique_ptr<SpellManager>    _spellManager;
 
   PFXSSAO   *_mSSAO;
+
+  //Spells cooldown
+  std::chrono::high_resolution_clock::time_point _t1;
+  std::chrono::high_resolution_clock::time_point _t2;
+  std::chrono::high_resolution_clock::time_point _t3;
+  std::chrono::high_resolution_clock::time_point _t4;
+
+  std::chrono::high_resolution_clock::time_point _cdSpell1;
+  std::chrono::high_resolution_clock::time_point _cdSpell2;
+  std::chrono::high_resolution_clock::time_point _cdSpell3;
+  std::chrono::high_resolution_clock::time_point _cdSpell4;
   bool mShutDown;
 };
 

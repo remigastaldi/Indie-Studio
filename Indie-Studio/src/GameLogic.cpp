@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Tue Jun 13 17:40:09 2017 gastal_r
+// Last update Tue Jun 13 20:09:09 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -108,10 +108,14 @@ void          GameLogic::initGameLogic(void)
   _camera->lookAt(_player->getPosition());
 #endif
 
+  _t1 = std::chrono::high_resolution_clock::now();
+  _t2 = std::chrono::high_resolution_clock::now();
+  _t3 = std::chrono::high_resolution_clock::now();
+  _t4 = std::chrono::high_resolution_clock::now();
+
 #if !DEBUG_LOCAL
   sendEntity(*_player);
 #endif
-
 }
 
 bool 	        GameLogic::frameStarted(const Ogre::FrameEvent &evt)
@@ -198,35 +202,56 @@ void          GameLogic::sendServerPlayerPos(void)
   }
 }
 
+void
 
-bool GameLogic::keyPressed( const OIS::KeyEvent &arg )
+bool GameLogic::keyPressed(const OIS::KeyEvent &arg)
 {
   switch (arg.key)
   {
   case OIS::KC_A:
-    #if DEBUG_LOCAL == false
-      sendSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
-    #endif
-    _spellManager->launchSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
+    _cdSpell1 = std::chrono::high_resolution_clock::now();
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell1 - _t1).count() >= _player->getSpellCooldown(0))
+    {
+      _t1 = std::chrono::high_resolution_clock::now();
+      #if DEBUG_LOCAL == false
+        sendSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
+      #endif
+      _spellManager->launchSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
+    }
     break;
   case OIS::KC_Z:
-    #if DEBUG_LOCAL == false
-      sendSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
-    #endif
-    _spellManager->launchSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
+    _cdSpell2 = std::chrono::high_resolution_clock::now();
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell2 - _t2).count() >= _player->getSpellCooldown(1))
+    {
+      _t2 = std::chrono::high_resolution_clock::now();
+      #if DEBUG_LOCAL == false
+        sendSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
+      #endif
+      _spellManager->launchSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
+    }
     break;
   case OIS::KC_E:
-    #if DEBUG_LOCAL == false
-      sendSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
-    #endif
-    _spellManager->launchSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
+    _cdSpell3 = std::chrono::high_resolution_clock::now();
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell3 - _t3).count() >= _player->getSpellCooldown(2))
+    {
+      _t3 = std::chrono::high_resolution_clock::now();
+      #if DEBUG_LOCAL == false
+        sendSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
+      #endif
+      _spellManager->launchSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
+    }
     break;
   case OIS::KC_R:
-    #if DEBUG_LOCAL == false
-      sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
-    #endif
-    _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
-    break;
+    _cdSpell4 = std::chrono::high_resolution_clock::now();
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell4 - _t4).count() >= _player->getSpellCooldown(3))
+    {
+      _t4 = std::chrono::high_resolution_clock::now();
+      #if DEBUG_LOCAL == false
+        sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
+      #endif
+      _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
+      break;
+    }
   }
   if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
   {
