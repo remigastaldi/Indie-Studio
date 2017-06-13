@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:43:07 2017 gastal_r
-// Last update Sat Jun 10 17:40:08 2017 gastal_r
+// Last update Tue Jun 13 18:27:56 2017 gastal_r
 //
 
 #ifndef _SPELL_HPP_
@@ -73,7 +73,7 @@ public:
 public:
   Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
     size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback,
-    Ogre::Real distance, Ogre::Real speed, Spell::Type type);
+    Ogre::Real distance, Ogre::Real speed, Ogre::Real cooldown, Spell::Type type);
 
   virtual ~Spell();
   Spell(const Spell& other) = default;
@@ -87,10 +87,11 @@ public:
   void 	destroy();
   const std::string &getCollidedObjectName(void) const { return (_collideWith); }
 
-  Spell::Type getType() const { return (_type); }
   size_t getId() { return (_id); };
-  Ogre::Entity *getEntity() { return (_entity); }
-  Ogre::SceneNode * getNode() { return (_node); }
+  Spell::Type getType(void) const     { return (_type); }
+  Ogre::Real  getCooldown(void) const { return (_cooldown); }
+  Ogre::Entity *getEntity(void)   { return (_entity); }
+  Ogre::SceneNode * getNode(void) { return (_node); }
 
 protected:
   Ogre::SceneManager        &_sceneMgr;
@@ -102,6 +103,7 @@ protected:
   bool                  _disableCallback;
   Ogre::Real            _distance;
   Ogre::Real			      _speed;
+  Ogre::Real            _cooldown;
   Spell::Type           _type;
   Ogre::Entity          *_entity;
   Ogre::SceneNode       *_node;
