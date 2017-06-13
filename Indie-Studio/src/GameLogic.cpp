@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Tue Jun 13 16:10:41 2017 gastal_r
+// Last update Tue Jun 13 16:44:39 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -229,7 +229,7 @@ bool GameLogic::keyPressed( const OIS::KeyEvent &arg )
     break;
   }
 	// _mSSAO->toggle();
-  return;
+  // return true;
   if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
   {
     Ogre::TextureFilterOptions tfo;

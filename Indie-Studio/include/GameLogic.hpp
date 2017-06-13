@@ -5,16 +5,16 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Tue Jun 13 01:14:22 2017 gastal_r
+// Last update Tue Jun 13 17:19:19 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
 #define       _GAMELOGIC_HPP
 
-#include <RTShaderSystem/OgreRTShaderSystem.h>
+#include      <RTShaderSystem/OgreRTShaderSystem.h>
 #include      "WorkingQueue.hpp"
 #include      "Socket.hpp"
-#include "PFXSSAO.h"
+#include      "PFXSSAO.hpp"
 
 #define DEBUG_LOCAL true
 #define DEBUG_CAMERA true
