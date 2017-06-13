@@ -5,14 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Wed Jun 14 00:50:32 2017 gastal_r
+// Last update Wed Jun 14 00:58:46 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
 
 GameLogic::GameLogic()
   : GameState(),
-  WorkingQueue() ,
+  WorkingQueue(std::function<void(void)>([=] (void) { this->playerDie(); })),
   Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room"),
   _shutDown(false),
   _camera(nullptr),
@@ -118,6 +118,11 @@ void          GameLogic::initGameLogic(void)
 #if !DEBUG_LOCAL
   sendEntity(*_player);
 #endif
+}
+
+void          GameLogic::playerDie(void)
+{
+  std::cout << "*************** PLAYER DIE ***********************" << std::endl;
 }
 
 bool 	        GameLogic::frameStarted(const Ogre::FrameEvent &evt)

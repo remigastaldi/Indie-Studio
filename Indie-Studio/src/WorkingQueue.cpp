@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:49:15 2017 gastal_r
-// Last update Wed Jun 14 00:26:36 2017 gastal_r
+// Last update Wed Jun 14 01:45:00 2017 gastal_r
 //
 
 #include      "WorkingQueue.hpp"
@@ -37,8 +37,9 @@ WorkingQueue::Data::Data(size_t id, bool player)
   _player(player)
 {}
 
-WorkingQueue::WorkingQueue()
-  : _sceneMgr(nullptr)
+WorkingQueue::WorkingQueue(std::function<void()> &playerDie)
+  : _sceneMgr(nullptr),
+  _playerDie(playerDie)
 {
   std::cout << "*********** CREATE WORKINGQUEUE ************" << std::endl;
 }
@@ -62,7 +63,7 @@ void        WorkingQueue::killedEntityQueue(const WorkingQueue::Data &data)
 {
   if (data._player)
   {
-    
+    _playerDie();
   }
   else if (_entity[data._id])
   {

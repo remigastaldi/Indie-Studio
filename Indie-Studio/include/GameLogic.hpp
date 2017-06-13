@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Wed Jun 14 00:27:19 2017 gastal_r
+// Last update Wed Jun 14 00:54:00 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -38,7 +38,7 @@ public:
   GameLogic& operator=(GameLogic&& other) = default;
 
   void  initGameLogic(void);
-
+  void  playerDie(void);
   // Ogre::FrameListener
   virtual bool frameStarted(const Ogre::FrameEvent &evt);
   virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
