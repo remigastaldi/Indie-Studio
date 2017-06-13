@@ -1,19 +1,35 @@
 var EntityType =
 {
   WARRIOR: 0,
-  MAGE: 1,
+  WIZZARD: 1,
   DARKFIEND: 2,
-  INGENIOR: 3,
+  ENGINEER: 3,
   ZOMBIE: 4,
   SKELETON: 5
 }
 
 var Spell =
 {
-  ANGEL : 0,
-  THUNDERSTORM: 1,
-  SPECTRE: 2,
-  FIRE: 3
+  /** Warrior */
+  EYE_FIRE: 0,
+  SWORD: 1,
+  HEARTH: 2,
+  DAGGER: 3,
+  /** Wizzard */
+  TORNADO: 4,
+  FIREBALL: 5,
+  SHIELD_BUFF: 6,
+  LEAF_BUFF: 7,
+  /** DarkFiend */
+  ANGEL: 8,
+  THUNDERSTORM: 9,
+  SPECTRE: 10,
+  FIRE: 11,
+  /** Engineer */
+  STONEBALL: 12,
+  STALACTITES: 13,
+  BULLET: 14,
+  BEAR_BUFF: 15
 }
 
 function Entity(id, server_id, username, type, room, health) {
@@ -29,6 +45,7 @@ function Entity(id, server_id, username, type, room, health) {
   /* BOT SECTION */
 
   this.focus = 0;
+  this.wait = false;
 
   /* END BOT SECTION */
 

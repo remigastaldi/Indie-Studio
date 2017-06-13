@@ -29,35 +29,94 @@ var rl = readline.createInterface({
   TEST MOBS
 */
 
-enemis[23455] = new Entity(23455, 23455, "BOT 1", EntityType.ZOMBIE, "room", 10);
-enemis[23455].setPosition(32.924129486083984, 20.143051147460938, 151.13072204589844);
-enemis[23455].setDestination(32.924129486083984, 20.143051147460938, 151.13072204589844);
-
-enemis[4567808] = new Entity(4567808, 4567808, "BOT 2", EntityType.ZOMBIE, "room", 30);
-enemis[4567808].setPosition(32.924129486083984, 20.143051147460938, 151.13072204589844);
-enemis[4567808].setDestination(32.924129486083984, 20.143051147460938, 151.13072204589844);
-
-enemis[7687786] = new Entity(7687786, 7687786, "BOT 3", EntityType.ZOMBIE, "room", 100);
-enemis[7687786].setPosition(32.924129486083984, 20.143051147460938, 151.13072204589844);
-enemis[7687786].setDestination(32.924129486083984, 20.143051147460938, 151.13072204589844);
+// enemis[23455] = new Entity(23455, 23455, "BOT 1", EntityType.ANGEL, "room", 10);
+// enemis[23455].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+// enemis[23455].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+//
+// enemis[4567808] = new Entity(4567808, 4567808, "BOT 2", EntityType.ANGEL, "room", 30);
+// enemis[4567808].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+// enemis[4567808].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+//
+// enemis[7687786] = new Entity(7687786, 7687786, "BOT 3", EntityType.ANGEL, "room", 100);
+// enemis[7687786].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+// enemis[7687786].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
 
 function checkDistance(userPosition, enemisPosition)
 {
+  if (!userPosition || !enemisPosition)
+    return (-1);
   var xPos = math.pow((enemisPosition.x - userPosition.x), 2);
   var yPos = math.pow((enemisPosition.y - userPosition.y), 2);
   var distance = math.sqrt(xPos + yPos);
   return (distance);
 }
 
+function userExist(id) {
+  if (users[id])
+    return (true);
+  else
+    return (false);
+}
+
+function touched(local, entity, spell_type)
+{
+  var damages = 0;
+
+  switch (spell_type) {
+    case Spell.ANGEL:
+      damages = 20;
+      break;
+    default:
+  }
+
+  entity.health -= damages;
+  if (entity.health <= 0)
+  {
+    io.to(entity.room).emit("killed", {user_id: entity.id});
+    if (local == 0)
+    {
+      var bots = 0;
+      while (bots != null)
+      {
+        log(entity.server_id);
+        bots = jsonQuery('.[*][focus=' + entity.server_id +'].server_id', {
+          data: enemis
+        }).value;
+        if (bots != null)
+          enemis[bots].focus = 0;
+      }
+      delete(users[entity.server_id]);
+    }
+    else
+      delete(enemis[entity.server_id]);
+  }
+  return (damages);
+}
 
 function IAEnemis()
 {
-
   for (bot in enemis)
   {
     if (enemis[bot].focus != 0)
     {
-      if (checkDistance(users[enemis[bot].focus].position, enemis[bot].position) < 5)
+      var dist = checkDistance(users[enemis[bot].focus].position, enemis[bot].position);
+      if (dist > 0 && dist < 1 && enemis[bot].wait != true)
+      {
+        enemis[bot].wait = true;
+        var damages = touched(0, users[enemis[bot].focus], Spell.ANGEL);
+        io.to(users[enemis[bot].focus].room).emit("hitted", {
+          send_by: enemis[bot].id,
+          send_to: 0,
+          hitted: users[enemis[bot].focus].id,
+          damages: damages
+        });
+        console.log("hit: " + enemis[bot].focus + " [by] : " + enemis[bot].id );
+        setTimeout(function()
+        {
+          enemis[bot].wait = false;
+        }, 1000);
+      }
+      else if (dist < 5)
       {
           io.to(users[enemis[bot].focus].room).emit("move", {
             send_by: enemis[bot].id,
@@ -66,6 +125,7 @@ function IAEnemis()
             destination: users[enemis[bot].focus].position,
             status: enemis[bot].status
           });
+          enemis[bot].destination = users[enemis[bot].focus].position;
       }
       else
       {
@@ -90,13 +150,14 @@ function IAEnemis()
             destination: users[user].position,
             status: enemis[bot].status
           });
+          enemis[bot].destination = users[user].position;
           enemis[bot].focus = users[user].server_id;
           io.to(users[user].room).emit("focus", {
             send_by: enemis[bot].id,
             send_to: users[user].id,
             focus: 1
           });
-
+          break;
         }
       }
 
@@ -118,29 +179,6 @@ function log(message)
   console.log(date + ": " + message);
 }
 
-function touched(local, entity, spell_type)
-{
-  var damages = 0;
-
-  switch (spell_type) {
-    case Spell.ANGEL:
-      damages = 20;
-      break;
-    default:
-  }
-
-  log(entity);
-  entity.health -= damages;
-  if (entity.health <= 0)
-  {
-    io.to(entity.room).emit("killed", {user_id: entity.id});
-    if (local == 0)
-      delete(users[entity.server_id]);
-    else
-      delete(enemis[entity.server_id]);
-  }
-
-}
 
 function exec_command(command, from)
 {
@@ -175,7 +213,7 @@ function exec_command(command, from)
 }
 
 rl.on('line', function(line){
-    //exec_command(line, 0);
+    exec_command(line, 0);
 });
 
 io.on('connection', function (socket) {
@@ -249,6 +287,7 @@ io.on('connection', function (socket) {
           health: enemis[bot]["health"],
           position: enemis[bot]["position"],
           status: enemis[bot]["status"],
+          type: enemis[bot]["type"],
           destination: enemis[bot]["destination"]
         });
       }
@@ -265,6 +304,7 @@ io.on('connection', function (socket) {
           health: users[user]["health"],
           position: users[user]["position"],
           status: users[user]["status"],
+          type: enemis[bot]["type"],
           destination: users[user]["destination"]
         });
       }
@@ -322,9 +362,9 @@ app.get('/bots/new', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send("Bot Created ID: " + id);
 
-  enemis[id] = new Entity(id, id, "BOT 3", EntityType.ZOMBIE, "room", 10);
-  enemis[id].setPosition(32.924129486083984, 20.143051147460938, 151.13072204589844);
-  enemis[id].setDestination(32.924129486083984, 20.143051147460938, 151.13072204589844);
+  enemis[id] = new Entity(id, id, "BOT " + id, EntityType.ANGEL, "room", 10);
+  enemis[id].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+  enemis[id].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
 
   io.emit("create_entity", {
     send_by: enemis[id]["id"],
@@ -332,13 +372,14 @@ app.get('/bots/new', function (req, res) {
     health: enemis[id]["health"],
     position: enemis[id]["position"],
     status: enemis[id]["status"],
+    type: enemis[bot]["type"],
     destination: enemis[id]["destination"]
   });
 });
 
 app.get('/clear', function (req, res) {
   users = {};
-  bots = {};
+  enemis = {};
   totalConnected = 0;
 });
 
