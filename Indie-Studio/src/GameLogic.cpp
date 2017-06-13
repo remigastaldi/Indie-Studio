@@ -240,8 +240,19 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
     }
     break;
   case OIS::KC_R:
-    _cdSpell4 = std::chrono::high_resolution_clock::now();
-    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell4 - _t4).count() >= _player->getSpellCooldown(3))
+    #if DEBUG_LOCAL == false
+      sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
+    #endif
+    _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
+    break;
+  }
+	// _mSSAO->toggle();  
+  if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
+  {
+    Ogre::TextureFilterOptions tfo;
+    unsigned int aniso;
+
+    switch (mPolygonRenderingMode)
     {
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());

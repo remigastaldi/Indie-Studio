@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun  3 19:42:53 2017 gastal_r
-// Last update Fri Jun  9 23:46:17 2017 gastal_r
+// Last update Tue Jun 13 17:22:37 2017 Leo HUBERT
 //
 
 #include "Collision.h"
