@@ -380,6 +380,12 @@ app.get('/bots/new', function (req, res) {
   });
 });
 
+app.get('/test', function(req, res)
+{
+  res.setHeader('Content-Type', 'application/json');
+  res.send("STEST");
+});
+
 app.get('/pull', function(req, res)
 {
   res.setHeader('Content-Type', 'application/json');
