@@ -51,8 +51,14 @@
 #include "Shapes/OgreBulletCollisionsBoxShape.h"
 #include "Shapes/OgreBulletCollisionsTrimeshShape.h"
 #include "Utils/OgreBulletCollisionsMeshToShapeConverter.h"
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+#include "OgreBulletCollisions.h"
+#include "Shapes/OgreBulletCollisionsCapsuleShape.h"
+#else
 #include "Collisions/OgreBulletCollisions.h"
 #include "Collisions/Shapes/OgreBulletCollisionsCapsuleShape.h"
+#endif
 
 #include "OgreParticleSystem.h"
 #include "OgreSceneNode.h"

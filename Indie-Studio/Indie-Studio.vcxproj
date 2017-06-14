@@ -366,30 +366,40 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <Image Include="Indie-Studio.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AllSpells.cpp" />
     <ClCompile Include="src\CameraMan.cpp" />
+    <ClCompile Include="src\Collision.cpp" />
     <ClCompile Include="src\DotSceneLoader.cpp" />
+    <ClCompile Include="src\Dungeon.cpp" />
     <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\GameLogic.cpp" />
     <ClCompile Include="src\GameStateManager.cpp" />
-    <ClCompile Include="src\HUD.cpp" />
     <ClCompile Include="src\Indie.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\Mobs.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Socket.cpp" />
+    <ClCompile Include="src\Spell.cpp" />
+    <ClCompile Include="src\SpellManager.cpp" />
     <ClCompile Include="src\SplashScreen.cpp" />
+    <ClCompile Include="src\WorkingQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AllSpells.hpp" />
     <ClInclude Include="include\CameraMan.hpp" />
+    <ClInclude Include="include\Collision.h" />
     <ClInclude Include="include\Core.hpp" />
     <ClInclude Include="include\DotSceneLoader.h" />
+    <ClInclude Include="include\Dungeon.hpp" />
     <ClInclude Include="include\Entity.hpp" />
+    <ClInclude Include="include\GameLogic.hpp" />
     <ClInclude Include="include\GameState.hpp" />
     <ClInclude Include="include\GameStateManager.hpp" />
-    <ClInclude Include="include\HUD.hpp" />
     <ClInclude Include="include\Indie.hpp" />
-    <ClInclude Include="include\Map.hpp" />
     <ClInclude Include="include\Menu.hpp" />
+    <ClInclude Include="include\Mobs.hpp" />
+    <ClInclude Include="include\PFXSSAO.hpp" />
     <ClInclude Include="include\Player.hpp" />
     <ClInclude Include="include\rapidxml.hpp" />
     <ClInclude Include="include\rapidxml_iterators.hpp" />
@@ -399,7 +409,11 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <ClInclude Include="include\sio_message.h" />
     <ClInclude Include="include\sio_socket.h" />
     <ClInclude Include="include\Socket.hpp" />
+    <ClInclude Include="include\Spell.hpp" />
+    <ClInclude Include="include\SpellManager.hpp" />
     <ClInclude Include="include\SplashScreen.hpp" />
+    <ClInclude Include="include\Utils.hpp" />
+    <ClInclude Include="src\WorkingQueue.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang_complete" />
@@ -413,6 +427,8 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <None Include="dist\bin\plugins_d.cfg" />
     <None Include="dist\bin\resources.cfg" />
     <None Include="dist\bin\resources_d.cfg" />
+    <None Include="dist\plugins.cfg" />
+    <None Include="dist\resources.cfg" />
     <None Include="lib\sioclient.dll" />
     <None Include="media\characters\materials\scripts\Ogre.material" />
     <None Include="media\characters\models\Barrel.mesh" />

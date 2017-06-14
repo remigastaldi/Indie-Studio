@@ -61,6 +61,7 @@ void  Entity::addToBulletWorld(const Ogre::Vector3 &position)
 
   btScalar stepHeight(btScalar(0.35));
   _character = new btKinematicCharacterController(_ghostObject, capsule, stepHeight);
+  _character->setGravity({ 0, btScalar(-9.81), 0 });
   _world.getBulletDynamicsWorld()->getPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
   _world.getBulletDynamicsWorld()->addCollisionObject(_ghostObject, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::AllFilter);
   _world.getBulletDynamicsWorld()->addAction(_character);

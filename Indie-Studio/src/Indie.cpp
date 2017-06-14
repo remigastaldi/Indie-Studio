@@ -142,11 +142,12 @@ bool            Indie::init()
 
   #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
   	_device.ogre->loadPlugin("OgreOggSound.dll");
-  	_device.ogre->loadPlugin("Plugin_OctreeZone.dll");
-  	_device.ogre->loadPlugin("Plugin_PCZSceneManager.dll");
-  	_device.ogre->loadPlugin("Plugin_OctreeSceneManager.dll");
-  	_device.ogre->loadPlugin("RenderSystem_GL.dll");
-	_device.ogre->loadPlugin("Plugin_ParticleFX.dll");
+  	/*_device.ogre->loadPlugin("Plugin_OctreeZone.dll");*/
+  	_device.ogre->loadPlugin("../../Indie-Studio-Dependencies/windows/OGRE_SDK/bin/release/Plugin_PCZSceneManager.dll");
+  	_device.ogre->loadPlugin("../../Indie-Studio-Dependencies/windows/OGRE_SDK/bin/release/Plugin_OctreeSceneManager.dll");
+  	_device.ogre->loadPlugin("../../Indie-Studio-Dependencies/windows/OGRE_SDK/bin/release/RenderSystem_GL.dll");
+	_device.ogre->loadPlugin("../../Indie-Studio-Dependencies/windows/OGRE_SDK/bin/release/Plugin_ParticleFX.dll");
+	_device.ogre->loadPlugin("../../Indie-Studio-Dependencies/windows/OGRE_SDK/bin/release/Plugin_CgProgramManager.dll");
   #else
 	  _device.ogre->loadPlugin("libOgreOggSound.so");
   #endif

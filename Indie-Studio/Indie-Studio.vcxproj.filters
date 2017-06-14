@@ -6,21 +6,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CameraMan.cpp" />
-    <ClCompile Include="src\HUD.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\DotSceneLoader.cpp" />
     <ClCompile Include="src\Socket.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Menu.cpp" />
-    <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\Indie.cpp" />
     <ClCompile Include="src\GameStateManager.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\SplashScreen.cpp" />
+    <ClCompile Include="src\AllSpells.cpp" />
+    <ClCompile Include="src\Collision.cpp" />
+    <ClCompile Include="src\Dungeon.cpp" />
+    <ClCompile Include="src\GameLogic.cpp" />
+    <ClCompile Include="src\Mobs.cpp" />
+    <ClCompile Include="src\Spell.cpp" />
+    <ClCompile Include="src\SpellManager.cpp" />
+    <ClCompile Include="src\WorkingQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\CameraMan.hpp" />
-    <ClInclude Include="include\HUD.hpp" />
     <ClInclude Include="include\DotSceneLoader.h" />
     <ClInclude Include="include\rapidxml.hpp" />
     <ClInclude Include="include\rapidxml_iterators.hpp" />
@@ -33,12 +38,21 @@
     <ClInclude Include="include\GameState.hpp" />
     <ClInclude Include="include\GameStateManager.hpp" />
     <ClInclude Include="include\Indie.hpp" />
-    <ClInclude Include="include\Map.hpp" />
     <ClInclude Include="include\Menu.hpp" />
     <ClInclude Include="include\Player.hpp" />
     <ClInclude Include="include\Socket.hpp" />
     <ClInclude Include="include\Core.hpp" />
     <ClInclude Include="include\SplashScreen.hpp" />
+    <ClInclude Include="include\AllSpells.hpp" />
+    <ClInclude Include="include\Collision.h" />
+    <ClInclude Include="include\Dungeon.hpp" />
+    <ClInclude Include="include\GameLogic.hpp" />
+    <ClInclude Include="include\Mobs.hpp" />
+    <ClInclude Include="include\PFXSSAO.hpp" />
+    <ClInclude Include="include\Spell.hpp" />
+    <ClInclude Include="include\SpellManager.hpp" />
+    <ClInclude Include="include\Utils.hpp" />
+    <ClInclude Include="src\WorkingQueue.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="media\map\jinxMono.wav" />
@@ -194,6 +208,8 @@
     <None Include="media\particles\materials\VTFInstancing.material" />
     <None Include="media\particles\particles\smoke.particle" />
     <None Include="media\particles\materials\Examples.material" />
+    <None Include="dist\plugins.cfg" />
+    <None Include="dist\resources.cfg" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeFiles\CMakeOutput.log" />

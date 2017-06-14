@@ -274,6 +274,7 @@ bool  Menu::SplashButton(const CEGUI::EventArgs &e)
 
   _optionButton = _gameMenu->getChild("Options");
   _optionButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonOptions, this));
+  return (true);
 }
 
 void Menu::createScene(void)
