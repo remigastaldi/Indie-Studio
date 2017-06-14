@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Wed Jun 14 01:43:00 2017 gastal_r
+// Last update Wed Jun 14 22:50:15 2017 gastal_r
 //
 
 #ifndef     _WORKING_HPP_
@@ -38,7 +38,8 @@ public:
     KILLED,
     FOCUS,
     UNFOCUS,
-    MOVE_ENTITY
+    MOVE_ENTITY,
+    HITTED
   };
 
   class Data
@@ -47,7 +48,8 @@ public:
     Data(Entity::Type, Entity::Status, size_t id, Ogre::Vector3 &position, Ogre::Vector3 &destination);
     Data(Entity::Status, size_t id, Ogre::Vector3 &position, Ogre::Vector3 &destination);
     Data(Spell::Type, Spell::Status, Ogre::Vector3 &position, Ogre::Vector3 &destination);
-    explicit Data(size_t id, bool player = false);
+    Data(size_t id, size_t damages, bool player = false);
+    Data(size_t id, bool player = false);
 
     Entity::Type    _ent_type;
     Entity::Status  _ent_status;
@@ -57,6 +59,7 @@ public:
     bool            _player;
     Ogre::Vector3   _position;
     Ogre::Vector3   _destination;
+    size_t          _damages;
   };
 
 public:
@@ -73,6 +76,7 @@ private:
   void killedEntityQueue(const WorkingQueue::Data &);
   void unfocusEntityQueue(const WorkingQueue::Data &);
   void focusEntityQueue(const WorkingQueue::Data &);
+  void hitEntity(const WorkingQueue::Data &);
 
   std::mutex  _mutex;
   std::vector<std::pair<void(WorkingQueue::*)(const WorkingQueue::Data &data), WorkingQueue::Data>> _queue;

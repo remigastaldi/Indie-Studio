@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Wed Jun 14 22:01:08 2017 gastal_r
+// Last update Wed Jun 14 23:21:02 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -159,6 +159,12 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
 	if (_animationState)
 		_animationState->addTime(evt.timeSinceLastFrame);
   _node->setPosition(Utils::cvt(_ghostObject->getWorldTransform().getOrigin()));
+}
+
+void          Entity::takeDamage(size_t value)
+{
+  _health -= value;
+  _healthBar->setProgress((float) _health / (float) _maxHealth);
 }
 
 void          Entity::setPosition(const Ogre::Vector3 &pos)

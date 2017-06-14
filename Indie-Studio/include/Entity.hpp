@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Wed Jun 14 21:59:08 2017 gastal_r
+// Last update Wed Jun 14 22:09:10 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -77,7 +77,7 @@ public:
   void  updateEntityHealthBar(const Ogre::Camera &camera);
   void  frameRenderingQueued(const Ogre::FrameEvent &evt);
 
-  void  destroy();
+  void  takeDamage(size_t value);
 
   Ogre::Entity            *getEntity() const  { return (_entity); }
   Ogre::SceneNode         *getNode() const    { return (_node); }
@@ -99,6 +99,7 @@ public:
   void					setWalkSpd(const Ogre::Real &_mWalkSpd)      { _walkSpd = _mWalkSpd; }
   void					setOrientation(const Ogre::Quaternion &orientation)  { _node->setOrientation(orientation); }
   void          setHealth(size_t health) { _health = health; }
+
 
 protected:
   Ogre::SceneManager  &_sceneMgr;

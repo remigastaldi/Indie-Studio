@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Wed Jun 14 18:22:55 2017 gastal_r
+// Last update Wed Jun 14 22:05:30 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -125,6 +125,7 @@ void          GameLogic::initGameLogic(void)
 void          GameLogic::playerDie(void)
 {
   std::cout << "*************** PLAYER DIE ***********************" << std::endl;
+  exit();
 }
 
 bool 	        GameLogic::frameStarted(const Ogre::FrameEvent &evt)

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Wed Jun 14 18:52:52 2017 gastal_r
+// Last update Wed Jun 14 23:13:24 2017 gastal_r
 //
 
 #ifndef     _WORKING_HPP_
@@ -38,7 +38,8 @@ public:
     KILLED,
     FOCUS,
     UNFOCUS,
-    MOVE_ENTITY
+    MOVE_ENTITY,
+    HITTED
   };
 
   class Data
@@ -47,7 +48,8 @@ public:
     Data(Entity::Type, Entity::Status, size_t id, Ogre::Vector3 &position, Ogre::Vector3 &destination);
     Data(Entity::Status, size_t id, Ogre::Vector3 &position, Ogre::Vector3 &destination);
     Data(Spell::Type, Spell::Status, Ogre::Vector3 &position, Ogre::Vector3 &destination);
-    explicit Data(size_t id, bool player = false);
+    Data(size_t id, size_t damages, bool player = false);
+    Data(size_t id, bool player = false);
 
     Entity::Type    _ent_type;
     Entity::Status  _ent_status;

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:49:15 2017 gastal_r
-// Last update Wed Jun 14 01:45:00 2017 gastal_r
+// Last update Wed Jun 14 22:36:06 2017 gastal_r
 //
 
 #include      "WorkingQueue.hpp"
@@ -30,6 +30,12 @@ WorkingQueue::Data::Data(Spell::Type type, Spell::Status status, Ogre::Vector3 &
   _spell_status(status),
   _position(position),
   _destination(destination)
+{}
+
+WorkingQueue::Data::Data(size_t id, size_t damages, bool player)
+  : _id(id),
+  _damages(damages),
+  _player(player)
 {}
 
 WorkingQueue::Data::Data(size_t id, bool player)
@@ -98,6 +104,14 @@ void        WorkingQueue::moveEntityQueue(const WorkingQueue::Data &data)
   }
 }
 
+void        WorkingQueue::hitEntity(const WorkingQueue::Data &data)
+{
+  if (_entity[data._id])
+  {
+    _entity[data._id]->takeDamage(data._damages);
+  }
+}
+
 void        WorkingQueue::pushToQueue(WorkingQueue::Action action, const WorkingQueue::Data &data)
 {
   _mutex.lock();
@@ -123,6 +137,9 @@ void        WorkingQueue::pushToQueue(WorkingQueue::Action action, const Working
     break;
   case Action::MOVE_ENTITY:
     _queue.push_back(std::make_pair(&WorkingQueue::moveEntityQueue, data));
+    break;
+  case Action::HITTED:
+    _queue.push_back(std::make_pair(&WorkingQueue::hitEntity, data));
     break;
   }
   _mutex.unlock();

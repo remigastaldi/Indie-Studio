@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Wed Jun 14 22:08:37 2017 Leo HUBERT
+** Last update Wed Jun 14 23:14:50 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -221,10 +221,15 @@ void Socket::events()
           {
             std::cout << "Damages: " << data->get_map()["damages"]->get_int()  << '\n';
             if (data->get_map()["hitted"]->get_int() == _id)
-              std::cout << "WHO ? : ME" << '\n';
+            {
+              WorkingQueue::Data queueData(data->get_map()["hitted"]->get_int(), data->get_map()["damages"]->get_int(), true);
+              pushToQueue(WorkingQueue::Action::HITTED, queueData);
+            }
             else
-              std::cout << "WHO ? : " << data->get_map()["hitted"]->get_int() << '\n';
-
+            {
+              WorkingQueue::Data queueData(data->get_map()["hitted"]->get_int(), data->get_map()["damages"]->get_int(), false);
+              pushToQueue(WorkingQueue::Action::HITTED, queueData);
+            }
           }
           _lock.unlock();
         }));
