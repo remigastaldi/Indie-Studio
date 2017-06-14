@@ -60,6 +60,7 @@ function userExist(id) {
 
 function touched(local, entity, spell_type)
 {
+  console.log("touched");
   var damages = 0;
 
   switch (spell_type) {
@@ -117,6 +118,8 @@ function touched(local, entity, spell_type)
       break;
     default:
   }
+
+  console.log(damages);
 
   entity.health -= damages;
   if (entity.health <= 0)
@@ -307,6 +310,7 @@ io.on('connection', function (socket) {
   });
 
   socket.on('collision', function (data) {
+    console.log("touched");
     if (enemis[data.touch])
       touched(1, enemis[data.touch], data.spell_type);
     var user_id = jsonQuery('.[*][id=' + data.touch +'].server_id', {
