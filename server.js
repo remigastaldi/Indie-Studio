@@ -29,17 +29,17 @@ var rl = readline.createInterface({
   TEST MOBS
 */
 
-// enemis[23455] = new Entity(23455, 23455, "BOT 1", EntityType.ANGEL, "room", 10);
-// enemis[23455].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
-// enemis[23455].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
-//
-// enemis[4567808] = new Entity(4567808, 4567808, "BOT 2", EntityType.ANGEL, "room", 30);
-// enemis[4567808].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
-// enemis[4567808].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
-//
-// enemis[7687786] = new Entity(7687786, 7687786, "BOT 3", EntityType.ANGEL, "room", 100);
-// enemis[7687786].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
-// enemis[7687786].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+enemis[23455] = new Entity(23455, 23455, "BOT 1", EntityType.ZOMBIE, "room", 10);
+enemis[23455].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+enemis[23455].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+
+enemis[4567808] = new Entity(4567808, 4567808, "BOT 2", EntityType.ZOMBIE, "room", 30);
+enemis[4567808].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+enemis[4567808].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+
+enemis[7687786] = new Entity(7687786, 7687786, "BOT 3", EntityType.ZOMBIE, "room", 100);
+enemis[7687786].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+enemis[7687786].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
 
 function checkDistance(userPosition, enemisPosition)
 {
@@ -100,7 +100,7 @@ function IAEnemis()
     if (enemis[bot].focus != 0)
     {
       var dist = checkDistance(users[enemis[bot].focus].position, enemis[bot].position);
-      if (dist > 0 && dist < 1 && enemis[bot].wait != true)
+      if (dist > 0 && dist < 2 && enemis[bot].wait != true)
       {
         enemis[bot].wait = true;
         var damages = touched(0, users[enemis[bot].focus], Spell.ANGEL);
@@ -246,6 +246,7 @@ io.on('connection', function (socket) {
     {
       users[socket.id].health = data["health"];
       users[socket.id].maxhealth = data["health"];
+      users[socket.id].type = data["type"];
       users[socket.id].setDestination(data["destination"]["x"], data["destination"]["y"], data["destination"]["z"]);
       users[socket.id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
       users[socket.id].setStatus(data["status"]);
@@ -281,6 +282,7 @@ io.on('connection', function (socket) {
     {
       if (enemis[bot]["room"] == socket.room)
       {
+        console.log(enemis[bot]);
         io.to(socket.room).emit("create_entity", {
           send_by: enemis[bot]["id"],
           send_to: data["user_id"],
@@ -297,6 +299,7 @@ io.on('connection', function (socket) {
     {
       if (users[user]["room"] == socket.room)
       {
+        console.log(enemis[bot]);
         io.to(socket.room).emit("login", { user_id: users[user]["id"], send_to: data["user_id"] });
         io.to(socket.room).emit("create_entity", {
           send_by: users[user]["id"],
@@ -304,7 +307,7 @@ io.on('connection', function (socket) {
           health: users[user]["health"],
           position: users[user]["position"],
           status: users[user]["status"],
-          type: enemis[bot]["type"],
+          type: users[user]["type"],
           destination: users[user]["destination"]
         });
       }
@@ -362,7 +365,7 @@ app.get('/bots/new', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send("Bot Created ID: " + id);
 
-  enemis[id] = new Entity(id, id, "BOT " + id, EntityType.ANGEL, "room", 10);
+  enemis[id] = new Entity(id, id, "BOT " + id, EntityType.ZOMBIE, "room", 10);
   enemis[id].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
   enemis[id].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
 
