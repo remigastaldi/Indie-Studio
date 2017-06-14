@@ -282,7 +282,6 @@ io.on('connection', function (socket) {
     {
       if (enemis[bot]["room"] == socket.room)
       {
-        console.log(enemis[bot]);
         io.to(socket.room).emit("create_entity", {
           send_by: enemis[bot]["id"],
           send_to: data["user_id"],
@@ -299,7 +298,6 @@ io.on('connection', function (socket) {
     {
       if (users[user]["room"] == socket.room)
       {
-        console.log(users[user]);
         io.to(socket.room).emit("login", { user_id: users[user]["id"], send_to: data["user_id"] });
         io.to(socket.room).emit("create_entity", {
           send_by: users[user]["id"],
@@ -317,7 +315,7 @@ io.on('connection', function (socket) {
 
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[socket.id] = new Entity(data["user_id"], socket.id, "User " + data["user_id"], EntityType.ANGEL, data["room"], data["health"]);
+    users[socket.id] = new Entity(data["user_id"], socket.id, "User " + data["user_id"], data["type"], data["room"], data["health"]);
     totalConnected++;
   });
 
