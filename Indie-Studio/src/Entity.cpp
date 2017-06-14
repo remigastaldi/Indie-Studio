@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Wed Jun 14 19:05:25 2017 gastal_r
+// Last update Wed Jun 14 20:07:21 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -32,6 +32,7 @@ Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 {
   _healthBar = static_cast<CEGUI::ProgressBar*>(CEGUI::WindowManager::getSingleton().loadLayoutFromFile("HealthBar.layout"));
 
+  _healthBar->setName(std::to_string(id));
   _healthBar->setSize(CEGUI::USize(CEGUI::UDim(0, 150), CEGUI::UDim(0, 20)));
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
   _healthBar->hide();
