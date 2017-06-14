@@ -299,7 +299,7 @@ io.on('connection', function (socket) {
     {
       if (users[user]["room"] == socket.room)
       {
-        console.log(enemis[bot]);
+        console.log(users[user]);
         io.to(socket.room).emit("login", { user_id: users[user]["id"], send_to: data["user_id"] });
         io.to(socket.room).emit("create_entity", {
           send_by: users[user]["id"],
@@ -375,7 +375,7 @@ app.get('/bots/new', function (req, res) {
     health: enemis[id]["health"],
     position: enemis[id]["position"],
     status: enemis[id]["status"],
-    type: enemis[bot]["type"],
+    type: enemis[id]["type"],
     destination: enemis[id]["destination"]
   });
 });
