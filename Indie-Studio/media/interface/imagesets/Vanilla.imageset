@@ -1,5 +1,5 @@
 <Imageset autoScaled="vertical" imagefile="vanilla.png" name="Vanilla-Images" nativeHorzRes="1280" nativeVertRes="720" version="2">
-    <Image height="3" name="GenericBrush" width="3" xPos="46" yPos="46" />
+    <Image height="3" name="GenericBrush" width="5" xPos="45" yPos="46" />
     <Image height="6" name="FrameTopLeft" width="6" xPos="67" yPos="60" />
     <Image height="6" name="FrameTopRight" width="6" xPos="80" yPos="72" />
     <Image height="6" name="FrameBottomLeft" width="6" xPos="69" yPos="72" />
