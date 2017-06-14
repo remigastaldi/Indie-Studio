@@ -11,6 +11,12 @@
             <Property name="NormalImage" value="GameMenuImages/SpellStoneBall" />
             <Property name="PushedImage" value="GameMenuImages/SpellStoneBall_Click" />
             <Property name="InheritsAlpha" value="false" />
+            <Window type="Generic/Image" name="CoolDownSpellBall" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Alpha" value="0.8" />
+                <Property name="Image" value="GameMenuImages/BackgroundSpell" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
         </Window>
         <Window type="Generic/ImageButton" name="SpellBullet" >
             <Property name="Area" value="{{0.51,0},{0.1,0},{0.73,0},{0.9,0}}" />
@@ -18,6 +24,12 @@
             <Property name="NormalImage" value="GameMenuImages/SpellBullet" />
             <Property name="PushedImage" value="GameMenuImages/SpellBullet_Click" />
             <Property name="InheritsAlpha" value="false" />
+            <Window type="Generic/Image" name="CoolDownBullet" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Alpha" value="0.8" />
+                <Property name="Image" value="GameMenuImages/BackgroundSpell" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
         </Window>
         <Window type="Generic/ImageButton" name="SpellHandBeard" >
             <Property name="Area" value="{{0.75,0},{0.1,0},{0.97,0},{0.9,0}}" />
@@ -25,6 +37,12 @@
             <Property name="NormalImage" value="GameMenuImages/SpellHandBeard" />
             <Property name="PushedImage" value="GameMenuImages/SpellHandBeard_Click" />
             <Property name="InheritsAlpha" value="false" />
+            <Window type="Generic/Image" name="CoolDownSpellBread" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Alpha" value="0.8" />
+                <Property name="Image" value="GameMenuImages/BackgroundSpell" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
         </Window>
         <Window type="Generic/ImageButton" name="SpellIce" >
             <Property name="Area" value="{{0.27,0},{0.1,0},{0.49,0},{0.9,0}}" />
@@ -32,6 +50,12 @@
             <Property name="NormalImage" value="GameMenuImages/SpellIce" />
             <Property name="PushedImage" value="GameMenuImages/SpellIce_Click" />
             <Property name="InheritsAlpha" value="false" />
+            <Window type="Generic/Image" name="CoolDownSpellIce" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Alpha" value="0.8" />
+                <Property name="Image" value="GameMenuImages/BackgroundSpell" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
         </Window>
     </Window>
 </GUILayout>
