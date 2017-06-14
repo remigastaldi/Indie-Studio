@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:56:53 2017 gastal_r
-// Last update Tue Jun 13 18:26:59 2017 gastal_r
+// Last update Wed Jun 14 21:27:48 2017 gastal_r
 //
 
 #include      "Spell.hpp"
@@ -59,7 +59,7 @@ void 	Spell::changeAnimation(Spell::Status status)
   _status = status;
 }
 
-bool 	Spell::frameRenderingQueued(const Ogre::FrameEvent &evt)
+Spell::End 	Spell::frameRenderingQueued(const Ogre::FrameEvent &evt)
 {
   if (_destination != Ogre::Vector3::ZERO)
   {
@@ -75,14 +75,14 @@ bool 	Spell::frameRenderingQueued(const Ogre::FrameEvent &evt)
       // if ()
       std::cout << _entity->getName() << " collide with " << ret.entity->getName() << " of type => " << (int) ret.type << std::endl;
       _collideWith = ret.entity->getName();
-      return (false);
+      return (Spell::End::COLLIDE);
     }
 
     if (_distance <= 0.0)
     {
       _direction = Ogre::Vector3::ZERO;
       _destination = Ogre::Vector3::ZERO;
-      return (false);
+      return (Spell::End::DISTANCE);
     }
     else
     {
@@ -100,7 +100,7 @@ bool 	Spell::frameRenderingQueued(const Ogre::FrameEvent &evt)
   }
   if (_animationState)
       _animationState->addTime(evt.timeSinceLastFrame);
-  return (true);
+  return (Spell::End::CONTINUE);
 }
 
 void  Spell::setDestination(const Ogre::Vector3 &destination)

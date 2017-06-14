@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:43:07 2017 gastal_r
-// Last update Tue Jun 13 18:27:56 2017 gastal_r
+// Last update Wed Jun 14 21:29:07 2017 gastal_r
 //
 
 #ifndef _SPELL_HPP_
@@ -39,6 +39,12 @@
 class Spell
 {
 public:
+  enum class End
+  {
+    COLLIDE,
+    DISTANCE,
+    CONTINUE
+  };
   enum class Type
   {
     /** Warrior */
@@ -62,7 +68,6 @@ public:
     BULLET,
     BEAR_BUFF
   };
-
   enum class Status
   {
     MOVE,
@@ -82,7 +87,7 @@ public:
   Spell& operator=(Spell&& other) = default;
 
   void 	changeAnimation(Spell::Status status);
-  virtual bool 	frameRenderingQueued(const Ogre::FrameEvent &evt);
+  virtual Spell::End 	frameRenderingQueued(const Ogre::FrameEvent &evt);
   void  setDestination(const Ogre::Vector3 &destination);
   void 	destroy();
   const std::string &getCollidedObjectName(void) const { return (_collideWith); }

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun  3 18:43:48 2017 gastal_r
-// Last update Sat Jun 10 19:19:08 2017 gastal_r
+// Last update Wed Jun 14 21:36:19 2017 gastal_r
 //
 
 #include      "SpellManager.hpp"
@@ -40,9 +40,10 @@ void        SpellManager::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
   for (std::vector<Spell *>::iterator it = _spells.begin(); it != _spells.end(); ++it)
   {
-    if ((*it)->frameRenderingQueued(evt) == false)
+    Spell::End ret = (*it)->frameRenderingQueued(evt);
+    if (ret != Spell::End::CONTINUE)
       {
-        if (_disableCallback)
+        if (!_disableCallback || ret == Spell::End::COLLIDE)
           _sendCollisionToServer((*it)->getType(), (*it)->getCollidedObjectName());
         _spellsIndex.push_back((*it)->getId());
         delete (*it);

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Wed Jun 14 20:28:16 2017 gastal_r
+// Last update Wed Jun 14 22:01:08 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -30,11 +30,11 @@ Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   _spells(4),
   _healthBar(nullptr)
 {
-  _healthBar = static_cast<CEGUI::ProgressBar*>(CEGUI::WindowManager::getSingleton().loadLayoutFromFile("HealthBar.layout"));
+  _healthBar.reset(static_cast<CEGUI::ProgressBar*>(CEGUI::WindowManager::getSingleton().loadLayoutFromFile("HealthBar.layout")));
 
   _healthBar->setName(std::to_string(id));
   _healthBar->setSize(CEGUI::USize(CEGUI::UDim(0, 150), CEGUI::UDim(0, 20)));
-  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar.get());
   _healthBar->hide();
 }
 
@@ -45,6 +45,7 @@ Entity::~Entity()
   _collision.remove_entity(_entity);
   _sceneMgr.destroyEntity(_entity);
   _sceneMgr.destroySceneNode(_node);
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->removeChild(_healthBar.get());
 }
 
 void  Entity::addToBulletWorld(const Ogre::Vector3 &position)

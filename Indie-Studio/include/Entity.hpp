@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Wed Jun 14 17:28:52 2017 gastal_r
+// Last update Wed Jun 14 21:59:08 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -119,7 +119,7 @@ protected:
   OgreBulletDynamics::RigidBody *defaultBody;
   Ogre::AnimationState	*_animationState;
   std::unordered_map<size_t, std::pair<Spell::Type, Ogre::Real>>  _spells;
-  CEGUI::ProgressBar    *_healthBar;
+  std::unique_ptr<CEGUI::ProgressBar> _healthBar;
 };
 
 #ifndef   _ENTITY_CREATE_
