@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Wed Jun 14 00:58:46 2017 gastal_r
+// Last update Wed Jun 14 18:22:55 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -37,6 +37,9 @@ void          GameLogic::initGameLogic(void)
   #endif
 
   _sceneMgr = mDevice->sceneMgr;
+
+  _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
+  CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
   _camera = _sceneMgr->createCamera("PlayerCamera");
   _camera->setNearClipDistance(5);
@@ -93,7 +96,6 @@ void          GameLogic::initGameLogic(void)
   case 3:
     _mSSAO = new PFXSSAO(mDevice->window, _camera);
   }
-
   _collisionRayCast = _sceneMgr->createRayQuery(Ogre::Ray());
   _player = createEntity(mDevice->data.Class, *_sceneMgr, *_world, *_collision, _id,
     Entity::Status::IMMOBILE, Ogre::Vector3(0.f, 0.f, 0.f), Ogre::Vector3::ZERO);
@@ -104,7 +106,7 @@ void          GameLogic::initGameLogic(void)
   _camera->lookAt(_player->getPosition());
 #else
   _cameraNode = _sceneMgr->getRootSceneNode()->createChildSceneNode("CamNode");
-  _cameraNode->setPosition(_player->getPosition() + Ogre::Vector3(0.f, 40.f, 40.f));
+  _cameraNode->setPosition(_player->getPosition() + Ogre::Vector3(0.f, 40.f, 25.f));
   _cameraNode->attachObject(_camera);
   _cameraNode->attachObject(mDevice->soundManager->getListener());
   _camera->lookAt(_player->getPosition());
@@ -151,16 +153,18 @@ bool          GameLogic::frameRenderingQueued(const Ogre::FrameEvent& evt)
   _spellManager->frameRenderingQueued(evt);
 
   _player->frameRenderingQueued(evt);
+  _player->updateEntityHealthBar(*_camera);
 
   #if !DEBUG_LOCAL
     refreshServerPlayerPos();
   #endif
 
-  mDevice->soundManager->update(evt.timeSinceLastFrame);
-
   #if DEBUG_LOCAL == false
     for (auto & it : _entity)
+    {
       it.second->frameRenderingQueued(evt);
+      it.second->updateEntityHealthBar(*_camera);
+    }
   #endif
 
   #if DEBUG_CAMERA
@@ -171,6 +175,8 @@ bool          GameLogic::frameRenderingQueued(const Ogre::FrameEvent& evt)
     _movementZ = ((_player->getPosition().z + _offsetZ - _cameraNode->getPosition().z)) / _maximumDistance;
     _cameraNode->translate(Ogre::Vector3((_movementX * _playerVelocity * evt.timeSinceLastFrame), (_movementY * _playerVelocity * evt.timeSinceLastFrame), (_movementZ * _playerVelocity * evt.timeSinceLastFrame)));
   #endif
+
+  mDevice->soundManager->update(evt.timeSinceLastFrame);
 
   return (true);
 }

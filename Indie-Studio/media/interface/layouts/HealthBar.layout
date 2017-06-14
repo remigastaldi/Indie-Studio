@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+      <Window type="Vanilla/ProgressBar" name="ProgressBar" >
+          <Property name="Area" value="{{0.28,0},{0.1,0},{0.98,0},{0.32,0}}" />
+          <Property name="StepSize" value="0.01" />
+          <Property name="EnabledColour" value="tl:FFBE2337 tr:FFBE2337 bl:FFBE2337 br:FFBE2337" />
+          <Property name="InheritsAlpha" value="false" />
+          <Property name="DisabledColour" value="tl:FFBE2337 tr:FFBE2337 bl:FFBE2337 br:FFBE2337" />
+          <Property name="CurrentProgress" value="0.5" />
+      </Window>
+</GUILayout>

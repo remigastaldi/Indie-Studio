@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Sat Jun 10 22:35:48 2017 gastal_r
+// Last update Wed Jun 14 19:05:25 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -27,8 +27,15 @@ Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 	_animationState(0),
 	_ghostObject(nullptr),
 	_character(nullptr),
-  _spells(4)
-{}
+  _spells(4),
+  _healthBar(nullptr)
+{
+  _healthBar = static_cast<CEGUI::ProgressBar*>(CEGUI::WindowManager::getSingleton().loadLayoutFromFile("HealthBar.layout"));
+
+  _healthBar->setSize(CEGUI::USize(CEGUI::UDim(0, 150), CEGUI::UDim(0, 20)));
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
+  _healthBar->hide();
+}
 
 Entity::~Entity()
 {
@@ -61,10 +68,31 @@ void  Entity::addToBulletWorld(const Ogre::Vector3 &position)
 
   btScalar stepHeight(btScalar(0.35));
   _character = new btKinematicCharacterController(_ghostObject, capsule, stepHeight);
-  _character->setGravity({ 0, btScalar(-9.81), 0 });
+  // _character->setGravity({ 0, btScalar(-9.81), 0 });
   _world.getBulletDynamicsWorld()->getPairCache()->setInternalGhostPairCallback(new btGhostPairCallback());
   _world.getBulletDynamicsWorld()->addCollisionObject(_ghostObject, btBroadphaseProxy::CharacterFilter, btBroadphaseProxy::AllFilter);
   _world.getBulletDynamicsWorld()->addAction(_character);
+}
+
+void  Entity::updateEntityHealthBar(const Ogre::Camera &camera)
+{
+  Ogre::Vector2 result;
+
+  const Ogre::AxisAlignedBox &AABB = _entity->getWorldBoundingBox(true);
+  Ogre::Vector3 point = AABB.getCenter();
+
+  Ogre::Plane cameraPlane = Ogre::Plane(Ogre::Vector3(camera.getDerivedOrientation().zAxis()), camera.getDerivedPosition());
+  if(cameraPlane.getSide(point) != Ogre::Plane::NEGATIVE_SIDE)
+  {
+    _healthBar->hide();
+    return;
+  }
+  else if (!_healthBar->isVisible())
+    _healthBar->show();
+  point = camera.getProjectionMatrix() * (camera.getViewMatrix() * point);
+  result.x = (point.x / 2) + 0.5f - 0.05;
+  result.y = 1 - ((point.y / 2) + 0.5f) - 0.1;
+  _healthBar->setPosition(CEGUI::UVector2(CEGUI::UDim(result.x, 0), CEGUI::UDim(result.y, 0)));
 }
 
 void 	Entity::changeAnimation(Entity::Status status)

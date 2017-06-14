@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Wed Jun 14 00:32:53 2017 gastal_r
+// Last update Wed Jun 14 11:26:41 2017 gastal_r
 //
 
 #ifndef _CLIENT_HPP_

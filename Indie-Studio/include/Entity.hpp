@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Wed Jun 14 00:18:54 2017 gastal_r
+// Last update Wed Jun 14 17:28:52 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -74,8 +74,8 @@ public:
 
   void  addToBulletWorld(const Ogre::Vector3 &position);
   void  changeAnimation(Entity::Status status);
+  void  updateEntityHealthBar(const Ogre::Camera &camera);
   void  frameRenderingQueued(const Ogre::FrameEvent &evt);
-  void	updateAnimation(std::string, Ogre::Real);
 
   void  destroy();
 
@@ -119,6 +119,7 @@ protected:
   OgreBulletDynamics::RigidBody *defaultBody;
   Ogre::AnimationState	*_animationState;
   std::unordered_map<size_t, std::pair<Spell::Type, Ogre::Real>>  _spells;
+  CEGUI::ProgressBar    *_healthBar;
 };
 
 #ifndef   _ENTITY_CREATE_

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Wed Jun 14 00:54:00 2017 gastal_r
+// Last update Wed Jun 14 18:31:10 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -87,8 +87,8 @@ protected:
   Ogre::Camera *_camera;
   Ogre::SceneNode *_cameraNode;
   float   _offsetX = 0;
-  float   _offsetY = 10;
-  float   _offsetZ = 10;
+  float   _offsetY = 25;
+  float   _offsetZ = 15;
   float   _maximumDistance = 4;
   float   _playerVelocity = 10;
   float   _movementX;
