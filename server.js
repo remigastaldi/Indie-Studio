@@ -116,9 +116,9 @@ function touched(local, entity, spell_type)
     case Spell.BEAR_BUFF:
       damages = 20;
       break;
-    default:
   }
 
+  log("TETT");
   console.log(damages);
 
   entity.health -= damages;
