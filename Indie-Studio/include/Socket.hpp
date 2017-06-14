@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Wed Jun 14 11:26:41 2017 gastal_r
+// Last update Wed Jun 14 20:46:28 2017 Leo HUBERT
 //
 
 #ifndef _CLIENT_HPP_
@@ -13,7 +13,7 @@
 
 #include "WorkingQueue.hpp"
 
-#define SOCKET_SERVER "http://ezgames.eu"
+#define SOCKET_SERVER "http://localhost"
 #define SOCKET_PORT 3000
 
 #ifdef WIN32

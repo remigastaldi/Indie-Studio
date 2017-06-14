@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Wed Jun 14 00:18:33 2017 gastal_r
+** Last update Wed Jun 14 22:08:37 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -207,6 +207,27 @@ void Socket::events()
         }
         _lock.unlock();
       }));
+
+      _current_socket->on("hitted", sio::socket::event_listener_aux([&](std::string const& name,
+        sio::message::ptr const& data,
+        bool isAck, const sio::message::list &ack_resp)
+        {
+          (void)name;
+          (void)isAck;
+          (void)ack_resp;
+
+          _lock.lock();
+          if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
+          {
+            std::cout << "Damages: " << data->get_map()["damages"]->get_int()  << '\n';
+            if (data->get_map()["hitted"]->get_int() == _id)
+              std::cout << "WHO ? : ME" << '\n';
+            else
+              std::cout << "WHO ? : " << data->get_map()["hitted"]->get_int() << '\n';
+
+          }
+          _lock.unlock();
+        }));
 
     _current_socket->on("killed", sio::socket::event_listener_aux([&](std::string const& name,
       sio::message::ptr const& data,
