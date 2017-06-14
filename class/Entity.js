@@ -1,5 +1,6 @@
 var EntityType =
 {
+  DEFAULT: -1,
   WARRIOR: 0,
   WIZZARD: 1,
   DARKFIEND: 2,

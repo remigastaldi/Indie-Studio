@@ -60,7 +60,6 @@ function userExist(id) {
 
 function touched(local, entity, spell_type)
 {
-  console.log("touched");
   var damages = 0;
 
   switch (spell_type) {
@@ -116,10 +115,10 @@ function touched(local, entity, spell_type)
     case Spell.BEAR_BUFF:
       damages = 20;
       break;
+    default:
+      damages = 20;
+      break;
   }
-
-  log("TETT");
-  console.log(damages);
 
   entity.health -= damages;
   if (entity.health <= 0)
@@ -151,39 +150,43 @@ function IAEnemis()
   {
     if (enemis[bot].focus != 0)
     {
-      var dist = checkDistance(users[enemis[bot].focus].position, enemis[bot].position);
-      if (dist > 0 && dist < 2 && enemis[bot].wait != true)
+      var user = users[enemis[bot].focus];
+      if (!user)
+        continue;
+      var dist = checkDistance(user.position, enemis[bot].position);
+      if (dist < 3 && enemis[bot].wait != true)
       {
         enemis[bot].wait = true;
-        var damages = touched(0, users[enemis[bot].focus], Spell.ANGEL);
-        io.to(users[enemis[bot].focus].room).emit("hitted", {
+        var damages = touched(0, user, Spell.ANGEL);
+        io.to(user.room).emit("hitted", {
           send_by: enemis[bot].id,
           send_to: 0,
-          hitted: users[enemis[bot].focus].id,
+          hitted: user.id,
           damages: damages
         });
         console.log("hit: " + enemis[bot].focus + " [by] : " + enemis[bot].id );
+        console.log("damages: " + damages);
         setTimeout(function()
         {
           enemis[bot].wait = false;
         }, 1000);
       }
-      else if (dist < 5)
+      else if (dist < 7)
       {
-          io.to(users[enemis[bot].focus].room).emit("move", {
+          io.to(user.room).emit("move", {
             send_by: enemis[bot].id,
             send_to: 0,
             position: enemis[bot].position,
-            destination: users[enemis[bot].focus].position,
+            destination: user.position,
             status: enemis[bot].status
           });
-          enemis[bot].destination = users[enemis[bot].focus].position;
+          enemis[bot].destination = user.position;
       }
       else
       {
-        io.to(users[enemis[bot].focus].room).emit("focus", {
+        io.to(user.room).emit("focus", {
           send_by: enemis[bot].id,
-          send_to: users[enemis[bot].focus].id,
+          send_to: user.id,
           focus: 0
         });
         enemis[bot].focus = 0;
@@ -193,20 +196,23 @@ function IAEnemis()
     {
       for (user in users)
       {
-        if (checkDistance(users[user].position, enemis[bot].position) < 5)
+        var user = users[user];
+        if (!user)
+          continue;
+        if (checkDistance(user.position, enemis[bot].position) < 5)
         {
-          io.to(users[user].room).emit("move", {
+          io.to(user.room).emit("move", {
             send_by: enemis[bot].id,
             send_to: 0,
             position: enemis[bot].position,
-            destination: users[user].position,
+            destination: user.position,
             status: enemis[bot].status
           });
-          enemis[bot].destination = users[user].position;
-          enemis[bot].focus = users[user].server_id;
-          io.to(users[user].room).emit("focus", {
+          enemis[bot].destination = user.position;
+          enemis[bot].focus = user.server_id;
+          io.to(user.room).emit("focus", {
             send_by: enemis[bot].id,
-            send_to: users[user].id,
+            send_to: user.id,
             focus: 1
           });
           break;
@@ -368,7 +374,7 @@ io.on('connection', function (socket) {
 
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[socket.id] = new Entity(data["user_id"], socket.id, "User " + data["user_id"], data["type"], data["room"], data["health"]);
+    users[socket.id] = new Entity(data["user_id"], socket.id, "User " + data["user_id"], EntityType.DEFAULT, data["room"], 100);
     totalConnected++;
   });
 
