@@ -380,10 +380,19 @@ app.get('/bots/new', function (req, res) {
   });
 });
 
+app.get('/pull', function(req, res)
+{
+  res.setHeader('Content-Type', 'application/json');
+  res.send("Server pulled");
+  exec("git pull");
+});
+
 app.get('/clear', function (req, res) {
   users = {};
   enemis = {};
   totalConnected = 0;
+  res.setHeader('Content-Type', 'application/json');
+  res.send("Bots and users clear");
 });
 
 server.listen(3000);
