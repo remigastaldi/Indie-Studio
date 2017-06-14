@@ -63,7 +63,56 @@ function touched(local, entity, spell_type)
   var damages = 0;
 
   switch (spell_type) {
+    /** Warrior */
+    case Spell.EYE_FIRE:
+      damages = 20;
+      break;
+    case Spell.SWORD:
+      damages = 20;
+      break;
+    case Spell.HEARTH:
+      damages = 20;
+      break;
+    case Spell.DAGGER:
+      damages = 20;
+      break;
+      /** Wizzard */
+    case Spell.TORNADO:
+      damages = 20;
+      break;
+    case Spell.FIREBALL:
+      damages = 20
+      break;
+    case Spell.SHIELD_BUFF:
+      damages = 20;
+      break;
+    case Spell.LEAF_BUFF:
+      damages = 20;
+      break;
+    /** DARKFIEND */
     case Spell.ANGEL:
+      damages = 20;
+      break;
+    case Spell.THUNDERSTORM:
+      damages = 20;
+      break;
+    case Spell.SPECTRE:
+      damages = 20;
+      break;
+    case Spell.FIRE:
+      damages = 20;
+      break;
+      /** Engineer */
+    case Spell.STONEBALL:
+      damages = 20;
+      break;
+    case Spell.STALACTITES:
+      damages = 20;
+      break;
+    case Spell.BULLET:
+      damages = 20;
+      break;
+    case Spell.BEAR_BUFF:
       damages = 20;
       break;
     default:
