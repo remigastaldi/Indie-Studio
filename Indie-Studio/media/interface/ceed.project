@@ -42,6 +42,7 @@
             <Item path="layouts/EffectsDemo.layout" type="file" />
             <Item path="layouts/FontDemo.layout" type="file" />
             <Item path="layouts/GameMenu.layout" type="file" />
+            <Item path="layouts/GameOver.layout" type="file" />
             <Item path="layouts/HUDDemoGameOver.layout" type="file" />
             <Item path="layouts/HUDDemoIngame.layout" type="file" />
             <Item path="layouts/IG_MENU.layout" type="file" />
@@ -68,7 +69,10 @@
             <Item path="layouts/application_templates.layout" type="file" />
             <Item path="layouts/mainMenu.layout" type="file" />
             <Item path="layouts/selectChar.layout" type="file" />
-            <Item path="layouts/GameOver.layout" type="file" />
+            <Item path="layouts/AvatarDarkFiend.layout" type="file" />
+            <Item path="layouts/AvatarIngenior.layout" type="file" />
+            <Item path="layouts/AvatarWarrior.layout" type="file" />
+            <Item path="layouts/AvatarWizzard.layout" type="file" />
         </Item>
         <Item name="looknfeel" type="folder">
             <Item path="looknfeel/AlfiskoSkin.looknfeel" type="file" />
