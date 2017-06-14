@@ -7,6 +7,6 @@
         <Property name="EnabledColour" value="tl:FFBE2337 tr:FFBE2337 bl:FFBE2337 br:FFBE2337" />
         <Property name="InheritsAlpha" value="false" />
         <Property name="DisabledColour" value="tl:FFBE2337 tr:FFBE2337 bl:FFBE2337 br:FFBE2337" />
-        <Property name="CurrentProgress" value="0.5" />
+        <Property name="CurrentProgress" value="1" />
     </Window>
 </GUILayout>
