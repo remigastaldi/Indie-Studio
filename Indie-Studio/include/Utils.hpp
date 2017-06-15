@@ -5,12 +5,19 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Fri Jun  9 00:04:17 2017 gastal_r
-// Last update Sat Jun 10 14:23:17 2017 gastal_r
+// Last update Thu Jun 15 12:08:20 2017 gastal_r
 //
 
-#ifndef _UTILS_HPP_
-#define _UTILS_HPP_
+#ifndef       _UTILS_HPP_
+#define       _UTILS_HPP_
 
+#include <OgreSceneNode.h>
+#include <OgreLogManager.h>
+#include <OgreSceneManager.h>
+#include <OgreRoot.h>
+#include <OgreEntity.h>
+#include      <OgreMesh.h>
+#include      <OgrePrerequisites.h>
 #include      <CEGUI/CEGUI.h>
 #include      <OISKeyboard.h>
 #include      <OISMouse.h>
@@ -66,6 +73,47 @@ public:
       return CEGUI::MiddleButton;
     default:
       return CEGUI::LeftButton;
+    }
+  }
+
+  static void   scaleMesh(Ogre::MeshPtr &meshPtr, float scale, size_t id)
+  {
+    if (scale == 0)
+      return;
+    meshPtr = meshPtr->clone(std::to_string(id));
+    Ogre::Mesh::SubMeshIterator smit = meshPtr->getSubMeshIterator();
+    while( smit.hasMoreElements() )
+    {
+      Ogre::SubMesh* submesh = smit.getNext();
+      if(submesh)
+      {
+        Ogre::VertexData* vertex_data = submesh->vertexData;
+        if(vertex_data)
+        {
+          const Ogre::VertexElement* posElem = vertex_data->vertexDeclaration->findElementBySemantic(Ogre::VES_POSITION);
+          Ogre::HardwareVertexBufferSharedPtr vbuf = vertex_data->vertexBufferBinding->getBuffer(posElem->getSource());
+          unsigned char* vertex = static_cast<unsigned char*>(vbuf->lock(Ogre::HardwareBuffer::HBL_NORMAL));
+          Ogre::Real* points;
+
+          for(size_t j = 0; j < vertex_data->vertexCount; ++j, vertex += vbuf->getVertexSize())
+          {
+            posElem->baseVertexPointerToElement(vertex, (void **)&points);
+            if (scale < 0)
+            {
+              points[0] /= scale * -1;
+              points[1] /= scale * -1;
+              points[2] /= scale * -1;
+            }
+            else
+            {
+              points[0] *= scale;
+              points[1] *= scale;
+              points[2] *= scale;
+            }
+          }
+          vbuf->unlock();
+        }
+      }
     }
   }
 };

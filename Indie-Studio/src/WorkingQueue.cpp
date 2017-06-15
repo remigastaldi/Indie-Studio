@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:49:15 2017 gastal_r
-// Last update Wed Jun 14 22:36:06 2017 gastal_r
+// Last update Thu Jun 15 12:11:15 2017 gastal_r
 //
 
 #include      "WorkingQueue.hpp"
@@ -43,7 +43,7 @@ WorkingQueue::Data::Data(size_t id, bool player)
   _player(player)
 {}
 
-WorkingQueue::WorkingQueue(std::function<void()> &playerDie)
+WorkingQueue::WorkingQueue(const std::function<void()> &playerDie)
   : _sceneMgr(nullptr),
   _playerDie(playerDie)
 {

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Wed Jun 14 23:13:24 2017 gastal_r
+// Last update Thu Jun 15 12:15:04 2017 gastal_r
 //
 
 #ifndef     _WORKING_HPP_
@@ -56,13 +56,14 @@ public:
     Spell::Type     _spell_type;
     Spell::Status   _spell_status;
     size_t          _id;
+    size_t          _damages;
     bool            _player;
     Ogre::Vector3   _position;
     Ogre::Vector3   _destination;
   };
 
 public:
-  WorkingQueue(std::function<void()> &playerDie);
+  explicit WorkingQueue(const std::function<void()> &playerDie);
   WorkingQueue() {};
 
   void pushToQueue(WorkingQueue::Action, const WorkingQueue::Data &);
@@ -75,6 +76,7 @@ private:
   void killedEntityQueue(const WorkingQueue::Data &);
   void unfocusEntityQueue(const WorkingQueue::Data &);
   void focusEntityQueue(const WorkingQueue::Data &);
+  void hitEntity(const WorkingQueue::Data &);
 
   std::mutex  _mutex;
   std::vector<std::pair<void(WorkingQueue::*)(const WorkingQueue::Data &data), WorkingQueue::Data>> _queue;
