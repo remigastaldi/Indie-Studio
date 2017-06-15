@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Wed Jun 14 22:09:10 2017 gastal_r
+// Last update Thu Jun 15 17:17:17 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -133,13 +133,15 @@ class Wizzard;
 class DarkFiend;
 class Engineer;
 class Zombie;
+class Skeleton;
 
 #define   ENTITY_INDEX    \
 { Entity::Type::WARRIOR,    &createInstance<Warrior>    },  \
 { Entity::Type::WIZZARD,    &createInstance<Wizzard>    },  \
 { Entity::Type::DARKFIEND,  &createInstance<DarkFiend>  },  \
 { Entity::Type::ENGINEER,   &createInstance<Engineer>   },  \
-{ Entity::Type::ZOMBIE,     &createInstance<Zombie>     },
+{ Entity::Type::ZOMBIE,     &createInstance<Zombie>     },  \
+{ Entity::Type::SKELETON,   &createInstance<Skeleton>   },
 
 #define   ENTITY_INIT_PARAMETERS                                 \
 Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, \
