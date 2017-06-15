@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Thu Jun 15 15:13:55 2017 gastal_r
+// Last update Thu Jun 15 21:29:57 2017 gastal_r
 //
 
 #include        "Dungeon.hpp"
@@ -155,8 +155,8 @@ void Dungeon::createScene(void)
     _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("WarriorSpellBar.layout");
     setupWarriorSpell();
     break;
-  case (Entity::Type::WIZZARD):
-    _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("WizzardSpellBar.layout");
+  case (Entity::Type::WIZARD):
+    _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("WizardSpellBar.layout");
     setupMageSpell();
     break;
   case (Entity::Type::DARKFIEND):

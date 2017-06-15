@@ -1,11 +1,11 @@
 <Imageset autoScaled="vertical" imagefile="HUDDemo.png" name="HUDDemo" nativeHorzRes="1280" nativeVertRes="720" version="2">
     <Image height="100" name="DarkFiend" width="100" xPos="0" yPos="376" />
-    <Image height="100" name="Wizzard" width="100" xPos="248" yPos="1" />
+    <Image height="100" name="Wizard" width="100" xPos="248" yPos="1" />
     <Image height="100" name="Ingenior" width="100" xPos="372" yPos="251" />
     <Image height="100" name="Warrior" width="100" xPos="124" yPos="251" />
     <Image height="1080" name="SplashScreen" width="1920" xPos="499" yPos="0" />
     <Image height="90" name="WarriorRound" width="90" xPos="235" yPos="433" />
     <Image height="90" name="IngeniorRound" width="90" xPos="235" yPos="558" />
     <Image height="90" name="DarkFiendRound" width="90" xPos="235" yPos="683" />
-    <Image height="90" name="WizzardRound" width="90" xPos="235" yPos="808" />
+    <Image height="90" name="WizardRound" width="90" xPos="235" yPos="808" />
 </Imageset>

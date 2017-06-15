@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun Jun  4 17:24:51 2017 gastal_r
-// Last update Tue Jun 13 18:20:21 2017 gastal_r
+// Last update Thu Jun 15 21:29:57 2017 gastal_r
 //
 
 #include      "AllSpells.hpp"
@@ -139,7 +139,7 @@ Dagger::Dagger(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
 
 
 /*-----------------------------------------------------------------------------
-|  Wizzard
+|  Wizard
 -----------------------------------------------------------------------------*/
 Tornado::Tornado(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback)

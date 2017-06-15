@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <GUILayout version="4" >
-    <Window type="Generic/Image" name="Wizzard" >
+    <Window type="Generic/Image" name="Wizard" >
         <Property name="Area" value="{{0,0},{0,0},{0.27,0},{0.13,0}}" />
         <Property name="Alpha" value="0" />
         <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
-        <Window type="Generic/Image" name="WizzardPic" >
+        <Window type="Generic/Image" name="WizardPic" >
             <Property name="Area" value="{{0.02,0},{0.07,0},{0.27,0},{0.92,0}}" />
-            <Property name="Image" value="HUDDemo/WizzardRound" />
+            <Property name="Image" value="HUDDemo/WizardRound" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="InheritsAlpha" value="false" />
         </Window>

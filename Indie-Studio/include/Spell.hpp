@@ -52,7 +52,7 @@ public:
     SWORD,
     HEARTH,
     DAGGER,
-    /** Wizzard */
+    /** Wizard */
     TORNADO,
     FIREBALL,
     SHIELD_BUFF,

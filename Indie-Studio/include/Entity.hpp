@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Thu Jun 15 18:32:28 2017 gastal_r
+// Last update Thu Jun 15 21:29:57 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -45,7 +45,7 @@ public:
   {
     //Classes
     WARRIOR,
-    WIZZARD,
+    WIZARD,
     DARKFIEND,
     ENGINEER,
     //Mobs
@@ -129,7 +129,7 @@ protected:
 #include "Player.hpp"
 #include "Mobs.hpp"
 class Warrior;
-class Wizzard;
+class Wizard;
 class DarkFiend;
 class Engineer;
 class Zombie;
@@ -137,7 +137,7 @@ class Skeleton;
 
 #define   ENTITY_INDEX    \
 { Entity::Type::WARRIOR,    &createInstance<Warrior>    },  \
-{ Entity::Type::WIZZARD,    &createInstance<Wizzard>    },  \
+{ Entity::Type::WIZARD,    &createInstance<Wizard>    },  \
 { Entity::Type::DARKFIEND,  &createInstance<DarkFiend>  },  \
 { Entity::Type::ENGINEER,   &createInstance<Engineer>   },  \
 { Entity::Type::ZOMBIE,     &createInstance<Zombie>     },  \

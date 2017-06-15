@@ -65,14 +65,14 @@
             <Item path="layouts/VanillaLookOverview.layout" type="file" />
             <Item path="layouts/VanillaWindows.layout" type="file" />
             <Item path="layouts/WarriorSpellBar.layout" type="file" />
-            <Item path="layouts/WizzardSpellBar.layout" type="file" />
+            <Item path="layouts/WizardSpellBar.layout" type="file" />
             <Item path="layouts/application_templates.layout" type="file" />
             <Item path="layouts/mainMenu.layout" type="file" />
             <Item path="layouts/selectChar.layout" type="file" />
             <Item path="layouts/AvatarDarkFiend.layout" type="file" />
             <Item path="layouts/AvatarIngenior.layout" type="file" />
             <Item path="layouts/AvatarWarrior.layout" type="file" />
-            <Item path="layouts/AvatarWizzard.layout" type="file" />
+            <Item path="layouts/AvatarWizard.layout" type="file" />
         </Item>
         <Item name="looknfeel" type="folder">
             <Item path="looknfeel/AlfiskoSkin.looknfeel" type="file" />

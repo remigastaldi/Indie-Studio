@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Thu Jun 15 12:09:37 2017 gastal_r
+// Last update Thu Jun 15 21:29:57 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -41,11 +41,11 @@ Warrior::Warrior(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Warrior created [id] " + std::to_string(id) + " =====");
 }
 
-Wizzard::Wizzard(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision,
+Wizard::Wizard(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision,
   size_t id, Entity::Status status, const Ogre::Vector3 &position, const Ogre::Vector3 &destination)
-  : Entity(ENTITY_INIT_VARS, Entity::Type::WIZZARD, WIZZARD_SPEED, WIZZARD_HEALTH)
+  : Entity(ENTITY_INIT_VARS, Entity::Type::WIZARD, WIZARD_SPEED, WIZARD_HEALTH)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Wizzard [id] " + std::to_string(id) + " =====");
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Wizard [id] " + std::to_string(id) + " =====");
 
   _spells[0] = { Spell::Type::TORNADO, TORNADO_COOLDOWN };
   _spells[1] = { Spell::Type::THUNDERSTORM, THUNDERSTORM_COOLDOWN };
@@ -63,7 +63,7 @@ Wizzard::Wizzard(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
   btVector3 posBody(_ghostObject->getWorldTransform().getOrigin());
   _node->setPosition(Utils::cvt(posBody));
 
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Wizzard created [id] " + std::to_string(id) + " =====");
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Wizard created [id] " + std::to_string(id) + " =====");
 }
 
 DarkFiend::DarkFiend(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision,
