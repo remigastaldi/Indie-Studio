@@ -74,7 +74,7 @@ function newBot(pos, type, room)
 }
 
 newBot({x: -23.780986785888672, y: -2.1303372383117676, z: 1.5097132921218872}, EntityType.ZOMBIE, "room");
-//newBot({x: -23.780986785888672, y: -2.1303372383117676, z: 1.5097132921218872}, EntityType.SKELETON, "room");
+newBot({x: -23.780986785888672, y: -2.1303372383117676, z: 1.5097132921218872}, EntityType.SKELETON, "room");
 
 function checkDistance(userPosition, enemisPosition)
 {
