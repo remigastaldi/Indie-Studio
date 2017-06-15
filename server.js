@@ -58,6 +58,23 @@ function userExist(id) {
     return (false);
 }
 
+function removeUser(server_id)
+{
+  var bots = 0;
+  while (bots != null)
+  {
+    bots = jsonQuery('.[*][focus=' + server_id +'].server_id', {
+      data: enemis
+    }).value;
+    if (bots != null)
+    {
+      enemis[bots].focus = 0;
+      enemis[bots].destination = enemis[bots].position;
+    }
+  }
+  delete(users[server_id]);
+}
+
 function touched(local, entity, spell_type)
 {
   var damages = 0;
@@ -125,19 +142,7 @@ function touched(local, entity, spell_type)
   {
     io.to(entity.room).emit("killed", {user_id: entity.id});
     if (local == 0)
-    {
-      var bots = 0;
-      while (bots != null)
-      {
-        log(entity.server_id);
-        bots = jsonQuery('.[*][focus=' + entity.server_id +'].server_id', {
-          data: enemis
-        }).value;
-        if (bots != null)
-          enemis[bots].focus = 0;
-      }
-      delete(users[entity.server_id]);
-    }
+      removeUser(entity.server_id);
     else
       delete(enemis[entity.server_id]);
   }
@@ -152,19 +157,22 @@ function IAEnemis()
     {
       var user = users[enemis[bot].focus];
       if (!user)
+      {
+        log("tests");
         continue;
+      }
       var dist = checkDistance(user.position, enemis[bot].position);
       if (dist < 3 && enemis[bot].wait != true)
       {
         enemis[bot].wait = true;
         var damages = touched(0, user, Spell.ANGEL);
-        io.to(user.room).emit("hitted", {
-          send_by: enemis[bot].id,
-          send_to: 0,
-          hitted: user.id,
-          damages: damages
-        });
-        console.log("hit: " + enemis[bot].focus + " [by] : " + enemis[bot].id );
+        // io.to(user.room).emit("hitted", {
+        //   send_by: enemis[bot].id,
+        //   send_to: 0,
+        //   hitted: user.id,
+        //   damages: damages
+        // });
+        console.log("hit: " + user.id + " [by] : " + enemis[bot].id );
         console.log("damages: " + damages);
         setTimeout(function()
         {
@@ -224,7 +232,7 @@ function IAEnemis()
 
   setTimeout(function(){
     IAEnemis();
-  }, 50  );
+  }, 50);
 }
 
 
@@ -316,7 +324,6 @@ io.on('connection', function (socket) {
   });
 
   socket.on('collision', function (data) {
-    console.log("touched");
     if (enemis[data.touch])
       touched(1, enemis[data.touch], data.spell_type);
     var user_id = jsonQuery('.[*][id=' + data.touch +'].server_id', {
@@ -374,22 +381,12 @@ io.on('connection', function (socket) {
 
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[socket.id] = new Entity(data["user_id"], socket.id, "User " + data["user_id"], EntityType.DEFAULT, data["room"], 100);
+    users[socket.id] = new Entity(data["user_id"], socket.id, "User " + data["user_id"], data["type"], data["room"], data["health"]);
     totalConnected++;
   });
 
 	socket.on('disconnect', function () {
-    var bots = 0;
-    while (bots != null)
-    {
-      bots = jsonQuery('.[*][focus=' + socket.id +'].server_id', {
-        data: enemis
-      }).value;
-      if (bots != null)
-        enemis[bots].focus = 0;
-    }
-
-    delete(users[socket.id]);
+    removeUser(socket.id);
     io.to(socket.room).emit("logout", {user_id: socket.user_id});
     log("Disconnected ! ID: " + socket.user_id);
     totalConnected--;
@@ -435,6 +432,17 @@ app.get('/bots/new', function (req, res) {
     type: enemis[id]["type"],
     destination: enemis[id]["destination"]
   });
+});
+
+app.get('/bots/clear', function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send("Bot Cleared");
+
+  for (bot in enemis)
+  {
+    io.to(enemis[bot]["room"]).emit("killed", {user_id: enemis[bot].id});
+    delete(enemis[bot]);
+  }
 });
 
 app.get('/test', function(req, res)
