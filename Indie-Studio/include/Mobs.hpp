@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun 13 21:29:11 2017 gastal_r
-// Last update Tue Jun 13 21:30:29 2017 gastal_r
+// Last update Thu Jun 15 18:15:03 2017 gastal_r
 //
 
 #ifndef _MOBS_HPP_
@@ -19,6 +19,16 @@ class Zombie : public Entity
 {
 public:
   Zombie(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, Status status, const Ogre::Vector3 &position,
+   const Ogre::Vector3 &destination);
+};
+
+
+#define SKELETON_SPEED 1.5f
+#define SKELETON_HEALTH 150
+class Skeleton : public Entity
+{
+public:
+  Skeleton(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &world, Collision::CollisionTools &collision, size_t id, Status status, const Ogre::Vector3 &position,
    const Ogre::Vector3 &destination);
 };
 

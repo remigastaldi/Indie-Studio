@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Thu Jun 15 14:13:26 2017 gastal_r
+// Last update Thu Jun 15 18:31:51 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -28,10 +28,7 @@ GameLogic::GameLogic()
   _rayCast(nullptr),
   _collisionRayCast(nullptr),
   _player(nullptr)
-{
-  _playerDie =std::function<void(void)>([=] (void) { this->playerDie(); });
-  _hitPlayer = std::function<void(size_t)>([=] (size_t damages) { this->hitPlayer(damages); });
-}
+{}
 
 void          GameLogic::initGameLogic(void)
 {
@@ -40,6 +37,8 @@ void          GameLogic::initGameLogic(void)
   #endif
 
   _sceneMgr = mDevice->sceneMgr;
+  _playerDie =std::function<void(void)>([=] (void) { this->playerDie(); });
+  _hitPlayer = std::function<void(size_t)>([=] (size_t damages) { this->hitPlayer(damages); });
 
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
@@ -119,10 +118,6 @@ void          GameLogic::initGameLogic(void)
   _t2 = std::chrono::high_resolution_clock::now();
   _t3 = std::chrono::high_resolution_clock::now();
   _t4 = std::chrono::high_resolution_clock::now();
-
-#if !DEBUG_LOCAL
-  sendEntity(*_player);
-#endif
 }
 
 void          GameLogic::playerDie(void)

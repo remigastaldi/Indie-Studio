@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Wed Jun 14 19:09:22 2017 gastal_r
+// Last update Thu Jun 15 15:13:55 2017 gastal_r
 //
 
 #include        "Dungeon.hpp"
@@ -172,6 +172,10 @@ void Dungeon::createScene(void)
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_spellBar);
   _healthBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("AvatarDarkFiend.layout");
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
+
+  #if !DEBUG_LOCAL
+    sendEntity(*_player);
+  #endif
 }
 
 void Dungeon::exit(void)

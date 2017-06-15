@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Thu Jun 15 14:09:55 2017 gastal_r
+// Last update Thu Jun 15 18:27:17 2017 gastal_r
 //
 
 #ifndef     _WORKING_HPP_
@@ -45,7 +45,7 @@ public:
   class Data
   {
   public:
-    Data(Entity::Type, Entity::Status, size_t id, Ogre::Vector3 &position, Ogre::Vector3 &destination);
+    Data(Entity::Type, Entity::Status, size_t id, Ogre::Vector3 &position, Ogre::Vector3 &destination, size_t health);
     Data(Entity::Status, size_t id, Ogre::Vector3 &position, Ogre::Vector3 &destination);
     Data(Spell::Type, Spell::Status, Ogre::Vector3 &position, Ogre::Vector3 &destination);
     Data(size_t id, size_t damages, bool player = false);
@@ -60,6 +60,7 @@ public:
     bool            _player;
     Ogre::Vector3   _position;
     Ogre::Vector3   _destination;
+    size_t          _health;
   };
 
 public:

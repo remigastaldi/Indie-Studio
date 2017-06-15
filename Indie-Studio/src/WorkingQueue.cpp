@@ -5,17 +5,18 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:49:15 2017 gastal_r
-// Last update Thu Jun 15 14:06:24 2017 gastal_r
+// Last update Thu Jun 15 18:27:51 2017 gastal_r
 //
 
 #include      "WorkingQueue.hpp"
 
-WorkingQueue::Data::Data(Entity::Type type, Entity::Status status, size_t id, Ogre::Vector3 &position, Ogre::Vector3 &destination)
+WorkingQueue::Data::Data(Entity::Type type, Entity::Status status, size_t id, Ogre::Vector3 &position, Ogre::Vector3 &destination, size_t health)
   : _ent_type(type),
   _ent_status(status),
   _id(id),
   _position(position),
-  _destination(destination)
+  _destination(destination),
+  _health(health)
 {}
 
 WorkingQueue::Data::Data(Entity::Status status, size_t id, Ogre::Vector3 &position, Ogre::Vector3 &destination)
@@ -52,7 +53,10 @@ WorkingQueue::WorkingQueue()
 void        WorkingQueue::createEntityQueue(const WorkingQueue::Data &data)
 {
   if (!_entity[data._id])
+  {
     _entity[data._id] = createEntity(data._ent_type, *_sceneMgr, *_world.get(), *_collision.get(), data._id, data._ent_status, data._position, data._destination);
+    _entity[data._id]->setHealth(data._health);
+  }
 }
 
 void        WorkingQueue::removeEntityQueue(const WorkingQueue::Data &data)
@@ -109,7 +113,7 @@ void        WorkingQueue::hitEntity(const WorkingQueue::Data &data)
   {
     _hitPlayer(data._damages);
   }
-  if (_entity[data._id])
+  else if (_entity[data._id])
   {
     _entity[data._id]->takeDamage(data._damages);
   }

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Thu Jun 15 17:17:17 2017 gastal_r
+// Last update Thu Jun 15 18:32:28 2017 gastal_r
 //
 
 #ifndef       _ENTITY_HPP_
@@ -98,7 +98,7 @@ public:
   void					setCamera(OgreCookies::CameraMan* cameraMan) { cameraMan->setTarget(_node); }
   void					setWalkSpd(const Ogre::Real &_mWalkSpd)      { _walkSpd = _mWalkSpd; }
   void					setOrientation(const Ogre::Quaternion &orientation)  { _node->setOrientation(orientation); }
-  void          setHealth(size_t health) { _health = health; }
+  void          setHealth(size_t health);
 
 
 protected:
