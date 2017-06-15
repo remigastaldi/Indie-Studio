@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Fri Jun 16 01:15:07 2017 gastal_r
+** Last update Fri Jun 16 01:23:09 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -101,7 +101,13 @@ void Socket::events()
           data->get_map()["destination"]->get_map()["y"]->get_double(),
           data->get_map()["destination"]->get_map()["z"]->get_double());
 
-        WorkingQueue::Data queueData((Spell::Type)data->get_map()["type"]->get_int(), Spell::Status::MOVE, position, destination, 0);
+        bool byPlayer;
+        if (data->get_map()["bot"]->get_int() == 1)
+          byPlayer = false;
+        else
+          byPlayer = true;
+
+        WorkingQueue::Data queueData((Spell::Type)data->get_map()["type"]->get_int(), Spell::Status::MOVE, position, destination, byPlayer);
         pushToQueue(WorkingQueue::Action::CREATE_SPELL, queueData);
       }
       _lock.unlock();
@@ -349,6 +355,7 @@ void Socket::sendSpell(Spell::Type type, const Ogre::Vector3 &playerPos, const O
   obj.get()->get_map()["type"] =  sio::int_message::create((int)type);
   obj.get()->get_map()["position"] =  position;
   obj.get()->get_map()["destination"] =  destination;
+  obj.get()->get_map()["bot"] =  sio::int_message::create(0);
   obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
   obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
 
