@@ -95,6 +95,7 @@ function createSpell(sender, target, type)
     send_to: 0,
     position: sender.position,
     destination: target.position,
+    bot: 1,
     type: type
   });
 }
