@@ -62,6 +62,10 @@ public:
   virtual bool mousePressed(const OIS::MouseEvent &arg, OIS::MouseButtonID id);
   virtual bool mouseReleased(const OIS::MouseEvent &arg, OIS::MouseButtonID id);
 
+  //CEGUI function
+  void         buttonResurect(const CEGUI::EventArgs &e);
+  void         CheckCD();
+
 protected:
   //OgreBullet
   OgreBulletCollisions::DebugDrawer   *_debugDrawer;
@@ -83,6 +87,8 @@ protected:
   CEGUI::Window *_closeInfos;
   CEGUI::Window *_closeButton;
   CEGUI::Window *_goToMenuButton;
+  CEGUI::Window *_gameOverMenu;
+  CEGUI::Window *_resurectButton;
 
   //Camera
   Ogre::Camera *_camera;
@@ -102,9 +108,17 @@ protected:
 
   //Spell button
   CEGUI::Window   *_firstSpell;
+  CEGUI::Window   *_firstSpellCD;
   CEGUI::Window   *_secondSpell;
+  CEGUI::Window   *_secondSpellCD;
   CEGUI::Window   *_thirdSpell;
+  CEGUI::Window   *_thirdSpellCD;
   CEGUI::Window   *_fourthSpell;
+  CEGUI::Window   *_fourthSpellCD;
+  bool             _firstSpellIsCD;
+  bool             _secondSpellIsCD;
+  bool             _thirdSpellIsCD;
+  bool             _fourthSpellIsCD;
 
 #if DEBUG_CAMERA
   OgreCookies::CameraMan* _cameraMan;

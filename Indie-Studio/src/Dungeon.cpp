@@ -169,6 +169,10 @@ void Dungeon::createScene(void)
     break;
   }
 
+  _firstSpellCD->hide();
+  _secondSpellCD->hide();
+  _thirdSpellCD->hide();
+  _fourthSpellCD->hide();
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_spellBar);
   _healthBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("AvatarDarkFiend.layout");
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
@@ -262,12 +266,16 @@ bool Dungeon::buttonSettings(const CEGUI::EventArgs &e)
 bool  Dungeon::setupWarriorSpell()
 {
   _firstSpell = _spellBar->getChild("SpellSword");
+  _firstSpellCD = _spellBar->getChild("SpellSword/CoolDownSpellSword");
   // _firstSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellSword, this));
   _secondSpell = _spellBar->getChild("SpellEyeFire");
+  _secondSpellCD = _spellBar->getChild("SpellEyeFire/CoolDownSpellEyeFire");
   // _secondSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellEyeFire, this));
   _thirdSpell = _spellBar->getChild("SpellHeart");
+  _thirdSpellCD = _spellBar->getChild("SpellHeart/CoolDownSpellHeart");
   // _thirdSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellHeart, this));
   _fourthSpell = _spellBar->getChild("SpellDagger");
+  _fourthSpellCD = _spellBar->getChild("SpellDagger/CoolDownSpellDagger");
   // _fourthSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellDagger, this));
   return (true);
 }
@@ -275,12 +283,16 @@ bool  Dungeon::setupWarriorSpell()
 bool  Dungeon::setupMageSpell()
 {
   _firstSpell = _spellBar->getChild("SpellTornado");
+  _firstSpellCD = _spellBar->getChild("SpellTornado/CoolDownSpellTornado");
   // _firstSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellTornado, this));
   _secondSpell = _spellBar->getChild("SpellFireBall");
+  _secondSpellCD = _spellBar->getChild("SpellFireBall/CoolDownSpellFireBall");
   // _secondSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellFireBall, this));
   _thirdSpell = _spellBar->getChild("SpellShield");
+  _thirdSpellCD = _spellBar->getChild("SpellShield/CoolDownSpellShield");
   // _thirdSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellShield, this));
   _fourthSpell = _spellBar->getChild("SpellLeaf");
+  _fourthSpell = _spellBar->getChild("SpellLeaf/CoolDownSpellLeaf");
   // _fourthSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellLeaf, this));
   return (true);
 }
@@ -288,12 +300,16 @@ bool  Dungeon::setupMageSpell()
 bool  Dungeon::setupDarkFiendSpell()
 {
   _firstSpell = _spellBar->getChild("SpellAngel");
+  _firstSpellCD = _spellBar->getChild("SpellAngel/CoolDownSpellAngel");
   // _firstSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellAngel, this));
   _secondSpell = _spellBar->getChild("SpellThunderStorm");
+  _secondSpellCD = _spellBar->getChild("SpellThunderStorm/CoolDownSpellThunderStorm");
   // _secondSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellThunderStorm, this));
   _thirdSpell = _spellBar->getChild("SpellSpectre");
+  _thirdSpellCD = _spellBar->getChild("SpellSpectre/CoolDownSpellSpectre");
   // _thirdSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellSpectre, this));
   _fourthSpell = _spellBar->getChild("SpellFire");
+  _fourthSpellCD = _spellBar->getChild("SpellFire/CoolDownSpellFire");
   // _fourthSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellFire, this));
   return (true);
 }
@@ -301,12 +317,16 @@ bool  Dungeon::setupDarkFiendSpell()
 bool  Dungeon::setupIngeniorSpell()
 {
   _firstSpell = _spellBar->getChild("SpellStoneBall");
+  _firstSpellCD = _spellBar->getChild("SpellStoneBall/CoolDownSpellStoneBall");
   // _firstSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellStoneBall, this));
   _secondSpell = _spellBar->getChild("SpellBullet");
+  _secondSpellCD = _spellBar->getChild("SpellBullet/CoolDownSpellBullet");
   // _secondSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellBullet, this));
   _thirdSpell = _spellBar->getChild("SpellHandBeard");
+  _thirdSpellCD = _spellBar->getChild("SpellHandBeard/CoolDownSpellHandBeard");
   // _thirdSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellHandBeard, this));
   _fourthSpell = _spellBar->getChild("SpellIce");
+  _fourthSpellCD = _spellBar->getChild("SpellIce/CoolDownSpellIce");
   // _fourthSpell->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellIce, this));
   return (true);
 }

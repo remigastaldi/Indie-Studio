@@ -125,10 +125,20 @@ void          GameLogic::initGameLogic(void)
 #endif
 }
 
+void          GameLogic::buttonResurect(const CEGUI::EventArgs &e)
+{
+  exit();
+}
+
 void          GameLogic::playerDie(void)
 {
   std::cout << "*************** PLAYER DIE ***********************" << std::endl;
-  exit();
+  _gameOverMenu = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("GameOver.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_gameOverMenu);
+
+  _resurectButton = _gameOverMenu->getChild("ResurectButton");
+  _resurectButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonResurect, this));
+  // exit();
 }
 
 void          GameLogic::hitPlayer(size_t damages)
@@ -143,6 +153,40 @@ bool 	        GameLogic::frameStarted(const Ogre::FrameEvent &evt)
   return (true);
 }
 
+void          GameLogic::CheckCD()
+{
+
+  // if (_firstSpellIsCD == 1)
+    _cdSpell1 = std::chrono::high_resolution_clock::now();
+    _firstSpellCD->setText(std::to_string(std::chrono::duration_cast<std::chrono::seconds>(_cdSpell1 - _t1).count()));
+  // if (_secondSpellIsCD == 1)
+    _cdSpell2 = std::chrono::high_resolution_clock::now();
+  // if (_thirdSpellIsCD == 1)
+    _cdSpell3 = std::chrono::high_resolution_clock::now();
+  // if (_fourthSpellIsCD == 1)
+    _cdSpell4 = std::chrono::high_resolution_clock::now();
+  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell1 - _t1).count() >= _player->getSpellCooldown(0))
+  {
+    _firstSpellCD->hide();
+    // _firstSpellIsCD = 0;
+  }
+  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell2 - _t2).count() >= _player->getSpellCooldown(1))
+    {
+      _secondSpellCD->hide();
+      // _secondSpellIsCD = 0;
+    }
+  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell3 - _t3).count() >= _player->getSpellCooldown(2))
+    {
+      _thirdSpellCD->hide();
+      // _thirdSpellIsCD = 0;
+    }
+  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell4 - _t4).count() >= _player->getSpellCooldown(3))
+    {
+      _fourthSpellCD->hide();
+      // _fourthSpellIsCD = 0;
+    }
+}
+
 bool          GameLogic::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	if (mDevice->window->isClosed())
@@ -152,6 +196,7 @@ bool          GameLogic::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	  return (false);
 
   CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+  CheckCD();
 
   if (_lMouseDown)
     mouseRaycast();
@@ -229,7 +274,6 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
   switch (arg.key)
   {
   case OIS::KC_A:
-    _cdSpell1 = std::chrono::high_resolution_clock::now();
     if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell1 - _t1).count() >= _player->getSpellCooldown(0))
     {
       #if DEBUG_LOCAL == false
@@ -237,10 +281,11 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
       #endif
       _spellManager->launchSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
       _t1 = std::chrono::high_resolution_clock::now();
+      _firstSpellCD->show();
+      // _firstSpellIsCD = 1;
     }
-    break;
+  break;
   case OIS::KC_Z:
-    _cdSpell2 = std::chrono::high_resolution_clock::now();
     if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell2 - _t2).count() >= _player->getSpellCooldown(1))
     {
       #if DEBUG_LOCAL == false
@@ -248,10 +293,11 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
       #endif
       _spellManager->launchSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
       _t2 = std::chrono::high_resolution_clock::now();
+      _secondSpellCD->show();
+      // _secondSpellIsCD = 1;
     }
     break;
   case OIS::KC_E:
-    _cdSpell3 = std::chrono::high_resolution_clock::now();
     if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell3 - _t3).count() >= _player->getSpellCooldown(2))
     {
       #if DEBUG_LOCAL == false
@@ -259,10 +305,11 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
       #endif
       _spellManager->launchSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
       _t3 = std::chrono::high_resolution_clock::now();
+      _thirdSpellCD->show();
+      // _thirdSpellIsCD = 1;
     }
     break;
   case OIS::KC_R:
-    _cdSpell4 = std::chrono::high_resolution_clock::now();
     if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell4 - _t4).count() >= _player->getSpellCooldown(3))
     {
       #if DEBUG_LOCAL == false
@@ -270,6 +317,8 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
       #endif
         _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
         _t4 = std::chrono::high_resolution_clock::now();
+        _fourthSpellCD->show();
+        // _fourthSpellIsCD = 1;
     }
     break;
   }

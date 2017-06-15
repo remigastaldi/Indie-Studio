@@ -5,26 +5,26 @@
         <Property name="Area" value="{{0.42,0},{0.87,0},{0.604,0},{0.955,0}}" />
         <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
-        <Window type="Generic/ImageButton" name="SpellEyeFire" >
+        <Window type="Generic/ImageButton" name="SpellSword" >
             <Property name="Area" value="{{0.03,0},{0.1,0},{0.25,0},{0.9,0}}" />
             <Property name="HoverImage" value="GameMenuImages/SpellEyeFire" />
             <Property name="NormalImage" value="GameMenuImages/SpellEyeFire" />
             <Property name="PushedImage" value="GameMenuImages/SpellEyeFire_Click" />
             <Property name="InheritsAlpha" value="false" />
-            <Window type="Generic/Image" name="CoolDownSpellEyeFire" >
+            <Window type="Generic/Image" name="CoolDownSpellSword" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="Alpha" value="0.8" />
                 <Property name="Image" value="GameMenuImages/BackgroundSpell" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
         </Window>
-        <Window type="Generic/ImageButton" name="SpellSword" >
+        <Window type="Generic/ImageButton" name="SpellEyeFire" >
             <Property name="Area" value="{{0.27,0},{0.1,0},{0.49,0},{0.9,0}}" />
             <Property name="HoverImage" value="GameMenuImages/SpellSword" />
             <Property name="NormalImage" value="GameMenuImages/SpellSword" />
             <Property name="PushedImage" value="GameMenuImages/SpellSword_Click" />
             <Property name="InheritsAlpha" value="false" />
-            <Window type="Generic/Image" name="CoolDownSpellSword" >
+            <Window type="Generic/Image" name="CoolDownSpellEyeFire" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="Alpha" value="0.8" />
                 <Property name="Image" value="GameMenuImages/BackgroundSpell" />
