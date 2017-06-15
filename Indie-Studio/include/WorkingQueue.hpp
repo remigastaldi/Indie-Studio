@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Thu Jun 15 18:27:17 2017 gastal_r
+// Last update Thu Jun 15 21:09:39 2017 gastal_r
 //
 
 #ifndef     _WORKING_HPP_
@@ -66,17 +66,17 @@ public:
 public:
   WorkingQueue();
 
-  void pushToQueue(WorkingQueue::Action, const WorkingQueue::Data &);
+  void  pushToQueue(WorkingQueue::Action, const WorkingQueue::Data &);
 
 private:
-  void createEntityQueue(const WorkingQueue::Data &);
-  void removeEntityQueue(const WorkingQueue::Data &);
-  void createSpellQueue(const WorkingQueue::Data &);
-  void moveEntityQueue(const WorkingQueue::Data &);
-  void killedEntityQueue(const WorkingQueue::Data &);
-  void unfocusEntityQueue(const WorkingQueue::Data &);
-  void focusEntityQueue(const WorkingQueue::Data &);
-  void hitEntity(const WorkingQueue::Data &);
+  void  createEntityQueue(const WorkingQueue::Data &);
+  void  removeEntityQueue(const WorkingQueue::Data &);
+  void  createSpellQueue(const WorkingQueue::Data &);
+  void  moveEntityQueue(const WorkingQueue::Data &);
+  void  killedEntityQueue(const WorkingQueue::Data &);
+  void  unfocusEntityQueue(const WorkingQueue::Data &);
+  void  focusEntityQueue(const WorkingQueue::Data &);
+  void  hitEntity(const WorkingQueue::Data &);
 
   std::mutex  _mutex;
   std::vector<std::pair<void(WorkingQueue::*)(const WorkingQueue::Data &data), WorkingQueue::Data>> _queue;
@@ -91,7 +91,7 @@ protected:
   std::unique_ptr<OgreBulletDynamics::DynamicsWorld> _world;
   std::vector<size_t>         _focus;
   std::function<void()>       _playerDie;
-  std::function<void(size_t damages)>   _hitPlayer;
+  Entity    *_player;
 };
 
 #endif /* _WORKING_HPP_ */

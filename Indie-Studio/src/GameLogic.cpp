@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Thu Jun 15 18:31:51 2017 gastal_r
+// Last update Thu Jun 15 21:11:12 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -26,8 +26,7 @@ GameLogic::GameLogic()
   _rMouseDown(false),
   _debugDrawer(nullptr),
   _rayCast(nullptr),
-  _collisionRayCast(nullptr),
-  _player(nullptr)
+  _collisionRayCast(nullptr)
 {}
 
 void          GameLogic::initGameLogic(void)
@@ -38,7 +37,6 @@ void          GameLogic::initGameLogic(void)
 
   _sceneMgr = mDevice->sceneMgr;
   _playerDie =std::function<void(void)>([=] (void) { this->playerDie(); });
-  _hitPlayer = std::function<void(size_t)>([=] (size_t damages) { this->hitPlayer(damages); });
 
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
@@ -126,9 +124,9 @@ void          GameLogic::playerDie(void)
   exit();
 }
 
-void          GameLogic::hitPlayer(size_t damages)
+void          GameLogic::updatePlayersHealthBar(void)
 {
-  _player->takeDamage(damages);
+  _player->updateEntityHealthBar(*_camera);
 }
 
 bool 	        GameLogic::frameStarted(const Ogre::FrameEvent &evt)
@@ -157,7 +155,7 @@ bool          GameLogic::frameRenderingQueued(const Ogre::FrameEvent& evt)
   _spellManager->frameRenderingQueued(evt);
 
   _player->frameRenderingQueued(evt);
-  _player->updateEntityHealthBar(*_camera);
+  updatePlayersHealthBar();
 
   #if !DEBUG_LOCAL
     refreshServerPlayerPos();

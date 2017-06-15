@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Wed Jun 14 18:31:10 2017 gastal_r
+// Last update Thu Jun 15 21:10:20 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -39,7 +39,7 @@ public:
 
   void  initGameLogic(void);
   void  playerDie(void);
-  void  hitPlayer(size_t damages);
+  void  updatePlayersHealthBar(void);
   // Ogre::FrameListener
   virtual bool frameStarted(const Ogre::FrameEvent &evt);
   virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
@@ -114,9 +114,6 @@ protected:
   Ogre::RaySceneQuery * _rayCast;
   //Collision RayCast
   Ogre::RaySceneQuery * _collisionRayCast;
-
-  //Player
-  Entity    *_player;
 
   std::unique_ptr<SpellManager>    _spellManager;
 

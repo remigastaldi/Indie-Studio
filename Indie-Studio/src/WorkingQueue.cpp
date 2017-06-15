@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:49:15 2017 gastal_r
-// Last update Thu Jun 15 18:27:51 2017 gastal_r
+// Last update Thu Jun 15 21:11:28 2017 gastal_r
 //
 
 #include      "WorkingQueue.hpp"
@@ -45,7 +45,8 @@ WorkingQueue::Data::Data(size_t id, bool player)
 {}
 
 WorkingQueue::WorkingQueue()
-  : _sceneMgr(nullptr)
+  : _sceneMgr(nullptr),
+  _player(nullptr)
 {
   std::cout << "*********** CREATE WORKINGQUEUE ************" << std::endl;
 }
@@ -111,7 +112,7 @@ void        WorkingQueue::hitEntity(const WorkingQueue::Data &data)
 {
   if (data._player)
   {
-    _hitPlayer(data._damages);
+    _player->takeDamage(data._damages);
   }
   else if (_entity[data._id])
   {
