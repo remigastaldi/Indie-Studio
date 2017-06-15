@@ -5,14 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Wed Jun 14 22:05:30 2017 gastal_r
+// Last update Thu Jun 15 14:13:26 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
 
 GameLogic::GameLogic()
   : GameState(),
-  WorkingQueue(std::function<void(void)>([=] (void) { this->playerDie(); })),
+  WorkingQueue(),
   Socket(SOCKET_SERVER, SOCKET_PORT, std::rand(), "room"),
   _shutDown(false),
   _camera(nullptr),
@@ -28,7 +28,10 @@ GameLogic::GameLogic()
   _rayCast(nullptr),
   _collisionRayCast(nullptr),
   _player(nullptr)
-{}
+{
+  _playerDie =std::function<void(void)>([=] (void) { this->playerDie(); });
+  _hitPlayer = std::function<void(size_t)>([=] (size_t damages) { this->hitPlayer(damages); });
+}
 
 void          GameLogic::initGameLogic(void)
 {
@@ -126,6 +129,11 @@ void          GameLogic::playerDie(void)
 {
   std::cout << "*************** PLAYER DIE ***********************" << std::endl;
   exit();
+}
+
+void          GameLogic::hitPlayer(size_t damages)
+{
+  _player->takeDamage(damages);
 }
 
 bool 	        GameLogic::frameStarted(const Ogre::FrameEvent &evt)

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Thu Jun 15 12:15:04 2017 gastal_r
+// Last update Thu Jun 15 14:09:55 2017 gastal_r
 //
 
 #ifndef     _WORKING_HPP_
@@ -63,8 +63,7 @@ public:
   };
 
 public:
-  explicit WorkingQueue(const std::function<void()> &playerDie);
-  WorkingQueue() {};
+  WorkingQueue();
 
   void pushToQueue(WorkingQueue::Action, const WorkingQueue::Data &);
 
@@ -91,6 +90,7 @@ protected:
   std::unique_ptr<OgreBulletDynamics::DynamicsWorld> _world;
   std::vector<size_t>         _focus;
   std::function<void()>       _playerDie;
+  std::function<void(size_t damages)>   _hitPlayer;
 };
 
 #endif /* _WORKING_HPP_ */

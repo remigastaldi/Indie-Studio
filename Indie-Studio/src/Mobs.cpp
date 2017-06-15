@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun 13 21:30:43 2017 gastal_r
-// Last update Tue Jun 13 21:54:39 2017 gastal_r
+// Last update Thu Jun 15 12:41:16 2017 gastal_r
 //
 
 #include      "Mobs.hpp"
@@ -28,7 +28,7 @@ Zombie::Zombie(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::MOB);
 
-  addToBulletWorld(position);
+  addToBulletWorld(Ogre::Vector3(position.x, position.y + 2, position.z));
   btVector3 posBody(_ghostObject->getWorldTransform().getOrigin());
   _node->setPosition(Utils::cvt(posBody));
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Zombie created [id] " + std::to_string(id) + " =====");

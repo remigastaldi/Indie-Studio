@@ -39,6 +39,7 @@ public:
 
   void  initGameLogic(void);
   void  playerDie(void);
+  void  hitPlayer(size_t damages);
   // Ogre::FrameListener
   virtual bool frameStarted(const Ogre::FrameEvent &evt);
   virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);

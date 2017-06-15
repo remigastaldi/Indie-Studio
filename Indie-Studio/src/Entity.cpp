@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Wed Jun 14 23:21:02 2017 gastal_r
+// Last update Thu Jun 15 14:18:04 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -163,6 +163,7 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
 
 void          Entity::takeDamage(size_t value)
 {
+  std::cout << "TAKE DAMAGES" << std::endl;
   _health -= value;
   _healthBar->setProgress((float) _health / (float) _maxHealth);
 }
