@@ -47,15 +47,9 @@ function checkDistance(userPosition, enemisPosition)
     return (-1);
   var xPos = math.pow((enemisPosition.x - userPosition.x), 2);
   var yPos = math.pow((enemisPosition.y - userPosition.y), 2);
-  var distance = math.sqrt(xPos + yPos);
+  var zPos = math.pow((enemisPosition.z - userPosition.z), 2);
+  var distance = math.sqrt(xPos + yPos + zPos);
   return (distance);
-}
-
-function userExist(id) {
-  if (users[id])
-    return (true);
-  else
-    return (false);
 }
 
 function removeUser(server_id)
@@ -162,7 +156,7 @@ function IAEnemis()
         continue;
       }
       var dist = checkDistance(user.position, enemis[bot].position);
-      if (dist < 3 && enemis[bot].wait != true)
+      if (dist < 5 && enemis[bot].wait != true)
       {
         enemis[bot].wait = true;
         var damages = touched(0, user, Spell.ANGEL);
@@ -176,10 +170,11 @@ function IAEnemis()
         console.log("damages: " + damages);
         setTimeout(function()
         {
-          enemis[bot].wait = false;
+          if (enemis[bot])
+            enemis[bot].wait = false;
         }, 1000);
       }
-      else if (dist < 7)
+      else if (dist < 14 && enemis[bot].wait != true)
       {
           io.to(user.room).emit("move", {
             send_by: enemis[bot].id,
@@ -190,7 +185,7 @@ function IAEnemis()
           });
           enemis[bot].destination = user.position;
       }
-      else
+      else if (enemis[bot].wait != true)
       {
         io.to(user.room).emit("focus", {
           send_by: enemis[bot].id,
@@ -198,6 +193,14 @@ function IAEnemis()
           focus: 0
         });
         enemis[bot].focus = 0;
+        enemis[bot].destination = enemis[bot].position;
+        io.to(user.room).emit("move", {
+          send_by: enemis[bot].id,
+          send_to: 0,
+          position: enemis[bot].position,
+          destination: enemis[bot].position,
+          status: enemis[bot].status
+        });
       }
     }
     else
@@ -207,7 +210,7 @@ function IAEnemis()
         var user = users[user];
         if (!user || user.finished == false)
           continue;
-        if (checkDistance(user.position, enemis[bot].position) < 5)
+        if (checkDistance(user.position, enemis[bot].position) < 14)
         {
           io.to(user.room).emit("move", {
             send_by: enemis[bot].id,
