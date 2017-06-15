@@ -44,12 +44,12 @@ function newBot(pos, type, room)
 
   switch (type) {
     case EntityType.ZOMBIE:
-      life = 200;
+      life = 300;
       range_attack = 3.5;
       range_move = 14;
       break;
     case EntityType.SKELETON:
-      life = 50;
+      life = 150;
       range_attack = 7;
       range_move = 17;
       break;
