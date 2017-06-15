@@ -419,7 +419,7 @@ app.get('/bots/new', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send("Bot Created ID: " + id);
 
-  enemis[id] = new Entity(id, id, "BOT " + id, EntityType.ZOMBIE, "room", 10);
+  enemis[id] = new Entity(id, id, "BOT " + id, EntityType.ZOMBIE, "room", 100);
   enemis[id].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
   enemis[id].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
 
