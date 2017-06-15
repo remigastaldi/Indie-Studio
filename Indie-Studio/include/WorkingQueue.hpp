@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Thu Jun 15 21:09:39 2017 gastal_r
+// Last update Fri Jun 16 01:10:26 2017 gastal_r
 //
 
 #ifndef     _WORKING_HPP_
@@ -47,7 +47,7 @@ public:
   public:
     Data(Entity::Type, Entity::Status, size_t id, Ogre::Vector3 &position, Ogre::Vector3 &destination, size_t health);
     Data(Entity::Status, size_t id, Ogre::Vector3 &position, Ogre::Vector3 &destination);
-    Data(Spell::Type, Spell::Status, Ogre::Vector3 &position, Ogre::Vector3 &destination);
+    Data(Spell::Type, Spell::Status, Ogre::Vector3 &position, Ogre::Vector3 &destination, bool player = false);
     Data(size_t id, size_t damages, bool player = false);
     Data(size_t id, bool player = false);
 
@@ -60,6 +60,7 @@ public:
     bool            _player;
     Ogre::Vector3   _position;
     Ogre::Vector3   _destination;
+    Collision::Type _collisionType;
     size_t          _health;
   };
 
@@ -86,6 +87,7 @@ protected:
 
   Ogre::SceneManager *_sceneMgr;
   std::unique_ptr<SpellManager>    _spellManagerSocket;
+  std::unique_ptr<SpellManager>    _spellManagerSocketMobs;
   std::unique_ptr<Collision::CollisionTools>  _collision;
   std::unordered_map<size_t, Entity *>  _entity;
   std::unique_ptr<OgreBulletDynamics::DynamicsWorld> _world;

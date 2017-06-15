@@ -5,13 +5,13 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:56:53 2017 gastal_r
-// Last update Wed Jun 14 21:27:48 2017 gastal_r
+// Last update Fri Jun 16 01:01:10 2017 gastal_r
 //
 
 #include      "Spell.hpp"
 
 Spell::Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback,
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback,
   Ogre::Real distance, Ogre::Real speed, Ogre::Real cooldown, Spell::Type type)
   :  _sceneMgr(sceneMgr),
   _collision(collision),
@@ -23,6 +23,7 @@ Spell::Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
   _speed(speed),
   _cooldown(cooldown),
   _type(type),
+  _collisionType(collisionType),
   _entity(nullptr),
   _node(nullptr),
   _animationState(nullptr),
@@ -66,16 +67,23 @@ Spell::End 	Spell::frameRenderingQueued(const Ogre::FrameEvent &evt)
     Ogre::Real move = _speed * evt.timeSinceLastFrame;
     _distance -= move;
 
-    Ogre::Ray ray(_node->getPosition(), _direction * move);
-    Collision::SCheckCollisionAnswer ret = _collision.check_ray_collision(
-    ray, Ogre::SceneManager::ENTITY_TYPE_MASK, _entity, _entity->getBoundingBox().getSize().x, true);
+    // Ogre::Ray ray(_node->getPosition(), _direction * move);
+    // Collision::SCheckCollisionAnswer ret = _collision.check_ray_collision(
+    //   ray, Ogre::SceneManager::ENTITY_TYPE_MASK, _entity, _entity->getBoundingBox().getSize().x, true);
+
+    Collision::SCheckCollisionAnswer ret = _collision.check_ray_collision(_node->getPosition(), _direction * move, _entity->getBoundingBox().getSize().x,
+      _entity->getBoundingBox().getSize().y, Ogre::SceneManager::ENTITY_TYPE_MASK, _entity, true);
 
     if (ret.collided)
     {
-      // if ()
       std::cout << _entity->getName() << " collide with " << ret.entity->getName() << " of type => " << (int) ret.type << std::endl;
-      _collideWith = ret.entity->getName();
-      return (Spell::End::COLLIDE);
+      if (ret.type == _collisionType || ret.type == Collision::Type::OTHER)
+      {
+        _collideWith = ret.entity->getName();
+        return (Spell::End::COLLIDE);
+      }
+      else if (ret.type == Collision::Type::WALL)
+        return (Spell::End::DISTANCE);
     }
 
     if (_distance <= 0.0)

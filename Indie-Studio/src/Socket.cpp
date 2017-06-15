@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Thu Jun 15 18:37:39 2017 gastal_r
+** Last update Fri Jun 16 01:15:07 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -101,7 +101,7 @@ void Socket::events()
           data->get_map()["destination"]->get_map()["y"]->get_double(),
           data->get_map()["destination"]->get_map()["z"]->get_double());
 
-        WorkingQueue::Data queueData((Spell::Type)data->get_map()["type"]->get_int(), Spell::Status::MOVE, position, destination);
+        WorkingQueue::Data queueData((Spell::Type)data->get_map()["type"]->get_int(), Spell::Status::MOVE, position, destination, 0);
         pushToQueue(WorkingQueue::Action::CREATE_SPELL, queueData);
       }
       _lock.unlock();

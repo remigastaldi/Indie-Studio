@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:49:15 2017 gastal_r
-// Last update Thu Jun 15 21:11:28 2017 gastal_r
+// Last update Fri Jun 16 01:14:55 2017 gastal_r
 //
 
 #include      "WorkingQueue.hpp"
@@ -26,11 +26,12 @@ WorkingQueue::Data::Data(Entity::Status status, size_t id, Ogre::Vector3 &positi
   _destination(destination)
 {}
 
-WorkingQueue::Data::Data(Spell::Type type, Spell::Status status, Ogre::Vector3 &position, Ogre::Vector3 &destination)
+WorkingQueue::Data::Data(Spell::Type type, Spell::Status status, Ogre::Vector3 &position, Ogre::Vector3 &destination, bool player)
 : _spell_type(type),
   _spell_status(status),
   _position(position),
-  _destination(destination)
+  _destination(destination),
+  _player(player)
 {}
 
 WorkingQueue::Data::Data(size_t id, size_t damages, bool player)
@@ -84,7 +85,10 @@ void        WorkingQueue::killedEntityQueue(const WorkingQueue::Data &data)
 
 void        WorkingQueue::createSpellQueue(const WorkingQueue::Data &data)
 {
-  _spellManagerSocket->launchSpell(data._spell_type, data._position, data._destination);
+  if (data._player)
+    _spellManagerSocket->launchSpell(data._spell_type, data._position, data._destination);
+  else
+    _spellManagerSocketMobs->launchSpell(data._spell_type, data._position, data._destination);
 }
 
 void        WorkingQueue::focusEntityQueue(const WorkingQueue::Data &data)

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Thu Jun 15 21:11:12 2017 gastal_r
+// Last update Thu Jun 15 23:37:14 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -56,9 +56,10 @@ void          GameLogic::initGameLogic(void)
     Ogre::AxisAlignedBox(Ogre::Vector3 (-10000, -10000, -10000), Ogre::Vector3 (10000,  10000,  10000)),
     Ogre::Vector3(0,-9.81,0)));
 
-  _spellManagerSocket.reset(new SpellManager(*_sceneMgr, *_collision, *mDevice->soundManager));
+  _spellManagerSocket.reset(new SpellManager(*_sceneMgr, *_collision, *mDevice->soundManager, Collision::Type::MOB));
   std::function<void(Spell::Type, const std::string &)> sendCollisionFunc([=] (Spell::Type type, const std::string &id) { this->sendCollision(type, id); } );
-  _spellManager.reset(new SpellManager(*_sceneMgr, *_collision, *mDevice->soundManager, sendCollisionFunc));
+  _spellManager.reset(new SpellManager(*_sceneMgr, *_collision, *mDevice->soundManager, sendCollisionFunc, Collision::Type::MOB));
+  _spellManagerSocketMobs.reset(new SpellManager(*_sceneMgr, *_collision, *mDevice->soundManager, sendCollisionFunc, Collision::Type::PLAYER));
 
   #if DEBUG_DRAWER
     debugDrawer = new OgreBulletCollisions::DebugDrawer();

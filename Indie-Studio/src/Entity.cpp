@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Thu Jun 15 18:34:16 2017 gastal_r
+// Last update Fri Jun 16 00:44:04 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -99,7 +99,7 @@ void  Entity::updateEntityHealthBar(const Ogre::Camera &camera)
 
 void 	Entity::changeAnimation(Entity::Status status)
 {
-  return;
+  // return;
 	switch (status)
 	{
 	case Entity::Status::IMMOBILE :

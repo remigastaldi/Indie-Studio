@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:43:07 2017 gastal_r
-// Last update Wed Jun 14 21:29:07 2017 gastal_r
+// Last update Thu Jun 15 23:08:34 2017 gastal_r
 //
 
 #ifndef _SPELL_HPP_
@@ -77,7 +77,7 @@ public:
 
 public:
   Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-    size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback,
+    size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback,
     Ogre::Real distance, Ogre::Real speed, Ogre::Real cooldown, Spell::Type type);
 
   virtual ~Spell();
@@ -110,6 +110,7 @@ protected:
   Ogre::Real			      _speed;
   Ogre::Real            _cooldown;
   Spell::Type           _type;
+  Collision::Type       _collisionType;
   Ogre::Entity          *_entity;
   Ogre::SceneNode       *_node;
   Ogre::AnimationState	*_animationState;
@@ -161,10 +162,10 @@ class BearBuff;
 
 #define   SPELL_INIT_PARAMETERS   \
 Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager, \
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback
 
 #define   SPELL_INIT_VARS   \
-sceneMgr, collision, soundManager, id, position, destination, disableCallback
+sceneMgr, collision, soundManager, id, position, destination, collisionType, disableCallback
 
 template<typename T>
 inline Spell * createInstance(SPELL_INIT_PARAMETERS)
