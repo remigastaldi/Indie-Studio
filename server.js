@@ -421,8 +421,8 @@ app.get('/bots/new', function (req, res) {
   res.send("Bot Created ID: " + id);
 
   enemis[id] = new Entity(id, id, "BOT " + id, EntityType.ZOMBIE, "room", 100);
-  enemis[id].setPosition(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
-  enemis[id].setDestination(-23.780986785888672, -2.1303372383117676, 1.5097132921218872);
+  enemis[id].setPosition(-1.7588584423065186, 0.12098400294780731, 1.6178098917007446);
+  enemis[id].setDestination(-1.7588584423065186, 0.12098400294780731, 1.6178098917007446);
 
   io.emit("create_entity", {
     send_by: enemis[id]["id"],
