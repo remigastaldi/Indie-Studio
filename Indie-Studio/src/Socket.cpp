@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Thu Jun 15 18:37:39 2017 gastal_r
+** Last update Thu Jun 15 21:47:54 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -100,6 +100,11 @@ void Socket::events()
           data->get_map()["destination"]->get_map()["x"]->get_double(),
           data->get_map()["destination"]->get_map()["y"]->get_double(),
           data->get_map()["destination"]->get_map()["z"]->get_double());
+
+        if (data->get_map()["bot"]->get_int() == 1)
+          std::cout << "CREATE BY BOT" << "\n";
+        else
+          std::cout << "CREATE BY PLAYER" << "\n";
 
         WorkingQueue::Data queueData((Spell::Type)data->get_map()["type"]->get_int(), Spell::Status::MOVE, position, destination);
         pushToQueue(WorkingQueue::Action::CREATE_SPELL, queueData);
@@ -349,6 +354,7 @@ void Socket::sendSpell(Spell::Type type, const Ogre::Vector3 &playerPos, const O
   obj.get()->get_map()["type"] =  sio::int_message::create((int)type);
   obj.get()->get_map()["position"] =  position;
   obj.get()->get_map()["destination"] =  destination;
+  obj.get()->get_map()["bot"] =  sio::int_message::create(0);
   obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
   obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
 
