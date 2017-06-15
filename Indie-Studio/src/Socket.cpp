@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Wed Jun 14 23:14:50 2017 gastal_r
+** Last update Thu Jun 15 14:24:03 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -306,7 +306,7 @@ void Socket::wait()
 
 void Socket::emit(const std::string &event, std::shared_ptr<sio::message> const &request)
 {
-  if (_killed == false)
+  if (_killed == false && _connect_finish == true)
     _current_socket->emit(event, request);
 }
 
