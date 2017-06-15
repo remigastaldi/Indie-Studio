@@ -48,6 +48,8 @@ function Entity(id, server_id, username, type, room, health) {
 
   this.focus = 0;
   this.wait = false;
+  this.range_attack = 4;
+  this.range_move = 14;
 
   /* END BOT SECTION */
 
