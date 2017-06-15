@@ -42,6 +42,7 @@ function Entity(id, server_id, username, type, room, health) {
   this.maxhealth = health;
   this.server_id = server_id
   this.status = 0;
+  this.finished = false;
 
   /* BOT SECTION */
 

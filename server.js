@@ -156,7 +156,7 @@ function IAEnemis()
     if (enemis[bot].focus != 0)
     {
       var user = users[enemis[bot].focus];
-      if (!user)
+      if (!user || user.finished == false)
       {
         log("tests");
         continue;
@@ -166,12 +166,12 @@ function IAEnemis()
       {
         enemis[bot].wait = true;
         var damages = touched(0, user, Spell.ANGEL);
-        // io.to(user.room).emit("hitted", {
-        //   send_by: enemis[bot].id,
-        //   send_to: 0,
-        //   hitted: user.id,
-        //   damages: damages
-        // });
+        io.to(user.room).emit("hitted", {
+          send_by: enemis[bot].id,
+          send_to: 0,
+          hitted: user.id,
+          damages: damages
+        });
         console.log("hit: " + user.id + " [by] : " + enemis[bot].id );
         console.log("damages: " + damages);
         setTimeout(function()
@@ -205,7 +205,7 @@ function IAEnemis()
       for (user in users)
       {
         var user = users[user];
-        if (!user)
+        if (!user || user.finished == false)
           continue;
         if (checkDistance(user.position, enemis[bot].position) < 5)
         {
@@ -313,6 +313,7 @@ io.on('connection', function (socket) {
       users[socket.id].health = data["health"];
       users[socket.id].maxhealth = data["health"];
       users[socket.id].type = data["type"];
+      users[socket.id].finished = true;
       users[socket.id].setDestination(data["destination"]["x"], data["destination"]["y"], data["destination"]["z"]);
       users[socket.id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
       users[socket.id].setStatus(data["status"]);
@@ -381,7 +382,7 @@ io.on('connection', function (socket) {
 
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
-    users[socket.id] = new Entity(data["user_id"], socket.id, "User " + data["user_id"], data["type"], data["room"], data["health"]);
+    users[socket.id] = new Entity(data["user_id"], socket.id, "User " + data["user_id"], EntityType.ANGEL, data["room"], 100);
     totalConnected++;
   });
 
