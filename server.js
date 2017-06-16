@@ -512,6 +512,21 @@ app.get('/bots/clear', function (req, res) {
   }
 });
 
+app.get('/test', function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send("TEST HEAL");
+
+  for (user in users)
+  {
+    io.to(users[user].room).emit("hitted", {
+      send_by: 42,
+      send_to: 0,
+      hitted: users[user].id,
+      damages: -100
+    });
+  }
+});
+
 app.get('/pull', function(req, res)
 {
   res.setHeader('Content-Type', 'application/json');
