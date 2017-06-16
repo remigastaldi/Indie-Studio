@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Fri Jun 16 14:58:13 2017 gastal_r
+// Last update Fri Jun 16 20:18:34 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -76,6 +76,7 @@ void          GameLogic::initGameLogic(void)
     _world->setDebugDrawer(debugDrawer);
   #endif
 
+  mDevice->data.shader = 3;
   switch (mDevice->data.shader)
   {
   case 0:
@@ -264,7 +265,7 @@ void          GameLogic::refreshServerPlayerPos(void)
   if (std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() >= 100)
   {
     t1 = std::chrono::high_resolution_clock::now();
-    move(*_player);
+    refreshPos(*_player);
     for (const auto & it : _focus)
     {
       refreshPos(*_entity[it]);

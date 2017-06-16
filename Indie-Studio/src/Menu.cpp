@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Fri Jun 16 12:13:20 2017 gastal_r
+// Last update Fri Jun 16 20:13:14 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -172,7 +172,7 @@ bool        Menu::ApplyButton(const CEGUI::EventArgs &e)
       break;
     case 1:
       mDevice->window->resize(1600, 900);
-      mDevice->data.r_height = 1200;
+      mDevice->data.r_height = 900;
       mDevice->data.r_length = 1600;
       break;
     case 2:
@@ -190,16 +190,16 @@ bool        Menu::ApplyButton(const CEGUI::EventArgs &e)
   switch (item->getID())
   {
     case 0:
-      mDevice->data.shader = 1;
+      mDevice->data.shader = 0;
       break;
     case 1:
-      mDevice->data.shader = 2;
+      mDevice->data.shader = 1;
       break;
     case 2:
-      mDevice->data.shader = 3;
+      mDevice->data.shader = 2;
       break;
     case 3:
-      mDevice->data.shader = 4;
+      mDevice->data.shader = 3;
       break;
   }
   CEGUI::System::getSingleton().getRenderer()->setDisplaySize(CEGUI::Sizef(mDevice->data.r_length, mDevice->data.r_height));
@@ -212,6 +212,30 @@ bool        Menu::ApplyButton(const CEGUI::EventArgs &e)
   return (true);
 }
 
+bool        Menu::catchSpellKey(const CEGUI::EventArgs &e)
+{
+  _spellBindButton[0].first->setText("Press key");
+  _spellBindButton[0].second = true;
+}
+
+bool        Menu::catchSpellKey1(const CEGUI::EventArgs &e)
+{
+  _spellBindButton[1].first->setText("Press key");
+  _spellBindButton[1].second = true;
+}
+
+bool        Menu::catchSpellKey2(const CEGUI::EventArgs &e)
+{
+  _spellBindButton[2].first->setText("Press key");
+  _spellBindButton[2].second = true;
+}
+
+bool        Menu::catchSpellKey3(const CEGUI::EventArgs &e)
+{
+  _spellBindButton[3].first->setText("Press key");
+  _spellBindButton[3].second = true;
+}
+
 bool         Menu::buttonOptions(const CEGUI::EventArgs &e)
 {
   if (_options == nullptr)
@@ -222,34 +246,59 @@ bool         Menu::buttonOptions(const CEGUI::EventArgs &e)
     _ButtonBack = _options->getChild("BackButton");
     _ButtonBack->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::Backbutton, this));
 
+    int windowWidth = CEGUI::CoordConverter::screenToWindowX(
+      *CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow(), CEGUI::UDim(1,0));
     // Shader drop down menu
     _shadingBox = (CEGUI::Combobox*)_options->getChild("Background_Settings/ComboboxShading");
-    CEGUI::ListboxTextItem *item;
-    item = new CEGUI::ListboxTextItem("Low", 0);
-    _shadingBox->addItem(item);
-    item = new CEGUI::ListboxTextItem("Medium", 1);
-    _shadingBox->addItem(item);
-    _shadingBox->setItemSelectState(item, true);
-    item = new CEGUI::ListboxTextItem("High", 2);
-    _shadingBox->addItem(item);
-    item = new CEGUI::ListboxTextItem("Ultra", 3);
-    _shadingBox->addItem(item);
-
+    CEGUI::ListboxTextItem *item[8];
+    item[0] = new CEGUI::ListboxTextItem("Low", 0);
+    _shadingBox->addItem(item[0]);
+    item[1] = new CEGUI::ListboxTextItem("Medium", 1);
+    _shadingBox->addItem(item[1]);
+    item[2] = new CEGUI::ListboxTextItem("High", 2);
+    _shadingBox->addItem(item[2]);
+    item[3] = new CEGUI::ListboxTextItem("Ultra", 3);
+    _shadingBox->addItem(item[3]);
     // Resolution drop down menu
     _resolBox = (CEGUI::Combobox*)_options->getChild("Background_Settings/ComboboxResol");
-    item = new CEGUI::ListboxTextItem("1280x720", 0);
-    _resolBox->addItem(item);
-    item = new CEGUI::ListboxTextItem("1600x1200", 1);
-    _resolBox->addItem(item);
-    item = new CEGUI::ListboxTextItem("1920x1080", 2);
-    _resolBox->addItem(item);
-    _resolBox->setItemSelectState(item, true);
-    item = new CEGUI::ListboxTextItem("3840x2160", 3);
-    _resolBox->addItem(item);
+    item[4] = new CEGUI::ListboxTextItem("1280x720", 0);
+    _resolBox->addItem(item[4]);
+    item[5] = new CEGUI::ListboxTextItem("1600x900", 1);
+    _resolBox->addItem(item[5]);
+    item[6] = new CEGUI::ListboxTextItem("1920x1080", 2);
+    _resolBox->addItem(item[6]);
+    item[7] = new CEGUI::ListboxTextItem("3840x2160", 3);
+    _resolBox->addItem(item[7]);
+    switch (windowWidth)
+    {
+    case 1280:
+      _resolBox->setItemSelectState(item[4], true);
+      break;
+    case 1600:
+      _resolBox->setItemSelectState(item[5], true);
+      break;
+    case 1920:
+      _resolBox->setItemSelectState(item[6], true);
+      break;
+    case 3840:
+      _resolBox->setItemSelectState(item[7], true);
+      break;
+    }
+    _shadingBox->setItemSelectState(item[3], true);
+
 
     // Apply Button
     _applyButton = _options->getChild("Background_Settings/ApplyButton");
     _applyButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::ApplyButton, this));
+
+    _spellBindButton[0].first = _options->getChild("Background_Settings/Spell1Button");
+    _spellBindButton[1].first = _options->getChild("Background_Settings/Spell2Button");
+    _spellBindButton[2].first = _options->getChild("Background_Settings/Spell3Button");
+    _spellBindButton[3].first = _options->getChild("Background_Settings/Spell4Button");
+    _spellBindButton[0].first->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::catchSpellKey, this));
+    _spellBindButton[1].first->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::catchSpellKey1, this));
+    _spellBindButton[2].first->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::catchSpellKey2, this));
+    _spellBindButton[3].first->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::catchSpellKey3, this));
   }
   return (true);
 }
@@ -291,9 +340,9 @@ void Menu::createScene(void)
 
   _splashButton = _splashScreen->getChild("SplashScreenButton");
   _splashButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::SplashButton, this));
-
-  GameState *dungeon = findByName("Dungeon");
-  changeGameState(dungeon);
+  //
+  // GameState *dungeon = findByName("Dungeon");
+  // changeGameState(dungeon);
 }
 
 // bool GameMenuDemo::handleLoginAcceptButtonClicked(const CEGUI::EventArgs&)
@@ -363,20 +412,43 @@ bool Menu::frameEnded(const Ogre::FrameEvent& evt)
 //-------------------------------------------------------------------------------------
 bool Menu::keyPressed( const OIS::KeyEvent &arg )
 {
-    if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
-    {
-        mDevice->window->writeContentsToTimestampedFile("screenshot", ".jpg");
-    }
-    else if (arg.key == OIS::KC_ESCAPE)
-    {
-        mShutDown = true;
-        Shutdown();
-    }
-    else
-    {
-        // _cameraMan->injectKeyDown(arg);
-    }
-
+  if (_spellBindButton[0].second)
+  {
+    _spellBindButton[0].second = false;
+    _spellBindButton[0].first->setText(mDevice->keyboard->getAsString(arg.key));
+    mDevice->data.keys[0] = arg.key;
+  }
+  else if (_spellBindButton[1].second)
+  {
+    _spellBindButton[1].second = false;
+    _spellBindButton[1].first->setText(mDevice->keyboard->getAsString(arg.key));
+    mDevice->data.keys[1] = arg.key;
+  }
+  else if (_spellBindButton[2].second)
+  {
+    _spellBindButton[2].second = false;
+    _spellBindButton[2].first->setText(mDevice->keyboard->getAsString(arg.key));
+    mDevice->data.keys[2] = arg.key;
+  }
+  else if (_spellBindButton[3].second)
+  {
+    _spellBindButton[3].second = false;
+    _spellBindButton[3].first->setText(mDevice->keyboard->getAsString(arg.key));
+    mDevice->data.keys[3] = arg.key;
+  }
+  if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
+  {
+    mDevice->window->writeContentsToTimestampedFile("screenshot", ".jpg");
+  }
+  else if (arg.key == OIS::KC_ESCAPE)
+  {
+    mShutDown = true;
+    Shutdown();
+  }
+  else
+  {
+    // _cameraMan->injectKeyDown(arg);
+  }
     return true;
 }
 

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:59:44 2017 gastal_r
-// Last update Sat Jun 10 12:33:20 2017 gastal_r
+// Last update Fri Jun 16 17:34:05 2017 gastal_r
 //
 
 #ifndef       _MENU_HPP_
@@ -53,9 +53,13 @@ public:
   bool         buttonInfos(const CEGUI::EventArgs &e);
   bool         buttonClose(const CEGUI::EventArgs &e);
   bool         buttonOptions(const CEGUI::EventArgs &e);
-  bool        Backbutton(const CEGUI::EventArgs &e);
-  bool        SplashButton(const CEGUI::EventArgs &e);
-  bool        ApplyButton(const CEGUI::EventArgs &e);
+  bool         Backbutton(const CEGUI::EventArgs &e);
+  bool         SplashButton(const CEGUI::EventArgs &e);
+  bool         ApplyButton(const CEGUI::EventArgs &e);
+  bool         catchSpellKey(const CEGUI::EventArgs &e);
+  bool         catchSpellKey1(const CEGUI::EventArgs &e);
+  bool         catchSpellKey2(const CEGUI::EventArgs &e);
+  bool         catchSpellKey3(const CEGUI::EventArgs &e);
 
 private:
   char mPolygonRenderingMode;
@@ -93,6 +97,8 @@ private:
   CEGUI::Combobox   *_shadingBox;
   CEGUI::Combobox   *_resolBox;
   CEGUI::Window     *_applyButton;
+
+  std::unordered_map<size_t, std::pair<CEGUI::Window *, bool>> _spellBindButton;
 
   bool mShutDown;
   Ogre::Camera *_camera;
