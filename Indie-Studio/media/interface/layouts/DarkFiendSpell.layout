@@ -20,8 +20,8 @@
             </Window>
             <Window type="Vanilla/StaticText" name="CoolDownTextAngel" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Font" value="Jura-18" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
-                <Property name="TextColours" value="tl:FFDF9B2F tr:FFDF9B2F bl:FFDF9B2F br:FFDF9B2F" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
@@ -43,8 +43,8 @@
             </Window>
             <Window type="Vanilla/StaticText" name="CoolDownTextStorm" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Font" value="Jura-18" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
-                <Property name="TextColours" value="tl:FFDF9B2F tr:FFDF9B2F bl:FFDF9B2F br:FFDF9B2F" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
@@ -66,8 +66,8 @@
             </Window>
             <Window type="Vanilla/StaticText" name="CoolDownTextSpectre" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Font" value="Jura-18" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
-                <Property name="TextColours" value="tl:FFDF9B2F tr:FFDF9B2F bl:FFDF9B2F br:FFDF9B2F" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
@@ -89,8 +89,8 @@
             </Window>
             <Window type="Vanilla/StaticText" name="CoolDownTextFire" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Font" value="Jura-18" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
-                <Property name="TextColours" value="tl:FFDF9B2F tr:FFDF9B2F bl:FFDF9B2F br:FFDF9B2F" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
