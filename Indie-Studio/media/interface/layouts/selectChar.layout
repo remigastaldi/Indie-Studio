@@ -7,6 +7,7 @@
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="Generic/Image" name="Ingenior" >
             <Property name="Area" value="{{0.74,0},{0.12,0},{0.96,0},{0.95,0}}" />
+            <Property name="Alpha" value="0.9" />
             <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Window type="Vanilla/StaticText" name="TextIce" >
@@ -16,6 +17,7 @@
 Launch stalactites</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -28,6 +30,7 @@ Launch stalactites</Property>
                 <Property name="Area" value="{{0.04,0},{-0.025,0},{0.24,0},{0.075,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellStoneBall" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Vanilla/StaticText" name="TextBear" >
@@ -37,6 +40,7 @@ Launch stalactites</Property>
 Increase your fire distance</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -49,18 +53,21 @@ Increase your fire distance</Property>
                 <Property name="Area" value="{{0,0},{0.1,0},{0.58,0},{0.38,0}}" />
                 <Property name="Image" value="HUDDemo/Ingenior" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/Image" name="SpellBear" >
                 <Property name="Area" value="{{0.04,0},{0.32,0},{0.24,0},{0.42,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellHandBeard" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/Image" name="SpellBullets" >
                 <Property name="Area" value="{{0.04,0},{0.205,0},{0.24,0},{0.305,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellBullet" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/ImageButton" name="SelectIngenior" >
@@ -68,6 +75,7 @@ Increase your fire distance</Property>
                 <Property name="HoverImage" value="GameMenuImages/SelectHover" />
                 <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
                 <Property name="PushedImage" value="GameMenuImages/SelectHover" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Bottom" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
@@ -78,6 +86,7 @@ Increase your fire distance</Property>
 Use your gun to fire bullets</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -91,6 +100,7 @@ Use your gun to fire bullets</Property>
                 <Property name="Text" value="ENGINEER" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="211" />
@@ -106,6 +116,7 @@ Use your gun to fire bullets</Property>
 Lanch a stoneball</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -118,11 +129,13 @@ Lanch a stoneball</Property>
                 <Property name="Area" value="{{0.04,0},{0.09,0},{0.24,0},{0.19,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellIce" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
         </Window>
         <Window type="Generic/Image" name="Warrior" >
             <Property name="Area" value="{{0.05,0},{0.12,0},{0.27,0},{0.95,0}}" />
+            <Property name="Alpha" value="0.9" />
             <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Window type="Vanilla/StaticText" name="TextWarrior" >
@@ -130,6 +143,7 @@ Lanch a stoneball</Property>
                 <Property name="Text" value="WARRIOR" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="211" />
@@ -145,6 +159,7 @@ Lanch a stoneball</Property>
 Use your sword</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -160,6 +175,7 @@ Use your sword</Property>
 Attack directly in the heart</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -175,6 +191,7 @@ Attack directly in the heart</Property>
 Launch a wall of fire</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -190,6 +207,7 @@ Launch a wall of fire</Property>
 Use your dagger</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -202,24 +220,28 @@ Use your dagger</Property>
                 <Property name="Area" value="{{0.04,0},{0.09,0},{0.24,0},{0.19,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellSword" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/Image" name="SpellHeart" >
                 <Property name="Area" value="{{0.04,0},{0.205,0},{0.24,0},{0.305,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellHeart" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/Image" name="SpellEyeFire" >
                 <Property name="Area" value="{{0.04,0},{-0.025,0},{0.24,0},{0.075,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellEyeFire" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/Image" name="SpellDagger" >
                 <Property name="Area" value="{{0.04,0},{0.32,0},{0.24,0},{0.42,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellDagger" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/ImageButton" name="SelectWarrior" >
@@ -227,6 +249,7 @@ Use your dagger</Property>
                 <Property name="HoverImage" value="GameMenuImages/SelectHover" />
                 <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
                 <Property name="PushedImage" value="GameMenuImages/SelectHover" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Bottom" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
@@ -234,11 +257,13 @@ Use your dagger</Property>
                 <Property name="Area" value="{{0,0},{0.1,0},{0.58,0},{0.38,0}}" />
                 <Property name="Image" value="HUDDemo/Warrior" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
         </Window>
         <Window type="Generic/Image" name="Wizard" >
             <Property name="Area" value="{{0.28,0},{0.12,0},{0.5,0},{0.95,0}}" />
+            <Property name="Alpha" value="0.9" />
             <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Window type="Vanilla/StaticText" name="TextWizard" >
@@ -246,6 +271,7 @@ Use your dagger</Property>
                 <Property name="Text" value="WIZARD" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="211" />
@@ -261,6 +287,7 @@ Use your dagger</Property>
 Launch a fire ball</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -276,6 +303,7 @@ Launch a fire ball</Property>
 Add a buff to protect you</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -291,6 +319,7 @@ Add a buff to protect you</Property>
 Launch a tornado</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -306,6 +335,7 @@ Launch a tornado</Property>
 Add a buff to a friend</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -318,24 +348,28 @@ Add a buff to a friend</Property>
                 <Property name="Area" value="{{0.04,0},{0.09,0},{0.24,0},{0.19,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellFireBall" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/Image" name="SpellShield" >
                 <Property name="Area" value="{{0.04,0},{0.205,0},{0.24,0},{0.305,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellShield" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/Image" name="SpellTornado" >
                 <Property name="Area" value="{{0.04,0},{-0.025,0},{0.24,0},{0.075,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellTornado" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/Image" name="SpellLeaf" >
                 <Property name="Area" value="{{0.04,0},{0.32,0},{0.24,0},{0.42,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellLeaf" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/ImageButton" name="SelectWizard" >
@@ -343,6 +377,7 @@ Add a buff to a friend</Property>
                 <Property name="HoverImage" value="GameMenuImages/SelectHover" />
                 <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
                 <Property name="PushedImage" value="GameMenuImages/SelectHover" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Bottom" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
@@ -350,29 +385,34 @@ Add a buff to a friend</Property>
                 <Property name="Area" value="{{0,0},{0.1,0},{0.58,0},{0.38,0}}" />
                 <Property name="Image" value="HUDDemo/Wizard" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
         </Window>
         <Window type="Generic/Image" name="DarkFiend" >
             <Property name="Area" value="{{0.51,0},{0.12,0},{0.73,0},{0.95,0}}" />
+            <Property name="Alpha" value="0.9" />
             <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Window type="Generic/Image" name="SpellThunderStorm" >
                 <Property name="Area" value="{{0.04,0},{0.205,0},{0.24,0},{0.305,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellThunderStorm" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/Image" name="SpellSpectre" >
                 <Property name="Area" value="{{0.04,0},{0.32,0},{0.24,0},{0.42,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellSpectre" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/Image" name="SpellFire" >
                 <Property name="Area" value="{{0.04,0},{0.09,0},{0.24,0},{0.19,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellFire" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Vanilla/StaticText" name="TextLeaf" >
@@ -382,6 +422,7 @@ Add a buff to a friend</Property>
 Launch a spectre</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -397,6 +438,7 @@ Launch a spectre</Property>
 Buff to increase damages</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -410,6 +452,7 @@ Buff to increase damages</Property>
                 <Property name="Text" value="DARK FIEND" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="211" />
@@ -423,6 +466,7 @@ Buff to increase damages</Property>
                 <Property name="HoverImage" value="GameMenuImages/SelectHover" />
                 <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
                 <Property name="PushedImage" value="GameMenuImages/SelectHover" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Bottom" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
@@ -433,6 +477,7 @@ Buff to increase damages</Property>
 Launch a thunderstorm</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -448,6 +493,7 @@ Launch a thunderstorm</Property>
 Launch a fire line</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="304" />
@@ -460,12 +506,14 @@ Launch a fire line</Property>
                 <Property name="Area" value="{{0.04,0},{-0.025,0},{0.24,0},{0.075,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellAngel" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
             <Window type="Generic/Image" name="ImageDarkFiend" >
                 <Property name="Area" value="{{0,0},{0.1,0},{0.58,0},{0.38,0}}" />
                 <Property name="Image" value="HUDDemo/DarkFiend" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
         </Window>

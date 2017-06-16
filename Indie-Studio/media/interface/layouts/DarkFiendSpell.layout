@@ -3,6 +3,7 @@
 <GUILayout version="4" >
     <Window type="Generic/Image" name="DarkFiendSpellBar" >
         <Property name="Area" value="{{0.42,0},{0.87,0},{0.604,0},{0.955,0}}" />
+        <Property name="Alpha" value="0.7" />
         <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="Generic/ImageButton" name="SpellAngel" >
@@ -19,15 +20,12 @@
             </Window>
             <Window type="Vanilla/StaticText" name="CoolDownTextAngel" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-                <Property name="Text" value="5" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="78" />
                 <Property name="VertScrollPageSize" value="74" />
-                <Property name="HorzScrollDocumentSize" value="12" />
-                <Property name="VertScrollDocumentSize" value="20.5273" />
             </Window>
         </Window>
         <Window type="Generic/ImageButton" name="SpellThunderStorm" >
@@ -44,15 +42,12 @@
             </Window>
             <Window type="Vanilla/StaticText" name="CoolDownTextStorm" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-                <Property name="Text" value="5" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="78" />
                 <Property name="VertScrollPageSize" value="74" />
-                <Property name="HorzScrollDocumentSize" value="12" />
-                <Property name="VertScrollDocumentSize" value="20.5273" />
             </Window>
         </Window>
         <Window type="Generic/ImageButton" name="SpellSpectre" >
@@ -69,15 +64,12 @@
             </Window>
             <Window type="Vanilla/StaticText" name="CoolDownTextSpectre" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-                <Property name="Text" value="5" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="78" />
                 <Property name="VertScrollPageSize" value="74" />
-                <Property name="HorzScrollDocumentSize" value="12" />
-                <Property name="VertScrollDocumentSize" value="20.5273" />
             </Window>
         </Window>
         <Window type="Generic/ImageButton" name="SpellFire" >
@@ -94,15 +86,12 @@
             </Window>
             <Window type="Vanilla/StaticText" name="CoolDownTextFire" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-                <Property name="Text" value="5" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="78" />
                 <Property name="VertScrollPageSize" value="74" />
-                <Property name="HorzScrollDocumentSize" value="12" />
-                <Property name="VertScrollDocumentSize" value="20.5273" />
             </Window>
         </Window>
     </Window>
