@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Fri Jun 16 12:59:32 2017 gastal_r
+// Last update Fri Jun 16 14:58:13 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -149,36 +149,54 @@ bool 	        GameLogic::frameStarted(const Ogre::FrameEvent &evt)
 
 void          GameLogic::CheckCD()
 {
-
-  // if (_firstSpellIsCD == 1)
-    _cdSpells[0].second = std::chrono::high_resolution_clock::now();
-    _spells[0].first->setText(std::to_string(std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[0].second - _cdSpells[0].first).count()));
-  // if (_secondSpellIsCD == 1)
-    _cdSpells[1].second = std::chrono::high_resolution_clock::now();
-  // if (_thirdSpellIsCD == 1)
-    _cdSpells[2].second = std::chrono::high_resolution_clock::now();
-  // if (_fourthSpellIsCD == 1)
-    _cdSpells[3].second = std::chrono::high_resolution_clock::now();
-  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[0].second - _cdSpells[0].first).count() >= _player->getSpellCooldown(0))
+  if (_spells[0].second->isVisible())
   {
-    _spells[0].second->hide();
-    // _firstSpellIsCD = 0;
+    _cdSpells[0].second = std::chrono::high_resolution_clock::now();
+    std::string time(std::to_string(_player->getSpellCooldown(0) - std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[0].second - _cdSpells[0].first).count()));
+    time.erase(time.find_last_of("123456789") + 1, std::string::npos);
+    _spells[0].first->setText(time);
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[0].second - _cdSpells[0].first).count() >= _player->getSpellCooldown(0))
+    {
+      _spells[0].first->hide();
+      _spells[0].second->hide();
+    }
   }
-  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[1].second - _cdSpells[1].first).count() >= _player->getSpellCooldown(1))
+  if (_spells[1].second->isVisible())
+  {
+    _cdSpells[1].second = std::chrono::high_resolution_clock::now();
+    std::string time(std::to_string(_player->getSpellCooldown(1) - std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[1].second - _cdSpells[1].first).count()));
+    time.erase(time.find_last_of("123456789") + 1, std::string::npos);
+    _spells[1].first->setText(time);
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[1].second - _cdSpells[1].first).count() >= _player->getSpellCooldown(1))
     {
+      _spells[1].first->hide();
       _spells[1].second->hide();
-      // _secondSpellIsCD = 0;
     }
-  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[2].second - _cdSpells[2].first).count() >= _player->getSpellCooldown(2))
+  }
+  if (_spells[2].second->isVisible())
+  {
+    _cdSpells[2].second = std::chrono::high_resolution_clock::now();
+    std::string time(std::to_string(_player->getSpellCooldown(2) - std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[2].second - _cdSpells[2].first).count()));
+    time.erase(time.find_last_of("123456789") + 1, std::string::npos);
+    _spells[2].first->setText(time);
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[2].second - _cdSpells[2].first).count() >= _player->getSpellCooldown(2))
     {
+      _spells[2].first->hide();
       _spells[2].second->hide();
-      // _thirdSpellIsCD = 0;
     }
-  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[3].second - _cdSpells[3].first).count() >= _player->getSpellCooldown(3))
+  }
+  if (_spells[3].second->isVisible())
+  {
+    _cdSpells[3].second = std::chrono::high_resolution_clock::now();
+    std::string time(std::to_string(_player->getSpellCooldown(3) - std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[3].second - _cdSpells[3].first).count()));
+    time.erase(time.find_last_of("123456789") + 1, std::string::npos);
+    _spells[3].first->setText(time);
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[3].second - _cdSpells[3].first).count() >= _player->getSpellCooldown(3))
     {
+      _spells[3].first->hide();
       _spells[3].second->hide();
-      // _fourthSpellIsCD = 0;
     }
+  }
 }
 
 bool          GameLogic::frameRenderingQueued(const Ogre::FrameEvent& evt)
@@ -270,54 +288,54 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
 {
   if (arg.key == mDevice->data.keys[0])
   {
-    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[0].second - _cdSpells[0].first).count() >= _player->getSpellCooldown(0))
+    if (!_spells[0].second->isVisible())
     {
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
       #endif
       _spellManager->launchSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
-      _cdSpells[0].first = std::chrono::high_resolution_clock::now();
+      _spells[0].first->show();
       _spells[0].second->show();
-      // _firstSpellIsCD = 1;
+      _cdSpells[0].first = std::chrono::high_resolution_clock::now();
     }
   }
   else if (arg.key == mDevice->data.keys[1])
   {
-    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[1].second - _cdSpells[1].first).count() >= _player->getSpellCooldown(1))
+    if (!_spells[1].second->isVisible())
     {
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
       #endif
       _spellManager->launchSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
-      _cdSpells[1].first = std::chrono::high_resolution_clock::now();
+      _spells[1].first->show();
       _spells[1].second->show();
-      // _secondSpellIsCD = 1;
+      _cdSpells[1].first = std::chrono::high_resolution_clock::now();
     }
   }
   else if (arg.key == mDevice->data.keys[2])
   {
-    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[2].second - _cdSpells[2].first).count() >= _player->getSpellCooldown(2))
+    if (!_spells[2].second->isVisible())
     {
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
       #endif
       _spellManager->launchSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
-      _cdSpells[2].first = std::chrono::high_resolution_clock::now();
+      _spells[2].first->show();
       _spells[2].second->show();
-      // _thirdSpellIsCD = 1;
+      _cdSpells[2].first = std::chrono::high_resolution_clock::now();
     }
   }
   else if (arg.key == mDevice->data.keys[3])
   {
-    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[3].second - _cdSpells[3].first).count() >= _player->getSpellCooldown(3))
+    if (!_spells[3].second->isVisible())
     {
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
       #endif
-        _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
-        _cdSpells[3].first = std::chrono::high_resolution_clock::now();
-        _spells[3].second->show();
-        // _fourthSpellIsCD = 1;
+      _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
+      _cdSpells[3].first = std::chrono::high_resolution_clock::now();
+      _spells[3].first->show();
+      _spells[3].second->show();
     }
   }
 }
