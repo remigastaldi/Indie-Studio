@@ -56,7 +56,7 @@ void Dungeon::createScene(void)
           candlelight->setType(Ogre::Light::LT_POINT);
           //TODO sauvegarde des pointeurs pour les delete
           Ogre::SceneNode *test = _sceneMgr->getRootSceneNode()->createChildSceneNode("Dungeon" + std::to_string(std::rand()), it.pos);
-          Ogre::ParticleSystem *_particleSystem = _sceneMgr->createParticleSystem(("EyeFireParticle") + std::to_string(std::rand()), "Space/Sun");
+          Ogre::ParticleSystem *_particleSystem = _sceneMgr->createParticleSystem(("EyeFireParticle") + std::to_string(std::rand()), "Spell/Fireball");
           test->attachObject(_particleSystem);
           candlelight->setAttenuation	(32, 0.5, 0.0014, 0.07);
           candlelight->setCastShadows(false);
