@@ -21,6 +21,7 @@
             <Property name="Alpha" value="0.9" />
             <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Disabled" value="true" />
             <Property name="InheritsAlpha" value="false" />
         </Window>
         <Window type="Generic/Image" name="Body" >
@@ -28,6 +29,7 @@
             <Property name="Alpha" value="0.6" />
             <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="Disabled" value="true" />
             <Property name="InheritsAlpha" value="false" />
             <Window type="Vanilla/StaticText" name="CreditsText" >
                 <Property name="Area" value="{{0.1,0},{-0.05,0},{0.9,0},{0.95,0}}" />
@@ -63,6 +65,7 @@ Created by:
         <Window type="Generic/ImageButton" name="Close" >
             <Property name="Area" value="{{-0.005,0},{0.005,0},{-0.005,30},{0.005,30}}" />
             <Property name="HoverImage" value="GameMenuImages/CloseButtonHover" />
+            <Property name="AlwaysOnTop" value="true" />
             <Property name="NormalImage" value="GameMenuImages/CloseButtonNormal" />
             <Property name="PushedImage" value="GameMenuImages/CloseButtonHover" />
             <Property name="HorizontalAlignment" value="Right" />
