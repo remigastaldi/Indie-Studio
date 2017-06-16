@@ -1,7 +1,9 @@
 /* LOCAL VAR */
 var totalConnected = 0;
+var level = 1;
 var users = {};
 var enemis = {};
+var spawners = {};
 
 module.exports = {
   users: users,
@@ -25,10 +27,6 @@ var rl = readline.createInterface({
   terminal: false
 });
 
-/*
-  TEST MOBS
-*/
-
 function getRandomIntInclusive(min, max) {
   min = math.ceil(min);
   max = math.floor(max);
@@ -41,19 +39,31 @@ function newBot(pos, type, room)
   var life = 100;
   var range_move = 14;
   var range_attack = 3;
+  var wait_time = 500;
 
   switch (type) {
     case EntityType.ZOMBIE:
       life = 300;
       range_attack = 3.5;
-      range_move = 14;
+      range_move = 17;
+      wait_time = 1000;
       break;
     case EntityType.SKELETON:
       life = 150;
-      range_attack = 7;
+      range_attack = 10;
       range_move = 17;
+      wait_time = 700;
       break;
     default:
+  }
+
+  if (level != 1)
+  {
+    life += (level * 10);
+    range_attack += level;
+    range_move += level;
+    if (wait_time > 0)
+      wait_time -= (level * 10);
   }
 
   enemis[id] = new Entity(id, id, "BOT " + id, type, room, life);
@@ -61,6 +71,7 @@ function newBot(pos, type, room)
   enemis[id].setDestination(pos.x, pos.y, pos.z);
   enemis[id].range_attack = range_attack;
   enemis[id].range_move = range_move;
+  enemis[id].wait_time = wait_time;
 
   io.emit("create_entity", {
     send_by: enemis[id]["id"],
@@ -89,6 +100,8 @@ function checkDistance(userPosition, enemisPosition)
 
 function createSpell(sender, target, type)
 {
+  if (!target || !sender)
+    return;
   io.to(target.room).emit("create_spell",
   {
     send_by: sender.id,
@@ -237,7 +250,7 @@ function IAEnemis()
         {
           if (bot)
             bot.wait = false;
-        }, 1000);
+        }, bot.wait_time);
       }
       else if (dist < bot.range_move && bot.wait != true)
       {
@@ -371,7 +384,13 @@ io.on('connection', function (socket) {
 
   socket.on('refresh_pos', function (data) {
     if (enemis[data.user_id])
+    {
       enemis[data.user_id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
+    }
+    else if (users[socket.id])
+    {
+      users[socket.id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
+    }
   });
 
   socket.on("create_entity", function (data) {

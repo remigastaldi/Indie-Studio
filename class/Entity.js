@@ -50,6 +50,7 @@ function Entity(id, server_id, username, type, room, health) {
   this.wait = false;
   this.range_attack = 4;
   this.range_move = 14;
+  this.wait_time = 500;
 
   /* END BOT SECTION */
 
