@@ -496,7 +496,7 @@ app.get('/bots/new/zombie', function (req, res) {
 
 app.get('/bots/new/skeleton', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
-  res.send("Zombie bot created");
+  res.send("Skeleton bot created");
 
   newBot({x: -1.7588584423065186, y: -1.7588584423065186, z: 1.6178098917007446}, EntityType.SKELETON, "room");
 });
