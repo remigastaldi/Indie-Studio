@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Fri Jun 16 11:21:16 2017 gastal_r
+// Last update Fri Jun 16 12:18:56 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -132,7 +132,6 @@ void          GameLogic::playerDie(void)
 
   _resurectButton = _gameOverMenu->getChild("ResurectButton");
   _resurectButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonResurect, this));
-  // exit();
 }
 
 void          GameLogic::updatePlayersHealthBar(void)
@@ -268,7 +267,7 @@ void          GameLogic::sendServerPlayerPos(void)
 
 void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
 {
-  if (arg.key == mDevice->FirstSpellKey)
+  if (arg.key == mDevice->data.keys[0])
   {
     if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell1 - _t1).count() >= _player->getSpellCooldown(0))
     {
@@ -281,7 +280,7 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
       // _firstSpellIsCD = 1;
     }
   }
-  else if (arg.key == mDevice->SecondSpellKey)
+  else if (arg.key == mDevice->data.keys[1])
   {
     if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell2 - _t2).count() >= _player->getSpellCooldown(1))
     {
@@ -294,7 +293,7 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
       // _secondSpellIsCD = 1;
     }
   }
-  else if (arg.key == mDevice->ThirdSpellKey)
+  else if (arg.key == mDevice->data.keys[2])
   {
     if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell3 - _t3).count() >= _player->getSpellCooldown(2))
     {
@@ -307,7 +306,7 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
       // _thirdSpellIsCD = 1;
     }
   }
-  else if (arg.key == mDevice->FourthSpellKey)
+  else if (arg.key == mDevice->data.keys[3])
   {
     if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell4 - _t4).count() >= _player->getSpellCooldown(3))
     {

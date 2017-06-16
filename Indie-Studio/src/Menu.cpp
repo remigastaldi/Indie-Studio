@@ -5,14 +5,13 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Thu Jun 15 21:32:19 2017 gastal_r
+// Last update Fri Jun 16 12:13:20 2017 gastal_r
 //
 
 #include        "Menu.hpp"
 #include    "Entity.hpp"
 
 Menu::Menu() :
-  mPolygonRenderingMode('B'),
   mShutDown(false),
   _camera(nullptr),
   mLMouseDown(false),
@@ -293,8 +292,8 @@ void Menu::createScene(void)
   _splashButton = _splashScreen->getChild("SplashScreenButton");
   _splashButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::SplashButton, this));
 
-  // GameState *dungeon = findByName("Dungeon");
-  // changeGameState(dungeon);
+  GameState *dungeon = findByName("Dungeon");
+  changeGameState(dungeon);
 }
 
 // bool GameMenuDemo::handleLoginAcceptButtonClicked(const CEGUI::EventArgs&)
@@ -364,60 +363,7 @@ bool Menu::frameEnded(const Ogre::FrameEvent& evt)
 //-------------------------------------------------------------------------------------
 bool Menu::keyPressed( const OIS::KeyEvent &arg )
 {
-    if (arg.key == OIS::KC_T)   // cycle polygon rendering mode
-    {
-        Ogre::TextureFilterOptions tfo;
-        unsigned int aniso;
-
-        switch (mPolygonRenderingMode)
-        {
-        case 'B':
-			mPolygonRenderingMode = 'T';
-            tfo = Ogre::TFO_TRILINEAR;
-            aniso = 1;
-            break;
-        case 'T':
-			mPolygonRenderingMode = 'A';
-            tfo = Ogre::TFO_ANISOTROPIC;
-            aniso = 8;
-            break;
-        case 'A':
-			mPolygonRenderingMode = 'N';
-            tfo = Ogre::TFO_NONE;
-            aniso = 1;
-            break;
-        default:
-			mPolygonRenderingMode = 'B';
-            tfo = Ogre::TFO_BILINEAR;
-            aniso = 1;
-        }
-
-        Ogre::MaterialManager::getSingleton().setDefaultTextureFiltering(tfo);
-        Ogre::MaterialManager::getSingleton().setDefaultAnisotropy(aniso);
-    }
-    else if (arg.key == OIS::KC_R)   // cycle polygon rendering mode
-    {
-        Ogre::PolygonMode pm;
-
-        // switch (_camera->getPolygonMode())
-        // {
-        // case Ogre::PM_SOLID:
-        //     pm = Ogre::PM_WIREFRAME;
-        //     break;
-        // case Ogre::PM_WIREFRAME:
-        //     pm = Ogre::PM_POINTS;
-        //     break;
-        // default:
-        //     pm = Ogre::PM_SOLID;
-        // }
-        //
-        // _camera->setPolygonMode(pm);
-    }
-    else if(arg.key == OIS::KC_F5)   // refresh all textures
-    {
-       Ogre::TextureManager::getSingleton().reloadAll();
-    }
-    else if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
+    if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
     {
         mDevice->window->writeContentsToTimestampedFile("screenshot", ".jpg");
     }
@@ -426,10 +372,6 @@ bool Menu::keyPressed( const OIS::KeyEvent &arg )
         mShutDown = true;
         Shutdown();
     }
-	else if (arg.key == OIS::KC_P)
-	{
-		// Ogre::SceneNode *test = mDevice->sceneMgr->getSceneNode("Particle");
-	}
     else
     {
         // _cameraMan->injectKeyDown(arg);

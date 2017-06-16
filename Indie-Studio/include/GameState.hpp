@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:20:33 2017 gastal_r
-// Last update Fri Jun  9 18:48:00 2017 gastal_r
+// Last update Fri Jun 16 12:16:53 2017 gastal_r
 //
 
 #ifndef         __GAMESTATE_HPP__
@@ -73,6 +73,7 @@ typedef struct
     int     r_height;
     int     r_length;
     Entity::Type    Class;
+    std::unordered_map<size_t, OIS::KeyCode> keys;
 }s_data;
 
 typedef struct

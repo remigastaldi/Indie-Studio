@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Thu Jun 15 21:10:20 2017 gastal_r
+// Last update Fri Jun 16 12:17:57 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -119,12 +119,6 @@ protected:
   bool             _secondSpellIsCD;
   bool             _thirdSpellIsCD;
   bool             _fourthSpellIsCD;
-
-  //OIS case
-  OIS::KeyCode   _firstSpellKey;
-  OIS::KeyCode   _secondSpellKey;
-  OIS::KeyCode   _thirdpellKey;
-  OIS::KeyCode   _fourthSpellKey;
 
 #if DEBUG_CAMERA
   OgreCookies::CameraMan* _cameraMan;

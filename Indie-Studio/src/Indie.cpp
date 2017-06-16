@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Mon Jun 12 01:59:29 2017 gastal_r
+// Last update Fri Jun 16 12:21:35 2017 gastal_r
 //
 
 #include        "Indie.hpp"
@@ -203,6 +203,10 @@ bool            Indie::init()
 
   _device.data.shader = 3;
   _device.data.Class = Entity::Type::WARRIOR;
+  _device.data.keys[0] = OIS::KC_A;
+  _device.data.keys[1] = OIS::KC_Z;
+  _device.data.keys[2] = OIS::KC_E;
+  _device.data.keys[3] = OIS::KC_R;
 
   return true;
 }
