@@ -61,4 +61,6 @@
     <Image height="87" name="ApplyHover" width="300" xPos="3546" yPos="1617" />
     <Image height="117" name="CloseButtonNormal" width="117" xPos="3201" yPos="1742" />
     <Image height="117" name="CloseButtonHover" width="117" xPos="3352" yPos="1743" />
+    <Image height="87" name="ResumeNormal" width="300" xPos="3550" yPos="1736" />
+    <Image height="87" name="ResumeHover" width="300" xPos="3550" yPos="1849" />
 </Imageset>

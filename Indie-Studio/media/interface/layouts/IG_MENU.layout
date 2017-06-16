@@ -3,36 +3,38 @@
 <GUILayout version="4" >
     <Window type="Generic/Image" name="BackgroundSettings" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-        <Property name="Alpha" value="0.6" />
+        <Property name="Alpha" value="0.4" />
         <Property name="Image" value="GameMenuImages/BackgroundSpell" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="Generic/Image" name="Settings" >
             <Property name="Area" value="{{0.4,0},{0.25,0},{0.65,0},{0.8,0}}" />
-            <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
+            <Property name="Alpha" value="0.8" />
+            <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="InheritsAlpha" value="false" />
             <Window type="Generic/ImageButton" name="BackToGame" >
-                <Property name="Area" value="{{0,0},{0.15,0},{0.31,0},{0.24,0}}" />
-                <Property name="HoverImage" value="GameMenuImages/PlayHover" />
-                <Property name="NormalImage" value="GameMenuImages/PlayNormal" />
-                <Property name="PushedImage" value="GameMenuImages/PlayHover" />
+                <Property name="Area" value="{{0,0},{0.15,0},{0.33,0},{0.24,0}}" />
+                <Property name="HoverImage" value="GameMenuImages/ResumeHover" />
+                <Property name="NormalImage" value="GameMenuImages/ResumeNormal" />
+                <Property name="PushedImage" value="GameMenuImages/ResumeHover" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
             <Window type="Vanilla/StaticText" name="SettingsText" >
                 <Property name="Area" value="{{0,0},{0,0},{0.5,0},{0.1,0}}" />
+                <Property name="Font" value="Jura-13" />
                 <Property name="Text" value="SETTINGS" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="240" />
-                <Property name="VertScrollPageSize" value="41" />
+                <Property name="VertScrollPageSize" value="59" />
                 <Property name="HorizontalAlignment" value="Centre" />
-                <Property name="HorzScrollDocumentSize" value="88" />
-                <Property name="VertScrollDocumentSize" value="20.5273" />
+                <Property name="HorzScrollDocumentSize" value="118" />
+                <Property name="VertScrollDocumentSize" value="26.6855" />
             </Window>
             <Window type="Generic/ImageButton" name="BackToMenu" >
-                <Property name="Area" value="{{0,0},{0.8,0},{0.31,0},{0.89,0}}" />
+                <Property name="Area" value="{{0,0},{0.8,0},{0.33,0},{0.89,0}}" />
                 <Property name="HoverImage" value="GameMenuImages/MainMenuHover" />
                 <Property name="NormalImage" value="GameMenuImages/MainMenuNormal" />
                 <Property name="PushedImage" value="GameMenuImages/MainMenuHover" />
