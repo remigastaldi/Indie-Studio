@@ -110,7 +110,7 @@ Dagger::Dagger(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create DaggerServer [id] " + std::to_string(id) +" =====");
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "DaggerServer:" : "Dagger:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "DaggerServer:" : "Dagger:") + std::to_string(id), "fireball.mesh");
+  _entity = sceneMgr.createEntity((disableCallback ? "DaggerServer:" : "Dagger:") + std::to_string(id), "stalactite.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -121,7 +121,7 @@ Dagger::Dagger(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
 
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "DaggerServerParticle:" : "DaggerParticle:") + std::to_string(id), "Spell/Fireball");
+  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "DaggerServerParticle:" : "DaggerParticle:") + std::to_string(id), "Spell/Stalactite");
   _node->attachObject(_particleSystem);
 
 

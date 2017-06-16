@@ -216,24 +216,28 @@ bool        Menu::catchSpellKey(const CEGUI::EventArgs &e)
 {
   _spellBindButton[0].first->setText("Press key");
   _spellBindButton[0].second = true;
+  return (true);
 }
 
 bool        Menu::catchSpellKey1(const CEGUI::EventArgs &e)
 {
   _spellBindButton[1].first->setText("Press key");
   _spellBindButton[1].second = true;
+  return (true);
 }
 
 bool        Menu::catchSpellKey2(const CEGUI::EventArgs &e)
 {
   _spellBindButton[2].first->setText("Press key");
   _spellBindButton[2].second = true;
+  return (true);
 }
 
 bool        Menu::catchSpellKey3(const CEGUI::EventArgs &e)
 {
   _spellBindButton[3].first->setText("Press key");
   _spellBindButton[3].second = true;
+  return (true);
 }
 
 bool         Menu::buttonOptions(const CEGUI::EventArgs &e)

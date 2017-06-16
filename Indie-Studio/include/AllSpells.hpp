@@ -70,8 +70,8 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
-#define     FIREBALL_SPEED 4.f
-#define     FIREBALL_DISTANCE 10.f
+#define     FIREBALL_SPEED 9.f
+#define     FIREBALL_DISTANCE 15.f
 #define     FIREBALL_COOLDOWN 1
 class Fireball : public Spell
 {

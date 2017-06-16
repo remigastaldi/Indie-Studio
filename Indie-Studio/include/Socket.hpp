@@ -13,7 +13,7 @@
 
  #include "WorkingQueue.hpp"
 
-#define SOCKET_SERVER "http://ezgames.com"
+#define SOCKET_SERVER "http://ezgames.eu"
 #define SOCKET_PORT 3000
 
 #ifdef WIN32
