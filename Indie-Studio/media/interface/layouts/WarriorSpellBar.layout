@@ -18,9 +18,10 @@
                 <Property name="Image" value="GameMenuImages/BackgroundSpell" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
-            <Window type="Vanilla/StaticText" name="CoolDownTextFire" >
+            <Window type="Vanilla/StaticText" name="CoolDownTextSword" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="TextColours" value="tl:FFDF9B2F tr:FFDF9B2F bl:FFDF9B2F br:FFDF9B2F" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
@@ -40,9 +41,10 @@
                 <Property name="Image" value="GameMenuImages/BackgroundSpell" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
-            <Window type="Vanilla/StaticText" name="CoolDownTextSword" >
+            <Window type="Vanilla/StaticText" name="CoolDownTextEyeFire" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="TextColours" value="tl:FFDF9B2F tr:FFDF9B2F bl:FFDF9B2F br:FFDF9B2F" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
@@ -65,6 +67,7 @@
             <Window type="Vanilla/StaticText" name="CoolDownTextHeart" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="TextColours" value="tl:FFDF9B2F tr:FFDF9B2F bl:FFDF9B2F br:FFDF9B2F" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
@@ -87,6 +90,7 @@
             <Window type="Vanilla/StaticText" name="CoolDownTextDagger" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="TextColours" value="tl:FFDF9B2F tr:FFDF9B2F bl:FFDF9B2F br:FFDF9B2F" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />

@@ -21,6 +21,7 @@
             <Window type="Vanilla/StaticText" name="CoolDownTextBall" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="TextColours" value="tl:FFDF9B2F tr:FFDF9B2F bl:FFDF9B2F br:FFDF9B2F" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
@@ -43,6 +44,7 @@
             <Window type="Vanilla/StaticText" name="CoolDownTextBullet" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="TextColours" value="tl:FFDF9B2F tr:FFDF9B2F bl:FFDF9B2F br:FFDF9B2F" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
@@ -63,8 +65,9 @@
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
             <Window type="Vanilla/StaticText" name="CoolDownTextBread" >
-                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Area" value="{{0,1},{0,0},{1,1},{1,0}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="TextColours" value="tl:FFDF9B2F tr:FFDF9B2F bl:FFDF9B2F br:FFDF9B2F" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
@@ -87,6 +90,7 @@
             <Window type="Vanilla/StaticText" name="CoolDownTextIce" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="TextColours" value="tl:FFDF9B2F tr:FFDF9B2F bl:FFDF9B2F br:FFDF9B2F" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
