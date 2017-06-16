@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Thu Jun 15 14:18:04 2017 gastal_r
+// Last update Fri Jun 16 00:44:04 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -99,7 +99,7 @@ void  Entity::updateEntityHealthBar(const Ogre::Camera &camera)
 
 void 	Entity::changeAnimation(Entity::Status status)
 {
-  return;
+  // return;
 	switch (status)
 	{
 	case Entity::Status::IMMOBILE :
@@ -163,7 +163,8 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
 
 void          Entity::takeDamage(size_t value)
 {
-  std::cout << "TAKE DAMAGES" << std::endl;
+  if (_health == 0)
+    return;
   _health -= value;
   _healthBar->setProgress((float) _health / (float) _maxHealth);
 }
@@ -190,4 +191,12 @@ void					Entity::setDestination(const Ogre::Vector3 &destination)
 {
   _destination = destination;
 	changeAnimation(Entity::Status::MOVE);
+}
+
+void          Entity::setHealth(size_t health)
+{
+  Ogre::Vector2 result;
+
+  _health = health;
+  _healthBar->setProgress((float) _health / (float) _maxHealth);
 }

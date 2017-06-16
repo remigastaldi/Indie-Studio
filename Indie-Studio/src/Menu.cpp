@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Wed Jun 14 11:42:11 2017 gastal_r
+// Last update Thu Jun 15 21:32:19 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -68,7 +68,7 @@ bool Menu::buttonSelected3(const CEGUI::EventArgs &e)
 
 bool Menu::buttonSelected4(const CEGUI::EventArgs &e)
 {
-  mDevice->data.Class = Entity::Type::WIZZARD;
+  mDevice->data.Class = Entity::Type::WIZARD;
   _play->destroy();
   _myRoot->destroy();
   GameState *menu = findByName("Dungeon");
@@ -113,7 +113,7 @@ bool Menu::buttonPlay(const CEGUI::EventArgs &e)
   _selectWarrior = _play->getChild("Warrior/SelectWarrior");
   _selectWarrior->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected3, this));
 
-  _selectMage = _play->getChild("Wizzard/SelectWizzard");
+  _selectMage = _play->getChild("Wizard/SelectWizard");
   _selectMage->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonSelected4, this));
 
   return (true);
@@ -293,8 +293,8 @@ void Menu::createScene(void)
   _splashButton = _splashScreen->getChild("SplashScreenButton");
   _splashButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::SplashButton, this));
 
-  GameState *dungeon = findByName("Dungeon");
-  changeGameState(dungeon);
+  // GameState *dungeon = findByName("Dungeon");
+  // changeGameState(dungeon);
 }
 
 // bool GameMenuDemo::handleLoginAcceptButtonClicked(const CEGUI::EventArgs&)

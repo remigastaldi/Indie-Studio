@@ -17,6 +17,18 @@
                 <Property name="Image" value="GameMenuImages/BackgroundSpell" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
+            <Window type="Vanilla/StaticText" name="CoolDownTextFire" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Text" value="5" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="78" />
+                <Property name="VertScrollPageSize" value="74" />
+                <Property name="HorzScrollDocumentSize" value="12" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
         </Window>
         <Window type="Generic/ImageButton" name="SpellEyeFire" >
             <Property name="Area" value="{{0.27,0},{0.1,0},{0.49,0},{0.9,0}}" />
@@ -29,6 +41,18 @@
                 <Property name="Alpha" value="0.8" />
                 <Property name="Image" value="GameMenuImages/BackgroundSpell" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="CoolDownTextSword" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Text" value="5" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="78" />
+                <Property name="VertScrollPageSize" value="74" />
+                <Property name="HorzScrollDocumentSize" value="12" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
             </Window>
         </Window>
         <Window type="Generic/ImageButton" name="SpellHeart" >
@@ -43,6 +67,18 @@
                 <Property name="Image" value="GameMenuImages/BackgroundSpell" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
+            <Window type="Vanilla/StaticText" name="CoolDownTextHeart" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Text" value="5" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="78" />
+                <Property name="VertScrollPageSize" value="74" />
+                <Property name="HorzScrollDocumentSize" value="12" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
+            </Window>
         </Window>
         <Window type="Generic/ImageButton" name="SpellDagger" >
             <Property name="Area" value="{{0.75,0},{0.1,0},{0.97,0},{0.9,0}}" />
@@ -55,6 +91,18 @@
                 <Property name="Alpha" value="0.8" />
                 <Property name="Image" value="GameMenuImages/BackgroundSpell" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Vanilla/StaticText" name="CoolDownTextDagger" >
+                <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                <Property name="Text" value="5" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="FrameEnabled" value="false" />
+                <Property name="HorzFormatting" value="CentreAligned" />
+                <Property name="BackgroundEnabled" value="false" />
+                <Property name="HorzScrollPageSize" value="78" />
+                <Property name="VertScrollPageSize" value="74" />
+                <Property name="HorzScrollDocumentSize" value="12" />
+                <Property name="VertScrollDocumentSize" value="20.5273" />
             </Window>
         </Window>
     </Window>

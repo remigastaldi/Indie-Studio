@@ -237,13 +237,13 @@ Use your dagger</Property>
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
         </Window>
-        <Window type="Generic/Image" name="Wizzard" >
+        <Window type="Generic/Image" name="Wizard" >
             <Property name="Area" value="{{0.28,0},{0.12,0},{0.5,0},{0.95,0}}" />
             <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
-            <Window type="Vanilla/StaticText" name="TextWizzard" >
+            <Window type="Vanilla/StaticText" name="TextWizard" >
                 <Property name="Area" value="{{0,0},{0,0},{0.5,0},{0.1,0}}" />
-                <Property name="Text" value="WIZZARD" />
+                <Property name="Text" value="WIZARD" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
@@ -338,7 +338,7 @@ Add a buff to a friend</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
-            <Window type="Generic/ImageButton" name="SelectWizzard" >
+            <Window type="Generic/ImageButton" name="SelectWizard" >
                 <Property name="Area" value="{{0,0},{-0.04,0},{0.35,0},{0.015,0}}" />
                 <Property name="HoverImage" value="GameMenuImages/SelectHover" />
                 <Property name="NormalImage" value="GameMenuImages/SelectNormal" />
@@ -346,9 +346,9 @@ Add a buff to a friend</Property>
                 <Property name="VerticalAlignment" value="Bottom" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>
-            <Window type="Generic/Image" name="ImageWizzard" >
+            <Window type="Generic/Image" name="ImageWizard" >
                 <Property name="Area" value="{{0,0},{0.1,0},{0.58,0},{0.38,0}}" />
-                <Property name="Image" value="HUDDemo/Wizzard" />
+                <Property name="Image" value="HUDDemo/Wizard" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="HorizontalAlignment" value="Centre" />
             </Window>

@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Thu Jun 15 14:24:03 2017 Leo HUBERT
+** Last update Fri Jun 16 01:23:09 2017 gastal_r
 */
 
 #include "Socket.hpp"
@@ -88,6 +88,7 @@ void Socket::events()
       (void)ack_resp;
 
       _lock.lock();
+      std::cerr << "****************** CREATE SPELL **********************" << std::endl;
       if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
       {
         Ogre::Vector3 position(
@@ -100,12 +101,17 @@ void Socket::events()
           data->get_map()["destination"]->get_map()["y"]->get_double(),
           data->get_map()["destination"]->get_map()["z"]->get_double());
 
-        WorkingQueue::Data queueData((Spell::Type)data->get_map()["type"]->get_int(), Spell::Status::MOVE, position, destination);
+        bool byPlayer;
+        if (data->get_map()["bot"]->get_int() == 1)
+          byPlayer = false;
+        else
+          byPlayer = true;
+
+        WorkingQueue::Data queueData((Spell::Type)data->get_map()["type"]->get_int(), Spell::Status::MOVE, position, destination, byPlayer);
         pushToQueue(WorkingQueue::Action::CREATE_SPELL, queueData);
       }
       _lock.unlock();
     }));
-
 
   _current_socket->on("move", sio::socket::event_listener_aux([&](std::string const& name,
     sio::message::ptr const& data,
@@ -143,6 +149,7 @@ void Socket::events()
       (void)ack_resp;
 
       _lock.lock();
+      std::cerr << "****************** CREATE ENTITY **********************" << std::endl;
       if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
       {
         Ogre::Vector3 position(
@@ -156,7 +163,7 @@ void Socket::events()
           data->get_map()["destination"]->get_map()["z"]->get_double());
 
         Data queueData((Entity::Type)data->get_map()["type"]->get_int(), (Entity::Status)data->get_map()["status"]->get_int(),
-          data->get_map()["send_by"]->get_int(), position, destination);
+          data->get_map()["send_by"]->get_int(), position, destination, data->get_map()["health"]->get_int());
         pushToQueue(WorkingQueue::Action::CREATE_ENTITY, queueData);
       }
       _lock.unlock();
@@ -171,6 +178,7 @@ void Socket::events()
       (void)ack_resp;
 
       _lock.lock();
+      std::cerr << "****************** LOGIN **********************" << std::endl;
       if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["user_id"]->get_int() != _id)
       {
         std::cout <<  "User connected! ID: " << data->get_map()["user_id"]->get_int() << std::endl;
@@ -187,6 +195,7 @@ void Socket::events()
         (void)ack_resp;
 
         _lock.lock();
+        std::cerr << "****************** FOCUSED **********************" << std::endl;
         if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
         {
           if (data->get_map()["focus"]->get_int() == 1)
@@ -217,6 +226,7 @@ void Socket::events()
           (void)ack_resp;
 
           _lock.lock();
+          std::cerr << "****************** HITTED **********************" << std::endl;
           if ((data->get_map()["send_to"]->get_int() == 0 || data->get_map()["send_to"]->get_int() == _id) && data->get_map()["send_by"]->get_int() != _id)
           {
             std::cout << "Damages: " << data->get_map()["damages"]->get_int()  << '\n';
@@ -243,6 +253,7 @@ void Socket::events()
         (void)ack_resp;
 
         _lock.lock();
+        std::cerr << "****************** KILLED **********************" << std::endl;
         if (data->get_map()["user_id"]->get_int() != _id)
         {
           WorkingQueue::Data queueData(data->get_map()["user_id"]->get_int());
@@ -344,6 +355,7 @@ void Socket::sendSpell(Spell::Type type, const Ogre::Vector3 &playerPos, const O
   obj.get()->get_map()["type"] =  sio::int_message::create((int)type);
   obj.get()->get_map()["position"] =  position;
   obj.get()->get_map()["destination"] =  destination;
+  obj.get()->get_map()["bot"] =  sio::int_message::create(0);
   obj.get()->get_map()["send_by"] =  sio::int_message::create(_id);
   obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
 

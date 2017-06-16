@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 16:33:57 2017 gastal_r
-// Last update Tue Jun 13 18:21:48 2017 gastal_r
+// Last update Thu Jun 15 22:56:41 2017 gastal_r
 //
 
 #ifndef     _ALLSPELLS_HPP_
@@ -23,7 +23,7 @@ class EyeFire : public Spell
 {
 public:
   EyeFire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #define     SWORD_SPEED 4.f
@@ -33,7 +33,7 @@ class Sword : public Spell
 {
 public:
   Sword(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-    size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+    size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #define     HEARTH_SPEED 4.f
@@ -43,7 +43,7 @@ class Hearth : public Spell
 {
 public:
   Hearth(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-    size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+    size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #define     DAGGER_SPEED 4.f
@@ -53,12 +53,12 @@ class Dagger : public Spell
 {
 public:
   Dagger(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-    size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+    size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 
 /*-----------------------------------------------------------------------------
-|  Wizzard
+|  Wizard
 -----------------------------------------------------------------------------*/
 #define     TORNADO_SPEED 4.f
 #define     TORNADO_DISTANCE 10.f
@@ -67,7 +67,7 @@ class Tornado : public Spell
 {
 public:
   Tornado(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #define     FIREBALL_SPEED 4.f
@@ -77,7 +77,7 @@ class Fireball : public Spell
 {
 public:
   Fireball(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #define     SHIELD_BUFF_SPEED 4.f
@@ -87,7 +87,7 @@ class ShieldBuff : public Spell
 {
 public:
   ShieldBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #define     LEAF_BUFF_SPEED 4.f
@@ -97,7 +97,7 @@ class LeafBuff : public Spell
 {
 public:
   LeafBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 
@@ -111,7 +111,7 @@ class Angel : public Spell
 {
 public:
   Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #define     THUNDERSTORM_SPEED 4.f
@@ -121,7 +121,7 @@ class Thunderstorm : public Spell
 {
 public:
   Thunderstorm(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #define     SPECTRE_SPEED 4.f
@@ -131,7 +131,7 @@ class Spectre : public Spell
 {
 public:
   Spectre(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #define     FIRE_SPEED 4.f
@@ -141,7 +141,7 @@ class Fire : public Spell
 {
 public:
   Fire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 
@@ -156,7 +156,7 @@ class StoneBall : public Spell
 {
 public:
   StoneBall(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #define     STALACTITES_SPEED 4.f
@@ -166,7 +166,7 @@ class Stalactites : public Spell
 {
 public:
   Stalactites(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #define     BULLET_SPEED 4.f
@@ -176,7 +176,7 @@ class Bullet : public Spell
 {
 public:
   Bullet(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #define     BEAR_BUFF_SPEED 4.f
@@ -186,7 +186,7 @@ class BearBuff : public Spell
 {
 public:
   BearBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, bool disableCallback);
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
 #endif /* !_ALLSPELLS_HPP_ */

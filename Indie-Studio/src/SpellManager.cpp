@@ -5,31 +5,33 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun  3 18:43:48 2017 gastal_r
-// Last update Wed Jun 14 21:36:19 2017 gastal_r
+// Last update Thu Jun 15 22:49:24 2017 gastal_r
 //
 
 #include      "SpellManager.hpp"
 
-SpellManager::SpellManager(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager)
+SpellManager::SpellManager(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager, Collision::Type collisionType)
   : _sceneMgr(sceneMgr),
   _collision(collision),
   _soundManager(soundManager),
   _currentMaxIndex(10),
   _spellsIndex(10),
   _sendCollisionToServer(nullptr),
+  _collisionType(collisionType),
   _disableCallback(true)
 {
   for (size_t i = 9; i > 0; --i)
     _spellsIndex.at(i) = i;
 }
 
-SpellManager::SpellManager(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager, std::function<void(Spell::Type, const std::string &)> sendCollisionToServer)
+SpellManager::SpellManager(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager, std::function<void(Spell::Type, const std::string &)> sendCollisionToServer, Collision::Type collisionType)
   : _sceneMgr(sceneMgr),
   _collision(collision),
   _soundManager(soundManager),
   _currentMaxIndex(10),
   _spellsIndex(10),
   _sendCollisionToServer(sendCollisionToServer),
+  _collisionType(collisionType),
   _disableCallback(false)
 {
   for (size_t i = 9; i > 0; --i)
@@ -43,7 +45,7 @@ void        SpellManager::frameRenderingQueued(const Ogre::FrameEvent& evt)
     Spell::End ret = (*it)->frameRenderingQueued(evt);
     if (ret != Spell::End::CONTINUE)
       {
-        if (!_disableCallback || ret == Spell::End::COLLIDE)
+        if (!_disableCallback && ret == Spell::End::COLLIDE)
           _sendCollisionToServer((*it)->getType(), (*it)->getCollidedObjectName());
         _spellsIndex.push_back((*it)->getId());
         delete (*it);
@@ -64,5 +66,5 @@ void        SpellManager::launchSpell(Spell::Type type, const Ogre::Vector3 &sta
     _currentMaxIndex++;
     _spellsIndex.push_back(_currentMaxIndex);
   }
-  _spells.push_back(createSpell(type, _sceneMgr, _collision, _soundManager, id, startPos, dest, _disableCallback));
+  _spells.push_back(createSpell(type, _sceneMgr, _collision, _soundManager, id, startPos, dest, _collisionType, _disableCallback));
 }

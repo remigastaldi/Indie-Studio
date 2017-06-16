@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun  3 19:42:53 2017 gastal_r
-// Last update Tue Jun 13 22:56:07 2017 gastal_r
+// Last update Thu Jun 15 22:15:17 2017 gastal_r
 //
 
 #include "Collision.h"
@@ -108,11 +108,11 @@
          {
             // since its sorted by distance, once we hit an entity that only collides with bounding box or sphere,
             // we stop immediatly and return it. there's no point checking the rest of the entities.
+            ret.type = query_result->first->Type;
             if (query_result->first->CollisionType != COLLISION_ACCURATE)
             {
                ret.closest_distance = abs(query_result->second);
                ret.collided = true;
-               ret.type = query_result->first->Type;
                ret.entity = query_result->first->Entity;
                ret.position = ray.getPoint(ret.closest_distance);
                return ret;
@@ -410,9 +410,6 @@
          bool Stop = false;
          for (auto data = m_Entities.begin(); (data != m_Entities.end() && !Stop); ++data)
          {
-            if (data->Type == Collision::Type::PLAYER || data->Type == Collision::Type::OTHER)
-              continue;
-
             // skip the ignored entity
             if (data->Entity == ignore)
                continue;

@@ -17,6 +17,7 @@
         PLAYER,
         MOB,
         WALL,
+        SPELL,
         OTHER
       };
 

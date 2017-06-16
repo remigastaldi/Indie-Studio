@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Thu Jun 15 14:13:26 2017 gastal_r
+// Last update Fri Jun 16 11:21:16 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -26,12 +26,8 @@ GameLogic::GameLogic()
   _rMouseDown(false),
   _debugDrawer(nullptr),
   _rayCast(nullptr),
-  _collisionRayCast(nullptr),
-  _player(nullptr)
-{
-  _playerDie =std::function<void(void)>([=] (void) { this->playerDie(); });
-  _hitPlayer = std::function<void(size_t)>([=] (size_t damages) { this->hitPlayer(damages); });
-}
+  _collisionRayCast(nullptr)
+{}
 
 void          GameLogic::initGameLogic(void)
 {
@@ -40,6 +36,7 @@ void          GameLogic::initGameLogic(void)
   #endif
 
   _sceneMgr = mDevice->sceneMgr;
+  _playerDie =std::function<void(void)>([=] (void) { this->playerDie(); });
 
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
@@ -59,9 +56,10 @@ void          GameLogic::initGameLogic(void)
     Ogre::AxisAlignedBox(Ogre::Vector3 (-10000, -10000, -10000), Ogre::Vector3 (10000,  10000,  10000)),
     Ogre::Vector3(0,-9.81,0)));
 
-  _spellManagerSocket.reset(new SpellManager(*_sceneMgr, *_collision, *mDevice->soundManager));
+  _spellManagerSocket.reset(new SpellManager(*_sceneMgr, *_collision, *mDevice->soundManager, Collision::Type::MOB));
   std::function<void(Spell::Type, const std::string &)> sendCollisionFunc([=] (Spell::Type type, const std::string &id) { this->sendCollision(type, id); } );
-  _spellManager.reset(new SpellManager(*_sceneMgr, *_collision, *mDevice->soundManager, sendCollisionFunc));
+  _spellManager.reset(new SpellManager(*_sceneMgr, *_collision, *mDevice->soundManager, sendCollisionFunc, Collision::Type::MOB));
+  _spellManagerSocketMobs.reset(new SpellManager(*_sceneMgr, *_collision, *mDevice->soundManager, sendCollisionFunc, Collision::Type::PLAYER));
 
   #if DEBUG_DRAWER
     debugDrawer = new OgreBulletCollisions::DebugDrawer();
@@ -119,10 +117,6 @@ void          GameLogic::initGameLogic(void)
   _t2 = std::chrono::high_resolution_clock::now();
   _t3 = std::chrono::high_resolution_clock::now();
   _t4 = std::chrono::high_resolution_clock::now();
-
-#if !DEBUG_LOCAL
-  sendEntity(*_player);
-#endif
 }
 
 void          GameLogic::buttonResurect(const CEGUI::EventArgs &e)
@@ -141,9 +135,9 @@ void          GameLogic::playerDie(void)
   // exit();
 }
 
-void          GameLogic::hitPlayer(size_t damages)
+void          GameLogic::updatePlayersHealthBar(void)
 {
-  _player->takeDamage(damages);
+  _player->updateEntityHealthBar(*_camera);
 }
 
 bool 	        GameLogic::frameStarted(const Ogre::FrameEvent &evt)
@@ -202,12 +196,15 @@ bool          GameLogic::frameRenderingQueued(const Ogre::FrameEvent& evt)
     mouseRaycast();
 
   #if DEBUG_LOCAL == false
+  {
     _spellManagerSocket->frameRenderingQueued(evt);
+    _spellManagerSocketMobs->frameRenderingQueued(evt);
+  }
   #endif
   _spellManager->frameRenderingQueued(evt);
 
   _player->frameRenderingQueued(evt);
-  _player->updateEntityHealthBar(*_camera);
+  updatePlayersHealthBar();
 
   #if !DEBUG_LOCAL
     refreshServerPlayerPos();
