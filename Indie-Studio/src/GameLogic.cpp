@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Fri Jun 16 12:18:56 2017 gastal_r
+// Last update Fri Jun 16 12:59:32 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -22,6 +22,7 @@ GameLogic::GameLogic()
   _movementX(0.f),
   _movementY(0.f),
   _movementZ(0.f),
+  _spells(4),
   _lMouseDown(false),
   _rMouseDown(false),
   _debugDrawer(nullptr),
@@ -113,10 +114,10 @@ void          GameLogic::initGameLogic(void)
   _camera->lookAt(_player->getPosition());
 #endif
 
-  _t1 = std::chrono::high_resolution_clock::now();
-  _t2 = std::chrono::high_resolution_clock::now();
-  _t3 = std::chrono::high_resolution_clock::now();
-  _t4 = std::chrono::high_resolution_clock::now();
+  _cdSpells[0].first = std::chrono::high_resolution_clock::now();
+  _cdSpells[1].first = std::chrono::high_resolution_clock::now();
+  _cdSpells[2].first = std::chrono::high_resolution_clock::now();
+  _cdSpells[3].first = std::chrono::high_resolution_clock::now();
 }
 
 void          GameLogic::buttonResurect(const CEGUI::EventArgs &e)
@@ -150,32 +151,32 @@ void          GameLogic::CheckCD()
 {
 
   // if (_firstSpellIsCD == 1)
-    _cdSpell1 = std::chrono::high_resolution_clock::now();
-    _firstSpellCD->setText(std::to_string(std::chrono::duration_cast<std::chrono::seconds>(_cdSpell1 - _t1).count()));
+    _cdSpells[0].second = std::chrono::high_resolution_clock::now();
+    _spells[0].first->setText(std::to_string(std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[0].second - _cdSpells[0].first).count()));
   // if (_secondSpellIsCD == 1)
-    _cdSpell2 = std::chrono::high_resolution_clock::now();
+    _cdSpells[1].second = std::chrono::high_resolution_clock::now();
   // if (_thirdSpellIsCD == 1)
-    _cdSpell3 = std::chrono::high_resolution_clock::now();
+    _cdSpells[2].second = std::chrono::high_resolution_clock::now();
   // if (_fourthSpellIsCD == 1)
-    _cdSpell4 = std::chrono::high_resolution_clock::now();
-  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell1 - _t1).count() >= _player->getSpellCooldown(0))
+    _cdSpells[3].second = std::chrono::high_resolution_clock::now();
+  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[0].second - _cdSpells[0].first).count() >= _player->getSpellCooldown(0))
   {
-    _firstSpellCD->hide();
+    _spells[0].second->hide();
     // _firstSpellIsCD = 0;
   }
-  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell2 - _t2).count() >= _player->getSpellCooldown(1))
+  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[1].second - _cdSpells[1].first).count() >= _player->getSpellCooldown(1))
     {
-      _secondSpellCD->hide();
+      _spells[1].second->hide();
       // _secondSpellIsCD = 0;
     }
-  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell3 - _t3).count() >= _player->getSpellCooldown(2))
+  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[2].second - _cdSpells[2].first).count() >= _player->getSpellCooldown(2))
     {
-      _thirdSpellCD->hide();
+      _spells[2].second->hide();
       // _thirdSpellIsCD = 0;
     }
-  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell4 - _t4).count() >= _player->getSpellCooldown(3))
+  if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[3].second - _cdSpells[3].first).count() >= _player->getSpellCooldown(3))
     {
-      _fourthSpellCD->hide();
+      _spells[3].second->hide();
       // _fourthSpellIsCD = 0;
     }
 }
@@ -269,53 +270,53 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
 {
   if (arg.key == mDevice->data.keys[0])
   {
-    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell1 - _t1).count() >= _player->getSpellCooldown(0))
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[0].second - _cdSpells[0].first).count() >= _player->getSpellCooldown(0))
     {
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
       #endif
       _spellManager->launchSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
-      _t1 = std::chrono::high_resolution_clock::now();
-      _firstSpellCD->show();
+      _cdSpells[0].first = std::chrono::high_resolution_clock::now();
+      _spells[0].second->show();
       // _firstSpellIsCD = 1;
     }
   }
   else if (arg.key == mDevice->data.keys[1])
   {
-    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell2 - _t2).count() >= _player->getSpellCooldown(1))
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[1].second - _cdSpells[1].first).count() >= _player->getSpellCooldown(1))
     {
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
       #endif
       _spellManager->launchSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
-      _t2 = std::chrono::high_resolution_clock::now();
-      _secondSpellCD->show();
+      _cdSpells[1].first = std::chrono::high_resolution_clock::now();
+      _spells[1].second->show();
       // _secondSpellIsCD = 1;
     }
   }
   else if (arg.key == mDevice->data.keys[2])
   {
-    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell3 - _t3).count() >= _player->getSpellCooldown(2))
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[2].second - _cdSpells[2].first).count() >= _player->getSpellCooldown(2))
     {
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
       #endif
       _spellManager->launchSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
-      _t3 = std::chrono::high_resolution_clock::now();
-      _thirdSpellCD->show();
+      _cdSpells[2].first = std::chrono::high_resolution_clock::now();
+      _spells[2].second->show();
       // _thirdSpellIsCD = 1;
     }
   }
   else if (arg.key == mDevice->data.keys[3])
   {
-    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell4 - _t4).count() >= _player->getSpellCooldown(3))
+    if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpells[3].second - _cdSpells[3].first).count() >= _player->getSpellCooldown(3))
     {
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
       #endif
         _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
-        _t4 = std::chrono::high_resolution_clock::now();
-        _fourthSpellCD->show();
+        _cdSpells[3].first = std::chrono::high_resolution_clock::now();
+        _spells[3].second->show();
         // _fourthSpellIsCD = 1;
     }
   }

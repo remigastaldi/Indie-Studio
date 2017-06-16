@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Fri Jun 16 12:17:57 2017 gastal_r
+// Last update Fri Jun 16 12:57:39 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -107,14 +107,7 @@ protected:
   CEGUI::Window   *_healthBar;
 
   //Spell button
-  CEGUI::Window   *_firstSpell;
-  CEGUI::Window   *_firstSpellCD;
-  CEGUI::Window   *_secondSpell;
-  CEGUI::Window   *_secondSpellCD;
-  CEGUI::Window   *_thirdSpell;
-  CEGUI::Window   *_thirdSpellCD;
-  CEGUI::Window   *_fourthSpell;
-  CEGUI::Window   *_fourthSpellCD;
+  std::unordered_map<size_t, std::pair<CEGUI::Window*, CEGUI::Window *>> _spells;
   bool             _firstSpellIsCD;
   bool             _secondSpellIsCD;
   bool             _thirdSpellIsCD;
@@ -134,15 +127,7 @@ protected:
   PFXSSAO   *_mSSAO;
 
   //Spells cooldown
-  std::chrono::high_resolution_clock::time_point   _t1;
-  std::chrono::high_resolution_clock::time_point   _t2;
-  std::chrono::high_resolution_clock::time_point   _t3;
-  std::chrono::high_resolution_clock::time_point   _t4;
-
-  std::chrono::high_resolution_clock::time_point   _cdSpell1;
-  std::chrono::high_resolution_clock::time_point   _cdSpell2;
-  std::chrono::high_resolution_clock::time_point   _cdSpell3;
-  std::chrono::high_resolution_clock::time_point   _cdSpell4;
+  std::unordered_map<size_t, std::pair<std::chrono::high_resolution_clock::time_point, std::chrono::high_resolution_clock::time_point>> _cdSpells;
   bool _shutDown;
 };
 
