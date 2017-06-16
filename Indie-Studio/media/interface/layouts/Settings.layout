@@ -7,6 +7,7 @@
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="Generic/Image" name="Background_Settings" >
             <Property name="Area" value="{{0.05,0},{0.1,0},{0.95,0},{0.9,0}}" />
+            <Property name="Alpha" value="0.9" />
             <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Window type="Vanilla/StaticText" name="Audio" >
@@ -14,6 +15,7 @@
                 <Property name="Text" value="AUDIO" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="576" />
@@ -26,6 +28,7 @@
                 <Property name="Text" value="SHADING QUALITY" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
@@ -37,11 +40,13 @@
             <Window type="Vanilla/HorizontalScrollbar" name="AudioScrollBar" >
                 <Property name="Area" value="{{0.05,0},{0.1,0},{0.45,0},{0.125,0}}" />
                 <Property name="AlwaysOnTop" value="true" />
+                <Property name="InheritsAlpha" value="false" />
             </Window>
             <Window type="Vanilla/Combobox" name="ComboboxShading" >
                 <Property name="Area" value="{{0.1,0},{-0.12,0},{0.4,0},{0.18,0}}" />
                 <Property name="ReadOnly" value="true" />
                 <Property name="AlwaysOnTop" value="true" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="ForceVertScrollbar" value="true" />
                 <AutoWindow namePath="__auto_editbox__" >
@@ -81,6 +86,7 @@
                 <Property name="Area" value="{{0.1,0},{-0.05,0},{0.4,0},{0.25,0}}" />
                 <Property name="ReadOnly" value="true" />
                 <Property name="AlwaysOnTop" value="true" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Bottom" />
                 <Property name="ForceVertScrollbar" value="true" />
                 <AutoWindow namePath="__auto_editbox__" >
@@ -121,6 +127,7 @@
                 <Property name="Text" value="RESOLUTION" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Bottom" />
@@ -134,12 +141,14 @@
                 <Property name="HoverImage" value="GameMenuImages/ApplyHover" />
                 <Property name="NormalImage" value="GameMenuImages/ApplyNormal" />
                 <Property name="PushedImage" value="GameMenuImages/ApplyHover" />
+                <Property name="InheritsAlpha" value="false" />
             </Window>
             <Window type="Vanilla/StaticText" name="KeyBinding" >
                 <Property name="Area" value="{{0.5,0},{0,0},{1,0},{0.15,0}}" />
                 <Property name="Text" value="KEY BINDING" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="864" />
@@ -152,6 +161,7 @@
                 <Property name="Text" value="SPELL 1" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="173" />
@@ -164,6 +174,7 @@
                 <Property name="Text" value="SPELL 2" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="173" />
@@ -176,6 +187,7 @@
                 <Property name="Text" value="SPELL 3" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="173" />
@@ -188,6 +200,7 @@
                 <Property name="Text" value="SPELL 4" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
+                <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="HorzScrollPageSize" value="173" />
@@ -197,15 +210,19 @@
             </Window>
             <Window type="Vanilla/Button" name="Spell1Button" >
                 <Property name="Area" value="{{0.8,0},{0.2,0},{0.88,0},{0.25,0}}" />
+                <Property name="InheritsAlpha" value="false" />
             </Window>
             <Window type="Vanilla/Button" name="Spell2Button" >
                 <Property name="Area" value="{{0.8,0},{0.35,0},{0.88,0},{0.4,0}}" />
+                <Property name="InheritsAlpha" value="false" />
             </Window>
             <Window type="Vanilla/Button" name="Spell3Button" >
                 <Property name="Area" value="{{0.8,0},{0.5,0},{0.88,0},{0.55,0}}" />
+                <Property name="InheritsAlpha" value="false" />
             </Window>
             <Window type="Vanilla/Button" name="Spell4Button" >
                 <Property name="Area" value="{{0.8,0},{0.65,0},{0.88,0},{0.7,0}}" />
+                <Property name="InheritsAlpha" value="false" />
             </Window>
         </Window>
         <Window type="Generic/ImageButton" name="BackButton" >
