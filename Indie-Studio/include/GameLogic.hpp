@@ -120,6 +120,12 @@ protected:
   bool             _thirdSpellIsCD;
   bool             _fourthSpellIsCD;
 
+  //OIS case
+  OIS::KeyCode   _firstSpellKey;
+  OIS::KeyCode   _secondSpellKey;
+  OIS::KeyCode   _thirdpellKey;
+  OIS::KeyCode   _fourthSpellKey;
+
 #if DEBUG_CAMERA
   OgreCookies::CameraMan* _cameraMan;
 #endif

@@ -268,9 +268,8 @@ void          GameLogic::sendServerPlayerPos(void)
 
 void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
 {
-  switch (arg.key)
+  if (arg.key == mDevice->FirstSpellKey)
   {
-  case OIS::KC_A:
     if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell1 - _t1).count() >= _player->getSpellCooldown(0))
     {
       #if DEBUG_LOCAL == false
@@ -281,8 +280,9 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
       _firstSpellCD->show();
       // _firstSpellIsCD = 1;
     }
-  break;
-  case OIS::KC_Z:
+  }
+  else if (arg.key == mDevice->SecondSpellKey)
+  {
     if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell2 - _t2).count() >= _player->getSpellCooldown(1))
     {
       #if DEBUG_LOCAL == false
@@ -293,8 +293,9 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
       _secondSpellCD->show();
       // _secondSpellIsCD = 1;
     }
-    break;
-  case OIS::KC_E:
+  }
+  else if (arg.key == mDevice->ThirdSpellKey)
+  {
     if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell3 - _t3).count() >= _player->getSpellCooldown(2))
     {
       #if DEBUG_LOCAL == false
@@ -305,8 +306,9 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
       _thirdSpellCD->show();
       // _thirdSpellIsCD = 1;
     }
-    break;
-  case OIS::KC_R:
+  }
+  else if (arg.key == mDevice->FourthSpellKey)
+  {
     if (std::chrono::duration_cast<std::chrono::seconds>(_cdSpell4 - _t4).count() >= _player->getSpellCooldown(3))
     {
       #if DEBUG_LOCAL == false
@@ -317,9 +319,9 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
         _fourthSpellCD->show();
         // _fourthSpellIsCD = 1;
     }
-    break;
   }
 }
+
 
 bool GameLogic::keyPressed(const OIS::KeyEvent &arg)
 {

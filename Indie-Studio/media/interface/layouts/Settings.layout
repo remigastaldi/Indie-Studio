@@ -171,7 +171,7 @@
                 <Property name="HorzScrollDocumentSize" value="75" />
                 <Property name="VertScrollDocumentSize" value="20.5273" />
             </Window>
-            <Window type="Vanilla/StaticText" name="SPell3" >
+            <Window type="Vanilla/StaticText" name="Spell3" >
                 <Property name="Area" value="{{0.65,0},{0.45,0},{0.75,0},{0.6,0}}" />
                 <Property name="Text" value="SPELL 3" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
