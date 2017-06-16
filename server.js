@@ -480,10 +480,25 @@ app.get('/bots', function (req, res) {
 
 app.get('/bots/new', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
-  res.send("Bot Created ID");
+  res.send("ZOMBIE & SKELETON Bot Created");
 
   newBot({x: -1.7588584423065186, y: -1.7588584423065186, z: 1.6178098917007446}, EntityType.ZOMBIE, "room");
+  newBot({x: -1.7588584423065186, y: -1.7588584423065186, z: 1.6178098917007446}, EntityType.SKELETON, "room");
 
+});
+
+app.get('/bots/new/zombie', function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send("Zombie bot created");
+
+  newBot({x: -1.7588584423065186, y: -1.7588584423065186, z: 1.6178098917007446}, EntityType.ZOMBIE, "room");
+});
+
+app.get('/bots/new/skeleton', function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send("Zombie bot created");
+
+  newBot({x: -1.7588584423065186, y: -1.7588584423065186, z: 1.6178098917007446}, EntityType.SKELETON, "room");
 });
 
 app.get('/bots/clear', function (req, res) {
