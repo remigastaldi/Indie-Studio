@@ -518,11 +518,12 @@ app.get('/test', function (req, res) {
 
   for (user in users)
   {
+    users[user].health += 20;
     io.to(users[user].room).emit("hitted", {
       send_by: 42,
       send_to: 0,
       hitted: users[user].id,
-      damages: -100
+      damages: -20
     });
   }
 });
