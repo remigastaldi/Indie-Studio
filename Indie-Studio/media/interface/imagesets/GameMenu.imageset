@@ -59,4 +59,6 @@
     <Image height="151" name="YouDied" width="1033" xPos="3029" yPos="78" />
     <Image height="87" name="ApplyNormal" width="300" xPos="3190" yPos="1617" />
     <Image height="87" name="ApplyHover" width="300" xPos="3546" yPos="1617" />
+    <Image height="117" name="CloseButtonNormal" width="117" xPos="3201" yPos="1742" />
+    <Image height="117" name="CloseButtonHover" width="117" xPos="3352" yPos="1743" />
 </Imageset>

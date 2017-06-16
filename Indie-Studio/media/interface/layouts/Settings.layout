@@ -48,11 +48,12 @@
                 <Property name="AlwaysOnTop" value="true" />
                 <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
-                <Property name="ForceVertScrollbar" value="true" />
+                <Property name="AutoSizeListHeight" value="true" />
                 <AutoWindow namePath="__auto_editbox__" >
                     <Property name="ReadOnly" value="true" />
                 </AutoWindow>
                 <AutoWindow namePath="__auto_droplist__" >
+                    <Property name="ForceVertScrollbar" value="false" />
                     <AutoWindow namePath="__auto_hscrollbar__" >
                         <AutoWindow namePath="__auto_incbtn__" >
                             <Property name="RestoreOldCapture" value="true" />
@@ -88,11 +89,12 @@
                 <Property name="AlwaysOnTop" value="true" />
                 <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Bottom" />
-                <Property name="ForceVertScrollbar" value="true" />
+                <Property name="AutoSizeListHeight" value="true" />
                 <AutoWindow namePath="__auto_editbox__" >
                     <Property name="ReadOnly" value="true" />
                 </AutoWindow>
                 <AutoWindow namePath="__auto_droplist__" >
+                    <Property name="ForceVertScrollbar" value="false" />
                     <AutoWindow namePath="__auto_hscrollbar__" >
                         <AutoWindow namePath="__auto_incbtn__" >
                             <Property name="RestoreOldCapture" value="true" />
