@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Fri Jun 16 12:57:39 2017 gastal_r
+// Last update Fri Jun 16 13:21:46 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -108,10 +108,8 @@ protected:
 
   //Spell button
   std::unordered_map<size_t, std::pair<CEGUI::Window*, CEGUI::Window *>> _spells;
-  bool             _firstSpellIsCD;
-  bool             _secondSpellIsCD;
-  bool             _thirdSpellIsCD;
-  bool             _fourthSpellIsCD;
+  //Spells cooldown
+  std::unordered_map<size_t, std::pair<std::chrono::high_resolution_clock::time_point, std::chrono::high_resolution_clock::time_point>> _cdSpells;
 
 #if DEBUG_CAMERA
   OgreCookies::CameraMan* _cameraMan;
@@ -126,8 +124,6 @@ protected:
 
   PFXSSAO   *_mSSAO;
 
-  //Spells cooldown
-  std::unordered_map<size_t, std::pair<std::chrono::high_resolution_clock::time_point, std::chrono::high_resolution_clock::time_point>> _cdSpells;
   bool _shutDown;
 };
 

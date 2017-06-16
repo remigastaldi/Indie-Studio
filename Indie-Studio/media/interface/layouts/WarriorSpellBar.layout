@@ -17,7 +17,7 @@
                 <Property name="Image" value="GameMenuImages/BackgroundSpell" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
-            <Window type="Vanilla/StaticText" name="CoolDownTextFire" >
+            <Window type="Vanilla/StaticText" name="CoolDownTextSword" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="Text" value="5" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
@@ -42,7 +42,7 @@
                 <Property name="Image" value="GameMenuImages/BackgroundSpell" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
-            <Window type="Vanilla/StaticText" name="CoolDownTextSword" >
+            <Window type="Vanilla/StaticText" name="CoolDownTextEyeFire" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="Text" value="5" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
