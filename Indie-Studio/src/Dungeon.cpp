@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Fri Jun 16 15:03:27 2017 gastal_r
+// Last update Fri Jun 16 16:31:28 2017 Matthias Prost
 //
 
 #include        "Dungeon.hpp"
@@ -143,6 +143,8 @@ void Dungeon::createScene(void)
   _ui = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("UI_IG.layout");
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
 
+  _settings = nullptr;
+  _credits = nullptr;
   _settingsButton = _ui->getChild("Parameters");
   _settingsButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::buttonSettings, this));
   _creditsButton = _ui->getChild("Infos");
@@ -218,13 +220,6 @@ bool Dungeon::buttonClose(const CEGUI::EventArgs &e)
 
 bool Dungeon::buttonMenu(const CEGUI::EventArgs &e)
 {
-  _closeButton->destroy();
-  _settings->destroy();
-  _settingsButton->destroy();
-  // _goToMenuButton->destroy();
-  _ui->destroy();
-  _spellBar->destroy();
-  _myRoot->destroy();
   GameState *menu = findByName("Menu");
   changeGameState(menu);
   return (true);
