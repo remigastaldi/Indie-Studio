@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat Jun 17 10:54:58 2017 gastal_r
+// Last update Sat Jun 17 11:30:00 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -380,7 +380,7 @@ void Menu::createScene(void)
           candlelight->setCastShadows(false);
         }
     }
-  _song = mDevice->soundManager->createSound("menu_song", "menu_song.ogg", true, true);
+  _song = mDevice->soundManager->createSound("menu_song", "menu_sound.ogg", true, true);
   _song->play();
   // GameState *dungeon = findByName("Dungeon");
   // changeGameState(dungeon);

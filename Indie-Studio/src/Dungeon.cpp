@@ -5,13 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat Jun 17 09:43:55 2017 gastal_r
+// Last update Sat Jun 17 11:49:32 2017 gastal_r
 //
 
 #include        "Dungeon.hpp"
 
 Dungeon::Dungeon() :
-  GameLogic()
+  GameLogic(),
+  _themeSound(nullptr)
 {}
 
 Dungeon::~Dungeon()
@@ -178,6 +179,10 @@ void Dungeon::createScene(void)
   _healthBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("AvatarDarkFiend.layout");
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
 
+  _themeSound = mDevice->soundManager->createSound("game_theme", "game_theme.ogg", true, true);
+  _themeSound->setVolume(0.2f);
+  _themeSound->play();
+
   #if !DEBUG_LOCAL
     connect();
     sendEntity(*_player);
@@ -186,6 +191,9 @@ void Dungeon::createScene(void)
 
 void Dungeon::exit(void)
 {
+  _themeSound->stop();
+  mDevice->soundManager->destroySound(_themeSound);
+
   #if !DEBUG_LOCAL
     disconnect();
   #endif
@@ -196,6 +204,7 @@ void Dungeon::exit(void)
 #endif
 
   releaseGameLogic();
+
   _settings = nullptr;
   _credits = nullptr;
 
