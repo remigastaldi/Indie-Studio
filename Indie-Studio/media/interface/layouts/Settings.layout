@@ -3,6 +3,7 @@
 <GUILayout version="4" >
     <Window type="Generic/Image" name="Background" >
         <Property name="Area" value="{{0,0},{0,0},{0,1920},{0,1080}}" />
+        <Property name="Alpha" value="0" />
         <Property name="Image" value="GameMenuImages/Background" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="Generic/Image" name="Background_Settings" >
@@ -10,6 +11,7 @@
             <Property name="Alpha" value="0.9" />
             <Property name="Image" value="GameMenuImages/BackgroundSpell2" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="InheritsAlpha" value="false" />
             <Window type="Vanilla/StaticText" name="Audio" >
                 <Property name="Area" value="{{0,0},{0,0},{0.5,0},{0.15,0}}" />
                 <Property name="Text" value="AUDIO" />
@@ -232,6 +234,7 @@
             <Property name="HoverImage" value="GameMenuImages/BackHover" />
             <Property name="NormalImage" value="GameMenuImages/BackNormal" />
             <Property name="PushedImage" value="GameMenuImages/BackHover" />
+            <Property name="InheritsAlpha" value="false" />
         </Window>
     </Window>
 </GUILayout>

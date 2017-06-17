@@ -3,6 +3,7 @@
 <GUILayout version="4" >
     <Window type="Generic/Image" name="SelectChar" >
         <Property name="Area" value="{{0,0},{0,0},{0,1920},{0,1082}}" />
+        <Property name="Alpha" value="0" />
         <Property name="Image" value="GameMenuImages/Background" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="Generic/Image" name="Ingenior" >
@@ -10,6 +11,7 @@
             <Property name="Alpha" value="0.9" />
             <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="InheritsAlpha" value="false" />
             <Window type="Vanilla/StaticText" name="TextIce" >
                 <Property name="Area" value="{{0.12,0},{0.09,0},{0.84,0},{0.18,0}}" />
                 <Property name="Text" >Ice
@@ -138,6 +140,7 @@ Lanch a stoneball</Property>
             <Property name="Alpha" value="0.9" />
             <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="InheritsAlpha" value="false" />
             <Window type="Vanilla/StaticText" name="TextWarrior" >
                 <Property name="Area" value="{{0,0},{0,0},{0.5,0},{0.1,0}}" />
                 <Property name="Text" value="WARRIOR" />
@@ -266,6 +269,7 @@ Use your dagger</Property>
             <Property name="Alpha" value="0.9" />
             <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="InheritsAlpha" value="false" />
             <Window type="Vanilla/StaticText" name="TextWizard" >
                 <Property name="Area" value="{{0,0},{0,0},{0.5,0},{0.1,0}}" />
                 <Property name="Text" value="WIZARD" />
@@ -394,6 +398,7 @@ Add a buff to a friend</Property>
             <Property name="Alpha" value="0.9" />
             <Property name="Image" value="GameMenuImages/BackgroundCharSelect" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="InheritsAlpha" value="false" />
             <Window type="Generic/Image" name="SpellThunderStorm" >
                 <Property name="Area" value="{{0.04,0},{0.205,0},{0.24,0},{0.305,0}}" />
                 <Property name="Image" value="GameMenuImages/SpellThunderStorm" />
@@ -522,6 +527,7 @@ Launch a fire line</Property>
             <Property name="HoverImage" value="GameMenuImages/BackHover" />
             <Property name="NormalImage" value="GameMenuImages/BackNormal" />
             <Property name="PushedImage" value="GameMenuImages/BackHover" />
+            <Property name="InheritsAlpha" value="false" />
         </Window>
     </Window>
 </GUILayout>
