@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Sat Jun 17 05:07:18 2017 Leo HUBERT
+// Last update Sat Jun 17 06:33:40 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -37,6 +37,10 @@ void          GameLogic::initGameLogic(void)
   #endif
 
   _sceneMgr = mDevice->sceneMgr;
+  mDevice->soundManager->createListener();
+  mDevice->soundManager->init();
+  mDevice->soundManager->setDistanceModel(AL_LINEAR_DISTANCE);
+
   _playerDie =std::function<void(void)>([=] (void) { this->playerDie(); });
 
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );

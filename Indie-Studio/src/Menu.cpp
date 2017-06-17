@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat Jun 17 04:56:51 2017 gastal_r
+// Last update Sat Jun 17 06:28:39 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -86,6 +86,9 @@ bool Menu::buttonBack(const CEGUI::EventArgs &e)
 
   _quitButton = _gameMenu->getChild("Quit");
   _quitButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
+
+  _optionButton = _gameMenu->getChild("Options");
+  _optionButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonOptions, this));
 
   _infosButton = _gameMenu->getChild("Infos");
   _infosButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonInfos, this));
@@ -356,9 +359,9 @@ void Menu::createScene(void)
   mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.15, 0.15, 0.15));
   for (auto & it : loader.getLightPos())
     {
-      if (it.name.find("Spot") != std::string::npos /*  ||  it.name.find("Area") != std::string::npos*/)
+      if (it.name.find("Spot") != std::string::npos   ||  it.name.find("Area") != std::string::npos)
         continue;
-        std::cout << "light: " << it.name << std::endl;
+      std::cout << "light: " << it.name << std::endl;
       Ogre::Light* candlelight = mDevice->sceneMgr->createLight(it.name);
       candlelight->setDiffuseColour(it.colourDiffuse);
       candlelight->setSpecularColour(it.colourSpecular);
@@ -372,27 +375,6 @@ void Menu::createScene(void)
           test->attachObject(_particleSystem);
           candlelight->setAttenuation	(32, 0.5, 0.0014, 0.07);
           candlelight->setCastShadows(false);
-        }
-      else if (it.name.find("Area") != std::string::npos)
-        {
-          candlelight->setPosition(it.pos);
-          candlelight->setType(Ogre::Light::LT_POINT);
-          candlelight->setAttenuation	(100, 1.0, 0.045, 0.0075);
-          candlelight->setCastShadows(true);
-        }
-        else if (it.name.find("Spot") != std::string::npos)
-        {
-          // candlelight->setType(Ogre::Light::LT_SPOTLIGHT);
-          // candlelight->setDiffuseColour(0, 0, 1.0);
-          // candlelight->setSpecularColour(0, 0, 1.0);
-          // // candlelight->setDiffuseColour(1, 1, 1);
-          // // candlelight->setSpecularColour(1, 1, 1);
-          // // candlelight->setDirection(Ogre::Vector3(0, 0, 0));
-          // // candlelight->setSpotlightFalloff(1.5f);
-          // candlelight->setDirection(Ogre::Vector3(it.pos.x, -1, it.pos.z));
-          // candlelight->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
-          // // candlelight->setCastShadows(true);
-          // candlelight->setCastShadows(true);
         }
     }
   // GameState *dungeon = findByName("Dungeon");
@@ -423,10 +405,6 @@ void Menu::createScene(void)
 
 void Menu::exit(void)
 {
-  // mDevice->sceneMgr->clearScene();
-  mDevice->sceneMgr->destroyAllCameras();
-  mDevice->window->removeAllViewports();
-
   mDevice->sceneMgr->clearScene();
   mDevice->sceneMgr->destroyAllCameras();
   mDevice->window->removeAllViewports();
