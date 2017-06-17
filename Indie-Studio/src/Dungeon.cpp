@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat Jun 17 19:04:05 2017 Matthias Prost
+// Last update Sat Jun 17 19:13:08 2017 gastal_r
 //
 
 #include        "Dungeon.hpp"
@@ -67,20 +67,6 @@ void Dungeon::createScene(void)
           candlelight->setType(Ogre::Light::LT_POINT);
           candlelight->setAttenuation	(100, 1.0, 0.045, 0.0075);
           candlelight->setCastShadows(true);
-        }
-        else if (it.name.find("Spot") != std::string::npos)
-        {
-          // candlelight->setType(Ogre::Light::LT_SPOTLIGHT);
-          // candlelight->setDiffuseColour(0, 0, 1.0);
-          // candlelight->setSpecularColour(0, 0, 1.0);
-          // // candlelight->setDiffuseColour(1, 1, 1);
-          // // candlelight->setSpecularColour(1, 1, 1);
-          // // candlelight->setDirection(Ogre::Vector3(0, 0, 0));
-          // // candlelight->setSpotlightFalloff(1.5f);
-          // candlelight->setDirection(Ogre::Vector3(it.pos.x, -1, it.pos.z));
-          // candlelight->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
-          // // candlelight->setCastShadows(true);
-          // candlelight->setCastShadows(true);
         }
     }
   for (auto & it : loader.dynamicObjects)
@@ -180,7 +166,7 @@ void Dungeon::createScene(void)
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
 
   _themeSound = mDevice->soundManager->createSound("game_theme", "game_theme.ogg", true, true);
-  _themeSound->setVolume(0.2f);
+  _themeSound->setVolume(0.3f);
   _themeSound->play();
 
   #if !DEBUG_LOCAL
@@ -292,7 +278,7 @@ bool  Dungeon::setupMageSpell()
   _spells[2].second = _spellBar->getChild("SpellShield/CoolDownSpellShield");
   // _spells[2].first->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellShield, this));
   _spells[3].first = _spellBar->getChild("SpellLeaf/CoolDownTextLeaf");
-  _spells[3].first = _spellBar->getChild("SpellLeaf/CoolDownSpellLeaf");
+  _spells[3].second = _spellBar->getChild("SpellLeaf/CoolDownSpellLeaf");
   // _spells[3].first->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::SpellLeaf, this));
   return (true);
 }
