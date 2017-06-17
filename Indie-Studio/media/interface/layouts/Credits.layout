@@ -49,17 +49,17 @@ Created by:
 
  Cyril Puccio - Modelling
 
- Matthias Prost - CEGUI &amp; Server
-</Property>
+ Matthias Prost - CEGUI, Server
+&amp; particules</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
                 <Property name="BackgroundEnabled" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="739" />
-                <Property name="VertScrollPageSize" value="410" />
+                <Property name="VertScrollPageSize" value="454" />
                 <Property name="HorzScrollDocumentSize" value="535" />
-                <Property name="VertScrollDocumentSize" value="348.965" />
+                <Property name="VertScrollDocumentSize" value="369.492" />
             </Window>
         </Window>
         <Window type="Generic/ImageButton" name="Close" >
