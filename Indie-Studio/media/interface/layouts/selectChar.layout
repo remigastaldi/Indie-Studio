@@ -422,9 +422,9 @@ Add a buff to a friend</Property>
             </Window>
             <Window type="Vanilla/StaticText" name="TextLeaf" >
                 <Property name="Area" value="{{0.12,0},{0.32,0},{0.84,0},{0.41,0}}" />
-                <Property name="Text" >Spectre
+                <Property name="Text" >Firestorm
 
-Launch a spectre</Property>
+Launch a magic firestorm</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="InheritsAlpha" value="false" />
@@ -433,7 +433,7 @@ Launch a spectre</Property>
                 <Property name="HorzScrollPageSize" value="304" />
                 <Property name="VertScrollPageSize" value="81" />
                 <Property name="HorizontalAlignment" value="Centre" />
-                <Property name="HorzScrollDocumentSize" value="171" />
+                <Property name="HorzScrollDocumentSize" value="243" />
                 <Property name="VertScrollDocumentSize" value="61.582" />
             </Window>
             <Window type="Vanilla/StaticText" name="TextAngel" >
