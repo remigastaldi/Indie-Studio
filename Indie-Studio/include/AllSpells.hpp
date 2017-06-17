@@ -124,13 +124,13 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
-#define     SPECTRE_SPEED 4.f
-#define     SPECTRE_DISTANCE 10.f
-#define     SPECTRE_COOLDOWN 7
-class Spectre : public Spell
+#define     FIRESTORM_SPEED 4.f
+#define     FIRESTORM_DISTANCE 10.f
+#define     FIRESTORM_COOLDOWN 7
+class FireStorm : public Spell
 {
 public:
-  Spectre(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
+	FireStorm(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 

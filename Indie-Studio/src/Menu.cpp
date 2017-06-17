@@ -440,7 +440,7 @@ void Menu::createScene(void)
 void Menu::exit(void)
 {
   _song->stop();
-  mDevice->soundManager->destroySound(_song);
+//  mDevice->soundManager->destroySound(_song);
 
   mDevice->sceneMgr->destroyAllAnimations();
   mDevice->sceneMgr->destroyAllAnimationStates();

@@ -1,8 +1,8 @@
-particle_system Spell/Thunderstorm
+particle_system Spell/Thunder
 {
 	material Material/Thunder
-	particle_width 300.0
-	particle_height 300.0
+	particle_width 10.0
+	particle_height 10.0
 	quota 1
 	cull_each false
 	sorted false

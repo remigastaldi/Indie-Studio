@@ -101,7 +101,7 @@ void  Entity::updateEntityHealthBar(const Ogre::Camera &camera)
 
 void 	Entity::changeAnimation(Entity::Status status)
 {
-  // return;
+   return;
 	switch (status)
 	{
 	case Entity::Status::IMMOBILE :

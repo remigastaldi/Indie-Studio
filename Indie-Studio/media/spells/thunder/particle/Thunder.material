@@ -10,7 +10,7 @@ material Material/Thunder
 
 			texture_unit
 			{
-				anim_texture Resources/Textures/Thunder1.png 6 0.02
+				anim_texture Thunder1.png 6 0.02
 			}
 		}
 	}

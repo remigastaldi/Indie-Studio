@@ -22,7 +22,7 @@ Warrior::Warrior(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
   _spells[3] = { Spell::Type::DAGGER, DAGGER_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
-  Ogre::MeshPtr meshPtr = Ogre::MeshManager::getSingleton().load("Ogre.mesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+  Ogre::MeshPtr meshPtr = Ogre::MeshManager::getSingleton().load("skeleton_archer.mesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
   // Utils::scaleMesh(meshPtr, -2, id);
 
@@ -49,7 +49,7 @@ Wizard::Wizard(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create Wizard [id] " + std::to_string(id) + " =====");
 
   _spells[0] = { Spell::Type::TORNADO, TORNADO_COOLDOWN };
-  _spells[1] = { Spell::Type::THUNDERSTORM, THUNDERSTORM_COOLDOWN };
+  _spells[1] = { Spell::Type::FIREBALL, FIREBALL_COOLDOWN };
   _spells[2] = { Spell::Type::SHIELD_BUFF, SHIELD_BUFF_COOLDOWN };
   _spells[3] = { Spell::Type::LEAF_BUFF, LEAF_BUFF_COOLDOWN };
 
@@ -75,8 +75,8 @@ DarkFiend::DarkFiend(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsW
 
   _spells[0] = { Spell::Type::ANGEL, ANGEL_COOLDOWN };
   _spells[1] = { Spell::Type::FIRE, FIRE_COOLDOWN };
-  _spells[2] = { Spell::Type::SPECTRE, SPECTRE_COOLDOWN };
-  _spells[3] = { Spell::Type::THUNDERSTORM, THUNDERSTORM_COOLDOWN };
+  _spells[2] = { Spell::Type::THUNDERSTORM, THUNDERSTORM_COOLDOWN };
+  _spells[3] = { Spell::Type::FIRESTORM, FIRESTORM_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
   _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");

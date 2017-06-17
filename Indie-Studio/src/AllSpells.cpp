@@ -308,7 +308,7 @@ Thunderstorm::Thunderstorm(Ogre::SceneManager &sceneMgr, Collision::CollisionToo
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
-  _entity = sceneMgr.createEntity(name, "fireball.mesh");
+  _entity = sceneMgr.createEntity(name, "stalactite.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -319,7 +319,7 @@ Thunderstorm::Thunderstorm(Ogre::SceneManager &sceneMgr, Collision::CollisionToo
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
 
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "ThunderstormServerParticle:" : "ThunderstormParticle:") + std::to_string(id), "Spell/Fireball");
+  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "ThunderstormServerParticle:" : "ThunderstormParticle:") + std::to_string(id), "Spell/Thunder");
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
@@ -331,11 +331,11 @@ Thunderstorm::Thunderstorm(Ogre::SceneManager &sceneMgr, Collision::CollisionToo
   _spellSound->play();
 }
 
-Spectre::Spectre(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
+FireStorm::FireStorm(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
-  : Spell(SPELL_INIT_VARS, SPECTRE_DISTANCE, SPECTRE_SPEED, SPECTRE_COOLDOWN, Spell::Type::SPECTRE)
+  : Spell(SPELL_INIT_VARS, FIRESTORM_DISTANCE, FIRESTORM_SPEED, FIRESTORM_COOLDOWN, Spell::Type::FIRESTORM)
 {
-  std::string name(disableCallback ? "SpectreServer:" + std::to_string(id) : "Spectre:" + std::to_string(id));
+  std::string name(disableCallback ? "FireStromServer:" + std::to_string(id) : "FireStrom:" + std::to_string(id));
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
@@ -350,11 +350,11 @@ Spectre::Spectre(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
 
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "SpectreServerParticle:" : "SpectreParticle:") + std::to_string(id), "Spell/Fireball");
+  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "FireStromServerParticle:" : "FireStromParticle:") + std::to_string(id), "Spell/Fireball");
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _spellSound = _soundManager.createSound((disableCallback ? "SpectreServerCreateSound:" : "SpectreCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound = _soundManager.createSound((disableCallback ? "FireStromServerCreateSound:" : "FireStromCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
   _spellSound->setRolloffFactor(4.f);
   _spellSound->setReferenceDistance(2.f);
   _spellSound->setMaxDistance(80.f);

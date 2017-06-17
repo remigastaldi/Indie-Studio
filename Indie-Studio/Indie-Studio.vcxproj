@@ -423,6 +423,7 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <Image Include="media\spells\thunder\particle\Thunder1_3.png" />
     <Image Include="media\spells\thunder\particle\Thunder1_4.png" />
     <Image Include="media\spells\thunder\particle\Thunder1_5.png" />
+    <Image Include="media\spells\tornado\particle\Tornado.png" />
     <ResourceCompile Include="Indie-Studio.rc" />
     <Image Include="Indie-Studio.ico" />
   </ItemGroup>
@@ -591,6 +592,8 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <None Include="media\spells\stone\objs\stone.mesh" />
     <None Include="media\spells\thunder\particle\Thunder.material" />
     <None Include="media\spells\thunder\particle\Thunderstorm.particle" />
+    <None Include="media\spells\tornado\particle\Tornado.material" />
+    <None Include="media\spells\tornado\particle\Tornado.particle" />
     <None Include="src\particles\sun.particle" />
   </ItemGroup>
   <ItemGroup>

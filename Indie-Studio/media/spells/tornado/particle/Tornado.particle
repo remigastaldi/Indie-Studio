@@ -1,8 +1,8 @@
 particle_system Spell/Tornado
 {
 	material Material/Tornado
-	particle_width 200.0
-	particle_height 200.0
+	particle_width 1.0
+	particle_height 1.0
 	quota 300
 	cull_each false
 	sorted false
@@ -17,7 +17,7 @@ particle_system Spell/Tornado
 
 	emitter Point
 	{
-		position 0.0 0.0 0.0
+		position 0.0 10.0 0.0
 		direction 0.0 -1.0 0.0
 		angle 5
 		emission_rate 200
@@ -45,11 +45,6 @@ particle_system Spell/Tornado
 		rotation_speed_range_end 500
 		rotation_range_start 0
 		rotation_range_end 180
-	}
-
-	affector Scaler
-	{
-		rate -98.82
 	}
 
 	affector ColourFader

@@ -59,9 +59,9 @@ public:
     LEAF_BUFF,
     /** DarkFiend */
     ANGEL,
+	FIRE,
+	FIRESTORM,
     THUNDERSTORM,
-    SPECTRE,
-    FIRE,
     /** Engineer */
     STONEBALL,
     STALACTITES,
@@ -134,7 +134,7 @@ class ShieldBuff;
 class LeafBuff;
 class Angel;
 class Thunderstorm;
-class Spectre;
+class FireStorm;
 class Fire;
 class StoneBall;
 class Stalactites;
@@ -152,7 +152,7 @@ class BearBuff;
 {   Spell::Type::LEAF_BUFF,    &createInstance<LeafBuff>     },  \
 {   Spell::Type::ANGEL,        &createInstance<Angel>        },  \
 {   Spell::Type::THUNDERSTORM, &createInstance<Thunderstorm> },  \
-{   Spell::Type::SPECTRE,      &createInstance<Spectre>      },  \
+{   Spell::Type::FIRESTORM,    &createInstance<FireStorm>    },  \
 {   Spell::Type::FIRE,         &createInstance<Fire>         },  \
 {   Spell::Type::STONEBALL,    &createInstance<StoneBall>    },  \
 {   Spell::Type::STALACTITES,  &createInstance<Stalactites>  },  \
