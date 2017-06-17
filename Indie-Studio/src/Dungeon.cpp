@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Fri Jun 16 16:31:28 2017 Matthias Prost
+// Last update Sat Jun 17 04:17:08 2017 gastal_r
 //
 
 #include        "Dungeon.hpp"
@@ -41,7 +41,6 @@ void Dungeon::createScene(void)
 	loader.parseDotScene("dungeon.scene","General", _sceneMgr, map);
   map->setPosition({0.f, 0.f, 0.f});
   _sceneMgr->setAmbientLight(Ogre::ColourValue(0.15, 0.15, 0.15));
-  // return;s
   for (auto & it : loader.getLightPos())
     {
       if (it.name.find("Spot") != std::string::npos /*  ||  it.name.find("Area") != std::string::npos*/)
