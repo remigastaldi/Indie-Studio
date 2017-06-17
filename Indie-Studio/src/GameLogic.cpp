@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Sat Jun 17 10:07:54 2017 gastal_r
+// Last update Sat Jun 17 20:54:06 2017 Matthias Prost
 //
 
 #include      "GameLogic.hpp"
@@ -383,6 +383,26 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
   }
 }
 
+bool GameLogic::buttonClose(const CEGUI::EventArgs &e)
+{
+  _closeButton->destroy();
+  _settings->destroy();
+  _settings = nullptr;
+  return (true);
+}
+
+bool GameLogic::buttonMenu(const CEGUI::EventArgs &e)
+{
+  GameState *menu = findByName("Menu");
+  changeGameState(menu);
+  return (true);
+}
+
+bool GameLogic::buttonExitGame(const CEGUI::EventArgs &e)
+{
+  Shutdown();
+  return (true);
+}
 
 bool GameLogic::keyPressed(const OIS::KeyEvent &arg)
 {
@@ -395,8 +415,28 @@ bool GameLogic::keyPressed(const OIS::KeyEvent &arg)
   }
   else if (arg.key == OIS::KC_ESCAPE)
   {
-    // _shutDown = true;
-    Shutdown();
+    if (_settings == nullptr)
+    {
+      _settings = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("IG_MENU.layout");
+      CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_settings);
+
+      _closeButton = _settings->getChild("Settings/BackToGame");
+      _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonClose, this));
+
+      _goToMenuButton = _settings->getChild("Settings/BackToMenu");
+      _goToMenuButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonMenu, this));
+
+      _exitGame = _settings->getChild("Settings/ExitGame");
+      _exitGame->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonExitGame, this));
+    }
+    else
+    {
+      _closeButton->destroy();
+      _goToMenuButton->destroy();
+      _exitGame->destroy();
+      _settings->destroy();
+      _settings = nullptr;
+    }
   }
   else
   {

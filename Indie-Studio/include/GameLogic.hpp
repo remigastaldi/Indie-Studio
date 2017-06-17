@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Sat Jun 17 19:31:11 2017 Matthias Prost
+// Last update Sat Jun 17 20:49:59 2017 Matthias Prost
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -66,6 +66,9 @@ public:
   //CEGUI function
   void         buttonResurect(const CEGUI::EventArgs &e);
   void         checkCD();
+  bool buttonClose(const CEGUI::EventArgs &e);
+  bool buttonExitGame(const CEGUI::EventArgs &e);
+  bool buttonMenu(const CEGUI::EventArgs &e);
 
 protected:
   //OgreBullet
