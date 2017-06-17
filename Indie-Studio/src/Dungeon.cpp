@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat Jun 17 21:08:07 2017 Matthias Prost
+// Last update Sat Jun 17 21:56:42 2017 gastal_r
 //
 
 #include        "Dungeon.hpp"
@@ -126,16 +126,6 @@ void Dungeon::createScene(void)
     _collision->register_entity(entity, Collision::COLLISION_BOX);
   }
 
-  _ui = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("UI_IG.layout");
-  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
-
-  _settings = nullptr;
-  _credits = nullptr;
-  _settingsButton = _ui->getChild("Parameters");
-  _settingsButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::buttonSettings, this));
-  _creditsButton = _ui->getChild("Infos");
-  _creditsButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::infosSettings, this));
-
   //Création du fond de la barre de sort
   switch (mDevice->data.Class)
   {
@@ -201,67 +191,6 @@ void Dungeon::exit(void)
   _credits = nullptr;
 
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Dungeon =====");
-}
-
-bool Dungeon::buttonClose(const CEGUI::EventArgs &e)
-{
-  _closeButton->destroy();
-  _settings->destroy();
-  _settings = nullptr;
-  return (true);
-}
-
-bool Dungeon::buttonMenu(const CEGUI::EventArgs &e)
-{
-  GameState *menu = findByName("Menu");
-  changeGameState(menu);
-  return (true);
-}
-
-bool Dungeon::buttonExitGame(const CEGUI::EventArgs &e)
-{
-  Shutdown();
-  return (true);
-}
-
-bool  Dungeon::infosClose(const CEGUI::EventArgs &e)
-{
-  _closeInfos->destroy();
-  _credits->destroy();
-  _credits = nullptr;
-  return (true);
-}
-
-bool  Dungeon::infosSettings(const CEGUI::EventArgs &e)
-{
-  if (_credits == nullptr)
-  {
-    _credits = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Credits.layout");
-    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_credits);
-
-    _closeInfos = _credits->getChild("Close");
-    _closeInfos->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::infosClose, this));
-  }
-  return (true);
-}
-
-bool Dungeon::buttonSettings(const CEGUI::EventArgs &e)
-{
-  if (_settings == nullptr)
-  {
-    _settings = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("IG_MENU.layout");
-    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_settings);
-
-    _closeButton = _settings->getChild("Settings/BackToGame");
-    _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::buttonClose, this));
-
-    _goToMenuButton = _settings->getChild("Settings/BackToMenu");
-    _goToMenuButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::buttonMenu, this));
-
-    _exitGame = _settings->getChild("Settings/ExitGame");
-    _exitGame->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::buttonExitGame, this));
-  }
-  return (true);
 }
 
 bool  Dungeon::setupWarriorSpell()

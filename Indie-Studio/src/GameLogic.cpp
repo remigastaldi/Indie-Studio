@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Sat Jun 17 20:54:06 2017 Matthias Prost
+// Last update Sat Jun 17 22:10:05 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -19,6 +19,7 @@ GameLogic::GameLogic()
 #if DEBUG_CAMERA
   _cameraMan(nullptr),
 #endif
+  _cameraNode(nullptr),
   _movementX(0.f),
   _movementY(0.f),
   _movementZ(0.f),
@@ -27,7 +28,20 @@ GameLogic::GameLogic()
   _rMouseDown(false),
   _debugDrawer(nullptr),
   _rayCast(nullptr),
-  _collisionRayCast(nullptr)
+  _collisionRayCast(nullptr),
+  _myRoot(nullptr),
+  _ui(nullptr),
+  _settingsButton(nullptr),
+  _creditsButton(nullptr),
+  _spellBar(nullptr),
+  _settings(nullptr),
+  _credits(nullptr),
+  _closeInfos(nullptr),
+  _closeButton(nullptr),
+  _goToMenuButton(nullptr),
+  _exitGame(nullptr),
+  _gameOverMenu(nullptr),
+  _resurectButton(nullptr)
 {}
 
 void          GameLogic::initGameLogic(void)
@@ -39,6 +53,14 @@ void          GameLogic::initGameLogic(void)
 
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
+  _ui = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("UI_IG.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_ui);
+
+  _settingsButton = _ui->getChild("Parameters");
+  _settingsButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonSettings, this));
+  _creditsButton = _ui->getChild("Infos");
+  _creditsButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::infosSettings, this));
+
 
   _camera = _sceneMgr->createCamera("PlayerCamera");
   _camera->setNearClipDistance(5);
@@ -402,6 +424,46 @@ bool GameLogic::buttonMenu(const CEGUI::EventArgs &e)
 bool GameLogic::buttonExitGame(const CEGUI::EventArgs &e)
 {
   Shutdown();
+  return (true);
+}
+
+bool  GameLogic::infosClose(const CEGUI::EventArgs &e)
+{
+  _closeInfos->destroy();
+  _credits->destroy();
+  _credits = nullptr;
+  return (true);
+}
+
+bool  GameLogic::infosSettings(const CEGUI::EventArgs &e)
+{
+  if (_credits == nullptr)
+  {
+    _credits = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Credits.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_credits);
+
+    _closeInfos = _credits->getChild("Close");
+    _closeInfos->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::infosClose, this));
+  }
+  return (true);
+}
+
+bool GameLogic::buttonSettings(const CEGUI::EventArgs &e)
+{
+  if (_settings == nullptr)
+  {
+    _settings = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("IG_MENU.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_settings);
+
+    _closeButton = _settings->getChild("Settings/BackToGame");
+    _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonClose, this));
+
+    _goToMenuButton = _settings->getChild("Settings/BackToMenu");
+    _goToMenuButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonMenu, this));
+
+    _exitGame = _settings->getChild("Settings/ExitGame");
+    _exitGame->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonExitGame, this));
+  }
   return (true);
 }
 

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Sat Jun 17 20:49:52 2017 Matthias Prost
+// Last update Sat Jun 17 21:46:21 2017 gastal_r
 //
 
 #ifndef       _MAP_HPP_
@@ -30,14 +30,6 @@ public:
   virtual void enter(void);
   virtual void exit(void);
   virtual void createScene(void);
-
-  // CEGUI
-  bool buttonSettings(const CEGUI::EventArgs &e);
-  bool buttonClose(const CEGUI::EventArgs &e);
-  bool buttonExitGame(const CEGUI::EventArgs &e);
-  bool buttonMenu(const CEGUI::EventArgs &e);
-  bool infosSettings(const CEGUI::EventArgs &e);
-  bool infosClose(const CEGUI::EventArgs &e);
 
   bool  setupWarriorSpell();
   bool  setupMageSpell();
