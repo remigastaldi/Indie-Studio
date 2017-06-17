@@ -3,6 +3,7 @@
 <GUILayout version="4" >
     <Window type="Generic/Image" name="GameMenuRoot" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="Alpha" value="0" />
         <Property name="Image" value="GameMenuImages/Background" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Property name="RiseOnClickEnabled" value="false" />
@@ -11,6 +12,7 @@
             <Property name="HoverImage" value="GameMenuImages/PlayHover" />
             <Property name="NormalImage" value="GameMenuImages/PlayNormal" />
             <Property name="PushedImage" value="GameMenuImages/PlayHover" />
+            <Property name="InheritsAlpha" value="false" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Vanilla/Button" name="Options" >
@@ -18,6 +20,7 @@
             <Property name="HoverImage" value="GameMenuImages/OptionsHover" />
             <Property name="NormalImage" value="GameMenuImages/OptionsNormal" />
             <Property name="PushedImage" value="GameMenuImages/OptionsHover" />
+            <Property name="InheritsAlpha" value="false" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
         <Window type="Generic/ImageButton" name="Infos" >
@@ -25,12 +28,14 @@
             <Property name="HoverImage" value="GameMenuImages/InfosHover" />
             <Property name="NormalImage" value="GameMenuImages/InfosNormal" />
             <Property name="PushedImage" value="GameMenuImages/InfosNormal" />
+            <Property name="InheritsAlpha" value="false" />
         </Window>
         <Window type="Vanilla/Button" name="Quit" >
             <Property name="Area" value="{{-0.0155,0},{0.65,0},{0.0795,0},{0.705,0}}" />
             <Property name="HoverImage" value="GameMenuImages/QuitHover" />
             <Property name="NormalImage" value="GameMenuImages/QuitNormal" />
             <Property name="PushedImage" value="GameMenuImages/QuitHover" />
+            <Property name="InheritsAlpha" value="false" />
             <Property name="HorizontalAlignment" value="Centre" />
         </Window>
     </Window>
