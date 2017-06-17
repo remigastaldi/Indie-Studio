@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Sat Jun 17 06:33:40 2017 gastal_r
+// Last update Sat Jun 17 09:34:56 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -32,14 +32,8 @@ GameLogic::GameLogic()
 
 void          GameLogic::initGameLogic(void)
 {
-  #if !DEBUG_LOCAL
-    connect();
-  #endif
-
   _sceneMgr = mDevice->sceneMgr;
   mDevice->soundManager->createListener();
-  mDevice->soundManager->init();
-  mDevice->soundManager->setDistanceModel(AL_LINEAR_DISTANCE);
 
   _playerDie =std::function<void(void)>([=] (void) { this->playerDie(); });
 
@@ -54,6 +48,7 @@ void          GameLogic::initGameLogic(void)
   vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
   vp->update();
 
+  _SSAO.reset(new PFXSSAO(mDevice->window, _camera));
 
   _collision.reset(new Collision::CollisionTools());
   _world.reset(new OgreBulletDynamics::DynamicsWorld(
@@ -101,9 +96,10 @@ void          GameLogic::initGameLogic(void)
     _sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
     break;
   case 3:
-    _mSSAO = new PFXSSAO(mDevice->window, _camera);
+    break;
   }
   _collisionRayCast = _sceneMgr->createRayQuery(Ogre::Ray());
+
   _player = createEntity(mDevice->data.Class, *_sceneMgr, *_world, *_collision, _id,
     Entity::Status::IMMOBILE, Ogre::Vector3(0.f, 0.f, 0.f), Ogre::Vector3::ZERO);
 
@@ -125,6 +121,39 @@ void          GameLogic::initGameLogic(void)
   _cdSpells[3].first = std::chrono::high_resolution_clock::now();
 }
 
+void          GameLogic::releaseGameLogic(void)
+{
+  delete (_player);
+  _player = nullptr;
+
+  _sceneMgr->destroyQuery(_rayCast);
+  _rayCast = nullptr;
+  _sceneMgr->destroyQuery(_collisionRayCast);
+  _collisionRayCast = nullptr;
+
+  _sceneMgr->destroyAllAnimations();
+  _sceneMgr->destroyAllAnimationStates();
+  _sceneMgr->destroyAllBillboardChains();
+  _sceneMgr->destroyAllBillboardSets();
+  _sceneMgr->destroyAllEntities();
+  _sceneMgr->destroyAllInstancedGeometry();
+  _sceneMgr->destroyAllLights();
+  _sceneMgr->destroyAllManualObjects();
+  _sceneMgr->destroyAllMovableObjects();
+  _sceneMgr->destroyAllParticleSystems();
+  _sceneMgr->destroyAllRibbonTrails();
+  _sceneMgr->destroyAllCameras();
+  _sceneMgr->clearScene();
+  mDevice->window->removeAllViewports();
+
+  _collision.release();
+  _world.release();
+  _spellManager.release();
+  _spellManagerSocket.release();
+  _spellManagerSocketMobs.release();
+  _SSAO.release();
+}
+
 void          GameLogic::buttonResurect(const CEGUI::EventArgs &e)
 {
   _killed = false;
@@ -136,9 +165,7 @@ void          GameLogic::buttonResurect(const CEGUI::EventArgs &e)
     sendLogin();
     sendEntity(*_player);
   #endif
-
   _gameOverMenu->destroy();
-
 }
 
 void          GameLogic::playerDie(void)

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat Jun 17 04:17:08 2017 gastal_r
+// Last update Sat Jun 17 09:43:55 2017 gastal_r
 //
 
 #include        "Dungeon.hpp"
@@ -179,6 +179,7 @@ void Dungeon::createScene(void)
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
 
   #if !DEBUG_LOCAL
+    connect();
     sendEntity(*_player);
   #endif
 }
@@ -193,18 +194,8 @@ void Dungeon::exit(void)
   delete(_cameraMan);
   _cameraMan = nullptr;
 #endif
-  delete(_player);
-  _player = nullptr;
 
-  _sceneMgr->destroyQuery(_rayCast);
-  _rayCast = nullptr;
-  _sceneMgr->destroyQuery(_collisionRayCast);
-  _collisionRayCast = nullptr;
-
-  _sceneMgr->clearScene();
-  _sceneMgr->destroyAllCameras();
-  mDevice->window->removeAllViewports();
-
+  releaseGameLogic();
   _settings = nullptr;
   _credits = nullptr;
 

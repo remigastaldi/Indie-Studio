@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Fri Jun 16 13:21:46 2017 gastal_r
+// Last update Sat Jun 17 09:54:36 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -38,6 +38,7 @@ public:
   GameLogic& operator=(GameLogic&& other) = default;
 
   void  initGameLogic(void);
+  void  releaseGameLogic(void);
   void  playerDie(void);
   void  updatePlayersHealthBar(void);
   // Ogre::FrameListener
@@ -121,8 +122,7 @@ protected:
   Ogre::RaySceneQuery * _collisionRayCast;
 
   std::unique_ptr<SpellManager>    _spellManager;
-
-  PFXSSAO   *_mSSAO;
+  std::unique_ptr<PFXSSAO>   _SSAO;
 
   bool _shutDown;
 };

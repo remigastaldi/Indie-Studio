@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 19:40:47 2017 gastal_r
-// Last update Fri Jun 16 12:21:35 2017 gastal_r
+// Last update Sat Jun 17 08:43:21 2017 gastal_r
 //
 
 #include        "Indie.hpp"
@@ -40,6 +40,20 @@ void            Indie::start()
   GameStateManager gameStateMgr(&_device);
   Menu::Create(&gameStateMgr, "Menu");
   Dungeon::Create(&gameStateMgr, "Dungeon");
+
+  _device.sceneMgr->destroyAllAnimations();
+  _device.sceneMgr->destroyAllAnimationStates();
+  _device.sceneMgr->destroyAllBillboardChains();
+  _device.sceneMgr->destroyAllBillboardSets();
+  _device.sceneMgr->destroyAllEntities();
+  _device.sceneMgr->destroyAllInstancedGeometry();
+  _device.sceneMgr->destroyAllLights();
+  _device.sceneMgr->destroyAllManualObjects();
+  _device.sceneMgr->destroyAllMovableObjects();
+  _device.sceneMgr->destroyAllParticleSystems();
+  _device.sceneMgr->destroyAllRibbonTrails();
+  _device.sceneMgr->clearScene();
+  _device.sceneMgr->destroyAllMovableObjects();
   GameState *menu = gameStateMgr.findByName("Menu");
   gameStateMgr.start(menu);
 }

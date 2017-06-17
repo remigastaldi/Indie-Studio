@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat Jun 17 06:28:39 2017 gastal_r
+// Last update Sat Jun 17 08:43:04 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -24,6 +24,8 @@ Menu::~Menu()
 void Menu::enter(void)
 {
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Enter Menu =====");
+
+  mDevice->soundManager->createListener();
 
   _camera = mDevice->sceneMgr->createCamera("CameraMenu");
   Ogre::Viewport* vp = mDevice->window->addViewport(_camera);
@@ -405,10 +407,21 @@ void Menu::createScene(void)
 
 void Menu::exit(void)
 {
+  mDevice->sceneMgr->destroyAllAnimations();
+  mDevice->sceneMgr->destroyAllAnimationStates();
+  mDevice->sceneMgr->destroyAllBillboardChains();
+  mDevice->sceneMgr->destroyAllBillboardSets();
+  mDevice->sceneMgr->destroyAllEntities();
+  mDevice->sceneMgr->destroyAllInstancedGeometry();
+  mDevice->sceneMgr->destroyAllLights();
+  mDevice->sceneMgr->destroyAllManualObjects();
+  mDevice->sceneMgr->destroyAllMovableObjects();
+  mDevice->sceneMgr->destroyAllParticleSystems();
+  mDevice->sceneMgr->destroyAllRibbonTrails();
   mDevice->sceneMgr->clearScene();
   mDevice->sceneMgr->destroyAllCameras();
   mDevice->window->removeAllViewports();
-Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Menu =====");
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Menu =====");
 }
 
 bool 	Menu::frameStarted(const Ogre::FrameEvent &evt)
