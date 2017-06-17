@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat Jun 17 19:33:35 2017 Matthias Prost
+// Last update Sat Jun 17 19:39:44 2017 Matthias Prost
 //
 
 #include        "Dungeon.hpp"
@@ -141,18 +141,26 @@ void Dungeon::createScene(void)
   {
   case (Entity::Type::WARRIOR):
     _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("WarriorSpellBar.layout");
+    _healthBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("AvatarWarrior.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
     setupWarriorSpell();
     break;
   case (Entity::Type::WIZARD):
     _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("WizardSpellBar.layout");
+    _healthBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("AvatarWizard.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
     setupMageSpell();
     break;
   case (Entity::Type::DARKFIEND):
     _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("DarkFiendSpell.layout");
+    _healthBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("AvatarDarkFiend.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
     setupDarkFiendSpell();
     break;
   case (Entity::Type::ENGINEER):
     _spellBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("IngeniorSpell.layout");
+    _healthBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("AvatarIngenior.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
     setupIngeniorSpell();
     break;
   }
@@ -162,8 +170,6 @@ void Dungeon::createScene(void)
   _spells[2].second->hide();
   _spells[3].second->hide();
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_spellBar);
-  _healthBar = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("AvatarDarkFiend.layout");
-  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_healthBar);
 
   _themeSound = mDevice->soundManager->createSound("game_theme", "game_theme.ogg", true, true);
   _themeSound->setVolume(0.3f);
