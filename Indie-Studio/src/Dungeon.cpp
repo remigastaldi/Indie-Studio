@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat Jun 17 19:39:44 2017 Matthias Prost
+// Last update Sat Jun 17 21:08:07 2017 Matthias Prost
 //
 
 #include        "Dungeon.hpp"
@@ -240,7 +240,7 @@ bool  Dungeon::infosSettings(const CEGUI::EventArgs &e)
     CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_credits);
 
     _closeInfos = _credits->getChild("Close");
-    _closeInfos->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::buttonExitGame, this));
+    _closeInfos->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::infosClose, this));
   }
   return (true);
 }
