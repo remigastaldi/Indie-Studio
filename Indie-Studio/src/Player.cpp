@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Thu Jun 15 21:29:57 2017 gastal_r
+// Last update Sat Jun 17 02:23:50 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -24,7 +24,7 @@ Warrior::Warrior(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
   Ogre::MeshPtr meshPtr = Ogre::MeshManager::getSingleton().load("Ogre.mesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
-  Utils::scaleMesh(meshPtr, -2, id);
+  // Utils::scaleMesh(meshPtr, -2, id);
 
   meshPtr->buildEdgeList();
   _entity =  sceneMgr.createEntity(std::to_string(id), meshPtr);
@@ -32,7 +32,8 @@ Warrior::Warrior(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
   _node->attachObject(_entity);
   changeAnimation(status);
 
-  _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::PLAYER);
+  // _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::PLAYER);
+  _collision.register_entity(_entity, Collision::COLLISION_SPHERE, Collision::Type::PLAYER);
 
   addToBulletWorld(position);
   btVector3 posBody(_ghostObject->getWorldTransform().getOrigin());
@@ -57,7 +58,7 @@ Wizard::Wizard(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   _node->attachObject(_entity);
   changeAnimation(status);
 
-  _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::PLAYER);
+  _collision.register_entity(_entity, Collision::COLLISION_SPHERE, Collision::Type::PLAYER);
 
   addToBulletWorld(position);
   btVector3 posBody(_ghostObject->getWorldTransform().getOrigin());
@@ -82,7 +83,7 @@ DarkFiend::DarkFiend(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsW
   _node->attachObject(_entity);
   changeAnimation(status);
 
-  _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::PLAYER);
+  _collision.register_entity(_entity, Collision::COLLISION_SPHERE, Collision::Type::PLAYER);
 
   addToBulletWorld(position);
   btVector3 posBody(_ghostObject->getWorldTransform().getOrigin());
@@ -107,7 +108,7 @@ Engineer::Engineer(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWor
   _node->attachObject(_entity);
   changeAnimation(status);
 
-  _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::PLAYER);
+  _collision.register_entity(_entity, Collision::COLLISION_SPHERE, Collision::Type::PLAYER);
 
   addToBulletWorld(position);
   btVector3 posBody(_ghostObject->getWorldTransform().getOrigin());
