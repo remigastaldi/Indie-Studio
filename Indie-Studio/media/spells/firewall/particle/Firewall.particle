@@ -1,4 +1,4 @@
-particle_system Firewall
+particle_system Spell/Firewall
 {
 	material Material/Firewall
 	particle_width 250.0
