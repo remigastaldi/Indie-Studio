@@ -1,39 +1,51 @@
-particle_system Spell/Stalactite
+particle_system Stalactite
 {
-    material        Material/Stalactite
-    particle_width	5
-    particle_height 5
-    cull_each       false
-    quota           5000
-    billboard_type  point
+	material Material/Stalactite
+	particle_width 50.0
+	particle_height 50.0
+	quota 50
+	cull_each false
+	sorted false
+	local_space false
+	iteration_interval 0.0
+	nonvisible_update_timeout 0.0
+	billboard_type point
+	billboard_origin center
+	billboard_rotation_type vertex
+	point_rendering false
+	accurate_facing false
 
-    // Area emitter
-    emitter Box
-    {
-        angle           30
-        emission_rate   30
-        time_to_live    1
-        direction       0 1 0
-        velocity    	0
-        colour_range_start  1 1 0
-        colour_range_end    0.3 1 0.3
-        width           1
-        height          1
-        depth           1
-    }
+	emitter Box
+	{
+		position 0.0 0.0 0.0
+		direction 0.0 0.0 1.0
+		angle 180
+		width 100
+		height 100
+		depth 100
+		emission_rate 150.67
+		velocity_min 9.46
+		velocity_max 95.8
+		time_to_live_min 0.16
+		time_to_live_max 4.54
+		duration_min 1
+		duration_max 1
+		repeat_delay_min 4
+		repeat_delay_max 4
+		colour_range_start 0 0.333333 1 1
+		colour_range_end 0 0 1 1
+	}
 
-    // Make em float upwards
-    affector LinearForce
-    {
-        force_vector      0 100 0
-        force_application add
-    }
+	affector Scaler
+	{
+		rate 156.47
+	}
 
-    // Fader
-    affector ColourFader
-    {
-        red -0.25
-        green -0.25
-        blue -0.25
-    }
+	affector Rotator
+	{
+		rotation_speed_range_start 10
+		rotation_speed_range_end 100
+		rotation_range_start 3.38
+		rotation_range_end 0
+	}
 }
