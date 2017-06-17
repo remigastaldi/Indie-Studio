@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:59:44 2017 gastal_r
-// Last update Fri Jun 16 17:34:05 2017 gastal_r
+// Last update Sat Jun 17 10:22:27 2017 gastal_r
 //
 
 #ifndef       _MENU_HPP_
@@ -99,6 +99,7 @@ private:
   CEGUI::Window     *_applyButton;
 
   std::unordered_map<size_t, std::pair<CEGUI::Window *, bool>> _spellBindButton;
+  OgreOggSound::OgreOggISound *_song;
 
   bool mShutDown;
   Ogre::Camera *_camera;

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Sat Jun 17 09:34:56 2017 gastal_r
+// Last update Sat Jun 17 10:07:54 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -190,7 +190,7 @@ bool 	        GameLogic::frameStarted(const Ogre::FrameEvent &evt)
   return (true);
 }
 
-void          GameLogic::CheckCD()
+void          GameLogic::checkCD()
 {
   if (_spells[0].second->isVisible())
   {
@@ -250,8 +250,8 @@ bool          GameLogic::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	if (_shutDown)
 	  return (false);
 
+  checkCD();
   CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
-  CheckCD();
 
   if (_lMouseDown)
     mouseRaycast();

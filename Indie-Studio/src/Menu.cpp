@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat Jun 17 08:43:04 2017 gastal_r
+// Last update Sat Jun 17 10:54:58 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -15,7 +15,8 @@ Menu::Menu() :
   mShutDown(false),
   _camera(nullptr),
   mLMouseDown(false),
-  mRMouseDown(false)
+  mRMouseDown(false),
+  _song(nullptr)
 {}
 
 Menu::~Menu()
@@ -379,6 +380,8 @@ void Menu::createScene(void)
           candlelight->setCastShadows(false);
         }
     }
+  _song = mDevice->soundManager->createSound("menu_song", "menu_song.ogg", true, true);
+  _song->play();
   // GameState *dungeon = findByName("Dungeon");
   // changeGameState(dungeon);
 }
@@ -407,6 +410,9 @@ void Menu::createScene(void)
 
 void Menu::exit(void)
 {
+  _song->stop();
+  mDevice->soundManager->destroySound(_song);
+
   mDevice->sceneMgr->destroyAllAnimations();
   mDevice->sceneMgr->destroyAllAnimationStates();
   mDevice->sceneMgr->destroyAllBillboardChains();
@@ -447,7 +453,6 @@ bool Menu::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
     // _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
     mDevice->soundManager->update(evt.timeSinceLastFrame);
-
 
     return true;
 }

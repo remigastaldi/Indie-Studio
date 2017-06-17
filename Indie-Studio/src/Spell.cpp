@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:56:53 2017 gastal_r
-// Last update Sat Jun 17 02:51:53 2017 gastal_r
+// Last update Sat Jun 17 10:45:59 2017 gastal_r
 //
 
 #include      "Spell.hpp"
@@ -27,14 +27,15 @@ Spell::Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
   _entity(nullptr),
   _node(nullptr),
   _animationState(nullptr),
-  _createSound(nullptr),
+  _spellSound(nullptr),
   _particleSystem(nullptr)
 {}
 
 Spell::~Spell()
 {
   std::cout << "==== DELETE SPELL =====" << std::endl;
-  _soundManager.destroySound(_createSound);
+  _spellSound->stop();
+  _soundManager.destroySound(_spellSound);
   _sceneMgr.destroyParticleSystem(_particleSystem);
   _collision.remove_entity(_entity);
   _sceneMgr.destroyEntity(_entity);

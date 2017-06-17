@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun Jun  4 17:24:51 2017 gastal_r
-// Last update Thu Jun 15 23:09:11 2017 gastal_r
+// Last update Sat Jun 17 10:45:59 2017 gastal_r
 //
 
 #include      "AllSpells.hpp"
@@ -35,12 +35,12 @@ EyeFire::EyeFire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "EyeFireServerCreateSound:" : "EyeFireCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "EyeFireServerCreateSound:" : "EyeFireCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 Sword::Sword(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
@@ -65,12 +65,12 @@ Sword::Sword(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "SwordServerCreateSound:" : "SwordCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "SwordServerCreateSound:" : "SwordCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 Hearth::Hearth(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
@@ -95,12 +95,12 @@ Hearth::Hearth(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "HearthServerCreateSound:" : "HearthCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "HearthServerCreateSound:" : "HearthCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 Dagger::Dagger(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
@@ -126,12 +126,12 @@ Dagger::Dagger(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
 
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "DaggerServerCreateSound:" : "DaggerCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "DaggerServerCreateSound:" : "DaggerCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 
@@ -160,12 +160,12 @@ Tornado::Tornado(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "TornadoServerCreateSound:" : "TornadoCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "TornadoServerCreateSound:" : "TornadoCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 Fireball::Fireball(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
@@ -190,12 +190,12 @@ Fireball::Fireball(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "FireballServerCreateSound:" : "FireballCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "FireballServerCreateSound:" : "FireballCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 ShieldBuff::ShieldBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
@@ -220,12 +220,12 @@ ShieldBuff::ShieldBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "ShieldBuffServerCreateSound:" : "ShieldBuffCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "ShieldBuffServerCreateSound:" : "ShieldBuffCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 LeafBuff::LeafBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
@@ -250,12 +250,12 @@ LeafBuff::LeafBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "LeafBuffServerCreateSound:" : "LeafBuffCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "LeafBuffServerCreateSound:" : "LeafBuffCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 /*-----------------------------------------------------------------------------
@@ -283,12 +283,12 @@ Angel::Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "AngelServerCreateSound:" : "AngelCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "AngelServerCreateSound:" : "AngelCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 Thunderstorm::Thunderstorm(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
@@ -313,12 +313,12 @@ Thunderstorm::Thunderstorm(Ogre::SceneManager &sceneMgr, Collision::CollisionToo
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "ThunderstormServerCreateSound:" : "ThunderstormCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "ThunderstormServerCreateSound:" : "ThunderstormCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 Spectre::Spectre(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
@@ -343,12 +343,12 @@ Spectre::Spectre(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "SpectreServerCreateSound:" : "SpectreCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "SpectreServerCreateSound:" : "SpectreCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 Fire::Fire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
@@ -373,12 +373,12 @@ Fire::Fire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, O
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "FireServerCreateSound:" : "FireCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "FireServerCreateSound:" : "FireCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 /*-----------------------------------------------------------------------------
@@ -406,12 +406,12 @@ StoneBall::StoneBall(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &co
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "StoneBallServerCreateSound:" : "StoneBallCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "StoneBallServerCreateSound:" : "StoneBallCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 Stalactites::Stalactites(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
@@ -436,12 +436,12 @@ Stalactites::Stalactites(Ogre::SceneManager &sceneMgr, Collision::CollisionTools
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "StalactitesServerCreateSound:" : "StalactitesCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "StalactitesServerCreateSound:" : "StalactitesCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 Bullet::Bullet(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
@@ -466,12 +466,12 @@ Bullet::Bullet(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "BulletServerCreateSound:" : "BulletCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "BulletServerCreateSound:" : "BulletCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }
 
 BearBuff::BearBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
@@ -496,10 +496,10 @@ BearBuff::BearBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _createSound = _soundManager.createSound((disableCallback ? "BearBuffServerCreateSound:" : "BearBuffCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
-  _createSound->setRolloffFactor(4.f);
-  _createSound->setReferenceDistance(2.f);
-  _createSound->setMaxDistance(80.f);
-  _node->attachObject(_createSound);
-  _createSound->play();
+  _spellSound = _soundManager.createSound((disableCallback ? "BearBuffServerCreateSound:" : "BearBuffCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound->setRolloffFactor(4.f);
+  _spellSound->setReferenceDistance(2.f);
+  _spellSound->setMaxDistance(80.f);
+  _node->attachObject(_spellSound);
+  _spellSound->play();
 }

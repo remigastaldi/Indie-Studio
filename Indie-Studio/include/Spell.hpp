@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:43:07 2017 gastal_r
-// Last update Thu Jun 15 23:08:34 2017 gastal_r
+// Last update Sat Jun 17 10:45:59 2017 gastal_r
 //
 
 #ifndef _SPELL_HPP_
@@ -116,7 +116,7 @@ protected:
   Ogre::AnimationState	*_animationState;
   Spell::Status         _status;
   std::string           _collideWith;
-  OgreOggSound::OgreOggISound *_createSound;
+  OgreOggSound::OgreOggISound *_spellSound;
   Ogre::ParticleSystem        *_particleSystem;
 };
 

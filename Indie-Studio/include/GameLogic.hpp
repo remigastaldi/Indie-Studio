@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Sat Jun 17 09:54:36 2017 gastal_r
+// Last update Sat Jun 17 10:07:38 2017 gastal_r
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -65,7 +65,7 @@ public:
 
   //CEGUI function
   void         buttonResurect(const CEGUI::EventArgs &e);
-  void         CheckCD();
+  void         checkCD();
 
 protected:
   //OgreBullet
