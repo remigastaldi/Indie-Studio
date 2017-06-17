@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat Jun 17 11:30:00 2017 gastal_r
+// Last update Sat Jun 17 19:41:53 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -315,8 +315,8 @@ bool         Menu::buttonOptions(const CEGUI::EventArgs &e)
 
 bool  Menu::SplashButton(const CEGUI::EventArgs &e)
 {
-    _splashButton->destroy();
-    _splashScreen->destroy();
+  _splashButton->destroy();
+  _splashScreen->destroy();
 
   _gameMenu = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("GameMenu.layout");
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_gameMenu);
@@ -347,6 +347,7 @@ void Menu::createScene(void)
 
   _splashScreen = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("SplashScreen.layout");
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_splashScreen);
+  mDevice->ogre->renderOneFrame();
 
   _splashButton = _splashScreen->getChild("SplashScreenButton");
   _splashButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::SplashButton, this));
@@ -382,6 +383,7 @@ void Menu::createScene(void)
     }
   _song = mDevice->soundManager->createSound("menu_song", "menu_sound.ogg", true, true);
   _song->play();
+  SplashButton(CEGUI::EventArgs());
   // GameState *dungeon = findByName("Dungeon");
   // changeGameState(dungeon);
 }
