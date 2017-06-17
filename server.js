@@ -7,7 +7,9 @@ var spawners = {};
 
 module.exports = {
   users: users,
-  totalConnected: totalConnected
+  totalConnected: totalConnected,
+  newBot: newBot,
+  getRandomIntInclusive, getRandomIntInclusive
 }
 
 /* REQUIRE ALL DEPS */
@@ -19,6 +21,10 @@ var math = require('mathjs');
 var jsonQuery = require('json-query');
 
 var { Entity, EntityType, Spell } = require("./class/Entity.js");
+var { Spawner } = require("./class/Spawner.js");
+
+spawners["test"] = new Spawner({x: -23.780986785888672, y: -2.1303372383117676, z: 1.5097132921218872}, [EntityType.ZOMBIE, EntityType.SKELETON], 1, 1000);
+//spawners["test2"] = new Spawner({"x":18.89887237548828,"y":0.12088017165660858,"z":-21.71393585205078}, [EntityType.ZOMBIE, EntityType.SKELETON], 1, 10000);
 
 var readline = require('readline');
 var rl = readline.createInterface({
@@ -26,6 +32,26 @@ var rl = readline.createInterface({
   output: process.stdout,
   terminal: false
 });
+
+function canSpawn()
+{
+  var totalEnemis = Object.keys(enemis).length;
+  var canRestart = true;
+
+  if (totalEnemis == 0)
+  {
+    for (spawner in spawners)
+    {
+      if (spawners[spawner].count != 0)
+        canRestart = false;
+    }
+  }
+  else {
+    canRestart = false;
+  }
+
+  return (canRestart);
+}
 
 function getRandomIntInclusive(min, max) {
   min = math.ceil(min);
@@ -44,7 +70,7 @@ function newBot(pos, type, room)
   switch (type) {
     case EntityType.ZOMBIE:
       life = 300;
-      range_attack = 3.5;
+      range_attack = 4;
       range_move = 17;
       wait_time = 1000;
       break;
@@ -84,9 +110,6 @@ function newBot(pos, type, room)
   });
 }
 
-newBot({x: -23.780986785888672, y: -2.1303372383117676, z: 1.5097132921218872}, EntityType.ZOMBIE, "room");
-newBot({x: -23.780986785888672, y: -2.1303372383117676, z: 1.5097132921218872}, EntityType.SKELETON, "room");
-
 function checkDistance(userPosition, enemisPosition)
 {
   if (!userPosition || !enemisPosition)
@@ -123,11 +146,20 @@ function removeUser(server_id)
     }).value;
     if (bots != null)
     {
+      enemis[bots].wait = 0;
       enemis[bots].focus = 0;
       enemis[bots].destination = enemis[bots].position;
     }
   }
   delete(users[server_id]);
+}
+
+function broadcast(message, room) {
+  io.to(room).emit("broadcast", {
+    send_by: 42,
+    send_to: 0,
+    message: message
+  });
 }
 
 function touched(local, entity, spell_type)
@@ -146,7 +178,7 @@ function touched(local, entity, spell_type)
       damages = 20;
       break;
     case Spell.DAGGER:
-      damages = 20;
+      damages = 400;
       break;
       /** Wizzard */
     case Spell.TORNADO:
@@ -207,7 +239,38 @@ function touched(local, entity, spell_type)
     if (local == 0)
       removeUser(entity.server_id);
     else
+    {
       delete(enemis[entity.server_id]);
+      if (canSpawn())
+      {
+        broadcast("Level clear, next level in 5 secondes.", entity.room);
+        level++;
+        setTimeout(function()
+        {
+          broadcast("Level " + level + " started !", entity.room);
+          for (spawner in spawners)
+          {
+            spawners[spawner].restartSpawner(1);
+          }
+
+          for (user in users)
+          {
+            if (users[user].room == entity.room)
+            {
+              damages = (users[user].health - users[user].maxhealth);
+              users[user].health = users[user].maxhealth;
+              io.to(users[user].room).emit("hitted", {
+                send_by: 42,
+                send_to: 0,
+                hitted: users[user].id,
+                damages: damages
+              });
+
+            }
+          }
+        }, 5000);
+      }
+    }
   }
   return (damages);
 }
@@ -228,6 +291,7 @@ function IAEnemis()
       if (dist < bot.range_attack && bot.wait != true)
       {
         var damages = 0;
+        console.log(bot.wait);
 
         io.to(user.room).emit("move", {
           send_by: bot.id,
@@ -304,12 +368,12 @@ function IAEnemis()
             send_to: user.id,
             focus: 1
           });
-          break;
         }
       }
-
     }
   }
+
+
 
   setTimeout(function(){
     IAEnemis();
