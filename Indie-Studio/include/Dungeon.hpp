@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 13:14:22 2017 gastal_r
-// Last update Sat Jun 17 11:38:50 2017 gastal_r
+// Last update Sat Jun 17 19:34:18 2017 Matthias Prost
 //
 
 #ifndef       _MAP_HPP_
@@ -37,6 +37,7 @@ public:
   bool buttonMenu(const CEGUI::EventArgs &e);
   bool infosSettings(const CEGUI::EventArgs &e);
   bool infosClose(const CEGUI::EventArgs &e);
+  bool buttonExitGame(const CEGUI::EventArgs &e);
 
   bool  setupWarriorSpell();
   bool  setupMageSpell();

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat Jun 17 19:13:08 2017 gastal_r
+// Last update Sat Jun 17 19:33:35 2017 Matthias Prost
 //
 
 #include        "Dungeon.hpp"
@@ -212,6 +212,12 @@ bool Dungeon::buttonMenu(const CEGUI::EventArgs &e)
   return (true);
 }
 
+bool Dungeon::buttonExitGame(const CEGUI::EventArgs &e)
+{
+  Shutdown();
+  return (true);
+}
+
 bool  Dungeon::infosClose(const CEGUI::EventArgs &e)
 {
   _closeInfos->destroy();
@@ -228,7 +234,7 @@ bool  Dungeon::infosSettings(const CEGUI::EventArgs &e)
     CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_credits);
 
     _closeInfos = _credits->getChild("Close");
-    _closeInfos->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::infosClose, this));
+    _closeInfos->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::buttonExitGame, this));
   }
   return (true);
 }
@@ -245,6 +251,9 @@ bool Dungeon::buttonSettings(const CEGUI::EventArgs &e)
 
     _goToMenuButton = _settings->getChild("Settings/BackToMenu");
     _goToMenuButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::buttonMenu, this));
+
+    _exitGame = _settings->getChild("Settings/ExitGame");
+    _exitGame->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Dungeon::buttonExitGame, this));
   }
   return (true);
 }
