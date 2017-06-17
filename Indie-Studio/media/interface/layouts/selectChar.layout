@@ -39,7 +39,7 @@ Launch stalactites</Property>
                 <Property name="Area" value="{{0.12,0},{0.32,0},{0.84,0},{0.41,0}}" />
                 <Property name="Text" >Bear
 
-Increase your fire distance</Property>
+Increase your damages</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="FrameEnabled" value="false" />
                 <Property name="InheritsAlpha" value="false" />
@@ -48,7 +48,7 @@ Increase your fire distance</Property>
                 <Property name="HorzScrollPageSize" value="304" />
                 <Property name="VertScrollPageSize" value="81" />
                 <Property name="HorizontalAlignment" value="Centre" />
-                <Property name="HorzScrollDocumentSize" value="262" />
+                <Property name="HorzScrollDocumentSize" value="231" />
                 <Property name="VertScrollDocumentSize" value="61.582" />
             </Window>
             <Window type="Generic/Image" name="ImageDarkFiend" >
@@ -438,7 +438,7 @@ Launch a spectre</Property>
             </Window>
             <Window type="Vanilla/StaticText" name="TextAngel" >
                 <Property name="Area" value="{{0.12,0},{-0.025,0},{0.84,0},{0.065,0}}" />
-                <Property name="Text" >Agel
+                <Property name="Text" >Angel
 
 Buff to increase damages</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
