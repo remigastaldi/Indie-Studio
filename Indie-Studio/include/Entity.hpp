@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:10:53 2017 gastal_r
-// Last update Thu Jun 15 21:29:57 2017 gastal_r
+// Last update Sat Jun 17 04:46:05 2017 Leo HUBERT
 //
 
 #ifndef       _ENTITY_HPP_
@@ -92,6 +92,7 @@ public:
   Spell::Type             getSpell(size_t id)   { return (_spells[id].first); }
   Ogre::Real              getSpellCooldown(size_t id)  { return (_spells[id].second); }
   size_t                  getHealth(void) const { return (_health); }
+  size_t                  getMaxHealth(void) const { return (_maxHealth); }
 
   void          setPosition(const Ogre::Vector3 &pos);
   void					setDestination(const Ogre::Vector3 &destination);

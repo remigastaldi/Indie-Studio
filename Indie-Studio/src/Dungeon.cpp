@@ -185,7 +185,9 @@ void Dungeon::createScene(void)
 
 void Dungeon::exit(void)
 {
-  disconnect();
+  #if !DEBUG_LOCAL
+    disconnect();
+  #endif
 
 #if DEBUG_CAMERA
   delete(_cameraMan);

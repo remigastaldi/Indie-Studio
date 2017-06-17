@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Fri Jun 16 20:18:34 2017 gastal_r
+// Last update Sat Jun 17 05:07:18 2017 Leo HUBERT
 //
 
 #include      "GameLogic.hpp"
@@ -123,7 +123,18 @@ void          GameLogic::initGameLogic(void)
 
 void          GameLogic::buttonResurect(const CEGUI::EventArgs &e)
 {
-  exit();
+  _killed = false;
+  _player->setPosition(Ogre::Vector3(0.f, 0.f, 0.f));
+  _player->setDestination(Ogre::Vector3(0.f, 0.f, 0.f));
+  _player->setHealth(_player->getMaxHealth());
+
+  #if !DEBUG_LOCAL
+    sendLogin();
+    sendEntity(*_player);
+  #endif
+
+  _gameOverMenu->destroy();
+
 }
 
 void          GameLogic::playerDie(void)
@@ -344,6 +355,8 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
 
 bool GameLogic::keyPressed(const OIS::KeyEvent &arg)
 {
+  if (_killed)
+    return (true);
   checkSpellKeyPressed(arg);
   if (arg.key == OIS::KC_SYSRQ)   // take a screenshot
   {

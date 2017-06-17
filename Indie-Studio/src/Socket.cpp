@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Fri Jun 16 01:23:09 2017 gastal_r
+** Last update Sat Jun 17 05:01:48 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -30,6 +30,16 @@ Socket::~Socket()
   _client.clear_con_listeners();
 }
 
+void Socket::sendLogin()
+{
+  auto obj = sio::object_message::create();
+  obj.get()->get_map()["user_id"] =  sio::int_message::create(_id);
+  obj.get()->get_map()["room"] =  sio::string_message::create(_room);
+  obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
+
+  emit("login", obj);
+}
+
 void Socket::on_connected()
 {
   _lock.lock();
@@ -37,11 +47,7 @@ void Socket::on_connected()
   _connect_finish = true;
   _lock.unlock();
 
-  auto obj = sio::object_message::create();
-  obj.get()->get_map()["user_id"] =  sio::int_message::create(_id);
-  obj.get()->get_map()["room"] =  sio::string_message::create(_room);
-  obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
-  emit("login", obj);
+  sendLogin();
 
   _client.set_reconnect_attempts(3);
   HIGHLIGHT_N("Socket.IO: Connected\n");
@@ -186,6 +192,19 @@ void Socket::events()
       _lock.unlock();
     }));
 
+    _current_socket->on("broadcast", sio::socket::event_listener_aux([&](std::string const& name,
+      sio::message::ptr const& data,
+      bool isAck, const sio::message::list &ack_resp)
+      {
+        (void)name;
+        (void)isAck;
+        (void)ack_resp;
+
+        _lock.lock();
+        HIGHLIGHT(data->get_map()["message"]->get_string());
+        _lock.unlock();
+      }));
+
     _current_socket->on("focus", sio::socket::event_listener_aux([&](std::string const& name,
       sio::message::ptr const& data,
       bool isAck, const sio::message::list &ack_resp)
@@ -262,6 +281,7 @@ void Socket::events()
         }
         else
         {
+          _killed = true;
           WorkingQueue::Data queueData(data->get_map()["user_id"]->get_int(), true);
           pushToQueue(WorkingQueue::Action::UNFOCUS, queueData);
           pushToQueue(WorkingQueue::Action::KILLED, queueData);
