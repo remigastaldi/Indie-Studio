@@ -15,7 +15,7 @@ material Material/Stalactite
 
 			texture_unit
 			{
-				texture Stalactite.png
+				texture Resources/Materials/Stalactite.png
 			}
 		}
 	}
