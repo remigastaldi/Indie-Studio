@@ -63,4 +63,6 @@
     <Image height="117" name="CloseButtonHover" width="117" xPos="3352" yPos="1743" />
     <Image height="87" name="ResumeNormal" width="300" xPos="3550" yPos="1736" />
     <Image height="87" name="ResumeHover" width="300" xPos="3550" yPos="1849" />
+    <Image height="87" name="ExitGamesHover" width="300" xPos="3205" yPos="1893" />
+    <Image height="87" name="ExitGameNormal" width="300" xPos="3205" yPos="2015" />
 </Imageset>
