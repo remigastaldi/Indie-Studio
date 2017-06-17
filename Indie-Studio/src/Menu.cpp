@@ -228,6 +228,7 @@ bool        Menu::ApplyButton(const CEGUI::EventArgs &e)
       break;
   }
   CEGUI::System::getSingleton().getRenderer()->setDisplaySize(CEGUI::Sizef(mDevice->data.r_length, mDevice->data.r_height));
+  mDevice->soundManager->setMasterVolume(_audioBar->getScrollPosition());
   _ButtonBack->destroy();
   _shadingBox->destroy();
   _resolBox->destroy();
@@ -315,6 +316,11 @@ bool         Menu::buttonOptions(const CEGUI::EventArgs &e)
     }
     _shadingBox->setItemSelectState(item[3], true);
 
+
+    _audioBar = (CEGUI::Scrollbar*)_options->getChild("Background_Settings/AudioScrollBar");
+    _audioBar->setStepSize(0.10);
+    _audioBar->setScrollPosition(0.50);
+    mDevice->soundManager->setMasterVolume(0.50);
 
     // Apply Button
     _applyButton = _options->getChild("Background_Settings/ApplyButton");

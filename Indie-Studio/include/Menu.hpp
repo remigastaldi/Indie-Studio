@@ -64,6 +64,7 @@ public:
   bool         catchSpellKey1(const CEGUI::EventArgs &e);
   bool         catchSpellKey2(const CEGUI::EventArgs &e);
   bool         catchSpellKey3(const CEGUI::EventArgs &e);
+  bool         AudioBar(const CEGUI::EventArgs &e);
 
 private:
   //OIS Input devices
@@ -94,6 +95,7 @@ private:
   CEGUI::Combobox   *_shadingBox;
   CEGUI::Combobox   *_resolBox;
   CEGUI::Window     *_applyButton;
+  CEGUI::Scrollbar  *_audioBar;
 
   std::unordered_map<size_t, std::pair<CEGUI::Window *, bool>> _spellBindButton;
   OgreOggSound::OgreOggISound *_song;
