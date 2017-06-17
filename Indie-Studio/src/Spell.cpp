@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:56:53 2017 gastal_r
-// Last update Sat Jun 17 02:17:31 2017 gastal_r
+// Last update Sat Jun 17 02:51:53 2017 gastal_r
 //
 
 #include      "Spell.hpp"
@@ -67,19 +67,8 @@ Spell::End 	Spell::frameRenderingQueued(const Ogre::FrameEvent &evt)
     Ogre::Real move = _speed * evt.timeSinceLastFrame;
     _distance -= move;
 
-
-
-    std::cout << _node->getPosition() << std::endl;
-    std::cout << _direction << std::endl;
-    std::cout << _direction * move<< std::endl;
-    std::cout << _entity->getBoundingBox().getSize().x << std::endl;
-    Ogre::Vector3 rayDir((_node->getPosition() + (move * _direction)) - (_entity->getBoundingBox().getSize().x / 2));
-    // std::cout << (_node->getPosition() + (move * _direction)) - (_entity->getBoundingBox().getSize().x / 2) << std::endl;
-    std::cout << "==============" << std::endl;
-
-    Ogre::Ray ray(_node->getPosition(), _direction * move);
-    Collision::SCheckCollisionAnswer ret = _collision.check_ray_collision(
-      ray, Ogre::SceneManager::ENTITY_TYPE_MASK, _entity, _entity->getBoundingBox().getSize().x, true);
+    Collision::SCheckCollisionAnswer ret = _collision.check_ray_collision(_node->getPosition(), _direction * move, 0.1f, 0.f,
+      Ogre::SceneManager::ENTITY_TYPE_MASK, _entity, true);
     if (ret.collided)
     {
       if (ret.type == _collisionType || ret.type == Collision::Type::OTHER)
