@@ -46,7 +46,7 @@ public:
     size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
-#define     DAGGER_SPEED 4.f
+#define     DAGGER_SPEED 8.f
 #define     DAGGER_DISTANCE 10.f
 #define     DAGGER_COOLDOWN 0.5
 class Dagger : public Spell

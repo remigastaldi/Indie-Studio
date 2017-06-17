@@ -130,6 +130,10 @@
     <Image Include="media\spells\thunder\particle\Thunder1_3.png" />
     <Image Include="media\spells\thunder\particle\Thunder1_4.png" />
     <Image Include="media\spells\thunder\particle\Thunder1_5.png" />
+    <Image Include="media\spells\angel\angel.png" />
+    <Image Include="media\spells\bear\bear.png" />
+    <Image Include="media\spells\fireline\Fireline.png" />
+    <Image Include="media\spells\Shield\Shield.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang_complete" />
@@ -233,11 +237,19 @@
     <None Include="media\spells\stalactite\objs\blender2ogre-export.material" />
     <None Include="media\spells\stalactite\objs\stalactite.mesh" />
     <None Include="media\spells\stalactite\particle\Stalactite.material" />
-    <None Include="media\spells\stalactite\particle\Stalactite.particle" />
     <None Include="media\spells\stone\objs\blender2ogre-export.material" />
     <None Include="media\spells\stone\objs\stone.mesh" />
     <None Include="media\spells\thunder\particle\Thunder.material" />
     <None Include="media\spells\thunder\particle\Thunderstorm.particle" />
+    <None Include="media\spells\stalactite\particle\Stalactite.particle" />
+    <None Include="media\spells\angel\angel.material" />
+    <None Include="media\spells\angel\Angel.particle" />
+    <None Include="media\spells\bear\Bear.material" />
+    <None Include="media\spells\bear\Bear.particle" />
+    <None Include="media\spells\fireline\FireLine.particle" />
+    <None Include="media\spells\fireline\Fireline.material" />
+    <None Include="media\spells\Shield\Shield.material" />
+    <None Include="media\spells\Shield\Shield.particle" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeFiles\CMakeOutput.log" />

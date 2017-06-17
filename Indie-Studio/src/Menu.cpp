@@ -357,8 +357,8 @@ void Menu::createScene(void)
   loader.parseDotScene("dungeon.scene","General", mDevice->sceneMgr, map);
   map->setPosition({0.f, 0.f, 0.f});
 
-  _camera->setPosition({-11.9485, 8.62654, 25.3843});
-  _camera->setOrientation({0.685325, -0.177875, -0.683532, -0.177409});
+  _camera->setPosition(Ogre::Vector3(-11.9485, 8.62654, 25.3843));
+  _camera->setOrientation(Ogre::Quaternion(0.685325, -0.177875, -0.683532, -0.177409));
   _camera->setNearClipDistance(5);
   mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.15, 0.15, 0.15));
   for (auto & it : loader.getLightPos())

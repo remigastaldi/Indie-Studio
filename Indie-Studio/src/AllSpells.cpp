@@ -125,7 +125,7 @@ Dagger::Dagger(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
 
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "DaggerServerParticle:" : "DaggerParticle:") + std::to_string(id), "Spell/Firewall");
+  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "DaggerServerParticle:" : "DaggerParticle:") + std::to_string(id), "Spell/Stalactite");
   _node->attachObject(_particleSystem);
 
 
@@ -149,8 +149,8 @@ Tornado::Tornado(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
   std::string name(disableCallback ? "TornadoServer:" + std::to_string(id) : "Tornado" + std::to_string(id));
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
-  _entity = sceneMgr.createEntity(name, "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "TornadoServer:" : "Tornado:") + std::to_string(id));
+  _entity = sceneMgr.createEntity((disableCallback ? "TornadoServer:" : "Tornado:") + std::to_string(id), "stalactite.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -161,7 +161,7 @@ Tornado::Tornado(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
 
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "TornadoServerParticle:" : "TornadoParticle:") + std::to_string(id), "Spell/Fireball");
+  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "TornadoServerParticle:" : "TornadoParticle:") + std::to_string(id), "Spell/Tornado");
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
