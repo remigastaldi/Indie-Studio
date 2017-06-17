@@ -346,6 +346,7 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
   {
     if (!_spells[1].second->isVisible())
     {
+      std::cout << "================================" << std::endl;
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
       #endif
@@ -376,9 +377,9 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
         sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
       #endif
       _spellManager->launchSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
-      _cdSpells[3].first = std::chrono::high_resolution_clock::now();
       _spells[3].first->show();
       _spells[3].second->show();
+      _cdSpells[3].first = std::chrono::high_resolution_clock::now();
     }
   }
 }

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun Jun  4 17:24:51 2017 gastal_r
-// Last update Sat Jun 17 10:45:59 2017 gastal_r
+// Last update Sat Jun 17 21:26:01 2017 gastal_r
 //
 
 #include      "AllSpells.hpp"
@@ -17,10 +17,11 @@ EyeFire::EyeFire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, EYE_FIRE_DISTANCE, EYE_FIRE_SPEED, EYE_FIRE_COOLDOWN, Spell::Type::EYE_FIRE)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create EyeFireServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "EyeFireServer:" + std::to_string(id) : "EyeFire:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + std::to_string(id) + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "EyeFireServer:" : "EyeFire:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "EyeFireServer:" : "EyeFire:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name + std::to_string(id));
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -47,10 +48,11 @@ Sword::Sword(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, SWORD_DISTANCE, SWORD_SPEED, SWORD_COOLDOWN, Spell::Type::SWORD)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create SwordServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "SwordServer:" + std::to_string(id) : "Sword:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "SwordServer:" : "Sword:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "SwordServer:" : "Sword:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -77,10 +79,11 @@ Hearth::Hearth(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, HEARTH_DISTANCE, HEARTH_SPEED, HEARTH_COOLDOWN, Spell::Type::HEARTH)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create HearthServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "HearthServer:" + std::to_string(id) : "Hearth:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "HearthServer:" : "Hearth:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "HearthServer:" : "Hearth:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -107,10 +110,11 @@ Dagger::Dagger(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, DAGGER_DISTANCE, DAGGER_SPEED, DAGGER_COOLDOWN, Spell::Type::DAGGER)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create DaggerServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "DaggerServer:" + std::to_string(id) : "Dagger:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "DaggerServer:" : "Dagger:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "DaggerServer:" : "Dagger:") + std::to_string(id), "stalactite.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "stalactite.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -142,10 +146,11 @@ Tornado::Tornado(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, TORNADO_DISTANCE, TORNADO_SPEED, TORNADO_COOLDOWN, Spell::Type::TORNADO)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create TornadoServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "TornadoServer:" + std::to_string(id) : "Tornado" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "TornadoServer:" : "Tornado:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "TornadoServer:" : "Tornado:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -172,10 +177,11 @@ Fireball::Fireball(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, FIREBALL_DISTANCE, FIREBALL_SPEED, FIREBALL_COOLDOWN, Spell::Type::FIREBALL)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create FireballServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "FireballServer:" + std::to_string(id) : "Fireball" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "FireballServer:" : "Fireball:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "FireballServer:" : "Fireball:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -202,10 +208,11 @@ ShieldBuff::ShieldBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, SHIELD_BUFF_DISTANCE, SHIELD_BUFF_SPEED, SHIELD_BUFF_COOLDOWN, Spell::Type::SHIELD_BUFF)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create ShieldBuffServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "ShieldBuffServer:" + std::to_string(id) : "ShieldBuff:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "ShieldBuffServer:" : "ShieldBuff:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "ShieldBuffServer:" : "ShieldBuff:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -232,10 +239,11 @@ LeafBuff::LeafBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, LEAF_BUFF_DISTANCE, LEAF_BUFF_SPEED, LEAF_BUFF_COOLDOWN, Spell::Type::LEAF_BUFF)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create LeafBuffServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "LeafBuffServer:" + std::to_string(id) : "LeafBuff:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name +" =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "LeafBuffServer:" : "LeafBuff:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "LeafBuffServer:" : "LeafBuff:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -265,10 +273,11 @@ Angel::Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, ANGEL_DISTANCE, ANGEL_SPEED, ANGEL_COOLDOWN, Spell::Type::ANGEL)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create AngelServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "AngelServer:" + std::to_string(id) : "Angel:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name +  +" =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "AngelServer:" : "Angel:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "AngelServer:" : "Angel:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -295,10 +304,11 @@ Thunderstorm::Thunderstorm(Ogre::SceneManager &sceneMgr, Collision::CollisionToo
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, THUNDERSTORM_DISTANCE, THUNDERSTORM_SPEED, THUNDERSTORM_COOLDOWN, Spell::Type::THUNDERSTORM)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create ThunderstormServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "ThunderstormServer:" + std::to_string(id) : "Thunderstorm:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "ThunderstormServer:" : "Thunderstorm:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "ThunderstormServer:" : "Thunderstorm:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -325,10 +335,11 @@ Spectre::Spectre(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, SPECTRE_DISTANCE, SPECTRE_SPEED, SPECTRE_COOLDOWN, Spell::Type::SPECTRE)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create SpectreServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "SpectreServer:" + std::to_string(id) : "Spectre:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "SpectreServer:" : "Spectre:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "SpectreServer:" : "Spectre:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -355,10 +366,11 @@ Fire::Fire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, O
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, FIRE_DISTANCE, FIRE_SPEED, FIRE_COOLDOWN, Spell::Type::FIRE)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create FireServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "FireServer:" + std::to_string(id) : "Fire:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "FireServer:" : "Fire:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "FireServer:" : "Fire:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -388,10 +400,11 @@ StoneBall::StoneBall(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &co
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, STONEBALL_DISTANCE, STONEBALL_SPEED, STONEBALL_COOLDOWN, Spell::Type::STONEBALL)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create StoneBallServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "StoneBallServer:" + std::to_string(id) : "StoneBall:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name +" =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "StoneBallServer:" : "StoneBall:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "StoneBallServer:" : "StoneBall:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -418,10 +431,11 @@ Stalactites::Stalactites(Ogre::SceneManager &sceneMgr, Collision::CollisionTools
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, STALACTITES_DISTANCE, STALACTITES_SPEED, STALACTITES_COOLDOWN, Spell::Type::STALACTITES)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create StalactitesServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "StalactitesServer:" + std::to_string(id): "Stalactites:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "StalactitesServer:" : "Stalactites:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "StalactitesServer:" : "Stalactites:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -448,10 +462,11 @@ Bullet::Bullet(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, BULLET_DISTANCE, BULLET_SPEED, BULLET_COOLDOWN, Spell::Type::BULLET)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create BulletServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "BulletServer:" + std::to_string(id) : "Bullet:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "BulletServer:" : "Bullet:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "BulletServer:" : "Bullet:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -478,10 +493,11 @@ BearBuff::BearBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback)
   : Spell(SPELL_INIT_VARS, BEAR_BUFF_DISTANCE, BEAR_BUFF_SPEED, BEAR_BUFF_COOLDOWN, Spell::Type::BEAR_BUFF)
 {
-  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create BearBuffServer [id] " + std::to_string(id) +" =====");
+  std::string name(disableCallback ? "BearBuffServer:" + std::to_string(id) : "BearBuff:" + std::to_string(id));
+  Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
-  _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "BearBuffServer:" : "BearBuff:") + std::to_string(id));
-  _entity = sceneMgr.createEntity((disableCallback ? "BearBuffServer:" : "BearBuff:") + std::to_string(id), "fireball.mesh");
+  _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
+  _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
