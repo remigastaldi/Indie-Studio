@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat Jun 17 19:41:53 2017 gastal_r
+// Last update Sat Jun 17 23:52:54 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -16,7 +16,8 @@ Menu::Menu() :
   _camera(nullptr),
   mLMouseDown(false),
   mRMouseDown(false),
-  _song(nullptr)
+  _song(nullptr),
+  _splashScreenCheck(true)
 {}
 
 Menu::~Menu()
@@ -96,6 +97,24 @@ bool Menu::buttonBack(const CEGUI::EventArgs &e)
   _infosButton = _gameMenu->getChild("Infos");
   _infosButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonInfos, this));
   return (true);
+}
+
+void  Menu::initMenuButton()
+{
+  _gameMenu = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("GameMenu.layout");
+  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_gameMenu);
+
+  _playButton = _gameMenu->getChild("Play");
+  _playButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonPlay, this));
+
+  _quitButton = _gameMenu->getChild("Quit");
+  _quitButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
+
+  _infosButton = _gameMenu->getChild("Infos");
+  _infosButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonInfos, this));
+
+  _optionButton = _gameMenu->getChild("Options");
+  _optionButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonOptions, this));
 }
 
 bool Menu::buttonPlay(const CEGUI::EventArgs &e)
@@ -317,21 +336,11 @@ bool  Menu::SplashButton(const CEGUI::EventArgs &e)
 {
   _splashButton->destroy();
   _splashScreen->destroy();
+  _splashScreen = nullptr;
+  _splashScreenCheck = false;
 
-  _gameMenu = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("GameMenu.layout");
-  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_gameMenu);
+  initMenuButton();
 
-  _playButton = _gameMenu->getChild("Play");
-  _playButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonPlay, this));
-
-  _quitButton = _gameMenu->getChild("Quit");
-  _quitButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonQuit, this));
-
-  _infosButton = _gameMenu->getChild("Infos");
-  _infosButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonInfos, this));
-
-  _optionButton = _gameMenu->getChild("Options");
-  _optionButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::buttonOptions, this));
   return (true);
 }
 
@@ -345,12 +354,17 @@ void Menu::createScene(void)
   _myRoot = CEGUI::WindowManager::getSingleton().createWindow( "DefaultWindow", "_MasterRoot" );
   CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow( _myRoot );
 
-  _splashScreen = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("SplashScreen.layout");
-  CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_splashScreen);
-  mDevice->ogre->renderOneFrame();
-
-  _splashButton = _splashScreen->getChild("SplashScreenButton");
-  _splashButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::SplashButton, this));
+  if (_splashScreenCheck)
+  {
+    _splashScreenTimer.first = std::chrono::high_resolution_clock::now();
+    _splashScreen = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("SplashScreen.layout");
+    CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->addChild(_splashScreen);
+    _splashButton = _splashScreen->getChild("SplashScreenButton");
+    _splashButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&Menu::SplashButton, this));
+    mDevice->ogre->renderOneFrame();
+  }
+  else
+    initMenuButton();
 
   Ogre::SceneNode *map = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Dungeon", Ogre::Vector3(0,0,0));
   DotSceneLoader loader;
@@ -373,7 +387,6 @@ void Menu::createScene(void)
       if (it.name.find("Point") != std::string::npos)
         {
           candlelight->setType(Ogre::Light::LT_POINT);
-          //TODO sauvegarde des pointeurs pour les delete
           Ogre::SceneNode *test = mDevice->sceneMgr->getRootSceneNode()->createChildSceneNode("Dungeon" + std::to_string(std::rand()), it.pos);
           Ogre::ParticleSystem *_particleSystem = mDevice->sceneMgr->createParticleSystem(("EyeFireParticle") + std::to_string(std::rand()), "Spell/Fireball");
           test->attachObject(_particleSystem);
@@ -381,9 +394,17 @@ void Menu::createScene(void)
           candlelight->setCastShadows(false);
         }
     }
+
+  if (_splashScreenCheck)
+  {
+    _splashScreenTimer.second = std::chrono::high_resolution_clock::now();
+    if (std::chrono::duration_cast<std::chrono::seconds>(_splashScreenTimer.second - _splashScreenTimer.first).count() >= 3)
+      SplashButton(CEGUI::EventArgs());
+  }
+
   _song = mDevice->soundManager->createSound("menu_song", "menu_sound.ogg", true, true);
   _song->play();
-  SplashButton(CEGUI::EventArgs());
+
   // GameState *dungeon = findByName("Dungeon");
   // changeGameState(dungeon);
 }
@@ -429,6 +450,7 @@ void Menu::exit(void)
   mDevice->sceneMgr->clearScene();
   mDevice->sceneMgr->destroyAllCameras();
   mDevice->window->removeAllViewports();
+  _splashScreen = nullptr;
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Menu =====");
 }
 
@@ -440,21 +462,27 @@ bool 	Menu::frameStarted(const Ogre::FrameEvent &evt)
 //-------------------------------------------------------------------------------------
 bool Menu::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-	if (mDevice->window->isClosed()) {
+	if (mDevice->window->isClosed())
 		return false;
-	}
 
-  	if (mShutDown) {
-  		return false;
-  	}
-          mDevice->keyboard->capture();
-          mDevice->mouse->capture();
+  if (mShutDown)
+  	return false;
 
-     //Need to inject timestamps to CEGUI System.
-    CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+  mDevice->keyboard->capture();
+  mDevice->mouse->capture();
 
-    // _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
-    mDevice->soundManager->update(evt.timeSinceLastFrame);
+  if (_splashScreenCheck)
+  {
+    _splashScreenTimer.second = std::chrono::high_resolution_clock::now();
+    if (std::chrono::duration_cast<std::chrono::seconds>(_splashScreenTimer.second - _splashScreenTimer.first).count() >= 3)
+      SplashButton(CEGUI::EventArgs());
+  }
+
+   //Need to inject timestamps to CEGUI System.
+  CEGUI::System::getSingleton().injectTimePulse(evt.timeSinceLastFrame);
+
+  // _cameraMan->frameRenderingQueued(evt);   // if dialog isn't up, then update the camera
+  mDevice->soundManager->update(evt.timeSinceLastFrame);
 
     return true;
 }

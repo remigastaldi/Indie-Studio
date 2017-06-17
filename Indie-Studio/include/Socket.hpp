@@ -5,13 +5,13 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Sat Jun 17 05:02:00 2017 Leo HUBERT
+// Last update Sat Jun 17 23:02:54 2017 gastal_r
 //
 
 #ifndef _CLIENT_HPP_
 #define _CLIENT_HPP_
 
- #include "WorkingQueue.hpp"
+#include "WorkingQueue.hpp"
 
 #define SOCKET_SERVER "http://ezgames.eu"
 #define SOCKET_PORT 3000

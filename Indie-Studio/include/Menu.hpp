@@ -5,11 +5,13 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 16:59:44 2017 gastal_r
-// Last update Sat Jun 17 10:22:27 2017 gastal_r
+// Last update Sat Jun 17 23:53:05 2017 gastal_r
 //
 
 #ifndef       _MENU_HPP_
 #define       _MENU_HPP_
+
+#include      <chrono>
 
 #include      "GameState.hpp"
 
@@ -43,6 +45,8 @@ public:
   virtual bool mousePressed(const OIS::MouseEvent &, OIS::MouseButtonID);
   virtual bool mouseReleased(const OIS::MouseEvent &, OIS::MouseButtonID);
 
+  void         initMenuButton();
+
   bool         buttonPlay(const CEGUI::EventArgs &e);
   bool         buttonBack(const CEGUI::EventArgs &e);
   bool         buttonSelected(const CEGUI::EventArgs &e);
@@ -62,18 +66,11 @@ public:
   bool         catchSpellKey3(const CEGUI::EventArgs &e);
 
 private:
-  char mPolygonRenderingMode;
-
-  // OgreCookies
-  OgreCookies::CameraMan* mCameraMan;       // basic camera controller
-
   //OIS Input devices
   bool    mLMouseDown;
   bool    mRMouseDown;
-  Ogre::SceneNode* mCurObject;
 
 //CEGUI
-  CEGUI::MouseCursor  *mCursor;
   CEGUI::Window *_myRoot;
   CEGUI::Window *_gameMenu;
   CEGUI::Window *_credits;
@@ -101,8 +98,12 @@ private:
   std::unordered_map<size_t, std::pair<CEGUI::Window *, bool>> _spellBindButton;
   OgreOggSound::OgreOggISound *_song;
 
-  bool mShutDown;
   Ogre::Camera *_camera;
+
+  bool  _splashScreenCheck;
+  std::pair<std::chrono::high_resolution_clock::time_point, std::chrono::high_resolution_clock::time_point> _splashScreenTimer;
+
+  bool mShutDown;
 };
 
 #endif /* end of include guard: _MENU_HPP_ */
