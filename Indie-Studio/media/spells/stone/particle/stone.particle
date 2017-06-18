@@ -1,0 +1,35 @@
+particle_system Spell/Stone
+{
+	material Material/Firewall
+	particle_width 1.3
+	particle_height 1.3
+	quota 75
+	cull_each false
+	sorted false
+	local_space false
+	iteration_interval 0.0
+	nonvisible_update_timeout 0.0
+	billboard_type point
+	billboard_origin center
+	billboard_rotation_type texcoord
+	point_rendering false
+	accurate_facing false
+
+	emitter Point
+	{
+		position 0.0 0.0 0.0
+		direction 0.0 0.0 0.0
+		angle 0
+		emission_rate 20
+		velocity_min 50
+		velocity_max 100
+		time_to_live_min 0.3
+		time_to_live_max 0.5
+		duration_min 0
+		duration_max 0
+		repeat_delay_min 0
+		repeat_delay_max 0.1
+		colour_range_start 0 0.266667 0 1
+		colour_range_end 0.192157 0.388235 0 1
+	}
+}

@@ -33,13 +33,6 @@
                 <Property name="HorzScrollDocumentSize" value="118" />
                 <Property name="VertScrollDocumentSize" value="26.6855" />
             </Window>
-            <Window type="Generic/ImageButton" name="BackToMenu" >
-                <Property name="Area" value="{{0,0},{0.7,0},{0.34,0},{0.79,0}}" />
-                <Property name="HoverImage" value="GameMenuImages/MainMenuHover" />
-                <Property name="NormalImage" value="GameMenuImages/MainMenuNormal" />
-                <Property name="PushedImage" value="GameMenuImages/MainMenuHover" />
-                <Property name="HorizontalAlignment" value="Centre" />
-            </Window>
             <Window type="Generic/ImageButton" name="ExitGame" >
                 <Property name="Area" value="{{0,0},{0.82,0},{0.34,0},{0.91,0}}" />
                 <Property name="HoverImage" value="GameMenuImages/ExitGamesHover" />

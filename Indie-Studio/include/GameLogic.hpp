@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:32 2017 gastal_r
-// Last update Sat Jun 17 22:58:36 2017 gastal_r
+// Last update Sun Jun 18 19:06:35 2017 Matthias Prost
 //
 
 #ifndef       _GAMELOGIC_HPP
@@ -91,7 +91,6 @@ protected:
   CEGUI::Window *_credits;
   CEGUI::Window *_closeInfos;
   CEGUI::Window *_closeButton;
-  CEGUI::Window *_goToMenuButton;
   CEGUI::Window *_exitGame;
   CEGUI::Window *_gameOverMenu;
   CEGUI::Window *_resurectButton;
