@@ -380,6 +380,7 @@ io.on('connection', function (socket) {
           type: enemis[bot]["type"],
           destination: enemis[bot]["destination"]
         });
+        console.log(enemis[bot]);
       }
     }
 
@@ -397,6 +398,7 @@ io.on('connection', function (socket) {
           type: users[user]["type"],
           destination: users[user]["destination"]
         });
+        console.log(users[user]);
       }
     }
 
