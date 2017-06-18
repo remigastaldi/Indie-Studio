@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun Jun  4 17:24:51 2017 gastal_r
-// Last update Sun Jun 18 19:10:10 2017 Matthias Prost
+// Last update Sun Jun 18 19:44:52 2017 Matthias Prost
 //
 
 #include      "AllSpells.hpp"
@@ -341,7 +341,7 @@ FireStorm::FireStorm(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &co
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
-  _entity = sceneMgr.createEntity(name, "fireball.mesh");
+  _entity = sceneMgr.createEntity(name, "stone.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -361,6 +361,7 @@ FireStorm::FireStorm(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &co
   _spellSound->setReferenceDistance(2.f);
   _spellSound->setMaxDistance(80.f);
   _node->attachObject(_spellSound);
+  _node->setScale(0.4, 0.4, 0.4);
   _spellSound->play();
 }
 
@@ -372,7 +373,7 @@ Fire::Fire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, O
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
-  _entity = sceneMgr.createEntity(name, "fireball.mesh");
+  _entity = sceneMgr.createEntity(name, "stalactite.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -383,7 +384,7 @@ Fire::Fire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, O
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
 
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "FireServerParticle:" : "FireParticle:") + std::to_string(id), "Spell/Fireball");
+  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "FireServerParticle:" : "FireParticle:") + std::to_string(id), "Spell/FireLine");
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
