@@ -132,9 +132,9 @@ class Fireball;
 class ShieldBuff;
 class LeafBuff;
 class Angel;
+class Fire;
 class Thunderstorm;
 class FireStorm;
-class Fire;
 class StoneBall;
 class Stalactites;
 class Bullet;
@@ -155,8 +155,8 @@ class BearBuff;
 {   Spell::Type::FIRESTORM,    &createInstance<FireStorm>    },  \
 {   Spell::Type::STONEBALL,    &createInstance<StoneBall>    },  \
 {   Spell::Type::STALACTITES,  &createInstance<Stalactites>  },  \
-{   Spell::Type::BULLET,       &createInstance<Bullet>       },  \
-{   Spell::Type::BEAR_BUFF,    &createInstance<BearBuff>     }
+{   Spell::Type::BULLET,       &createInstance<BearBuff>       },  \
+{   Spell::Type::BEAR_BUFF,    &createInstance<Bullet>     }
 
 
 #define   SPELL_INIT_PARAMETERS   \

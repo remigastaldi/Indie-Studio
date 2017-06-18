@@ -195,10 +195,10 @@ void Dungeon::exit(void)
 
 bool  Dungeon::setupWarriorSpell()
 {
-  _spells[0].first = _spellBar->getChild("SpellSword/CoolDownTextSword");
-  _spells[0].second = _spellBar->getChild("SpellSword/CoolDownSpellSword");
-  _spells[1].first = _spellBar->getChild("SpellEyeFire/CoolDownTextEyeFire");
-  _spells[1].second = _spellBar->getChild("SpellEyeFire/CoolDownSpellEyeFire");
+	_spells[0].first = _spellBar->getChild("SpellEyeFire/CoolDownTextEyeFire");
+	_spells[0].second = _spellBar->getChild("SpellEyeFire/CoolDownSpellEyeFire");
+	_spells[1].first = _spellBar->getChild("SpellSword/CoolDownTextSword");
+	_spells[1].second = _spellBar->getChild("SpellSword/CoolDownSpellSword");
   _spells[2].first = _spellBar->getChild("SpellHeart/CoolDownTextHeart");
   _spells[2].second = _spellBar->getChild("SpellHeart/CoolDownSpellHeart");
   _spells[3].first = _spellBar->getChild("SpellDagger/CoolDownTextDagger");
@@ -223,12 +223,12 @@ bool  Dungeon::setupDarkFiendSpell()
 {
   _spells[0].first = _spellBar->getChild("SpellAngel/CoolDownTextAngel");
   _spells[0].second = _spellBar->getChild("SpellAngel/CoolDownSpellAngel");
-  _spells[1].first = _spellBar->getChild("SpellThunderStorm/CoolDownTextStorm");
-  _spells[1].second = _spellBar->getChild("SpellThunderStorm/CoolDownSpellStorm");
-  _spells[2].first = _spellBar->getChild("SpellFireStorm/CoolDownTextFireStorm");
-  _spells[2].second = _spellBar->getChild("SpellFireStorm/CoolDownSpellFireStorm");
-  _spells[3].first = _spellBar->getChild("SpellFire/CoolDownTextFire");
-  _spells[3].second = _spellBar->getChild("SpellFire/CoolDownSpellFire");
+  _spells[1].first = _spellBar->getChild("SpellFire/CoolDownTextFire");
+  _spells[1].second = _spellBar->getChild("SpellFire/CoolDownSpellFire");
+  _spells[2].second = _spellBar->getChild("SpellThunderStorm/CoolDownSpellStorm");
+  _spells[2].first = _spellBar->getChild("SpellThunderStorm/CoolDownTextStorm");
+  _spells[3].second = _spellBar->getChild("SpellFireStorm/CoolDownSpellFireStorm");
+  _spells[3].first = _spellBar->getChild("SpellFireStorm/CoolDownTextFireStorm");
   return (true);
 }
 
@@ -236,11 +236,11 @@ bool  Dungeon::setupIngeniorSpell()
 {
   _spells[0].first = _spellBar->getChild("SpellStoneBall/CoolDownTextBall");
   _spells[0].second = _spellBar->getChild("SpellStoneBall/CoolDownSpellBall");
-  _spells[1].first = _spellBar->getChild("SpellBullet/CoolDownTextBullet");
-  _spells[1].second = _spellBar->getChild("SpellBullet/CoolDownBullet");
-  _spells[2].first = _spellBar->getChild("SpellHandBeard/CoolDownTextBread");
-  _spells[2].second = _spellBar->getChild("SpellHandBeard/CoolDownSpellBread");
-  _spells[3].first = _spellBar->getChild("SpellIce/CoolDownTextIce");
-  _spells[3].second = _spellBar->getChild("SpellIce/CoolDownSpellIce");
+  _spells[1].first = _spellBar->getChild("SpellIce/CoolDownTextIce");
+  _spells[1].second = _spellBar->getChild("SpellIce/CoolDownSpellIce");
+  _spells[2].first = _spellBar->getChild("SpellBullet/CoolDownTextBullet");
+  _spells[2].second = _spellBar->getChild("SpellBullet/CoolDownBullet");
+  _spells[3].first = _spellBar->getChild("SpellHandBeard/CoolDownTextBread");
+  _spells[3].second = _spellBar->getChild("SpellHandBeard/CoolDownSpellBread");
   return (true);
 }

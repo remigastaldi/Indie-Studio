@@ -34,8 +34,8 @@ Spell::Spell(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
 Spell::~Spell()
 {
   std::cout << "==== DELETE SPELL =====" << std::endl;
-  _spellSound->stop();
-  _soundManager.destroySound(_spellSound);
+//  _spellSound->stop();
+  //_soundManager.destroySound(_spellSound);
   _sceneMgr.destroyParticleSystem(_particleSystem);
   _collision.remove_entity(_entity);
   _sceneMgr.destroyEntity(_entity);
