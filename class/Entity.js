@@ -129,17 +129,9 @@ function Entity(id, server_id, username, type, room, health) {
             return;
           }
           var dist = checkDistance(user.position, this.position);
-          if (dist < this.range_attack)
+          if (dist < this.range_attack && this.wait != true)
           {
             var damages = 0;
-
-            if (this.wait == true)
-            {
-              setTimeout(function(){
-                that.IA();
-              }, IARefreshTime);
-              return;
-            }
 
             io.to(user.room).emit("move", {
               send_by: this.id,
@@ -163,7 +155,7 @@ function Entity(id, server_id, username, type, room, health) {
               that.wait = false;
             }, this.wait_time);
           }
-          else if (dist < this.range_move)
+          else if (dist < this.range_move && this.wait != true)
           {
               io.to(user.room).emit("move", {
                 send_by: this.id,
@@ -174,7 +166,7 @@ function Entity(id, server_id, username, type, room, health) {
               });
               this.destination = user.position;
           }
-          else
+          else if (this.wait != true)
           {
             io.to(user.room).emit("focus", {
               send_by: this.id,

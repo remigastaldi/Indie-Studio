@@ -74,13 +74,13 @@ function newBot(pos, type, room)
       life = 300;
       range_attack = 4;
       range_move = 17;
-      wait_time = 1000;
+      wait_time = 3000;
       break;
     case EntityType.SKELETON:
       life = 150;
       range_attack = 10;
       range_move = 17;
-      wait_time = 700;
+      wait_time = 2000;
       break;
     default:
   }
@@ -157,7 +157,7 @@ function touched(local, entity, spell_type)
       damages = 20;
       break;
     case Spell.DAGGER:
-      damages = 400;
+      damages = 20;
       break;
       /** Wizzard */
     case Spell.TORNADO:
