@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Sun Jun 18 04:36:04 2017 gastal_r
+// Last update Sun Jun 18 15:30:59 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -177,6 +177,8 @@ void          GameLogic::releaseGameLogic(void)
   _entity.clear();
   _focus.clear();
   clearQueue();
+
+  _myRoot->destroy();
 }
 
 void          GameLogic::buttonResurect(const CEGUI::EventArgs &e)
