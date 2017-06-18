@@ -111,7 +111,7 @@ function newBot(pos, type, room)
     destination: enemis[id]["destination"]
   });
 
-  //enemis[id].IA();
+  enemis[id].IA();
 }
 
 function removeUser(server_id)
