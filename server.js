@@ -371,16 +371,18 @@ io.on('connection', function (socket) {
     {
       if (enemis[bot]["room"] == socket.room)
       {
+        var type = users[user]["type"];
+        if (!type)
+          type = EntityType.ZOMBIE;
         io.to(socket.room).emit("create_entity", {
           send_by: enemis[bot]["id"],
           send_to: data["user_id"],
           health: enemis[bot]["health"],
           position: enemis[bot]["position"],
           status: enemis[bot]["status"],
-          type: enemis[bot]["type"],
+          type: type,
           destination: enemis[bot]["destination"]
         });
-        console.log(enemis[bot]);
       }
     }
 
@@ -388,6 +390,9 @@ io.on('connection', function (socket) {
     {
       if (users[user]["room"] == socket.room)
       {
+        var type = users[user]["type"];
+        if (!type)
+          type = EntityType.WARRIOR;
         io.to(socket.room).emit("login", { user_id: users[user]["id"], send_to: data["user_id"] });
         io.to(socket.room).emit("create_entity", {
           send_by: users[user]["id"],
@@ -395,10 +400,9 @@ io.on('connection', function (socket) {
           health: users[user]["health"],
           position: users[user]["position"],
           status: users[user]["status"],
-          type: users[user]["type"],
+          type: type,
           destination: users[user]["destination"]
         });
-        console.log(users[user]);
       }
     }
 
