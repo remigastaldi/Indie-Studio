@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:49:15 2017 gastal_r
-// Last update Fri Jun 16 01:14:55 2017 gastal_r
+// Last update Sun Jun 18 02:29:43 2017 gastal_r
 //
 
 #include      "WorkingQueue.hpp"
@@ -164,4 +164,9 @@ void        WorkingQueue::processQueue(void)
     (this->*it.first)(it.second);
   _queue.clear();
   _mutex.unlock();
+}
+
+void        WorkingQueue::clearQueue(void)
+{
+  _queue.clear();
 }

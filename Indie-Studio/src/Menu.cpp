@@ -453,9 +453,9 @@ void Menu::exit(void)
   mDevice->sceneMgr->destroyAllMovableObjects();
   mDevice->sceneMgr->destroyAllParticleSystems();
   mDevice->sceneMgr->destroyAllRibbonTrails();
-  mDevice->sceneMgr->clearScene();
   mDevice->sceneMgr->destroyAllCameras();
   mDevice->window->removeAllViewports();
+  mDevice->sceneMgr->clearScene();
   _splashScreen = nullptr;
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Menu =====");
 }

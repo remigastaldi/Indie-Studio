@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sun Jun 18 02:04:37 2017 gastal_r
+// Last update Sun Jun 18 02:21:10 2017 gastal_r
 //
 
 #include        "Dungeon.hpp"
@@ -173,12 +173,12 @@ void Dungeon::createScene(void)
 
 void Dungeon::exit(void)
 {
-  _themeSound->stop();
-//  mDevice->soundManager->destroySound(_themeSound);
-
   #if !DEBUG_LOCAL
     disconnect();
   #endif
+
+  _themeSound->stop();
+  //  mDevice->soundManager->destroySound(_themeSound);
 
 #if DEBUG_CAMERA
   delete(_cameraMan);

@@ -174,6 +174,9 @@ void          GameLogic::releaseGameLogic(void)
   _spellManagerSocket.release();
   _spellManagerSocketMobs.release();
   _SSAO.release();
+  _entity.clear();
+  _focus.clear();
+  clearQueue();
 }
 
 void          GameLogic::buttonResurect(const CEGUI::EventArgs &e)

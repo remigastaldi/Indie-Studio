@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun  6 22:52:01 2017 gastal_r
-// Last update Fri Jun 16 01:10:26 2017 gastal_r
+// Last update Sun Jun 18 02:29:05 2017 gastal_r
 //
 
 #ifndef     _WORKING_HPP_
@@ -68,6 +68,7 @@ public:
   WorkingQueue();
 
   void  pushToQueue(WorkingQueue::Action, const WorkingQueue::Data &);
+  void  clearQueue(void);
 
 private:
   void  createEntityQueue(const WorkingQueue::Data &);
