@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Sun Jun 18 03:00:42 2017 Leo HUBERT
+// Last update Sun Jun 18 04:36:04 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -206,6 +206,8 @@ void          GameLogic::playerDie(void)
 void          GameLogic::updatePlayersHealthBar(void)
 {
   _player->updateEntityHealthBar(*_camera);
+  CEGUI::ProgressBar *progressBar = static_cast<CEGUI::ProgressBar *>(_healthBar->getChild("ProgressBar"));
+  progressBar->setProgress((float) _player->getHealth() / (float) _player->getMaxHealth());
 }
 
 bool 	        GameLogic::frameStarted(const Ogre::FrameEvent &evt)
@@ -371,7 +373,6 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
   {
     if (!_spells[1].second->isVisible())
     {
-      std::cout << "================================" << std::endl;
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
       #endif
