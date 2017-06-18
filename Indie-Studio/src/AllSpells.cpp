@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun Jun  4 17:24:51 2017 gastal_r
-// Last update Sat Jun 17 21:26:01 2017 gastal_r
+// Last update Sun Jun 18 02:26:29 2017 Matthias Prost
 //
 
 #include      "AllSpells.hpp"
@@ -466,7 +466,7 @@ Bullet::Bullet(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
-  _entity = sceneMgr.createEntity(name, "fireball.mesh");
+  _entity = sceneMgr.createEntity(name, "stalactite.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -477,7 +477,7 @@ Bullet::Bullet(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
 
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "BulletServerParticle:" : "BulletParticle:") + std::to_string(id), "Spell/Fireball");
+  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "BulletServerParticle:" : "BulletParticle:") + std::to_string(id), "Spell/FireLine");
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager

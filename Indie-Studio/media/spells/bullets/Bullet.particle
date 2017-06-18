@@ -1,8 +1,8 @@
-particle_system Bullet
+particle_system Spell/Bullet
 {
-	material Particles/Bullet
-	particle_width 20.0
-	particle_height 7.61999988555908
+	material Material/Bullet
+	particle_width 1
+	particle_height 0.35
 	quota 30
 	cull_each false
 	sorted false
@@ -17,8 +17,8 @@ particle_system Bullet
 
 	emitter Point
 	{
-		position 0.0 659.820007324219 0.0
-		direction 0.0 0.0 -1.0
+		position 0.0 0.0 0.0
+		direction 0.0 0.0 0.0
 		angle 25.58
 		emission_rate 51.58
 		velocity_min 500

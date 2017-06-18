@@ -3,7 +3,7 @@ particle_system Spell/Tornado
 	material Material/Tornado
 	particle_width 1.0
 	particle_height 1.0
-	quota 300
+	quota 5000
 	cull_each false
 	sorted false
 	local_space false
@@ -19,18 +19,18 @@ particle_system Spell/Tornado
 	{
 		position 0.0 10.0 0.0
 		direction 0.0 -1.0 0.0
-		angle 5
-		emission_rate 200
+		angle 13
+		emission_rate 3500
 		velocity_min 100
 		velocity_max 300
-		time_to_live_min 2
-		time_to_live_max 3
-		duration_min 1
-		duration_max 1
+		time_to_live_min 1
+		time_to_live_max 1.1
+		duration_min 8
+		duration_max 10
 		repeat_delay_min 0
 		repeat_delay_max 0.1
-		colour_range_start 0.333333 0 0 1
-		colour_range_end 0 0.333333 1 1
+		colour_range_start 0.5 0.5 0.5 1
+		colour_range_end 0.5 0.5 0.5 1
 	}
 
 	affector LinearForce
@@ -41,17 +41,9 @@ particle_system Spell/Tornado
 
 	affector Rotator
 	{
-		rotation_speed_range_start 100
-		rotation_speed_range_end 500
+		rotation_speed_range_start 500
+		rotation_speed_range_end 100
 		rotation_range_start 0
 		rotation_range_end 180
-	}
-
-	affector ColourFader
-	{
-		red 0
-		green 0
-		blue 0
-		alpha -1
 	}
 }
