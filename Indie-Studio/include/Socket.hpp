@@ -5,7 +5,7 @@
 // Login   <matthias.prost@epitech.eu@epitech.eu>
 //
 // Started on  Sat May  6 13:22:30 2017 Matthias Prost
-// Last update Sat Jun 17 23:02:54 2017 gastal_r
+// Last update Sun Jun 18 02:57:54 2017 Leo HUBERT
 //
 
 #ifndef _CLIENT_HPP_
@@ -35,20 +35,20 @@
 class Socket : virtual private WorkingQueue
 {
 public:
-  Socket(std::string const &addr, int const port, int const id, std::string const &room);
+  Socket(std::string const &, int const, int const, std::string const &);
   ~Socket();
   void  on_connected();
-  void  on_close(sio::client::close_reason const& reason);
+  void  on_close(sio::client::close_reason const&);
   void  on_fail();
   void  events();
   void  connect();
   void  disconnect();
   void  wait();
   void  consoleChat();
-  void  sendLogin();
-  void  emit(const std::string &event, std::shared_ptr<sio::message> const &request);
-  void  move(const Entity &entity);
-  void  refreshPos(const Entity &entity);
+  void  sendLogin(const bool);
+  void  emit(const std::string &event, std::shared_ptr<sio::message> const &);
+  void  move(const Entity &);
+  void  refreshPos(const Entity &);
 
   void sendCollision(Spell::Type, const std::string &);
   void sendMessage(std::string const &);
@@ -59,6 +59,7 @@ private:
   std::mutex                  _lock;
   std::condition_variable_any _cond;
   bool                        _connect_finish;
+  size_t                      _connections;
   sio::socket::ptr            _current_socket;
   sio::client                 _client;
   std::string                 _addr;

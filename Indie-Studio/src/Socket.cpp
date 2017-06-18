@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Tue May 09 16:29:33 2017 Leo Hubert Froideval
-** Last update Sat Jun 17 05:01:48 2017 Leo HUBERT
+** Last update Sun Jun 18 03:03:24 2017 Leo HUBERT
 */
 
 #include "Socket.hpp"
@@ -16,6 +16,7 @@ Socket::Socket(std::string const &addr, int const port, int const id, std::strin
 {
   _connect_finish = false;
   _killed = false;
+  _connections = 0;
   _addr = addr + ":" + std::to_string(port);
 
   _client.set_open_listener(std::bind(&Socket::on_connected, this));
@@ -30,10 +31,11 @@ Socket::~Socket()
   _client.clear_con_listeners();
 }
 
-void Socket::sendLogin()
+void Socket::sendLogin(const bool first)
 {
   auto obj = sio::object_message::create();
   obj.get()->get_map()["user_id"] =  sio::int_message::create(_id);
+  obj.get()->get_map()["first"] =  sio::bool_message::create(first);
   obj.get()->get_map()["room"] =  sio::string_message::create(_room);
   obj.get()->get_map()["send_to"] =  sio::int_message::create(0);
 
@@ -45,9 +47,13 @@ void Socket::on_connected()
   _lock.lock();
   _cond.notify_all();
   _connect_finish = true;
+  _connections++;
   _lock.unlock();
 
-  sendLogin();
+  if (_connections == 1)
+    sendLogin(true);
+  else
+    sendLogin(false);
 
   _client.set_reconnect_attempts(3);
   HIGHLIGHT_N("Socket.IO: Connected\n");
