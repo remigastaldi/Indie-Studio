@@ -406,9 +406,9 @@ Add a buff to a friend</Property>
                 <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />
             </Window>
-            <Window type="Generic/Image" name="SpellSpectre" >
+            <Window type="Generic/Image" name="SpellFireStorm" >
                 <Property name="Area" value="{{0.04,0},{0.32,0},{0.24,0},{0.42,0}}" />
-                <Property name="Image" value="GameMenuImages/SpellSpectre" />
+                <Property name="Image" value="GameMenuImages/SpellFireStorm" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="InheritsAlpha" value="false" />
                 <Property name="VerticalAlignment" value="Centre" />

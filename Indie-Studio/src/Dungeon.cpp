@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sat Jun 17 21:56:42 2017 gastal_r
+// Last update Sun Jun 18 02:04:37 2017 gastal_r
 //
 
 #include        "Dungeon.hpp"
@@ -225,7 +225,7 @@ bool  Dungeon::setupDarkFiendSpell()
   _spells[0].second = _spellBar->getChild("SpellAngel/CoolDownSpellAngel");
   _spells[1].first = _spellBar->getChild("SpellThunderStorm/CoolDownTextStorm");
   _spells[1].second = _spellBar->getChild("SpellThunderStorm/CoolDownSpellStorm");
-  _spells[2].first = _spellBar->getChild("SpellSFireStorm/CoolDownTextFireStorm");
+  _spells[2].first = _spellBar->getChild("SpellFireStorm/CoolDownTextFireStorm");
   _spells[2].second = _spellBar->getChild("SpellFireStorm/CoolDownSpellFireStorm");
   _spells[3].first = _spellBar->getChild("SpellFire/CoolDownTextFire");
   _spells[3].second = _spellBar->getChild("SpellFire/CoolDownSpellFire");

@@ -52,19 +52,19 @@
                 <Property name="VertScrollPageSize" value="74" />
             </Window>
         </Window>
-        <Window type="Generic/ImageButton" name="SpellSpectre" >
+        <Window type="Generic/ImageButton" name="SpellFireStorm" >
             <Property name="Area" value="{{0.75,0},{0.1,0},{0.97,0},{0.9,0}}" />
-            <Property name="HoverImage" value="GameMenuImages/SpellSpectre" />
-            <Property name="NormalImage" value="GameMenuImages/SpellSpectre" />
-            <Property name="PushedImage" value="GameMenuImages/SpellSpectre_Click" />
+            <Property name="HoverImage" value="GameMenuImages/SpellFireStorm" />
+            <Property name="NormalImage" value="GameMenuImages/SpellFireStorm" />
+            <Property name="PushedImage" value="GameMenuImages/SpellFireStorm_Click" />
             <Property name="InheritsAlpha" value="false" />
-            <Window type="Generic/Image" name="CoolDownSpellSpectre" >
+            <Window type="Generic/Image" name="CoolDownSpellFireStorm" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="Alpha" value="0.8" />
                 <Property name="Image" value="GameMenuImages/BackgroundSpell" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
             </Window>
-            <Window type="Vanilla/StaticText" name="CoolDownTextSpectre" >
+            <Window type="Vanilla/StaticText" name="CoolDownTextFireStorm" >
                 <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
                 <Property name="Font" value="Jura-18" />
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />

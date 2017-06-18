@@ -29,8 +29,8 @@
     <Image height="256" name="SpellFire_Click" width="255" xPos="2240" yPos="1851" />
     <Image height="256" name="SpellThunderStorm" width="255" xPos="960" yPos="1848" />
     <Image height="256" name="SpellThunderStorm_Click" width="255" xPos="2560" yPos="1851" />
-    <Image height="256" name="SpellSpectre" width="255" xPos="1280" yPos="1847" />
-    <Image height="256" name="SpellSpectre_Click" width="255" xPos="2881" yPos="1850" />
+    <Image height="256" name="SpellFireStorm" width="255" xPos="1280" yPos="1847" />
+    <Image height="256" name="SpellFireStorm_Click" width="255" xPos="2881" yPos="1850" />
     <Image height="256" name="SpellStoneBall" width="255" xPos="320" yPos="2182" />
     <Image height="256" name="SpellStoneBall_Click" width="255" xPos="1921" yPos="2184" />
     <Image height="256" name="SpellIce" width="255" xPos="642" yPos="2183" />
