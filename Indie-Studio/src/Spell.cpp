@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:56:53 2017 gastal_r
-// Last update Sun Jun 18 22:17:38 2017 gastal_r
+// Last update Sun Jun 18 22:37:22 2017 gastal_r
 //
 
 #include      "Spell.hpp"
@@ -43,9 +43,12 @@ Spell::~Spell()
     _collision.remove_entity(_entity);
     _sceneMgr.destroyEntity(_entity);
   }
-  Utils::destroyAllAttachedMovableObjects(*_node, _sceneMgr);
-  _node->removeAndDestroyAllChildren();
-  _sceneMgr.destroySceneNode(_node);
+  if (_node)
+  {
+    Utils::destroyAllAttachedMovableObjects(*_node, _sceneMgr);
+    _node->removeAndDestroyAllChildren();
+    _sceneMgr.destroySceneNode(_node);
+  }
 }
 
 void 	Spell::changeAnimation(Spell::Status status)
