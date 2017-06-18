@@ -36,8 +36,10 @@ Spell::~Spell()
   std::cout << "==== DELETE SPELL =====" << std::endl;
 //  _spellSound->stop();
   //_soundManager.destroySound(_spellSound);
-  _sceneMgr.destroyParticleSystem(_particleSystem);
+  if (_particleSystem != nullptr)
+	_sceneMgr.destroyParticleSystem(_particleSystem);
   _collision.remove_entity(_entity);
+  if (_entity != nullptr)
   _sceneMgr.destroyEntity(_entity);
   Utils::destroyAllAttachedMovableObjects(*_node, _sceneMgr);
   _node->removeAndDestroyAllChildren();
@@ -55,7 +57,7 @@ void 	Spell::changeAnimation(Spell::Status status)
 	  _animationState = _entity->getAnimationState("Hurt1");
 		break;
 	case Spell::Status::DEAD :
-		_animationState = _entity->getAnimationState("Walk");	
+		_animationState = _entity->getAnimationState("Die");	
 		break;
 	}
 	_animationState->setLoop(true);

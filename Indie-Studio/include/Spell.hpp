@@ -155,8 +155,8 @@ class BearBuff;
 {   Spell::Type::FIRESTORM,    &createInstance<FireStorm>    },  \
 {   Spell::Type::STONEBALL,    &createInstance<StoneBall>    },  \
 {   Spell::Type::STALACTITES,  &createInstance<Stalactites>  },  \
-{   Spell::Type::BULLET,       &createInstance<BearBuff>       },  \
-{   Spell::Type::BEAR_BUFF,    &createInstance<Bullet>     }
+{   Spell::Type::BULLET,       &createInstance<Bullet>       },  \
+{   Spell::Type::BEAR_BUFF,    &createInstance<BearBuff>     }
 
 
 #define   SPELL_INIT_PARAMETERS   \

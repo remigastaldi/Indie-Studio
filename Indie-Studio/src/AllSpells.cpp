@@ -32,10 +32,8 @@ EyeFire::EyeFire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
   _direction.normalise();
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
-
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "EyeFirServereParticle:" : "EyeFireParticle:") + std::to_string(id), "Spell/Firewall");
+  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "TornadoServerParticle:" : "TornadoParticle:") + std::to_string(id), "Spell/FireLine");
   _node->attachObject(_particleSystem);
-
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
   _spellSound = _soundManager.createSound((disableCallback ? "EyeFireServerCreateSound:" : "EyeFireCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
   _spellSound->setRolloffFactor(4.f);
@@ -55,6 +53,8 @@ Sword::Sword(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
   _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
+  _entity->setVisible(false);
+
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
 
@@ -64,8 +64,6 @@ Sword::Sword(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
 
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "SwordServerParticle:" : "SwordParticle:") + std::to_string(id), "Spell/Fireball");
-  _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
   _spellSound = _soundManager.createSound((disableCallback ? "SwordServerCreateSound:" : "SwordCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
@@ -85,6 +83,7 @@ Hearth::Hearth(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
   _entity = sceneMgr.createEntity(name, "fireball.mesh");
+  _entity->setVisible(false);
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -94,9 +93,6 @@ Hearth::Hearth(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
   _direction.normalise();
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
-
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "HearthServerParticle:" : "HearthParticle:") + std::to_string(id), "Spell/Fireball");
-  _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
   _spellSound = _soundManager.createSound((disableCallback ? "HearthServerCreateSound:" : "HearthCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
@@ -125,11 +121,7 @@ Dagger::Dagger(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
   _direction.normalise();
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
-
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "DaggerServerParticle:" : "DaggerParticle:") + std::to_string(id), "Spell/Stalactite");
-  _node->attachObject(_particleSystem);
-
-
+  
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
   _spellSound = _soundManager.createSound((disableCallback ? "DaggerServerCreateSound:" : "DaggerCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
   _spellSound->setRolloffFactor(4.f);
@@ -153,6 +145,7 @@ Tornado::Tornado(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode((disableCallback ? "TornadoServer:" : "Tornado:") + std::to_string(id));
   _entity = sceneMgr.createEntity((disableCallback ? "TornadoServer:" : "Tornado:") + std::to_string(id), "stalactite.mesh");
   _node->attachObject(_entity);
+  _entity->setVisible(false);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
 
@@ -215,6 +208,7 @@ ShieldBuff::ShieldBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
   _entity = sceneMgr.createEntity(name, "fireball.mesh");
+  _entity->setVisible(false);
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -224,10 +218,7 @@ ShieldBuff::ShieldBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &
   _direction.normalise();
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
-
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "ShieldBuffServerParticle:" : "ShieldBuffParticle:") + std::to_string(id), "Spell/Fireball");
-  _node->attachObject(_particleSystem);
-
+  
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
   _spellSound = _soundManager.createSound((disableCallback ? "ShieldBuffServerCreateSound:" : "ShieldBuffCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
   _spellSound->setRolloffFactor(4.f);
@@ -246,6 +237,7 @@ LeafBuff::LeafBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
   _entity = sceneMgr.createEntity(name, "fireball.mesh");
+  _entity->setVisible(false);
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -255,10 +247,7 @@ LeafBuff::LeafBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
   _direction.normalise();
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
-
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "LeafBuffServerParticle:" : "LeafBuffParticle:") + std::to_string(id), "Spell/Fireball");
-  _node->attachObject(_particleSystem);
-
+  
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
   _spellSound = _soundManager.createSound((disableCallback ? "LeafBuffServerCreateSound:" : "LeafBuffCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
   _spellSound->setRolloffFactor(4.f);
@@ -280,6 +269,7 @@ Angel::Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
   _entity = sceneMgr.createEntity(name, "fireball.mesh");
+  _entity->setVisible(false);
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -289,9 +279,6 @@ Angel::Angel(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision,
   _direction.normalise();
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
-
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "AngelServerParticle:" : "AngelParticle:") + std::to_string(id), "Spell/Fireball");
-  _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
   _spellSound = _soundManager.createSound((disableCallback ? "AngelServerCreateSound:" : "AngelCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
@@ -312,6 +299,7 @@ Thunderstorm::Thunderstorm(Ogre::SceneManager &sceneMgr, Collision::CollisionToo
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
   _entity = sceneMgr.createEntity(name, "stalactite.mesh");
   _node->attachObject(_entity);
+  _entity->setVisible(false);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
 
@@ -341,8 +329,9 @@ FireStorm::FireStorm(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &co
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
-  _entity = sceneMgr.createEntity(name, "stone.mesh");
+  _entity = sceneMgr.createEntity(name, "firestorm.mesh");
   _node->attachObject(_entity);
+  _entity->setVisible(false);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
 
@@ -502,6 +491,7 @@ BearBuff::BearBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
   _entity = sceneMgr.createEntity(name, "fireball.mesh");
+  _entity->setVisible(false);
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -511,9 +501,6 @@ BearBuff::BearBuff(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
   _direction.normalise();
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
-
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "BearBuffServerParticle:" : "BearBuffParticle:") + std::to_string(id), "Spell/Fireball");
-  _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
   _spellSound = _soundManager.createSound((disableCallback ? "BearBuffServerCreateSound:" : "BearBuffCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");

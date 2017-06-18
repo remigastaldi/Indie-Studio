@@ -238,9 +238,9 @@ bool  Dungeon::setupIngeniorSpell()
   _spells[0].second = _spellBar->getChild("SpellStoneBall/CoolDownSpellBall");
   _spells[1].first = _spellBar->getChild("SpellIce/CoolDownTextIce");
   _spells[1].second = _spellBar->getChild("SpellIce/CoolDownSpellIce");
-  _spells[2].first = _spellBar->getChild("SpellBullet/CoolDownTextBullet");
-  _spells[2].second = _spellBar->getChild("SpellBullet/CoolDownBullet");
-  _spells[3].first = _spellBar->getChild("SpellHandBeard/CoolDownTextBread");
-  _spells[3].second = _spellBar->getChild("SpellHandBeard/CoolDownSpellBread");
+  _spells[3].first = _spellBar->getChild("SpellBullet/CoolDownTextBullet");
+  _spells[3].second = _spellBar->getChild("SpellBullet/CoolDownBullet");
+  _spells[2].first = _spellBar->getChild("SpellHandBeard/CoolDownTextBread");
+  _spells[2].second = _spellBar->getChild("SpellHandBeard/CoolDownSpellBread");
   return (true);
 }

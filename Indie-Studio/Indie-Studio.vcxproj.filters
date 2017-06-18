@@ -135,7 +135,9 @@
     <Image Include="media\spells\fireline\Fireline.png" />
     <Image Include="media\spells\Shield\Shield.png" />
     <Image Include="media\spells\tornado\particle\Tornado.png" />
-    <Image Include="media\spells\firestorm\FireStorm.png" />
+    <Image Include="media\spells\stone\particle\stone.png" />
+    <Image Include="media\spells\firestorm\particle\FireStorm.png" />
+    <Image Include="media\spells\firestorm\objs\enemy_rock2_s3tc.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang_complete" />
@@ -254,8 +256,11 @@
     <None Include="media\spells\Shield\Shield.particle" />
     <None Include="media\spells\tornado\particle\Tornado.material" />
     <None Include="media\spells\tornado\particle\Tornado.particle" />
-    <None Include="media\spells\firestorm\FireStorm.material" />
-    <None Include="media\spells\firestorm\FireStorm.particle" />
+    <None Include="media\spells\stone\particle\stone.material" />
+    <None Include="media\spells\stone\particle\stone.particle" />
+    <None Include="media\spells\firestorm\particle\FireStorm.material" />
+    <None Include="media\spells\firestorm\particle\FireStorm.particle" />
+    <None Include="media\spells\firestorm\objs\firestorm.mesh" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeFiles\CMakeOutput.log" />
