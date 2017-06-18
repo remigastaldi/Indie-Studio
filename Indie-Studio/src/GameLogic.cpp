@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Sun Jun 18 16:44:30 2017 gastal_r
+// Last update Sun Jun 18 18:43:01 2017 Matthias Prost
 //
 
 #include      "GameLogic.hpp"
@@ -38,7 +38,6 @@ GameLogic::GameLogic()
   _credits(nullptr),
   _closeInfos(nullptr),
   _closeButton(nullptr),
-  _goToMenuButton(nullptr),
   _exitGame(nullptr),
   _gameOverMenu(nullptr),
   _resurectButton(nullptr)
@@ -464,9 +463,6 @@ bool GameLogic::buttonSettings(const CEGUI::EventArgs &e)
     _closeButton = _settings->getChild("Settings/BackToGame");
     _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonClose, this));
 
-    _goToMenuButton = _settings->getChild("Settings/BackToMenu");
-    _goToMenuButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonMenu, this));
-
     _exitGame = _settings->getChild("Settings/ExitGame");
     _exitGame->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonExitGame, this));
   }
@@ -492,16 +488,12 @@ bool GameLogic::keyPressed(const OIS::KeyEvent &arg)
       _closeButton = _settings->getChild("Settings/BackToGame");
       _closeButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonClose, this));
 
-      _goToMenuButton = _settings->getChild("Settings/BackToMenu");
-      _goToMenuButton->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonMenu, this));
-
       _exitGame = _settings->getChild("Settings/ExitGame");
       _exitGame->subscribeEvent(CEGUI::Window::EventMouseClick, CEGUI::Event::Subscriber(&GameLogic::buttonExitGame, this));
     }
     else
     {
       _closeButton->destroy();
-      _goToMenuButton->destroy();
       _exitGame->destroy();
       _settings->destroy();
       _settings = nullptr;
