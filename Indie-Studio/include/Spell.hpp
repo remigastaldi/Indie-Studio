@@ -1,4 +1,3 @@
-//
 // Spell.hpp for Indie-Studio in /home/gastal_r/rendu/Indie-Studio/Indie-Studio/include/
 //
 // Made by gastal_r
@@ -60,9 +59,9 @@ public:
     /** DarkFiend */
     ANGEL,
 	FIRE,
+	THUNDERSTORM,
 	FIRESTORM,
-    THUNDERSTORM,
-    /** Engineer */
+	/** Engineer */
     STONEBALL,
     STALACTITES,
     BULLET,
@@ -151,9 +150,9 @@ class BearBuff;
 {   Spell::Type::SHIELD_BUFF,  &createInstance<ShieldBuff>   },  \
 {   Spell::Type::LEAF_BUFF,    &createInstance<LeafBuff>     },  \
 {   Spell::Type::ANGEL,        &createInstance<Angel>        },  \
+{   Spell::Type::FIRE,         &createInstance<Fire>         },  \
 {   Spell::Type::THUNDERSTORM, &createInstance<Thunderstorm> },  \
 {   Spell::Type::FIRESTORM,    &createInstance<FireStorm>    },  \
-{   Spell::Type::FIRE,         &createInstance<Fire>         },  \
 {   Spell::Type::STONEBALL,    &createInstance<StoneBall>    },  \
 {   Spell::Type::STALACTITES,  &createInstance<Stalactites>  },  \
 {   Spell::Type::BULLET,       &createInstance<Bullet>       },  \

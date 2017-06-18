@@ -217,10 +217,16 @@ bool            Indie::init()
 
   _device.data.shader = 3;
   _device.data.Class = Entity::Type::WARRIOR;
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+  _device.data.keys[0] = OIS::KC_Q;
+  _device.data.keys[1] = OIS::KC_W;
+  _device.data.keys[2] = OIS::KC_E;
+  _device.data.keys[3] = OIS::KC_R;
+#else
   _device.data.keys[0] = OIS::KC_A;
   _device.data.keys[1] = OIS::KC_Z;
   _device.data.keys[2] = OIS::KC_E;
   _device.data.keys[3] = OIS::KC_R;
-
+#endif
   return true;
 }

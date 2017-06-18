@@ -201,6 +201,7 @@ Fireball::Fireball(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &coll
   _spellSound->setReferenceDistance(2.f);
   _spellSound->setMaxDistance(80.f);
   _node->attachObject(_spellSound);
+  _node->setScale(0.3, 0.3, 0.3);
   _spellSound->play();
 }
 
