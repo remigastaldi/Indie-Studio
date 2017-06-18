@@ -102,8 +102,8 @@ Engineer::Engineer(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWor
 
   _spells[0] = { Spell::Type::STONEBALL, STONEBALL_COOLDOWN };
   _spells[1] = { Spell::Type::STALACTITES, STALACTITES_COOLDOWN };
-  _spells[2] = { Spell::Type::BULLET, BULLET_COOLDOWN };
-  _spells[3] = { Spell::Type::BEAR_BUFF, BEAR_BUFF_COOLDOWN };
+  _spells[3] = { Spell::Type::BULLET, BULLET_COOLDOWN };
+  _spells[2] = { Spell::Type::BEAR_BUFF, BEAR_BUFF_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
   _entity = sceneMgr.createEntity(std::to_string(id), "Adventurer.mesh");

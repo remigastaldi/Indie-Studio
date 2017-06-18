@@ -64,8 +64,8 @@ public:
 	/** Engineer */
     STONEBALL,
     STALACTITES,
-    BULLET,
-    BEAR_BUFF
+    BEAR_BUFF,
+	BULLET
   };
   enum class Status
   {
@@ -155,7 +155,7 @@ class BearBuff;
 {   Spell::Type::FIRESTORM,    &createInstance<FireStorm>    },  \
 {   Spell::Type::STONEBALL,    &createInstance<StoneBall>    },  \
 {   Spell::Type::STALACTITES,  &createInstance<Stalactites>  },  \
-{   Spell::Type::BULLET,       &createInstance<Bullet>       },  \
+{   Spell::Type::BULLET,       &createInstance<Bullet>         },  \
 {   Spell::Type::BEAR_BUFF,    &createInstance<BearBuff>     }
 
 
