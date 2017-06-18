@@ -1,4 +1,4 @@
-material Particles/Fireball.001
+material Material/Fireline
 {
 	technique
 	{
@@ -10,7 +10,7 @@ material Particles/Fireball.001
 
 			texture_unit
 			{
-				texture Fireball.001.png
+				texture Fireline.png
 			}
 		}
 	}

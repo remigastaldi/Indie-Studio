@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 16:33:57 2017 gastal_r
-// Last update Thu Jun 15 22:56:41 2017 gastal_r
+// Last update Sun Jun 18 02:33:49 2017 Matthias Prost
 //
 
 #ifndef     _ALLSPELLS_HPP_
@@ -169,7 +169,7 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
-#define     BULLET_SPEED 4.f
+#define     BULLET_SPEED 15.f
 #define     BULLET_DISTANCE 10.f
 #define     BULLET_COOLDOWN 0.5
 class Bullet : public Spell

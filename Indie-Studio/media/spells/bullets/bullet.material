@@ -1,4 +1,4 @@
-material Particles/Bullet
+material Material/Bullet
 {
 	technique
 	{

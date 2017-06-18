@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Sat Jun 17 22:10:05 2017 gastal_r
+// Last update Sun Jun 18 03:00:42 2017 Leo HUBERT
 //
 
 #include      "GameLogic.hpp"
@@ -187,7 +187,7 @@ void          GameLogic::buttonResurect(const CEGUI::EventArgs &e)
   _player->setHealth(_player->getMaxHealth());
 
   #if !DEBUG_LOCAL
-    sendLogin();
+    sendLogin(false);
     sendEntity(*_player);
   #endif
   _gameOverMenu->destroy();

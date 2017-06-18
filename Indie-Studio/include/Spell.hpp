@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:43:07 2017 gastal_r
-// Last update Sat Jun 17 10:45:59 2017 gastal_r
+// Last update Sun Jun 18 02:00:57 2017 Matthias Prost
 //
 
 #ifndef _SPELL_HPP_
@@ -156,7 +156,7 @@ class BearBuff;
 {   Spell::Type::FIRE,         &createInstance<Fire>         },  \
 {   Spell::Type::STONEBALL,    &createInstance<StoneBall>    },  \
 {   Spell::Type::STALACTITES,  &createInstance<Stalactites>  },  \
-{   Spell::Type::BULLET,       &createInstance<BearBuff>     },  \
+{   Spell::Type::BULLET,       &createInstance<Bullet>       },  \
 {   Spell::Type::BEAR_BUFF,    &createInstance<BearBuff>     }
 
 
