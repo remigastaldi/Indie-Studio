@@ -5,13 +5,6 @@ var users = {};
 var enemis = {};
 var spawners = {};
 
-module.exports = {
-  users: users,
-  totalConnected: totalConnected,
-  newBot: newBot,
-  getRandomIntInclusive, getRandomIntInclusive
-}
-
 /* REQUIRE ALL DEPS */
 var app = require("./app.js");
 var server = require('http').createServer(app);
@@ -20,10 +13,19 @@ var exec = require('child_process').exec;
 var math = require('mathjs');
 var jsonQuery = require('json-query');
 
+module.exports = {
+  users: users,
+  totalConnected: totalConnected,
+  newBot: newBot,
+  getRandomIntInclusive, getRandomIntInclusive,
+  io: io,
+  touched: touched
+}
+
 var { Entity, EntityType, Spell } = require("./class/Entity.js");
 var { Spawner } = require("./class/Spawner.js");
 
-spawners["test"] = new Spawner({x: -23.780986785888672, y: -2.1303372383117676, z: 1.5097132921218872}, [EntityType.ZOMBIE, EntityType.SKELETON], 1, 1000);
+spawners["test"] = new Spawner({x: -53.780986785888672, y: -2.1303372383117676, z: 2.5097132921218872}, [EntityType.ZOMBIE, EntityType.SKELETON], 1, 1000);
 //spawners["test2"] = new Spawner({"x":18.89887237548828,"y":0.12088017165660858,"z":-21.71393585205078}, [EntityType.ZOMBIE, EntityType.SKELETON], 1, 10000);
 
 var readline = require('readline');
@@ -108,32 +110,8 @@ function newBot(pos, type, room)
     type: enemis[id]["type"],
     destination: enemis[id]["destination"]
   });
-}
 
-function checkDistance(userPosition, enemisPosition)
-{
-  if (!userPosition || !enemisPosition)
-    return (-1);
-  var xPos = math.pow((enemisPosition.x - userPosition.x), 2);
-  var yPos = math.pow((enemisPosition.y - userPosition.y), 2);
-  var zPos = math.pow((enemisPosition.z - userPosition.z), 2);
-  var distance = math.sqrt(xPos + yPos + zPos);
-  return (distance);
-}
-
-function createSpell(sender, target, type)
-{
-  if (!target || !sender)
-    return;
-  io.to(target.room).emit("create_spell",
-  {
-    send_by: sender.id,
-    send_to: 0,
-    position: sender.position,
-    destination: target.position,
-    bot: 1,
-    type: type
-  });
+  enemis[id].IA();
 }
 
 function removeUser(server_id)
@@ -154,11 +132,12 @@ function removeUser(server_id)
   delete(users[server_id]);
 }
 
-function broadcast(message, room) {
+function broadcast(message, room, time) {
   io.to(room).emit("broadcast", {
     send_by: 42,
     send_to: 0,
-    message: message
+    message: message,
+    time: time
   });
 }
 
@@ -243,11 +222,11 @@ function touched(local, entity, spell_type)
       delete(enemis[entity.server_id]);
       if (canSpawn())
       {
-        broadcast("Level clear, next level in 5 secondes.", entity.room);
+        broadcast("Level clear, next level in 5 secondes.", entity.room, 3000);
         level++;
         setTimeout(function()
         {
-          broadcast("Level " + level + " started !", entity.room);
+          broadcast("Level " + level + " started !", entity.room, 2000);
           for (spawner in spawners)
           {
             spawners[spawner].restartSpawner(1);
@@ -274,114 +253,6 @@ function touched(local, entity, spell_type)
   }
   return (damages);
 }
-
-function IAEnemis()
-{
-  for (bot in enemis)
-  {
-    var bot = enemis[bot];
-    if (!bot)
-      continue;
-    if (bot.focus != 0)
-    {
-      var user = users[bot.focus];
-      if (!user || user.finished == false)
-        continue;
-      var dist = checkDistance(user.position, bot.position);
-      if (dist < bot.range_attack && bot.wait != true)
-      {
-        var damages = 0;
-        console.log(bot.wait);
-
-        io.to(user.room).emit("move", {
-          send_by: bot.id,
-          send_to: 0,
-          position: bot.position,
-          destination: bot.position,
-          status: bot.status
-        });
-
-        bot.wait = true;
-        switch (bot.type) {
-          case EntityType.ZOMBIE:
-            damages = touched(0, user, Spell.ANGEL);
-            break;
-          case EntityType.SKELETON:
-            createSpell(bot, user, Spell.BULLET);
-            break;
-        }
-        setTimeout(function()
-        {
-          if (bot)
-            bot.wait = false;
-        }, bot.wait_time);
-      }
-      else if (dist < bot.range_move && bot.wait != true)
-      {
-          io.to(user.room).emit("move", {
-            send_by: bot.id,
-            send_to: 0,
-            position: bot.position,
-            destination: user.position,
-            status: bot.status
-          });
-          bot.destination = user.position;
-      }
-      else if (bot.wait != true)
-      {
-        io.to(user.room).emit("focus", {
-          send_by: bot.id,
-          send_to: user.id,
-          focus: 0
-        });
-        bot.focus = 0;
-        bot.destination = bot.position;
-        io.to(user.room).emit("move", {
-          send_by: bot.id,
-          send_to: 0,
-          position: bot.position,
-          destination: bot.position,
-          status: bot.status
-        });
-      }
-    }
-    else
-    {
-      for (user in users)
-      {
-        var user = users[user];
-        if (!user || user.finished == false)
-          continue;
-        if (checkDistance(user.position, bot.position) < bot.range_move)
-        {
-          io.to(user.room).emit("move", {
-            send_by: bot.id,
-            send_to: 0,
-            position: bot.position,
-            destination: user.position,
-            status: bot.status
-          });
-          bot.destination = user.position;
-          bot.focus = user.server_id;
-          io.to(user.room).emit("focus", {
-            send_by: bot.id,
-            send_to: user.id,
-            focus: 1
-          });
-        }
-      }
-    }
-  }
-
-
-
-  setTimeout(function(){
-    IAEnemis();
-  }, 50);
-}
-
-
-IAEnemis();
 
 
 function log(message)
@@ -534,7 +405,10 @@ io.on('connection', function (socket) {
     socket.user_id = data["user_id"];
     socket.user_server_id = totalConnected;
     users[socket.id] = new Entity(data["user_id"], socket.id, "User " + data["user_id"], EntityType.ANGEL, data["room"], 100);
-    totalConnected++;
+    if (data["first"] == false)
+      users[socket.id].finished = true;
+    else
+      totalConnected++;
   });
 
 	socket.on('disconnect', function () {

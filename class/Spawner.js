@@ -1,6 +1,10 @@
 var { EntityType, Spell } = require("./Entity.js");
 var { newBot, getRandomIntInclusive } = require("../server.js");
 
+Array.prototype.random = function () {
+  return this[Math.floor((Math.random()*this.length))];
+}
+
 function Spawner(pos, mobs, count, time)
 {
   this.mobs = mobs;
@@ -15,12 +19,11 @@ function Spawner(pos, mobs, count, time)
 
   this.createBot = function()
   {
-    console.log("TEST1: " + this.count);
     if (this.count > 0)
     {
-      console.log("TEST2: " + this.count);
       this.count -= 1;
-      newBot(this.pos, EntityType.SKELETON, "room");
+      var entity = this.mobs.random();
+      newBot(this.pos, entity, "room");
 
       setTimeout(function()
       {
