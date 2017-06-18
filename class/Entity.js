@@ -129,9 +129,17 @@ function Entity(id, server_id, username, type, room, health) {
             return;
           }
           var dist = checkDistance(user.position, this.position);
-          if (dist < this.range_attack && this.wait != true)
+          if (dist < this.range_attack)
           {
             var damages = 0;
+
+            if (this.wait == true)
+            {
+              setTimeout(function(){
+                that.IA();
+              }, IARefreshTime);
+              return;
+            }
 
             io.to(user.room).emit("move", {
               send_by: this.id,
@@ -139,7 +147,7 @@ function Entity(id, server_id, username, type, room, health) {
               position: this.position,
               destination: this.position,
               status: this.status
-            });            
+            });
 
             this.wait = true;
             switch (this.type) {
@@ -155,7 +163,7 @@ function Entity(id, server_id, username, type, room, health) {
               that.wait = false;
             }, this.wait_time);
           }
-          else if (dist < this.range_move && this.wait != true)
+          else if (dist < this.range_move)
           {
               io.to(user.room).emit("move", {
                 send_by: this.id,
@@ -166,7 +174,7 @@ function Entity(id, server_id, username, type, room, health) {
               });
               this.destination = user.position;
           }
-          else if (this.wait != true)
+          else
           {
             io.to(user.room).emit("focus", {
               send_by: this.id,
