@@ -25,8 +25,11 @@ module.exports = {
 var { Entity, EntityType, Spell } = require("./class/Entity.js");
 var { Spawner } = require("./class/Spawner.js");
 
-spawners["test"] = new Spawner({x: -53.780986785888672, y: -2.1303372383117676, z: 2.5097132921218872}, [EntityType.ZOMBIE, EntityType.SKELETON], 1, 1000);
-//spawners["test2"] = new Spawner({"x":18.89887237548828,"y":0.12088017165660858,"z":-21.71393585205078}, [EntityType.ZOMBIE, EntityType.SKELETON], 1, 10000);
+spawners["1"] = new Spawner({x: -53.780986785888672, y: 10.1303372383117676, z: 2.5097132921218872}, [EntityType.ZOMBIE, EntityType.SKELETON], 1, 5000);
+spawners["2"] = new Spawner({"x":44.3564338684082,"y": 10.5362368822097778,"z":-27.127761840820312}, [EntityType.ZOMBIE, EntityType.SKELETON], 1, 7000);
+spawners["3"] = new Spawner({"x":2.3774611949920654,"y": 10.45093703269958496,"z":26.703584671020508}, [EntityType.ZOMBIE, EntityType.SKELETON], 1, 3000);
+
+
 
 var readline = require('readline');
 var rl = readline.createInterface({
