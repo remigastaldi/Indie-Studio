@@ -24,6 +24,8 @@ esac
 
 cd Indie-Studio-Dependencies/linux/
 tar -xvf bin_include_share.tar.bz2
-tar -xvf lib.tar.bz2 -C ~/lib/Indie-Studio
-tar -xvf ogre_plugins.tar.bz2 -C ~/lib/Indie-Studio
+tar -xvf lib.tar.bz2
+cp -r lib  ~/lib/Indie-Studio
+tar -xvf ogre_plugins.tar.bz2
+cp -r lib/Ogre -C ~/lib/Indie-Studio/lib
 cd -
