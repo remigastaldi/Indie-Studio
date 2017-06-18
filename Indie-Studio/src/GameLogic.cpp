@@ -362,6 +362,7 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
   {
     if (!_spells[0].second->isVisible())
     {
+		_player->changeAnimation(Entity::Status::ATTACK);
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(0), _player->getPosition(), getMouseFocusPos());
       #endif
@@ -375,6 +376,7 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
   {
     if (!_spells[1].second->isVisible())
     {
+		_player->changeAnimation(Entity::Status::ATTACK);
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(1), _player->getPosition(), getMouseFocusPos());
       #endif
@@ -388,6 +390,7 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
   {
     if (!_spells[2].second->isVisible())
     {
+		_player->changeAnimation(Entity::Status::ATTACK);
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(2), _player->getPosition(), getMouseFocusPos());
       #endif
@@ -401,6 +404,7 @@ void GameLogic::checkSpellKeyPressed(const OIS::KeyEvent &arg)
   {
     if (!_spells[3].second->isVisible())
     {
+		_player->changeAnimation(Entity::Status::ATTACK);
       #if DEBUG_LOCAL == false
         sendSpell(_player->getSpell(3), _player->getPosition(), getMouseFocusPos());
       #endif

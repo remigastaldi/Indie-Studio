@@ -52,8 +52,10 @@ void 	Spell::changeAnimation(Spell::Status status)
 		_animationState = _entity->getAnimationState("Walk");
 		break;
   case Spell::Status::HIT :
+	  _animationState = _entity->getAnimationState("Hurt1");
 		break;
 	case Spell::Status::DEAD :
+		_animationState = _entity->getAnimationState("Walk");	
 		break;
 	}
 	_animationState->setLoop(true);

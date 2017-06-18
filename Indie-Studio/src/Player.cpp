@@ -22,7 +22,7 @@ Warrior::Warrior(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
   _spells[3] = { Spell::Type::DAGGER, DAGGER_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
-  Ogre::MeshPtr meshPtr = Ogre::MeshManager::getSingleton().load("Adventurer.mesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+  Ogre::MeshPtr meshPtr = Ogre::MeshManager::getSingleton().load("Knight.mesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
   // Utils::scaleMesh(meshPtr, -2, id);
 
@@ -81,12 +81,12 @@ DarkFiend::DarkFiend(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsW
   _spells[3] = { Spell::Type::FIRESTORM, FIRESTORM_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
-  _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
+  _entity = sceneMgr.createEntity(std::to_string(id), "DarkElf.mesh");
   _node->attachObject(_entity);
+  _node->setScale({ 3.0f, 3.0f, 3.0f });
   changeAnimation(status);
 
   _collision.register_entity(_entity, Collision::COLLISION_SPHERE, Collision::Type::PLAYER);
-
   addToBulletWorld(position);
   btVector3 posBody(_ghostObject->getWorldTransform().getOrigin());
   _node->setPosition(Utils::cvt(posBody));
@@ -106,10 +106,11 @@ Engineer::Engineer(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWor
   _spells[3] = { Spell::Type::BEAR_BUFF, BEAR_BUFF_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
-  _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
+  _entity = sceneMgr.createEntity(std::to_string(id), "Adventurer.mesh");
   _node->attachObject(_entity);
   changeAnimation(status);
 
+  _node->setScale({ 3.0f, 3.0f, 3.0f });
   _collision.register_entity(_entity, Collision::COLLISION_SPHERE, Collision::Type::PLAYER);
 
   addToBulletWorld(position);

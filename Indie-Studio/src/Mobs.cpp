@@ -22,7 +22,8 @@ Zombie::Zombie(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   _spells[3] = { Spell::Type::BEAR_BUFF, BEAR_BUFF_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
-  _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
+  _entity = sceneMgr.createEntity(std::to_string(id), "Troll.mesh");
+  _node->setScale({ 3.0f, 3.0f, 3.0f });
   _node->attachObject(_entity);
   changeAnimation(status);
 
@@ -46,7 +47,8 @@ Skeleton::Skeleton(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWor
   _spells[3] = { Spell::Type::BEAR_BUFF, BEAR_BUFF_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
-  _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
+  _entity = sceneMgr.createEntity(std::to_string(id), "Orc.mesh");
+  _node->setScale({ 3.0f, 3.0f, 3.0f });
   _node->attachObject(_entity);
   changeAnimation(status);
 

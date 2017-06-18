@@ -82,7 +82,7 @@ public:
 
 #define     SHIELD_BUFF_SPEED 4.f
 #define     SHIELD_BUFF_DISTANCE 10.f
-#define     SHIELD_BUFF_COOLDOWN 10
+#define     SHIELD_BUFF_COOLDOWN 9
 class ShieldBuff : public Spell
 {
 public:
@@ -92,7 +92,7 @@ public:
 
 #define     LEAF_BUFF_SPEED 4.f
 #define     LEAF_BUFF_DISTANCE 10.f
-#define     LEAF_BUFF_COOLDOWN 10
+#define     LEAF_BUFF_COOLDOWN 9
 class LeafBuff : public Spell
 {
 public:
@@ -181,7 +181,7 @@ public:
 
 #define     BEAR_BUFF_SPEED 4.f
 #define     BEAR_BUFF_DISTANCE 10.f
-#define     BEAR_BUFF_COOLDOWN 15
+#define     BEAR_BUFF_COOLDOWN 9
 class BearBuff : public Spell
 {
 public:

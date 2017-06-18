@@ -101,7 +101,6 @@ void  Entity::updateEntityHealthBar(const Ogre::Camera &camera)
 
 void 	Entity::changeAnimation(Entity::Status status)
 {
-   return;
 	switch (status)
 	{
 	case Entity::Status::IMMOBILE :
@@ -111,10 +110,13 @@ void 	Entity::changeAnimation(Entity::Status status)
 		_animationState = _entity->getAnimationState("Walk");
 		break;
 	case Entity::Status::ATTACK :
+		_animationState = _entity->getAnimationState("Attack1");
 		break;
 	case Entity::Status::HITTED :
+		_animationState = _entity->getAnimationState("Hurt1");
 		break;
 	case Entity::Status::DEAD :
+		_animationState = _entity->getAnimationState("Die");
 		break;
 	}
 	_animationState->setLoop(true);
