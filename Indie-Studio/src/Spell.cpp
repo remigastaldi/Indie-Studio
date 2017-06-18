@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat May 27 13:56:53 2017 gastal_r
-// Last update Sat Jun 17 10:45:59 2017 gastal_r
+// Last update Sun Jun 18 22:17:38 2017 gastal_r
 //
 
 #include      "Spell.hpp"
@@ -37,10 +37,12 @@ Spell::~Spell()
 //  _spellSound->stop();
   //_soundManager.destroySound(_spellSound);
   if (_particleSystem != nullptr)
-	_sceneMgr.destroyParticleSystem(_particleSystem);
-  _collision.remove_entity(_entity);
+	 _sceneMgr.destroyParticleSystem(_particleSystem);
   if (_entity != nullptr)
-  _sceneMgr.destroyEntity(_entity);
+  {
+    _collision.remove_entity(_entity);
+    _sceneMgr.destroyEntity(_entity);
+  }
   Utils::destroyAllAttachedMovableObjects(*_node, _sceneMgr);
   _node->removeAndDestroyAllChildren();
   _sceneMgr.destroySceneNode(_node);
@@ -57,7 +59,7 @@ void 	Spell::changeAnimation(Spell::Status status)
 	  _animationState = _entity->getAnimationState("Hurt1");
 		break;
 	case Spell::Status::DEAD :
-		_animationState = _entity->getAnimationState("Die");	
+		_animationState = _entity->getAnimationState("Die");
 		break;
 	}
 	_animationState->setLoop(true);

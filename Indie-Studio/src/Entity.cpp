@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Sun Jun 18 18:48:35 2017 gastal_r
+// Last update Sun Jun 18 22:14:31 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -40,11 +40,17 @@ Entity::Entity(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
 
 Entity::~Entity()
 {
-  _world.getBulletDynamicsWorld()->removeAction(_character);
-  _world.getBulletDynamicsWorld()->removeCollisionObject(_ghostObject);
-  _collision.remove_entity(_entity);
-  _sceneMgr.destroyEntity(_entity);
-  _sceneMgr.destroySceneNode(_node);
+  if (_character)
+    _world.getBulletDynamicsWorld()->removeAction(_character);
+  if (_ghostObject)
+    _world.getBulletDynamicsWorld()->removeCollisionObject(_ghostObject);
+  if (_entity)
+  {
+    _collision.remove_entity(_entity);
+    _sceneMgr.destroyEntity(_entity);
+  }
+  if (_node)
+    _sceneMgr.destroySceneNode(_node);
   CEGUI::System::getSingleton().getDefaultGUIContext().getRootWindow()->removeChild(_healthBar.get());
 }
 
@@ -94,13 +100,14 @@ void  Entity::updateEntityHealthBar(const Ogre::Camera &camera)
   else if (!_healthBar->isVisible())
     _healthBar->show();
   point = camera.getProjectionMatrix() * (camera.getViewMatrix() * point);
-  result.x = (point.x / 2) + 0.5f - 0.05;
+  result.x = ((point.x / 2) + 0.5f) - 0.04;
   result.y = 1 - ((point.y / 2) + 0.5f) - 0.1;
   _healthBar->setPosition(CEGUI::UVector2(CEGUI::UDim(result.x, 0), CEGUI::UDim(result.y, 0)));
 }
 
 void 	Entity::changeAnimation(Entity::Status status)
 {
+  return;
 	switch (status)
 	{
 	case Entity::Status::IMMOBILE :
@@ -156,6 +163,7 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
     	_orientation = src.getRotationTo(direction);
     	_node->rotate(_orientation);
     }
+  _node->yaw(Ogre::Degree(-90.f));
   }
   else if (_status != Entity::Status::IMMOBILE)
     changeAnimation(Entity::Status::IMMOBILE);

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun  3 19:42:53 2017 gastal_r
-// Last update Thu Jun 15 22:15:17 2017 gastal_r
+// Last update Sun Jun 18 22:09:25 2017 gastal_r
 //
 
 #include "Collision.h"
@@ -424,8 +424,8 @@
                continue;
 
             // if invisible skip it
-            if (!data->Entity->isVisible())
-               continue;
+            // if (!data->Entity->isVisible())
+            //    continue;
 
             // check basic intersection
             switch (data->CollisionType)
