@@ -371,7 +371,7 @@ io.on('connection', function (socket) {
     {
       if (enemis[bot]["room"] == socket.room)
       {
-        var type = users[user]["type"];
+        var type = enemis[bot]["type"];
         if (!type)
           type = EntityType.ZOMBIE;
         io.to(socket.room).emit("create_entity", {
