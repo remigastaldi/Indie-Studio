@@ -1,6 +1,6 @@
 particle_system Spell/FireStorm
 {
-	material Material/FireStorm
+	material Material/Fireball
 	particle_width 3.0
 	particle_height 3.0
 	quota 40
