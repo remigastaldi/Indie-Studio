@@ -60,7 +60,7 @@ void  Entity::addToBulletWorld(const Ogre::Vector3 &position)
   _ghostObject->setWorldTransform(startTransform);
   Ogre::AxisAlignedBox boundingB(_entity->getBoundingBox());
   Ogre::Vector3 size(boundingB.getSize());
-  size /= 100.0f;
+  size /= 2.0f;
   btScalar characterHeight = size.y;
   btScalar characterWidth = size.x;
   btConvexShape* capsule = new btCapsuleShape(characterWidth, characterHeight);

@@ -22,7 +22,7 @@ Warrior::Warrior(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
   _spells[3] = { Spell::Type::DAGGER, DAGGER_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
-  Ogre::MeshPtr meshPtr = Ogre::MeshManager::getSingleton().load("skeleton_archer.mesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+  Ogre::MeshPtr meshPtr = Ogre::MeshManager::getSingleton().load("Adventurer.mesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
   // Utils::scaleMesh(meshPtr, -2, id);
 
@@ -30,7 +30,7 @@ Warrior::Warrior(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
   _entity =  sceneMgr.createEntity(std::to_string(id), meshPtr);
   // _entity = sceneMgr.createEntity(std::to_string(id), "Untitled.004.mesh");
   _node->attachObject(_entity);
-  _node->setScale({1.5f, 1.5f, 1.5f});
+  _node->setScale({2.5f, 2.5f, 2.5f});
   changeAnimation(status);
 
   // _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::PLAYER);
