@@ -32,7 +32,7 @@ EyeFire::EyeFire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
   _direction.normalise();
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "TornadoServerParticle:" : "TornadoParticle:") + std::to_string(id), "Spell/FireLine");
+  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "TornadoServerParticle:" : "TornadoParticle:") + std::to_string(id), "Spell/Firewall");
   _node->attachObject(_particleSystem);
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
   _spellSound = _soundManager.createSound((disableCallback ? "EyeFireServerCreateSound:" : "EyeFireCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");

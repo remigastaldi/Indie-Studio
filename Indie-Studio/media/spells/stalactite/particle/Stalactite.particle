@@ -1,6 +1,6 @@
 particle_system Spell/Stalactite
 {
-	material Material/Firewall
+	material Material/Stalactite
 	particle_width 1.0
 	particle_height 1.0
 	quota 75
