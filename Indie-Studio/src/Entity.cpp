@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:13:03 2017 gastal_r
-// Last update Sun Jun 18 16:52:00 2017 gastal_r
+// Last update Sun Jun 18 18:48:35 2017 gastal_r
 //
 
 #include        "Entity.hpp"
@@ -63,7 +63,7 @@ void  Entity::addToBulletWorld(const Ogre::Vector3 &position)
   size /= 2.0f;
   btScalar characterHeight = size.y;
   btScalar characterWidth = size.x;
-  btConvexShape* capsule = new btCapsuleShape(0.4f, 2.f);
+  btConvexShape* capsule = new btCapsuleShape(0.6f, 2.f);
   _ghostObject->setCollisionShape(capsule);
   _ghostObject->setCollisionFlags(btCollisionObject::CF_CHARACTER_OBJECT);
   // _ghostObject->setActivationState(DISABLE_DEACTIVATION);
@@ -154,7 +154,6 @@ void 	Entity::frameRenderingQueued(const Ogre::FrameEvent &evt)
     	_orientation = src.getRotationTo(direction);
     	_node->rotate(_orientation);
     }
-    _node->yaw(Ogre::Degree(90.f));
   }
   else if (_status != Entity::Status::IMMOBILE)
     changeAnimation(Entity::Status::IMMOBILE);
