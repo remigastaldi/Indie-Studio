@@ -114,8 +114,8 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
-#define     THUNDERSTORM_SPEED 4.f
-#define     THUNDERSTORM_DISTANCE 10.f
+#define     THUNDERSTORM_SPEED 8.f
+#define     THUNDERSTORM_DISTANCE 13.f
 #define     THUNDERSTORM_COOLDOWN 8
 class Thunderstorm : public Spell
 {
@@ -159,7 +159,7 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
-#define     STALACTITES_SPEED 4.f
+#define     STALACTITES_SPEED 8.f
 #define     STALACTITES_DISTANCE 10.f
 #define     STALACTITES_COOLDOWN 2
 class Stalactites : public Spell

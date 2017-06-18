@@ -24,6 +24,7 @@ EyeFire::EyeFire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
   _entity = sceneMgr.createEntity(name, "fireball.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
+  _node->setScale(0.01, 0.01, 0.01);
   // _node->setPosition(position);
 
   _direction = _destination - _node->getPosition();
@@ -32,7 +33,7 @@ EyeFire::EyeFire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collis
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
 
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "EyeFirServereParticle:" : "EyeFireParticle:") + std::to_string(id), "Spell/Fireball");
+  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "EyeFirServereParticle:" : "EyeFireParticle:") + std::to_string(id), "Spell/Firewall");
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
@@ -351,7 +352,7 @@ FireStorm::FireStorm(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &co
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
 
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "FireStromServerParticle:" : "FireStromParticle:") + std::to_string(id), "Spell/Fireball");
+  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "FireStromServerParticle:" : "FireStromParticle:") + std::to_string(id), "Spell/FireStorm");
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
@@ -436,7 +437,7 @@ Stalactites::Stalactites(Ogre::SceneManager &sceneMgr, Collision::CollisionTools
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Create " + name + " =====");
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
-  _entity = sceneMgr.createEntity(name, "fireball.mesh");
+  _entity = sceneMgr.createEntity(name, "stalactite.mesh");
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
@@ -447,7 +448,7 @@ Stalactites::Stalactites(Ogre::SceneManager &sceneMgr, Collision::CollisionTools
 
   _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::SPELL);
 
-  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "StalactitesServerParticle:" : "StalactitesParticle:") + std::to_string(id), "Spell/Fireball");
+  _particleSystem = _sceneMgr.createParticleSystem((disableCallback ? "StalactitesServerParticle:" : "StalactitesParticle:") + std::to_string(id), "Spell/Stalactite");
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager

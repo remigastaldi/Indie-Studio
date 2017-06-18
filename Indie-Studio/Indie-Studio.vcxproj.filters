@@ -135,6 +135,7 @@
     <Image Include="media\spells\fireline\Fireline.png" />
     <Image Include="media\spells\Shield\Shield.png" />
     <Image Include="media\spells\tornado\particle\Tornado.png" />
+    <Image Include="media\spells\firestorm\FireStorm.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".clang_complete" />
@@ -253,6 +254,8 @@
     <None Include="media\spells\Shield\Shield.particle" />
     <None Include="media\spells\tornado\particle\Tornado.material" />
     <None Include="media\spells\tornado\particle\Tornado.particle" />
+    <None Include="media\spells\firestorm\FireStorm.material" />
+    <None Include="media\spells\firestorm\FireStorm.particle" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeFiles\CMakeOutput.log" />

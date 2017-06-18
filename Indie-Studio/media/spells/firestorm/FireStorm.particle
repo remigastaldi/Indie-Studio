@@ -1,8 +1,8 @@
-particle_system FireStorm
+particle_system Spell/FireStorm
 {
 	material Material/FireStorm
-	particle_width 30.0
-	particle_height 30.0
+	particle_width 3.0
+	particle_height 3.0
 	quota 40
 	cull_each false
 	sorted false
@@ -18,7 +18,7 @@ particle_system FireStorm
 	emitter Ring
 	{
 		position 0.0 0.0 0.0
-		direction 0.0 0.0 -1.0
+		direction 0.0 0.0 0.0
 		angle 16.11
 		width 100
 		height 100

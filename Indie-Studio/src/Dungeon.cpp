@@ -195,10 +195,10 @@ void Dungeon::exit(void)
 
 bool  Dungeon::setupWarriorSpell()
 {
-	_spells[0].first = _spellBar->getChild("SpellEyeFire/CoolDownTextEyeFire");
-	_spells[0].second = _spellBar->getChild("SpellEyeFire/CoolDownSpellEyeFire");
-	_spells[1].first = _spellBar->getChild("SpellSword/CoolDownTextSword");
-	_spells[1].second = _spellBar->getChild("SpellSword/CoolDownSpellSword");
+	_spells[0].first = _spellBar->getChild("SpellSword/CoolDownTextSword");
+	_spells[0].second = _spellBar->getChild("SpellSword/CoolDownSpellSword");
+	_spells[1].first = _spellBar->getChild("SpellEyeFire/CoolDownTextEyeFire");
+	_spells[1].second = _spellBar->getChild("SpellEyeFire/CoolDownSpellEyeFire");
   _spells[2].first = _spellBar->getChild("SpellHeart/CoolDownTextHeart");
   _spells[2].second = _spellBar->getChild("SpellHeart/CoolDownSpellHeart");
   _spells[3].first = _spellBar->getChild("SpellDagger/CoolDownTextDagger");
