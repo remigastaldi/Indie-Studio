@@ -30,6 +30,7 @@ Warrior::Warrior(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
   _entity =  sceneMgr.createEntity(std::to_string(id), meshPtr);
   // _entity = sceneMgr.createEntity(std::to_string(id), "Untitled.004.mesh");
   _node->attachObject(_entity);
+  _node->setScale({1.5f, 1.5f, 1.5f});
   changeAnimation(status);
 
   // _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::PLAYER);
