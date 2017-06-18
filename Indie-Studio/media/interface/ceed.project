@@ -33,6 +33,10 @@
         </Item>
         <Item name="layout" type="folder">
             <Item path="layouts/Avatar.layout" type="file" />
+            <Item path="layouts/AvatarDarkFiend.layout" type="file" />
+            <Item path="layouts/AvatarIngenior.layout" type="file" />
+            <Item path="layouts/AvatarWarrior.layout" type="file" />
+            <Item path="layouts/AvatarWizard.layout" type="file" />
             <Item path="layouts/ChatBox.layout" type="file" />
             <Item path="layouts/Console.wnd" type="file" />
             <Item path="layouts/Credits.layout" type="file" />
@@ -69,10 +73,7 @@
             <Item path="layouts/application_templates.layout" type="file" />
             <Item path="layouts/mainMenu.layout" type="file" />
             <Item path="layouts/selectChar.layout" type="file" />
-            <Item path="layouts/AvatarDarkFiend.layout" type="file" />
-            <Item path="layouts/AvatarIngenior.layout" type="file" />
-            <Item path="layouts/AvatarWarrior.layout" type="file" />
-            <Item path="layouts/AvatarWizard.layout" type="file" />
+            <Item path="layouts/broadcast.layout" type="file" />
         </Item>
         <Item name="looknfeel" type="folder">
             <Item path="looknfeel/AlfiskoSkin.looknfeel" type="file" />

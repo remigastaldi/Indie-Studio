@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="Vanilla/StaticText" name="Broadcast" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{0.4,0}}" />
+        <Property name="Font" value="Jura-18" />
+        <Property name="Text" value="VAGUE 1" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="AlwaysOnTop" value="true" />
+        <Property name="FrameEnabled" value="false" />
+        <Property name="HorzFormatting" value="CentreAligned" />
+        <Property name="BackgroundEnabled" value="false" />
+        <Property name="HorzScrollPageSize" value="1920" />
+        <Property name="VertScrollPageSize" value="432" />
+        <Property name="HorzScrollDocumentSize" value="141" />
+        <Property name="VertScrollDocumentSize" value="36.9492" />
+    </Window>
+</GUILayout>
