@@ -87,7 +87,7 @@ OBJ             =       $(SRC:.cpp=.o)
 all             :	title $(NAME)
 
 install 				:
-									#@./setup.sh
+									@./setup.sh
 									$(MAKE) all
 									cp bin/linux/IndieStudio ~/bin/
 									cp installPackages/* ~/bin
