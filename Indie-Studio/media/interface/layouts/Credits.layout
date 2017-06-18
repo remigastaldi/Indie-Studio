@@ -32,25 +32,27 @@
             <Property name="Disabled" value="true" />
             <Property name="InheritsAlpha" value="false" />
             <Window type="Vanilla/StaticText" name="CreditsText" >
-                <Property name="Area" value="{{0.1,0},{-0.05,0},{0.9,0},{0.95,0}}" />
+                <Property name="Area" value="{{0.1,0},{-0.03,0},{0.9,0},{0.97,0}}" />
                 <Property name="Text" >IndieStudio is an Epitech project in C++
 
 Created by:
 
  
 
- Remi Gastaldi - Ogre3D &amp; Bullet
+ Remi Gastaldi - Ogre3D, PhysX &amp; Global code structuring
 
- Flavien Sellet - Windows portability, particules &amp; spells
+ Flavien Sellet - Windows portability, particules, spells &amp; OBJ
 
- Leo Hubert - Server &amp; Client
+ Matthias Prost - CEGUI, Server, particules &amp; spells
+
+ Leo Hubert - Server &amp; IA
 
  Thomas Augusto - CEGUI
 
- Cyril Puccio - Modelling
+ Cyril Puccio - Map making
 
- Matthias Prost - CEGUI, Server
-&amp; particules</Property>
+
+ Made with: Bullet Physics, Ogre3D, OpenAL, CEGUI, Socket.io, OIS</Property>
                 <Property name="MaxSize" value="{{1,0},{1,0}}" />
                 <Property name="InheritsAlpha" value="false" />
                 <Property name="HorzFormatting" value="CentreAligned" />
@@ -58,8 +60,8 @@ Created by:
                 <Property name="VerticalAlignment" value="Centre" />
                 <Property name="HorzScrollPageSize" value="739" />
                 <Property name="VertScrollPageSize" value="454" />
-                <Property name="HorzScrollDocumentSize" value="535" />
-                <Property name="VertScrollDocumentSize" value="369.492" />
+                <Property name="HorzScrollDocumentSize" value="607" />
+                <Property name="VertScrollDocumentSize" value="410.547" />
             </Window>
         </Window>
         <Window type="Generic/ImageButton" name="Close" >
