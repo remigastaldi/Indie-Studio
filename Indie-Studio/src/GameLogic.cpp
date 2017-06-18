@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Sun Jun 18 15:30:59 2017 gastal_r
+// Last update Sun Jun 18 16:44:30 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -123,7 +123,7 @@ void          GameLogic::initGameLogic(void)
   _collisionRayCast = _sceneMgr->createRayQuery(Ogre::Ray());
 
   _player = createEntity(mDevice->data.Class, *_sceneMgr, *_world, *_collision, _id,
-    Entity::Status::IMMOBILE, Ogre::Vector3(0.f, 0.f, 0.f), Ogre::Vector3::ZERO);
+    Entity::Status::IMMOBILE, Ogre::Vector3(0.f, 10.f, 0.f), Ogre::Vector3::ZERO);
 
 #if DEBUG_CAMERA
   _camera->setPosition(_player->getPosition() + Ogre::Vector3(0, 50.f, 50.f));
