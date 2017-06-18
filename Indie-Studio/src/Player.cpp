@@ -30,7 +30,7 @@ Warrior::Warrior(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
   _entity =  sceneMgr.createEntity(std::to_string(id), meshPtr);
   // _entity = sceneMgr.createEntity(std::to_string(id), "Untitled.004.mesh");
   _node->attachObject(_entity);
-  _node->setScale({2.5f, 2.5f, 2.5f});
+  _node->setScale({3.0f, 3.0f, 3.0f});
   changeAnimation(status);
 
   // _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::PLAYER);
@@ -55,8 +55,9 @@ Wizard::Wizard(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld &
   _spells[3] = { Spell::Type::LEAF_BUFF, LEAF_BUFF_COOLDOWN };
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
-  _entity = sceneMgr.createEntity(std::to_string(id), "Ogre.mesh");
+  _entity = sceneMgr.createEntity(std::to_string(id), "Wizard.mesh");
   _node->attachObject(_entity);
+  _node->setScale({3.0f, 3.0f, 3.0f});
   changeAnimation(status);
 
   _collision.register_entity(_entity, Collision::COLLISION_SPHERE, Collision::Type::PLAYER);
