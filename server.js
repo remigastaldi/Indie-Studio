@@ -152,10 +152,10 @@ function touched(local, entity, spell_type)
       damages = 100;
       break;
     case Spell.SWORD:
-      damages = 0;
+      damages = 20;
       break;
     case Spell.HEARTH:
-      damages = 0;
+      damages = 20;
       break;
     case Spell.DAGGER:
       damages = 25;
@@ -168,14 +168,14 @@ function touched(local, entity, spell_type)
       damages = 50
       break;
     case Spell.SHIELD_BUFF:
-      damages = 0;
+      damages = 20;
       break;
     case Spell.LEAF_BUFF:
-      damages = 0;
+      damages = 20;
       break;
     /** DARKFIEND */
     case Spell.ANGEL:
-      damages = 0;
+      damages = 20;
       break;
     case Spell.THUNDERSTORM:
       damages = 125;
