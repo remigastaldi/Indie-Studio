@@ -29,8 +29,6 @@ spawners["1"] = new Spawner({x: -53.780986785888672, y: 10.1303372383117676, z: 
 spawners["2"] = new Spawner({"x":44.3564338684082,"y": 10.5362368822097778,"z":-27.127761840820312}, [EntityType.ZOMBIE, EntityType.SKELETON], 1, 7000);
 spawners["3"] = new Spawner({"x":2.3774611949920654,"y": 10.45093703269958496,"z":26.703584671020508}, [EntityType.ZOMBIE, EntityType.SKELETON], 1, 3000);
 
-
-
 var readline = require('readline');
 var rl = readline.createInterface({
   input: process.stdin,
@@ -74,13 +72,13 @@ function newBot(pos, type, room)
 
   switch (type) {
     case EntityType.ZOMBIE:
-      life = 300;
+      life = 1000;
       range_attack = 4;
       range_move = 17;
       wait_time = 3000;
       break;
     case EntityType.SKELETON:
-      life = 150;
+      life = 500;
       range_attack = 10;
       range_move = 17;
       wait_time = 2000;
@@ -151,52 +149,52 @@ function touched(local, entity, spell_type)
   switch (spell_type) {
     /** Warrior */
     case Spell.EYE_FIRE:
-      damages = 20;
+      damages = 100;
       break;
     case Spell.SWORD:
-      damages = 20;
+      damages = 0;
       break;
     case Spell.HEARTH:
-      damages = 20;
+      damages = 0;
       break;
     case Spell.DAGGER:
-      damages = 20;
+      damages = 25;
       break;
       /** Wizzard */
     case Spell.TORNADO:
-      damages = 20;
+      damages = 75;
       break;
     case Spell.FIREBALL:
-      damages = 20
+      damages = 50
       break;
     case Spell.SHIELD_BUFF:
-      damages = 20;
+      damages = 0;
       break;
     case Spell.LEAF_BUFF:
-      damages = 20;
+      damages = 0;
       break;
     /** DARKFIEND */
     case Spell.ANGEL:
-      damages = 20;
+      damages = 0;
       break;
     case Spell.THUNDERSTORM:
-      damages = 20;
+      damages = 125;
       break;
-    case Spell.SPECTRE:
-      damages = 20;
+    case Spell.FIRESTORM:
+      damages = 75;
       break;
     case Spell.FIRE:
-      damages = 20;
+      damages = 25;
       break;
       /** Engineer */
     case Spell.STONEBALL:
-      damages = 20;
+      damages = 25;
       break;
     case Spell.STALACTITES:
-      damages = 20;
+      damages = 75;
       break;
     case Spell.BULLET:
-      damages = 20;
+      damages = 125;
       break;
     case Spell.BEAR_BUFF:
       damages = 20;
