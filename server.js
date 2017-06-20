@@ -330,18 +330,14 @@ io.on('connection', function (socket) {
   });
 
   socket.on("create_entity", function (data) {
-    io.to(socket.room).emit("create_entity", data);
-    console.log("Create Entity: ");
-    console.log(data);
-
-      console.log("Entity exist");
+    io.to(socket.room).emit("create_entity", data);    
       users[socket.id].health = data["health"];
       users[socket.id].maxhealth = data["health"];
       users[socket.id].type = data["type"];
       users[socket.id].finished = true;
       users[socket.id].setDestination(data["destination"]["x"], data["destination"]["y"], data["destination"]["z"]);
       users[socket.id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
-      users[socket.id].setStatus(data["status"]);    
+      users[socket.id].setStatus(data["status"]);
   });
 
   socket.on("create_spell", function (data) {
