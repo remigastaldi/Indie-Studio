@@ -78,7 +78,7 @@ function newBot(pos, type, room)
       wait_time = 3000;
       break;
     case EntityType.SKELETON:
-      life = 500;
+      life = 300;
       range_attack = 10;
       range_move = 17;
       wait_time = 2000;
