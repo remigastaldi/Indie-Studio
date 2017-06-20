@@ -333,8 +333,7 @@ io.on('connection', function (socket) {
     io.to(socket.room).emit("create_entity", data);
     console.log("Create Entity: ");
     console.log(data);
-    if (users[socket.id])
-    {
+
       console.log("Entity exist");
       users[socket.id].health = data["health"];
       users[socket.id].maxhealth = data["health"];
@@ -342,8 +341,7 @@ io.on('connection', function (socket) {
       users[socket.id].finished = true;
       users[socket.id].setDestination(data["destination"]["x"], data["destination"]["y"], data["destination"]["z"]);
       users[socket.id].setPosition(data["position"]["x"], data["position"]["y"], data["position"]["z"]);
-      users[socket.id].setStatus(data["status"]);
-    }
+      users[socket.id].setStatus(data["status"]);    
   });
 
   socket.on("create_spell", function (data) {
