@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 11:40:38 2017 gastal_r
-// Last update Sun Jun 18 18:43:01 2017 Matthias Prost
+// Last update Tue Jun 20 01:22:18 2017 gastal_r
 //
 
 #include      "GameLogic.hpp"
@@ -70,6 +70,7 @@ void          GameLogic::initGameLogic(void)
   vp->update();
 
   _SSAO.reset(new PFXSSAO(mDevice->window, _camera));
+  _sceneMgr->setShadowCameraSetup(Ogre::ShadowCameraSetupPtr(new Ogre::FocusedShadowCameraSetup()));
 
   _collision.reset(new Collision::CollisionTools());
   _world.reset(new OgreBulletDynamics::DynamicsWorld(

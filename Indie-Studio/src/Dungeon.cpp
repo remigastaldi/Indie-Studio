@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun May 21 20:34:06 2017 gastal_r
-// Last update Sun Jun 18 02:21:10 2017 gastal_r
+// Last update Tue Jun 20 01:40:12 2017 gastal_r
 //
 
 #include        "Dungeon.hpp"
@@ -28,23 +28,22 @@ void Dungeon::enter(void)
 
 void Dungeon::createScene(void)
 {
-  //   Ogre::Light* spotLight = _sceneMgr->createLight("SpotLight");
-  //
-  // spotLight->setType(Ogre::Light::LT_SPOTLIGHT);
-  // spotLight->setDiffuseColour(1.0, 1.0, 1.0);
-  // spotLight->setSpecularColour(1.0, 1.0, 1.0);
-  //
-  // spotLight->setDirection(-1, -1, 0);
-  // spotLight->setPosition(Ogre::Vector3(0, 40, 0));
-
   Ogre::SceneNode *map = _sceneMgr->getRootSceneNode()->createChildSceneNode("Dungeon", Ogre::Vector3(0,0,0));
   DotSceneLoader loader;
 	loader.parseDotScene("dungeon.scene","General", _sceneMgr, map);
   map->setPosition({0.f, 0.f, 0.f});
-  _sceneMgr->setAmbientLight(Ogre::ColourValue(0.15, 0.15, 0.15));
+
+  Ogre::Light* directionalLight = _sceneMgr->createLight("DirectionalLight");
+  // mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.f, 0.f, 0.f));
+  directionalLight->setType(Ogre::Light::LT_DIRECTIONAL);
+
+  directionalLight->setDiffuseColour(Ogre::ColourValue(0.05f, 0.05f, 0.05f));
+  directionalLight->setSpecularColour(Ogre::ColourValue(0.05f, 0.05f, 0.05f));
+  directionalLight->setDirection(Ogre::Vector3(0, -1, 0));
+
   for (auto & it : loader.getLightPos())
     {
-      if (it.name.find("Spot") != std::string::npos /*  ||  it.name.find("Area") != std::string::npos*/)
+      if (it.name.find("Spot") != std::string::npos || it.name.find("Area") != std::string::npos)
         continue;
         std::cout << "light: " << it.name << std::endl;
       Ogre::Light* candlelight = _sceneMgr->createLight(it.name);
@@ -54,7 +53,6 @@ void Dungeon::createScene(void)
       if (it.name.find("Point") != std::string::npos)
         {
           candlelight->setType(Ogre::Light::LT_POINT);
-          //TODO sauvegarde des pointeurs pour les delete
           Ogre::SceneNode *test = _sceneMgr->getRootSceneNode()->createChildSceneNode("Dungeon" + std::to_string(std::rand()), it.pos);
           Ogre::ParticleSystem *_particleSystem = _sceneMgr->createParticleSystem(("EyeFireParticle") + std::to_string(std::rand()), "Spell/Fireball");
           test->attachObject(_particleSystem);
@@ -225,10 +223,10 @@ bool  Dungeon::setupDarkFiendSpell()
   _spells[0].second = _spellBar->getChild("SpellAngel/CoolDownSpellAngel");
   _spells[1].first = _spellBar->getChild("SpellFire/CoolDownTextFire");
   _spells[1].second = _spellBar->getChild("SpellFire/CoolDownSpellFire");
-  _spells[2].second = _spellBar->getChild("SpellThunderStorm/CoolDownSpellStorm");
   _spells[2].first = _spellBar->getChild("SpellThunderStorm/CoolDownTextStorm");
-  _spells[3].second = _spellBar->getChild("SpellFireStorm/CoolDownSpellFireStorm");
+  _spells[2].second = _spellBar->getChild("SpellThunderStorm/CoolDownSpellStorm");
   _spells[3].first = _spellBar->getChild("SpellFireStorm/CoolDownTextFireStorm");
+  _spells[3].second = _spellBar->getChild("SpellFireStorm/CoolDownSpellFireStorm");
   return (true);
 }
 

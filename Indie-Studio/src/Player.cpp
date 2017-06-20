@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 14:53:43 2017 gastal_r
-// Last update Sat Jun 17 02:23:50 2017 gastal_r
+// Last update Mon Jun 19 22:34:14 2017 gastal_r
 //
 
 #include        "Player.hpp"
@@ -24,16 +24,12 @@ Warrior::Warrior(Ogre::SceneManager &sceneMgr, OgreBulletDynamics::DynamicsWorld
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(std::to_string(id));
   Ogre::MeshPtr meshPtr = Ogre::MeshManager::getSingleton().load("Knight.mesh", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 
-  // Utils::scaleMesh(meshPtr, -2, id);
-
   meshPtr->buildEdgeList();
   _entity =  sceneMgr.createEntity(std::to_string(id), meshPtr);
-  // _entity = sceneMgr.createEntity(std::to_string(id), "Untitled.004.mesh");
   _node->attachObject(_entity);
   _node->setScale({3.0f, 3.0f, 3.0f});
   changeAnimation(status);
 
-  // _collision.register_entity(_entity, Collision::COLLISION_ACCURATE, Collision::Type::PLAYER);
   _collision.register_entity(_entity, Collision::COLLISION_SPHERE, Collision::Type::PLAYER);
 
   addToBulletWorld(position);

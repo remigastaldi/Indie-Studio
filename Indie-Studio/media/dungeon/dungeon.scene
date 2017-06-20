@@ -1,4 +1,4 @@
-<scene export_time="1497297396.942857" exported_by="gastal_r" formatVersion="1.0.1" previous_export_time="1497113802.771505" >
+<scene export_time="1497823380.5864232" exported_by="gastal_r" formatVersion="1.0.1" previous_export_time="1497113802.771505" >
   <nodes >
     <node name="Chest_Tap.000" >
       <position x="-0.061577" y="-2.036452" z="0.018151" />
@@ -14,7 +14,7 @@
       <position x="2.335815" y="5.519731" z="24.932182" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBArea.001", name="cycles_visibility", address=0x7f4abc21ea88&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBArea.001", name="cycles_visibility", address=0x7faa09367568&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -10732,7 +10732,7 @@
       <position x="6.211861" y="1.523767" z="16.914879" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.004", name="cycles_visibility", address=0x7f4abc21f2a8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.004", name="cycles_visibility", address=0x7faa09367d88&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -10748,7 +10748,7 @@
       <position x="2.301727" y="1.523767" z="16.927208" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.006", name="cycles_visibility", address=0x7f4abc21f528&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.006", name="cycles_visibility", address=0x7faa0967f008&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -10764,7 +10764,7 @@
       <position x="10.877876" y="1.495492" z="32.791985" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.008", name="cycles_visibility", address=0x7f4abc21f7a8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.008", name="cycles_visibility", address=0x7faa0967f288&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -10780,7 +10780,7 @@
       <position x="6.225822" y="1.485067" z="32.806755" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.009", name="cycles_visibility", address=0x7f4abc21f8e8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.009", name="cycles_visibility", address=0x7faa0967f3c8&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -10796,7 +10796,7 @@
       <position x="10.896492" y="1.507962" z="16.926384" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.010", name="cycles_visibility", address=0x7f4abc21fa28&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.010", name="cycles_visibility", address=0x7faa0967f508&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -10812,7 +10812,7 @@
       <position x="18.615326" y="1.493959" z="19.491692" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.011", name="cycles_visibility", address=0x7f4abc21fb68&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.011", name="cycles_visibility", address=0x7faa0967f648&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -10828,7 +10828,7 @@
       <position x="18.585075" y="1.549260" z="24.716637" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.012", name="cycles_visibility", address=0x7f4abc21fca8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.012", name="cycles_visibility", address=0x7faa0967f788&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -10844,7 +10844,7 @@
       <position x="2.301727" y="1.523767" z="32.812462" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.014", name="cycles_visibility", address=0x7f4abc21ff28&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.014", name="cycles_visibility", address=0x7faa0967fa08&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -13370,8 +13370,8 @@
       <position x="-0.062138" y="-2.102300" z="0.017571" />
       <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
       <scale x="1.000000" y="1.000000" z="1.000000" />
-      <user_data name="cycles" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBGround24 (87)", name="cycles", address=0x7f4abc21ebc8&gt;' />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBGround24 (87)", name="cycles_visibility", address=0x7f4abc21ec68&gt;' />
+      <user_data name="cycles" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBGround24 (87)", name="cycles", address=0x7faa093676a8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBGround24 (87)", name="cycles_visibility", address=0x7faa09367748&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14062,7 +14062,7 @@
       <position x="59.912468" y="2.673810" z="-38.251190" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.000", name="cycles_visibility", address=0x7f4abc21eda8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.000", name="cycles_visibility", address=0x7faa09367888&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14078,7 +14078,7 @@
       <position x="59.938568" y="2.673810" z="-29.026745" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.001", name="cycles_visibility", address=0x7f4abc21eee8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.001", name="cycles_visibility", address=0x7faa093679c8&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14104,7 +14104,7 @@
       <position x="59.912468" y="2.673810" z="-19.433544" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.002", name="cycles_visibility", address=0x7f4abc21f028&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.002", name="cycles_visibility", address=0x7faa09367b08&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14130,7 +14130,7 @@
       <position x="33.215988" y="2.673810" z="-44.778049" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.005", name="cycles_visibility", address=0x7f4abc21f3e8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.005", name="cycles_visibility", address=0x7faa09367ec8&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14426,7 +14426,7 @@
       <position x="-16.633392" y="0.700685" z="42.634254" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.007", name="cycles_visibility", address=0x7f4abc21f668&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.007", name="cycles_visibility", address=0x7faa0967f148&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14442,7 +14442,7 @@
       <position x="-44.211044" y="1.589047" z="-37.201965" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.013", name="cycles_visibility", address=0x7f4abc21fde8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.013", name="cycles_visibility", address=0x7faa0967f8c8&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14468,7 +14468,7 @@
       <position x="-34.463547" y="2.673810" z="44.627129" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.020", name="cycles_visibility", address=0x7f4abc2206a8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.020", name="cycles_visibility", address=0x7faa09680188&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14484,7 +14484,7 @@
       <position x="-15.199828" y="1.526246" z="-6.273346" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.024", name="cycles_visibility", address=0x7f4abc220ba8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.024", name="cycles_visibility", address=0x7faa09680688&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14510,7 +14510,7 @@
       <position x="-38.193798" y="1.526246" z="-43.277817" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.025", name="cycles_visibility", address=0x7f4abc220ce8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.025", name="cycles_visibility", address=0x7faa096807c8&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14536,7 +14536,7 @@
       <position x="-11.831835" y="1.495492" z="43.181770" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.026", name="cycles_visibility", address=0x7f4abc220e28&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.026", name="cycles_visibility", address=0x7faa09680908&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14832,7 +14832,7 @@
       <position x="-9.737402" y="1.523767" z="11.954271" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.016", name="cycles_visibility", address=0x7f4abc2201a8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.016", name="cycles_visibility", address=0x7faa0967fc88&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14848,7 +14848,7 @@
       <position x="4.714509" y="1.526246" z="-8.885640" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.023", name="cycles_visibility", address=0x7f4abc220a68&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.023", name="cycles_visibility", address=0x7faa09680548&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14864,7 +14864,7 @@
       <position x="13.557810" y="1.526246" z="-9.009849" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.027", name="cycles_visibility", address=0x7f4abc220f68&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.027", name="cycles_visibility", address=0x7faa09680a48&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14880,7 +14880,7 @@
       <position x="43.173565" y="-1.038696" z="10.348079" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.028", name="cycles_visibility", address=0x7f4abbfdc0a8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.028", name="cycles_visibility", address=0x7faa09680b88&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14896,7 +14896,7 @@
       <position x="59.673592" y="-1.552025" z="11.483527" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.029", name="cycles_visibility", address=0x7f4abbfdc1e8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.029", name="cycles_visibility", address=0x7faa09680cc8&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14912,7 +14912,7 @@
       <position x="46.351425" y="2.673810" z="-44.778046" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.032", name="cycles_visibility", address=0x7f4abbfdc5a8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.032", name="cycles_visibility", address=0x7faa09681088&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14938,7 +14938,7 @@
       <position x="-24.611137" y="2.673810" z="-44.778046" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.003", name="cycles_visibility", address=0x7f4abc21f168&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.003", name="cycles_visibility", address=0x7faa09367c48&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14964,7 +14964,7 @@
       <position x="-43.126556" y="2.673810" z="-10.640778" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.015", name="cycles_visibility", address=0x7f4abc220068&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.015", name="cycles_visibility", address=0x7faa0967fb48&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -14990,7 +14990,7 @@
       <position x="-48.495472" y="2.673810" z="15.437296" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.017", name="cycles_visibility", address=0x7f4abc2202e8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.017", name="cycles_visibility", address=0x7faa0967fdc8&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -15016,7 +15016,7 @@
       <position x="-34.421131" y="2.673810" z="15.437296" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.018", name="cycles_visibility", address=0x7f4abc220428&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.018", name="cycles_visibility", address=0x7faa0967ff08&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -15042,7 +15042,7 @@
       <position x="-56.857117" y="2.673810" z="44.627129" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.019", name="cycles_visibility", address=0x7f4abc220568&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.019", name="cycles_visibility", address=0x7faa09680048&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -15068,7 +15068,7 @@
       <position x="-34.463547" y="2.673810" z="13.699731" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.021", name="cycles_visibility", address=0x7f4abc2207e8&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.021", name="cycles_visibility", address=0x7faa096802c8&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -15094,7 +15094,7 @@
       <position x="-48.411972" y="2.673810" z="13.699731" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.022", name="cycles_visibility", address=0x7f4abc220928&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.022", name="cycles_visibility", address=0x7faa09680408&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -15120,7 +15120,7 @@
       <position x="7.040035" y="2.673810" z="44.627129" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.031", name="cycles_visibility", address=0x7f4abbfdc468&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.031", name="cycles_visibility", address=0x7faa09680f48&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -15146,7 +15146,7 @@
       <position x="22.500521" y="1.908243" z="32.430092" />
       <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
       <scale x="2.000000" y="2.000000" z="2.000000" />
-      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.030", name="cycles_visibility", address=0x7f4abbfdc328&gt;' />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.030", name="cycles_visibility", address=0x7faa09680e08&gt;' />
       <game >
         <sensors />
         <actuators />
@@ -15248,10 +15248,298 @@
       </game>
       <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Wall2_(38).001.mesh" name="Wall2 (38).001" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" />
     </node>
+    <node name="Point.033" >
+      <position x="-34.463547" y="2.673810" z="-12.539042" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="2.000000" y="2.000000" z="2.000000" />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.033", name="cycles_visibility", address=0x7faa096811c8&gt;' />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light name="Point.033" powerScale="0.800000011920929" type="point" >
+        <position x="-34.463547" y="2.673810" z="-12.539042" />
+        <lightAttenuation constant="1.0" linear="1.0" quadratic="0.0" range="5000" />
+        <colourDiffuse b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+        <colourSpecular b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+      </light>
+    </node>
+    <node name="Torchlight.015" >
+      <position x="-34.480320" y="1.524445" z="-12.345964" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Torchlight.015.mesh" name="Torchlight.015" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" />
+    </node>
+    <node name="Point.034" >
+      <position x="-48.837414" y="2.673810" z="-12.539042" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="2.000000" y="2.000000" z="2.000000" />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.034", name="cycles_visibility", address=0x7faa09681308&gt;' />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light name="Point.034" powerScale="0.800000011920929" type="point" >
+        <position x="-48.837414" y="2.673810" z="-12.539042" />
+        <lightAttenuation constant="1.0" linear="1.0" quadratic="0.0" range="5000" />
+        <colourDiffuse b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+        <colourSpecular b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+      </light>
+    </node>
+    <node name="Torchlight.016" >
+      <position x="-48.854187" y="1.524445" z="-12.345964" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Torchlight.016.mesh" name="Torchlight.016" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" />
+    </node>
+    <node name="Point.035" >
+      <position x="59.912468" y="2.673810" z="-4.898828" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="2.000000" y="2.000000" z="2.000000" />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.035", name="cycles_visibility", address=0x7faa09681448&gt;' />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light name="Point.035" powerScale="0.800000011920929" type="point" >
+        <position x="59.912468" y="2.673810" z="-4.898828" />
+        <lightAttenuation constant="1.0" linear="1.0" quadratic="0.0" range="5000" />
+        <colourDiffuse b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+        <colourSpecular b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+      </light>
+    </node>
+    <node name="Torchlight.017" >
+      <position x="60.128197" y="1.224916" z="-4.894460" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Torchlight.017.mesh" name="Torchlight.017" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" />
+    </node>
+    <node name="Point.036" >
+      <position x="59.912468" y="2.673810" z="36.043926" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="2.000000" y="2.000000" z="2.000000" />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.036", name="cycles_visibility", address=0x7faa09681588&gt;' />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light name="Point.036" powerScale="0.800000011920929" type="point" >
+        <position x="59.912468" y="2.673810" z="36.043926" />
+        <lightAttenuation constant="1.0" linear="1.0" quadratic="0.0" range="5000" />
+        <colourDiffuse b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+        <colourSpecular b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+      </light>
+    </node>
+    <node name="Torchlight.018" >
+      <position x="60.128197" y="1.224916" z="36.048294" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Torchlight.018.mesh" name="Torchlight.018" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" />
+    </node>
+    <node name="Point.037" >
+      <position x="-1.893793" y="2.673810" z="-38.827835" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="2.000000" y="2.000000" z="2.000000" />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.037", name="cycles_visibility", address=0x7faa096816c8&gt;' />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light name="Point.037" powerScale="0.800000011920929" type="point" >
+        <position x="-1.893793" y="2.673810" z="-38.827835" />
+        <lightAttenuation constant="1.0" linear="1.0" quadratic="0.0" range="5000" />
+        <colourDiffuse b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+        <colourSpecular b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+      </light>
+    </node>
+    <node name="Torchlight.019" >
+      <position x="-1.890203" y="1.356426" z="-38.988998" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Torchlight.019.mesh" name="Torchlight.019" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" />
+    </node>
+    <node name="Point.038" >
+      <position x="46.594486" y="2.673810" z="44.627129" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="2.000000" y="2.000000" z="2.000000" />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.038", name="cycles_visibility", address=0x7faa09681808&gt;' />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light name="Point.038" powerScale="0.800000011920929" type="point" >
+        <position x="46.594486" y="2.673810" z="44.627129" />
+        <lightAttenuation constant="1.0" linear="1.0" quadratic="0.0" range="5000" />
+        <colourDiffuse b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+        <colourSpecular b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+      </light>
+    </node>
+    <node name="Torchlight.020" >
+      <position x="46.577713" y="1.524445" z="44.820206" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Torchlight.020.mesh" name="Torchlight.020" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" />
+    </node>
+    <node name="Point.039" >
+      <position x="25.322845" y="2.673810" z="44.627129" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="2.000000" y="2.000000" z="2.000000" />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.039", name="cycles_visibility", address=0x7faa09681948&gt;' />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light name="Point.039" powerScale="0.800000011920929" type="point" >
+        <position x="25.322845" y="2.673810" z="44.627129" />
+        <lightAttenuation constant="1.0" linear="1.0" quadratic="0.0" range="5000" />
+        <colourDiffuse b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+        <colourSpecular b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+      </light>
+    </node>
+    <node name="Torchlight.021" >
+      <position x="25.306072" y="1.524445" z="44.820206" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Torchlight.021.mesh" name="Torchlight.021" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" />
+    </node>
+    <node name="Point.040" >
+      <position x="-11.814246" y="2.673810" z="23.765606" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="2.000000" y="2.000000" z="2.000000" />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.040", name="cycles_visibility", address=0x7faa09681a88&gt;' />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light name="Point.040" powerScale="0.800000011920929" type="point" >
+        <position x="-11.814246" y="2.673810" z="23.765606" />
+        <lightAttenuation constant="1.0" linear="1.0" quadratic="0.0" range="5000" />
+        <colourDiffuse b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+        <colourSpecular b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+      </light>
+    </node>
+    <node name="Torchlight.022" >
+      <position x="-11.598517" y="1.224916" z="23.769974" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Torchlight.022.mesh" name="Torchlight.022" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" />
+    </node>
+    <node name="Point.041" >
+      <position x="-22.774223" y="2.673810" z="-1.339317" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="2.000000" y="2.000000" z="2.000000" />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.041", name="cycles_visibility", address=0x7faa09681bc8&gt;' />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light name="Point.041" powerScale="0.800000011920929" type="point" >
+        <position x="-22.774223" y="2.673810" z="-1.339317" />
+        <lightAttenuation constant="1.0" linear="1.0" quadratic="0.0" range="5000" />
+        <colourDiffuse b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+        <colourSpecular b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+      </light>
+    </node>
+    <node name="Torchlight.023" >
+      <position x="-22.558495" y="1.224916" z="-1.334949" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Torchlight.023.mesh" name="Torchlight.023" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" />
+    </node>
+    <node name="Point.042" >
+      <position x="-30.944698" y="2.673810" z="-1.339317" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="2.000000" y="2.000000" z="2.000000" />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.042", name="cycles_visibility", address=0x7faa09681d08&gt;' />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light name="Point.042" powerScale="0.800000011920929" type="point" >
+        <position x="-30.944698" y="2.673810" z="-1.339317" />
+        <lightAttenuation constant="1.0" linear="1.0" quadratic="0.0" range="5000" />
+        <colourDiffuse b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+        <colourSpecular b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+      </light>
+    </node>
+    <node name="Torchlight.024" >
+      <position x="-30.728970" y="1.224916" z="-1.334949" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Torchlight.024.mesh" name="Torchlight.024" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" />
+    </node>
+    <node name="Point.043" >
+      <position x="5.850987" y="2.673810" z="-24.542906" />
+      <rotation qw="1.000000" qx="0.000000" qy="0.000000" qz="-0.000000" />
+      <scale x="2.000000" y="2.000000" z="2.000000" />
+      <user_data name="cycles_visibility" type="IDPropertyGroup" value='&lt;bpy id prop: owner="OBPoint.043", name="cycles_visibility", address=0x7faa09681e48&gt;' />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <light name="Point.043" powerScale="0.800000011920929" type="point" >
+        <position x="5.850987" y="2.673810" z="-24.542906" />
+        <lightAttenuation constant="1.0" linear="1.0" quadratic="0.0" range="5000" />
+        <colourDiffuse b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+        <colourSpecular b="0.05738838016986847" g="0.34849655628204346" r="1.0" />
+      </light>
+    </node>
+    <node name="Torchlight.025" >
+      <position x="6.066716" y="1.224916" z="-24.538538" />
+      <rotation qw="0.707107" qx="0.707107" qy="0.000000" qz="-0.000000" />
+      <scale x="1.000000" y="1.000000" z="1.000000" />
+      <game >
+        <sensors />
+        <actuators />
+      </game>
+      <entity actor="False" anisotropic_friction="False" damping_rot="0.10000000149011612" damping_trans="0.03999999910593033" friction_x="1.0" friction_y="1.0" friction_z="1.0" ghost="False" inertia_tensor="0.4000000059604645" lock_rot_x="False" lock_rot_y="False" lock_rot_z="False" lock_trans_x="False" lock_trans_y="False" lock_trans_z="False" mass="1.0" mass_radius="1.0" meshFile="Torchlight.025.mesh" name="Torchlight.025" physics_type="STATIC" velocity_max="0.0" velocity_min="0.0" >
+        <user_data name="ogre_mesh_exporter" type="IDPropertyGroup" value='&lt;bpy id prop: owner="METorchlight.025", name="ogre_mesh_exporter", address=0x7faa09683e28&gt;' />
+      </entity>
+    </node>
   </nodes>
   <externals >
     <item type="material" >
-      <file name="/home/gastal_r/rendu/Indie-Studio/Indie-Studio/media/dungeon/dungeon.material" />
+      <file name="/home/gastal_r/Downloads/finalmap/dungeon.material" />
     </item>
   </externals>
   <environment >

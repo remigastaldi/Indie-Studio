@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu May 18 17:41:32 2017 gastal_r
-// Last update Sat Jun 17 23:52:54 2017 gastal_r
+// Last update Mon Jun 19 21:44:37 2017 gastal_r
 //
 
 #include        "Menu.hpp"
@@ -380,10 +380,12 @@ void Menu::createScene(void)
   _camera->setPosition(Ogre::Vector3(-11.9485, 8.62654, 25.3843));
   _camera->setOrientation(Ogre::Quaternion(0.685325, -0.177875, -0.683532, -0.177409));
   _camera->setNearClipDistance(5);
-  mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.15, 0.15, 0.15));
+  mDevice->sceneMgr->setAmbientLight(Ogre::ColourValue(0.15f, 0.15f, 0.15f));
+  mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+
   for (auto & it : loader.getLightPos())
     {
-      if (it.name.find("Spot") != std::string::npos   ||  it.name.find("Area") != std::string::npos)
+      if (it.name.find("Spot") != std::string::npos)
         continue;
       std::cout << "light: " << it.name << std::endl;
       Ogre::Light* candlelight = mDevice->sceneMgr->createLight(it.name);
@@ -399,6 +401,13 @@ void Menu::createScene(void)
           candlelight->setAttenuation	(32, 0.5, 0.0014, 0.07);
           candlelight->setCastShadows(false);
         }
+        else if (it.name.find("Area") != std::string::npos)
+          {
+            candlelight->setPosition(it.pos);
+            candlelight->setType(Ogre::Light::LT_POINT);
+            candlelight->setAttenuation	(32, 0.5, 0.0014, 0.07);
+            candlelight->setCastShadows(true);
+          }
     }
 
   if (_splashScreenCheck)
@@ -410,32 +419,7 @@ void Menu::createScene(void)
 
   _song = mDevice->soundManager->createSound("menu_song", "menu_sound.ogg", true, true);
   _song->play();
-
-  // GameState *dungeon = findByName("Dungeon");
-  // changeGameState(dungeon);
 }
-
-// bool GameMenuDemo::handleLoginAcceptButtonClicked(const CEGUI::EventArgs&)
-// {
-//     d_startButtonClickArea->setAlpha(0.0f);
-//     d_startButtonBlendInAnimInst->start();
-//
-//     enableNavigationBarElements();
-//
-//     d_loginContainerMoveOutInst->start();
-//     d_navigationTravelIcon->setEnabled(true);
-//
-//     CEGUI::Editbox* loginEditbox = static_cast<CEGUI::Editbox*>(d_root->getChild("LoginContainer/LoginEditbox"));
-//     d_userName = loginEditbox->getText();
-//
-//     d_timeSinceLoginAccepted = 0.0f;
-//     d_loginWasAccepted = true;
-//     d_currentWriteFocus = WF_TopBar;
-//
-//     d_botNaviContainer->setEnabled(true);
-//
-//     return false;
-// }
 
 void Menu::exit(void)
 {
@@ -457,6 +441,8 @@ void Menu::exit(void)
   mDevice->window->removeAllViewports();
   mDevice->sceneMgr->clearScene();
   _splashScreen = nullptr;
+  mDevice->sceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE_INTEGRATED);
+
   Ogre::LogManager::getSingletonPtr()->logMessage("===== Exit Menu =====");
 }
 

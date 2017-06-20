@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Jun 10 16:33:57 2017 gastal_r
-// Last update Sun Jun 18 02:33:49 2017 Matthias Prost
+// Last update Tue Jun 20 02:06:56 2017 gastal_r
 //
 
 #ifndef     _ALLSPELLS_HPP_
@@ -18,7 +18,7 @@
 -----------------------------------------------------------------------------*/
 #define     EYE_FIRE_SPEED 4.f
 #define     EYE_FIRE_DISTANCE 10.f
-#define     EYE_FIRE_COOLDOWN 3
+#define     EYE_FIRE_COOLDOWN 6
 class EyeFire : public Spell
 {
 public:
@@ -27,7 +27,7 @@ public:
 };
 
 #define     SWORD_SPEED 4.f
-#define     SWORD_DISTANCE 10.f
+#define     SWORD_DISTANCE 20.f
 #define     SWORD_COOLDOWN 0.5
 class Sword : public Spell
 {
@@ -37,7 +37,7 @@ public:
 };
 
 #define     HEARTH_SPEED 4.f
-#define     HEARTH_DISTANCE 10.f
+#define     HEARTH_DISTANCE 20.f
 #define     HEARTH_COOLDOWN 2
 class Hearth : public Spell
 {
@@ -46,8 +46,8 @@ public:
     size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
-#define     DAGGER_SPEED 15.f
-#define     DAGGER_DISTANCE 4.f
+#define     DAGGER_SPEED 30.f
+#define     DAGGER_DISTANCE 6.f
 #define     DAGGER_COOLDOWN 0.5
 class Dagger : public Spell
 {
@@ -61,8 +61,8 @@ public:
 |  Wizard
 -----------------------------------------------------------------------------*/
 #define     TORNADO_SPEED 4.f
-#define     TORNADO_DISTANCE 10.f
-#define     TORNADO_COOLDOWN 2
+#define     TORNADO_DISTANCE 20.f
+#define     TORNADO_COOLDOWN 4
 class Tornado : public Spell
 {
 public:
@@ -70,8 +70,8 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
-#define     FIREBALL_SPEED 9.f
-#define     FIREBALL_DISTANCE 15.f
+#define     FIREBALL_SPEED 10.f
+#define     FIREBALL_DISTANCE 20.f
 #define     FIREBALL_COOLDOWN 1
 class Fireball : public Spell
 {
@@ -81,7 +81,7 @@ public:
 };
 
 #define     SHIELD_BUFF_SPEED 4.f
-#define     SHIELD_BUFF_DISTANCE 10.f
+#define     SHIELD_BUFF_DISTANCE 20.f
 #define     SHIELD_BUFF_COOLDOWN 9
 class ShieldBuff : public Spell
 {
@@ -91,7 +91,7 @@ public:
 };
 
 #define     LEAF_BUFF_SPEED 4.f
-#define     LEAF_BUFF_DISTANCE 10.f
+#define     LEAF_BUFF_DISTANCE 20.f
 #define     LEAF_BUFF_COOLDOWN 9
 class LeafBuff : public Spell
 {
@@ -104,8 +104,8 @@ public:
 /*-----------------------------------------------------------------------------
 |  DarkFiend
 -----------------------------------------------------------------------------*/
-#define     ANGEL_SPEED 4.f
-#define     ANGEL_DISTANCE 10.f
+#define     ANGEL_SPEED 6.f
+#define     ANGEL_DISTANCE 15.f
 #define     ANGEL_COOLDOWN 3
 class Angel : public Spell
 {
@@ -114,8 +114,18 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
+#define     FIRE_SPEED 20.f
+#define     FIRE_DISTANCE 10.f
+#define     FIRE_COOLDOWN 3
+class Fire : public Spell
+{
+public:
+  Fire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
+  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
+};
+
 #define     THUNDERSTORM_SPEED 8.f
-#define     THUNDERSTORM_DISTANCE 13.f
+#define     THUNDERSTORM_DISTANCE 7.f
 #define     THUNDERSTORM_COOLDOWN 8
 class Thunderstorm : public Spell
 {
@@ -124,9 +134,9 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
-#define     FIRESTORM_SPEED 4.f
-#define     FIRESTORM_DISTANCE 10.f
-#define     FIRESTORM_COOLDOWN 7
+#define     FIRESTORM_SPEED 5.f
+#define     FIRESTORM_DISTANCE 15.f
+#define     FIRESTORM_COOLDOWN 6
 class FireStorm : public Spell
 {
 public:
@@ -134,24 +144,15 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
-#define     FIRE_SPEED 4.f
-#define     FIRE_DISTANCE 10.f
-#define     FIRE_COOLDOWN 2
-class Fire : public Spell
-{
-public:
-  Fire(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collision, OgreOggSound::OgreOggSoundManager &soundManager,
-  size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
-};
 
 
 /*-----------------------------------------------------------------------------
 |  Engineer
 -----------------------------------------------------------------------------*/
 
-#define     STONEBALL_SPEED 4.f
-#define     STONEBALL_DISTANCE 10.f
-#define     STONEBALL_COOLDOWN 8
+#define     STONEBALL_SPEED 5.f
+#define     STONEBALL_DISTANCE 15.f
+#define     STONEBALL_COOLDOWN 1.5f
 class StoneBall : public Spell
 {
 public:
@@ -159,9 +160,9 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
-#define     STALACTITES_SPEED 12.f
-#define     STALACTITES_DISTANCE 10.f
-#define     STALACTITES_COOLDOWN 2
+#define     STALACTITES_SPEED 14.f
+#define     STALACTITES_DISTANCE 20.f
+#define     STALACTITES_COOLDOWN 5.f
 class Stalactites : public Spell
 {
 public:
@@ -169,9 +170,9 @@ public:
   size_t id, const Ogre::Vector3 &position, const Ogre::Vector3 &destination, Collision::Type collisionType, bool disableCallback);
 };
 
-#define     BULLET_SPEED 15.f
-#define     BULLET_DISTANCE 10.f
-#define     BULLET_COOLDOWN 0.5
+#define     BULLET_SPEED 2.f
+#define     BULLET_DISTANCE 20.f
+#define     BULLET_COOLDOWN 8.f
 class Bullet : public Spell
 {
 public:
@@ -180,8 +181,8 @@ public:
 };
 
 #define     BEAR_BUFF_SPEED 4.f
-#define     BEAR_BUFF_DISTANCE 10.f
-#define     BEAR_BUFF_COOLDOWN 9
+#define     BEAR_BUFF_DISTANCE 20.f
+#define     BEAR_BUFF_COOLDOWN 9.f
 class BearBuff : public Spell
 {
 public:

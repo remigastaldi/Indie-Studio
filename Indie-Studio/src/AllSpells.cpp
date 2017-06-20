@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun Jun  4 17:24:51 2017 gastal_r
-// Last update Sun Jun 18 22:59:00 2017 gastal_r
+// Last update Tue Jun 20 02:16:49 2017 gastal_r
 //
 
 #include      "AllSpells.hpp"
@@ -313,7 +313,7 @@ Thunderstorm::Thunderstorm(Ogre::SceneManager &sceneMgr, Collision::CollisionToo
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _spellSound = _soundManager.createSound((disableCallback ? "ThunderstormServerCreateSound:" : "ThunderstormCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound = _soundManager.createSound((disableCallback ? "ThunderstormServerCreateSound:" : "ThunderstormCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "electric.wav");
   _spellSound->setRolloffFactor(4.f);
   _spellSound->setReferenceDistance(50.f);
   _spellSound->setMaxDistance(100.f);
@@ -443,7 +443,7 @@ Stalactites::Stalactites(Ogre::SceneManager &sceneMgr, Collision::CollisionTools
   _node->attachObject(_particleSystem);
 
   //TODO Correct this horrible rand by fixing MovableObject delete in SceneManager
-  _spellSound = _soundManager.createSound((disableCallback ? "StalactitesServerCreateSound:" : "StalactitesCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "angel.wav");
+  _spellSound = _soundManager.createSound((disableCallback ? "StalactitesServerCreateSound:" : "StalactitesCreateSound:")+ std::to_string(std::rand()) + std::to_string(id), "ice.wav");
   _spellSound->setRolloffFactor(4.f);
   _spellSound->setReferenceDistance(50.f);
   _spellSound->setMaxDistance(100.f);
