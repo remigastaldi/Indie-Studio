@@ -27,13 +27,13 @@ var Spell =
   /** DarkFiend */
   ANGEL: 8,
   FIRE: 9,
-  FIRESTORM: 10,
-  FIRE: 11,
+  THUNDERSTORM: 10,
+  FIRESTORM: 11,
   /** Engineer */
   STONEBALL: 12,
   STALACTITES: 13,
-  BULLET: 14,
-  BEAR_BUFF: 15
+  BEAR_BUFF: 14,
+  BULLET: 15
 }
 
 function checkDistance(userPosition, enemisPosition)
@@ -147,7 +147,7 @@ function Entity(id, server_id, username, type, room, health) {
                 damages = touched(0, user, Spell.ANGEL);
                 break;
               case EntityType.SKELETON:
-                createSpell(this, user, Spell.FIRE);
+                createSpell(this, user, Spell.BULLET);
                 break;
             }
             setTimeout(function()
