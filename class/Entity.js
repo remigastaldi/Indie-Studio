@@ -147,7 +147,7 @@ function Entity(id, server_id, username, type, room, health) {
                 damages = touched(0, user, Spell.ANGEL);
                 break;
               case EntityType.SKELETON:
-                createSpell(this, user, Spell.BULLET);
+                createSpell(this, user, Spell.FIRE);
                 break;
             }
             setTimeout(function()
