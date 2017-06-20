@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sun Jun  4 17:24:51 2017 gastal_r
-// Last update Tue Jun 20 02:16:49 2017 gastal_r
+// Last update Tue Jun 20 10:58:58 2017 gastal_r
 //
 
 #include      "AllSpells.hpp"
@@ -460,6 +460,7 @@ Bullet::Bullet(Ogre::SceneManager &sceneMgr, Collision::CollisionTools &collisio
 
   _node = sceneMgr.getRootSceneNode()->createChildSceneNode(name);
   _entity = sceneMgr.createEntity(name, "stalactite.mesh");
+  _entity->setVisible(false);
   _node->attachObject(_entity);
   _node->setPosition(Ogre::Vector3(position.x, position.y + 0.2f, position.z));
   // _node->setPosition(position);
