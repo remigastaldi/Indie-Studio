@@ -2,6 +2,7 @@
 
 CORE=$(grep -c ^processor /proc/cpuinfo)
 
+mkdir -p ~/lib/bin
 mkdir -p ~/lib/Indie-Studio
 
 case $SHELL in

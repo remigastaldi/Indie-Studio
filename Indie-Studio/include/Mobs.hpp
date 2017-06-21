@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Jun 13 21:29:11 2017 gastal_r
-// Last update Thu Jun 15 18:15:03 2017 gastal_r
+// Last update Tue Jun 20 12:41:31 2017 gastal_r
 //
 
 #ifndef _MOBS_HPP_
@@ -14,7 +14,7 @@
 #include        "Entity.hpp"
 
 #define ZOMBIE_SPEED 1.5f
-#define ZOMBIE_HEALTH 300
+#define ZOMBIE_HEALTH 1000
 class Zombie : public Entity
 {
 public:
@@ -24,7 +24,7 @@ public:
 
 
 #define SKELETON_SPEED 1.5f
-#define SKELETON_HEALTH 150
+#define SKELETON_HEALTH 500
 class Skeleton : public Entity
 {
 public:
