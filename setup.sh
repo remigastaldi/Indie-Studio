@@ -2,7 +2,7 @@
 
 CORE=$(grep -c ^processor /proc/cpuinfo)
 
-mkdir -p ~/lib/bin
+mkdir -p ~/bin
 mkdir -p ~/lib/Indie-Studio
 
 case $SHELL in
@@ -26,7 +26,7 @@ esac
 cd Indie-Studio-Dependencies/linux/
 tar -xvf bin_include_share.tar.bz2
 tar -xvf lib.tar.bz2
-cp -rf lib  ~/lib/Indie-Studio
+cp -r lib  ~/lib/Indie-Studio
 tar -xvf ogre_plugins.tar.bz2
-cp -rf lib/Ogre  ~/lib/Indie-Studio/lib
+cp -r lib/OGRE ~/lib/Indie-Studio/lib
 cd -
