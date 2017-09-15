@@ -5,7 +5,10 @@
 
 The goal of this project was to re-create one of these games : Hyper Sprint, Lemmings, Worms, Bomberman, Gauntlet.  
 The game had to be compatible with Linux and Windows.  
-We chose Gauntlet, and implemente a server for multiplayer.
+We chose Gauntlet, and implemente a server for multiplayer.  
+You must kill the monsters and survive a maximum of round.
+  
+The game is not finished and miss functionalities.
 
 ## Libraries used:
 - Ogre3d for graphic
@@ -14,6 +17,12 @@ We chose Gauntlet, and implemente a server for multiplayer.
 - OpenAl for sound
 - OIS and Cegui for input
 - SockerIO for multiplayer
+
+<p align="center">
+  <img src="readme_media/ogre_logo.jpg" width="15%"> <img src="readme_media/bullet_logo.png" width="12%">
+  <img src="readme_media/cegui_logo.png" width="10%"> <img src="readme_media/openal_logo.png" width="9%">
+  <img src="readme_media/socketio_logo.png" width="12%"> <br>
+</p>
 
 ## Usage:
 ### Linux:
@@ -29,8 +38,9 @@ make install
 ## Screenshots:
 
 <p align="center">
-  <img src="screenshots/screenshot1.png" width="49%"> <img src="screenshots/screenshot2.png" width="49%"><br>
-  <img src="screenshots/screenshot3.png" width="49%">
+  <img src="readme_media/menu.png" width="48%"> <img src="readme_media/hero_select.png" width="48%"> <br>
+  <img src="readme_media/warrior_fire.jpg" width="48%"> <img src="readme_media/wizard_spells.jpg" width="48%"> <br>
+  <img src="readme_media/darkfiend_fight.jpg" width="48%"> <img src="readme_media/engineer_fight.jpg" width="48%"> <br>
 </p>
 
 ## Creators:
