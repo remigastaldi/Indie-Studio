@@ -1,7 +1,4 @@
 # Epitech - Indie Studio
-<p align="center">
-  <img src="screenshots/logo.png" width="70%">
-</p>
 
 The goal of this project was to re-create one of these games : Hyper Sprint, Lemmings, Worms, Bomberman, Gauntlet.  
 The game had to be compatible with Linux and Windows.  
